@@ -18,6 +18,12 @@ class PixelSubscriptTests: XCTestCase {
         XCTAssertEqual(image[0, 0], Pixel(r: 0, g: 1, b: 2, a: 3))
         XCTAssertEqual(image[1, 0], Pixel(r: 4, g: 5, b: 6, a: 7))
         XCTAssertEqual(image[0, 1], Pixel(r: 16, g: 17, b: 18, a: 19))
+        
+        // mix
+        XCTAssertEqual(image[0, 0][0], 0)
+        XCTAssertEqual(image[1, 0][.green], 5)
+        XCTAssertEqual(image[0, 1][2], 18)
+        XCTAssertEqual(image[0, 1][.alpha], 19)
     }
     
     func testSubscriptSet() {
@@ -38,6 +44,12 @@ class PixelSubscriptTests: XCTestCase {
         
         image[0, 0][1] = 66
         XCTAssertEqual(image.data, [100, 66, 2, 3,
+                                    99, 98, 97, 96,
+                                    8, 9, 10, 11,
+                                    12, 13, 14, 15])
+        
+        image[0, 0][.blue] = 67
+        XCTAssertEqual(image.data, [100, 66, 67, 3,
                                     99, 98, 97, 96,
                                     8, 9, 10, 11,
                                     12, 13, 14, 15])
