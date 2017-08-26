@@ -19,7 +19,7 @@ extension Image where T: Comparable {
         public mutating func clip(low: Float, high: Float) {
             var low = low
             var high = high
-            self.data.withUnsafeMutableBufferPointer {
+            self.unsafeChannelwiseConvert {
                 let p = $0.baseAddress!
                 vDSP_vclip(p, 1, &low, &high, p, 1, vDSP_Length(self.data.count))
             }
@@ -36,7 +36,7 @@ extension Image where T: Comparable {
         public mutating func clip(low: Double, high: Double) {
             var low = low
             var high = high
-            self.data.withUnsafeMutableBufferPointer {
+            self.unsafeChannelwiseConvert {
                 let p = $0.baseAddress!
                 vDSP_vclipD(p, 1, &low, &high, p, 1, vDSP_Length(self.data.count))
             }
