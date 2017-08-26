@@ -4,7 +4,7 @@ private func getChannel<I: PixelSequence>(image: I, channel: Int) ->Image<Intens
 }
 
 private func setChannel<P, T>(image: inout Image<P, T>, channel: Int, newValue: Image<Intensity, T>) {
-    image.data.withUnsafeMutableBufferPointer {
+    image.unsafeChannelwiseConvert {
         var dst = $0.baseAddress! + channel
         for v in newValue.data {
             dst.pointee = v

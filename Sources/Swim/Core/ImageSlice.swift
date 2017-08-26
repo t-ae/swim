@@ -9,10 +9,10 @@ public struct ImageSlice<P: PixelType, T: DataType> {
     public let width: Int
     public let height: Int
     
-    init(image: Image<P, T>, x: Int, y: Int, width: Int, height: Int) {
-        assert(x >= 0 && y >= 0 && width >= 0 && height >= 0)
-        assert(x+width <= image.width)
-        assert(y+height <= image.height)
+    public init(image: Image<P, T>, x: Int, y: Int, width: Int, height: Int) {
+        precondition(x >= 0 && y >= 0 && width >= 0 && height >= 0)
+        precondition(x+width <= image.width)
+        precondition(y+height <= image.height)
         
         self.image = image
         self.x = x

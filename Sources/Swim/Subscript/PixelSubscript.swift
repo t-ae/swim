@@ -1,14 +1,10 @@
 extension Image where P == Intensity {
     public subscript(x: Int, y: Int) -> T {
         get {
-            precondition(0 <= x && x < width)
-            precondition(0 <= y && y < height)
-            return data[y * width + x]
+            return data[index(x: x, y: y)]
         }
         set {
-            precondition(0 <= x && x < width)
-            precondition(0 <= y && y < height)
-            data[y * width + x] = newValue
+            data[index(x: x, y: y)] = newValue
         }
     }
 }
@@ -16,22 +12,20 @@ extension Image where P == Intensity {
 extension Image {
     public subscript(x: Int, y: Int, c: Int) -> T {
         get {
-            precondition(0 <= c && c < P.channels)
-            return data[(y * width + x) * P.channels + c]
+            return data[index(x: x, y: y, c: c)]
         }
         set {
-            precondition(0 <= c && c < P.channels)
-            data[(y * width + x) * P.channels + c] = newValue
+            data[index(x: x, y: y, c: c)] = newValue
         }
     }
     
     public subscript(x: Int, y: Int) -> Pixel<P, T> {
         get {
-            let start = (y * width + x) * P.channels
+            let start = index(x: x, y: y)
             return Pixel(data: [T](data[start..<start+P.channels]))
         }
         set {
-            let start = (y * width + x) * P.channels
+            let start = index(x: x, y: y)
             self.data.replaceSubrange(start..<start+P.channels, with: newValue.data)
         }
     }
