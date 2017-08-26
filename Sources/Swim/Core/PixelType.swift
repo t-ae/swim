@@ -1,6 +1,8 @@
 
 public protocol PixelType {
     static var channels: Int { get }
+    
+    init?(rawValue: Int)
     var rawValue: Int { get }
 }
 

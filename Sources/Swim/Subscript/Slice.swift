@@ -18,4 +18,3 @@ extension Image {
         return self[cols, 0..<height]
     }
 }
-
