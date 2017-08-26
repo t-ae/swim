@@ -41,8 +41,8 @@ public struct PixelIterator<P: PixelType, T: DataType>: IteratorProtocol {
     
     init(image: Image<P, T>, x: Int, y: Int, width: Int, height: Int) {
         assert(x >= 0 && y >= 0 && width >= 0 && height >= 0)
-        assert(x+width < image.width)
-        assert(y+height < image.height)
+        assert(x+width <= image.width)
+        assert(y+height <= image.height)
         self.image = image
         self.x = x
         self.y = y
