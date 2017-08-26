@@ -9,6 +9,21 @@ extension Image {
             }
         }
     }
+    
+    public mutating func unsafeChannelwiseConvert(_ f: (UnsafeMutableBufferPointer<T>)->Void) {
+        self.data.withUnsafeMutableBufferPointer { bp in
+            f(bp)
+        }
+    }
+    
+    public func unsafeChannelwiseConverted<T2: DataType>(_ f: (UnsafeBufferPointer<T>, UnsafeMutableBufferPointer<T2>)->Void) {
+        var data = [T2](repeating: 0, count: width*height*PT.channels)
+        self.data.withUnsafeBufferPointer { src in
+            data.withUnsafeMutableBufferPointer { dst in
+                f(src, dst)
+            }
+        }
+    }
 }
 
 extension PixelSequence where Iterator == PixelIterator<PT, DT> {
