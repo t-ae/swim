@@ -16,13 +16,14 @@ extension Image {
         }
     }
     
-    public func unsafeChannelwiseConverted<T2: DataType>(_ f: (UnsafeBufferPointer<T>, UnsafeMutableBufferPointer<T2>)->Void) {
+    public func unsafeChannelwiseConverted<T2: DataType>(_ f: (UnsafeBufferPointer<T>, UnsafeMutableBufferPointer<T2>)->Void) -> Image<P, T2>{
         var data = [T2](repeating: 0, count: width*height*PT.channels)
         self.data.withUnsafeBufferPointer { src in
             data.withUnsafeMutableBufferPointer { dst in
                 f(src, dst)
             }
         }
+        return Image<P, T2>(width: width, height: height, data: data)
     }
 }
 

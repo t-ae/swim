@@ -20,55 +20,45 @@ extension Image where T == Double {
 #if os(macOS) || os(iOS)
     import Accelerate
     
-    private func vDSPConvert<T, U: ExpressibleByIntegerLiteral>(_ src: [T],
-                             _ f: (UnsafePointer<T>, vDSP_Stride, UnsafeMutablePointer<U>, vDSP_Stride, vDSP_Length)->Void) -> [U] {
-        let count = src.count
-        var ret = [U](repeating: 0, count: count)
-        
-        src.withUnsafeBufferPointer {
-            let src = $0.baseAddress!
-            ret.withUnsafeMutableBufferPointer {
-                let dst = $0.baseAddress!
-                f(src, 1, dst, 1, vDSP_Length(count))
+    extension Image where T == UInt8 {
+        public func cast() -> Image<P, Float> {
+            return self.unsafeChannelwiseConverted { src, dst in
+                vDSP_vfltu8(src.baseAddress!, 1, dst.baseAddress!, 1, vDSP_Length(src.count))
             }
         }
         
-        return ret
-    }
-    
-    extension Image where T == UInt8 {
-        public func cast() -> Image<P, Float> {
-            let data = vDSPConvert(self.data, vDSP_vfltu8)
-            return Image<P, Float>(width: width, height: height, data: data)
-        }
-        
         public func cast() -> Image<P, Double> {
-            let data = vDSPConvert(self.data, vDSP_vfltu8D)
-            return Image<P, Double>(width: width, height: height, data: data)
+            return self.unsafeChannelwiseConverted { src, dst in
+                vDSP_vfltu8D(src.baseAddress!, 1, dst.baseAddress!, 1, vDSP_Length(src.count))
+            }
         }
     }
     
     extension Image where T == Float {
         public func cast() -> Image<P, UInt8> {
-            let data = vDSPConvert(self.data, vDSP_vfixu8)
-            return Image<P, UInt8>(width: width, height: height, data: data)
+            return self.unsafeChannelwiseConverted { src, dst in
+                vDSP_vfixu8(src.baseAddress!, 1, dst.baseAddress!, 1, vDSP_Length(src.count))
+            }
         }
         
         public func cast() -> Image<P, Double> {
-            let data = vDSPConvert(self.data, vDSP_vspdp)
-            return Image<P, Double>(width: width, height: height, data: data)
+            return self.unsafeChannelwiseConverted { src, dst in
+                vDSP_vspdp(src.baseAddress!, 1, dst.baseAddress!, 1, vDSP_Length(src.count))
+            }
         }
     }
     
     extension Image where T == Double {
         public func cast() -> Image<P, UInt8> {
-            let data = vDSPConvert(self.data, vDSP_vfixu8D)
-            return Image<P, UInt8>(width: width, height: height, data: data)
+            return self.unsafeChannelwiseConverted { src, dst in
+                vDSP_vfixu8D(src.baseAddress!, 1, dst.baseAddress!, 1, vDSP_Length(src.count))
+            }
         }
         
         public func cast() -> Image<P, Float> {
-            let data = vDSPConvert(self.data, vDSP_vdpsp)
-            return Image<P, Float>(width: width, height: height, data: data)
+            return self.unsafeChannelwiseConverted { src, dst in
+                vDSP_vdpsp(src.baseAddress!, 1, dst.baseAddress!, 1, vDSP_Length(src.count))
+            }
         }
     }
     

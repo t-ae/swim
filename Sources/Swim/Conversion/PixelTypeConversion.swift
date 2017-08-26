@@ -15,7 +15,7 @@ extension PixelSequence where Iterator == PixelIterator<PT, DT>, PT == RGB, DT: 
 // MARK: - RGB -> RGBA
 extension Image where P == RGBA {
     public init(image: Image<RGB, T>, alpha: T) {
-        var data = [T](repeating: 0, count: image.width*image.height*P.channels)
+        var data = [T](repeating: alpha, count: image.width*image.height*P.channels)
         image.data.withUnsafeBufferPointer {
             var src = $0.baseAddress!
             data.withUnsafeMutableBufferPointer {
@@ -23,9 +23,7 @@ extension Image where P == RGBA {
                 for _ in 0..<image.width*image.height {
                     memcpy(dst, src, RGB.channels * MemoryLayout<T>.size)
                     src += RGB.channels
-                    dst += RGB.channels
-                    dst.pointee = alpha
-                    dst += 1
+                    dst += RGBA.channels
                 }
             }
         }
