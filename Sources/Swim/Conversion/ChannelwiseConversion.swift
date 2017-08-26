@@ -45,11 +45,11 @@ extension Image {
 }
 
 extension PixelSequence where Iterator == PixelIterator<PT, DT> {
-    public func channelwiseConverted<T2: DataType>(_ f: (DT)->T2) -> Image<PT, T2> {
+    public func channelwiseConverted<T2: DataType>(_ f: @escaping (DT)->T2) -> Image<PT, T2> {
         var data = [T2](repeating: 0, count: width*height*PT.channels)
         data.withUnsafeMutableBufferPointer {
             var dst = $0.baseAddress!
-            for (_, _, px) in self {
+            for px in self {
                 px.data.withUnsafeBufferPointer {
                     var src = $0.baseAddress!
                     for _ in 0..<PT.channels {

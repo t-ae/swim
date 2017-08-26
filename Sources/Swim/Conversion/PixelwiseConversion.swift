@@ -6,13 +6,14 @@ extension Image {
     public mutating func convert(_ f: (Int, Int, Pixel<P, T>)->Pixel<P, T>) {
         self.data.withUnsafeMutableBufferPointer {
             var dst = $0.baseAddress!
-            for (x, y, px) in self {
+            self.withCoord { x, y, px in
                 let newPx = f(x, y, px)
                 newPx.data.withUnsafeBufferPointer {
                     let src = $0.baseAddress!
                     memcpy(dst, src, P.channels*MemoryLayout<T>.size)
                 }
                 dst += P.channels
+
             }
         }
     }
@@ -22,7 +23,7 @@ extension Image where P == Intensity {
     public mutating func convert(_ f: (Int, Int, T)->T) {
         self.data.withUnsafeMutableBufferPointer {
             var dst = $0.baseAddress!
-            for (x, y, px) in self {
+            self.withCoord { x, y, px in
                 dst.pointee = f(x, y, px.value)
                 dst += P.channels
             }
@@ -31,12 +32,12 @@ extension Image where P == Intensity {
 }
 
 // MARK: - General conversion
-extension PixelSequence where Iterator == PixelIterator<PT, DT> {
+extension PixelSequence {
     public func converted<T2: DataType>(_ f: (Int, Int, Pixel<PT, DT>)->T2) -> Image<Intensity, T2> {
         var data = [T2](repeating: 0, count: width*height)
         data.withUnsafeMutableBufferPointer {
             var dst = $0.baseAddress!
-            for (x, y, px) in self {
+            self.withCoord { x, y, px in
                 dst.pointee = f(x, y, px)
                 dst += 1
             }
@@ -48,7 +49,7 @@ extension PixelSequence where Iterator == PixelIterator<PT, DT> {
         var data = [T2](repeating: 0, count: width*height*P2.channels)
         data.withUnsafeMutableBufferPointer {
             var dst = $0.baseAddress!
-            for (x, y, px) in self {
+            self.withCoord { x, y, px in
                 let out = f(x, y, px)
                 out.data.withUnsafeBufferPointer {
                     let src = $0.baseAddress!
@@ -61,12 +62,12 @@ extension PixelSequence where Iterator == PixelIterator<PT, DT> {
     }
 }
 
-extension PixelSequence where Iterator == PixelIterator<Intensity, DT> {
+extension PixelSequence where PT == Intensity {
     public func converted<T2: DataType>(_ f: @escaping (Int, Int, DT)->T2) -> Image<Intensity, T2> {
         var data = [T2](repeating: 0, count: width*height)
         data.withUnsafeMutableBufferPointer {
             var dst = $0.baseAddress!
-            for (x, y, px) in self {
+            self.withCoord { x, y, px in
                 dst.pointee = f(x, y, px.value)
                 dst += 1
             }
@@ -78,7 +79,7 @@ extension PixelSequence where Iterator == PixelIterator<Intensity, DT> {
         var data = [T2](repeating: 0, count: width*height*P2.channels)
         data.withUnsafeMutableBufferPointer {
             var dst = $0.baseAddress!
-            for (x, y, px) in self {
+            self.withCoord { x, y, px in
                 let out = f(x, y, px.value)
                 out.data.withUnsafeBufferPointer {
                     let src = $0.baseAddress!

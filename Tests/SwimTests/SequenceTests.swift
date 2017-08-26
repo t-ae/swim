@@ -7,75 +7,14 @@ class SequencePerformanceTests: XCTestCase {
     func testImageSequence() {
         do {
             let image = Image<Intensity, UInt8>(width: 2, height: 2, data: [0, 1, 2, 3])
-            
-            var iterator = image.makeIterator()
-            
-            var x: Int, y: Int, pixel: Pixel<Intensity, UInt8>
-            do {
-                (x, y, pixel) = iterator.next()!
-                
-                XCTAssertEqual(x, 0)
-                XCTAssertEqual(y, 0)
-                XCTAssertEqual(pixel, Pixel(0))
-            }
-            do {
-                (x, y, pixel) = iterator.next()!
-                
-                XCTAssertEqual(x, 1)
-                XCTAssertEqual(y, 0)
-                XCTAssertEqual(pixel, Pixel(1))
-            }
-            do {
-                (x, y, pixel) = iterator.next()!
-                
-                XCTAssertEqual(x, 0)
-                XCTAssertEqual(y, 1)
-                XCTAssertEqual(pixel, Pixel(2))
-            }
-            do {
-                (x, y, pixel) = iterator.next()!
-                
-                XCTAssertEqual(x, 1)
-                XCTAssertEqual(y, 1)
-                XCTAssertEqual(pixel, Pixel(3))
-            }
-            XCTAssertNil(iterator.next())
+            XCTAssertEqual(image.map { $0 }, [Pixel(0), Pixel(1), Pixel(2), Pixel(3)])
         }
         do {
             let image = Image<RGBA, Double>(width: 2, height: 2, data: (0..<16).map(Double.init))
-            
-            var iterator = image.makeIterator()
-            
-            var x: Int, y: Int, pixel: Pixel<RGBA, Double>
-            do {
-                (x, y, pixel) = iterator.next()!
-                
-                XCTAssertEqual(x, 0)
-                XCTAssertEqual(y, 0)
-                XCTAssertEqual(pixel, Pixel(r: 0, g: 1, b: 2, a: 3))
-            }
-            do {
-                (x, y, pixel) = iterator.next()!
-                
-                XCTAssertEqual(x, 1)
-                XCTAssertEqual(y, 0)
-                XCTAssertEqual(pixel, Pixel(r: 4, g: 5, b: 6, a: 7))
-            }
-            do {
-                (x, y, pixel) = iterator.next()!
-                
-                XCTAssertEqual(x, 0)
-                XCTAssertEqual(y, 1)
-                XCTAssertEqual(pixel, Pixel(r: 8, g: 9, b: 10, a: 11))
-            }
-            do {
-                (x, y, pixel) = iterator.next()!
-                
-                XCTAssertEqual(x, 1)
-                XCTAssertEqual(y, 1)
-                XCTAssertEqual(pixel, Pixel(r: 12, g: 13, b: 14, a: 15))
-            }
-            XCTAssertNil(iterator.next())
+            XCTAssertEqual(image.map { $0 }, [Pixel(r: 0, g: 1, b: 2, a: 3),
+                                              Pixel(r: 4, g: 5, b: 6, a: 7),
+                                              Pixel(r: 8, g: 9, b: 10, a: 11),
+                                              Pixel(r: 12, g: 13, b: 14, a: 15)])
         }
     }
     
@@ -83,39 +22,7 @@ class SequencePerformanceTests: XCTestCase {
         do {
             let image = Image<Intensity, UInt8>(width: 3, height: 3, data: [UInt8](0..<9))
             let slice = image[1..<3, 1..<3]
-            var iterator = slice.makeIterator()
-            
-            var x: Int, y: Int, pixel: Pixel<Intensity, UInt8>
-            
-            do {
-                (x, y, pixel) = iterator.next()!
-                
-                XCTAssertEqual(x, 0)
-                XCTAssertEqual(y, 0)
-                XCTAssertEqual(pixel, Pixel(4))
-            }
-            do {
-                (x, y, pixel) = iterator.next()!
-                
-                XCTAssertEqual(x, 1)
-                XCTAssertEqual(y, 0)
-                XCTAssertEqual(pixel, Pixel(5))
-            }
-            do {
-                (x, y, pixel) = iterator.next()!
-                
-                XCTAssertEqual(x, 0)
-                XCTAssertEqual(y, 1)
-                XCTAssertEqual(pixel, Pixel(7))
-            }
-            do {
-                (x, y, pixel) = iterator.next()!
-                
-                XCTAssertEqual(x, 1)
-                XCTAssertEqual(y, 1)
-                XCTAssertEqual(pixel, Pixel(8))
-            }
-            XCTAssertNil(iterator.next())
+            XCTAssertEqual(slice.map { $0 }, [Pixel(4), Pixel(5), Pixel(7), Pixel(8)])
         }
     }
 }

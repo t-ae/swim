@@ -1,5 +1,5 @@
 
-private func getChannel<I: PixelSequence>(image: I, channel: Int) ->Image<Intensity, I.DT> where I.Iterator == PixelIterator<I.PT, I.DT> {
+private func getChannel<I: PixelSequence>(image: I, channel: Int) ->Image<Intensity, I.DT> {
     return image.converted { _, _, px in px.data[channel] }
 }
 

@@ -1,18 +1,31 @@
 
 import Foundation
 
-public protocol PixelSequence: Sequence {
+public protocol PixelSequence: Sequence  {
     
     associatedtype PT: PixelType
     associatedtype DT: DataType
     
+    var referenceImage: Image<PT, DT> { get }
+    var startX: Int { get }
+    var startY: Int { get }
     var width: Int { get }
     var height: Int { get }
+}
+
+extension PixelSequence{
+    public func makeIterator() -> PixelIterator<PT, DT> {
+        return PixelIterator(image: referenceImage, x: startX, y: startY, width: width, height: height)
+    }
 }
 
 extension Image: PixelSequence {
     public typealias PT = P
     public typealias DT = T
+    
+    public var referenceImage: Image<P, T> { return self }
+    public var startX: Int { return 0 }
+    public var startY: Int { return 0 }
     
     public func makeIterator() -> PixelIterator<P, T> {
         return PixelIterator(image: self)
@@ -23,9 +36,11 @@ extension ImageSlice: PixelSequence {
     public typealias PT = P
     public typealias DT = T
     
-    public func makeIterator() -> PixelIterator<P, T> {
-        return PixelIterator(image: image, x: x, y: y, width: width, height: height)
-    }
+    public var referenceImage: Image<P, T> { return image }
+    public var startX: Int { return x }
+    public var startY: Int { return y }
+    
+    
 }
 
 public struct PixelIterator<P: PixelType, T: DataType>: IteratorProtocol {
@@ -57,21 +72,12 @@ public struct PixelIterator<P: PixelType, T: DataType>: IteratorProtocol {
         self.init(image: image, x: 0, y: 0, width: image.width, height: image.height)
     }
     
-    public mutating func next() -> (x: Int, y: Int, pixel: Pixel<P, T>)? {
+    public mutating func next() -> Pixel<P, T>? {
         guard dy < height else {
             return nil
         }
         
-        let _dx = dx
-        let _dy = dy
-        
-        dx += 1
-        if dx >= width {
-            dx = 0
-            dy += 1
-        }
-        
-        let start = image.index(x: x + _dx, y: y + _dy)
+        let start = image.index(x: x + dx, y: y + dy)
         image.data.withUnsafeBufferPointer {
             let src = $0.baseAddress! + start
             pixel.data.withUnsafeMutableBufferPointer {
@@ -80,6 +86,23 @@ public struct PixelIterator<P: PixelType, T: DataType>: IteratorProtocol {
             }
         }
         
-        return (_dx, _dy, pixel)
+        dx += 1
+        if dx >= width {
+            dx = 0
+            dy += 1
+        }
+        
+        return pixel
+    }
+}
+
+extension PixelSequence {
+    func withCoord(_ f: (Int, Int, Pixel<PT, DT>)->Void) {
+        var iterator: PixelIterator<PT, DT> = makeIterator()
+        for y in 0..<height {
+            for x in 0..<width {
+                f(x, y, iterator.next()!)
+            }
+        }
     }
 }

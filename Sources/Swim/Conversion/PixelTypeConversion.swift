@@ -2,7 +2,7 @@
 import Foundation
 
 // MARK: - RGB -> Intensity
-extension PixelSequence where Iterator == PixelIterator<PT, DT>, PT == RGB, DT: BinaryFloatingPoint {
+extension PixelSequence where PT == RGB, DT: BinaryFloatingPoint {
     public func toBrightness() -> Image<Intensity, DT> {
         return self.converted { x, y, px in (px[.red] + px[.green] + px[.blue]) / 3 }
     }
