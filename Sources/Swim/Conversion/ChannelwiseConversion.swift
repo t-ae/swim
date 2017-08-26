@@ -1,9 +1,9 @@
 
 extension Image {
-    mutating func channelwiseConvert(_ f: (DT)->DT) {
+    public mutating func channelwiseConvert(_ f: (DT)->DT) {
         self.data.withUnsafeMutableBufferPointer {
             var p = $0.baseAddress!
-            for _ in 0..<data.count {
+            for _ in 0..<$0.count {
                 p.pointee = f(p.pointee)
                 p += 1
             }
@@ -12,7 +12,7 @@ extension Image {
 }
 
 extension PixelSequence where Iterator == PixelIterator<PT, DT> {
-    func channelwiseConverted<T2: DataType>(_ f: (DT)->T2) -> Image<PT, T2> {
+    public func channelwiseConverted<T2: DataType>(_ f: (DT)->T2) -> Image<PT, T2> {
         var data = [T2](repeating: 0, count: width*height*PT.channels)
         data.withUnsafeMutableBufferPointer {
             var dst = $0.baseAddress!
