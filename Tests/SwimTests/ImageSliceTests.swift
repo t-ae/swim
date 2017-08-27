@@ -10,9 +10,8 @@ class ImageSliceTests: XCTestCase {
         
         do {
             let slice = image[0..<2, 0..<3]
-            let result = Image(slice)
             
-            XCTAssertEqual(result.data, [0, 1, 2, 3,
+            XCTAssertEqual(slice.data, [0, 1, 2, 3,
                                          4, 5, 6, 7,
                                          40, 41, 42, 43,
                                          44, 45, 46, 47,
@@ -22,9 +21,8 @@ class ImageSliceTests: XCTestCase {
         
         do {
             let slice = image[1..<4, 0..<2]
-            let result = Image(slice)
             
-            XCTAssertEqual(result.data, [4, 5, 6, 7,
+            XCTAssertEqual(slice.data, [4, 5, 6, 7,
                                          8, 9, 10, 11,
                                          12, 13, 14, 15,
                                          44, 45, 46, 47,
@@ -34,9 +32,8 @@ class ImageSliceTests: XCTestCase {
         
         do {
             let slice = image[1..<3, 1..<3]
-            let result = Image(slice)
             
-            XCTAssertEqual(result.data, [44, 45, 46, 47,
+            XCTAssertEqual(slice.data, [44, 45, 46, 47,
                                          48, 49, 50, 51,
                                          84, 85, 86, 87,
                                          88, 89, 90, 91])
@@ -44,14 +41,12 @@ class ImageSliceTests: XCTestCase {
         
         do {
             let slice = image[rows: 1..<2]
-            let result = Image(slice)
-            XCTAssertEqual(result.data, (40..<80).map(Double.init))
+            XCTAssertEqual(slice.data, (40..<80).map(Double.init))
         }
         
         do {
             let slice = image[cols: 1..<2]
-            let result = Image(slice)
-            XCTAssertEqual(result.data, [4, 5, 6, 7,
+            XCTAssertEqual(slice.data, [4, 5, 6, 7,
                                          44, 45, 46, 47,
                                          84, 85, 86, 87,
                                          124, 125, 126, 127,

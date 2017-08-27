@@ -32,8 +32,8 @@ extension Image where P == Intensity {
 }
 
 // MARK: - General conversion
-extension PixelSequence {
-    public func converted<T2: DataType>(_ f: (Int, Int, Pixel<PT, DT>)->T2) -> Image<Intensity, T2> {
+extension Image {
+    public func converted<T2: DataType>(_ f: (Int, Int, Pixel<P, T>)->T2) -> Image<Intensity, T2> {
         var data = [T2](repeating: 0, count: width*height)
         data.withUnsafeMutableBufferPointer {
             var dst = $0.baseAddress!
@@ -45,7 +45,7 @@ extension PixelSequence {
         return Image<Intensity, T2>(width: width, height: height, data: data)
     }
     
-    public func converted<P2, T2>(_ f: (Int, Int, Pixel<PT, DT>)->Pixel<P2, T2>) -> Image<P2, T2> {
+    public func converted<P2, T2>(_ f: (Int, Int, Pixel<P, T>)->Pixel<P2, T2>) -> Image<P2, T2> {
         var data = [T2](repeating: 0, count: width*height*P2.channels)
         data.withUnsafeMutableBufferPointer {
             var dst = $0.baseAddress!
@@ -62,8 +62,8 @@ extension PixelSequence {
     }
 }
 
-extension PixelSequence where PT == Intensity {
-    public func converted<T2: DataType>(_ f: @escaping (Int, Int, DT)->T2) -> Image<Intensity, T2> {
+extension Image where P == Intensity {
+    public func converted<T2: DataType>(_ f: @escaping (Int, Int, T)->T2) -> Image<Intensity, T2> {
         var data = [T2](repeating: 0, count: width*height)
         data.withUnsafeMutableBufferPointer {
             var dst = $0.baseAddress!
@@ -75,7 +75,7 @@ extension PixelSequence where PT == Intensity {
         return Image<Intensity, T2>(width: width, height: height, data: data)
     }
     
-    public func converted<P2, T2>(_ f: @escaping (Int, Int, DT)->Pixel<P2, T2>) -> Image<P2, T2> {
+    public func converted<P2, T2>(_ f: @escaping (Int, Int, T)->Pixel<P2, T2>) -> Image<P2, T2> {
         var data = [T2](repeating: 0, count: width*height*P2.channels)
         data.withUnsafeMutableBufferPointer {
             var dst = $0.baseAddress!

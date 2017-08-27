@@ -1,5 +1,5 @@
 
-private func getChannel<I: PixelSequence>(image: I, channel: Int) ->Image<Intensity, I.DT> {
+private func getChannel<P, T>(image: Image<P, T>, channel: Int) ->Image<Intensity, T> {
     return image.converted { _, _, px in px.data[channel] }
 }
 
@@ -32,16 +32,6 @@ extension Image {
         set {
             setChannel(image: &self, channel: channel.rawValue, newValue: newValue)
         }
-    }
-}
-
-extension ImageSlice {
-    public subscript(channel channel: Int) -> Image<Intensity, T> {
-        return getChannel(image: self, channel: channel)
-    }
-    
-    public subscript(channel channel: P) -> Image<Intensity, T> {
-        return getChannel(image: self, channel: channel.rawValue)
     }
 }
 
