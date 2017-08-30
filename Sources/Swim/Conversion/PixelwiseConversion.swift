@@ -3,7 +3,7 @@ import Foundation
 
 // MARK: - Same Pixel/Data type conversion
 extension Image {
-    public mutating func convert(_ f: (Int, Int, Pixel<P, T>)->Pixel<P, T>) {
+    mutating func _convert(_ f: (Int, Int, Pixel<P, T>)->Pixel<P, T>) {
         self.data.withUnsafeMutableBufferPointer {
             var dst = $0.baseAddress!
             self.withCoord { x, y, px in
@@ -16,10 +16,14 @@ extension Image {
             }
         }
     }
+    
+    public mutating func convert(_ f: (Int, Int, Pixel<P, T>)->Pixel<P, T>) {
+        self._convert(f)
+    }
 }
 
 extension Image where P == Intensity {
-    public mutating func convert(_ f: (Int, Int, T)->T) {
+    mutating func _convert(_ f: (Int, Int, T)->T) {
         self.data.withUnsafeMutableBufferPointer {
             var dst = $0.baseAddress!
             self.withCoord { x, y, px in
@@ -28,11 +32,15 @@ extension Image where P == Intensity {
             }
         }
     }
+    
+    public mutating func convert(_ f: (Int, Int, T)->T) {
+        self.convert(f)
+    }
 }
 
 // MARK: - General conversion
 extension Image {
-    public func converted<T2: DataType>(_ f: (Int, Int, Pixel<P, T>)->T2) -> Image<Intensity, T2> {
+    func _converted<T2: DataType>(_ f: (Int, Int, Pixel<P, T>)->T2) -> Image<Intensity, T2> {
         var data = [T2](repeating: 0, count: width*height)
         data.withUnsafeMutableBufferPointer {
             var dst = $0.baseAddress!
@@ -44,7 +52,11 @@ extension Image {
         return Image<Intensity, T2>(width: width, height: height, data: data)
     }
     
-    public func converted<P2, T2>(_ f: (Int, Int, Pixel<P, T>)->Pixel<P2, T2>) -> Image<P2, T2> {
+    public func converted<T2: DataType>(_ f: (Int, Int, Pixel<P, T>)->T2) -> Image<Intensity, T2> {
+        return self._converted(f)
+    }
+    
+    func _converted<P2, T2>(_ f: (Int, Int, Pixel<P, T>)->Pixel<P2, T2>) -> Image<P2, T2> {
         var data = [T2](repeating: 0, count: width*height*P2.channels)
         data.withUnsafeMutableBufferPointer {
             var dst = $0.baseAddress!
@@ -59,10 +71,14 @@ extension Image {
         }
         return Image<P2, T2>(width: width, height: height, data: data)
     }
+    
+    public func converted<P2, T2>(_ f: (Int, Int, Pixel<P, T>)->Pixel<P2, T2>) -> Image<P2, T2> {
+        return self._converted(f)
+    }
 }
 
 extension Image where P == Intensity {
-    public func converted<T2: DataType>(_ f: @escaping (Int, Int, T)->T2) -> Image<Intensity, T2> {
+    func _converted<T2: DataType>(_ f: (Int, Int, T)->T2) -> Image<Intensity, T2> {
         var data = [T2](repeating: 0, count: width*height)
         data.withUnsafeMutableBufferPointer {
             var dst = $0.baseAddress!
@@ -74,7 +90,11 @@ extension Image where P == Intensity {
         return Image<Intensity, T2>(width: width, height: height, data: data)
     }
     
-    public func converted<P2, T2>(_ f: @escaping (Int, Int, T)->Pixel<P2, T2>) -> Image<P2, T2> {
+    public func converted<T2: DataType>(_ f: (Int, Int, T)->T2) -> Image<Intensity, T2> {
+        return self._converted(f)
+    }
+    
+    func _converted<P2, T2>(_ f: (Int, Int, T)->Pixel<P2, T2>) -> Image<P2, T2> {
         var data = [T2](repeating: 0, count: width*height*P2.channels)
         data.withUnsafeMutableBufferPointer {
             var dst = $0.baseAddress!
@@ -88,5 +108,9 @@ extension Image where P == Intensity {
             }
         }
         return Image<P2, T2>(width: width, height: height, data: data)
+    }
+    
+    public func converted<P2, T2>(_ f: (Int, Int, T)->Pixel<P2, T2>) -> Image<P2, T2> {
+        return self._converted(f)
     }
 }
