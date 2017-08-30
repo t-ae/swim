@@ -5,6 +5,12 @@ extension Image where T == UInt8 {
     }
 }
 
+extension Image where T == Int {
+    public func cast<T2: DataType&BinaryFloatingPoint>() -> Image<P, T2> {
+        return _channelwiseConverted(T2.init)
+    }
+}
+
 extension Image where T == Float {
     public func cast<T2: DataType&BinaryFloatingPoint>() -> Image<P, T2> {
         return _channelwiseConverted(T2.init)
@@ -64,6 +70,16 @@ extension Image where T == Double {
     
 #else
     extension Image where T == UInt8 {
+        public func cast() -> Image<P, Double> {
+            return _channelwiseConverted(Double.init)
+        }
+        
+        public func cast() -> Image<P, Float> {
+            return _channelwiseConverted(Float.init)
+        }
+    }
+    
+    extension Image where T == Int {
         public func cast() -> Image<P, Double> {
             return _channelwiseConverted(Double.init)
         }

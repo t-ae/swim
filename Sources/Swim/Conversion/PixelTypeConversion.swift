@@ -35,9 +35,32 @@ func imageFromRGB<T: DataType>(image: Image<RGB, T>, alpha: T) -> Image<RGBA, T>
         }
     }
     
-    return Image(width: image.width, height: image.height, data: data)
+    return Image<RGBA, T>(width: image.width, height: image.height, data: data)
 }
 extension Image where P == RGBA {
+    public init(image: Image<RGB, T>, alpha: T) {
+        self = imageFromRGB(image: image, alpha: alpha)
+    }
+}
+
+// MARK: - RGB -> ARGB
+func imageFromRGB<T: DataType>(image: Image<RGB, T>, alpha: T) -> Image<ARGB, T> {
+    var data = [T](repeating: alpha, count: image.width*image.height*ARGB.channels)
+    image.data.withUnsafeBufferPointer {
+        var src = $0.baseAddress!
+        data.withUnsafeMutableBufferPointer {
+            var dst = $0.baseAddress! + 1
+            for _ in 0..<image.width*image.height {
+                memcpy(dst, src, RGB.channels * MemoryLayout<T>.size)
+                src += RGB.channels
+                dst += ARGB.channels
+            }
+        }
+    }
+    
+    return Image<ARGB, T>(width: image.width, height: image.height, data: data)
+}
+extension Image where P == ARGB {
     public init(image: Image<RGB, T>, alpha: T) {
         self = imageFromRGB(image: image, alpha: alpha)
     }

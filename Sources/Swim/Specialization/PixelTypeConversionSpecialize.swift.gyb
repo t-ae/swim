@@ -41,6 +41,32 @@ extension Image where P == RGBA, T == ${dt} {
 
 % end
 
+% for dt in int_data_types:
+extension Image where P == ARGB, T == ${dt} {
+    public init(image: Image<RGB, T>, alpha: T) {
+        self = imageFromRGB(image: image, alpha: alpha)
+    }
+
+    public init(image: Image<RGB, T>) {
+        self = imageFromRGB(image: image, alpha: 255)
+    }
+}
+
+% end
+
+% for dt in fp_data_types:
+extension Image where P == ARGB, T == ${dt} {
+    public init(image: Image<RGB, T>, alpha: T) {
+        self = imageFromRGB(image: image, alpha: alpha)
+    }
+    
+    public init(image: Image<RGB, T>) {
+        self = imageFromRGB(image: image, alpha: 1)
+    }
+}
+
+% end
+
 % for dt in data_types:
 extension Image where P == RGB, T == ${dt} {
     public init(image: Image<RGBA, T>) {
