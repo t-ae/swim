@@ -6,8 +6,9 @@ extern "C" {
 #endif
     
     // IO
-    unsigned char* load_image(const char* path, int* width, int* height, int* bpp, int desired_bpp);
-    void free_image(unsigned char* pixels);
+    unsigned char* load_image(const char* path, int* width, int* height, int* channels, int desired_channels);
+    float* load_image_float(const char* path, int* width, int* height, int* channels, int desired_channels);
+    void free_image(void* pixels);
     
     int write_image_bmp(const char* path, int width, int height, int bpp, const void* data);
     int write_image_jpg(const char* path, int width, int height, int bpp, const void* data);

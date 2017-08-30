@@ -13,7 +13,6 @@ extension Image {
                     memcpy(dst, src, P.channels*MemoryLayout<T>.size)
                 }
                 dst += P.channels
-
             }
         }
     }

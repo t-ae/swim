@@ -1,19 +1,19 @@
 
 extension Image where T == UInt8 {
     public func cast<T2: DataType&BinaryFloatingPoint>() -> Image<P, T2> {
-        return Image<P, T2>(width: width, height: height, data: data.map { T2($0) })
+        return channelwiseConverted(T2.init)
     }
 }
 
 extension Image where T == Float {
     public func cast<T2: DataType&BinaryFloatingPoint>() -> Image<P, T2> {
-        return Image<P, T2>(width: width, height: height, data: data.map { T2($0) })
+        return channelwiseConverted(T2.init)
     }
 }
 
 extension Image where T == Double {
     public func cast<T2: DataType&BinaryFloatingPoint>() -> Image<P, T2> {
-        return Image<P, T2>(width: width, height: height, data: data.map { T2($0) })
+        return channelwiseConverted(T2.init)
     }
 }
 

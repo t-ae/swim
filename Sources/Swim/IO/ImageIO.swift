@@ -42,6 +42,28 @@ extension Image where P: ImageFileFormat, T == UInt8 {
     }
 }
 
+extension Image where P: ImageFileFormat, T == Float {
+    public init?(path: String) {
+        
+        var width: Int32 = 0
+        var height: Int32 = 0
+        var bpp: Int32 = 0
+        
+        guard let pixels = load_image_float(path, &width, &height, &bpp, Int32(P.channels)) else {
+            return nil
+        }
+        defer { free_image(pixels) }
+        
+        guard bpp == Int32(P.channels) else {
+            return nil
+        }
+        
+        let data = [Float](UnsafeBufferPointer(start: pixels, count: Int(width*height)*P.channels))
+        
+        self.init(width: Int(width), height: Int(height), data: data)
+    }
+}
+
 // MARK: Write
 private func write<P, T>(image: Image<P, T>, path: String, type: ImageFileType) throws {
     let width = Int32(image.width)
