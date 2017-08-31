@@ -1,4 +1,6 @@
 
+// FIXME: Wait for Swift4
+/*
 extension Image where P == Intensity, T == UInt8 {
     public subscript(channel channel: Int) -> Image<Intensity, T> {
         get{
@@ -656,3 +658,4 @@ extension Image where P == ARGB, T == Int {
     }
 
 #endif
+*/

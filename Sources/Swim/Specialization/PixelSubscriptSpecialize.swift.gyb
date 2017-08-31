@@ -2,6 +2,8 @@
 from type import *
 }%
 
+// FIXME: Wait for Swift4
+/*
 % for dt in data_types:
 extension Image where P == Intensity, T == ${dt} {
     public subscript(x: Int, y: Int) -> T {
@@ -39,3 +41,4 @@ extension Image where P == ${pt}, T == ${dt} {
 
 % end
 % end
+*/

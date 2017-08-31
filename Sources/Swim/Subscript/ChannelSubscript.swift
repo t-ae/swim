@@ -1,10 +1,14 @@
 
 extension Image {
     func getChannel(channel: Int) ->Image<Intensity, T> {
+        assert(0 <= channel && channel <= P.channels)
+        
         return converted { _, _, px in px.data[channel] }
     }
     
     mutating func setChannel(channel: Int, newValue: Image<Intensity, T>) {
+        assert(0 <= channel && channel <= P.channels)
+        
         self.unsafeChannelwiseConvert {
             var dst = $0.baseAddress! + channel
             for v in newValue.data {
