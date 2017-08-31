@@ -2,7 +2,7 @@
 import CStbImage
 
 extension Image where T == UInt8 {
-    func resized(width: Int, height: Int) -> Image<P, T>? {
+    public func resized(width: Int, height: Int) -> Image<P, T>? {
         var data = [T](repeating: 0, count: width*height*P.channels)
         let in_w = Int32(self.width)
         let in_h = Int32(self.height)
@@ -26,7 +26,7 @@ extension Image where T == UInt8 {
 }
 
 extension Image where T == Float {
-    func resized(width: Int, height: Int) -> Image<P, T>? {
+    public func resized(width: Int, height: Int) -> Image<P, T>? {
         var data = [T](repeating: 0, count: width*height*P.channels)
         let in_w = Int32(self.width)
         let in_h = Int32(self.height)
