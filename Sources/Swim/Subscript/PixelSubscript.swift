@@ -36,10 +36,10 @@ extension Image {
 extension Image where P == Intensity {
     public subscript(x: Int, y: Int) -> T {
         get {
-            return self.getPixel(x: x, y: y)
+            return getPixel(x: x, y: y)
         }
         set {
-            self.setPixel(x: x, y: y, newValue: newValue)
+            setPixel(x: x, y: y, newValue: newValue)
         }
     }
 }
@@ -47,19 +47,19 @@ extension Image where P == Intensity {
 extension Image {
     public subscript(x: Int, y: Int, c: Int) -> T {
         get {
-            return self.getPixel(x: x, y: y, c: c)
+            return getPixel(x: x, y: y, c: c)
         }
         set {
-            self.setPixel(x: x, y: y, c: c, newValue: newValue)
+            setPixel(x: x, y: y, c: c, newValue: newValue)
         }
     }
     
     public subscript(x: Int, y: Int) -> Pixel<P, T> {
         get {
-            return self.getPixel(x: x, y: y)
+            return getPixel(x: x, y: y)
         }
         set {
-            self.setPixel(x: x, y: y, newValue: newValue)
+            setPixel(x: x, y: y, newValue: newValue)
         }
     }
 }

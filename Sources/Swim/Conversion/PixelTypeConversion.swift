@@ -4,19 +4,19 @@ import Foundation
 // MARK: - RGB -> Intensity
 extension Image where P == RGB, T: BinaryFloatingPoint {
     func _toBrightness() -> Image<Intensity, T> {
-        return self._converted { x, y, px in (px[.red] + px[.green] + px[.blue]) / 3 }
+        return _converted { x, y, px in (px[.red] + px[.green] + px[.blue]) / 3 }
     }
     
     func _toLuminane() -> Image<Intensity, T> {
-        return self._converted { x, y, px in 0.2126*px[.red] + 0.7152*px[.green] + 0.0722*px[.blue] }
+        return _converted { x, y, px in 0.2126*px[.red] + 0.7152*px[.green] + 0.0722*px[.blue] }
     }
     
     public func toBrightness() -> Image<Intensity, T> {
-        return self._toBrightness()
+        return _toBrightness()
     }
     
     public func toLuminane() -> Image<Intensity, T> {
-        return self._toLuminane()
+        return _toLuminane()
     }
 }
 

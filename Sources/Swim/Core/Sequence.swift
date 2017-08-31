@@ -34,7 +34,7 @@ public struct PixelIterator<P: PixelType, T: DataType>: IteratorProtocol {
         
         image.data.withUnsafeBufferPointer {
             let src = $0.baseAddress! + p
-            self.pixel.data.withUnsafeMutableBufferPointer {
+            pixel.data.withUnsafeMutableBufferPointer {
                 let dst = $0.baseAddress!
                 memcpy(dst, src, P.channels*MemoryLayout<T>.size)
             }

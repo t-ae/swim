@@ -14,6 +14,9 @@ public struct Image<P: PixelType, T: DataType> {
 
 extension Image: Equatable {
     public static func == (lhs: Image, rhs: Image) -> Bool {
+        guard lhs.width == rhs.width && lhs.height == rhs.height else {
+            return false
+        }
         for (l, r) in zip(lhs.data, rhs.data) {
             if l != r {
                 return false

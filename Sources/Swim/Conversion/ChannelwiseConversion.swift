@@ -1,7 +1,7 @@
 
 extension Image {
     mutating func _channelwiseConvert(_ f: (T)->T) {
-        self.data.withUnsafeMutableBufferPointer {
+        data.withUnsafeMutableBufferPointer {
             var p = $0.baseAddress!
             for _ in 0..<$0.count {
                 p.pointee = f(p.pointee)
@@ -11,7 +11,7 @@ extension Image {
     }
     
     public mutating func channelwiseConvert(_ f: (T)->T) {
-        self._channelwiseConvert(f)
+        _channelwiseConvert(f)
     }
     
     func _channelwiseConverted<T2: DataType>(_ f: (T) -> T2) -> Image<P, T2> {
@@ -32,11 +32,11 @@ extension Image {
     }
     
     public func channelwiseConverted<T2: DataType>(_ f: (T) -> T2) -> Image<P, T2> {
-        return self._channelwiseConverted(f)
+        return _channelwiseConverted(f)
     }
     
     public mutating func unsafeChannelwiseConvert(_ f: (UnsafeMutableBufferPointer<T>)->Void) {
-        self.data.withUnsafeMutableBufferPointer { bp in
+        data.withUnsafeMutableBufferPointer { bp in
             f(bp)
         }
     }

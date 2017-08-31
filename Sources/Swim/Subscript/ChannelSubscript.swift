@@ -9,7 +9,7 @@ extension Image {
     mutating func setChannel(channel: Int, newValue: Image<Intensity, T>) {
         assert(0 <= channel && channel <= P.channels)
         
-        self.unsafeChannelwiseConvert {
+        unsafeChannelwiseConvert {
             var dst = $0.baseAddress! + channel
             for v in newValue.data {
                 dst.pointee = v
@@ -21,20 +21,20 @@ extension Image {
     public subscript(channel channel: Int) -> Image<Intensity, T> {
         get{
             precondition(0 <= channel && channel <= P.channels)
-            return self.getChannel(channel: channel)
+            return getChannel(channel: channel)
         }
         set {
             precondition(0 <= channel && channel <= P.channels)
-            self.setChannel(channel: channel, newValue: newValue)
+            setChannel(channel: channel, newValue: newValue)
         }
     }
     
     public subscript(channel channel: P) -> Image<Intensity, T> {
         get {
-            return self.getChannel(channel: channel.rawValue)
+            return getChannel(channel: channel.rawValue)
         }
         set {
-            self.setChannel(channel: channel.rawValue, newValue: newValue)
+            setChannel(channel: channel.rawValue, newValue: newValue)
         }
     }
 }
