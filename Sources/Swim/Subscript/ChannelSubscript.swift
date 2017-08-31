@@ -65,11 +65,11 @@ extension Image {
     extension Image where T == Float {
         func getChannel(channel: Int) ->Image<Intensity, T> {
             assert(0 <= channel && channel <= P.channels)
-            var data = [T](repeating: 0, count: width*height)
+            var newImage = Image<Intensity, T>(width: width, height: height)
             strideCopy(src: self.data, srcOffset: channel, srcStride: P.channels,
-                       dst: &data, dstOffset: 0, dstStride: 1,
+                       dst: &newImage.data, dstOffset: 0, dstStride: 1,
                        cblas_scopy)
-            return Image<Intensity, T>(width: width, height: height, data: data)
+            return newImage
         }
         
         mutating func setChannel(channel: Int, newValue: Image<Intensity, T>) {
@@ -104,11 +104,11 @@ extension Image {
     extension Image where T == Double {
         func getChannel(channel: Int) ->Image<Intensity, T> {
             assert(0 <= channel && channel <= P.channels)
-            var data = [T](repeating: 0, count: width*height)
+            var newImage = Image<Intensity, T>(width: width, height: height)
             strideCopy(src: self.data, srcOffset: channel, srcStride: P.channels,
-                       dst: &data, dstOffset: 0, dstStride: 1,
+                       dst: &newImage.data, dstOffset: 0, dstStride: 1,
                        cblas_dcopy)
-            return Image<Intensity, T>(width: width, height: height, data: data)
+            return newImage
         }
         
         mutating func setChannel(channel: Int, newValue: Image<Intensity, T>) {

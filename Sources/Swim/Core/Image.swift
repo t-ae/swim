@@ -12,6 +12,16 @@ public struct Image<P: PixelType, T: DataType> {
         self.height = height
         self.data = data
     }
+    
+    public init(width: Int, height: Int, value: T) {
+        let data = [T](repeating: value, count: width*height*P.channels)
+        self.init(width: width, height: height, data: data)
+    }
+    
+    init(width: Int, height: Int) {
+        let data = [T](repeating: T.swimDefaultValue, count: width*height*P.channels)
+        self.init(width: width, height: height, data: data)
+    }
 }
 
 extension Image: Equatable {

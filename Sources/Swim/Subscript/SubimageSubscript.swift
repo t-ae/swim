@@ -9,10 +9,10 @@ extension Image {
         
         let start = index(x: x, y: y)
         
-        var data = [T](repeating: T.swimDefaultValue, count: width*height*P.channels)
-        self.data.withUnsafeBufferPointer {
+        var newImage = Image<P, T>(width: width, height: height)
+        data.withUnsafeBufferPointer {
             var src = $0.baseAddress! + start
-            data.withUnsafeMutableBufferPointer {
+            newImage.data.withUnsafeMutableBufferPointer {
                 var dst = $0.baseAddress!
                 for _ in 0..<height {
                     memcpy(dst, src, width*P.channels*MemoryLayout<T>.size)
@@ -22,7 +22,7 @@ extension Image {
             }
         }
         
-        return Image(width: width, height: height , data: data)
+        return newImage
     }
     
     mutating func setSubimage(x: Int, y: Int, width: Int, height: Int, newValue: Image<P, T>) {
