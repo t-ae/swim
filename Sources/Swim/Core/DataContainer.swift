@@ -2,8 +2,8 @@
 import Foundation
 
 public protocol DataContainer {
-    associatedtype PT
-    associatedtype DT
+    associatedtype PT: PixelType
+    associatedtype DT: DataType
     
     var data: [DT] { get set }
 }
