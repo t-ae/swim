@@ -5,11 +5,11 @@ from .type import *
 % for dt in fp_data_types:
 extension Image where P == RGB, T == ${dt} {
     public func toBrightness() -> Image<Intensity, T> {
-        return self._toBrightness()
+        return _toBrightness()
     }
     
     public func toLuminane() -> Image<Intensity, T> {
-        return self._toLuminane()
+        return _toLuminane()
     }
 }
 

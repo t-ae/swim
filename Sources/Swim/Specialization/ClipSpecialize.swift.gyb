@@ -3,10 +3,10 @@ from type import *
 }%
 
 % for pt in pixel_types:
-% for dt in int_data_types:
+% for dt in data_types:
 extension Image where P == ${pt}, T == ${dt} {
     public mutating func clip(low: T, high: T) {
-        self._clip(low: low, high: high)
+        _clip(low: low, high: high)
     }
     
     public func clipped(low: T, high: T) -> Image<P, T> {
@@ -18,72 +18,3 @@ extension Image where P == ${pt}, T == ${dt} {
 
 % end
 % end
-
-
-#if os(macOS) || os(iOS)
-    import Accelerate
-    
-% for pt in pixel_types:
-    extension Image where P == ${pt}, T == Float {
-        public mutating func clip(low: T, high: T) {
-            var low = low
-            var high = high
-            self.unsafeChannelwiseConvert {
-                let p = $0.baseAddress!
-                vDSP_vclip(p, 1, &low, &high, p, 1, vDSP_Length(self.data.count))
-            }
-        }
-        
-        public func clipped(low: T, high: T) -> Image<P, T> {
-            var ret = self
-            ret.clip(low: low, high: high)
-            return ret
-        }
-    }
-    
-    extension Image where P == ${pt}, T == Double {
-        public mutating func clip(low: T, high: T) {
-            var low = low
-            var high = high
-            self.unsafeChannelwiseConvert {
-                let p = $0.baseAddress!
-                vDSP_vclipD(p, 1, &low, &high, p, 1, vDSP_Length(self.data.count))
-            }
-        }
-        
-        public func clipped(low: T, high: T) -> Image<P, T> {
-            var ret = self
-            ret.clip(low: low, high: high)
-            return ret
-        }
-    }
-
-% end
-#else
-% for pt in pixel_types:
-    extension Image where T == Float {
-        public mutating func clip(low: T, high: T) {
-            self._clip(low: low, high: high)
-        }
-        
-        public func clipped(low: T, high: T) -> Image<P, T> {
-            var ret = self
-            ret._clip(low: low, high: high)
-            return ret
-        }
-    }
-    
-    extension Image where T == Double {
-        public mutating func clip(low: T, high: T) {
-            self._clip(low: low, high: high)
-        }
-        
-        public func clipped(low: T, high: T) -> Image<P, T> {
-            var ret = self
-            ret._clip(low: low, high: high)
-            return ret
-        }
-    }
-
-% end
-#endif
