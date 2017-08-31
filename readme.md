@@ -8,7 +8,7 @@ Image<P: PixelType, T: DataType>
 
 Supported types  
 PixelType: `Intensity`, `RGB`, `RGBA`, `ARGB`  
-DataType: `UInt8`, `Int`, `Float`, `Double`  
+DataType: `Bool`, `UInt8`, `Int`, `Float`, `Double`  
 
 ## Save/Load image
 ```swift

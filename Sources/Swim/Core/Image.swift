@@ -1,4 +1,6 @@
 
+import Foundation
+
 public struct Image<P: PixelType, T: DataType> {
     public let width: Int
     public let height: Int
@@ -17,12 +19,7 @@ extension Image: Equatable {
         guard lhs.width == rhs.width && lhs.height == rhs.height else {
             return false
         }
-        for (l, r) in zip(lhs.data, rhs.data) {
-            if l != r {
-                return false
-            }
-        }
-        return true
+        return memcmp(lhs.data, rhs.data, lhs.width*lhs.height*P.channels*MemoryLayout<T>.size) == 0
     }
 }
 
