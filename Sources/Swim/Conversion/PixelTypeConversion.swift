@@ -8,7 +8,12 @@ extension Image where P == RGB, T: BinaryFloatingPoint {
     }
     
     func _toLuminane() -> Image<Intensity, T> {
-        return _converted { x, y, px in 0.2126*px[.red] + 0.7152*px[.green] + 0.0722*px[.blue] }
+        return _converted { x, y, px -> T in
+            let r = 0.2126*px[.red]
+            let g = 0.7152*px[.green]
+            let b = 0.0722*px[.blue]
+            return r + g + b
+        }
     }
     
     public func toBrightness() -> Image<Intensity, T> {

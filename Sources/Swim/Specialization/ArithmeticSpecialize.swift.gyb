@@ -4,44 +4,44 @@ from type import *
 
 % for pt in pixel_types:
 % for dt in data_types:
-extension Image where P == ${pt}, T == ${dt} {
-    public static func +(lhs: Image<P, T>, rhs: T) -> Image<P, T> {
+extension DataContainer where PT == ${pt}, DT == ${dt} {
+    public static func +(lhs: Self, rhs: DT) -> Self {
         var ret = lhs
         ret += rhs
         return ret
     }
     
-    public static func +=(lhs: inout Image<P, T>, rhs: T) {
+    public static func +=(lhs: inout Self, rhs: DT) {
         add(lhs: &lhs, rhs: rhs)
     }
     
-    public static func -(lhs: Image<P, T>, rhs: T) -> Image<P, T> {
+    public static func -(lhs: Self, rhs: DT) -> Self {
         var ret = lhs
         ret -= rhs
         return ret
     }
     
-    public static func -=(lhs: inout Image<P, T>, rhs: T) {
+    public static func -=(lhs: inout Self, rhs: DT) {
         subtract(lhs: &lhs, rhs: rhs)
     }
     
-    public static func *(lhs: Image<P, T>, rhs: T) -> Image<P, T> {
+    public static func *(lhs: Self, rhs: DT) -> Self {
         var ret = lhs
         ret *= rhs
         return ret
     }
     
-    public static func *=(lhs: inout Image<P, T>, rhs: T) {
+    public static func *=(lhs: inout Self, rhs: DT) {
         multiply(lhs: &lhs, rhs: rhs)
     }
     
-    public static func /(lhs: Image<P, T>, rhs: T) -> Image<P, T> {
+    public static func /(lhs: Self, rhs: DT) -> Self {
         var ret = lhs
         ret /= rhs
         return ret
     }
     
-    public static func /=(lhs: inout Image<P, T>, rhs: T) {
+    public static func /=(lhs: inout Self, rhs: DT) {
         divide(lhs: &lhs, rhs: rhs)
     }
 }

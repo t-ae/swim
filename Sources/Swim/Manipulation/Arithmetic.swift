@@ -12,10 +12,10 @@ extension Int: CompoundArithmetics {}
 extension Float: CompoundArithmetics {}
 extension Double: CompoundArithmetics {}
 
-extension Image where T: CompoundArithmetics {
+extension DataContainer where DT: CompoundArithmetics {
     
-    static func add(lhs: inout Image<P, T>, rhs: T) {
-        lhs.unsafeChannelwiseConvert {
+    static func add(lhs: inout Self, rhs: DT) {
+        lhs.data.withUnsafeMutableBufferPointer {
             var p = $0.baseAddress!
             for _ in 0..<$0.count {
                 p.pointee += rhs
@@ -24,8 +24,8 @@ extension Image where T: CompoundArithmetics {
         }
     }
     
-    static func subtract(lhs: inout Image<P, T>, rhs: T) {
-        lhs.unsafeChannelwiseConvert {
+    static func subtract(lhs: inout Self, rhs: DT) {
+        lhs.data.withUnsafeMutableBufferPointer {
             var p = $0.baseAddress!
             for _ in 0..<$0.count {
                 p.pointee -= rhs
@@ -34,8 +34,8 @@ extension Image where T: CompoundArithmetics {
         }
     }
     
-    static func multiply(lhs: inout Image<P, T>, rhs: T) {
-        lhs.unsafeChannelwiseConvert {
+    static func multiply(lhs: inout Self, rhs: DT) {
+        lhs.data.withUnsafeMutableBufferPointer {
             var p = $0.baseAddress!
             for _ in 0..<$0.count {
                 p.pointee *= rhs
@@ -44,8 +44,8 @@ extension Image where T: CompoundArithmetics {
         }
     }
     
-    static func divide(lhs: inout Image<P, T>, rhs: T) {
-        lhs.unsafeChannelwiseConvert {
+    static func divide(lhs: inout Self, rhs: DT) {
+        lhs.data.withUnsafeMutableBufferPointer {
             var p = $0.baseAddress!
             for _ in 0..<$0.count {
                 p.pointee /= rhs
@@ -54,43 +54,43 @@ extension Image where T: CompoundArithmetics {
         }
     }
     
-    public static func +(lhs: Image<P, T>, rhs: T) -> Image<P, T> {
+    public static func +(lhs: Self, rhs: DT) -> Self {
         var ret = lhs
         ret += rhs
         return ret
     }
     
-    public static func +=(lhs: inout Image<P, T>, rhs: T) {
+    public static func +=(lhs: inout Self, rhs: DT) {
         add(lhs: &lhs, rhs: rhs)
     }
     
-    public static func -(lhs: Image<P, T>, rhs: T) -> Image<P, T> {
+    public static func -(lhs: Self, rhs: DT) -> Self {
         var ret = lhs
         ret -= rhs
         return ret
     }
     
-    public static func -=(lhs: inout Image<P, T>, rhs: T) {
+    public static func -=(lhs: inout Self, rhs: DT) {
         subtract(lhs: &lhs, rhs: rhs)
     }
     
-    public static func *(lhs: Image<P, T>, rhs: T) -> Image<P, T> {
+    public static func *(lhs: Self, rhs: DT) -> Self {
         var ret = lhs
         ret *= rhs
         return ret
     }
     
-    public static func *=(lhs: inout Image<P, T>, rhs: T) {
+    public static func *=(lhs: inout Self, rhs: DT) {
         multiply(lhs: &lhs, rhs: rhs)
     }
     
-    public static func /(lhs: Image<P, T>, rhs: T) -> Image<P, T> {
+    public static func /(lhs: Self, rhs: DT) -> Self {
         var ret = lhs
         ret /= rhs
         return ret
     }
     
-    public static func /=(lhs: inout Image<P, T>, rhs: T) {
+    public static func /=(lhs: inout Self, rhs: DT) {
         divide(lhs: &lhs, rhs: rhs)
     }
 }

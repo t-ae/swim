@@ -53,5 +53,11 @@ class PixelSubscriptTests: XCTestCase {
                                     99, 98, 97, 96,
                                     8, 9, 10, 11,
                                     12, 13, 14, 15])
+        
+        image[0, 1] += 1
+        XCTAssertEqual(image.data, [100, 66, 67, 3,
+                                    99, 98, 97, 96,
+                                    9, 10, 11, 12,
+                                    12, 13, 14, 15])
     }
 }

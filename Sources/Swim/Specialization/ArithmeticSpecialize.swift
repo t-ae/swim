@@ -1,672 +1,672 @@
 
-extension Image where P == Intensity, T == UInt8 {
-    public static func +(lhs: Image<P, T>, rhs: T) -> Image<P, T> {
+extension DataContainer where PT == Intensity, DT == UInt8 {
+    public static func +(lhs: Self, rhs: DT) -> Self {
         var ret = lhs
         ret += rhs
         return ret
     }
     
-    public static func +=(lhs: inout Image<P, T>, rhs: T) {
+    public static func +=(lhs: inout Self, rhs: DT) {
         add(lhs: &lhs, rhs: rhs)
     }
     
-    public static func -(lhs: Image<P, T>, rhs: T) -> Image<P, T> {
+    public static func -(lhs: Self, rhs: DT) -> Self {
         var ret = lhs
         ret -= rhs
         return ret
     }
     
-    public static func -=(lhs: inout Image<P, T>, rhs: T) {
+    public static func -=(lhs: inout Self, rhs: DT) {
         subtract(lhs: &lhs, rhs: rhs)
     }
     
-    public static func *(lhs: Image<P, T>, rhs: T) -> Image<P, T> {
+    public static func *(lhs: Self, rhs: DT) -> Self {
         var ret = lhs
         ret *= rhs
         return ret
     }
     
-    public static func *=(lhs: inout Image<P, T>, rhs: T) {
+    public static func *=(lhs: inout Self, rhs: DT) {
         multiply(lhs: &lhs, rhs: rhs)
     }
     
-    public static func /(lhs: Image<P, T>, rhs: T) -> Image<P, T> {
+    public static func /(lhs: Self, rhs: DT) -> Self {
         var ret = lhs
         ret /= rhs
         return ret
     }
     
-    public static func /=(lhs: inout Image<P, T>, rhs: T) {
+    public static func /=(lhs: inout Self, rhs: DT) {
         divide(lhs: &lhs, rhs: rhs)
     }
 }
 
-extension Image where P == Intensity, T == Int {
-    public static func +(lhs: Image<P, T>, rhs: T) -> Image<P, T> {
+extension DataContainer where PT == Intensity, DT == Int {
+    public static func +(lhs: Self, rhs: DT) -> Self {
         var ret = lhs
         ret += rhs
         return ret
     }
     
-    public static func +=(lhs: inout Image<P, T>, rhs: T) {
+    public static func +=(lhs: inout Self, rhs: DT) {
         add(lhs: &lhs, rhs: rhs)
     }
     
-    public static func -(lhs: Image<P, T>, rhs: T) -> Image<P, T> {
+    public static func -(lhs: Self, rhs: DT) -> Self {
         var ret = lhs
         ret -= rhs
         return ret
     }
     
-    public static func -=(lhs: inout Image<P, T>, rhs: T) {
+    public static func -=(lhs: inout Self, rhs: DT) {
         subtract(lhs: &lhs, rhs: rhs)
     }
     
-    public static func *(lhs: Image<P, T>, rhs: T) -> Image<P, T> {
+    public static func *(lhs: Self, rhs: DT) -> Self {
         var ret = lhs
         ret *= rhs
         return ret
     }
     
-    public static func *=(lhs: inout Image<P, T>, rhs: T) {
+    public static func *=(lhs: inout Self, rhs: DT) {
         multiply(lhs: &lhs, rhs: rhs)
     }
     
-    public static func /(lhs: Image<P, T>, rhs: T) -> Image<P, T> {
+    public static func /(lhs: Self, rhs: DT) -> Self {
         var ret = lhs
         ret /= rhs
         return ret
     }
     
-    public static func /=(lhs: inout Image<P, T>, rhs: T) {
+    public static func /=(lhs: inout Self, rhs: DT) {
         divide(lhs: &lhs, rhs: rhs)
     }
 }
 
-extension Image where P == Intensity, T == Float {
-    public static func +(lhs: Image<P, T>, rhs: T) -> Image<P, T> {
+extension DataContainer where PT == Intensity, DT == Float {
+    public static func +(lhs: Self, rhs: DT) -> Self {
         var ret = lhs
         ret += rhs
         return ret
     }
     
-    public static func +=(lhs: inout Image<P, T>, rhs: T) {
+    public static func +=(lhs: inout Self, rhs: DT) {
         add(lhs: &lhs, rhs: rhs)
     }
     
-    public static func -(lhs: Image<P, T>, rhs: T) -> Image<P, T> {
+    public static func -(lhs: Self, rhs: DT) -> Self {
         var ret = lhs
         ret -= rhs
         return ret
     }
     
-    public static func -=(lhs: inout Image<P, T>, rhs: T) {
+    public static func -=(lhs: inout Self, rhs: DT) {
         subtract(lhs: &lhs, rhs: rhs)
     }
     
-    public static func *(lhs: Image<P, T>, rhs: T) -> Image<P, T> {
+    public static func *(lhs: Self, rhs: DT) -> Self {
         var ret = lhs
         ret *= rhs
         return ret
     }
     
-    public static func *=(lhs: inout Image<P, T>, rhs: T) {
+    public static func *=(lhs: inout Self, rhs: DT) {
         multiply(lhs: &lhs, rhs: rhs)
     }
     
-    public static func /(lhs: Image<P, T>, rhs: T) -> Image<P, T> {
+    public static func /(lhs: Self, rhs: DT) -> Self {
         var ret = lhs
         ret /= rhs
         return ret
     }
     
-    public static func /=(lhs: inout Image<P, T>, rhs: T) {
+    public static func /=(lhs: inout Self, rhs: DT) {
         divide(lhs: &lhs, rhs: rhs)
     }
 }
 
-extension Image where P == Intensity, T == Double {
-    public static func +(lhs: Image<P, T>, rhs: T) -> Image<P, T> {
+extension DataContainer where PT == Intensity, DT == Double {
+    public static func +(lhs: Self, rhs: DT) -> Self {
         var ret = lhs
         ret += rhs
         return ret
     }
     
-    public static func +=(lhs: inout Image<P, T>, rhs: T) {
+    public static func +=(lhs: inout Self, rhs: DT) {
         add(lhs: &lhs, rhs: rhs)
     }
     
-    public static func -(lhs: Image<P, T>, rhs: T) -> Image<P, T> {
+    public static func -(lhs: Self, rhs: DT) -> Self {
         var ret = lhs
         ret -= rhs
         return ret
     }
     
-    public static func -=(lhs: inout Image<P, T>, rhs: T) {
+    public static func -=(lhs: inout Self, rhs: DT) {
         subtract(lhs: &lhs, rhs: rhs)
     }
     
-    public static func *(lhs: Image<P, T>, rhs: T) -> Image<P, T> {
+    public static func *(lhs: Self, rhs: DT) -> Self {
         var ret = lhs
         ret *= rhs
         return ret
     }
     
-    public static func *=(lhs: inout Image<P, T>, rhs: T) {
+    public static func *=(lhs: inout Self, rhs: DT) {
         multiply(lhs: &lhs, rhs: rhs)
     }
     
-    public static func /(lhs: Image<P, T>, rhs: T) -> Image<P, T> {
+    public static func /(lhs: Self, rhs: DT) -> Self {
         var ret = lhs
         ret /= rhs
         return ret
     }
     
-    public static func /=(lhs: inout Image<P, T>, rhs: T) {
+    public static func /=(lhs: inout Self, rhs: DT) {
         divide(lhs: &lhs, rhs: rhs)
     }
 }
 
-extension Image where P == RGB, T == UInt8 {
-    public static func +(lhs: Image<P, T>, rhs: T) -> Image<P, T> {
+extension DataContainer where PT == RGB, DT == UInt8 {
+    public static func +(lhs: Self, rhs: DT) -> Self {
         var ret = lhs
         ret += rhs
         return ret
     }
     
-    public static func +=(lhs: inout Image<P, T>, rhs: T) {
+    public static func +=(lhs: inout Self, rhs: DT) {
         add(lhs: &lhs, rhs: rhs)
     }
     
-    public static func -(lhs: Image<P, T>, rhs: T) -> Image<P, T> {
+    public static func -(lhs: Self, rhs: DT) -> Self {
         var ret = lhs
         ret -= rhs
         return ret
     }
     
-    public static func -=(lhs: inout Image<P, T>, rhs: T) {
+    public static func -=(lhs: inout Self, rhs: DT) {
         subtract(lhs: &lhs, rhs: rhs)
     }
     
-    public static func *(lhs: Image<P, T>, rhs: T) -> Image<P, T> {
+    public static func *(lhs: Self, rhs: DT) -> Self {
         var ret = lhs
         ret *= rhs
         return ret
     }
     
-    public static func *=(lhs: inout Image<P, T>, rhs: T) {
+    public static func *=(lhs: inout Self, rhs: DT) {
         multiply(lhs: &lhs, rhs: rhs)
     }
     
-    public static func /(lhs: Image<P, T>, rhs: T) -> Image<P, T> {
+    public static func /(lhs: Self, rhs: DT) -> Self {
         var ret = lhs
         ret /= rhs
         return ret
     }
     
-    public static func /=(lhs: inout Image<P, T>, rhs: T) {
+    public static func /=(lhs: inout Self, rhs: DT) {
         divide(lhs: &lhs, rhs: rhs)
     }
 }
 
-extension Image where P == RGB, T == Int {
-    public static func +(lhs: Image<P, T>, rhs: T) -> Image<P, T> {
+extension DataContainer where PT == RGB, DT == Int {
+    public static func +(lhs: Self, rhs: DT) -> Self {
         var ret = lhs
         ret += rhs
         return ret
     }
     
-    public static func +=(lhs: inout Image<P, T>, rhs: T) {
+    public static func +=(lhs: inout Self, rhs: DT) {
         add(lhs: &lhs, rhs: rhs)
     }
     
-    public static func -(lhs: Image<P, T>, rhs: T) -> Image<P, T> {
+    public static func -(lhs: Self, rhs: DT) -> Self {
         var ret = lhs
         ret -= rhs
         return ret
     }
     
-    public static func -=(lhs: inout Image<P, T>, rhs: T) {
+    public static func -=(lhs: inout Self, rhs: DT) {
         subtract(lhs: &lhs, rhs: rhs)
     }
     
-    public static func *(lhs: Image<P, T>, rhs: T) -> Image<P, T> {
+    public static func *(lhs: Self, rhs: DT) -> Self {
         var ret = lhs
         ret *= rhs
         return ret
     }
     
-    public static func *=(lhs: inout Image<P, T>, rhs: T) {
+    public static func *=(lhs: inout Self, rhs: DT) {
         multiply(lhs: &lhs, rhs: rhs)
     }
     
-    public static func /(lhs: Image<P, T>, rhs: T) -> Image<P, T> {
+    public static func /(lhs: Self, rhs: DT) -> Self {
         var ret = lhs
         ret /= rhs
         return ret
     }
     
-    public static func /=(lhs: inout Image<P, T>, rhs: T) {
+    public static func /=(lhs: inout Self, rhs: DT) {
         divide(lhs: &lhs, rhs: rhs)
     }
 }
 
-extension Image where P == RGB, T == Float {
-    public static func +(lhs: Image<P, T>, rhs: T) -> Image<P, T> {
+extension DataContainer where PT == RGB, DT == Float {
+    public static func +(lhs: Self, rhs: DT) -> Self {
         var ret = lhs
         ret += rhs
         return ret
     }
     
-    public static func +=(lhs: inout Image<P, T>, rhs: T) {
+    public static func +=(lhs: inout Self, rhs: DT) {
         add(lhs: &lhs, rhs: rhs)
     }
     
-    public static func -(lhs: Image<P, T>, rhs: T) -> Image<P, T> {
+    public static func -(lhs: Self, rhs: DT) -> Self {
         var ret = lhs
         ret -= rhs
         return ret
     }
     
-    public static func -=(lhs: inout Image<P, T>, rhs: T) {
+    public static func -=(lhs: inout Self, rhs: DT) {
         subtract(lhs: &lhs, rhs: rhs)
     }
     
-    public static func *(lhs: Image<P, T>, rhs: T) -> Image<P, T> {
+    public static func *(lhs: Self, rhs: DT) -> Self {
         var ret = lhs
         ret *= rhs
         return ret
     }
     
-    public static func *=(lhs: inout Image<P, T>, rhs: T) {
+    public static func *=(lhs: inout Self, rhs: DT) {
         multiply(lhs: &lhs, rhs: rhs)
     }
     
-    public static func /(lhs: Image<P, T>, rhs: T) -> Image<P, T> {
+    public static func /(lhs: Self, rhs: DT) -> Self {
         var ret = lhs
         ret /= rhs
         return ret
     }
     
-    public static func /=(lhs: inout Image<P, T>, rhs: T) {
+    public static func /=(lhs: inout Self, rhs: DT) {
         divide(lhs: &lhs, rhs: rhs)
     }
 }
 
-extension Image where P == RGB, T == Double {
-    public static func +(lhs: Image<P, T>, rhs: T) -> Image<P, T> {
+extension DataContainer where PT == RGB, DT == Double {
+    public static func +(lhs: Self, rhs: DT) -> Self {
         var ret = lhs
         ret += rhs
         return ret
     }
     
-    public static func +=(lhs: inout Image<P, T>, rhs: T) {
+    public static func +=(lhs: inout Self, rhs: DT) {
         add(lhs: &lhs, rhs: rhs)
     }
     
-    public static func -(lhs: Image<P, T>, rhs: T) -> Image<P, T> {
+    public static func -(lhs: Self, rhs: DT) -> Self {
         var ret = lhs
         ret -= rhs
         return ret
     }
     
-    public static func -=(lhs: inout Image<P, T>, rhs: T) {
+    public static func -=(lhs: inout Self, rhs: DT) {
         subtract(lhs: &lhs, rhs: rhs)
     }
     
-    public static func *(lhs: Image<P, T>, rhs: T) -> Image<P, T> {
+    public static func *(lhs: Self, rhs: DT) -> Self {
         var ret = lhs
         ret *= rhs
         return ret
     }
     
-    public static func *=(lhs: inout Image<P, T>, rhs: T) {
+    public static func *=(lhs: inout Self, rhs: DT) {
         multiply(lhs: &lhs, rhs: rhs)
     }
     
-    public static func /(lhs: Image<P, T>, rhs: T) -> Image<P, T> {
+    public static func /(lhs: Self, rhs: DT) -> Self {
         var ret = lhs
         ret /= rhs
         return ret
     }
     
-    public static func /=(lhs: inout Image<P, T>, rhs: T) {
+    public static func /=(lhs: inout Self, rhs: DT) {
         divide(lhs: &lhs, rhs: rhs)
     }
 }
 
-extension Image where P == RGBA, T == UInt8 {
-    public static func +(lhs: Image<P, T>, rhs: T) -> Image<P, T> {
+extension DataContainer where PT == RGBA, DT == UInt8 {
+    public static func +(lhs: Self, rhs: DT) -> Self {
         var ret = lhs
         ret += rhs
         return ret
     }
     
-    public static func +=(lhs: inout Image<P, T>, rhs: T) {
+    public static func +=(lhs: inout Self, rhs: DT) {
         add(lhs: &lhs, rhs: rhs)
     }
     
-    public static func -(lhs: Image<P, T>, rhs: T) -> Image<P, T> {
+    public static func -(lhs: Self, rhs: DT) -> Self {
         var ret = lhs
         ret -= rhs
         return ret
     }
     
-    public static func -=(lhs: inout Image<P, T>, rhs: T) {
+    public static func -=(lhs: inout Self, rhs: DT) {
         subtract(lhs: &lhs, rhs: rhs)
     }
     
-    public static func *(lhs: Image<P, T>, rhs: T) -> Image<P, T> {
+    public static func *(lhs: Self, rhs: DT) -> Self {
         var ret = lhs
         ret *= rhs
         return ret
     }
     
-    public static func *=(lhs: inout Image<P, T>, rhs: T) {
+    public static func *=(lhs: inout Self, rhs: DT) {
         multiply(lhs: &lhs, rhs: rhs)
     }
     
-    public static func /(lhs: Image<P, T>, rhs: T) -> Image<P, T> {
+    public static func /(lhs: Self, rhs: DT) -> Self {
         var ret = lhs
         ret /= rhs
         return ret
     }
     
-    public static func /=(lhs: inout Image<P, T>, rhs: T) {
+    public static func /=(lhs: inout Self, rhs: DT) {
         divide(lhs: &lhs, rhs: rhs)
     }
 }
 
-extension Image where P == RGBA, T == Int {
-    public static func +(lhs: Image<P, T>, rhs: T) -> Image<P, T> {
+extension DataContainer where PT == RGBA, DT == Int {
+    public static func +(lhs: Self, rhs: DT) -> Self {
         var ret = lhs
         ret += rhs
         return ret
     }
     
-    public static func +=(lhs: inout Image<P, T>, rhs: T) {
+    public static func +=(lhs: inout Self, rhs: DT) {
         add(lhs: &lhs, rhs: rhs)
     }
     
-    public static func -(lhs: Image<P, T>, rhs: T) -> Image<P, T> {
+    public static func -(lhs: Self, rhs: DT) -> Self {
         var ret = lhs
         ret -= rhs
         return ret
     }
     
-    public static func -=(lhs: inout Image<P, T>, rhs: T) {
+    public static func -=(lhs: inout Self, rhs: DT) {
         subtract(lhs: &lhs, rhs: rhs)
     }
     
-    public static func *(lhs: Image<P, T>, rhs: T) -> Image<P, T> {
+    public static func *(lhs: Self, rhs: DT) -> Self {
         var ret = lhs
         ret *= rhs
         return ret
     }
     
-    public static func *=(lhs: inout Image<P, T>, rhs: T) {
+    public static func *=(lhs: inout Self, rhs: DT) {
         multiply(lhs: &lhs, rhs: rhs)
     }
     
-    public static func /(lhs: Image<P, T>, rhs: T) -> Image<P, T> {
+    public static func /(lhs: Self, rhs: DT) -> Self {
         var ret = lhs
         ret /= rhs
         return ret
     }
     
-    public static func /=(lhs: inout Image<P, T>, rhs: T) {
+    public static func /=(lhs: inout Self, rhs: DT) {
         divide(lhs: &lhs, rhs: rhs)
     }
 }
 
-extension Image where P == RGBA, T == Float {
-    public static func +(lhs: Image<P, T>, rhs: T) -> Image<P, T> {
+extension DataContainer where PT == RGBA, DT == Float {
+    public static func +(lhs: Self, rhs: DT) -> Self {
         var ret = lhs
         ret += rhs
         return ret
     }
     
-    public static func +=(lhs: inout Image<P, T>, rhs: T) {
+    public static func +=(lhs: inout Self, rhs: DT) {
         add(lhs: &lhs, rhs: rhs)
     }
     
-    public static func -(lhs: Image<P, T>, rhs: T) -> Image<P, T> {
+    public static func -(lhs: Self, rhs: DT) -> Self {
         var ret = lhs
         ret -= rhs
         return ret
     }
     
-    public static func -=(lhs: inout Image<P, T>, rhs: T) {
+    public static func -=(lhs: inout Self, rhs: DT) {
         subtract(lhs: &lhs, rhs: rhs)
     }
     
-    public static func *(lhs: Image<P, T>, rhs: T) -> Image<P, T> {
+    public static func *(lhs: Self, rhs: DT) -> Self {
         var ret = lhs
         ret *= rhs
         return ret
     }
     
-    public static func *=(lhs: inout Image<P, T>, rhs: T) {
+    public static func *=(lhs: inout Self, rhs: DT) {
         multiply(lhs: &lhs, rhs: rhs)
     }
     
-    public static func /(lhs: Image<P, T>, rhs: T) -> Image<P, T> {
+    public static func /(lhs: Self, rhs: DT) -> Self {
         var ret = lhs
         ret /= rhs
         return ret
     }
     
-    public static func /=(lhs: inout Image<P, T>, rhs: T) {
+    public static func /=(lhs: inout Self, rhs: DT) {
         divide(lhs: &lhs, rhs: rhs)
     }
 }
 
-extension Image where P == RGBA, T == Double {
-    public static func +(lhs: Image<P, T>, rhs: T) -> Image<P, T> {
+extension DataContainer where PT == RGBA, DT == Double {
+    public static func +(lhs: Self, rhs: DT) -> Self {
         var ret = lhs
         ret += rhs
         return ret
     }
     
-    public static func +=(lhs: inout Image<P, T>, rhs: T) {
+    public static func +=(lhs: inout Self, rhs: DT) {
         add(lhs: &lhs, rhs: rhs)
     }
     
-    public static func -(lhs: Image<P, T>, rhs: T) -> Image<P, T> {
+    public static func -(lhs: Self, rhs: DT) -> Self {
         var ret = lhs
         ret -= rhs
         return ret
     }
     
-    public static func -=(lhs: inout Image<P, T>, rhs: T) {
+    public static func -=(lhs: inout Self, rhs: DT) {
         subtract(lhs: &lhs, rhs: rhs)
     }
     
-    public static func *(lhs: Image<P, T>, rhs: T) -> Image<P, T> {
+    public static func *(lhs: Self, rhs: DT) -> Self {
         var ret = lhs
         ret *= rhs
         return ret
     }
     
-    public static func *=(lhs: inout Image<P, T>, rhs: T) {
+    public static func *=(lhs: inout Self, rhs: DT) {
         multiply(lhs: &lhs, rhs: rhs)
     }
     
-    public static func /(lhs: Image<P, T>, rhs: T) -> Image<P, T> {
+    public static func /(lhs: Self, rhs: DT) -> Self {
         var ret = lhs
         ret /= rhs
         return ret
     }
     
-    public static func /=(lhs: inout Image<P, T>, rhs: T) {
+    public static func /=(lhs: inout Self, rhs: DT) {
         divide(lhs: &lhs, rhs: rhs)
     }
 }
 
-extension Image where P == ARGB, T == UInt8 {
-    public static func +(lhs: Image<P, T>, rhs: T) -> Image<P, T> {
+extension DataContainer where PT == ARGB, DT == UInt8 {
+    public static func +(lhs: Self, rhs: DT) -> Self {
         var ret = lhs
         ret += rhs
         return ret
     }
     
-    public static func +=(lhs: inout Image<P, T>, rhs: T) {
+    public static func +=(lhs: inout Self, rhs: DT) {
         add(lhs: &lhs, rhs: rhs)
     }
     
-    public static func -(lhs: Image<P, T>, rhs: T) -> Image<P, T> {
+    public static func -(lhs: Self, rhs: DT) -> Self {
         var ret = lhs
         ret -= rhs
         return ret
     }
     
-    public static func -=(lhs: inout Image<P, T>, rhs: T) {
+    public static func -=(lhs: inout Self, rhs: DT) {
         subtract(lhs: &lhs, rhs: rhs)
     }
     
-    public static func *(lhs: Image<P, T>, rhs: T) -> Image<P, T> {
+    public static func *(lhs: Self, rhs: DT) -> Self {
         var ret = lhs
         ret *= rhs
         return ret
     }
     
-    public static func *=(lhs: inout Image<P, T>, rhs: T) {
+    public static func *=(lhs: inout Self, rhs: DT) {
         multiply(lhs: &lhs, rhs: rhs)
     }
     
-    public static func /(lhs: Image<P, T>, rhs: T) -> Image<P, T> {
+    public static func /(lhs: Self, rhs: DT) -> Self {
         var ret = lhs
         ret /= rhs
         return ret
     }
     
-    public static func /=(lhs: inout Image<P, T>, rhs: T) {
+    public static func /=(lhs: inout Self, rhs: DT) {
         divide(lhs: &lhs, rhs: rhs)
     }
 }
 
-extension Image where P == ARGB, T == Int {
-    public static func +(lhs: Image<P, T>, rhs: T) -> Image<P, T> {
+extension DataContainer where PT == ARGB, DT == Int {
+    public static func +(lhs: Self, rhs: DT) -> Self {
         var ret = lhs
         ret += rhs
         return ret
     }
     
-    public static func +=(lhs: inout Image<P, T>, rhs: T) {
+    public static func +=(lhs: inout Self, rhs: DT) {
         add(lhs: &lhs, rhs: rhs)
     }
     
-    public static func -(lhs: Image<P, T>, rhs: T) -> Image<P, T> {
+    public static func -(lhs: Self, rhs: DT) -> Self {
         var ret = lhs
         ret -= rhs
         return ret
     }
     
-    public static func -=(lhs: inout Image<P, T>, rhs: T) {
+    public static func -=(lhs: inout Self, rhs: DT) {
         subtract(lhs: &lhs, rhs: rhs)
     }
     
-    public static func *(lhs: Image<P, T>, rhs: T) -> Image<P, T> {
+    public static func *(lhs: Self, rhs: DT) -> Self {
         var ret = lhs
         ret *= rhs
         return ret
     }
     
-    public static func *=(lhs: inout Image<P, T>, rhs: T) {
+    public static func *=(lhs: inout Self, rhs: DT) {
         multiply(lhs: &lhs, rhs: rhs)
     }
     
-    public static func /(lhs: Image<P, T>, rhs: T) -> Image<P, T> {
+    public static func /(lhs: Self, rhs: DT) -> Self {
         var ret = lhs
         ret /= rhs
         return ret
     }
     
-    public static func /=(lhs: inout Image<P, T>, rhs: T) {
+    public static func /=(lhs: inout Self, rhs: DT) {
         divide(lhs: &lhs, rhs: rhs)
     }
 }
 
-extension Image where P == ARGB, T == Float {
-    public static func +(lhs: Image<P, T>, rhs: T) -> Image<P, T> {
+extension DataContainer where PT == ARGB, DT == Float {
+    public static func +(lhs: Self, rhs: DT) -> Self {
         var ret = lhs
         ret += rhs
         return ret
     }
     
-    public static func +=(lhs: inout Image<P, T>, rhs: T) {
+    public static func +=(lhs: inout Self, rhs: DT) {
         add(lhs: &lhs, rhs: rhs)
     }
     
-    public static func -(lhs: Image<P, T>, rhs: T) -> Image<P, T> {
+    public static func -(lhs: Self, rhs: DT) -> Self {
         var ret = lhs
         ret -= rhs
         return ret
     }
     
-    public static func -=(lhs: inout Image<P, T>, rhs: T) {
+    public static func -=(lhs: inout Self, rhs: DT) {
         subtract(lhs: &lhs, rhs: rhs)
     }
     
-    public static func *(lhs: Image<P, T>, rhs: T) -> Image<P, T> {
+    public static func *(lhs: Self, rhs: DT) -> Self {
         var ret = lhs
         ret *= rhs
         return ret
     }
     
-    public static func *=(lhs: inout Image<P, T>, rhs: T) {
+    public static func *=(lhs: inout Self, rhs: DT) {
         multiply(lhs: &lhs, rhs: rhs)
     }
     
-    public static func /(lhs: Image<P, T>, rhs: T) -> Image<P, T> {
+    public static func /(lhs: Self, rhs: DT) -> Self {
         var ret = lhs
         ret /= rhs
         return ret
     }
     
-    public static func /=(lhs: inout Image<P, T>, rhs: T) {
+    public static func /=(lhs: inout Self, rhs: DT) {
         divide(lhs: &lhs, rhs: rhs)
     }
 }
 
-extension Image where P == ARGB, T == Double {
-    public static func +(lhs: Image<P, T>, rhs: T) -> Image<P, T> {
+extension DataContainer where PT == ARGB, DT == Double {
+    public static func +(lhs: Self, rhs: DT) -> Self {
         var ret = lhs
         ret += rhs
         return ret
     }
     
-    public static func +=(lhs: inout Image<P, T>, rhs: T) {
+    public static func +=(lhs: inout Self, rhs: DT) {
         add(lhs: &lhs, rhs: rhs)
     }
     
-    public static func -(lhs: Image<P, T>, rhs: T) -> Image<P, T> {
+    public static func -(lhs: Self, rhs: DT) -> Self {
         var ret = lhs
         ret -= rhs
         return ret
     }
     
-    public static func -=(lhs: inout Image<P, T>, rhs: T) {
+    public static func -=(lhs: inout Self, rhs: DT) {
         subtract(lhs: &lhs, rhs: rhs)
     }
     
-    public static func *(lhs: Image<P, T>, rhs: T) -> Image<P, T> {
+    public static func *(lhs: Self, rhs: DT) -> Self {
         var ret = lhs
         ret *= rhs
         return ret
     }
     
-    public static func *=(lhs: inout Image<P, T>, rhs: T) {
+    public static func *=(lhs: inout Self, rhs: DT) {
         multiply(lhs: &lhs, rhs: rhs)
     }
     
-    public static func /(lhs: Image<P, T>, rhs: T) -> Image<P, T> {
+    public static func /(lhs: Self, rhs: DT) -> Self {
         var ret = lhs
         ret /= rhs
         return ret
     }
     
-    public static func /=(lhs: inout Image<P, T>, rhs: T) {
+    public static func /=(lhs: inout Self, rhs: DT) {
         divide(lhs: &lhs, rhs: rhs)
     }
 }

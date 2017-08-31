@@ -2,7 +2,7 @@
 public struct Image<P: PixelType, T: DataType> {
     public let width: Int
     public let height: Int
-    public internal(set) var data: [T]
+    public var data: [T]
     
     public init(width: Int, height: Int, data: [T]) {
         precondition(data.count == width * height * P.channels)
