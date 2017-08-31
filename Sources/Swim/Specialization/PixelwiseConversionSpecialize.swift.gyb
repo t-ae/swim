@@ -2,7 +2,7 @@
 from type import *
 }%
 
-% for dt in data_types:
+% for dt in bool_data_types + int_data_types + fp_data_types:
 extension Image where P == Intensity, T == ${dt} {
     public mutating func convert(_ f: (Int, Int, T)->T) {
         _convert(f)
@@ -11,9 +11,9 @@ extension Image where P == Intensity, T == ${dt} {
 
 %end
 % for pt in pixel_types:
-% for dt in data_types:
+% for dt in bool_data_types + int_data_types + fp_data_types:
 extension Image where P == ${pt}, T == ${dt} {
-% for dt2 in data_types:
+% for dt2 in bool_data_types + int_data_types + fp_data_types:
     public func converted(_ f: (Int, Int, Pixel<P, T>)->${dt2}) -> Image<Intensity, ${dt2}> {
         return _converted(f)
     }

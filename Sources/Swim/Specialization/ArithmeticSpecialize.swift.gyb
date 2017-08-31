@@ -3,7 +3,7 @@ from type import *
 }%
 
 % for pt in pixel_types:
-% for dt in data_types:
+% for dt in int_data_types + fp_data_types:
 extension DataContainer where PT == ${pt}, DT == ${dt} {
     public static func +(lhs: Self, rhs: DT) -> Self {
         var ret = lhs

@@ -4,7 +4,7 @@ from type import *
 
 // FIXME: Wait for Swift4
 /*
-% for dt in data_types:
+% for dt in bool_data_types + int_data_types + fp_data_types:
 extension Image where P == Intensity, T == ${dt} {
     public subscript(x: Int, y: Int) -> T {
         get {
@@ -18,7 +18,7 @@ extension Image where P == Intensity, T == ${dt} {
 
 %end
 % for pt in pixel_types:
-% for dt in data_types:
+% for dt in bool_data_types + int_data_types + fp_data_types:
 extension Image where P == ${pt}, T == ${dt} {
     public subscript(x: Int, y: Int, c: Int) -> T {
         get {

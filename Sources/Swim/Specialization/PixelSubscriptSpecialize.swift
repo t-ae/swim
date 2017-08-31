@@ -1,6 +1,17 @@
 
 // FIXME: Wait for Swift4
 /*
+extension Image where P == Intensity, T == Bool {
+    public subscript(x: Int, y: Int) -> T {
+        get {
+            return getPixel(x: x, y: y)
+        }
+        set {
+            setPixel(x: x, y: y, newValue: newValue)
+        }
+    }
+}
+
 extension Image where P == Intensity, T == UInt8 {
     public subscript(x: Int, y: Int) -> T {
         get {
@@ -45,6 +56,26 @@ extension Image where P == Intensity, T == Double {
     }
 }
 
+extension Image where P == Intensity, T == Bool {
+    public subscript(x: Int, y: Int, c: Int) -> T {
+        get {
+            return getPixel(x: x, y: y, c: c)
+        }
+        set {
+            setPixel(x: x, y: y, c: c, newValue: newValue)
+        }
+    }
+    
+    public subscript(x: Int, y: Int) -> Pixel<P, T> {
+        get {
+            return getPixel(x: x, y: y)
+        }
+        set {
+            setPixel(x: x, y: y, newValue: newValue)
+        }
+    }
+}
+
 extension Image where P == Intensity, T == UInt8 {
     public subscript(x: Int, y: Int, c: Int) -> T {
         get {
@@ -106,6 +137,26 @@ extension Image where P == Intensity, T == Float {
 }
 
 extension Image where P == Intensity, T == Double {
+    public subscript(x: Int, y: Int, c: Int) -> T {
+        get {
+            return getPixel(x: x, y: y, c: c)
+        }
+        set {
+            setPixel(x: x, y: y, c: c, newValue: newValue)
+        }
+    }
+    
+    public subscript(x: Int, y: Int) -> Pixel<P, T> {
+        get {
+            return getPixel(x: x, y: y)
+        }
+        set {
+            setPixel(x: x, y: y, newValue: newValue)
+        }
+    }
+}
+
+extension Image where P == RGB, T == Bool {
     public subscript(x: Int, y: Int, c: Int) -> T {
         get {
             return getPixel(x: x, y: y, c: c)
@@ -205,6 +256,26 @@ extension Image where P == RGB, T == Double {
     }
 }
 
+extension Image where P == RGBA, T == Bool {
+    public subscript(x: Int, y: Int, c: Int) -> T {
+        get {
+            return getPixel(x: x, y: y, c: c)
+        }
+        set {
+            setPixel(x: x, y: y, c: c, newValue: newValue)
+        }
+    }
+    
+    public subscript(x: Int, y: Int) -> Pixel<P, T> {
+        get {
+            return getPixel(x: x, y: y)
+        }
+        set {
+            setPixel(x: x, y: y, newValue: newValue)
+        }
+    }
+}
+
 extension Image where P == RGBA, T == UInt8 {
     public subscript(x: Int, y: Int, c: Int) -> T {
         get {
@@ -266,6 +337,26 @@ extension Image where P == RGBA, T == Float {
 }
 
 extension Image where P == RGBA, T == Double {
+    public subscript(x: Int, y: Int, c: Int) -> T {
+        get {
+            return getPixel(x: x, y: y, c: c)
+        }
+        set {
+            setPixel(x: x, y: y, c: c, newValue: newValue)
+        }
+    }
+    
+    public subscript(x: Int, y: Int) -> Pixel<P, T> {
+        get {
+            return getPixel(x: x, y: y)
+        }
+        set {
+            setPixel(x: x, y: y, newValue: newValue)
+        }
+    }
+}
+
+extension Image where P == ARGB, T == Bool {
     public subscript(x: Int, y: Int, c: Int) -> T {
         get {
             return getPixel(x: x, y: y, c: c)

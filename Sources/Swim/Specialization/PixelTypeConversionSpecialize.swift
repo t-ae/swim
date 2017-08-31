@@ -104,6 +104,12 @@ extension Image where P == ARGB, T == Double {
 }
 
 
+extension Image where P == RGB, T == Bool {
+    public init(image: Image<RGBA, T>) {
+        self = imageFromRGBA(image: image)
+    }
+}
+
 extension Image where P == RGB, T == UInt8 {
     public init(image: Image<RGBA, T>) {
         self = imageFromRGBA(image: image)

@@ -5,7 +5,7 @@ from type import *
 // FIXME: Wait for Swift4
 /*
 % for pt in pixel_types:
-% for dt in data_types:
+% for dt in bool_data_types + int_data_types + fp_data_types:
 extension Image where P == ${pt}, T == ${dt} {
     public subscript(xRange: CountableRange<Int>, yRange: CountableRange<Int>) -> Image<P, T> {
         get {
