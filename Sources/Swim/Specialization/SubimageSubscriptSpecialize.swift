@@ -28,6 +28,24 @@ extension Image where P == Intensity, T == UInt8 {
             self[cols, 0..<height] = newValue
         }
     }
+
+    public subscript(row row: Int) -> Image<P, T> {
+        get {
+            return getSubimage(x: 0, y: row, width: width, height: 1)
+        }
+        set {
+            setSubimage(x: 0, y: row, width: width, height: 1, newValue: newValue)
+        }
+    }
+    
+    public subscript(col col: Int) -> Image<P, T> {
+        get {
+            return getSubimage(x: col, y: 0, width: 1, height: height)
+        }
+        set {
+            setSubimage(x: col, y: 0, width: 1, height: height, newValue: newValue)
+        }
+    }
 }
 
 extension Image where P == Intensity, T == Int {
@@ -55,6 +73,24 @@ extension Image where P == Intensity, T == Int {
         }
         set {
             self[cols, 0..<height] = newValue
+        }
+    }
+
+    public subscript(row row: Int) -> Image<P, T> {
+        get {
+            return getSubimage(x: 0, y: row, width: width, height: 1)
+        }
+        set {
+            setSubimage(x: 0, y: row, width: width, height: 1, newValue: newValue)
+        }
+    }
+    
+    public subscript(col col: Int) -> Image<P, T> {
+        get {
+            return getSubimage(x: col, y: 0, width: 1, height: height)
+        }
+        set {
+            setSubimage(x: col, y: 0, width: 1, height: height, newValue: newValue)
         }
     }
 }
@@ -86,6 +122,24 @@ extension Image where P == Intensity, T == Float {
             self[cols, 0..<height] = newValue
         }
     }
+
+    public subscript(row row: Int) -> Image<P, T> {
+        get {
+            return getSubimage(x: 0, y: row, width: width, height: 1)
+        }
+        set {
+            setSubimage(x: 0, y: row, width: width, height: 1, newValue: newValue)
+        }
+    }
+    
+    public subscript(col col: Int) -> Image<P, T> {
+        get {
+            return getSubimage(x: col, y: 0, width: 1, height: height)
+        }
+        set {
+            setSubimage(x: col, y: 0, width: 1, height: height, newValue: newValue)
+        }
+    }
 }
 
 extension Image where P == Intensity, T == Double {
@@ -113,6 +167,24 @@ extension Image where P == Intensity, T == Double {
         }
         set {
             self[cols, 0..<height] = newValue
+        }
+    }
+
+    public subscript(row row: Int) -> Image<P, T> {
+        get {
+            return getSubimage(x: 0, y: row, width: width, height: 1)
+        }
+        set {
+            setSubimage(x: 0, y: row, width: width, height: 1, newValue: newValue)
+        }
+    }
+    
+    public subscript(col col: Int) -> Image<P, T> {
+        get {
+            return getSubimage(x: col, y: 0, width: 1, height: height)
+        }
+        set {
+            setSubimage(x: col, y: 0, width: 1, height: height, newValue: newValue)
         }
     }
 }
@@ -144,6 +216,24 @@ extension Image where P == RGB, T == UInt8 {
             self[cols, 0..<height] = newValue
         }
     }
+
+    public subscript(row row: Int) -> Image<P, T> {
+        get {
+            return getSubimage(x: 0, y: row, width: width, height: 1)
+        }
+        set {
+            setSubimage(x: 0, y: row, width: width, height: 1, newValue: newValue)
+        }
+    }
+    
+    public subscript(col col: Int) -> Image<P, T> {
+        get {
+            return getSubimage(x: col, y: 0, width: 1, height: height)
+        }
+        set {
+            setSubimage(x: col, y: 0, width: 1, height: height, newValue: newValue)
+        }
+    }
 }
 
 extension Image where P == RGB, T == Int {
@@ -171,6 +261,24 @@ extension Image where P == RGB, T == Int {
         }
         set {
             self[cols, 0..<height] = newValue
+        }
+    }
+
+    public subscript(row row: Int) -> Image<P, T> {
+        get {
+            return getSubimage(x: 0, y: row, width: width, height: 1)
+        }
+        set {
+            setSubimage(x: 0, y: row, width: width, height: 1, newValue: newValue)
+        }
+    }
+    
+    public subscript(col col: Int) -> Image<P, T> {
+        get {
+            return getSubimage(x: col, y: 0, width: 1, height: height)
+        }
+        set {
+            setSubimage(x: col, y: 0, width: 1, height: height, newValue: newValue)
         }
     }
 }
@@ -202,6 +310,24 @@ extension Image where P == RGB, T == Float {
             self[cols, 0..<height] = newValue
         }
     }
+
+    public subscript(row row: Int) -> Image<P, T> {
+        get {
+            return getSubimage(x: 0, y: row, width: width, height: 1)
+        }
+        set {
+            setSubimage(x: 0, y: row, width: width, height: 1, newValue: newValue)
+        }
+    }
+    
+    public subscript(col col: Int) -> Image<P, T> {
+        get {
+            return getSubimage(x: col, y: 0, width: 1, height: height)
+        }
+        set {
+            setSubimage(x: col, y: 0, width: 1, height: height, newValue: newValue)
+        }
+    }
 }
 
 extension Image where P == RGB, T == Double {
@@ -229,6 +355,24 @@ extension Image where P == RGB, T == Double {
         }
         set {
             self[cols, 0..<height] = newValue
+        }
+    }
+
+    public subscript(row row: Int) -> Image<P, T> {
+        get {
+            return getSubimage(x: 0, y: row, width: width, height: 1)
+        }
+        set {
+            setSubimage(x: 0, y: row, width: width, height: 1, newValue: newValue)
+        }
+    }
+    
+    public subscript(col col: Int) -> Image<P, T> {
+        get {
+            return getSubimage(x: col, y: 0, width: 1, height: height)
+        }
+        set {
+            setSubimage(x: col, y: 0, width: 1, height: height, newValue: newValue)
         }
     }
 }
@@ -260,6 +404,24 @@ extension Image where P == RGBA, T == UInt8 {
             self[cols, 0..<height] = newValue
         }
     }
+
+    public subscript(row row: Int) -> Image<P, T> {
+        get {
+            return getSubimage(x: 0, y: row, width: width, height: 1)
+        }
+        set {
+            setSubimage(x: 0, y: row, width: width, height: 1, newValue: newValue)
+        }
+    }
+    
+    public subscript(col col: Int) -> Image<P, T> {
+        get {
+            return getSubimage(x: col, y: 0, width: 1, height: height)
+        }
+        set {
+            setSubimage(x: col, y: 0, width: 1, height: height, newValue: newValue)
+        }
+    }
 }
 
 extension Image where P == RGBA, T == Int {
@@ -287,6 +449,24 @@ extension Image where P == RGBA, T == Int {
         }
         set {
             self[cols, 0..<height] = newValue
+        }
+    }
+
+    public subscript(row row: Int) -> Image<P, T> {
+        get {
+            return getSubimage(x: 0, y: row, width: width, height: 1)
+        }
+        set {
+            setSubimage(x: 0, y: row, width: width, height: 1, newValue: newValue)
+        }
+    }
+    
+    public subscript(col col: Int) -> Image<P, T> {
+        get {
+            return getSubimage(x: col, y: 0, width: 1, height: height)
+        }
+        set {
+            setSubimage(x: col, y: 0, width: 1, height: height, newValue: newValue)
         }
     }
 }
@@ -318,6 +498,24 @@ extension Image where P == RGBA, T == Float {
             self[cols, 0..<height] = newValue
         }
     }
+
+    public subscript(row row: Int) -> Image<P, T> {
+        get {
+            return getSubimage(x: 0, y: row, width: width, height: 1)
+        }
+        set {
+            setSubimage(x: 0, y: row, width: width, height: 1, newValue: newValue)
+        }
+    }
+    
+    public subscript(col col: Int) -> Image<P, T> {
+        get {
+            return getSubimage(x: col, y: 0, width: 1, height: height)
+        }
+        set {
+            setSubimage(x: col, y: 0, width: 1, height: height, newValue: newValue)
+        }
+    }
 }
 
 extension Image where P == RGBA, T == Double {
@@ -345,6 +543,24 @@ extension Image where P == RGBA, T == Double {
         }
         set {
             self[cols, 0..<height] = newValue
+        }
+    }
+
+    public subscript(row row: Int) -> Image<P, T> {
+        get {
+            return getSubimage(x: 0, y: row, width: width, height: 1)
+        }
+        set {
+            setSubimage(x: 0, y: row, width: width, height: 1, newValue: newValue)
+        }
+    }
+    
+    public subscript(col col: Int) -> Image<P, T> {
+        get {
+            return getSubimage(x: col, y: 0, width: 1, height: height)
+        }
+        set {
+            setSubimage(x: col, y: 0, width: 1, height: height, newValue: newValue)
         }
     }
 }
@@ -376,6 +592,24 @@ extension Image where P == ARGB, T == UInt8 {
             self[cols, 0..<height] = newValue
         }
     }
+
+    public subscript(row row: Int) -> Image<P, T> {
+        get {
+            return getSubimage(x: 0, y: row, width: width, height: 1)
+        }
+        set {
+            setSubimage(x: 0, y: row, width: width, height: 1, newValue: newValue)
+        }
+    }
+    
+    public subscript(col col: Int) -> Image<P, T> {
+        get {
+            return getSubimage(x: col, y: 0, width: 1, height: height)
+        }
+        set {
+            setSubimage(x: col, y: 0, width: 1, height: height, newValue: newValue)
+        }
+    }
 }
 
 extension Image where P == ARGB, T == Int {
@@ -403,6 +637,24 @@ extension Image where P == ARGB, T == Int {
         }
         set {
             self[cols, 0..<height] = newValue
+        }
+    }
+
+    public subscript(row row: Int) -> Image<P, T> {
+        get {
+            return getSubimage(x: 0, y: row, width: width, height: 1)
+        }
+        set {
+            setSubimage(x: 0, y: row, width: width, height: 1, newValue: newValue)
+        }
+    }
+    
+    public subscript(col col: Int) -> Image<P, T> {
+        get {
+            return getSubimage(x: col, y: 0, width: 1, height: height)
+        }
+        set {
+            setSubimage(x: col, y: 0, width: 1, height: height, newValue: newValue)
         }
     }
 }
@@ -434,6 +686,24 @@ extension Image where P == ARGB, T == Float {
             self[cols, 0..<height] = newValue
         }
     }
+
+    public subscript(row row: Int) -> Image<P, T> {
+        get {
+            return getSubimage(x: 0, y: row, width: width, height: 1)
+        }
+        set {
+            setSubimage(x: 0, y: row, width: width, height: 1, newValue: newValue)
+        }
+    }
+    
+    public subscript(col col: Int) -> Image<P, T> {
+        get {
+            return getSubimage(x: col, y: 0, width: 1, height: height)
+        }
+        set {
+            setSubimage(x: col, y: 0, width: 1, height: height, newValue: newValue)
+        }
+    }
 }
 
 extension Image where P == ARGB, T == Double {
@@ -461,6 +731,24 @@ extension Image where P == ARGB, T == Double {
         }
         set {
             self[cols, 0..<height] = newValue
+        }
+    }
+
+    public subscript(row row: Int) -> Image<P, T> {
+        get {
+            return getSubimage(x: 0, y: row, width: width, height: 1)
+        }
+        set {
+            setSubimage(x: 0, y: row, width: width, height: 1, newValue: newValue)
+        }
+    }
+    
+    public subscript(col col: Int) -> Image<P, T> {
+        get {
+            return getSubimage(x: col, y: 0, width: 1, height: height)
+        }
+        set {
+            setSubimage(x: col, y: 0, width: 1, height: height, newValue: newValue)
         }
     }
 }

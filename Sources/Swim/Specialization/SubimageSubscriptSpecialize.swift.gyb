@@ -33,6 +33,24 @@ extension Image where P == ${pt}, T == ${dt} {
             self[cols, 0..<height] = newValue
         }
     }
+
+    public subscript(row row: Int) -> Image<P, T> {
+        get {
+            return getSubimage(x: 0, y: row, width: width, height: 1)
+        }
+        set {
+            setSubimage(x: 0, y: row, width: width, height: 1, newValue: newValue)
+        }
+    }
+    
+    public subscript(col col: Int) -> Image<P, T> {
+        get {
+            return getSubimage(x: col, y: 0, width: 1, height: height)
+        }
+        set {
+            setSubimage(x: col, y: 0, width: 1, height: height, newValue: newValue)
+        }
+    }
 }
 
 % end
