@@ -4,7 +4,7 @@ import Swim
 
 class ImageSliceTests: XCTestCase {
     
-    func testSlice() {
+    func testSliceSubscriptGet() {
         let data = (0..<400).map { Double($0) }
         let image = Image<RGBA, Double>(width: 10, height: 10, data: data)
         
@@ -59,4 +59,40 @@ class ImageSliceTests: XCTestCase {
         }
     }
     
+    func testSliceSubscriptSet() {
+        let data = (0..<3*3*3).map { Double($0) }
+        var image = Image<RGB, Double>(width: 3, height: 3, data: data)
+        
+        XCTAssertEqual(image.data, [0, 1, 2,
+                                    3, 4, 5,
+                                    6, 7, 8,
+                                    9, 10, 11,
+                                    12, 13, 14,
+                                    15, 16, 17,
+                                    18, 19, 20,
+                                    21, 22, 23,
+                                    24, 25, 26])
+        
+        image[0..<2, 0..<2] = Image<RGB, Double>(width: 2, height: 2, data: (0..<2*2*3).map { -Double($0+1) })
+        XCTAssertEqual(image.data, [-1, -2, -3,
+                                    -4, -5, -6,
+                                    6, 7, 8,
+                                    -7, -8, -9,
+                                    -10, -11, -12,
+                                    15, 16, 17,
+                                    18, 19, 20,
+                                    21, 22, 23,
+                                    24, 25, 26])
+        
+        image[rows: 2..<3] = Image<RGB, Double>(width: 3, height: 1, data: [50, 51, 52, 53, 54, 55, 56, 57, 58])
+        XCTAssertEqual(image.data, [-1, -2, -3,
+                                    -4, -5, -6,
+                                    6, 7, 8,
+                                    -7, -8, -9,
+                                    -10, -11, -12,
+                                    15, 16, 17,
+                                    50, 51, 52,
+                                    53, 54, 55,
+                                    56, 57, 58])
+    }
 }
