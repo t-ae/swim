@@ -101,7 +101,7 @@ extension Image where P == ARGB, T == Int {
     import Accelerate
     
     extension Image where P == Intensity, T == Float {
-        public mutating func clip(low: Float, high: Float) {
+        public mutating func clip(low: T, high: T) {
             var low = low
             var high = high
             self.unsafeChannelwiseConvert {
@@ -110,7 +110,7 @@ extension Image where P == ARGB, T == Int {
             }
         }
         
-        public func clipped(low: Float, high: Float) -> Image<P, Float> {
+        public func clipped(low: T, high: T) -> Image<P, T> {
             var ret = self
             ret.clip(low: low, high: high)
             return ret
@@ -118,7 +118,7 @@ extension Image where P == ARGB, T == Int {
     }
     
     extension Image where P == Intensity, T == Double {
-        public mutating func clip(low: Double, high: Double) {
+        public mutating func clip(low: T, high: T) {
             var low = low
             var high = high
             self.unsafeChannelwiseConvert {
@@ -127,7 +127,7 @@ extension Image where P == ARGB, T == Int {
             }
         }
         
-        public func clipped(low: Double, high: Double) -> Image<P, Double> {
+        public func clipped(low: T, high: T) -> Image<P, T> {
             var ret = self
             ret.clip(low: low, high: high)
             return ret
@@ -135,7 +135,7 @@ extension Image where P == ARGB, T == Int {
     }
 
     extension Image where P == RGB, T == Float {
-        public mutating func clip(low: Float, high: Float) {
+        public mutating func clip(low: T, high: T) {
             var low = low
             var high = high
             self.unsafeChannelwiseConvert {
@@ -144,7 +144,7 @@ extension Image where P == ARGB, T == Int {
             }
         }
         
-        public func clipped(low: Float, high: Float) -> Image<P, Float> {
+        public func clipped(low: T, high: T) -> Image<P, T> {
             var ret = self
             ret.clip(low: low, high: high)
             return ret
@@ -152,7 +152,7 @@ extension Image where P == ARGB, T == Int {
     }
     
     extension Image where P == RGB, T == Double {
-        public mutating func clip(low: Double, high: Double) {
+        public mutating func clip(low: T, high: T) {
             var low = low
             var high = high
             self.unsafeChannelwiseConvert {
@@ -161,7 +161,7 @@ extension Image where P == ARGB, T == Int {
             }
         }
         
-        public func clipped(low: Double, high: Double) -> Image<P, Double> {
+        public func clipped(low: T, high: T) -> Image<P, T> {
             var ret = self
             ret.clip(low: low, high: high)
             return ret
@@ -169,7 +169,7 @@ extension Image where P == ARGB, T == Int {
     }
 
     extension Image where P == RGBA, T == Float {
-        public mutating func clip(low: Float, high: Float) {
+        public mutating func clip(low: T, high: T) {
             var low = low
             var high = high
             self.unsafeChannelwiseConvert {
@@ -178,7 +178,7 @@ extension Image where P == ARGB, T == Int {
             }
         }
         
-        public func clipped(low: Float, high: Float) -> Image<P, Float> {
+        public func clipped(low: T, high: T) -> Image<P, T> {
             var ret = self
             ret.clip(low: low, high: high)
             return ret
@@ -186,7 +186,7 @@ extension Image where P == ARGB, T == Int {
     }
     
     extension Image where P == RGBA, T == Double {
-        public mutating func clip(low: Double, high: Double) {
+        public mutating func clip(low: T, high: T) {
             var low = low
             var high = high
             self.unsafeChannelwiseConvert {
@@ -195,7 +195,7 @@ extension Image where P == ARGB, T == Int {
             }
         }
         
-        public func clipped(low: Double, high: Double) -> Image<P, Double> {
+        public func clipped(low: T, high: T) -> Image<P, T> {
             var ret = self
             ret.clip(low: low, high: high)
             return ret
@@ -203,7 +203,7 @@ extension Image where P == ARGB, T == Int {
     }
 
     extension Image where P == ARGB, T == Float {
-        public mutating func clip(low: Float, high: Float) {
+        public mutating func clip(low: T, high: T) {
             var low = low
             var high = high
             self.unsafeChannelwiseConvert {
@@ -212,7 +212,7 @@ extension Image where P == ARGB, T == Int {
             }
         }
         
-        public func clipped(low: Float, high: Float) -> Image<P, Float> {
+        public func clipped(low: T, high: T) -> Image<P, T> {
             var ret = self
             ret.clip(low: low, high: high)
             return ret
@@ -220,7 +220,7 @@ extension Image where P == ARGB, T == Int {
     }
     
     extension Image where P == ARGB, T == Double {
-        public mutating func clip(low: Double, high: Double) {
+        public mutating func clip(low: T, high: T) {
             var low = low
             var high = high
             self.unsafeChannelwiseConvert {
@@ -229,7 +229,7 @@ extension Image where P == ARGB, T == Int {
             }
         }
         
-        public func clipped(low: Double, high: Double) -> Image<P, Double> {
+        public func clipped(low: T, high: T) -> Image<P, T> {
             var ret = self
             ret.clip(low: low, high: high)
             return ret
@@ -238,11 +238,11 @@ extension Image where P == ARGB, T == Int {
 
 #else
     extension Image where T == Float {
-        public mutating func clip(low: Float, high: Float) {
+        public mutating func clip(low: T, high: T) {
             self._clip(low: low, high: high)
         }
         
-        public func clipped(low: Float, high: Float) -> Image<P, Float> {
+        public func clipped(low: T, high: T) -> Image<P, T> {
             var ret = self
             ret._clip(low: low, high: high)
             return ret
@@ -250,11 +250,11 @@ extension Image where P == ARGB, T == Int {
     }
     
     extension Image where T == Double {
-        public mutating func clip(low: Double, high: Double) {
+        public mutating func clip(low: T, high: T) {
             self._clip(low: low, high: high)
         }
         
-        public func clipped(low: Double, high: Double) -> Image<P, Double> {
+        public func clipped(low: T, high: T) -> Image<P, T> {
             var ret = self
             ret._clip(low: low, high: high)
             return ret
@@ -262,11 +262,11 @@ extension Image where P == ARGB, T == Int {
     }
 
     extension Image where T == Float {
-        public mutating func clip(low: Float, high: Float) {
+        public mutating func clip(low: T, high: T) {
             self._clip(low: low, high: high)
         }
         
-        public func clipped(low: Float, high: Float) -> Image<P, Float> {
+        public func clipped(low: T, high: T) -> Image<P, T> {
             var ret = self
             ret._clip(low: low, high: high)
             return ret
@@ -274,11 +274,11 @@ extension Image where P == ARGB, T == Int {
     }
     
     extension Image where T == Double {
-        public mutating func clip(low: Double, high: Double) {
+        public mutating func clip(low: T, high: T) {
             self._clip(low: low, high: high)
         }
         
-        public func clipped(low: Double, high: Double) -> Image<P, Double> {
+        public func clipped(low: T, high: T) -> Image<P, T> {
             var ret = self
             ret._clip(low: low, high: high)
             return ret
@@ -286,11 +286,11 @@ extension Image where P == ARGB, T == Int {
     }
 
     extension Image where T == Float {
-        public mutating func clip(low: Float, high: Float) {
+        public mutating func clip(low: T, high: T) {
             self._clip(low: low, high: high)
         }
         
-        public func clipped(low: Float, high: Float) -> Image<P, Float> {
+        public func clipped(low: T, high: T) -> Image<P, T> {
             var ret = self
             ret._clip(low: low, high: high)
             return ret
@@ -298,11 +298,11 @@ extension Image where P == ARGB, T == Int {
     }
     
     extension Image where T == Double {
-        public mutating func clip(low: Double, high: Double) {
+        public mutating func clip(low: T, high: T) {
             self._clip(low: low, high: high)
         }
         
-        public func clipped(low: Double, high: Double) -> Image<P, Double> {
+        public func clipped(low: T, high: T) -> Image<P, T> {
             var ret = self
             ret._clip(low: low, high: high)
             return ret
@@ -310,11 +310,11 @@ extension Image where P == ARGB, T == Int {
     }
 
     extension Image where T == Float {
-        public mutating func clip(low: Float, high: Float) {
+        public mutating func clip(low: T, high: T) {
             self._clip(low: low, high: high)
         }
         
-        public func clipped(low: Float, high: Float) -> Image<P, Float> {
+        public func clipped(low: T, high: T) -> Image<P, T> {
             var ret = self
             ret._clip(low: low, high: high)
             return ret
@@ -322,11 +322,11 @@ extension Image where P == ARGB, T == Int {
     }
     
     extension Image where T == Double {
-        public mutating func clip(low: Double, high: Double) {
+        public mutating func clip(low: T, high: T) {
             self._clip(low: low, high: high)
         }
         
-        public func clipped(low: Double, high: Double) -> Image<P, Double> {
+        public func clipped(low: T, high: T) -> Image<P, T> {
             var ret = self
             ret._clip(low: low, high: high)
             return ret
