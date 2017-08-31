@@ -8,6 +8,7 @@ public protocol CompoundArithmetics {
 }
 
 extension UInt8: CompoundArithmetics {}
+extension Int: CompoundArithmetics {}
 extension Float: CompoundArithmetics {}
 extension Double: CompoundArithmetics {}
 

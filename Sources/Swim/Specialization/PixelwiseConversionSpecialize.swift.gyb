@@ -1,8 +1,5 @@
 %{
-pixel_types = ["Intensity", "RGB", "RGBA", "ARGB"]
-data_types = ["UInt8", "Float", "Double"]
-int_data_types = ["UInt8"]
-fp_data_types = ["Float", "Double"]
+from type import *
 }%
 
 % for dt in data_types:
