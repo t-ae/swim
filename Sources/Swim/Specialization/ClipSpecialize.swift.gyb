@@ -1,9 +1,10 @@
+%{
+from type import *
+}%
 
-extension Image where T: Comparable {
-    mutating func _clip(low: T, high: T) {
-        self._channelwiseConvert { Swift.max(Swift.min($0, high), low) }
-    }
-    
+% for pt in pixel_types:
+% for dt in int_data_types:
+extension Image where P == ${pt}, T == ${dt} {
     public mutating func clip(low: T, high: T) {
         self._clip(low: low, high: high)
     }
@@ -15,11 +16,15 @@ extension Image where T: Comparable {
     }
 }
 
-// MARK: - Accelerate
+% end
+% end
+
+
 #if os(macOS) || os(iOS)
     import Accelerate
     
-    extension Image where T == Float {
+% for pt in pixel_types:
+    extension Image where P == ${pt}, T == Float {
         public mutating func clip(low: Float, high: Float) {
             var low = low
             var high = high
@@ -36,7 +41,7 @@ extension Image where T: Comparable {
         }
     }
     
-    extension Image where T == Double {
+    extension Image where P == ${pt}, T == Double {
         public mutating func clip(low: Double, high: Double) {
             var low = low
             var high = high
@@ -52,7 +57,10 @@ extension Image where T: Comparable {
             return ret
         }
     }
+
+% end
 #else
+% for pt in pixel_types:
     extension Image where T == Float {
         public mutating func clip(low: Float, high: Float) {
             self._clip(low: low, high: high)
@@ -76,4 +84,6 @@ extension Image where T: Comparable {
             return ret
         }
     }
+
+% end
 #endif
