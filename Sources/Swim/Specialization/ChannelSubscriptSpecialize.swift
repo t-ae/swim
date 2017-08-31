@@ -179,7 +179,7 @@ extension Image where P == ARGB, T == Int {
 #if os(macOS) || os(iOS)
     import Accelerate
     
-    private func strideCopy<T: DataType>(src: [T],
+    private func strideCopy<T>(src: [T],
                             srcOffset: Int,
                             srcStride: Int,
                             dst: inout [T],

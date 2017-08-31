@@ -23,7 +23,6 @@ extension Image where P == Intensity, T == Double {
     }
 }
 
-
 extension Image where P == Intensity, T == UInt8 {
     public func converted(_ f: (Int, Int, Pixel<P, T>)->UInt8) -> Image<Intensity, UInt8> {
         return self._converted(f)

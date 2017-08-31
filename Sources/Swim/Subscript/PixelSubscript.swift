@@ -1,11 +1,32 @@
 
+extension Image {
+    func getPixel(x: Int, y: Int, c: Int = 0) -> T {
+        return data[index(x: x, y: y, c: c)]
+    }
+    
+    mutating func setPixel(x: Int, y: Int, c: Int = 0, newValue: T) {
+        data[index(x: x, y: y, c: c)] = newValue
+    }
+    
+    func getPixel(x: Int, y: Int) -> Pixel<P, T> {
+        let start = index(x: x, y: y)
+        return Pixel(data: [T](data[start..<start+P.channels]))
+    }
+    
+    mutating func setPixel(x: Int, y: Int, newValue: Pixel<P, T>) {
+        let start = index(x: x, y: y)
+        self.data.replaceSubrange(start..<start+P.channels, with: newValue.data)
+    }
+    
+}
+
 extension Image where P == Intensity {
     public subscript(x: Int, y: Int) -> T {
         get {
-            return data[index(x: x, y: y)]
+            return self.getPixel(x: x, y: y)
         }
         set {
-            data[index(x: x, y: y)] = newValue
+            self.setPixel(x: x, y: y, newValue: newValue)
         }
     }
 }
@@ -13,21 +34,19 @@ extension Image where P == Intensity {
 extension Image {
     public subscript(x: Int, y: Int, c: Int) -> T {
         get {
-            return data[index(x: x, y: y, c: c)]
+            return self.getPixel(x: x, y: y, c: c)
         }
         set {
-            data[index(x: x, y: y, c: c)] = newValue
+            self.setPixel(x: x, y: y, c: c, newValue: newValue)
         }
     }
     
     public subscript(x: Int, y: Int) -> Pixel<P, T> {
         get {
-            let start = index(x: x, y: y)
-            return Pixel(data: [T](data[start..<start+P.channels]))
+            return self.getPixel(x: x, y: y)
         }
         set {
-            let start = index(x: x, y: y)
-            self.data.replaceSubrange(start..<start+P.channels, with: newValue.data)
+            self.setPixel(x: x, y: y, newValue: newValue)
         }
     }
 }
