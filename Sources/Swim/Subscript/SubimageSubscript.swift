@@ -9,7 +9,7 @@ extension Image {
         
         let start = index(x: x, y: y)
         
-        var data = [T](repeating: 0, count: width*height*P.channels)
+        var data = [T](repeating: T.swimDefaultValue, count: width*height*P.channels)
         self.data.withUnsafeBufferPointer {
             var src = $0.baseAddress! + start
             data.withUnsafeMutableBufferPointer {

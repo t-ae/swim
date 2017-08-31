@@ -15,7 +15,7 @@ extension Image {
     }
     
     func _channelwiseConverted<T2: DataType>(_ f: (T) -> T2) -> Image<P, T2> {
-        var data = [T2](repeating: 0, count: width*height*P.channels)
+        var data = [T2](repeating: T2.swimDefaultValue, count: width*height*P.channels)
         self.data.withUnsafeBufferPointer {
             var src = $0.baseAddress!
             data.withUnsafeMutableBufferPointer {
@@ -42,7 +42,7 @@ extension Image {
     }
     
     public func unsafeChannelwiseConverted<T2: DataType>(_ f: (UnsafeBufferPointer<T>, UnsafeMutableBufferPointer<T2>)->Void) -> Image<P, T2> {
-        var data = [T2](repeating: 0, count: width*height*P.channels)
+        var data = [T2](repeating: T2.swimDefaultValue, count: width*height*P.channels)
         self.data.withUnsafeBufferPointer { src in
             data.withUnsafeMutableBufferPointer { dst in
                 f(src, dst)

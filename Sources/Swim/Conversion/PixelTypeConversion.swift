@@ -75,7 +75,7 @@ extension Image where P == ARGB {
 
 // MARK: - RGBA -> RGB
 func imageFromRGBA<T: DataType>(image: Image<RGBA, T>) -> Image<RGB, T> {
-    var data = [T](repeating: 0, count: RGB.channels * image.data.count / RGBA.channels)
+    var data = [T](repeating: T.swimDefaultValue, count: RGB.channels * image.data.count / RGBA.channels)
     image.data.withUnsafeBufferPointer {
         var src = $0.baseAddress!
         data.withUnsafeMutableBufferPointer {

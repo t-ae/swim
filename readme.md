@@ -19,6 +19,7 @@ try? image.write(path: dstPath, type: .png)
 ## Pixel manipulation
 ```swift
 let image = Image<RGBA, UInt8>(path: path)!
+image[0, 0] // Pixel<RGBA, UInt8> of (x: 0, y: 0)
 image[0, 0, 0] // red channel of (x: 0, y: 0)
 image[0, 0][.red] // ditto
 

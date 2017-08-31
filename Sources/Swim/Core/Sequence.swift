@@ -23,7 +23,7 @@ public struct PixelIterator<P: PixelType, T: DataType>: IteratorProtocol {
     
     init(image: Image<P, T>) {
         self.image = image
-        self.pixel = Pixel<P, T>(data: [T](repeating: 0, count: P.channels))
+        self.pixel = Pixel<P, T>(data: [T](repeating: T.swimDefaultValue, count: P.channels))
     }
     
     public mutating func next() -> Pixel<P, T>? {
@@ -48,7 +48,7 @@ public struct PixelIterator<P: PixelType, T: DataType>: IteratorProtocol {
 
 extension Image {
     func withCoord(_ f: (Int, Int, Pixel<P, T>)->Void) {
-        var pixel = Pixel<P, T>(data: [T](repeating: 0, count: P.channels))
+        var pixel = Pixel<P, T>(data: [T](repeating: T.swimDefaultValue, count: P.channels))
         data.withUnsafeBufferPointer {
             var src = $0.baseAddress!
             for y in 0..<height {

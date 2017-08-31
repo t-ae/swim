@@ -41,7 +41,7 @@ extension Image where P == Intensity {
 // MARK: - General conversion
 extension Image {
     func _converted<T2: DataType>(_ f: (Int, Int, Pixel<P, T>)->T2) -> Image<Intensity, T2> {
-        var data = [T2](repeating: 0, count: width*height)
+        var data = [T2](repeating: T2.swimDefaultValue, count: width*height)
         data.withUnsafeMutableBufferPointer {
             var dst = $0.baseAddress!
             withCoord { x, y, px in
@@ -57,7 +57,7 @@ extension Image {
     }
     
     func _converted<P2, T2>(_ f: (Int, Int, Pixel<P, T>)->Pixel<P2, T2>) -> Image<P2, T2> {
-        var data = [T2](repeating: 0, count: width*height*P2.channels)
+        var data = [T2](repeating: T2.swimDefaultValue, count: width*height*P2.channels)
         data.withUnsafeMutableBufferPointer {
             var dst = $0.baseAddress!
             withCoord { x, y, px in
@@ -79,7 +79,7 @@ extension Image {
 
 extension Image where P == Intensity {
     func _converted<T2: DataType>(_ f: (Int, Int, T)->T2) -> Image<Intensity, T2> {
-        var data = [T2](repeating: 0, count: width*height)
+        var data = [T2](repeating: T2.swimDefaultValue, count: width*height)
         data.withUnsafeMutableBufferPointer {
             var dst = $0.baseAddress!
             withCoord { x, y, px in
@@ -95,7 +95,7 @@ extension Image where P == Intensity {
     }
     
     func _converted<P2, T2>(_ f: (Int, Int, T)->Pixel<P2, T2>) -> Image<P2, T2> {
-        var data = [T2](repeating: 0, count: width*height*P2.channels)
+        var data = [T2](repeating: T2.swimDefaultValue, count: width*height*P2.channels)
         data.withUnsafeMutableBufferPointer {
             var dst = $0.baseAddress!
             withCoord { x, y, px in
