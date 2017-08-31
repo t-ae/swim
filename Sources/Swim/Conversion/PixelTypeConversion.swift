@@ -37,6 +37,7 @@ func imageFromRGB<T: DataType>(image: Image<RGB, T>, alpha: T) -> Image<RGBA, T>
     
     return Image<RGBA, T>(width: image.width, height: image.height, data: data)
 }
+
 extension Image where P == RGBA {
     public init(image: Image<RGB, T>, alpha: T) {
         self = imageFromRGB(image: image, alpha: alpha)
@@ -60,6 +61,7 @@ func imageFromRGB<T: DataType>(image: Image<RGB, T>, alpha: T) -> Image<ARGB, T>
     
     return Image<ARGB, T>(width: image.width, height: image.height, data: data)
 }
+
 extension Image where P == ARGB {
     public init(image: Image<RGB, T>, alpha: T) {
         self = imageFromRGB(image: image, alpha: alpha)

@@ -1,3 +1,4 @@
+
 extension Image where P == Intensity {
     public subscript(x: Int, y: Int) -> T {
         get {
