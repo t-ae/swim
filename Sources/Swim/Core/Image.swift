@@ -24,6 +24,16 @@ public struct Image<P: PixelType, T: DataType> {
     }
 }
 
+extension Image {
+    var size: (width: Int, height: Int) {
+        return (width, height)
+    }
+    
+    var pixelCount: Int {
+        return width * height
+    }
+}
+
 extension Image: Equatable {
     public static func ==(lhs: Image, rhs: Image) -> Bool {
         guard lhs.width == rhs.width && lhs.height == rhs.height else {

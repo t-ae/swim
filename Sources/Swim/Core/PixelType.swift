@@ -49,6 +49,14 @@ public enum ARGB: Int, PixelType {
 // MARK: - RGBWithAlpha
 public protocol RGBWithAlpha {
     static var redIndex: Int { get }
+    static var greenIndex: Int { get }
+    static var blueIndex: Int { get }
+    static var alphaIndex: Int { get }
+}
+extension RGBWithAlpha {
+    public static var greenIndex: Int { return Self.alphaIndex + 1 }
+    public static var blueIndex: Int { return Self.alphaIndex + 2 }
+    public static var alphaIndex: Int { return (Self.alphaIndex + 3) % 4 }
 }
 extension RGBA: RGBWithAlpha {
     public static let redIndex: Int = RGBA.red.rawValue
