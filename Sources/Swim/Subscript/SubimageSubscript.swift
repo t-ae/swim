@@ -3,6 +3,7 @@ import Foundation
 
 extension Image {
     func getSubimage(x: Int, y: Int, width: Int, height: Int) -> Image<P, T> {
+        assert(0 <= width && 0 <= height)
         precondition(0 <= x && 0 <= y)
         precondition(x+width <= self.width)
         precondition(y+height <= self.height)
@@ -29,6 +30,10 @@ extension Image {
         precondition(0 <= x && 0 <= y)
         precondition(x+width <= self.width)
         precondition(y+height <= self.height)
+        if width == 0 || height == 0 {
+            // No effects
+            return
+        }
         precondition((width, height) == newValue.size)
         
         let start = index(x: x, y: y)

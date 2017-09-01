@@ -57,6 +57,11 @@ class SubimageSubscriptTests: XCTestCase {
                                            324, 325, 326, 327,
                                            364, 365, 366, 367])
         }
+        
+        do {
+            let subimage = image[cols: 1..<1]
+            XCTAssertEqual(subimage.data, [])
+        }
     }
     
     func testSubimageSubscriptSet() {
@@ -85,6 +90,17 @@ class SubimageSubscriptTests: XCTestCase {
                                     24, 25, 26])
         
         image[rows: 2..<3] = Image<RGB, Double>(width: 3, height: 1, data: [50, 51, 52, 53, 54, 55, 56, 57, 58])
+        XCTAssertEqual(image.data, [-1, -2, -3,
+                                    -4, -5, -6,
+                                    6, 7, 8,
+                                    -7, -8, -9,
+                                    -10, -11, -12,
+                                    15, 16, 17,
+                                    50, 51, 52,
+                                    53, 54, 55,
+                                    56, 57, 58])
+        
+        image[rows: 2..<2] = Image<RGB, Double>(width: 0, height: 0, data: [])
         XCTAssertEqual(image.data, [-1, -2, -3,
                                     -4, -5, -6,
                                     6, 7, 8,
