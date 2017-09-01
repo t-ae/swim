@@ -177,35 +177,27 @@ extension Image where P == ARGB {
 #if os(macOS) || os(iOS)
     import Accelerate
     
-    func compoundChannels<T: DataType>(datas: [[T]],
-                          strideCopyFunc: (Int32, UnsafePointer<T>, Int32, UnsafeMutablePointer<T>, Int32)->Void) -> [T] {
+    // MARK: Float
+    func compoundChannels(datas: [[Float]]) -> [Float] {
         let pixelCount = datas.first!.count
         assert(!datas.contains { $0.count != pixelCount})
-        var newData = [T](repeating: T.swimDefaultValue, count: pixelCount * datas.count)
+        var newData = [Float](repeating: 0, count: pixelCount * datas.count)
         
-        newData.withUnsafeMutableBufferPointer {
-            var dst = $0.baseAddress!
-            for i in 0..<datas.count {
-                
-                datas[i].withUnsafeBufferPointer {
-                    let src = $0.baseAddress!
-                    strideCopyFunc(Int32(pixelCount), src, 1, dst, Int32(datas.count))
-                }
-                
-                dst += 1
-            }
+        for i in 0..<datas.count {
+            strideCopy(src: datas[i], srcOffset: 0, srcStride: 1,
+                       dst: &newData, dstOffset: i, dstStride: datas.count,
+                       count: pixelCount)
         }
         
         return newData
     }
     
-    // MARK: Float
     func compoundChannels(data1: [Float], data2: [Float], data3: [Float]) -> [Float] {
-        return compoundChannels(datas: [data1, data2, data3], strideCopyFunc: cblas_scopy)
+        return compoundChannels(datas: [data1, data2, data3])
     }
     
     func compoundChannels(data1: [Float], data2: [Float], data3: [Float], data4: [Float]) -> [Float] {
-        return compoundChannels(datas: [data1, data2, data3, data4], strideCopyFunc: cblas_scopy)
+        return compoundChannels(datas: [data1, data2, data3, data4])
     }
     
     func compoundChannels(intensity: Image<Intensity, Float>,
@@ -258,12 +250,26 @@ extension Image where P == ARGB {
     }
     
     // MARK: Double
+    func compoundChannels(datas: [[Double]]) -> [Double] {
+        let pixelCount = datas.first!.count
+        assert(!datas.contains { $0.count != pixelCount})
+        var newData = [Double](repeating: 0, count: pixelCount * datas.count)
+        
+        for i in 0..<datas.count {
+            strideCopy(src: datas[i], srcOffset: 0, srcStride: 1,
+                       dst: &newData, dstOffset: i, dstStride: datas.count,
+                       count: pixelCount)
+        }
+        
+        return newData
+    }
+    
     func compoundChannels(data1: [Double], data2: [Double], data3: [Double]) -> [Double] {
-        return compoundChannels(datas: [data1, data2, data3], strideCopyFunc: cblas_dcopy)
+        return compoundChannels(datas: [data1, data2, data3])
     }
     
     func compoundChannels(data1: [Double], data2: [Double], data3: [Double], data4: [Double]) -> [Double] {
-        return compoundChannels(datas: [data1, data2, data3, data4], strideCopyFunc: cblas_dcopy)
+        return compoundChannels(datas: [data1, data2, data3, data4])
     }
     
     func compoundChannels(intensity: Image<Intensity, Double>,
