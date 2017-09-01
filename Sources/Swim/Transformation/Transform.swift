@@ -53,7 +53,7 @@ extension Image {
             newImage.data.withUnsafeMutableBufferPointer { dst in
                 var src = src.baseAddress!
                 var dst = dst.baseAddress! + ((height-1) * width + width-1) * P.channels
-                for _ in 0..<width*height {
+                for _ in 0..<pixelCount {
                     memcpy(dst, src, width * P.channels * MemoryLayout<T>.size)
                     src += P.channels
                     dst -= P.channels
