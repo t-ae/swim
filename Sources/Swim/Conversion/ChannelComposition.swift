@@ -192,6 +192,10 @@ extension Image where P == ARGB {
         return newData
     }
     
+    func compoundChannels(data1: [Float], data2: [Float]) -> [Float] {
+        return compoundChannels(datas: [data1, data2])
+    }
+    
     func compoundChannels(data1: [Float], data2: [Float], data3: [Float]) -> [Float] {
         return compoundChannels(datas: [data1, data2, data3])
     }
@@ -262,6 +266,10 @@ extension Image where P == ARGB {
         }
         
         return newData
+    }
+    
+    func compoundChannels(data1: [Double], data2: [Double]) -> [Double] {
+        return compoundChannels(datas: [data1, data2])
     }
     
     func compoundChannels(data1: [Double], data2: [Double], data3: [Double]) -> [Double] {
