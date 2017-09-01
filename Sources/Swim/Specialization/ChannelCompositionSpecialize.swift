@@ -1,4 +1,34 @@
 
+extension Image where P == IntensityAlpha, T == Bool {
+    public init(intensity: Image<Intensity, T>, alpha: Image<Intensity, T>) {
+        self = compoundChannels(intensity: intensity, alpha: alpha)
+    }
+}
+
+extension Image where P == IntensityAlpha, T == UInt8 {
+    public init(intensity: Image<Intensity, T>, alpha: Image<Intensity, T>) {
+        self = compoundChannels(intensity: intensity, alpha: alpha)
+    }
+}
+
+extension Image where P == IntensityAlpha, T == Int {
+    public init(intensity: Image<Intensity, T>, alpha: Image<Intensity, T>) {
+        self = compoundChannels(intensity: intensity, alpha: alpha)
+    }
+}
+
+extension Image where P == IntensityAlpha, T == Float {
+    public init(intensity: Image<Intensity, T>, alpha: Image<Intensity, T>) {
+        self = compoundChannels(intensity: intensity, alpha: alpha)
+    }
+}
+
+extension Image where P == IntensityAlpha, T == Double {
+    public init(intensity: Image<Intensity, T>, alpha: Image<Intensity, T>) {
+        self = compoundChannels(intensity: intensity, alpha: alpha)
+    }
+}
+
 extension Image where P == RGB, T == Bool {
     public init(r: Image<Intensity, T>, g: Image<Intensity, T>, b: Image<Intensity, T>) {
         self = compoundChannels(r: r, g: g, b: b)

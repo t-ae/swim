@@ -3,6 +3,14 @@ from type import *
 }%
 
 % for dt in bool_data_types + int_data_types + fp_data_types:
+extension Image where P == IntensityAlpha, T == ${dt} {
+    public init(intensity: Image<Intensity, T>, alpha: Image<Intensity, T>) {
+        self = compoundChannels(intensity: intensity, alpha: alpha)
+    }
+}
+
+% end
+% for dt in bool_data_types + int_data_types + fp_data_types:
 extension Image where P == RGB, T == ${dt} {
     public init(r: Image<Intensity, T>, g: Image<Intensity, T>, b: Image<Intensity, T>) {
         self = compoundChannels(r: r, g: g, b: b)
