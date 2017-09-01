@@ -1,7 +1,7 @@
 
 import Foundation
 
-extension Image where T: BinaryFloatingPoint {
+extension Image where T: FloatingPoint {
     mutating func _round() {
         channelwiseConvert(Foundation.round)
     }

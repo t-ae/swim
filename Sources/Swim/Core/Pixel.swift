@@ -61,6 +61,20 @@ extension Pixel where P == Intensity {
     }
 }
 
+// MARK: Intensity
+extension Pixel where P == Intensity {
+    public init(intensity: T) {
+        self.init(data: [intensity])
+    }
+}
+
+// MARK: IntensityAlpha
+extension Pixel where P == IntensityAlpha {
+    public init(intensity: T, alpha: T) {
+        self.init(data: [intensity, alpha])
+    }
+}
+
 // MARK: RGB
 extension Pixel where P == RGB {
     public init(r: T, g: T, b: T) {

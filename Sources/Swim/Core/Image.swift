@@ -7,6 +7,7 @@ public struct Image<P: PixelType, T: DataType> {
     public var data: [T]
     
     public init(width: Int, height: Int, data: [T]) {
+        precondition(width >= 0 && height >= 0)
         precondition(data.count == width * height * P.channels)
         self.width = width
         self.height = height
@@ -19,8 +20,7 @@ public struct Image<P: PixelType, T: DataType> {
     }
     
     init(width: Int, height: Int) {
-        let data = [T](repeating: T.swimDefaultValue, count: width*height*P.channels)
-        self.init(width: width, height: height, data: data)
+        self.init(width: width, height: height, value: T.swimDefaultValue)
     }
 }
 
@@ -36,7 +36,7 @@ extension Image {
 
 extension Image: Equatable {
     public static func ==(lhs: Image, rhs: Image) -> Bool {
-        guard lhs.width == rhs.width && lhs.height == rhs.height else {
+        guard lhs.size == rhs.size else {
             return false
         }
         return memcmp(lhs.data, rhs.data, lhs.width*lhs.height*P.channels*MemoryLayout<T>.size) == 0

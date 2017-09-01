@@ -4,7 +4,7 @@ import Foundation
 extension Image {
     /// Sequence of pixels.
     /// Note: Since the iterator has no specializations, it may be slow.
-    /// Use other mothods instead.
+    /// Consider to use other mothods instead.
     public func pixels() -> PixelSequence<P, T> {
         return PixelSequence(image: self)
     }
