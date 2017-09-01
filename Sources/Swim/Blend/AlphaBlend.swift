@@ -12,13 +12,17 @@ extension Image where P == RGB, T: BinaryFloatingPoint {
                 var dst = $0.baseAddress!
                 
                 for _ in 0..<pixelCount {
-                    for _ in 0..<P.channels {
-                        dst.pointee *= 1-srcAlpha.pointee
-                        dst.pointee += srcColor.pointee * srcAlpha.pointee
-                        srcColor += 1
-                        dst += 1
+                    if srcAlpha.pointee != 0 {
+                        for _ in 0..<P.channels {
+                            dst.pointee *= 1-srcAlpha.pointee
+                            dst.pointee += srcColor.pointee * srcAlpha.pointee
+                            srcColor += 1
+                            dst += 1
+                        }
+                        srcColor += P2.channels - P.channels
+                    } else {
+                        srcColor += P2.channels
                     }
-                    srcColor += P2.channels - P.channels
                     srcAlpha += P2.channels
                 }
             }
@@ -38,18 +42,23 @@ extension Image where P: RGBWithAlpha, T: BinaryFloatingPoint {
                 var dstAlpha = $0.baseAddress! + P.alphaIndex
                 
                 for _ in 0..<pixelCount {
-                    let blendAlpha = srcAlpha.pointee + (1-srcAlpha.pointee)*dstAlpha.pointee
-                    for _ in 0..<P.channels {
-                        dstColor.pointee *= (1-srcAlpha.pointee)*dstAlpha.pointee
-                        dstColor.pointee += srcColor.pointee * srcAlpha.pointee
-                        dstColor.pointee /= blendAlpha
-                        srcColor += 1
-                        dstColor += 1
+                    if srcAlpha.pointee != 0 {
+                        let blendAlpha = srcAlpha.pointee + (1-srcAlpha.pointee)*dstAlpha.pointee
+                        for _ in 0..<P.channels {
+                            dstColor.pointee *= (1-srcAlpha.pointee)*dstAlpha.pointee
+                            dstColor.pointee += srcColor.pointee * srcAlpha.pointee
+                            dstColor.pointee /= blendAlpha
+                            srcColor += 1
+                            dstColor += 1
+                        }
+                        dstAlpha.pointee = blendAlpha
+                        srcColor += P.channels - P.channels
+                        dstColor += P.channels - P.channels
+                    } else {
+                        srcColor += P.channels
+                        dstColor += P.channels
                     }
-                    dstAlpha.pointee = blendAlpha
-                    srcColor += P.channels - P.channels
                     srcAlpha += P.channels
-                    dstColor += P.channels - P.channels
                     dstAlpha += P.channels
                 }
             }
