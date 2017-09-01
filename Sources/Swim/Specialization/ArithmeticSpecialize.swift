@@ -167,6 +167,174 @@ extension DataContainer where PT == Intensity, DT == Double {
     }
 }
 
+extension DataContainer where PT == IntensityAlpha, DT == UInt8 {
+    public static func +(lhs: Self, rhs: DT) -> Self {
+        var ret = lhs
+        ret += rhs
+        return ret
+    }
+    
+    public static func +=(lhs: inout Self, rhs: DT) {
+        add(lhs: &lhs, rhs: rhs)
+    }
+    
+    public static func -(lhs: Self, rhs: DT) -> Self {
+        var ret = lhs
+        ret -= rhs
+        return ret
+    }
+    
+    public static func -=(lhs: inout Self, rhs: DT) {
+        subtract(lhs: &lhs, rhs: rhs)
+    }
+    
+    public static func *(lhs: Self, rhs: DT) -> Self {
+        var ret = lhs
+        ret *= rhs
+        return ret
+    }
+    
+    public static func *=(lhs: inout Self, rhs: DT) {
+        multiply(lhs: &lhs, rhs: rhs)
+    }
+    
+    public static func /(lhs: Self, rhs: DT) -> Self {
+        var ret = lhs
+        ret /= rhs
+        return ret
+    }
+    
+    public static func /=(lhs: inout Self, rhs: DT) {
+        divide(lhs: &lhs, rhs: rhs)
+    }
+}
+
+extension DataContainer where PT == IntensityAlpha, DT == Int {
+    public static func +(lhs: Self, rhs: DT) -> Self {
+        var ret = lhs
+        ret += rhs
+        return ret
+    }
+    
+    public static func +=(lhs: inout Self, rhs: DT) {
+        add(lhs: &lhs, rhs: rhs)
+    }
+    
+    public static func -(lhs: Self, rhs: DT) -> Self {
+        var ret = lhs
+        ret -= rhs
+        return ret
+    }
+    
+    public static func -=(lhs: inout Self, rhs: DT) {
+        subtract(lhs: &lhs, rhs: rhs)
+    }
+    
+    public static func *(lhs: Self, rhs: DT) -> Self {
+        var ret = lhs
+        ret *= rhs
+        return ret
+    }
+    
+    public static func *=(lhs: inout Self, rhs: DT) {
+        multiply(lhs: &lhs, rhs: rhs)
+    }
+    
+    public static func /(lhs: Self, rhs: DT) -> Self {
+        var ret = lhs
+        ret /= rhs
+        return ret
+    }
+    
+    public static func /=(lhs: inout Self, rhs: DT) {
+        divide(lhs: &lhs, rhs: rhs)
+    }
+}
+
+extension DataContainer where PT == IntensityAlpha, DT == Float {
+    public static func +(lhs: Self, rhs: DT) -> Self {
+        var ret = lhs
+        ret += rhs
+        return ret
+    }
+    
+    public static func +=(lhs: inout Self, rhs: DT) {
+        add(lhs: &lhs, rhs: rhs)
+    }
+    
+    public static func -(lhs: Self, rhs: DT) -> Self {
+        var ret = lhs
+        ret -= rhs
+        return ret
+    }
+    
+    public static func -=(lhs: inout Self, rhs: DT) {
+        subtract(lhs: &lhs, rhs: rhs)
+    }
+    
+    public static func *(lhs: Self, rhs: DT) -> Self {
+        var ret = lhs
+        ret *= rhs
+        return ret
+    }
+    
+    public static func *=(lhs: inout Self, rhs: DT) {
+        multiply(lhs: &lhs, rhs: rhs)
+    }
+    
+    public static func /(lhs: Self, rhs: DT) -> Self {
+        var ret = lhs
+        ret /= rhs
+        return ret
+    }
+    
+    public static func /=(lhs: inout Self, rhs: DT) {
+        divide(lhs: &lhs, rhs: rhs)
+    }
+}
+
+extension DataContainer where PT == IntensityAlpha, DT == Double {
+    public static func +(lhs: Self, rhs: DT) -> Self {
+        var ret = lhs
+        ret += rhs
+        return ret
+    }
+    
+    public static func +=(lhs: inout Self, rhs: DT) {
+        add(lhs: &lhs, rhs: rhs)
+    }
+    
+    public static func -(lhs: Self, rhs: DT) -> Self {
+        var ret = lhs
+        ret -= rhs
+        return ret
+    }
+    
+    public static func -=(lhs: inout Self, rhs: DT) {
+        subtract(lhs: &lhs, rhs: rhs)
+    }
+    
+    public static func *(lhs: Self, rhs: DT) -> Self {
+        var ret = lhs
+        ret *= rhs
+        return ret
+    }
+    
+    public static func *=(lhs: inout Self, rhs: DT) {
+        multiply(lhs: &lhs, rhs: rhs)
+    }
+    
+    public static func /(lhs: Self, rhs: DT) -> Self {
+        var ret = lhs
+        ret /= rhs
+        return ret
+    }
+    
+    public static func /=(lhs: inout Self, rhs: DT) {
+        divide(lhs: &lhs, rhs: rhs)
+    }
+}
+
 extension DataContainer where PT == RGB, DT == UInt8 {
     public static func +(lhs: Self, rhs: DT) -> Self {
         var ret = lhs

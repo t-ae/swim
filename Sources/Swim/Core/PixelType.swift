@@ -12,6 +12,13 @@ public enum Intensity: Int, PixelType {
     case intensity = 0
 }
 
+public enum IntensityAlpha: Int, PixelType {
+    public static var channels: Int = 2
+    
+    case intensity = 0
+    case alpha = 1
+}
+
 public enum RGB: Int, PixelType {
     public static var channels: Int = 3
     

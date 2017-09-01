@@ -1,6 +1,33 @@
 
 import Foundation
 
+func compoundChannels<T: DataType>(data1: [T], data2: [T]) -> [T] {
+    assert(data1.count == data2.count)
+    
+    let pixelCount = data1.count
+    var newData = [T](repeating: T.swimDefaultValue, count: pixelCount * 2)
+    
+    data1.withUnsafeBufferPointer {
+        var src1 = $0.baseAddress!
+        data2.withUnsafeBufferPointer {
+            var src2 = $0.baseAddress!
+            newData.withUnsafeMutableBufferPointer {
+                var dst = $0.baseAddress!
+                for _ in 0..<pixelCount {
+                    dst.pointee = src1.pointee
+                    dst += 1
+                    src1 += 1
+                    dst.pointee = src2.pointee
+                    dst += 1
+                    src2 += 1
+                }
+            }
+        }
+    }
+    
+    return newData
+}
+
 func compoundChannels<T: DataType>(data1: [T], data2: [T], data3: [T]) -> [T] {
     assert(data1.count == data2.count && data2.count == data3.count)
     
@@ -73,6 +100,18 @@ func compoundChannels<T: DataType>(data1: [T], data2: [T], data3: [T], data4: [T
     return newData
 }
 
+func compoundChannels<T>(intensity: Image<Intensity, T>,
+                      alpha: Image<Intensity, T>) -> Image<IntensityAlpha, T> {
+    precondition(intensity.width == alpha.width)
+    precondition(intensity.height == alpha.height)
+    
+    let width = intensity.width
+    let height = alpha.height
+    let data = compoundChannels(data1: intensity.data, data2: alpha.data)
+    
+    return Image(width: width, height: height, data: data)
+}
+
 func compoundChannels<T>(r: Image<Intensity, T>,
                       g: Image<Intensity, T>,
                       b: Image<Intensity, T>) -> Image<RGB, T> {
@@ -112,6 +151,12 @@ func compoundChannels<T>(a: Image<Intensity, T>,
     let data = compoundChannels(data1: a.data, data2: r.data, data3: g.data, data4: b.data)
     
     return Image(width: width, height: height, data: data)
+}
+
+extension Image where P == IntensityAlpha {
+    public init(intensity: Image<Intensity, T>, alpha: Image<Intensity, T>) {
+        self = compoundChannels(intensity: intensity, alpha: alpha)
+    }
 }
 
 extension Image where P == RGB {

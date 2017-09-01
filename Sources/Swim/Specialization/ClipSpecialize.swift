@@ -47,6 +47,54 @@ extension Image where P == Intensity, T == Double {
     }
 }
 
+extension Image where P == IntensityAlpha, T == UInt8 {
+    public mutating func clip(low: T, high: T) {
+        _clip(low: low, high: high)
+    }
+    
+    public func clipped(low: T, high: T) -> Image<P, T> {
+        var ret = self
+        ret._clip(low: low, high: high)
+        return ret
+    }
+}
+
+extension Image where P == IntensityAlpha, T == Int {
+    public mutating func clip(low: T, high: T) {
+        _clip(low: low, high: high)
+    }
+    
+    public func clipped(low: T, high: T) -> Image<P, T> {
+        var ret = self
+        ret._clip(low: low, high: high)
+        return ret
+    }
+}
+
+extension Image where P == IntensityAlpha, T == Float {
+    public mutating func clip(low: T, high: T) {
+        _clip(low: low, high: high)
+    }
+    
+    public func clipped(low: T, high: T) -> Image<P, T> {
+        var ret = self
+        ret._clip(low: low, high: high)
+        return ret
+    }
+}
+
+extension Image where P == IntensityAlpha, T == Double {
+    public mutating func clip(low: T, high: T) {
+        _clip(low: low, high: high)
+    }
+    
+    public func clipped(low: T, high: T) -> Image<P, T> {
+        var ret = self
+        ret._clip(low: low, high: high)
+        return ret
+    }
+}
+
 extension Image where P == RGB, T == UInt8 {
     public mutating func clip(low: T, high: T) {
         _clip(low: low, high: high)
