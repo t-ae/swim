@@ -29,8 +29,7 @@ extension Image {
         precondition(0 <= x && 0 <= y)
         precondition(x+width <= self.width)
         precondition(y+height <= self.height)
-        precondition(width == newValue.width)
-        precondition(height == newValue.height)
+        precondition((width, height) == newValue.size)
         
         let start = index(x: x, y: y)
         

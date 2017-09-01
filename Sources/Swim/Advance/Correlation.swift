@@ -3,8 +3,7 @@ import Foundation
 
 public func calculateSSD<T: DataType&BinaryFloatingPoint>(_ a: Image<Intensity, T>,
                          _ b: Image<Intensity, T>) -> T {
-    precondition(a.width == b.width)
-    precondition(a.height == a.height)
+    precondition(a.size == b.size)
     
     var sum: T = 0
     a.data.withUnsafeBufferPointer {
@@ -24,8 +23,7 @@ public func calculateSSD<T: DataType&BinaryFloatingPoint>(_ a: Image<Intensity, 
 
 public func calculateSAD<T: DataType&BinaryFloatingPoint>(_ a: Image<Intensity, T>,
                          _ b: Image<Intensity, T>) -> T {
-    precondition(a.width == b.width)
-    precondition(a.height == a.height)
+    precondition(a.size == b.size)
     
     var sum: T = 0
     a.data.withUnsafeBufferPointer {
@@ -45,8 +43,7 @@ public func calculateSAD<T: DataType&BinaryFloatingPoint>(_ a: Image<Intensity, 
 
 public func calculateNCC<T: DataType&BinaryFloatingPoint>(_ a: Image<Intensity, T>,
                          _ b: Image<Intensity, T>) -> T {
-    precondition(a.width == b.width)
-    precondition(a.height == a.height)
+    precondition(a.size == b.size)
     
     var sum2a: T = 0
     var sum2b: T = 0
@@ -71,8 +68,7 @@ public func calculateNCC<T: DataType&BinaryFloatingPoint>(_ a: Image<Intensity, 
 
 public func calculateZNCC<T: DataType&BinaryFloatingPoint>(_ a: Image<Intensity, T>,
                           _ b: Image<Intensity, T>) -> T {
-    precondition(a.width == b.width)
-    precondition(a.height == a.height)
+    precondition(a.size == b.size)
     
     var suma: T = 0
     var sumb: T = 0
