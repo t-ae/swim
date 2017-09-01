@@ -104,33 +104,59 @@ extension Image where P == ARGB, T == Double {
 }
 
 
+
 extension Image where P == RGB, T == Bool {
     public init(image: Image<RGBA, T>) {
-        self = imageFromRGBA(image: image)
+        self = imageFromRGBWithAlpha(image: image)
     }
+
+    public init(image: Image<ARGB, T>) {
+        self = imageFromRGBWithAlpha(image: image)
+    }
+
 }
 
 extension Image where P == RGB, T == UInt8 {
     public init(image: Image<RGBA, T>) {
-        self = imageFromRGBA(image: image)
+        self = imageFromRGBWithAlpha(image: image)
     }
+
+    public init(image: Image<ARGB, T>) {
+        self = imageFromRGBWithAlpha(image: image)
+    }
+
 }
 
 extension Image where P == RGB, T == Int {
     public init(image: Image<RGBA, T>) {
-        self = imageFromRGBA(image: image)
+        self = imageFromRGBWithAlpha(image: image)
     }
+
+    public init(image: Image<ARGB, T>) {
+        self = imageFromRGBWithAlpha(image: image)
+    }
+
 }
 
 extension Image where P == RGB, T == Float {
     public init(image: Image<RGBA, T>) {
-        self = imageFromRGBA(image: image)
+        self = imageFromRGBWithAlpha(image: image)
     }
+
+    public init(image: Image<ARGB, T>) {
+        self = imageFromRGBWithAlpha(image: image)
+    }
+
 }
 
 extension Image where P == RGB, T == Double {
     public init(image: Image<RGBA, T>) {
-        self = imageFromRGBA(image: image)
+        self = imageFromRGBWithAlpha(image: image)
     }
+
+    public init(image: Image<ARGB, T>) {
+        self = imageFromRGBWithAlpha(image: image)
+    }
+
 }
 

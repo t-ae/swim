@@ -7,6 +7,10 @@ extension Image where P == RGB, T: BinaryFloatingPoint {
         return _converted { x, y, px in (px[.red] + px[.green] + px[.blue]) / 3 }
     }
     
+    public func toBrightness() -> Image<Intensity, T> {
+        return _toBrightness()
+    }
+    
     func _toLuminane() -> Image<Intensity, T> {
         return _converted { x, y, px -> T in
             let r = 0.2126*px[.red]
@@ -16,26 +20,22 @@ extension Image where P == RGB, T: BinaryFloatingPoint {
         }
     }
     
-    public func toBrightness() -> Image<Intensity, T> {
-        return _toBrightness()
-    }
-    
     public func toLuminane() -> Image<Intensity, T> {
         return _toLuminane()
     }
 }
 
-// MARK: - RGB -> RGBA
-func imageFromRGB<T: DataType>(image: Image<RGB, T>, alpha: T) -> Image<RGBA, T> {
-    var newImage = Image<RGBA, T>(width: image.width, height: image.height, value: alpha)
+// MARK: - RGB -> RGBWithAlpha
+func imageFromRGB<P: RGBWithAlpha, T: DataType>(image: Image<RGB, T>, alpha: T) -> Image<P, T> {
+    var newImage = Image<P, T>(width: image.width, height: image.height, value: alpha)
     image.data.withUnsafeBufferPointer {
         var src = $0.baseAddress!
         newImage.data.withUnsafeMutableBufferPointer {
-            var dst = $0.baseAddress!
+            var dst = $0.baseAddress! + P.redIndex
             for _ in 0..<image.width*image.height {
                 memcpy(dst, src, RGB.channels * MemoryLayout<T>.size)
                 src += RGB.channels
-                dst += RGBA.channels
+                dst += P.channels
             }
         }
     }
@@ -43,47 +43,23 @@ func imageFromRGB<T: DataType>(image: Image<RGB, T>, alpha: T) -> Image<RGBA, T>
     return newImage
 }
 
-extension Image where P == RGBA {
+extension Image where P: RGBWithAlpha {
     public init(image: Image<RGB, T>, alpha: T) {
         self = imageFromRGB(image: image, alpha: alpha)
     }
 }
 
-// MARK: - RGB -> ARGB
-func imageFromRGB<T: DataType>(image: Image<RGB, T>, alpha: T) -> Image<ARGB, T> {
-    var newImage = Image<ARGB, T>(width: image.width, height: image.height, value: alpha)
-    image.data.withUnsafeBufferPointer {
-        var src = $0.baseAddress!
-        newImage.data.withUnsafeMutableBufferPointer {
-            var dst = $0.baseAddress! + 1
-            for _ in 0..<image.width*image.height {
-                memcpy(dst, src, RGB.channels * MemoryLayout<T>.size)
-                src += RGB.channels
-                dst += ARGB.channels
-            }
-        }
-    }
-    
-    return newImage
-}
-
-extension Image where P == ARGB {
-    public init(image: Image<RGB, T>, alpha: T) {
-        self = imageFromRGB(image: image, alpha: alpha)
-    }
-}
-
-// MARK: - RGBA -> RGB
-func imageFromRGBA<T: DataType>(image: Image<RGBA, T>) -> Image<RGB, T> {
+// MARK: - RGBWithAlpha -> RGB
+func imageFromRGBWithAlpha<P: RGBWithAlpha, T: DataType>(image: Image<P, T>) -> Image<RGB, T> {
     var newImage = Image<RGB, T>(width: image.width, height: image.height)
     image.data.withUnsafeBufferPointer {
-        var src = $0.baseAddress!
+        var src = $0.baseAddress! + P.redIndex
         newImage.data.withUnsafeMutableBufferPointer {
             var dst = $0.baseAddress!
             for _ in 0..<image.width*image.height {
                 memcpy(dst, src, RGB.channels)
                 dst += RGB.channels
-                src += RGBA.channels
+                src += P.channels
             }
         }
     }
@@ -91,7 +67,7 @@ func imageFromRGBA<T: DataType>(image: Image<RGBA, T>) -> Image<RGB, T> {
 }
 
 extension Image where P == RGB {
-    public init(image: Image<RGBA, T>) {
-        self = imageFromRGBA(image: image)
+    public init<P: RGBWithAlpha>(image: Image<P, T>) {
+        self = imageFromRGBWithAlpha(image: image)
     }
 }

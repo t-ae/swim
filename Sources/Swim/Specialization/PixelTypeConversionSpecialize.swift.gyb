@@ -67,11 +67,15 @@ extension Image where P == ARGB, T == ${dt} {
 
 % end
 
+
 % for dt in bool_data_types + int_data_types + fp_data_types:
 extension Image where P == RGB, T == ${dt} {
-    public init(image: Image<RGBA, T>) {
-        self = imageFromRGBA(image: image)
+% for pt in ["RGBA", "ARGB"]:
+    public init(image: Image<${pt}, T>) {
+        self = imageFromRGBWithAlpha(image: image)
     }
+
+% end
 }
 
 % end

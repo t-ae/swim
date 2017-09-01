@@ -1,6 +1,5 @@
 
-
-
+// TODO: Improve with Numeric protocol in Swift4
 extension Image where P == Intensity, T: CompoundArithmetics&ExpressibleByIntegerLiteral {
     public func toIntegralImage() -> Image<Intensity, T> {
         var newImage = self

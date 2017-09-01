@@ -1,4 +1,4 @@
-
+// MARK: - PixelType
 public protocol PixelType {
     static var channels: Int { get }
     
@@ -36,4 +36,16 @@ public enum ARGB: Int, PixelType {
     case red = 1
     case green = 2
     case blue = 3
+}
+
+
+// MARK: - RGBWithAlpha
+public protocol RGBWithAlpha {
+    static var redIndex: Int { get }
+}
+extension RGBA: RGBWithAlpha {
+    public static let redIndex: Int = RGBA.red.rawValue
+}
+extension ARGB: RGBWithAlpha {
+    public static let redIndex: Int = ARGB.red.rawValue
 }
