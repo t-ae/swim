@@ -44,4 +44,15 @@ class ImageTests: XCTestCase {
             XCTAssertTrue(image == image)
         }
     }
+    
+    func testCoW() {
+        do {
+            let image1 = Image<Intensity, Bool>(width: 2, height: 2, data: [true, false, false, true])
+            var image2 = image1
+            
+            image2[0, 0, 0] = false
+            
+            XCTAssertTrue(image1 != image2)
+        }
+    }
 }
