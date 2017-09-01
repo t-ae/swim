@@ -73,42 +73,62 @@ func compoundChannels<T: DataType>(data1: [T], data2: [T], data3: [T], data4: [T
     return newData
 }
 
+func compoundChannels<T>(r: Image<Intensity, T>,
+                      g: Image<Intensity, T>,
+                      b: Image<Intensity, T>) -> Image<RGB, T> {
+    precondition(r.width == g.width && g.width == b.width)
+    precondition(r.height == g.height && g.height == b.height)
+    
+    let width = r.width
+    let height = r.height
+    let data = compoundChannels(data1: r.data, data2: g.data, data3: b.data)
+    
+    return Image(width: width, height: height, data: data)
+}
+
+func compoundChannels<T>(r: Image<Intensity, T>,
+                      g: Image<Intensity, T>,
+                      b: Image<Intensity, T>,
+                      a: Image<Intensity, T>) -> Image<RGBA, T> {
+    precondition(r.width == g.width && g.width == b.width && b.width == a.width)
+    precondition(r.height == g.height && g.height == b.height && b.height == a.height)
+    
+    let width = r.width
+    let height = r.height
+    let data = compoundChannels(data1: r.data, data2: g.data, data3: b.data, data4: a.data)
+    
+    return Image(width: width, height: height, data: data)
+}
+
+func compoundChannels<T>(a: Image<Intensity, T>,
+                      r: Image<Intensity, T>,
+                      g: Image<Intensity, T>,
+                      b: Image<Intensity, T>) -> Image<ARGB, T> {
+    precondition(a.width == r.width && r.width == g.width && g.width == b.width)
+    precondition(a.height == r.height && r.height == g.height && g.height == b.height)
+    
+    let width = a.width
+    let height = a.height
+    let data = compoundChannels(data1: a.data, data2: r.data, data3: g.data, data4: b.data)
+    
+    return Image(width: width, height: height, data: data)
+}
+
 extension Image where P == RGB {
     public init(r: Image<Intensity, T>, g: Image<Intensity, T>, b: Image<Intensity, T>) {
-        precondition(r.width == g.width && g.width == b.width)
-        precondition(r.height == g.height && g.height == b.height)
-        
-        let width = r.width
-        let height = r.height
-        let data = compoundChannels(data1: r.data, data2: g.data, data3: b.data)
-        
-        self.init(width: width, height: height, data: data)
+        self = compoundChannels(r: r, g: g, b: b)
     }
 }
 
 extension Image where P == RGBA {
     public init(r: Image<Intensity, T>, g: Image<Intensity, T>, b: Image<Intensity, T>, a: Image<Intensity, T>) {
-        precondition(r.width == g.width && g.width == b.width && b.width == a.width)
-        precondition(r.height == g.height && g.height == b.height && b.height == a.height)
-        
-        let width = r.width
-        let height = r.height
-        let data = compoundChannels(data1: r.data, data2: g.data, data3: b.data, data4: a.data)
-        
-        self.init(width: width, height: height, data: data)
+        self = compoundChannels(r: r, g: g, b: b, a: a)
     }
 }
 
 extension Image where P == ARGB {
     public init(a: Image<Intensity, T>, r: Image<Intensity, T>, g: Image<Intensity, T>, b: Image<Intensity, T>) {
-        precondition(a.width == r.width && r.width == g.width && g.width == b.width)
-        precondition(a.height == r.height && r.height == g.height && g.height == b.height)
-        
-        let width = a.width
-        let height = a.height
-        let data = compoundChannels(data1: a.data, data2: r.data, data3: g.data, data4: b.data)
-        
-        self.init(width: width, height: height, data: data)
+        self = compoundChannels(a: a, r: r, g: g, b: b)
     }
 }
 
