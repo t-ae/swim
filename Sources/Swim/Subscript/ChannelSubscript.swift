@@ -1,7 +1,7 @@
 
 extension Image {
     func getChannel(channel: Int) ->Image<Intensity, T> {
-        assert(0 <= channel && channel <= P.channels)
+        assert(0 <= channel && channel < P.channels)
         
         return converted { _, _, px in px.data[channel] }
     }
@@ -21,11 +21,11 @@ extension Image {
     
     public subscript(channel channel: Int) -> Image<Intensity, T> {
         get{
-            precondition(0 <= channel && channel <= P.channels)
+            precondition(0 <= channel && channel < P.channels)
             return getChannel(channel: channel)
         }
         set {
-            precondition(0 <= channel && channel <= P.channels)
+            precondition(0 <= channel && channel < P.channels)
             setChannel(channel: channel, newValue: newValue)
         }
     }
@@ -47,7 +47,7 @@ extension Image {
  
     extension Image where T == Float {
         func getChannel(channel: Int) ->Image<Intensity, T> {
-            assert(0 <= channel && channel <= P.channels)
+            assert(0 <= channel && channel < P.channels)
             var newImage = Image<Intensity, T>(width: width, height: height)
             strideCopy(src: self.data, srcOffset: channel, srcStride: P.channels,
                        dst: &newImage.data, dstOffset: 0, dstStride: 1,
@@ -56,7 +56,7 @@ extension Image {
         }
         
         mutating func setChannel(channel: Int, newValue: Image<Intensity, T>) {
-            assert(0 <= channel && channel <= P.channels)
+            assert(0 <= channel && channel < P.channels)
             precondition(size == newValue.size)
             strideCopy(src: newValue.data, srcOffset: channel, srcStride: 1,
                        dst: &self.data, dstOffset: channel, dstStride: P.channels,
@@ -65,11 +65,11 @@ extension Image {
         
         public subscript(channel channel: Int) -> Image<Intensity, T> {
             get {
-                precondition(0 <= channel && channel <= P.channels)
+                precondition(0 <= channel && channel < P.channels)
                 return getChannel(channel: channel)
             }
             set {
-                precondition(0 <= channel && channel <= P.channels)
+                precondition(0 <= channel && channel < P.channels)
                 setChannel(channel: channel, newValue: newValue)
             }
         }
@@ -87,7 +87,7 @@ extension Image {
     
     extension Image where T == Double {
         func getChannel(channel: Int) ->Image<Intensity, T> {
-            assert(0 <= channel && channel <= P.channels)
+            assert(0 <= channel && channel < P.channels)
             var newImage = Image<Intensity, T>(width: width, height: height)
             strideCopy(src: self.data, srcOffset: channel, srcStride: P.channels,
                        dst: &newImage.data, dstOffset: 0, dstStride: 1,
@@ -96,7 +96,7 @@ extension Image {
         }
         
         mutating func setChannel(channel: Int, newValue: Image<Intensity, T>) {
-            assert(0 <= channel && channel <= P.channels)
+            assert(0 <= channel && channel < P.channels)
             precondition(size == newValue.size)
             strideCopy(src: newValue.data, srcOffset: channel, srcStride: 1,
                        dst: &self.data, dstOffset: channel, dstStride: P.channels,
@@ -105,11 +105,11 @@ extension Image {
         
         public subscript(channel channel: Int) -> Image<Intensity, T> {
             get {
-                precondition(0 <= channel && channel <= P.channels)
+                precondition(0 <= channel && channel < P.channels)
                 return getChannel(channel: channel)
             }
             set {
-                precondition(0 <= channel && channel <= P.channels)
+                precondition(0 <= channel && channel < P.channels)
                 setChannel(channel: channel, newValue: newValue)
             }
         }

@@ -4,11 +4,11 @@
 extension Image where P == Intensity, T == Bool {
     public subscript(channel channel: Int) -> Image<Intensity, T> {
         get{
-            precondition(0 <= channel && channel <= P.channels)
+            precondition(0 <= channel && channel < P.channels)
             return getChannel(channel: channel)
         }
         set {
-            precondition(0 <= channel && channel <= P.channels)
+            precondition(0 <= channel && channel < P.channels)
             setChannel(channel: channel, newValue: newValue)
         }
     }
@@ -26,11 +26,11 @@ extension Image where P == Intensity, T == Bool {
 extension Image where P == Intensity, T == UInt8 {
     public subscript(channel channel: Int) -> Image<Intensity, T> {
         get{
-            precondition(0 <= channel && channel <= P.channels)
+            precondition(0 <= channel && channel < P.channels)
             return getChannel(channel: channel)
         }
         set {
-            precondition(0 <= channel && channel <= P.channels)
+            precondition(0 <= channel && channel < P.channels)
             setChannel(channel: channel, newValue: newValue)
         }
     }
@@ -48,11 +48,11 @@ extension Image where P == Intensity, T == UInt8 {
 extension Image where P == Intensity, T == Int {
     public subscript(channel channel: Int) -> Image<Intensity, T> {
         get{
-            precondition(0 <= channel && channel <= P.channels)
+            precondition(0 <= channel && channel < P.channels)
             return getChannel(channel: channel)
         }
         set {
-            precondition(0 <= channel && channel <= P.channels)
+            precondition(0 <= channel && channel < P.channels)
             setChannel(channel: channel, newValue: newValue)
         }
     }
@@ -70,11 +70,11 @@ extension Image where P == Intensity, T == Int {
 extension Image where P == Intensity, T == Float {
     public subscript(channel channel: Int) -> Image<Intensity, T> {
         get{
-            precondition(0 <= channel && channel <= P.channels)
+            precondition(0 <= channel && channel < P.channels)
             return getChannel(channel: channel)
         }
         set {
-            precondition(0 <= channel && channel <= P.channels)
+            precondition(0 <= channel && channel < P.channels)
             setChannel(channel: channel, newValue: newValue)
         }
     }
@@ -92,11 +92,11 @@ extension Image where P == Intensity, T == Float {
 extension Image where P == Intensity, T == Double {
     public subscript(channel channel: Int) -> Image<Intensity, T> {
         get{
-            precondition(0 <= channel && channel <= P.channels)
+            precondition(0 <= channel && channel < P.channels)
             return getChannel(channel: channel)
         }
         set {
-            precondition(0 <= channel && channel <= P.channels)
+            precondition(0 <= channel && channel < P.channels)
             setChannel(channel: channel, newValue: newValue)
         }
     }
@@ -114,11 +114,11 @@ extension Image where P == Intensity, T == Double {
 extension Image where P == IntensityAlpha, T == Bool {
     public subscript(channel channel: Int) -> Image<Intensity, T> {
         get{
-            precondition(0 <= channel && channel <= P.channels)
+            precondition(0 <= channel && channel < P.channels)
             return getChannel(channel: channel)
         }
         set {
-            precondition(0 <= channel && channel <= P.channels)
+            precondition(0 <= channel && channel < P.channels)
             setChannel(channel: channel, newValue: newValue)
         }
     }
@@ -136,11 +136,11 @@ extension Image where P == IntensityAlpha, T == Bool {
 extension Image where P == IntensityAlpha, T == UInt8 {
     public subscript(channel channel: Int) -> Image<Intensity, T> {
         get{
-            precondition(0 <= channel && channel <= P.channels)
+            precondition(0 <= channel && channel < P.channels)
             return getChannel(channel: channel)
         }
         set {
-            precondition(0 <= channel && channel <= P.channels)
+            precondition(0 <= channel && channel < P.channels)
             setChannel(channel: channel, newValue: newValue)
         }
     }
@@ -158,11 +158,11 @@ extension Image where P == IntensityAlpha, T == UInt8 {
 extension Image where P == IntensityAlpha, T == Int {
     public subscript(channel channel: Int) -> Image<Intensity, T> {
         get{
-            precondition(0 <= channel && channel <= P.channels)
+            precondition(0 <= channel && channel < P.channels)
             return getChannel(channel: channel)
         }
         set {
-            precondition(0 <= channel && channel <= P.channels)
+            precondition(0 <= channel && channel < P.channels)
             setChannel(channel: channel, newValue: newValue)
         }
     }
@@ -180,11 +180,11 @@ extension Image where P == IntensityAlpha, T == Int {
 extension Image where P == IntensityAlpha, T == Float {
     public subscript(channel channel: Int) -> Image<Intensity, T> {
         get{
-            precondition(0 <= channel && channel <= P.channels)
+            precondition(0 <= channel && channel < P.channels)
             return getChannel(channel: channel)
         }
         set {
-            precondition(0 <= channel && channel <= P.channels)
+            precondition(0 <= channel && channel < P.channels)
             setChannel(channel: channel, newValue: newValue)
         }
     }
@@ -202,11 +202,11 @@ extension Image where P == IntensityAlpha, T == Float {
 extension Image where P == IntensityAlpha, T == Double {
     public subscript(channel channel: Int) -> Image<Intensity, T> {
         get{
-            precondition(0 <= channel && channel <= P.channels)
+            precondition(0 <= channel && channel < P.channels)
             return getChannel(channel: channel)
         }
         set {
-            precondition(0 <= channel && channel <= P.channels)
+            precondition(0 <= channel && channel < P.channels)
             setChannel(channel: channel, newValue: newValue)
         }
     }
@@ -224,11 +224,11 @@ extension Image where P == IntensityAlpha, T == Double {
 extension Image where P == RGB, T == Bool {
     public subscript(channel channel: Int) -> Image<Intensity, T> {
         get{
-            precondition(0 <= channel && channel <= P.channels)
+            precondition(0 <= channel && channel < P.channels)
             return getChannel(channel: channel)
         }
         set {
-            precondition(0 <= channel && channel <= P.channels)
+            precondition(0 <= channel && channel < P.channels)
             setChannel(channel: channel, newValue: newValue)
         }
     }
@@ -246,11 +246,11 @@ extension Image where P == RGB, T == Bool {
 extension Image where P == RGB, T == UInt8 {
     public subscript(channel channel: Int) -> Image<Intensity, T> {
         get{
-            precondition(0 <= channel && channel <= P.channels)
+            precondition(0 <= channel && channel < P.channels)
             return getChannel(channel: channel)
         }
         set {
-            precondition(0 <= channel && channel <= P.channels)
+            precondition(0 <= channel && channel < P.channels)
             setChannel(channel: channel, newValue: newValue)
         }
     }
@@ -268,11 +268,11 @@ extension Image where P == RGB, T == UInt8 {
 extension Image where P == RGB, T == Int {
     public subscript(channel channel: Int) -> Image<Intensity, T> {
         get{
-            precondition(0 <= channel && channel <= P.channels)
+            precondition(0 <= channel && channel < P.channels)
             return getChannel(channel: channel)
         }
         set {
-            precondition(0 <= channel && channel <= P.channels)
+            precondition(0 <= channel && channel < P.channels)
             setChannel(channel: channel, newValue: newValue)
         }
     }
@@ -290,11 +290,11 @@ extension Image where P == RGB, T == Int {
 extension Image where P == RGB, T == Float {
     public subscript(channel channel: Int) -> Image<Intensity, T> {
         get{
-            precondition(0 <= channel && channel <= P.channels)
+            precondition(0 <= channel && channel < P.channels)
             return getChannel(channel: channel)
         }
         set {
-            precondition(0 <= channel && channel <= P.channels)
+            precondition(0 <= channel && channel < P.channels)
             setChannel(channel: channel, newValue: newValue)
         }
     }
@@ -312,11 +312,11 @@ extension Image where P == RGB, T == Float {
 extension Image where P == RGB, T == Double {
     public subscript(channel channel: Int) -> Image<Intensity, T> {
         get{
-            precondition(0 <= channel && channel <= P.channels)
+            precondition(0 <= channel && channel < P.channels)
             return getChannel(channel: channel)
         }
         set {
-            precondition(0 <= channel && channel <= P.channels)
+            precondition(0 <= channel && channel < P.channels)
             setChannel(channel: channel, newValue: newValue)
         }
     }
@@ -334,11 +334,11 @@ extension Image where P == RGB, T == Double {
 extension Image where P == RGBA, T == Bool {
     public subscript(channel channel: Int) -> Image<Intensity, T> {
         get{
-            precondition(0 <= channel && channel <= P.channels)
+            precondition(0 <= channel && channel < P.channels)
             return getChannel(channel: channel)
         }
         set {
-            precondition(0 <= channel && channel <= P.channels)
+            precondition(0 <= channel && channel < P.channels)
             setChannel(channel: channel, newValue: newValue)
         }
     }
@@ -356,11 +356,11 @@ extension Image where P == RGBA, T == Bool {
 extension Image where P == RGBA, T == UInt8 {
     public subscript(channel channel: Int) -> Image<Intensity, T> {
         get{
-            precondition(0 <= channel && channel <= P.channels)
+            precondition(0 <= channel && channel < P.channels)
             return getChannel(channel: channel)
         }
         set {
-            precondition(0 <= channel && channel <= P.channels)
+            precondition(0 <= channel && channel < P.channels)
             setChannel(channel: channel, newValue: newValue)
         }
     }
@@ -378,11 +378,11 @@ extension Image where P == RGBA, T == UInt8 {
 extension Image where P == RGBA, T == Int {
     public subscript(channel channel: Int) -> Image<Intensity, T> {
         get{
-            precondition(0 <= channel && channel <= P.channels)
+            precondition(0 <= channel && channel < P.channels)
             return getChannel(channel: channel)
         }
         set {
-            precondition(0 <= channel && channel <= P.channels)
+            precondition(0 <= channel && channel < P.channels)
             setChannel(channel: channel, newValue: newValue)
         }
     }
@@ -400,11 +400,11 @@ extension Image where P == RGBA, T == Int {
 extension Image where P == RGBA, T == Float {
     public subscript(channel channel: Int) -> Image<Intensity, T> {
         get{
-            precondition(0 <= channel && channel <= P.channels)
+            precondition(0 <= channel && channel < P.channels)
             return getChannel(channel: channel)
         }
         set {
-            precondition(0 <= channel && channel <= P.channels)
+            precondition(0 <= channel && channel < P.channels)
             setChannel(channel: channel, newValue: newValue)
         }
     }
@@ -422,11 +422,11 @@ extension Image where P == RGBA, T == Float {
 extension Image where P == RGBA, T == Double {
     public subscript(channel channel: Int) -> Image<Intensity, T> {
         get{
-            precondition(0 <= channel && channel <= P.channels)
+            precondition(0 <= channel && channel < P.channels)
             return getChannel(channel: channel)
         }
         set {
-            precondition(0 <= channel && channel <= P.channels)
+            precondition(0 <= channel && channel < P.channels)
             setChannel(channel: channel, newValue: newValue)
         }
     }
@@ -444,11 +444,11 @@ extension Image where P == RGBA, T == Double {
 extension Image where P == ARGB, T == Bool {
     public subscript(channel channel: Int) -> Image<Intensity, T> {
         get{
-            precondition(0 <= channel && channel <= P.channels)
+            precondition(0 <= channel && channel < P.channels)
             return getChannel(channel: channel)
         }
         set {
-            precondition(0 <= channel && channel <= P.channels)
+            precondition(0 <= channel && channel < P.channels)
             setChannel(channel: channel, newValue: newValue)
         }
     }
@@ -466,11 +466,11 @@ extension Image where P == ARGB, T == Bool {
 extension Image where P == ARGB, T == UInt8 {
     public subscript(channel channel: Int) -> Image<Intensity, T> {
         get{
-            precondition(0 <= channel && channel <= P.channels)
+            precondition(0 <= channel && channel < P.channels)
             return getChannel(channel: channel)
         }
         set {
-            precondition(0 <= channel && channel <= P.channels)
+            precondition(0 <= channel && channel < P.channels)
             setChannel(channel: channel, newValue: newValue)
         }
     }
@@ -488,11 +488,11 @@ extension Image where P == ARGB, T == UInt8 {
 extension Image where P == ARGB, T == Int {
     public subscript(channel channel: Int) -> Image<Intensity, T> {
         get{
-            precondition(0 <= channel && channel <= P.channels)
+            precondition(0 <= channel && channel < P.channels)
             return getChannel(channel: channel)
         }
         set {
-            precondition(0 <= channel && channel <= P.channels)
+            precondition(0 <= channel && channel < P.channels)
             setChannel(channel: channel, newValue: newValue)
         }
     }
@@ -510,11 +510,11 @@ extension Image where P == ARGB, T == Int {
 extension Image where P == ARGB, T == Float {
     public subscript(channel channel: Int) -> Image<Intensity, T> {
         get{
-            precondition(0 <= channel && channel <= P.channels)
+            precondition(0 <= channel && channel < P.channels)
             return getChannel(channel: channel)
         }
         set {
-            precondition(0 <= channel && channel <= P.channels)
+            precondition(0 <= channel && channel < P.channels)
             setChannel(channel: channel, newValue: newValue)
         }
     }
@@ -532,11 +532,11 @@ extension Image where P == ARGB, T == Float {
 extension Image where P == ARGB, T == Double {
     public subscript(channel channel: Int) -> Image<Intensity, T> {
         get{
-            precondition(0 <= channel && channel <= P.channels)
+            precondition(0 <= channel && channel < P.channels)
             return getChannel(channel: channel)
         }
         set {
-            precondition(0 <= channel && channel <= P.channels)
+            precondition(0 <= channel && channel < P.channels)
             setChannel(channel: channel, newValue: newValue)
         }
     }

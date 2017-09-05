@@ -9,11 +9,11 @@ from .type import *
 extension Image where P == ${pt}, T == ${dt} {
     public subscript(channel channel: Int) -> Image<Intensity, T> {
         get{
-            precondition(0 <= channel && channel <= P.channels)
+            precondition(0 <= channel && channel < P.channels)
             return getChannel(channel: channel)
         }
         set {
-            precondition(0 <= channel && channel <= P.channels)
+            precondition(0 <= channel && channel < P.channels)
             setChannel(channel: channel, newValue: newValue)
         }
     }
