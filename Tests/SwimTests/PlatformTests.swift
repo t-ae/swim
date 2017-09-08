@@ -15,6 +15,10 @@ class PlatformTests: XCTestCase {
             
             let imagePath = "/path/to/image.png"
             
+            guard FileManager.default.fileExists(atPath: imagePath) else {
+                return
+            }
+            
             let nsImage = NSImage(contentsOf: URL(fileURLWithPath: imagePath))!
             
             let image = Image<RGBA, UInt8>(nsImage: nsImage)

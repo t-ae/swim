@@ -15,4 +15,5 @@
             return NSImage(cgImage: cgImage(), size: .zero)
         }
     }
+    
 #endif
