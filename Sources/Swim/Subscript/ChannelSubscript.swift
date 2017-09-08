@@ -10,7 +10,7 @@ extension Image {
         assert(0 <= channel && channel <= P.channels)
         precondition(size == newValue.size)
         
-        unsafeChannelwiseConvert {
+        data.withUnsafeMutableBufferPointer {
             var dst = $0.baseAddress! + channel
             for v in newValue.data {
                 dst.pointee = v

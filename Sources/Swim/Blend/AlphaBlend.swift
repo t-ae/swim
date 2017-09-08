@@ -8,7 +8,7 @@ extension Image where P == RGB, T: BinaryFloatingPoint {
         image.data.withUnsafeBufferPointer {
             var srcColor = $0.baseAddress! + P2.redIndex
             var srcAlpha = $0.baseAddress! + P2.alphaIndex
-            unsafeChannelwiseConvert {
+            data.withUnsafeMutableBufferPointer {
                 var dst = $0.baseAddress!
                 
                 for _ in 0..<pixelCount {
@@ -37,7 +37,7 @@ extension Image where P: RGBWithAlpha, T: BinaryFloatingPoint {
         image.data.withUnsafeBufferPointer {
             var srcColor = $0.baseAddress! + P.redIndex
             var srcAlpha = $0.baseAddress! + P.alphaIndex
-            unsafeChannelwiseConvert {
+            data.withUnsafeMutableBufferPointer {
                 var dstColor = $0.baseAddress! + P.redIndex
                 var dstAlpha = $0.baseAddress! + P.alphaIndex
                 

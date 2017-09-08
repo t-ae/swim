@@ -103,7 +103,7 @@ extension DataContainer where DT: CompoundArithmetics {
     extension Image where T == Float {
         static func add(lhs: inout Image<P, T>, rhs: T) {
             var rhs = rhs
-            lhs.unsafeChannelwiseConvert {
+            lhs.data.withUnsafeMutableBufferPointer {
                 vDSP_vsadd($0.baseAddress!, 1, &rhs, $0.baseAddress!, 1, vDSP_Length($0.count))
             }
         }
@@ -114,14 +114,14 @@ extension DataContainer where DT: CompoundArithmetics {
         
         static func multiply(lhs: inout Image<P, T>, rhs: T) {
             var rhs = rhs
-            lhs.unsafeChannelwiseConvert {
+            lhs.data.withUnsafeMutableBufferPointer {
                 vDSP_vsmul($0.baseAddress!, 1, &rhs, $0.baseAddress!, 1, vDSP_Length($0.count))
             }
         }
         
         static func divide(lhs: inout Image<P, T>, rhs: T) {
             var rhs = rhs
-            lhs.unsafeChannelwiseConvert {
+            lhs.data.withUnsafeMutableBufferPointer {
                 vDSP_vsdiv($0.baseAddress!, 1, &rhs, $0.baseAddress!, 1, vDSP_Length($0.count))
             }
         }
@@ -130,7 +130,7 @@ extension DataContainer where DT: CompoundArithmetics {
     extension Image where T == Double {
         static func add(lhs: inout Image<P, T>, rhs: T) {
             var rhs = rhs
-            lhs.unsafeChannelwiseConvert {
+            lhs.data.withUnsafeMutableBufferPointer {
                 vDSP_vsaddD($0.baseAddress!, 1, &rhs, $0.baseAddress!, 1, vDSP_Length($0.count))
             }
         }
@@ -141,14 +141,14 @@ extension DataContainer where DT: CompoundArithmetics {
         
         static func multiply(lhs: inout Image<P, T>, rhs: T) {
             var rhs = rhs
-            lhs.unsafeChannelwiseConvert {
+            lhs.data.withUnsafeMutableBufferPointer {
                 vDSP_vsmulD($0.baseAddress!, 1, &rhs, $0.baseAddress!, 1, vDSP_Length($0.count))
             }
         }
         
         static func divide(lhs: inout Image<P, T>, rhs: T) {
             var rhs = rhs
-            lhs.unsafeChannelwiseConvert {
+            lhs.data.withUnsafeMutableBufferPointer {
                 vDSP_vsdivD($0.baseAddress!, 1, &rhs, $0.baseAddress!, 1, vDSP_Length($0.count))
             }
         }
