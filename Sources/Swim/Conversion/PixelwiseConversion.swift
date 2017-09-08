@@ -17,8 +17,25 @@ extension Image {
         }
     }
     
+    mutating func _unsafeConvert(_ f: (Int, Int, UnsafeMutableBufferPointer<T>)->Void) {
+        data.withUnsafeMutableBufferPointer {
+            var p = $0.baseAddress!
+            for y in 0..<height {
+                for x in 0..<width {
+                    let bp = UnsafeMutableBufferPointer<T>(start: p, count: P.channels)
+                    f(x, y, bp)
+                    p += P.channels
+                }
+            }
+        }
+    }
+    
     public mutating func convert(_ f: (Int, Int, Pixel<P, T>)->Pixel<P, T>) {
         _convert(f)
+    }
+    
+    public mutating func unsafeConvert(_ f: (Int, Int, UnsafeMutableBufferPointer<T>)->Void) {
+        _unsafeConvert(f)
     }
 }
 

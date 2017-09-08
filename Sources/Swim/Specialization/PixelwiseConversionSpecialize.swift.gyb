@@ -7,6 +7,10 @@ extension Image where P == Intensity, T == ${dt} {
     public mutating func convert(_ f: (Int, Int, T)->T) {
         _convert(f)
     }
+
+    public mutating func unsafeConvert(_ f: (Int, Int, UnsafeMutableBufferPointer<T>)->Void) {
+        _unsafeConvert(f)
+    }
 }
 
 %end

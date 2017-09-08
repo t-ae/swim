@@ -3,11 +3,19 @@ extension Image where P == Intensity, T == Bool {
     public mutating func convert(_ f: (Int, Int, T)->T) {
         _convert(f)
     }
+
+    public mutating func unsafeConvert(_ f: (Int, Int, UnsafeMutableBufferPointer<T>)->Void) {
+        _unsafeConvert(f)
+    }
 }
 
 extension Image where P == Intensity, T == UInt8 {
     public mutating func convert(_ f: (Int, Int, T)->T) {
         _convert(f)
+    }
+
+    public mutating func unsafeConvert(_ f: (Int, Int, UnsafeMutableBufferPointer<T>)->Void) {
+        _unsafeConvert(f)
     }
 }
 
@@ -15,17 +23,29 @@ extension Image where P == Intensity, T == Int {
     public mutating func convert(_ f: (Int, Int, T)->T) {
         _convert(f)
     }
+
+    public mutating func unsafeConvert(_ f: (Int, Int, UnsafeMutableBufferPointer<T>)->Void) {
+        _unsafeConvert(f)
+    }
 }
 
 extension Image where P == Intensity, T == Float {
     public mutating func convert(_ f: (Int, Int, T)->T) {
         _convert(f)
     }
+
+    public mutating func unsafeConvert(_ f: (Int, Int, UnsafeMutableBufferPointer<T>)->Void) {
+        _unsafeConvert(f)
+    }
 }
 
 extension Image where P == Intensity, T == Double {
     public mutating func convert(_ f: (Int, Int, T)->T) {
         _convert(f)
+    }
+
+    public mutating func unsafeConvert(_ f: (Int, Int, UnsafeMutableBufferPointer<T>)->Void) {
+        _unsafeConvert(f)
     }
 }
 
