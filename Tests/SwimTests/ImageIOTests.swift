@@ -16,7 +16,7 @@ class ImageIOTests: XCTestCase {
         
         let image = Image<RGBA, UInt8>(path: srcPath)!
         
-        let pixel = image[300, 300]
+        let pixel = image[10, 10]
         print(pixel[.red], pixel[.green], pixel[.blue], pixel[.alpha])
         
         do {
@@ -35,5 +35,18 @@ class ImageIOTests: XCTestCase {
             print(pixel2[.red], pixel2[.green], pixel2[.blue])
             try! FileManager.default.removeItem(atPath: dstPath)
         }
+    }
+    
+    func testLoadFloat() {
+        let srcPath = "/path/to/image.png"
+        
+        guard FileManager.default.fileExists(atPath: srcPath) else {
+            return
+        }
+        
+        let image = Image<RGBA, Float>(path: srcPath)!
+        
+        let pixel = image[10, 10]
+        print(pixel[.red], pixel[.green], pixel[.blue], pixel[.alpha])
     }
 }

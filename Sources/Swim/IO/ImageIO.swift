@@ -44,6 +44,8 @@ extension Image where P: ImageFileFormat, T == UInt8 {
 }
 
 extension Image where P: ImageFileFormat, T == Float {
+    /// Load image file.
+    /// All values are in [0, 1].
     public init?(path: String) {
         
         var width: Int32 = 0
