@@ -34,20 +34,4 @@ extension Image {
     public func channelwiseConverted<T2: DataType>(_ f: (T) -> T2) -> Image<P, T2> {
         return _channelwiseConverted(f)
     }
-    
-    public mutating func unsafeChannelwiseConvert(_ f: (UnsafeMutableBufferPointer<T>)->Void) {
-        _data.withUnsafeMutableBufferPointer { bp in
-            f(bp)
-        }
-    }
-    
-    public func unsafeChannelwiseConverted<T2: DataType>(_ f: (UnsafeBufferPointer<T>, UnsafeMutableBufferPointer<T2>)->Void) -> Image<P, T2> {
-        var newImage = Image<P, T2>(width: width, height: height)
-        _data.withUnsafeBufferPointer { src in
-            newImage._data.withUnsafeMutableBufferPointer { dst in
-                f(src, dst)
-            }
-        }
-        return newImage
-    }
 }
