@@ -74,15 +74,15 @@ private func write<P, T>(image: Image<P, T>, path: String, type: ImageFileType) 
     let code: Int32
     switch type {
     case .bitmap:
-        code = image.data.withUnsafeBufferPointer {
+        code = image._data.withUnsafeBufferPointer {
             write_image_bmp(path, width, height, bpp, $0.baseAddress!)
         }
     case .jpeg:
-        code = image.data.withUnsafeBufferPointer {
+        code = image._data.withUnsafeBufferPointer {
             write_image_jpg(path, width, height, bpp, $0.baseAddress!)
         }
     case .png:
-        code = image.data.withUnsafeBufferPointer {
+        code = image._data.withUnsafeBufferPointer {
             write_image_png(path, width, height, bpp, $0.baseAddress!)
         }
     }

@@ -6,8 +6,8 @@ extension Image {
         
         var newImage = Image<P, T>(width: width, height: height)
         
-        data.withUnsafeBufferPointer { src in
-            newImage.data.withUnsafeMutableBufferPointer { dst in
+        _data.withUnsafeBufferPointer { src in
+            newImage._data.withUnsafeMutableBufferPointer { dst in
                 let dstTail = dst.baseAddress! + (width-1)*P.channels
                 for y in 0..<height {
                     var src = src.baseAddress! + y*width*P.channels
@@ -28,8 +28,8 @@ extension Image {
         
         var newImage = Image<P, T>(width: width, height: height)
         
-        data.withUnsafeBufferPointer { src in
-            newImage.data.withUnsafeMutableBufferPointer { dst in
+        _data.withUnsafeBufferPointer { src in
+            newImage._data.withUnsafeMutableBufferPointer { dst in
                 var src = src.baseAddress!
                 var dst = dst.baseAddress! + (height-1)*width*P.channels
                 for _ in 0..<height {
@@ -49,8 +49,8 @@ extension Image {
         
         var newImage = Image<P, T>(width: width, height: height)
         
-        data.withUnsafeBufferPointer { src in
-            newImage.data.withUnsafeMutableBufferPointer { dst in
+        _data.withUnsafeBufferPointer { src in
+            newImage._data.withUnsafeMutableBufferPointer { dst in
                 var src = src.baseAddress!
                 var dst = dst.baseAddress! + ((height-1) * width + width-1) * P.channels
                 for _ in 0..<pixelCount {

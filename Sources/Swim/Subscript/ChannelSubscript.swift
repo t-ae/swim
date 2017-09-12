@@ -3,16 +3,16 @@ extension Image {
     func getChannel(channel: Int) ->Image<Intensity, T> {
         assert(0 <= channel && channel < P.channels)
         
-        return converted { _, _, px in px.data[channel] }
+        return converted { _, _, px in px._data[channel] }
     }
     
     mutating func setChannel(channel: Int, newValue: Image<Intensity, T>) {
         assert(0 <= channel && channel <= P.channels)
         precondition(size == newValue.size)
         
-        data.withUnsafeMutableBufferPointer {
+        _data.withUnsafeMutableBufferPointer {
             var dst = $0.baseAddress! + channel
-            for v in newValue.data {
+            for v in newValue._data {
                 dst.pointee = v
                 dst += P.channels
             }
@@ -49,18 +49,18 @@ extension Image {
         func getChannel(channel: Int) ->Image<Intensity, T> {
             assert(0 <= channel && channel < P.channels)
             var newImage = Image<Intensity, T>(width: width, height: height)
-            strideCopy(src: self.data, srcOffset: channel, srcStride: P.channels,
-                       dst: &newImage.data, dstOffset: 0, dstStride: 1,
-                       count: newImage.data.count)
+            strideCopy(src: _data, srcOffset: channel, srcStride: P.channels,
+                       dst: &newImage._data, dstOffset: 0, dstStride: 1,
+                       count: newImage._data.count)
             return newImage
         }
         
         mutating func setChannel(channel: Int, newValue: Image<Intensity, T>) {
             assert(0 <= channel && channel < P.channels)
             precondition(size == newValue.size)
-            strideCopy(src: newValue.data, srcOffset: channel, srcStride: 1,
-                       dst: &self.data, dstOffset: channel, dstStride: P.channels,
-                       count: newValue.data.count)
+            strideCopy(src: newValue._data, srcOffset: channel, srcStride: 1,
+                       dst: &_data, dstOffset: channel, dstStride: P.channels,
+                       count: newValue._data.count)
         }
         
         public subscript(channel channel: Int) -> Image<Intensity, T> {
@@ -89,18 +89,18 @@ extension Image {
         func getChannel(channel: Int) ->Image<Intensity, T> {
             assert(0 <= channel && channel < P.channels)
             var newImage = Image<Intensity, T>(width: width, height: height)
-            strideCopy(src: self.data, srcOffset: channel, srcStride: P.channels,
-                       dst: &newImage.data, dstOffset: 0, dstStride: 1,
-                       count: newImage.data.count)
+            strideCopy(src: _data, srcOffset: channel, srcStride: P.channels,
+                       dst: &newImage._data, dstOffset: 0, dstStride: 1,
+                       count: newImage._data.count)
             return newImage
         }
         
         mutating func setChannel(channel: Int, newValue: Image<Intensity, T>) {
             assert(0 <= channel && channel < P.channels)
             precondition(size == newValue.size)
-            strideCopy(src: newValue.data, srcOffset: channel, srcStride: 1,
-                       dst: &self.data, dstOffset: channel, dstStride: P.channels,
-                       count: newValue.data.count)
+            strideCopy(src: newValue._data, srcOffset: channel, srcStride: 1,
+                       dst: &_data, dstOffset: channel, dstStride: P.channels,
+                       count: newValue._data.count)
         }
         
         public subscript(channel channel: Int) -> Image<Intensity, T> {

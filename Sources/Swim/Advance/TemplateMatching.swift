@@ -15,7 +15,7 @@ struct Template<T: DataType> {
         
         let mask = Image<Intensity, Bool>(width: image.width,
                                           height: image.height,
-                                          data: [Bool](repeating: true, count: image.data.count))
+                                          data: [Bool](repeating: true, count: image._data.count))
         self.init(image: image, mask: mask)
     }
 }

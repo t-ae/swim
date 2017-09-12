@@ -4,7 +4,7 @@ extension Image where P == Intensity, T: CompoundArithmetics&ExpressibleByIntege
     public func toIntegralImage() -> Image<Intensity, T> {
         var newImage = self
         
-        newImage.data.withUnsafeMutableBufferPointer {
+        newImage._data.withUnsafeMutableBufferPointer {
             var p = $0.baseAddress! + 1
             
             // First row

@@ -5,10 +5,10 @@ extension Image where P == RGB, T: BinaryFloatingPoint {
     mutating func _alphaBlend<P2: RGBWithAlpha>(image: Image<P2, T>) {
         precondition(size == image.size)
         
-        image.data.withUnsafeBufferPointer {
+        image._data.withUnsafeBufferPointer {
             var srcColor = $0.baseAddress! + P2.redIndex
             var srcAlpha = $0.baseAddress! + P2.alphaIndex
-            data.withUnsafeMutableBufferPointer {
+            _data.withUnsafeMutableBufferPointer {
                 var dst = $0.baseAddress!
                 
                 for _ in 0..<pixelCount {
@@ -34,10 +34,10 @@ extension Image where P: RGBWithAlpha, T: BinaryFloatingPoint {
     mutating func _alphaBlend(image: Image<P, T>) {
         precondition(size == image.size)
         
-        image.data.withUnsafeBufferPointer {
+        image._data.withUnsafeBufferPointer {
             var srcColor = $0.baseAddress! + P.redIndex
             var srcAlpha = $0.baseAddress! + P.alphaIndex
-            data.withUnsafeMutableBufferPointer {
+            _data.withUnsafeMutableBufferPointer {
                 var dstColor = $0.baseAddress! + P.redIndex
                 var dstAlpha = $0.baseAddress! + P.alphaIndex
                 

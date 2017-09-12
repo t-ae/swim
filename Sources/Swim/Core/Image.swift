@@ -4,14 +4,24 @@ import Foundation
 public struct Image<P: PixelType, T: DataType> {
     public let width: Int
     public let height: Int
-    public var data: [T]
+    var _data: [T]
+    
+    public var data: [T] {
+        get {
+            return _data
+        }
+        set {
+            precondition(data.count == width * height * P.channels)
+            _data = newValue
+        }
+    }
     
     public init(width: Int, height: Int, data: [T]) {
         precondition(width >= 0 && height >= 0)
         precondition(data.count == width * height * P.channels)
         self.width = width
         self.height = height
-        self.data = data
+        self._data = data
     }
     
     public init(width: Int, height: Int, value: T) {
@@ -39,7 +49,7 @@ extension Image: Equatable {
         guard lhs.size == rhs.size else {
             return false
         }
-        return memcmp(lhs.data, rhs.data, lhs.width*lhs.height*P.channels*MemoryLayout<T>.size) == 0
+        return memcmp(lhs._data, rhs._data, lhs.width*lhs.height*P.channels*MemoryLayout<T>.size) == 0
     }
 }
 

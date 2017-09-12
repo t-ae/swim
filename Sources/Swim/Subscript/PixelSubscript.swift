@@ -5,7 +5,7 @@ extension Image {
         precondition(0 <= y && y < height)
         precondition(0 <= c && c < P.channels)
         
-        return data[index(x: x, y: y, c: c)]
+        return _data[index(x: x, y: y, c: c)]
     }
     
     mutating func setPixel(x: Int, y: Int, c: Int = 0, newValue: T) {
@@ -13,7 +13,7 @@ extension Image {
         precondition(0 <= y && y < height)
         precondition(0 <= c && c < P.channels)
         
-        data[index(x: x, y: y, c: c)] = newValue
+        _data[index(x: x, y: y, c: c)] = newValue
     }
     
     func getPixel(x: Int, y: Int) -> Pixel<P, T> {
@@ -21,7 +21,7 @@ extension Image {
         precondition(0 <= y && y < height)
         
         let start = index(x: x, y: y)
-        return Pixel(data: [T](data[start..<start+P.channels]))
+        return Pixel(data: [T](_data[start..<start+P.channels]))
     }
     
     mutating func setPixel(x: Int, y: Int, newValue: Pixel<P, T>) {
@@ -29,7 +29,7 @@ extension Image {
         precondition(0 <= y && y < height)
         
         let start = index(x: x, y: y)
-        self.data.replaceSubrange(start..<start+P.channels, with: newValue.data)
+        _data.replaceSubrange(start..<start+P.channels, with: newValue._data)
     }
 }
 

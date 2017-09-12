@@ -4,11 +4,11 @@ import Foundation
 // MARK: - Same Pixel/Data type conversion
 extension Image {
     mutating func _convert(_ f: (Int, Int, Pixel<P, T>)->Pixel<P, T>) {
-        data.withUnsafeMutableBufferPointer {
+        _data.withUnsafeMutableBufferPointer {
             var dst = $0.baseAddress!
             withCoord { x, y, px in
                 let newPx = f(x, y, px)
-                newPx.data.withUnsafeBufferPointer {
+                newPx._data.withUnsafeBufferPointer {
                     let src = $0.baseAddress!
                     memcpy(dst, src, P.channels*MemoryLayout<T>.size)
                 }
@@ -18,7 +18,7 @@ extension Image {
     }
     
     mutating func _unsafeConvert(_ f: (Int, Int, UnsafeMutableBufferPointer<T>)->Void) {
-        data.withUnsafeMutableBufferPointer {
+        _data.withUnsafeMutableBufferPointer {
             var p = $0.baseAddress!
             for y in 0..<height {
                 for x in 0..<width {
@@ -41,10 +41,10 @@ extension Image {
 
 extension Image where P == Intensity {
     mutating func _convert(_ f: (Int, Int, T)->T) {
-        data.withUnsafeMutableBufferPointer {
+        _data.withUnsafeMutableBufferPointer {
             var dst = $0.baseAddress!
             withCoord { x, y, px in
-                dst.pointee = f(x, y, px.value)
+                dst.pointee = f(x, y, px[.intensity])
                 dst += P.channels
             }
         }
@@ -59,7 +59,7 @@ extension Image where P == Intensity {
 extension Image {
     func _converted<T2: DataType>(_ f: (Int, Int, Pixel<P, T>)->T2) -> Image<Intensity, T2> {
         var newImage = Image<Intensity, T2>(width: width, height: height)
-        newImage.data.withUnsafeMutableBufferPointer {
+        newImage._data.withUnsafeMutableBufferPointer {
             var dst = $0.baseAddress!
             withCoord { x, y, px in
                 dst.pointee = f(x, y, px)
@@ -75,11 +75,11 @@ extension Image {
     
     func _converted<P2, T2>(_ f: (Int, Int, Pixel<P, T>)->Pixel<P2, T2>) -> Image<P2, T2> {
         var newImage = Image<P2, T2>(width: width, height: height)
-        newImage.data.withUnsafeMutableBufferPointer {
+        newImage._data.withUnsafeMutableBufferPointer {
             var dst = $0.baseAddress!
             withCoord { x, y, px in
                 let out = f(x, y, px)
-                out.data.withUnsafeBufferPointer {
+                out._data.withUnsafeBufferPointer {
                     let src = $0.baseAddress!
                     memcpy(dst, src, P2.channels*MemoryLayout<T2>.size)
                 }
@@ -97,10 +97,10 @@ extension Image {
 extension Image where P == Intensity {
     func _converted<T2: DataType>(_ f: (Int, Int, T)->T2) -> Image<Intensity, T2> {
         var newImage = Image<Intensity, T2>(width: width, height: height)
-        newImage.data.withUnsafeMutableBufferPointer {
+        newImage._data.withUnsafeMutableBufferPointer {
             var dst = $0.baseAddress!
             withCoord { x, y, px in
-                dst.pointee = f(x, y, px.value)
+                dst.pointee = f(x, y, px[.intensity])
                 dst += 1
             }
         }
@@ -113,11 +113,11 @@ extension Image where P == Intensity {
     
     func _converted<P2, T2>(_ f: (Int, Int, T)->Pixel<P2, T2>) -> Image<P2, T2> {
         var newImage = Image<P2, T2>(width: width, height: height)
-        newImage.data.withUnsafeMutableBufferPointer {
+        newImage._data.withUnsafeMutableBufferPointer {
             var dst = $0.baseAddress!
             withCoord { x, y, px in
-                let out = f(x, y, px.value)
-                out.data.withUnsafeBufferPointer {
+                let out = f(x, y, px[.intensity])
+                out._data.withUnsafeBufferPointer {
                     let src = $0.baseAddress!
                     memcpy(dst, src, P2.channels*MemoryLayout<T2>.size)
                 }

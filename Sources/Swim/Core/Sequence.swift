@@ -35,9 +35,9 @@ public struct PixelIterator<P: PixelType, T: DataType>: IteratorProtocol {
             return nil
         }
         
-        image.data.withUnsafeBufferPointer {
+        image._data.withUnsafeBufferPointer {
             let src = $0.baseAddress! + p
-            pixel.data.withUnsafeMutableBufferPointer {
+            pixel._data.withUnsafeMutableBufferPointer {
                 let dst = $0.baseAddress!
                 memcpy(dst, src, P.channels*MemoryLayout<T>.size)
             }
@@ -52,11 +52,11 @@ public struct PixelIterator<P: PixelType, T: DataType>: IteratorProtocol {
 extension Image {
     func withCoord(_ f: (Int, Int, Pixel<P, T>)->Void) {
         var pixel = Pixel<P, T>(data: [T](repeating: T.swimDefaultValue, count: P.channels))
-        data.withUnsafeBufferPointer {
+        _data.withUnsafeBufferPointer {
             var src = $0.baseAddress!
             for y in 0..<height {
                 for x in 0..<width {
-                    memcpy(&pixel.data, src, P.channels * MemoryLayout<T>.size)
+                    memcpy(&pixel._data, src, P.channels * MemoryLayout<T>.size)
                     f(x, y, pixel)
                     src += P.channels
                 }
