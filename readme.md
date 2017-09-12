@@ -7,7 +7,7 @@ Image<P: PixelType, T: DataType>
 ```
 
 Supported types  
-PixelType: `Intensity`, `RGB`, `RGBA`, `ARGB`  
+PixelType: `Intensity`, `IntensityAlpha`, `RGB`, `RGBA`, `ARGB`  
 DataType: `Bool`, `UInt8`, `Int`, `Float`, `Double`  
 
 ## Save/Load image
