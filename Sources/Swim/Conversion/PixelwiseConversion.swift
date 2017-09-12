@@ -44,7 +44,7 @@ extension Image where P == Intensity {
         _data.withUnsafeMutableBufferPointer {
             var dst = $0.baseAddress!
             withCoord { x, y, px in
-                dst.pointee = f(x, y, px[.intensity])
+                dst.pointee = f(x, y, px._data[0])
                 dst += P.channels
             }
         }
@@ -100,7 +100,7 @@ extension Image where P == Intensity {
         newImage._data.withUnsafeMutableBufferPointer {
             var dst = $0.baseAddress!
             withCoord { x, y, px in
-                dst.pointee = f(x, y, px[.intensity])
+                dst.pointee = f(x, y, px._data[0])
                 dst += 1
             }
         }
@@ -116,7 +116,7 @@ extension Image where P == Intensity {
         newImage._data.withUnsafeMutableBufferPointer {
             var dst = $0.baseAddress!
             withCoord { x, y, px in
-                let out = f(x, y, px[.intensity])
+                let out = f(x, y, px._data[0])
                 out._data.withUnsafeBufferPointer {
                     let src = $0.baseAddress!
                     memcpy(dst, src, P2.channels*MemoryLayout<T2>.size)
