@@ -7,7 +7,7 @@ class ChannelwiseConversionTests: XCTestCase {
         var image = Image<RGBA, Double>(width: 4, height: 5, data: (0..<4*5*4).map(Double.init))
         image.channelwiseConvert { $0 * 2 }
         
-        let expect = (0..<4*5*4).map { Double($0) * 2 }
+        let expect = (0..<4*5*4).map { Double(2*$0) }
         XCTAssertEqual(image.data, expect)
     }
 }
