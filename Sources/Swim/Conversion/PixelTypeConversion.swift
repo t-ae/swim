@@ -4,7 +4,7 @@ import Foundation
 // MARK: - RGB -> Intensity
 extension Image where P == RGB, T: BinaryFloatingPoint {
     func _toBrightness() -> Image<Intensity, T> {
-        return _converted { x, y, px in (px[.red] + px[.green] + px[.blue]) / 3 }
+        return _converted { x, y, px -> T in (px[.red] + px[.green] + px[.blue]) / 3 }
     }
     
     public func toBrightness() -> Image<Intensity, T> {
@@ -26,7 +26,7 @@ extension Image where P == RGB, T: BinaryFloatingPoint {
 }
 
 // MARK: - RGB -> RGBWithAlpha
-func imageFromRGB<P: RGBWithAlpha, T: DataType>(image: Image<RGB, T>, alpha: T) -> Image<P, T> {
+func imageFromRGB<P: RGBWithAlpha, T>(image: Image<RGB, T>, alpha: T) -> Image<P, T> {
     var newImage = Image<P, T>(width: image.width, height: image.height, value: alpha)
     image._data.withUnsafeBufferPointer {
         var src = $0.baseAddress!
@@ -50,7 +50,7 @@ extension Image where P: RGBWithAlpha {
 }
 
 // MARK: - RGBWithAlpha -> RGB
-func imageFromRGBWithAlpha<P: RGBWithAlpha, T: DataType>(image: Image<P, T>) -> Image<RGB, T> {
+func imageFromRGBWithAlpha<P: RGBWithAlpha, T>(image: Image<P, T>) -> Image<RGB, T> {
     var newImage = Image<RGB, T>(width: image.width, height: image.height)
     image._data.withUnsafeBufferPointer {
         var src = $0.baseAddress! + P.redIndex

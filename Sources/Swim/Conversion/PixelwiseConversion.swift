@@ -57,7 +57,7 @@ extension Image where P == Intensity {
 
 // MARK: - General conversion
 extension Image {
-    func _converted<T2: DataType>(_ f: (Int, Int, Pixel<P, T>)->T2) -> Image<Intensity, T2> {
+    func _converted<T2>(_ f: (Int, Int, Pixel<P, T>)->T2) -> Image<Intensity, T2> {
         var newImage = Image<Intensity, T2>(width: width, height: height)
         newImage._data.withUnsafeMutableBufferPointer {
             var dst = $0.baseAddress!
@@ -69,7 +69,7 @@ extension Image {
         return newImage
     }
     
-    public func converted<T2: DataType>(_ f: (Int, Int, Pixel<P, T>)->T2) -> Image<Intensity, T2> {
+    public func converted<T2>(_ f: (Int, Int, Pixel<P, T>)->T2) -> Image<Intensity, T2> {
         return _converted(f)
     }
     
@@ -95,7 +95,7 @@ extension Image {
 }
 
 extension Image where P == Intensity {
-    func _converted<T2: DataType>(_ f: (Int, Int, T)->T2) -> Image<Intensity, T2> {
+    func _converted<T2>(_ f: (Int, Int, T)->T2) -> Image<Intensity, T2> {
         var newImage = Image<Intensity, T2>(width: width, height: height)
         newImage._data.withUnsafeMutableBufferPointer {
             var dst = $0.baseAddress!
@@ -107,7 +107,7 @@ extension Image where P == Intensity {
         return newImage
     }
     
-    public func converted<T2: DataType>(_ f: (Int, Int, T)->T2) -> Image<Intensity, T2> {
+    public func converted<T2>(_ f: (Int, Int, T)->T2) -> Image<Intensity, T2> {
         return _converted(f)
     }
     

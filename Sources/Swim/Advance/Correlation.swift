@@ -1,7 +1,7 @@
 
 import Foundation
 
-public func calculateSSD<T: DataType&BinaryFloatingPoint>(_ a: Image<Intensity, T>,
+public func calculateSSD<T: BinaryFloatingPoint>(_ a: Image<Intensity, T>,
                          _ b: Image<Intensity, T>) -> T {
     precondition(a.size == b.size)
     
@@ -21,7 +21,7 @@ public func calculateSSD<T: DataType&BinaryFloatingPoint>(_ a: Image<Intensity, 
     return sum
 }
 
-public func calculateSAD<T: DataType&BinaryFloatingPoint>(_ a: Image<Intensity, T>,
+public func calculateSAD<T: BinaryFloatingPoint>(_ a: Image<Intensity, T>,
                          _ b: Image<Intensity, T>) -> T {
     precondition(a.size == b.size)
     
@@ -41,7 +41,7 @@ public func calculateSAD<T: DataType&BinaryFloatingPoint>(_ a: Image<Intensity, 
     return sum
 }
 
-public func calculateNCC<T: DataType&BinaryFloatingPoint>(_ a: Image<Intensity, T>,
+public func calculateNCC<T: BinaryFloatingPoint>(_ a: Image<Intensity, T>,
                          _ b: Image<Intensity, T>) -> T {
     precondition(a.size == b.size)
     
@@ -66,7 +66,7 @@ public func calculateNCC<T: DataType&BinaryFloatingPoint>(_ a: Image<Intensity, 
     return sumCross / sqrt(sum2a * sum2b)
 }
 
-public func calculateZNCC<T: DataType&BinaryFloatingPoint>(_ a: Image<Intensity, T>,
+public func calculateZNCC<T: BinaryFloatingPoint>(_ a: Image<Intensity, T>,
                           _ b: Image<Intensity, T>) -> T {
     precondition(a.size == b.size)
     

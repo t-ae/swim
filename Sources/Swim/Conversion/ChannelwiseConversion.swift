@@ -14,7 +14,7 @@ extension Image {
         _channelwiseConvert(f)
     }
     
-    func _channelwiseConverted<T2: DataType>(_ f: (T) -> T2) -> Image<P, T2> {
+    func _channelwiseConverted<T2>(_ f: (T) -> T2) -> Image<P, T2> {
         var newImage = Image<P, T2>(width: width, height: height)
         _data.withUnsafeBufferPointer {
             var src = $0.baseAddress!
@@ -31,7 +31,7 @@ extension Image {
         return newImage
     }
     
-    public func channelwiseConverted<T2: DataType>(_ f: (T) -> T2) -> Image<P, T2> {
+    public func channelwiseConverted<T2>(_ f: (T) -> T2) -> Image<P, T2> {
         return _channelwiseConverted(f)
     }
 }
