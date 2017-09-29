@@ -71,3 +71,40 @@ extension Image where P == RGB {
         self = imageFromRGBWithAlpha(image: image)
     }
 }
+
+// MARK: - RGBA <-> ARGB
+
+func permuteChannels<T>(data: [T], permutation: [Int]) -> [T] {
+    assert(Set(permutation) == Set(0..<permutation.count))
+    var ret = data
+    let numChannels = permutation.count
+    
+    data.withUnsafeBufferPointer {
+        var src = $0.baseAddress!
+        ret.withUnsafeMutableBufferPointer {
+            var dst = $0.baseAddress!
+            
+            for c in 0..<numChannels {
+                dst[c] = src[permutation[c]]
+            }
+            src += numChannels
+            dst += numChannels
+        }
+    }
+    
+    return ret
+}
+extension Image where P == RGBA {
+    public init(image: Image<ARGB, T>) {
+        let data = permuteChannels(data: image.data, permutation: [1, 2, 3, 0])
+        self.init(width: image.width, height: image.height, data: data)
+    }
+}
+
+extension Image where P == ARGB {
+    public init(image: Image<RGBA, T>) {
+        let data = permuteChannels(data: image.data, permutation: [3, 0, 1, 2])
+        self.init(width: image.width, height: image.height, data: data)
+    }
+}
+
