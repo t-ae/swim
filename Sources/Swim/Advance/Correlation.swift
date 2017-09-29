@@ -1,8 +1,8 @@
 
 import Foundation
 
-public func calculateSSD<T: BinaryFloatingPoint>(_ a: Image<Intensity, T>,
-                         _ b: Image<Intensity, T>) -> T {
+func _calculateSSD<T: BinaryFloatingPoint>(_ a: Image<Intensity, T>,
+                                           _ b: Image<Intensity, T>) -> T {
     precondition(a.size == b.size)
     
     var sum: T = 0
@@ -21,8 +21,13 @@ public func calculateSSD<T: BinaryFloatingPoint>(_ a: Image<Intensity, T>,
     return sum
 }
 
-public func calculateSAD<T: BinaryFloatingPoint>(_ a: Image<Intensity, T>,
-                         _ b: Image<Intensity, T>) -> T {
+public func calculateSSD<T: BinaryFloatingPoint>(_ a: Image<Intensity, T>,
+                                                 _ b: Image<Intensity, T>) -> T {
+    return _calculateSSD(a, b)
+}
+
+func _calculateSAD<T: BinaryFloatingPoint>(_ a: Image<Intensity, T>,
+                                           _ b: Image<Intensity, T>) -> T {
     precondition(a.size == b.size)
     
     var sum: T = 0
@@ -41,8 +46,13 @@ public func calculateSAD<T: BinaryFloatingPoint>(_ a: Image<Intensity, T>,
     return sum
 }
 
-public func calculateNCC<T: BinaryFloatingPoint>(_ a: Image<Intensity, T>,
-                         _ b: Image<Intensity, T>) -> T {
+public func calculateSAD<T: BinaryFloatingPoint>(_ a: Image<Intensity, T>,
+                                                 _ b: Image<Intensity, T>) -> T {
+    return _calculateSAD(a, b)
+}
+
+func _calculateNCC<T: BinaryFloatingPoint>(_ a: Image<Intensity, T>,
+                                           _ b: Image<Intensity, T>) -> T {
     precondition(a.size == b.size)
     
     var sum2a: T = 0
@@ -66,8 +76,13 @@ public func calculateNCC<T: BinaryFloatingPoint>(_ a: Image<Intensity, T>,
     return sumCross / sqrt(sum2a * sum2b)
 }
 
-public func calculateZNCC<T: BinaryFloatingPoint>(_ a: Image<Intensity, T>,
-                          _ b: Image<Intensity, T>) -> T {
+public func calculateNCC<T: BinaryFloatingPoint>(_ a: Image<Intensity, T>,
+                                                 _ b: Image<Intensity, T>) -> T {
+    return _calculateNCC(a, b)
+}
+
+func _calculateZNCC<T: BinaryFloatingPoint>(_ a: Image<Intensity, T>,
+                                            _ b: Image<Intensity, T>) -> T {
     precondition(a.size == b.size)
     
     var suma: T = 0
@@ -98,4 +113,9 @@ public func calculateZNCC<T: BinaryFloatingPoint>(_ a: Image<Intensity, T>,
     let da = (c*sum2a - suma*suma)
     let db = (c*sum2b - sumb*sumb)
     return up / sqrt(da*db)
+}
+
+public func calculateZNCC<T: BinaryFloatingPoint>(_ a: Image<Intensity, T>,
+                                                  _ b: Image<Intensity, T>) -> T {
+    return _calculateZNCC(a, b)
 }

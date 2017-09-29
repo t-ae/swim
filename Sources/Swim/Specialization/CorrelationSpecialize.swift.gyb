@@ -1,0 +1,26 @@
+%{
+from type import *
+}%
+
+% for dt in fp_data_types:
+public func calculateSSD(_ a: Image<Intensity, ${dt}>,
+                         _ b: Image<Intensity, ${dt}>) -> ${dt} {
+    return _calculateSSD(a, b)
+}
+
+public func calculateSAD(_ a: Image<Intensity, ${dt}>,
+                         _ b: Image<Intensity, ${dt}>) -> ${dt} {
+    return _calculateSAD(a, b)
+}
+
+public func calculateNCC(_ a: Image<Intensity, ${dt}>,
+                         _ b: Image<Intensity, ${dt}>) -> ${dt} {
+    return _calculateNCC(a, b)
+}
+
+public func calculateZNCC(_ a: Image<Intensity, ${dt}>,
+                          _ b: Image<Intensity, ${dt}>) -> ${dt} {
+    return _calculateZNCC(a, b)
+}
+
+% end
