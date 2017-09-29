@@ -1,6 +1,6 @@
 
 extension Image where P == Intensity, T: Numeric {
-    public func toIntegralImage() -> Image<Intensity, T> {
+    func _toIntegralImage() -> Image<Intensity, T> {
         var newImage = self
         
         newImage._data.withUnsafeMutableBufferPointer {
@@ -27,5 +27,9 @@ extension Image where P == Intensity, T: Numeric {
         }
         
         return newImage
+    }
+    
+    public func toIntegralImage() -> Image<Intensity, T> {
+        return _toIntegralImage()
     }
 }
