@@ -54,5 +54,16 @@ class PerformanceTests: XCTestCase {
             }
         }
     }
+    
+    func testIntegralImage() {
+        let data = [Float](repeating: 0, count: 1920*1080)
+        let image = Image<Intensity, Float>(width: 1920, height: 1080, data: data)
+        
+        measure {
+            for _ in 0..<1 {
+                _ = image.toIntegralImage()
+            }
+        }
+    }
     #endif
 }
