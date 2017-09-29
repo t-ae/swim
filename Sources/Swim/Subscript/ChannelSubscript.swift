@@ -40,8 +40,6 @@ extension Image {
     }
 }
 
-// FIXME: Wait for Swift4
-/*
 #if os(macOS) || os(iOS)
     import Accelerate
  
@@ -125,4 +123,3 @@ extension Image {
         }
     }
 #endif
-*/

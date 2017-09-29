@@ -1,6 +1,5 @@
 
-// TODO: Improve with Numeric protocol in Swift4
-extension Image where P == Intensity, T: CompoundArithmetics&ExpressibleByIntegerLiteral {
+extension Image where P == Intensity, T: Numeric {
     public func toIntegralImage() -> Image<Intensity, T> {
         var newImage = self
         
@@ -17,17 +16,10 @@ extension Image where P == Intensity, T: CompoundArithmetics&ExpressibleByIntege
             var p2 = $0.baseAddress!
             for _ in 1..<height {
                 var rowsum: T = 0
-                // left end
-                rowsum += p.pointee
-                p.pointee = p2.pointee
-                p.pointee += rowsum
-                p += 1
-                p2 += 1
                 
-                for _ in 1..<width {
+                for _ in 0..<width {
                     rowsum += p.pointee
-                    p.pointee = p2.pointee
-                    p.pointee += rowsum
+                    p.pointee = p2.pointee + rowsum
                     p += 1
                     p2 += 1
                 }

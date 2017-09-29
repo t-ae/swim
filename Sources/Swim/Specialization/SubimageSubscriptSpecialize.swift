@@ -1,6 +1,4 @@
 
-// FIXME: Wait for Swift4
-/*
 extension Image where P == Intensity, T == Bool {
     public subscript(xRange: CountableRange<Int>, yRange: CountableRange<Int>) -> Image<P, T> {
         get {
@@ -1176,4 +1174,3 @@ extension Image where P == ARGB, T == Double {
     }
 }
 
-*/

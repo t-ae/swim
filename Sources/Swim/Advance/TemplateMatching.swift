@@ -1,7 +1,7 @@
 
 import Foundation
 
-// TODO: Wait for Numeric protocol in Swift4
+// TODO: 
 struct Template<T: DataType> {
     let image: Image<Intensity, T>
     let mask: Image<Intensity, Bool>

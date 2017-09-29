@@ -1,6 +1,4 @@
 
-// FIXME: Wait for Swift4
-/*
 extension Image where P == Intensity, T == Bool {
     public subscript(x: Int, y: Int) -> T {
         get {
@@ -556,4 +554,3 @@ extension Image where P == ARGB, T == Double {
     }
 }
 
-*/
