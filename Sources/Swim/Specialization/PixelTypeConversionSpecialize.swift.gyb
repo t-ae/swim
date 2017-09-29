@@ -79,3 +79,20 @@ extension Image where P == RGB, T == ${dt} {
 }
 
 % end
+
+% for dt in bool_data_types + int_data_types + fp_data_types:
+extension Image where P == RGBA, T == ${dt} {
+    public init(image: Image<ARGB, T>) {
+        let data = permuteChannels(data: image.data, permutation: [1, 2, 3, 0])
+        self.init(width: image.width, height: image.height, data: data)
+    }
+}
+
+extension Image where P == ARGB, T == ${dt}  {
+    public init(image: Image<RGBA, T>) {
+        let data = permuteChannels(data: image.data, permutation: [3, 0, 1, 2])
+        self.init(width: image.width, height: image.height, data: data)
+    }
+}
+
+% end
