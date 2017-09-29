@@ -23,7 +23,7 @@ extension DataContainer where PT == ${pt}, DT == ${dt} {
     }
     
     public static func +=(lhs: inout Self, rhs: DT) {
-        add(lhs: &lhs, rhs: rhs)
+        addAssign(lhs: &lhs, rhs: rhs)
     }
     
     public static func -(lhs: Self, rhs: DT) -> Self {
@@ -33,7 +33,7 @@ extension DataContainer where PT == ${pt}, DT == ${dt} {
     }
     
     public static func -=(lhs: inout Self, rhs: DT) {
-        subtract(lhs: &lhs, rhs: rhs)
+        subtractAssign(lhs: &lhs, rhs: rhs)
     }
     
     public static func *(lhs: Self, rhs: DT) -> Self {
@@ -43,7 +43,7 @@ extension DataContainer where PT == ${pt}, DT == ${dt} {
     }
     
     public static func *=(lhs: inout Self, rhs: DT) {
-        multiply(lhs: &lhs, rhs: rhs)
+        multiplyAssign(lhs: &lhs, rhs: rhs)
     }
     
     public static func /(lhs: Self, rhs: DT) -> Self {
@@ -53,7 +53,7 @@ extension DataContainer where PT == ${pt}, DT == ${dt} {
     }
     
     public static func /=(lhs: inout Self, rhs: DT) {
-        divide(lhs: &lhs, rhs: rhs)
+        divideAssign(lhs: &lhs, rhs: rhs)
     }
 }
 

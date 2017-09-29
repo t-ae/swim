@@ -98,7 +98,7 @@ extension DataContainer where PT == Intensity, DT == UInt8 {
     }
     
     public static func +=(lhs: inout Self, rhs: DT) {
-        add(lhs: &lhs, rhs: rhs)
+        addAssign(lhs: &lhs, rhs: rhs)
     }
     
     public static func -(lhs: Self, rhs: DT) -> Self {
@@ -108,7 +108,7 @@ extension DataContainer where PT == Intensity, DT == UInt8 {
     }
     
     public static func -=(lhs: inout Self, rhs: DT) {
-        subtract(lhs: &lhs, rhs: rhs)
+        subtractAssign(lhs: &lhs, rhs: rhs)
     }
     
     public static func *(lhs: Self, rhs: DT) -> Self {
@@ -118,7 +118,7 @@ extension DataContainer where PT == Intensity, DT == UInt8 {
     }
     
     public static func *=(lhs: inout Self, rhs: DT) {
-        multiply(lhs: &lhs, rhs: rhs)
+        multiplyAssign(lhs: &lhs, rhs: rhs)
     }
     
     public static func /(lhs: Self, rhs: DT) -> Self {
@@ -128,7 +128,7 @@ extension DataContainer where PT == Intensity, DT == UInt8 {
     }
     
     public static func /=(lhs: inout Self, rhs: DT) {
-        divide(lhs: &lhs, rhs: rhs)
+        divideAssign(lhs: &lhs, rhs: rhs)
     }
 }
 
@@ -140,7 +140,7 @@ extension DataContainer where PT == Intensity, DT == Int {
     }
     
     public static func +=(lhs: inout Self, rhs: DT) {
-        add(lhs: &lhs, rhs: rhs)
+        addAssign(lhs: &lhs, rhs: rhs)
     }
     
     public static func -(lhs: Self, rhs: DT) -> Self {
@@ -150,7 +150,7 @@ extension DataContainer where PT == Intensity, DT == Int {
     }
     
     public static func -=(lhs: inout Self, rhs: DT) {
-        subtract(lhs: &lhs, rhs: rhs)
+        subtractAssign(lhs: &lhs, rhs: rhs)
     }
     
     public static func *(lhs: Self, rhs: DT) -> Self {
@@ -160,7 +160,7 @@ extension DataContainer where PT == Intensity, DT == Int {
     }
     
     public static func *=(lhs: inout Self, rhs: DT) {
-        multiply(lhs: &lhs, rhs: rhs)
+        multiplyAssign(lhs: &lhs, rhs: rhs)
     }
     
     public static func /(lhs: Self, rhs: DT) -> Self {
@@ -170,7 +170,7 @@ extension DataContainer where PT == Intensity, DT == Int {
     }
     
     public static func /=(lhs: inout Self, rhs: DT) {
-        divide(lhs: &lhs, rhs: rhs)
+        divideAssign(lhs: &lhs, rhs: rhs)
     }
 }
 
@@ -182,7 +182,7 @@ extension DataContainer where PT == Intensity, DT == Float {
     }
     
     public static func +=(lhs: inout Self, rhs: DT) {
-        add(lhs: &lhs, rhs: rhs)
+        addAssign(lhs: &lhs, rhs: rhs)
     }
     
     public static func -(lhs: Self, rhs: DT) -> Self {
@@ -192,7 +192,7 @@ extension DataContainer where PT == Intensity, DT == Float {
     }
     
     public static func -=(lhs: inout Self, rhs: DT) {
-        subtract(lhs: &lhs, rhs: rhs)
+        subtractAssign(lhs: &lhs, rhs: rhs)
     }
     
     public static func *(lhs: Self, rhs: DT) -> Self {
@@ -202,7 +202,7 @@ extension DataContainer where PT == Intensity, DT == Float {
     }
     
     public static func *=(lhs: inout Self, rhs: DT) {
-        multiply(lhs: &lhs, rhs: rhs)
+        multiplyAssign(lhs: &lhs, rhs: rhs)
     }
     
     public static func /(lhs: Self, rhs: DT) -> Self {
@@ -212,7 +212,7 @@ extension DataContainer where PT == Intensity, DT == Float {
     }
     
     public static func /=(lhs: inout Self, rhs: DT) {
-        divide(lhs: &lhs, rhs: rhs)
+        divideAssign(lhs: &lhs, rhs: rhs)
     }
 }
 
@@ -224,7 +224,7 @@ extension DataContainer where PT == Intensity, DT == Double {
     }
     
     public static func +=(lhs: inout Self, rhs: DT) {
-        add(lhs: &lhs, rhs: rhs)
+        addAssign(lhs: &lhs, rhs: rhs)
     }
     
     public static func -(lhs: Self, rhs: DT) -> Self {
@@ -234,7 +234,7 @@ extension DataContainer where PT == Intensity, DT == Double {
     }
     
     public static func -=(lhs: inout Self, rhs: DT) {
-        subtract(lhs: &lhs, rhs: rhs)
+        subtractAssign(lhs: &lhs, rhs: rhs)
     }
     
     public static func *(lhs: Self, rhs: DT) -> Self {
@@ -244,7 +244,7 @@ extension DataContainer where PT == Intensity, DT == Double {
     }
     
     public static func *=(lhs: inout Self, rhs: DT) {
-        multiply(lhs: &lhs, rhs: rhs)
+        multiplyAssign(lhs: &lhs, rhs: rhs)
     }
     
     public static func /(lhs: Self, rhs: DT) -> Self {
@@ -254,7 +254,7 @@ extension DataContainer where PT == Intensity, DT == Double {
     }
     
     public static func /=(lhs: inout Self, rhs: DT) {
-        divide(lhs: &lhs, rhs: rhs)
+        divideAssign(lhs: &lhs, rhs: rhs)
     }
 }
 
@@ -266,7 +266,7 @@ extension DataContainer where PT == IntensityAlpha, DT == UInt8 {
     }
     
     public static func +=(lhs: inout Self, rhs: DT) {
-        add(lhs: &lhs, rhs: rhs)
+        addAssign(lhs: &lhs, rhs: rhs)
     }
     
     public static func -(lhs: Self, rhs: DT) -> Self {
@@ -276,7 +276,7 @@ extension DataContainer where PT == IntensityAlpha, DT == UInt8 {
     }
     
     public static func -=(lhs: inout Self, rhs: DT) {
-        subtract(lhs: &lhs, rhs: rhs)
+        subtractAssign(lhs: &lhs, rhs: rhs)
     }
     
     public static func *(lhs: Self, rhs: DT) -> Self {
@@ -286,7 +286,7 @@ extension DataContainer where PT == IntensityAlpha, DT == UInt8 {
     }
     
     public static func *=(lhs: inout Self, rhs: DT) {
-        multiply(lhs: &lhs, rhs: rhs)
+        multiplyAssign(lhs: &lhs, rhs: rhs)
     }
     
     public static func /(lhs: Self, rhs: DT) -> Self {
@@ -296,7 +296,7 @@ extension DataContainer where PT == IntensityAlpha, DT == UInt8 {
     }
     
     public static func /=(lhs: inout Self, rhs: DT) {
-        divide(lhs: &lhs, rhs: rhs)
+        divideAssign(lhs: &lhs, rhs: rhs)
     }
 }
 
@@ -308,7 +308,7 @@ extension DataContainer where PT == IntensityAlpha, DT == Int {
     }
     
     public static func +=(lhs: inout Self, rhs: DT) {
-        add(lhs: &lhs, rhs: rhs)
+        addAssign(lhs: &lhs, rhs: rhs)
     }
     
     public static func -(lhs: Self, rhs: DT) -> Self {
@@ -318,7 +318,7 @@ extension DataContainer where PT == IntensityAlpha, DT == Int {
     }
     
     public static func -=(lhs: inout Self, rhs: DT) {
-        subtract(lhs: &lhs, rhs: rhs)
+        subtractAssign(lhs: &lhs, rhs: rhs)
     }
     
     public static func *(lhs: Self, rhs: DT) -> Self {
@@ -328,7 +328,7 @@ extension DataContainer where PT == IntensityAlpha, DT == Int {
     }
     
     public static func *=(lhs: inout Self, rhs: DT) {
-        multiply(lhs: &lhs, rhs: rhs)
+        multiplyAssign(lhs: &lhs, rhs: rhs)
     }
     
     public static func /(lhs: Self, rhs: DT) -> Self {
@@ -338,7 +338,7 @@ extension DataContainer where PT == IntensityAlpha, DT == Int {
     }
     
     public static func /=(lhs: inout Self, rhs: DT) {
-        divide(lhs: &lhs, rhs: rhs)
+        divideAssign(lhs: &lhs, rhs: rhs)
     }
 }
 
@@ -350,7 +350,7 @@ extension DataContainer where PT == IntensityAlpha, DT == Float {
     }
     
     public static func +=(lhs: inout Self, rhs: DT) {
-        add(lhs: &lhs, rhs: rhs)
+        addAssign(lhs: &lhs, rhs: rhs)
     }
     
     public static func -(lhs: Self, rhs: DT) -> Self {
@@ -360,7 +360,7 @@ extension DataContainer where PT == IntensityAlpha, DT == Float {
     }
     
     public static func -=(lhs: inout Self, rhs: DT) {
-        subtract(lhs: &lhs, rhs: rhs)
+        subtractAssign(lhs: &lhs, rhs: rhs)
     }
     
     public static func *(lhs: Self, rhs: DT) -> Self {
@@ -370,7 +370,7 @@ extension DataContainer where PT == IntensityAlpha, DT == Float {
     }
     
     public static func *=(lhs: inout Self, rhs: DT) {
-        multiply(lhs: &lhs, rhs: rhs)
+        multiplyAssign(lhs: &lhs, rhs: rhs)
     }
     
     public static func /(lhs: Self, rhs: DT) -> Self {
@@ -380,7 +380,7 @@ extension DataContainer where PT == IntensityAlpha, DT == Float {
     }
     
     public static func /=(lhs: inout Self, rhs: DT) {
-        divide(lhs: &lhs, rhs: rhs)
+        divideAssign(lhs: &lhs, rhs: rhs)
     }
 }
 
@@ -392,7 +392,7 @@ extension DataContainer where PT == IntensityAlpha, DT == Double {
     }
     
     public static func +=(lhs: inout Self, rhs: DT) {
-        add(lhs: &lhs, rhs: rhs)
+        addAssign(lhs: &lhs, rhs: rhs)
     }
     
     public static func -(lhs: Self, rhs: DT) -> Self {
@@ -402,7 +402,7 @@ extension DataContainer where PT == IntensityAlpha, DT == Double {
     }
     
     public static func -=(lhs: inout Self, rhs: DT) {
-        subtract(lhs: &lhs, rhs: rhs)
+        subtractAssign(lhs: &lhs, rhs: rhs)
     }
     
     public static func *(lhs: Self, rhs: DT) -> Self {
@@ -412,7 +412,7 @@ extension DataContainer where PT == IntensityAlpha, DT == Double {
     }
     
     public static func *=(lhs: inout Self, rhs: DT) {
-        multiply(lhs: &lhs, rhs: rhs)
+        multiplyAssign(lhs: &lhs, rhs: rhs)
     }
     
     public static func /(lhs: Self, rhs: DT) -> Self {
@@ -422,7 +422,7 @@ extension DataContainer where PT == IntensityAlpha, DT == Double {
     }
     
     public static func /=(lhs: inout Self, rhs: DT) {
-        divide(lhs: &lhs, rhs: rhs)
+        divideAssign(lhs: &lhs, rhs: rhs)
     }
 }
 
@@ -434,7 +434,7 @@ extension DataContainer where PT == RGB, DT == UInt8 {
     }
     
     public static func +=(lhs: inout Self, rhs: DT) {
-        add(lhs: &lhs, rhs: rhs)
+        addAssign(lhs: &lhs, rhs: rhs)
     }
     
     public static func -(lhs: Self, rhs: DT) -> Self {
@@ -444,7 +444,7 @@ extension DataContainer where PT == RGB, DT == UInt8 {
     }
     
     public static func -=(lhs: inout Self, rhs: DT) {
-        subtract(lhs: &lhs, rhs: rhs)
+        subtractAssign(lhs: &lhs, rhs: rhs)
     }
     
     public static func *(lhs: Self, rhs: DT) -> Self {
@@ -454,7 +454,7 @@ extension DataContainer where PT == RGB, DT == UInt8 {
     }
     
     public static func *=(lhs: inout Self, rhs: DT) {
-        multiply(lhs: &lhs, rhs: rhs)
+        multiplyAssign(lhs: &lhs, rhs: rhs)
     }
     
     public static func /(lhs: Self, rhs: DT) -> Self {
@@ -464,7 +464,7 @@ extension DataContainer where PT == RGB, DT == UInt8 {
     }
     
     public static func /=(lhs: inout Self, rhs: DT) {
-        divide(lhs: &lhs, rhs: rhs)
+        divideAssign(lhs: &lhs, rhs: rhs)
     }
 }
 
@@ -476,7 +476,7 @@ extension DataContainer where PT == RGB, DT == Int {
     }
     
     public static func +=(lhs: inout Self, rhs: DT) {
-        add(lhs: &lhs, rhs: rhs)
+        addAssign(lhs: &lhs, rhs: rhs)
     }
     
     public static func -(lhs: Self, rhs: DT) -> Self {
@@ -486,7 +486,7 @@ extension DataContainer where PT == RGB, DT == Int {
     }
     
     public static func -=(lhs: inout Self, rhs: DT) {
-        subtract(lhs: &lhs, rhs: rhs)
+        subtractAssign(lhs: &lhs, rhs: rhs)
     }
     
     public static func *(lhs: Self, rhs: DT) -> Self {
@@ -496,7 +496,7 @@ extension DataContainer where PT == RGB, DT == Int {
     }
     
     public static func *=(lhs: inout Self, rhs: DT) {
-        multiply(lhs: &lhs, rhs: rhs)
+        multiplyAssign(lhs: &lhs, rhs: rhs)
     }
     
     public static func /(lhs: Self, rhs: DT) -> Self {
@@ -506,7 +506,7 @@ extension DataContainer where PT == RGB, DT == Int {
     }
     
     public static func /=(lhs: inout Self, rhs: DT) {
-        divide(lhs: &lhs, rhs: rhs)
+        divideAssign(lhs: &lhs, rhs: rhs)
     }
 }
 
@@ -518,7 +518,7 @@ extension DataContainer where PT == RGB, DT == Float {
     }
     
     public static func +=(lhs: inout Self, rhs: DT) {
-        add(lhs: &lhs, rhs: rhs)
+        addAssign(lhs: &lhs, rhs: rhs)
     }
     
     public static func -(lhs: Self, rhs: DT) -> Self {
@@ -528,7 +528,7 @@ extension DataContainer where PT == RGB, DT == Float {
     }
     
     public static func -=(lhs: inout Self, rhs: DT) {
-        subtract(lhs: &lhs, rhs: rhs)
+        subtractAssign(lhs: &lhs, rhs: rhs)
     }
     
     public static func *(lhs: Self, rhs: DT) -> Self {
@@ -538,7 +538,7 @@ extension DataContainer where PT == RGB, DT == Float {
     }
     
     public static func *=(lhs: inout Self, rhs: DT) {
-        multiply(lhs: &lhs, rhs: rhs)
+        multiplyAssign(lhs: &lhs, rhs: rhs)
     }
     
     public static func /(lhs: Self, rhs: DT) -> Self {
@@ -548,7 +548,7 @@ extension DataContainer where PT == RGB, DT == Float {
     }
     
     public static func /=(lhs: inout Self, rhs: DT) {
-        divide(lhs: &lhs, rhs: rhs)
+        divideAssign(lhs: &lhs, rhs: rhs)
     }
 }
 
@@ -560,7 +560,7 @@ extension DataContainer where PT == RGB, DT == Double {
     }
     
     public static func +=(lhs: inout Self, rhs: DT) {
-        add(lhs: &lhs, rhs: rhs)
+        addAssign(lhs: &lhs, rhs: rhs)
     }
     
     public static func -(lhs: Self, rhs: DT) -> Self {
@@ -570,7 +570,7 @@ extension DataContainer where PT == RGB, DT == Double {
     }
     
     public static func -=(lhs: inout Self, rhs: DT) {
-        subtract(lhs: &lhs, rhs: rhs)
+        subtractAssign(lhs: &lhs, rhs: rhs)
     }
     
     public static func *(lhs: Self, rhs: DT) -> Self {
@@ -580,7 +580,7 @@ extension DataContainer where PT == RGB, DT == Double {
     }
     
     public static func *=(lhs: inout Self, rhs: DT) {
-        multiply(lhs: &lhs, rhs: rhs)
+        multiplyAssign(lhs: &lhs, rhs: rhs)
     }
     
     public static func /(lhs: Self, rhs: DT) -> Self {
@@ -590,7 +590,7 @@ extension DataContainer where PT == RGB, DT == Double {
     }
     
     public static func /=(lhs: inout Self, rhs: DT) {
-        divide(lhs: &lhs, rhs: rhs)
+        divideAssign(lhs: &lhs, rhs: rhs)
     }
 }
 
@@ -602,7 +602,7 @@ extension DataContainer where PT == RGBA, DT == UInt8 {
     }
     
     public static func +=(lhs: inout Self, rhs: DT) {
-        add(lhs: &lhs, rhs: rhs)
+        addAssign(lhs: &lhs, rhs: rhs)
     }
     
     public static func -(lhs: Self, rhs: DT) -> Self {
@@ -612,7 +612,7 @@ extension DataContainer where PT == RGBA, DT == UInt8 {
     }
     
     public static func -=(lhs: inout Self, rhs: DT) {
-        subtract(lhs: &lhs, rhs: rhs)
+        subtractAssign(lhs: &lhs, rhs: rhs)
     }
     
     public static func *(lhs: Self, rhs: DT) -> Self {
@@ -622,7 +622,7 @@ extension DataContainer where PT == RGBA, DT == UInt8 {
     }
     
     public static func *=(lhs: inout Self, rhs: DT) {
-        multiply(lhs: &lhs, rhs: rhs)
+        multiplyAssign(lhs: &lhs, rhs: rhs)
     }
     
     public static func /(lhs: Self, rhs: DT) -> Self {
@@ -632,7 +632,7 @@ extension DataContainer where PT == RGBA, DT == UInt8 {
     }
     
     public static func /=(lhs: inout Self, rhs: DT) {
-        divide(lhs: &lhs, rhs: rhs)
+        divideAssign(lhs: &lhs, rhs: rhs)
     }
 }
 
@@ -644,7 +644,7 @@ extension DataContainer where PT == RGBA, DT == Int {
     }
     
     public static func +=(lhs: inout Self, rhs: DT) {
-        add(lhs: &lhs, rhs: rhs)
+        addAssign(lhs: &lhs, rhs: rhs)
     }
     
     public static func -(lhs: Self, rhs: DT) -> Self {
@@ -654,7 +654,7 @@ extension DataContainer where PT == RGBA, DT == Int {
     }
     
     public static func -=(lhs: inout Self, rhs: DT) {
-        subtract(lhs: &lhs, rhs: rhs)
+        subtractAssign(lhs: &lhs, rhs: rhs)
     }
     
     public static func *(lhs: Self, rhs: DT) -> Self {
@@ -664,7 +664,7 @@ extension DataContainer where PT == RGBA, DT == Int {
     }
     
     public static func *=(lhs: inout Self, rhs: DT) {
-        multiply(lhs: &lhs, rhs: rhs)
+        multiplyAssign(lhs: &lhs, rhs: rhs)
     }
     
     public static func /(lhs: Self, rhs: DT) -> Self {
@@ -674,7 +674,7 @@ extension DataContainer where PT == RGBA, DT == Int {
     }
     
     public static func /=(lhs: inout Self, rhs: DT) {
-        divide(lhs: &lhs, rhs: rhs)
+        divideAssign(lhs: &lhs, rhs: rhs)
     }
 }
 
@@ -686,7 +686,7 @@ extension DataContainer where PT == RGBA, DT == Float {
     }
     
     public static func +=(lhs: inout Self, rhs: DT) {
-        add(lhs: &lhs, rhs: rhs)
+        addAssign(lhs: &lhs, rhs: rhs)
     }
     
     public static func -(lhs: Self, rhs: DT) -> Self {
@@ -696,7 +696,7 @@ extension DataContainer where PT == RGBA, DT == Float {
     }
     
     public static func -=(lhs: inout Self, rhs: DT) {
-        subtract(lhs: &lhs, rhs: rhs)
+        subtractAssign(lhs: &lhs, rhs: rhs)
     }
     
     public static func *(lhs: Self, rhs: DT) -> Self {
@@ -706,7 +706,7 @@ extension DataContainer where PT == RGBA, DT == Float {
     }
     
     public static func *=(lhs: inout Self, rhs: DT) {
-        multiply(lhs: &lhs, rhs: rhs)
+        multiplyAssign(lhs: &lhs, rhs: rhs)
     }
     
     public static func /(lhs: Self, rhs: DT) -> Self {
@@ -716,7 +716,7 @@ extension DataContainer where PT == RGBA, DT == Float {
     }
     
     public static func /=(lhs: inout Self, rhs: DT) {
-        divide(lhs: &lhs, rhs: rhs)
+        divideAssign(lhs: &lhs, rhs: rhs)
     }
 }
 
@@ -728,7 +728,7 @@ extension DataContainer where PT == RGBA, DT == Double {
     }
     
     public static func +=(lhs: inout Self, rhs: DT) {
-        add(lhs: &lhs, rhs: rhs)
+        addAssign(lhs: &lhs, rhs: rhs)
     }
     
     public static func -(lhs: Self, rhs: DT) -> Self {
@@ -738,7 +738,7 @@ extension DataContainer where PT == RGBA, DT == Double {
     }
     
     public static func -=(lhs: inout Self, rhs: DT) {
-        subtract(lhs: &lhs, rhs: rhs)
+        subtractAssign(lhs: &lhs, rhs: rhs)
     }
     
     public static func *(lhs: Self, rhs: DT) -> Self {
@@ -748,7 +748,7 @@ extension DataContainer where PT == RGBA, DT == Double {
     }
     
     public static func *=(lhs: inout Self, rhs: DT) {
-        multiply(lhs: &lhs, rhs: rhs)
+        multiplyAssign(lhs: &lhs, rhs: rhs)
     }
     
     public static func /(lhs: Self, rhs: DT) -> Self {
@@ -758,7 +758,7 @@ extension DataContainer where PT == RGBA, DT == Double {
     }
     
     public static func /=(lhs: inout Self, rhs: DT) {
-        divide(lhs: &lhs, rhs: rhs)
+        divideAssign(lhs: &lhs, rhs: rhs)
     }
 }
 
@@ -770,7 +770,7 @@ extension DataContainer where PT == ARGB, DT == UInt8 {
     }
     
     public static func +=(lhs: inout Self, rhs: DT) {
-        add(lhs: &lhs, rhs: rhs)
+        addAssign(lhs: &lhs, rhs: rhs)
     }
     
     public static func -(lhs: Self, rhs: DT) -> Self {
@@ -780,7 +780,7 @@ extension DataContainer where PT == ARGB, DT == UInt8 {
     }
     
     public static func -=(lhs: inout Self, rhs: DT) {
-        subtract(lhs: &lhs, rhs: rhs)
+        subtractAssign(lhs: &lhs, rhs: rhs)
     }
     
     public static func *(lhs: Self, rhs: DT) -> Self {
@@ -790,7 +790,7 @@ extension DataContainer where PT == ARGB, DT == UInt8 {
     }
     
     public static func *=(lhs: inout Self, rhs: DT) {
-        multiply(lhs: &lhs, rhs: rhs)
+        multiplyAssign(lhs: &lhs, rhs: rhs)
     }
     
     public static func /(lhs: Self, rhs: DT) -> Self {
@@ -800,7 +800,7 @@ extension DataContainer where PT == ARGB, DT == UInt8 {
     }
     
     public static func /=(lhs: inout Self, rhs: DT) {
-        divide(lhs: &lhs, rhs: rhs)
+        divideAssign(lhs: &lhs, rhs: rhs)
     }
 }
 
@@ -812,7 +812,7 @@ extension DataContainer where PT == ARGB, DT == Int {
     }
     
     public static func +=(lhs: inout Self, rhs: DT) {
-        add(lhs: &lhs, rhs: rhs)
+        addAssign(lhs: &lhs, rhs: rhs)
     }
     
     public static func -(lhs: Self, rhs: DT) -> Self {
@@ -822,7 +822,7 @@ extension DataContainer where PT == ARGB, DT == Int {
     }
     
     public static func -=(lhs: inout Self, rhs: DT) {
-        subtract(lhs: &lhs, rhs: rhs)
+        subtractAssign(lhs: &lhs, rhs: rhs)
     }
     
     public static func *(lhs: Self, rhs: DT) -> Self {
@@ -832,7 +832,7 @@ extension DataContainer where PT == ARGB, DT == Int {
     }
     
     public static func *=(lhs: inout Self, rhs: DT) {
-        multiply(lhs: &lhs, rhs: rhs)
+        multiplyAssign(lhs: &lhs, rhs: rhs)
     }
     
     public static func /(lhs: Self, rhs: DT) -> Self {
@@ -842,7 +842,7 @@ extension DataContainer where PT == ARGB, DT == Int {
     }
     
     public static func /=(lhs: inout Self, rhs: DT) {
-        divide(lhs: &lhs, rhs: rhs)
+        divideAssign(lhs: &lhs, rhs: rhs)
     }
 }
 
@@ -854,7 +854,7 @@ extension DataContainer where PT == ARGB, DT == Float {
     }
     
     public static func +=(lhs: inout Self, rhs: DT) {
-        add(lhs: &lhs, rhs: rhs)
+        addAssign(lhs: &lhs, rhs: rhs)
     }
     
     public static func -(lhs: Self, rhs: DT) -> Self {
@@ -864,7 +864,7 @@ extension DataContainer where PT == ARGB, DT == Float {
     }
     
     public static func -=(lhs: inout Self, rhs: DT) {
-        subtract(lhs: &lhs, rhs: rhs)
+        subtractAssign(lhs: &lhs, rhs: rhs)
     }
     
     public static func *(lhs: Self, rhs: DT) -> Self {
@@ -874,7 +874,7 @@ extension DataContainer where PT == ARGB, DT == Float {
     }
     
     public static func *=(lhs: inout Self, rhs: DT) {
-        multiply(lhs: &lhs, rhs: rhs)
+        multiplyAssign(lhs: &lhs, rhs: rhs)
     }
     
     public static func /(lhs: Self, rhs: DT) -> Self {
@@ -884,7 +884,7 @@ extension DataContainer where PT == ARGB, DT == Float {
     }
     
     public static func /=(lhs: inout Self, rhs: DT) {
-        divide(lhs: &lhs, rhs: rhs)
+        divideAssign(lhs: &lhs, rhs: rhs)
     }
 }
 
@@ -896,7 +896,7 @@ extension DataContainer where PT == ARGB, DT == Double {
     }
     
     public static func +=(lhs: inout Self, rhs: DT) {
-        add(lhs: &lhs, rhs: rhs)
+        addAssign(lhs: &lhs, rhs: rhs)
     }
     
     public static func -(lhs: Self, rhs: DT) -> Self {
@@ -906,7 +906,7 @@ extension DataContainer where PT == ARGB, DT == Double {
     }
     
     public static func -=(lhs: inout Self, rhs: DT) {
-        subtract(lhs: &lhs, rhs: rhs)
+        subtractAssign(lhs: &lhs, rhs: rhs)
     }
     
     public static func *(lhs: Self, rhs: DT) -> Self {
@@ -916,7 +916,7 @@ extension DataContainer where PT == ARGB, DT == Double {
     }
     
     public static func *=(lhs: inout Self, rhs: DT) {
-        multiply(lhs: &lhs, rhs: rhs)
+        multiplyAssign(lhs: &lhs, rhs: rhs)
     }
     
     public static func /(lhs: Self, rhs: DT) -> Self {
@@ -926,7 +926,7 @@ extension DataContainer where PT == ARGB, DT == Double {
     }
     
     public static func /=(lhs: inout Self, rhs: DT) {
-        divide(lhs: &lhs, rhs: rhs)
+        divideAssign(lhs: &lhs, rhs: rhs)
     }
 }
 
