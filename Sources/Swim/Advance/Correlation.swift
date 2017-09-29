@@ -94,7 +94,7 @@ public func calculateZNCC<T: BinaryFloatingPoint>(_ a: Image<Intensity, T>,
     }
     
     let c = T(a.width * a.height)
-    let up = (c*sumCross - sum2a*sum2b)
+    let up = (c*sumCross - suma*sumb)
     let da = (c*sum2a - suma*suma)
     let db = (c*sum2b - sumb*sumb)
     return up / sqrt(da*db)
