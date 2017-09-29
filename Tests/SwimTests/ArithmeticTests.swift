@@ -4,6 +4,15 @@ import Swim
 
 class ArithmeticTests: XCTestCase {
     
+    func testNegate() {
+        do {
+            let before = (0..<16).map { Float.init($0) }
+            let after = before.map { -$0 }
+            let image = Image<RGBA, Float>(width: 2, height: 2, data: before)
+            XCTAssertEqual((-image).data, after)
+        }
+    }
+    
     func testAdd() {
         do {
             let before = (0..<4).map { UInt8($0) }

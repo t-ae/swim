@@ -1,4 +1,95 @@
 
+extension DataContainer where PT ==Intensity, DT == Int {
+    public static prefix func -(arg: Self) -> Self {
+        return negate(arg: arg)
+    }
+}
+
+extension DataContainer where PT ==Intensity, DT == Float {
+    public static prefix func -(arg: Self) -> Self {
+        return negate(arg: arg)
+    }
+}
+
+extension DataContainer where PT ==Intensity, DT == Double {
+    public static prefix func -(arg: Self) -> Self {
+        return negate(arg: arg)
+    }
+}
+
+extension DataContainer where PT ==IntensityAlpha, DT == Int {
+    public static prefix func -(arg: Self) -> Self {
+        return negate(arg: arg)
+    }
+}
+
+extension DataContainer where PT ==IntensityAlpha, DT == Float {
+    public static prefix func -(arg: Self) -> Self {
+        return negate(arg: arg)
+    }
+}
+
+extension DataContainer where PT ==IntensityAlpha, DT == Double {
+    public static prefix func -(arg: Self) -> Self {
+        return negate(arg: arg)
+    }
+}
+
+extension DataContainer where PT ==RGB, DT == Int {
+    public static prefix func -(arg: Self) -> Self {
+        return negate(arg: arg)
+    }
+}
+
+extension DataContainer where PT ==RGB, DT == Float {
+    public static prefix func -(arg: Self) -> Self {
+        return negate(arg: arg)
+    }
+}
+
+extension DataContainer where PT ==RGB, DT == Double {
+    public static prefix func -(arg: Self) -> Self {
+        return negate(arg: arg)
+    }
+}
+
+extension DataContainer where PT ==RGBA, DT == Int {
+    public static prefix func -(arg: Self) -> Self {
+        return negate(arg: arg)
+    }
+}
+
+extension DataContainer where PT ==RGBA, DT == Float {
+    public static prefix func -(arg: Self) -> Self {
+        return negate(arg: arg)
+    }
+}
+
+extension DataContainer where PT ==RGBA, DT == Double {
+    public static prefix func -(arg: Self) -> Self {
+        return negate(arg: arg)
+    }
+}
+
+extension DataContainer where PT ==ARGB, DT == Int {
+    public static prefix func -(arg: Self) -> Self {
+        return negate(arg: arg)
+    }
+}
+
+extension DataContainer where PT ==ARGB, DT == Float {
+    public static prefix func -(arg: Self) -> Self {
+        return negate(arg: arg)
+    }
+}
+
+extension DataContainer where PT ==ARGB, DT == Double {
+    public static prefix func -(arg: Self) -> Self {
+        return negate(arg: arg)
+    }
+}
+
+
 extension DataContainer where PT == Intensity, DT == UInt8 {
     public static func +(lhs: Self, rhs: DT) -> Self {
         var ret = lhs

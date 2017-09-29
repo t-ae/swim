@@ -3,6 +3,17 @@ from type import *
 }%
 
 % for pt in pixel_types:
+% for dt in signed_data_types:
+extension DataContainer where PT ==${pt}, DT == ${dt} {
+    public static prefix func -(arg: Self) -> Self {
+        return negate(arg: arg)
+    }
+}
+
+%end
+%end
+
+% for pt in pixel_types:
 % for dt in int_data_types + fp_data_types:
 extension DataContainer where PT == ${pt}, DT == ${dt} {
     public static func +(lhs: Self, rhs: DT) -> Self {
