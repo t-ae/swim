@@ -35,11 +35,11 @@ public struct Image<P: PixelType, T: DataType> {
 }
 
 extension Image {
-    var size: (width: Int, height: Int) {
+    public var size: (width: Int, height: Int) {
         return (width, height)
     }
     
-    var pixelCount: Int {
+    public var pixelCount: Int {
         return width * height
     }
 }

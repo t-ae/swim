@@ -21,6 +21,12 @@ extension DataContainer where PT == ${pt}, DT == ${dt} {
         ret += rhs
         return ret
     }
+
+    public static func +(lhs: DT, rhs: Self) -> Self {
+        var ret = rhs
+        ret += lhs
+        return ret
+    }
     
     public static func +=(lhs: inout Self, rhs: DT) {
         addAssign(lhs: &lhs, rhs: rhs)
@@ -30,6 +36,10 @@ extension DataContainer where PT == ${pt}, DT == ${dt} {
         var ret = lhs
         ret -= rhs
         return ret
+    }
+
+    public static func -(lhs: DT, rhs: Self) -> Self {
+        return subtract(lhs: lhs, rhs: rhs)
     }
     
     public static func -=(lhs: inout Self, rhs: DT) {
@@ -41,6 +51,12 @@ extension DataContainer where PT == ${pt}, DT == ${dt} {
         ret *= rhs
         return ret
     }
+
+    public static func *(lhs: DT, rhs: Self) -> Self {
+        var ret = rhs
+        ret *= lhs
+        return ret
+    }
     
     public static func *=(lhs: inout Self, rhs: DT) {
         multiplyAssign(lhs: &lhs, rhs: rhs)
@@ -50,6 +66,10 @@ extension DataContainer where PT == ${pt}, DT == ${dt} {
         var ret = lhs
         ret /= rhs
         return ret
+    }
+
+    public static func /(lhs: DT, rhs: Self) -> Self {
+        return divide(lhs: lhs, rhs: rhs)
     }
     
     public static func /=(lhs: inout Self, rhs: DT) {
