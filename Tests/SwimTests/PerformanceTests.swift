@@ -35,22 +35,22 @@ class PerformanceTests: XCTestCase {
     
     func testSubimageSubscript() {
         let data = [Float](repeating: 0, count: 1920*1080*3)
-        let image = Image<RGB, Float>(width: 1920, height: 1080, data: data)
+        var image = Image<RGB, Float>(width: 1920, height: 1080, data: data)
         
         measure {
             for _ in 0..<100_000 {
-                _ = image[0..<16, 0..<16]
+                image[0..<16, 0..<16] += 0.01
             }
         }
     }
     
     func testChannelSubscript() {
         let data = [Float](repeating: 0, count: 1920*1080*3)
-        let image = Image<RGB, Float>(width: 1920, height: 1080, data: data)
+        var image = Image<RGB, Float>(width: 1920, height: 1080, data: data)
         
         measure {
             for _ in 0..<1 {
-                _ = image[channel: .red]
+                image[channel: .red] += 0.01
             }
         }
     }
