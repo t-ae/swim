@@ -47,7 +47,7 @@ public enum ARGB: Int, PixelType {
 
 
 // MARK: - RGBWithAlpha
-public protocol RGBWithAlpha {
+public protocol RGBWithAlpha: PixelType {
     static var redIndex: Int { get }
     static var greenIndex: Int { get }
     static var blueIndex: Int { get }

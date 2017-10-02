@@ -2,10 +2,12 @@
 from type import *
 }%
 
+% for ct in ["Image", "Pixel"]:
+
 % for pt in pixel_types:
 % for dt in signed_data_types:
-extension DataContainer where PT ==${pt}, DT == ${dt} {
-    public static prefix func -(arg: Self) -> Self {
+extension ${ct} where PT ==${pt}, DT == ${dt} {
+    public static prefix func -(arg: ${ct}) -> ${ct} {
         return negate(arg: arg)
     }
 }
@@ -15,67 +17,68 @@ extension DataContainer where PT ==${pt}, DT == ${dt} {
 
 % for pt in pixel_types:
 % for dt in int_data_types + fp_data_types:
-extension DataContainer where PT == ${pt}, DT == ${dt} {
-    public static func +(lhs: Self, rhs: DT) -> Self {
+extension ${ct} where PT == ${pt}, DT == ${dt} {
+    public static func +(lhs: ${ct}, rhs: DT) -> ${ct} {
         var ret = lhs
         ret += rhs
         return ret
     }
 
-    public static func +(lhs: DT, rhs: Self) -> Self {
+    public static func +(lhs: DT, rhs: ${ct}) -> ${ct} {
         var ret = rhs
         ret += lhs
         return ret
     }
     
-    public static func +=(lhs: inout Self, rhs: DT) {
+    public static func +=(lhs: inout ${ct}, rhs: DT) {
         addAssign(lhs: &lhs, rhs: rhs)
     }
     
-    public static func -(lhs: Self, rhs: DT) -> Self {
+    public static func -(lhs: ${ct}, rhs: DT) -> ${ct} {
         var ret = lhs
         ret -= rhs
         return ret
     }
 
-    public static func -(lhs: DT, rhs: Self) -> Self {
+    public static func -(lhs: DT, rhs: ${ct}) -> ${ct} {
         return subtract(lhs: lhs, rhs: rhs)
     }
     
-    public static func -=(lhs: inout Self, rhs: DT) {
+    public static func -=(lhs: inout ${ct}, rhs: DT) {
         subtractAssign(lhs: &lhs, rhs: rhs)
     }
     
-    public static func *(lhs: Self, rhs: DT) -> Self {
+    public static func *(lhs: ${ct}, rhs: DT) -> ${ct} {
         var ret = lhs
         ret *= rhs
         return ret
     }
 
-    public static func *(lhs: DT, rhs: Self) -> Self {
+    public static func *(lhs: DT, rhs: ${ct}) -> ${ct} {
         var ret = rhs
         ret *= lhs
         return ret
     }
     
-    public static func *=(lhs: inout Self, rhs: DT) {
+    public static func *=(lhs: inout ${ct}, rhs: DT) {
         multiplyAssign(lhs: &lhs, rhs: rhs)
     }
     
-    public static func /(lhs: Self, rhs: DT) -> Self {
+    public static func /(lhs: ${ct}, rhs: DT) -> ${ct} {
         var ret = lhs
         ret /= rhs
         return ret
     }
 
-    public static func /(lhs: DT, rhs: Self) -> Self {
+    public static func /(lhs: DT, rhs: ${ct}) -> ${ct} {
         return divide(lhs: lhs, rhs: rhs)
     }
     
-    public static func /=(lhs: inout Self, rhs: DT) {
+    public static func /=(lhs: inout ${ct}, rhs: DT) {
         divideAssign(lhs: &lhs, rhs: rhs)
     }
 }
 
+% end
 % end
 % end
