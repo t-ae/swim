@@ -61,9 +61,9 @@ class TransformTests: XCTestCase {
             let data = (0..<2*2*3).map { UInt8($0) }
             let image = Image<RGB, UInt8>(width: 2, height: 2, data: data)
             
-            XCTAssertEqual(image.rot180(),
-                           Image(width: 2, height: 2, data: [9, 10, 11, 6, 7, 8,
-                                                             3, 4, 5, 0, 1, 2]))
+            XCTAssertEqual(image.rot90(),
+                           Image(width: 2, height: 2, data: [6, 7, 8, 0, 1, 2,
+                                                             9, 10, 11, 3, 4, 5 ]))
         }
         do {
             let data = (0..<2*5*4).map { UInt8($0) }
