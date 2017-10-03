@@ -1,6 +1,7 @@
 
 import Foundation
 
+// MARK: - Flip
 extension Image {
     public func flipLR() -> Image<P, T> {
         
@@ -44,6 +45,7 @@ extension Image {
     }
 }
 
+// MARK: - Rotate
 extension Image {
     
     public func rot90() -> Image<P, T> {
