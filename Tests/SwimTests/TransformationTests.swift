@@ -2,7 +2,7 @@
 import XCTest
 import Swim
 
-class TransformTests: XCTestCase {
+class TransformationTests: XCTestCase {
     
     func testFlipLR() {
         do {
