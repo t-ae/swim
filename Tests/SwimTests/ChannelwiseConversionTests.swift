@@ -8,6 +8,6 @@ class ChannelwiseConversionTests: XCTestCase {
         image.channelwiseConvert { $0 * 2 }
         
         let expect = (0..<4*5*4).map { Double(2*$0) }
-        XCTAssertEqual(image.data, expect)
+        XCTAssertEqual(image, Image(width: 4, height: 5, data: expect))
     }
 }

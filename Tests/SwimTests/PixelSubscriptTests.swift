@@ -31,33 +31,38 @@ class PixelSubscriptTests: XCTestCase {
         var image = Image<RGBA, UInt8>(width: 2, height: 2, data: data)
         
         image[0, 0, 0] = 100
-        XCTAssertEqual(image.data, [100, 1, 2, 3,
-                                    4, 5, 6, 7,
-                                    8, 9, 10, 11,
-                                    12, 13, 14, 15])
+        XCTAssertEqual(image,
+                       Image(width: 2, height: 2, data: [100, 1, 2, 3,
+                                                         4, 5, 6, 7,
+                                                         8, 9, 10, 11,
+                                                         12, 13, 14, 15]))
         
         image[1, 0] = Pixel(r: 99, g: 98, b: 97, a: 96)
-        XCTAssertEqual(image.data, [100, 1, 2, 3,
-                                    99, 98, 97, 96,
-                                    8, 9, 10, 11, 12,
-                                    13, 14, 15])
+        XCTAssertEqual(image,
+                       Image(width: 2, height: 2, data: [100, 1, 2, 3,
+                                                         99, 98, 97, 96,
+                                                         8, 9, 10, 11, 12,
+                                                         13, 14, 15]))
         
         image[0, 0][1] = 66
-        XCTAssertEqual(image.data, [100, 66, 2, 3,
-                                    99, 98, 97, 96,
-                                    8, 9, 10, 11,
-                                    12, 13, 14, 15])
+        XCTAssertEqual(image,
+                       Image(width: 2, height: 2, data: [100, 66, 2, 3,
+                                                         99, 98, 97, 96,
+                                                         8, 9, 10, 11,
+                                                         12, 13, 14, 15]))
         
         image[0, 0][.blue] = 67
-        XCTAssertEqual(image.data, [100, 66, 67, 3,
-                                    99, 98, 97, 96,
-                                    8, 9, 10, 11,
-                                    12, 13, 14, 15])
+        XCTAssertEqual(image,
+                       Image(width: 2, height: 2, data: [100, 66, 67, 3,
+                                                         99, 98, 97, 96,
+                                                         8, 9, 10, 11,
+                                                         12, 13, 14, 15]))
         
         image[0, 1] += 1
-        XCTAssertEqual(image.data, [100, 66, 67, 3,
-                                    99, 98, 97, 96,
-                                    9, 10, 11, 12,
-                                    12, 13, 14, 15])
+        XCTAssertEqual(image,
+                       Image(width: 2, height: 2, data: [100, 66, 67, 3,
+                                                         99, 98, 97, 96,
+                                                         9, 10, 11, 12,
+                                                         12, 13, 14, 15]))
     }
 }
