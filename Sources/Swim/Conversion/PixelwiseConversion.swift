@@ -12,9 +12,7 @@ extension Image {
             
             for y in 0..<height {
                 for x in 0..<width {
-                    pixel._data.withUnsafeMutableBufferPointer {
-                        _ = memcpy($0.baseAddress!, p, P.channels*MemoryLayout<T>.size)
-                    }
+                    memcpy(&pixel._data, p, P.channels*MemoryLayout<T>.size)
                     let newPixel = f(x, y, pixel)
                     memcpy(p, newPixel._data, P.channels*MemoryLayout<T>.size)
                     p += P.channels
