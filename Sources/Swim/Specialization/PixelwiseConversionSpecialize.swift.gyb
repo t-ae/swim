@@ -4,16 +4,16 @@ from type import *
 
 % for dt in bool_data_types + int_data_types + fp_data_types:
 extension Image where P == Intensity, T == ${dt} {
-    public mutating func convert(_ f: (Int, Int, T)->T) {
-        _convert(f)
-    }
+//    public mutating func convert(_ f: (Int, Int, T)->T) {
+//        _convert(f)
+//    }
 
-    public mutating func unsafeConvert(_ f: (Int, Int, UnsafeMutableBufferPointer<T>)->Void) {
-        _unsafeConvert(f)
-    }
+//    public mutating func unsafeConvert(_ f: (Int, Int, UnsafeMutableBufferPointer<T>)->Void) {
+//        _unsafeConvert(f)
+//    }
 }
 
-%end
+% end
 % for pt in pixel_types:
 % for dt in bool_data_types + int_data_types + fp_data_types:
 extension Image where P == ${pt}, T == ${dt} {

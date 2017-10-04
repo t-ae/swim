@@ -5,10 +5,6 @@ from .type import *
 % for pt in pixel_types:
 % for dt in bool_data_types + int_data_types + fp_data_types:
 extension Image where P == ${pt}, T == ${dt} {
-    public mutating func convert(_ f: (Int, Int, Pixel<P, T>)->Pixel<P, T>) {
-        _convert(f)
-    }
-
     public mutating func channelwiseConvert(_ f: (T)->T) {
         _channelwiseConvert(f)
     }
