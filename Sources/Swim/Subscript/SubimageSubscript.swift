@@ -4,9 +4,9 @@ import Foundation
 extension Image {
     func getSubimage(x: Int, y: Int, width: Int, height: Int) -> Image<P, T> {
         assert(0 <= width && 0 <= height)
-        precondition(0 <= x && 0 <= y)
-        precondition(x+width <= self.width)
-        precondition(y+height <= self.height)
+        precondition(0 <= x && 0 <= y, "Index out of range.")
+        precondition(x+width <= self.width, "Index out of range.")
+        precondition(y+height <= self.height, "Index out of range.")
         
         let start = index(x: x, y: y)
         
@@ -27,9 +27,9 @@ extension Image {
     }
     
     mutating func setSubimage(x: Int, y: Int, width: Int, height: Int, newValue: Image<P, T>) {
-        precondition(0 <= x && 0 <= y)
-        precondition(x+width <= self.width)
-        precondition(y+height <= self.height)
+        precondition(0 <= x && 0 <= y, "Index out of range.")
+        precondition(x+width <= self.width, "Index out of range.")
+        precondition(y+height <= self.height, "Index out of range.")
         if width == 0 || height == 0 {
             // No effects
             return

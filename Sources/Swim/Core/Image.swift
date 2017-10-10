@@ -11,14 +11,15 @@ public struct Image<P: PixelType, T: DataType> {
             return _data
         }
         set {
-            precondition(data.count == width * height * P.channels)
+            precondition(data.count == width * height * P.channels,
+                         "Size of `data` must be exaclty `width` * `height` * number of channels")
             _data = newValue
         }
     }
     
     public init(width: Int, height: Int, data: [T]) {
-        precondition(width >= 0 && height >= 0)
-        precondition(data.count == width * height * P.channels)
+        precondition(width >= 0 && height >= 0, "Image can't have negative size.")
+        precondition(data.count == width * height * P.channels, "Size of `data` must be exaclty `width` * `height` * number of channels")
         self.width = width
         self.height = height
         self._data = data
@@ -55,9 +56,9 @@ extension Image: Equatable {
 
 extension Image {
     func index(x: Int, y: Int, c: Int = 0) -> Int {
-        precondition(0 <= x && x < width)
-        precondition(0 <= y && y < height)
-        precondition(0 <= c && c < P.channels)
+        precondition(0 <= x && x < width, "Index out of range.")
+        precondition(0 <= y && y < height, "Index out of range.")
+        precondition(0 <= c && c < P.channels, "Index out of range.")
         
         return ((y * width) + x) * P.channels + c
     }

@@ -102,7 +102,7 @@ func compoundChannels<T: DataType>(data1: [T], data2: [T], data3: [T], data4: [T
 
 func compoundChannels<T>(intensity: Image<Intensity, T>,
                       alpha: Image<Intensity, T>) -> Image<IntensityAlpha, T> {
-    precondition(intensity.size == alpha.size)
+    precondition(intensity.size == alpha.size, "Images must have same size.")
     
     let width = intensity.width
     let height = alpha.height
@@ -114,7 +114,7 @@ func compoundChannels<T>(intensity: Image<Intensity, T>,
 func compoundChannels<T>(r: Image<Intensity, T>,
                       g: Image<Intensity, T>,
                       b: Image<Intensity, T>) -> Image<RGB, T> {
-    precondition(r.size == g.size && g.size == b.size)
+    precondition(r.size == g.size && g.size == b.size, "Images must have same size.")
     
     let width = r.width
     let height = r.height
@@ -127,7 +127,7 @@ func compoundChannels<T>(r: Image<Intensity, T>,
                       g: Image<Intensity, T>,
                       b: Image<Intensity, T>,
                       a: Image<Intensity, T>) -> Image<RGBA, T> {
-    precondition(r.size == g.size && g.size == b.size && b.size == a.size)
+    precondition(r.size == g.size && g.size == b.size && b.size == a.size, "Images must have same size.")
     
     let width = r.width
     let height = r.height
@@ -140,7 +140,7 @@ func compoundChannels<T>(a: Image<Intensity, T>,
                       r: Image<Intensity, T>,
                       g: Image<Intensity, T>,
                       b: Image<Intensity, T>) -> Image<ARGB, T> {
-    precondition(a.size == r.size && r.size == g.size && g.size == b.size)
+    precondition(a.size == r.size && r.size == g.size && g.size == b.size, "Images must have same size.")
     
     let width = a.width
     let height = a.height
@@ -206,7 +206,7 @@ extension Image where P == ARGB {
     
     func compoundChannels(intensity: Image<Intensity, Float>,
                           alpha: Image<Intensity, Float>) -> Image<IntensityAlpha, Float> {
-        precondition(intensity.size == alpha.size)
+        precondition(intensity.size == alpha.size, "Images must have same size.")
         
         let width = intensity.width
         let height = alpha.height
@@ -218,7 +218,7 @@ extension Image where P == ARGB {
     func compoundChannels(r: Image<Intensity, Float>,
                           g: Image<Intensity, Float>,
                           b: Image<Intensity, Float>) -> Image<RGB, Float> {
-        precondition(r.size == g.size && g.size == b.size)
+        precondition(r.size == g.size && g.size == b.size, "Images must have same size.")
         
         let width = r.width
         let height = r.height
@@ -231,7 +231,7 @@ extension Image where P == ARGB {
                           g: Image<Intensity, Float>,
                           b: Image<Intensity, Float>,
                           a: Image<Intensity, Float>) -> Image<RGBA, Float> {
-        precondition(r.size == g.size && g.size == b.size && b.size == a.size)
+        precondition(r.size == g.size && g.size == b.size && b.size == a.size, "Images must have same size.")
         
         let width = r.width
         let height = r.height
@@ -282,7 +282,7 @@ extension Image where P == ARGB {
     
     func compoundChannels(intensity: Image<Intensity, Double>,
                           alpha: Image<Intensity, Double>) -> Image<IntensityAlpha, Double> {
-        precondition(intensity.size == alpha.size)
+        precondition(intensity.size == alpha.size, "Images must have same size.")
         
         let width = intensity.width
         let height = alpha.height
@@ -294,7 +294,7 @@ extension Image where P == ARGB {
     func compoundChannels(r: Image<Intensity, Double>,
                           g: Image<Intensity, Double>,
                           b: Image<Intensity, Double>) -> Image<RGB, Double> {
-        precondition(r.size == g.size && g.size == b.size)
+        precondition(r.size == g.size && g.size == b.size, "Images must have same size.")
         
         let width = r.width
         let height = r.height
@@ -307,7 +307,7 @@ extension Image where P == ARGB {
                           g: Image<Intensity, Double>,
                           b: Image<Intensity, Double>,
                           a: Image<Intensity, Double>) -> Image<RGBA, Double> {
-        precondition(r.size == g.size && g.size == b.size && b.size == a.size)
+        precondition(r.size == g.size && g.size == b.size && b.size == a.size, "Images must have same size.")
         
         let width = r.width
         let height = r.height
@@ -320,7 +320,7 @@ extension Image where P == ARGB {
                           r: Image<Intensity, Double>,
                           g: Image<Intensity, Double>,
                           b: Image<Intensity, Double>) -> Image<ARGB, Double> {
-        precondition(a.size == r.size && r.size == g.size && g.size == b.size)
+        precondition(a.size == r.size && r.size == g.size && g.size == b.size, "Images must have same size.")
         
         let width = a.width
         let height = a.height

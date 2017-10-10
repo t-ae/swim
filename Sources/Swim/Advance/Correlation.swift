@@ -3,7 +3,7 @@ import Foundation
 
 func _calculateSSD<T: BinaryFloatingPoint>(_ a: Image<Intensity, T>,
                                            _ b: Image<Intensity, T>) -> T {
-    precondition(a.size == b.size)
+    precondition(a.size == b.size, "Images must have same size.")
     
     var sum: T = 0
     a._data.withUnsafeBufferPointer {
@@ -28,7 +28,7 @@ public func calculateSSD<T: BinaryFloatingPoint>(_ a: Image<Intensity, T>,
 
 func _calculateSAD<T: BinaryFloatingPoint>(_ a: Image<Intensity, T>,
                                            _ b: Image<Intensity, T>) -> T {
-    precondition(a.size == b.size)
+    precondition(a.size == b.size, "Images must have same size.")
     
     var sum: T = 0
     a._data.withUnsafeBufferPointer {
@@ -53,7 +53,7 @@ public func calculateSAD<T: BinaryFloatingPoint>(_ a: Image<Intensity, T>,
 
 func _calculateNCC<T: BinaryFloatingPoint>(_ a: Image<Intensity, T>,
                                            _ b: Image<Intensity, T>) -> T {
-    precondition(a.size == b.size)
+    precondition(a.size == b.size, "Images must have same size.")
     
     var sum2a: T = 0
     var sum2b: T = 0
@@ -83,7 +83,7 @@ public func calculateNCC<T: BinaryFloatingPoint>(_ a: Image<Intensity, T>,
 
 func _calculateZNCC<T: BinaryFloatingPoint>(_ a: Image<Intensity, T>,
                                             _ b: Image<Intensity, T>) -> T {
-    precondition(a.size == b.size)
+    precondition(a.size == b.size, "Images must have same size.")
     
     var suma: T = 0
     var sumb: T = 0

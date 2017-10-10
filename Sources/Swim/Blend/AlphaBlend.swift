@@ -3,7 +3,7 @@ import Foundation
 
 extension Image where P == RGB, T: BinaryFloatingPoint {
     mutating func _alphaBlend<P2: RGBWithAlpha>(image: Image<P2, T>) {
-        precondition(size == image.size)
+        precondition(size == image.size, "Images must have same size.")
         
         image._data.withUnsafeBufferPointer {
             var srcColor = $0.baseAddress! + P2.redIndex
@@ -32,7 +32,7 @@ extension Image where P == RGB, T: BinaryFloatingPoint {
 
 extension Image where P: RGBWithAlpha, T: BinaryFloatingPoint {
     mutating func _alphaBlend(image: Image<P, T>) {
-        precondition(size == image.size)
+        precondition(size == image.size, "Images must have same size.")
         
         image._data.withUnsafeBufferPointer {
             var srcColor = $0.baseAddress! + P.redIndex

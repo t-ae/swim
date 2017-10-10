@@ -8,13 +8,13 @@ public struct Pixel<P: PixelType, T: DataType> {
             return _data
         }
         set {
-            precondition(data.count == P.channels)
+            precondition(data.count == P.channels, "Size of `data` must be exact same as the number of channels.")
             _data = newValue
         }
     }
     
     public init(data: [T]) {
-        precondition(data.count == P.channels)
+        precondition(data.count == P.channels, "Size of `data` must be exact same as the number of channels.")
         self._data = data
     }
 }
@@ -28,11 +28,11 @@ extension Pixel: Equatable {
 extension Pixel {
     public subscript(channel: Int) -> T {
         get {
-            precondition(0 <= channel && channel < P.channels)
+            precondition(0 <= channel && channel < P.channels, "Index out of range.")
             return _data[channel]
         }
         set {
-            precondition(0 <= channel && channel < P.channels)
+            precondition(0 <= channel && channel < P.channels, "Index out of range.")
             _data[channel] = newValue
         }
     }
