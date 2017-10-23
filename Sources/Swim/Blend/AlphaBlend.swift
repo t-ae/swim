@@ -2,10 +2,10 @@
 import Foundation
 
 extension Image where P == RGB, T: BinaryFloatingPoint {
-    mutating func _alphaBlend<P2: RGBWithAlpha>(image: Image<P2, T>) {
-        precondition(size == image.size, "Images must have same size.")
+    mutating func _alphaBlend<P2: RGBWithAlpha>(with src: Image<P2, T>) {
+        precondition(size == src.size, "Images must have same size.")
         
-        image._data.withUnsafeBufferPointer {
+        src._data.withUnsafeBufferPointer {
             var srcColor = $0.baseAddress! + P2.redIndex
             var srcAlpha = $0.baseAddress! + P2.alphaIndex
             _data.withUnsafeMutableBufferPointer {
@@ -28,13 +28,17 @@ extension Image where P == RGB, T: BinaryFloatingPoint {
             }
         }
     }
+    
+    public mutating func alphaBlend<P2: RGBWithAlpha>(with src: Image<P2, T>) {
+        self._alphaBlend(with: src)
+    }
 }
 
 extension Image where P: RGBWithAlpha, T: BinaryFloatingPoint {
-    mutating func _alphaBlend(image: Image<P, T>) {
-        precondition(size == image.size, "Images must have same size.")
+    mutating func _alphaBlend(with src: Image<P, T>) {
+        precondition(size == src.size, "Images must have same size.")
         
-        image._data.withUnsafeBufferPointer {
+        src._data.withUnsafeBufferPointer {
             var srcColor = $0.baseAddress! + P.redIndex
             var srcAlpha = $0.baseAddress! + P.alphaIndex
             _data.withUnsafeMutableBufferPointer {
@@ -63,5 +67,9 @@ extension Image where P: RGBWithAlpha, T: BinaryFloatingPoint {
                 }
             }
         }
+    }
+    
+    public mutating func alphaBlend(with src: Image<P, T>) {
+        self._alphaBlend(with: src)
     }
 }

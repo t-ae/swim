@@ -54,9 +54,9 @@ public protocol RGBWithAlpha: PixelType {
     static var alphaIndex: Int { get }
 }
 extension RGBWithAlpha {
-    public static var greenIndex: Int { return Self.alphaIndex + 1 }
-    public static var blueIndex: Int { return Self.alphaIndex + 2 }
-    public static var alphaIndex: Int { return (Self.alphaIndex + 3) % 4 }
+    public static var greenIndex: Int { return Self.redIndex + 1 }
+    public static var blueIndex: Int { return Self.redIndex + 2 }
+    public static var alphaIndex: Int { return (Self.redIndex + 3) % 4 }
 }
 extension RGBA: RGBWithAlpha {
     public static let redIndex: Int = RGBA.red.rawValue
