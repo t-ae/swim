@@ -48,7 +48,7 @@ extension Image where P: RGBWithAlpha, T: BinaryFloatingPoint {
                 for _ in 0..<pixelCount {
                     if srcAlpha.pointee != 0 {
                         let blendAlpha = srcAlpha.pointee + (1-srcAlpha.pointee)*dstAlpha.pointee
-                        for _ in 0..<P.channels {
+                        for _ in 0..<P.channels-1 {
                             dstColor.pointee *= (1-srcAlpha.pointee)*dstAlpha.pointee
                             dstColor.pointee += srcColor.pointee * srcAlpha.pointee
                             dstColor.pointee /= blendAlpha
@@ -56,8 +56,8 @@ extension Image where P: RGBWithAlpha, T: BinaryFloatingPoint {
                             dstColor += 1
                         }
                         dstAlpha.pointee = blendAlpha
-                        srcColor += P.channels - P.channels
-                        dstColor += P.channels - P.channels
+                        srcColor += 1
+                        dstColor += 1
                     } else {
                         srcColor += P.channels
                         dstColor += P.channels

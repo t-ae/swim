@@ -9,7 +9,10 @@ func XCTAssertEqual<T: FloatingPoint>(_ expression1: [T],
                                       line: UInt = #line) {
     XCTAssertEqual(expression1.count, expression2.count)
     for (e1, e2) in zip(expression1, expression2) {
-        XCTAssertEqual(e1, e2, accuracy: accuracy, file: file, line: line)
+        XCTAssertEqual(e1, e2, accuracy: accuracy, "\(expression1) != \(expression2)", file: file, line: line)
+        if abs(e1-e2) > accuracy {
+            return
+        }
     }
 }
 
