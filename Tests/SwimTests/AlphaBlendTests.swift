@@ -77,7 +77,7 @@ class AlphaBlendTests: XCTestCase {
     
     func testARGBandARGB() {
         
-        let c = 3
+        let c = 100
         let p1: [[Float]] = (0..<c).map { _ in randomArray(count: 4) }
         let p2: [[Float]] = (0..<c).map { _ in randomArray(count: 4) }
         let answer = zip(p1, p2).map { p1, p2 -> [Float] in
