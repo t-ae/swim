@@ -10,7 +10,7 @@ class PerformanceTests: XCTestCase {
         var image = Image<RGBA, UInt8>(width: 1920, height: 1080, data: data)
         
         measure {
-            _ = image.convert { x, y, px in
+            image.convert { x, y, px in
                 px + 1
             }
         }
