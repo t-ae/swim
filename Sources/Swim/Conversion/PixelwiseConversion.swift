@@ -6,15 +6,15 @@ extension Image {
     
     mutating func _convert(_ f: (Int, Int, Pixel<P, T>)->Pixel<P, T>) {
         
-        _data.withUnsafeMutableBufferPointer {
+        data.withUnsafeMutableBufferPointer {
             var p = $0.baseAddress!
             var pixel = Pixel<P, T>(data: [T](repeating: T.swimDefaultValue, count: P.channels))
             
             for y in 0..<height {
                 for x in 0..<width {
-                    memcpy(&pixel._data, p, P.channels*MemoryLayout<T>.size)
+                    memcpy(&pixel.data, p, P.channels*MemoryLayout<T>.size)
                     let newPixel = f(x, y, pixel)
-                    memcpy(p, newPixel._data, P.channels*MemoryLayout<T>.size)
+                    memcpy(p, newPixel.data, P.channels*MemoryLayout<T>.size)
                     p += P.channels
                 }
             }
@@ -22,7 +22,7 @@ extension Image {
     }
     
     mutating func _unsafeConvert(_ f: (Int, Int, UnsafeMutableBufferPointer<T>)->Void) {
-        _data.withUnsafeMutableBufferPointer {
+        data.withUnsafeMutableBufferPointer {
             var p = $0.baseAddress!
             for y in 0..<height {
                 for x in 0..<width {
@@ -45,10 +45,10 @@ extension Image {
 
 extension Image where P == Intensity {
     mutating func _convert(_ f: (Int, Int, T)->T) {
-        _data.withUnsafeMutableBufferPointer {
+        data.withUnsafeMutableBufferPointer {
             var dst = $0.baseAddress!
             withCoord { x, y, px in
-                dst.pointee = f(x, y, px._data[0])
+                dst.pointee = f(x, y, px.data[0])
                 dst += P.channels
             }
         }
@@ -63,7 +63,7 @@ extension Image where P == Intensity {
 extension Image {
     func _converted<T2>(_ f: (Int, Int, Pixel<P, T>)->T2) -> Image<Intensity, T2> {
         var newImage = Image<Intensity, T2>(width: width, height: height)
-        newImage._data.withUnsafeMutableBufferPointer {
+        newImage.data.withUnsafeMutableBufferPointer {
             var dst = $0.baseAddress!
             withCoord { x, y, px in
                 dst.pointee = f(x, y, px)
@@ -79,11 +79,11 @@ extension Image {
     
     func _converted<P2, T2>(_ f: (Int, Int, Pixel<P, T>)->Pixel<P2, T2>) -> Image<P2, T2> {
         var newImage = Image<P2, T2>(width: width, height: height)
-        newImage._data.withUnsafeMutableBufferPointer {
+        newImage.data.withUnsafeMutableBufferPointer {
             var dst = $0.baseAddress!
             withCoord { x, y, px in
                 let out = f(x, y, px)
-                out._data.withUnsafeBufferPointer {
+                out.data.withUnsafeBufferPointer {
                     let src = $0.baseAddress!
                     memcpy(dst, src, P2.channels*MemoryLayout<T2>.size)
                 }
@@ -101,10 +101,10 @@ extension Image {
 extension Image where P == Intensity {
     func _converted<T2>(_ f: (Int, Int, T)->T2) -> Image<Intensity, T2> {
         var newImage = Image<Intensity, T2>(width: width, height: height)
-        newImage._data.withUnsafeMutableBufferPointer {
+        newImage.data.withUnsafeMutableBufferPointer {
             var dst = $0.baseAddress!
             withCoord { x, y, px in
-                dst.pointee = f(x, y, px._data[0])
+                dst.pointee = f(x, y, px.data[0])
                 dst += 1
             }
         }
@@ -117,11 +117,11 @@ extension Image where P == Intensity {
     
     func _converted<P2, T2>(_ f: (Int, Int, T)->Pixel<P2, T2>) -> Image<P2, T2> {
         var newImage = Image<P2, T2>(width: width, height: height)
-        newImage._data.withUnsafeMutableBufferPointer {
+        newImage.data.withUnsafeMutableBufferPointer {
             var dst = $0.baseAddress!
             withCoord { x, y, px in
-                let out = f(x, y, px._data[0])
-                out._data.withUnsafeBufferPointer {
+                let out = f(x, y, px.data[0])
+                out.data.withUnsafeBufferPointer {
                     let src = $0.baseAddress!
                     memcpy(dst, src, P2.channels*MemoryLayout<T2>.size)
                 }

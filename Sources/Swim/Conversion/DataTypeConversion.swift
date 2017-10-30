@@ -55,7 +55,7 @@ extension Image where T == UInt8 {
     #if os(macOS) || os(iOS)
     public func converted(to: Float.Type = Float.self) -> Image<P, Float> {
         var newImage = Image<P, Float>(width: width, height: height)
-        _data.withUnsafeBufferPointer {
+        data.withUnsafeBufferPointer {
             let src = $0.baseAddress!
             newImage.data.withUnsafeMutableBufferPointer {
                 let dst = $0.baseAddress!
@@ -67,7 +67,7 @@ extension Image where T == UInt8 {
     
     public func converted(to: Double.Type = Double.self) -> Image<P, Double> {
         var newImage = Image<P, Double>(width: width, height: height)
-        _data.withUnsafeBufferPointer {
+        data.withUnsafeBufferPointer {
             let src = $0.baseAddress!
             newImage.data.withUnsafeMutableBufferPointer {
                 let dst = $0.baseAddress!
@@ -111,7 +111,7 @@ extension Image where T == Float {
     #if os(macOS) || os(iOS)
     public func converted(to: UInt8.Type = UInt8.self) -> Image<P, UInt8> {
         var newImage = Image<P, UInt8>(width: width, height: height)
-        _data.withUnsafeBufferPointer {
+        data.withUnsafeBufferPointer {
             let src = $0.baseAddress!
             newImage.data.withUnsafeMutableBufferPointer {
                 let dst = $0.baseAddress!
@@ -137,7 +137,7 @@ extension Image where T == Float {
     #if os(macOS) || os(iOS)
     public func converted(to: Double.Type = Double.self) -> Image<P, Double> {
         var newImage = Image<P, Double>(width: width, height: height)
-        _data.withUnsafeBufferPointer {
+        data.withUnsafeBufferPointer {
             let src = $0.baseAddress!
             newImage.data.withUnsafeMutableBufferPointer {
                 let dst = $0.baseAddress!
@@ -158,7 +158,7 @@ extension Image where T == Double {
     #if os(macOS) || os(iOS)
     public func converted(to: UInt8.Type = UInt8.self) -> Image<P, UInt8> {
         var newImage = Image<P, UInt8>(width: width, height: height)
-        _data.withUnsafeBufferPointer {
+        data.withUnsafeBufferPointer {
             let src = $0.baseAddress!
             newImage.data.withUnsafeMutableBufferPointer {
                 let dst = $0.baseAddress!
@@ -180,7 +180,7 @@ extension Image where T == Double {
     #if os(macOS) || os(iOS)
     public func converted(to: Float.Type = Float.self) -> Image<P, Float> {
         var newImage = Image<P, Float>(width: width, height: height)
-        _data.withUnsafeBufferPointer {
+        data.withUnsafeBufferPointer {
             let src = $0.baseAddress!
             newImage.data.withUnsafeMutableBufferPointer {
                 let dst = $0.baseAddress!

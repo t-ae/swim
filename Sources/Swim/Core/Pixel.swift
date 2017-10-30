@@ -2,26 +2,17 @@ import Foundation
 
 public struct Pixel<P: PixelType, T: DataType> {
 
-    var _data: [T]
-    public var data: [T] {
-        get {
-            return _data
-        }
-        set {
-            precondition(data.count == P.channels, "Size of `data` must be exact same as the number of channels.")
-            _data = newValue
-        }
-    }
+    public internal(set) var data: [T]
     
     public init(data: [T]) {
         precondition(data.count == P.channels, "Size of `data` must be exact same as the number of channels.")
-        self._data = data
+        self.data = data
     }
 }
 
 extension Pixel: Equatable {
     public static func == (lhs: Pixel, rhs: Pixel) -> Bool {
-        return memcmp(lhs._data, rhs._data, P.channels*MemoryLayout<T>.size) == 0
+        return memcmp(lhs.data, rhs.data, P.channels*MemoryLayout<T>.size) == 0
     }
 }
 
@@ -29,20 +20,20 @@ extension Pixel {
     public subscript(channel: Int) -> T {
         get {
             precondition(0 <= channel && channel < P.channels, "Index out of range.")
-            return _data[channel]
+            return data[channel]
         }
         set {
             precondition(0 <= channel && channel < P.channels, "Index out of range.")
-            _data[channel] = newValue
+            data[channel] = newValue
         }
     }
     
     public subscript(channel: P) -> T {
         get {
-            return _data[channel.rawValue]
+            return data[channel.rawValue]
         }
         set {
-            _data[channel.rawValue] = newValue
+            data[channel.rawValue] = newValue
         }
     }
 }

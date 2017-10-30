@@ -106,7 +106,7 @@ func compoundChannels<T>(intensity: Image<Intensity, T>,
     
     let width = intensity.width
     let height = alpha.height
-    let data = compoundChannels(data1: intensity._data, data2: alpha._data)
+    let data = compoundChannels(data1: intensity.data, data2: alpha.data)
     
     return Image(width: width, height: height, data: data)
 }
@@ -118,7 +118,7 @@ func compoundChannels<T>(r: Image<Intensity, T>,
     
     let width = r.width
     let height = r.height
-    let data = compoundChannels(data1: r._data, data2: g._data, data3: b._data)
+    let data = compoundChannels(data1: r.data, data2: g.data, data3: b.data)
     
     return Image(width: width, height: height, data: data)
 }
@@ -131,7 +131,7 @@ func compoundChannels<T>(r: Image<Intensity, T>,
     
     let width = r.width
     let height = r.height
-    let data = compoundChannels(data1: r._data, data2: g._data, data3: b._data, data4: a._data)
+    let data = compoundChannels(data1: r.data, data2: g.data, data3: b.data, data4: a.data)
     
     return Image(width: width, height: height, data: data)
 }
@@ -144,7 +144,7 @@ func compoundChannels<T>(a: Image<Intensity, T>,
     
     let width = a.width
     let height = a.height
-    let data = compoundChannels(data1: a._data, data2: r._data, data3: g._data, data4: b._data)
+    let data = compoundChannels(data1: a.data, data2: r.data, data3: g.data, data4: b.data)
     
     return Image(width: width, height: height, data: data)
 }
@@ -210,7 +210,7 @@ extension Image where P == ARGB {
         
         let width = intensity.width
         let height = alpha.height
-        let data = compoundChannels(data1: intensity._data, data2: alpha._data)
+        let data = compoundChannels(data1: intensity.data, data2: alpha.data)
         
         return Image(width: width, height: height, data: data)
     }
@@ -222,7 +222,7 @@ extension Image where P == ARGB {
         
         let width = r.width
         let height = r.height
-        let data = compoundChannels(data1: r._data, data2: g._data, data3: b._data)
+        let data = compoundChannels(data1: r.data, data2: g.data, data3: b.data)
         
         return Image(width: width, height: height, data: data)
     }
@@ -235,7 +235,7 @@ extension Image where P == ARGB {
         
         let width = r.width
         let height = r.height
-        let data = compoundChannels(data1: r._data, data2: g._data, data3: b._data, data4: a._data)
+        let data = compoundChannels(data1: r.data, data2: g.data, data3: b.data, data4: a.data)
         
         return Image(width: width, height: height, data: data)
     }
@@ -248,7 +248,7 @@ extension Image where P == ARGB {
         
         let width = a.width
         let height = a.height
-        let data = compoundChannels(data1: a._data, data2: r._data, data3: g._data, data4: b._data)
+        let data = compoundChannels(data1: a.data, data2: r.data, data3: g.data, data4: b.data)
         
         return Image(width: width, height: height, data: data)
     }
@@ -286,7 +286,7 @@ extension Image where P == ARGB {
         
         let width = intensity.width
         let height = alpha.height
-        let data = compoundChannels(data1: intensity._data, data2: alpha._data)
+        let data = compoundChannels(data1: intensity.data, data2: alpha.data)
         
         return Image(width: width, height: height, data: data)
     }
@@ -298,7 +298,7 @@ extension Image where P == ARGB {
         
         let width = r.width
         let height = r.height
-        let data = compoundChannels(data1: r._data, data2: g._data, data3: b._data)
+        let data = compoundChannels(data1: r.data, data2: g.data, data3: b.data)
         
         return Image(width: width, height: height, data: data)
     }
@@ -311,7 +311,7 @@ extension Image where P == ARGB {
         
         let width = r.width
         let height = r.height
-        let data = compoundChannels(data1: r._data, data2: g._data, data3: b._data, data4: a._data)
+        let data = compoundChannels(data1: r.data, data2: g.data, data3: b.data, data4: a.data)
         
         return Image(width: width, height: height, data: data)
     }
@@ -324,7 +324,7 @@ extension Image where P == ARGB {
         
         let width = a.width
         let height = a.height
-        let data = compoundChannels(data1: a._data, data2: r._data, data3: g._data, data4: b._data)
+        let data = compoundChannels(data1: a.data, data2: r.data, data3: g.data, data4: b.data)
         
         return Image(width: width, height: height, data: data)
     }

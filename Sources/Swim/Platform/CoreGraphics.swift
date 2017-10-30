@@ -40,7 +40,7 @@
             
             let bitmapInfo = CGBitmapInfo(rawValue: CGImageAlphaInfo.premultipliedLast.rawValue | CGBitmapInfo.byteOrder32Big.rawValue)
             
-            let data = premultipliedImage()._data
+            let data = premultipliedImage().data
             let cfData = CFDataCreate(nil, data, data.count)!
             let dataProvider = CGDataProvider(data: cfData)!
             

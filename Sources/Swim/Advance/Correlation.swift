@@ -6,9 +6,9 @@ func _calculateSSD<T: BinaryFloatingPoint>(_ a: Image<Intensity, T>,
     precondition(a.size == b.size, "Images must have same size.")
     
     var sum: T = 0
-    a._data.withUnsafeBufferPointer {
+    a.data.withUnsafeBufferPointer {
         var ap = $0.baseAddress!
-        b._data.withUnsafeBufferPointer {
+        b.data.withUnsafeBufferPointer {
             var bp = $0.baseAddress!
             
             for _ in 0..<$0.count {
@@ -31,9 +31,9 @@ func _calculateSAD<T: BinaryFloatingPoint>(_ a: Image<Intensity, T>,
     precondition(a.size == b.size, "Images must have same size.")
     
     var sum: T = 0
-    a._data.withUnsafeBufferPointer {
+    a.data.withUnsafeBufferPointer {
         var ap = $0.baseAddress!
-        b._data.withUnsafeBufferPointer {
+        b.data.withUnsafeBufferPointer {
             var bp = $0.baseAddress!
             
             for _ in 0..<$0.count {
@@ -59,9 +59,9 @@ func _calculateNCC<T: BinaryFloatingPoint>(_ a: Image<Intensity, T>,
     var sum2b: T = 0
     var sumCross: T = 0
     
-    a._data.withUnsafeBufferPointer {
+    a.data.withUnsafeBufferPointer {
         var ap = $0.baseAddress!
-        b._data.withUnsafeBufferPointer {
+        b.data.withUnsafeBufferPointer {
             var bp = $0.baseAddress!
             
             for _ in 0..<$0.count {
@@ -91,9 +91,9 @@ func _calculateZNCC<T: BinaryFloatingPoint>(_ a: Image<Intensity, T>,
     var sum2b: T = 0
     var sumCross: T = 0
     
-    a._data.withUnsafeBufferPointer {
+    a.data.withUnsafeBufferPointer {
         var ap = $0.baseAddress!
-        b._data.withUnsafeBufferPointer {
+        b.data.withUnsafeBufferPointer {
             var bp = $0.baseAddress!
             
             for _ in 0..<$0.count {

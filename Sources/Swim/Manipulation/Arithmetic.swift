@@ -3,7 +3,7 @@
 extension DataContainer where DT: SignedNumeric {
     static func negate(arg: Self) -> Self {
         var ret = arg
-        ret.data.withUnsafeMutableBufferPointer {
+        ret.withUnsafeMutableBufferPointer {
             var p = $0.baseAddress!
             for _ in 0..<$0.count {
                 p.pointee = -p.pointee
@@ -22,7 +22,7 @@ extension DataContainer where DT: SignedNumeric {
 extension DataContainer where DT: Numeric {
     
     static func addAssign(lhs: inout Self, rhs: DT) {
-        lhs.data.withUnsafeMutableBufferPointer {
+        lhs.withUnsafeMutableBufferPointer {
             var p = $0.baseAddress!
             for _ in 0..<$0.count {
                 p.pointee += rhs
@@ -32,7 +32,7 @@ extension DataContainer where DT: Numeric {
     }
     
     static func subtractAssign(lhs: inout Self, rhs: DT) {
-        lhs.data.withUnsafeMutableBufferPointer {
+        lhs.withUnsafeMutableBufferPointer {
             var p = $0.baseAddress!
             for _ in 0..<$0.count {
                 p.pointee -= rhs
@@ -43,7 +43,7 @@ extension DataContainer where DT: Numeric {
     
     static func subtract(lhs: DT, rhs: Self) -> Self {
         var ret = rhs
-        ret.data.withUnsafeMutableBufferPointer {
+        ret.withUnsafeMutableBufferPointer {
             var p = $0.baseAddress!
             for _ in 0..<$0.count {
                 p.pointee = lhs - p.pointee
@@ -54,7 +54,7 @@ extension DataContainer where DT: Numeric {
     }
     
     static func multiplyAssign(lhs: inout Self, rhs: DT) {
-        lhs.data.withUnsafeMutableBufferPointer {
+        lhs.withUnsafeMutableBufferPointer {
             var p = $0.baseAddress!
             for _ in 0..<$0.count {
                 p.pointee *= rhs
@@ -112,7 +112,7 @@ extension DataContainer where DT: Numeric {
 
 extension DataContainer where DT: BinaryInteger {
     static func divideAssign(lhs: inout Self, rhs: DT) {
-        lhs.data.withUnsafeMutableBufferPointer {
+        lhs.withUnsafeMutableBufferPointer {
             var p = $0.baseAddress!
             for _ in 0..<$0.count {
                 p.pointee /= rhs
@@ -123,7 +123,7 @@ extension DataContainer where DT: BinaryInteger {
     
     static func divide(lhs: DT, rhs: Self) -> Self {
         var ret = rhs
-        ret.data.withUnsafeMutableBufferPointer {
+        ret.withUnsafeMutableBufferPointer {
             var p = $0.baseAddress!
             for _ in 0..<$0.count {
                 p.pointee = lhs / p.pointee
@@ -150,7 +150,7 @@ extension DataContainer where DT: BinaryInteger {
 
 extension DataContainer where DT: BinaryFloatingPoint {
     static func divideAssign(lhs: inout Self, rhs: DT) {
-        lhs.data.withUnsafeMutableBufferPointer {
+        lhs.withUnsafeMutableBufferPointer {
             var p = $0.baseAddress!
             for _ in 0..<$0.count {
                 p.pointee /= rhs
@@ -161,7 +161,7 @@ extension DataContainer where DT: BinaryFloatingPoint {
     
     static func divide(lhs: DT, rhs: Self) -> Self {
         var ret = rhs
-        ret.data.withUnsafeMutableBufferPointer {
+        ret.withUnsafeMutableBufferPointer {
             var p = $0.baseAddress!
             for _ in 0..<$0.count {
                 p.pointee = lhs / p.pointee
@@ -195,7 +195,7 @@ extension DataContainer where DT: BinaryFloatingPoint {
         
         static func negate(arg: Self) -> Self {
             var ret = arg
-            ret.data.withUnsafeMutableBufferPointer {
+            ret.withUnsafeMutableBufferPointer {
                 vDSP_vneg($0.baseAddress!, 1, $0.baseAddress!, 1, vDSP_Length($0.count))
             }
             return ret
@@ -203,7 +203,7 @@ extension DataContainer where DT: BinaryFloatingPoint {
         
         static func addAssign(lhs: inout Self, rhs: DT) {
             var rhs = rhs
-            lhs.data.withUnsafeMutableBufferPointer {
+            lhs.withUnsafeMutableBufferPointer {
                 vDSP_vsadd($0.baseAddress!, 1, &rhs, $0.baseAddress!, 1, vDSP_Length($0.count))
             }
         }
@@ -220,14 +220,14 @@ extension DataContainer where DT: BinaryFloatingPoint {
         
         static func multiplyAssign(lhs: inout Self, rhs: DT) {
             var rhs = rhs
-            lhs.data.withUnsafeMutableBufferPointer {
+            lhs.withUnsafeMutableBufferPointer {
                 vDSP_vsmul($0.baseAddress!, 1, &rhs, $0.baseAddress!, 1, vDSP_Length($0.count))
             }
         }
         
         static func divideAssign(lhs: inout Self, rhs: DT) {
             var rhs = rhs
-            lhs.data.withUnsafeMutableBufferPointer {
+            lhs.withUnsafeMutableBufferPointer {
                 vDSP_vsdiv($0.baseAddress!, 1, &rhs, $0.baseAddress!, 1, vDSP_Length($0.count))
             }
         }
@@ -235,7 +235,7 @@ extension DataContainer where DT: BinaryFloatingPoint {
         static func divide(lhs: DT, rhs: Self) -> Self {
             var ret = rhs
             var lhs = lhs
-            ret.data.withUnsafeMutableBufferPointer {
+            ret.withUnsafeMutableBufferPointer {
                 vDSP_svdiv(&lhs, $0.baseAddress!, 1, $0.baseAddress!, 1, vDSP_Length($0.count))
             }
             return ret
@@ -246,7 +246,7 @@ extension DataContainer where DT: BinaryFloatingPoint {
         
         static func negate(arg: Self) -> Self {
             var ret = arg
-            ret.data.withUnsafeMutableBufferPointer {
+            ret.withUnsafeMutableBufferPointer {
                 vDSP_vnegD($0.baseAddress!, 1, $0.baseAddress!, 1, vDSP_Length($0.count))
             }
             return ret
@@ -254,7 +254,7 @@ extension DataContainer where DT: BinaryFloatingPoint {
         
         static func addAssign(lhs: inout Self, rhs: DT) {
             var rhs = rhs
-            lhs.data.withUnsafeMutableBufferPointer {
+            lhs.withUnsafeMutableBufferPointer {
                 vDSP_vsaddD($0.baseAddress!, 1, &rhs, $0.baseAddress!, 1, vDSP_Length($0.count))
             }
         }
@@ -271,14 +271,14 @@ extension DataContainer where DT: BinaryFloatingPoint {
         
         static func multiplyAssign(lhs: inout Self, rhs: DT) {
             var rhs = rhs
-            lhs.data.withUnsafeMutableBufferPointer {
+            lhs.withUnsafeMutableBufferPointer {
                 vDSP_vsmulD($0.baseAddress!, 1, &rhs, $0.baseAddress!, 1, vDSP_Length($0.count))
             }
         }
         
         static func divideAssign(lhs: inout Self, rhs: DT) {
             var rhs = rhs
-            lhs.data.withUnsafeMutableBufferPointer {
+            lhs.withUnsafeMutableBufferPointer {
                 vDSP_vsdivD($0.baseAddress!, 1, &rhs, $0.baseAddress!, 1, vDSP_Length($0.count))
             }
         }
@@ -286,7 +286,7 @@ extension DataContainer where DT: BinaryFloatingPoint {
         static func divide(lhs: DT, rhs: Self) -> Self {
             var ret = rhs
             var lhs = lhs
-            ret.data.withUnsafeMutableBufferPointer {
+            ret.withUnsafeMutableBufferPointer {
                 vDSP_svdivD(&lhs, $0.baseAddress!, 1, $0.baseAddress!, 1, vDSP_Length($0.count))
             }
             return ret

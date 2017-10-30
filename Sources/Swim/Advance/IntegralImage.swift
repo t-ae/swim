@@ -3,7 +3,7 @@ extension Image where P == Intensity, T: Numeric {
     func _toIntegralImage() -> Image<Intensity, T> {
         var newImage = self
         
-        newImage._data.withUnsafeMutableBufferPointer {
+        newImage.data.withUnsafeMutableBufferPointer {
             var p = $0.baseAddress! + 1
             
             // First row

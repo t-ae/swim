@@ -11,9 +11,9 @@ extension Image {
         let start = index(x: x, y: y)
         
         var newImage = Image<P, T>(width: width, height: height)
-        _data.withUnsafeBufferPointer {
+        data.withUnsafeBufferPointer {
             var src = $0.baseAddress! + start
-            newImage._data.withUnsafeMutableBufferPointer {
+            newImage.data.withUnsafeMutableBufferPointer {
                 var dst = $0.baseAddress!
                 for _ in 0..<height {
                     memcpy(dst, src, width*P.channels*MemoryLayout<T>.size)
@@ -38,9 +38,9 @@ extension Image {
         
         let start = index(x: x, y: y)
         
-        newValue._data.withUnsafeBufferPointer {
+        newValue.data.withUnsafeBufferPointer {
             var src = $0.baseAddress!
-            _data.withUnsafeMutableBufferPointer {
+            data.withUnsafeMutableBufferPointer {
                 var dst = $0.baseAddress! + start
                 for _ in 0..<height {
                     memcpy(dst, src, width*P.channels*MemoryLayout<T>.size)

@@ -33,9 +33,9 @@ extension Image where P == RGB, T: BinaryFloatingPoint {
 // MARK: - RGB -> RGBWithAlpha
 func imageFromRGB<P: RGBWithAlpha, T>(image: Image<RGB, T>, alpha: T) -> Image<P, T> {
     var newImage = Image<P, T>(width: image.width, height: image.height, value: alpha)
-    image._data.withUnsafeBufferPointer {
+    image.data.withUnsafeBufferPointer {
         var src = $0.baseAddress!
-        newImage._data.withUnsafeMutableBufferPointer {
+        newImage.data.withUnsafeMutableBufferPointer {
             var dst = $0.baseAddress! + P.redIndex
             for _ in 0..<image.width*image.height {
                 memcpy(dst, src, RGB.channels * MemoryLayout<T>.size)
@@ -57,9 +57,9 @@ extension Image where P: RGBWithAlpha {
 // MARK: - RGBWithAlpha -> RGB
 func imageFromRGBWithAlpha<P: RGBWithAlpha, T>(image: Image<P, T>) -> Image<RGB, T> {
     var newImage = Image<RGB, T>(width: image.width, height: image.height)
-    image._data.withUnsafeBufferPointer {
+    image.data.withUnsafeBufferPointer {
         var src = $0.baseAddress! + P.redIndex
-        newImage._data.withUnsafeMutableBufferPointer {
+        newImage.data.withUnsafeMutableBufferPointer {
             var dst = $0.baseAddress!
             for _ in 0..<image.width*image.height {
                 memcpy(dst, src, RGB.channels)

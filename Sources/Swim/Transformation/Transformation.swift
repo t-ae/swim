@@ -7,8 +7,8 @@ extension Image {
         
         var newImage = Image<P, T>(width: width, height: height)
         
-        _data.withUnsafeBufferPointer { src in
-            newImage._data.withUnsafeMutableBufferPointer { dst in
+        data.withUnsafeBufferPointer { src in
+            newImage.data.withUnsafeMutableBufferPointer { dst in
                 let dstTail = dst.baseAddress! + (width-1)*P.channels
                 for y in 0..<height {
                     var src = src.baseAddress! + y*width*P.channels
@@ -33,8 +33,8 @@ extension Image {
         
         var newImage = Image<P, T>(width: width, height: height)
         
-        _data.withUnsafeBufferPointer { src in
-            newImage._data.withUnsafeMutableBufferPointer { dst in
+        data.withUnsafeBufferPointer { src in
+            newImage.data.withUnsafeMutableBufferPointer { dst in
                 var src = src.baseAddress!
                 var dst = dst.baseAddress! + (height-1)*width*P.channels
                 for _ in 0..<height {
@@ -59,7 +59,7 @@ extension Image {
     func _rot90() -> Image<P, T> {
         var newImage = Image<P, T>(width: height, height: width)
         
-        _data.withUnsafeBufferPointer {
+        data.withUnsafeBufferPointer {
             var src = $0.baseAddress!
             newImage.data.withUnsafeMutableBufferPointer {
                 var dst = $0.baseAddress! + (height - 1)*P.channels
@@ -85,9 +85,9 @@ extension Image {
         
         var newImage = Image<P, T>(width: width, height: height)
         
-        _data.withUnsafeBufferPointer {
+        data.withUnsafeBufferPointer {
             var src = $0.baseAddress!
-            newImage._data.withUnsafeMutableBufferPointer {
+            newImage.data.withUnsafeMutableBufferPointer {
                 var dst = $0.baseAddress! + (pixelCount-1) * P.channels
                 for _ in 0..<pixelCount {
                     memcpy(dst, src, P.channels * MemoryLayout<T>.size)
@@ -107,7 +107,7 @@ extension Image {
     func _rot270() -> Image<P, T> {
         var newImage = Image<P, T>(width: height, height: width)
         
-        _data.withUnsafeBufferPointer {
+        data.withUnsafeBufferPointer {
             var src = $0.baseAddress!
             newImage.data.withUnsafeMutableBufferPointer {
                 var dst = $0.baseAddress!
