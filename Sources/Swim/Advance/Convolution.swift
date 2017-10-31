@@ -31,9 +31,29 @@ public enum Filter<T: BinaryFloatingPoint&DataType> {
     }
     
     public static var gaussian3x3: Image<Intensity, T> {
-        return Image(width: 3, height: 3, data: [0.0625,  0.125, 0.0625,
-                                                 0.125,   0.25,  0.125,
-                                                 0.0625,  0.125, 0.0625])
+        let unit = T(1.0/16)
+        return Image(width: 3, height: 3, data: [1*unit, 2*unit, 1*unit,
+                                                 2*unit, 4*unit, 2*unit,
+                                                 1*unit, 2*unit, 1*unit])
+    }
+    
+    public static var gaussian5x5: Image<Intensity, T> {
+        let unit = T(1.0/256)
+        return Image(width: 5, height: 5, data: [1*unit,  4*unit,  6*unit,  4*unit, 1*unit,
+                                                 4*unit, 16*unit, 24*unit, 16*unit, 4*unit,
+                                                 6*unit, 24*unit, 36*unit, 24*unit, 6*unit,
+                                                 4*unit, 16*unit, 24*unit, 16*unit, 4*unit,
+                                                 1*unit,  4*unit,  6*unit,  4*unit, 1*unit])
+    }
+    
+    public static var mean3x3: Image<Intensity, T> {
+        let mean = T(1.0/9)
+        return Image(width: 3, height: 3, data: [T](repeating: mean, count: 9))
+    }
+    
+    public static var mean5x5: Image<Intensity, T> {
+        let mean = T(1.0/25)
+        return Image(width: 5, height: 5, data: [T](repeating: mean, count: 25))
     }
 }
 
