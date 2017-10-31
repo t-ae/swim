@@ -1,0 +1,13 @@
+%{
+from type import *
+}%
+
+% for pt in ["Intensity", "RGB"]:
+% for dt in fp_data_types:
+extension Image where P == ${pt}, T == ${dt} {
+    public func convoluted(_ filter: Image<Intensity, T>) -> Image<P, T> {
+        return _convoluted(filter)
+    }
+}
+
+% end

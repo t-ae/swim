@@ -1,7 +1,7 @@
 
 import Foundation
 
-func dotProduct<T: FloatingPoint>(_ a: [T], _ b: [T]) -> T {
+private func _dotProduct<T: FloatingPoint>(_ a: [T], _ b: [T]) -> T {
     assert(a.count == b.count)
     
     var result: T = 0
@@ -11,6 +11,10 @@ func dotProduct<T: FloatingPoint>(_ a: [T], _ b: [T]) -> T {
     }
     
     return result
+}
+
+func dotProduct<T: FloatingPoint>(_ a: [T], _ b: [T]) -> T {
+    return _dotProduct(a, b)
 }
 
 #if os(macOS) || os(iOS)
@@ -32,5 +36,13 @@ func dotProduct<T: FloatingPoint>(_ a: [T], _ b: [T]) -> T {
         vDSP_dotprD(a, 1, b, 1, &result, vDSP_Length(a.count))
         
         return result
+    }
+#else
+    func dotProduct(_ a: [Float], _ b: [Float]) -> Float {
+        return _dotProduct(a, b)
+    }
+    
+    func dotProduct(_ a: [Double], _ b: [Double]) -> Double {
+        return _dotProduct(a, b)
     }
 #endif
