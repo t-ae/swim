@@ -1,21 +1,21 @@
 
 extension Image {
-    func _filter(kernelSize: Int, kernelFunc: ([Pixel<P, T>])->Pixel<P, T>) -> Image<P, T> {
+    func _filter(kernelSize: Int, kernelFunc: ([Pixel<P, T>?])->Pixel<P, T>) -> Image<P, T> {
         var ret = Image<P, T>(width: width, height: height)
         
         let d = -kernelSize/2
         
         for y in 0..<height {
             for x in 0..<width {
-                var array: [Pixel<P, T>] = []
+                var array: [Pixel<P, T>?] = []
                 array.reserveCapacity(kernelSize*kernelSize)
                 for i in 0..<kernelSize {
                     let yy = y + d + i
-                    guard 0 <= yy && yy < self.height else { continue }
                     for j in 0..<kernelSize {
                         let xx = x + d + j
-                        guard 0 <= xx && xx < self.width else { continue }
-                        array.append(self[xx, yy])
+                        if 0 <= xx && xx < self.width && 0 <= yy && yy < self.height {
+                            array.append(self[xx, yy])
+                        }
                     }
                 }
                 ret[x, y] = kernelFunc(array)
@@ -25,7 +25,7 @@ extension Image {
         return ret
     }
     
-    public func filter(kernelSize: Int, kernelFunc: ([Pixel<P, T>])->Pixel<P, T>) -> Image<P, T> {
+    public func filter(kernelSize: Int, kernelFunc: ([Pixel<P, T>?])->Pixel<P, T>) -> Image<P, T> {
         return _filter(kernelSize: kernelSize, kernelFunc: kernelFunc)
     }
 }
@@ -33,6 +33,7 @@ extension Image {
 extension Image where T: Numeric&Comparable {
     func _minimumFilter(kernelSize: Int) -> Image<P, T> {
         return _filter(kernelSize: kernelSize) { pxs in
+            let pxs = pxs.flatMap { $0 }
             var min = pxs.first!
             var minValue = min.data.reduce(0, +)
             for p in pxs.dropFirst() {
@@ -52,6 +53,7 @@ extension Image where T: Numeric&Comparable {
     
     func _maximumFilter(kernelSize: Int) -> Image<P, T> {
         return _filter(kernelSize: kernelSize) { pxs in
+            let pxs = pxs.flatMap { $0 }
             var max = pxs.first!
             var maxValue = max.data.reduce(0, +)
             for p in pxs.dropFirst() {
@@ -71,6 +73,7 @@ extension Image where T: Numeric&Comparable {
     
     func _medianFilter(kernelSize: Int) -> Image<P, T> {
         return _filter(kernelSize: kernelSize) { pxs in
+            let pxs = pxs.flatMap { $0 }
             let sorted = pxs.sorted { a, b in
                 a.data.reduce(0, +) < b.data.reduce(0, +)
             }
