@@ -47,6 +47,7 @@ public enum Filter<T: BinaryFloatingPoint&DataType> {
     }
 }
 
+// padding = nearest
 func im2col<T>(image: Image<Intensity, T>, width: Int, height: Int) -> [T] {
     
     let dx = -width/2
