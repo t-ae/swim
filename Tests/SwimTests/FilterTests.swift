@@ -2,7 +2,7 @@
 import XCTest
 import Swim
 
-class FIlterTests: XCTestCase {
+class FilterTests: XCTestCase {
 
     func testMaximumFilter() {
         let image = Image<Intensity, Float>(width: 3, height: 3, data: (0..<9).map(Float.init))
