@@ -43,7 +43,6 @@ public struct PixelIterator<P: PixelType, T: DataType>: IteratorProtocol {
         }
         p += P.channels
         
-        
         return pixel
     }
 }

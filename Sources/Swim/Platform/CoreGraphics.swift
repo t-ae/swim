@@ -23,7 +23,7 @@
             self.init(width: cgImage.width, height: cgImage.height, data: data)
             
             // cancel premultiplication
-            _unsafeConvert { x, y, px in
+            _unsafeConvert { px in
                 let alpha = Int(px[P.alpha.rawValue])
                 if alpha == 0 { return }
                 for c in [P.red.rawValue, P.green.rawValue, P.blue.rawValue] {
@@ -59,7 +59,7 @@
         
         private func premultipliedImage() -> Image<P, T> {
             var newImage = self
-            newImage._unsafeConvert { x, y, px in
+            newImage._unsafeConvert { px in
                 let alpha = Int(px[P.alpha.rawValue])
                 for c in [P.red.rawValue, P.green.rawValue, P.blue.rawValue] {
                     px[c] = UInt8(Int(px[c]) * alpha / 255)

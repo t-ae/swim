@@ -4,7 +4,7 @@ import Foundation
 // MARK: - RGB -> Intensity
 extension Image where P == RGB, T: BinaryFloatingPoint {
     func _toBrightness() -> Image<Intensity, T> {
-        return _converted { x, y, px -> T in
+        return _converted { px -> T in
             let r = px[.red]
             let g = px[.green]
             let b = px[.blue]
@@ -17,7 +17,7 @@ extension Image where P == RGB, T: BinaryFloatingPoint {
     }
     
     func _toLuminane() -> Image<Intensity, T> {
-        return _converted { x, y, px -> T in
+        return _converted { px -> T in
             let r = 0.2126*px[.red]
             let g = 0.7152*px[.green]
             let b = 0.0722*px[.blue]

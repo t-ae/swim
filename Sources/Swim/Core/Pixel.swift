@@ -8,6 +8,10 @@ public struct Pixel<P: PixelType, T: DataType> {
         precondition(data.count == P.channels, "Size of `data` must be exact same as the number of channels.")
         self.data = data
     }
+    
+    init() {
+        self.init(data: [T](repeating: T.swimDefaultValue, count: P.channels))
+    }
 }
 
 extension Pixel: Equatable {
