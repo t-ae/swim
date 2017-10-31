@@ -4,12 +4,13 @@ from type import *
 
 % for pt in pixel_types:
 % for dt in bool_data_types + int_data_types + fp_data_types:
-public func concatH(_ images: [Image<${pt}, ${dt}>]) -> Image<${pt}, ${dt}> {
-    return _concatH(images)
-}
-
-public func concatV(_ images: [Image<${pt}, ${dt}>]) -> Image<${pt}, ${dt}> {
-    return _concatV(images)
+extension Image where P == ${pt}, T == ${dt} {
+    public static func concatH(_ images: [Image<P, T>]) -> Image<P, T> {
+        return _concatH(images)
+    }
+    public static func concatV(_ images: [Image<P, T>]) -> Image<P, T> {
+        return _concatV(images)
+    }
 }
 
 % end
