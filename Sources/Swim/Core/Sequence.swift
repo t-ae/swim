@@ -46,19 +46,3 @@ public struct PixelIterator<P: PixelType, T: DataType>: IteratorProtocol {
         return pixel
     }
 }
-
-extension Image {
-    func withCoord(_ f: (Int, Int, Pixel<P, T>)->Void) {
-        var pixel = Pixel<P, T>(data: [T](repeating: T.swimDefaultValue, count: P.channels))
-        data.withUnsafeBufferPointer {
-            var src = $0.baseAddress!
-            for y in 0..<height {
-                for x in 0..<width {
-                    memcpy(&pixel.data, src, P.channels * MemoryLayout<T>.size)
-                    f(x, y, pixel)
-                    src += P.channels
-                }
-            }
-        }
-    }
-}
