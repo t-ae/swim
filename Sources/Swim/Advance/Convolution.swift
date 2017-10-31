@@ -31,26 +31,16 @@ public enum Filter<T: BinaryFloatingPoint&DataType> {
     }
     
     public static var gaussian3x3: Image<Intensity, T> {
-        let unit = T(1.0/16)
-        return Image(width: 3, height: 3, data: [1*unit, 2*unit, 1*unit,
-                                                 2*unit, 4*unit, 2*unit,
-                                                 1*unit, 2*unit, 1*unit])
+        return Image(width: 3, height: 3, data: [0.065, 0.125, 0.065,
+                                                 0.125, 0.250, 0.125,
+                                                 0.065, 0.125, 0.065])
     }
-    
-    public static var gaussian5x5: Image<Intensity, T> {
-        let unit = T(1.0/256)
-        return Image(width: 5, height: 5, data: [1*unit,  4*unit,  6*unit,  4*unit, 1*unit,
-                                                 4*unit, 16*unit, 24*unit, 16*unit, 4*unit,
-                                                 6*unit, 24*unit, 36*unit, 24*unit, 6*unit,
-                                                 4*unit, 16*unit, 24*unit, 16*unit, 4*unit,
-                                                 1*unit,  4*unit,  6*unit,  4*unit, 1*unit])
-    }
-    
+
     public static var mean3x3: Image<Intensity, T> {
         let mean = T(1.0/9)
         return Image(width: 3, height: 3, data: [T](repeating: mean, count: 9))
     }
-    
+
     public static var mean5x5: Image<Intensity, T> {
         let mean = T(1.0/25)
         return Image(width: 5, height: 5, data: [T](repeating: mean, count: 25))
@@ -93,6 +83,36 @@ extension Image where T: FloatingPoint {
     }
 }
 
+#if os(macOS) || os(iOS)
+    extension Image where T == Float {
+        func _convoluted(_ filter: Image<Intensity, T>) -> Image<P, T> {
+            var ret = Image<P, T>(width: width, height: height)
+
+            for c in 0..<P.channels {
+                let matrix = im2col(image: self[channel: c], width: filter.width, height: filter.height)
+                let result = _matmul(lhs: filter.data, rhs: matrix, m: 1, n: width*height, p: filter.width*filter.height)
+                ret[channel: c] = Image<Intensity, T>(width: width, height: height, data: result)
+            }
+
+            return ret
+        }
+    }
+
+    extension Image where T == Double {
+        func _convoluted(_ filter: Image<Intensity, T>) -> Image<P, T> {
+            var ret = Image<P, T>(width: width, height: height)
+
+            for c in 0..<P.channels {
+                let matrix = im2col(image: self[channel: c], width: filter.width, height: filter.height)
+                let result = _matmul(lhs: filter.data, rhs: matrix, m: 1, n: width*height, p: filter.width*filter.height)
+                ret[channel: c] = Image<Intensity, T>(width: width, height: height, data: result)
+            }
+
+            return ret
+        }
+    }
+#endif
+
 extension Image where P == Intensity, T: FloatingPoint {
     public func convoluted(_ filter: Image<Intensity, T>) -> Image<P, T> {
         return _convoluted(filter)
@@ -104,3 +124,4 @@ extension Image where P == RGB, T: FloatingPoint {
         return _convoluted(filter)
     }
 }
+
