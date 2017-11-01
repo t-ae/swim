@@ -1,5 +1,5 @@
 
-public enum Filter<T: BinaryFloatingPoint&DataType> {
+public enum Filter<T: Numeric&DataType> {
     public static var sobel3x3H: Image<Intensity, T> {
         return Image(width: 3, height: 3, data: [-1, 0, 1,
                                                  -2, 0, 2,
@@ -29,18 +29,20 @@ public enum Filter<T: BinaryFloatingPoint&DataType> {
                                                  +1, -4, +1,
                                                  +0, +1, +0])
     }
-    
+}
+
+extension Filter where T: BinaryFloatingPoint {
     public static var gaussian3x3: Image<Intensity, T> {
         return Image(width: 3, height: 3, data: [0.065, 0.125, 0.065,
                                                  0.125, 0.250, 0.125,
                                                  0.065, 0.125, 0.065])
     }
-
+    
     public static var mean3x3: Image<Intensity, T> {
         let mean = T(1.0/9)
         return Image(width: 3, height: 3, data: [T](repeating: mean, count: 9))
     }
-
+    
     public static var mean5x5: Image<Intensity, T> {
         let mean = T(1.0/25)
         return Image(width: 5, height: 5, data: [T](repeating: mean, count: 25))
@@ -48,7 +50,7 @@ public enum Filter<T: BinaryFloatingPoint&DataType> {
 }
 
 
-extension Image where T: FloatingPoint {
+extension Image where T: Numeric {
     func _convoluted(_ filter: Image<Intensity, T>) -> Image<P, T> {
         var ret = Image<P, T>(width: width, height: height)
         
