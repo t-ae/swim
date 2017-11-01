@@ -90,6 +90,22 @@ extension Image where P == Intensity, T: Comparable {
             
             return Image(width: width, height: height, data: data)
         }
+        
+        public func _medianFilter(kernelSize: Int) -> Image<P, T> {
+            let (m, n, matrix) = _im2col(patchWidth: kernelSize,
+                                         patchHeight: kernelSize,
+                                         padding: .constant(T.nan))
+            
+            var data = [T](repeating: 0, count: n)
+            var values = [T](repeating: 0, count: m)
+            for i in 0..<n {
+                strideCopy(src: matrix, srcOffset: i, srcStride: n,
+                           dst: &values, dstOffset: 0, dstStride: 1,
+                           count: m)
+                data[i] = values.filter { !$0.isNaN }.median()!
+            }
+            return Image(width: width, height: height, data: data)
+        }
     }
     
     extension Image where P == Intensity, T == Double {
@@ -124,6 +140,22 @@ extension Image where P == Intensity, T: Comparable {
                 }
             }
             
+            return Image(width: width, height: height, data: data)
+        }
+        
+        public func _medianFilter(kernelSize: Int) -> Image<P, T> {
+            let (m, n, matrix) = _im2col(patchWidth: kernelSize,
+                                         patchHeight: kernelSize,
+                                         padding: .constant(T.nan))
+            
+            var data = [T](repeating: 0, count: n)
+            var values = [T](repeating: 0, count: m)
+            for i in 0..<n {
+                strideCopy(src: matrix, srcOffset: i, srcStride: n,
+                           dst: &values, dstOffset: 0, dstStride: 1,
+                           count: m)
+                data[i] = values.filter { !$0.isNaN }.median()!
+            }
             return Image(width: width, height: height, data: data)
         }
     }
