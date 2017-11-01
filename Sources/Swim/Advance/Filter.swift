@@ -8,17 +8,19 @@ extension Image where P == Intensity, T: Comparable {
         
         for y in 0..<height {
             for x in 0..<width {
-                let patch = kernelRange.flatMap { dy -> [T] in
+                var patch: [T] = []
+                patch.reserveCapacity(kernelSize*kernelSize)
+                for dy in kernelRange {
                     let yy = y+dy
-                    guard 0 <= y+dy && yy < height else {
-                        return []
+                    guard 0 <= yy && yy < height else {
+                        continue
                     }
-                    return kernelRange.flatMap { dx -> [T] in
+                    for dx in kernelRange {
                         let xx = x+dx
                         guard 0 <= xx && xx < width else {
-                            return []
+                            continue
                         }
-                        return [self[xx, yy]]
+                        patch.append(self[xx, yy])
                     }
                 }
                 ret[x, y] = kernelFunc(patch)
