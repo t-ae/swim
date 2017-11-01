@@ -2,20 +2,8 @@
 from type import *
 }%
 
-% for pt in pixel_types:
-% for dt in bool_data_types + int_data_types + fp_data_types:
-extension Image where P == ${pt}, T == ${dt} {
-    public func filter(kernelSize: Int, kernelFunc: ([Pixel<P, T>?])->Pixel<P, T>) -> Image<P, T> {
-        return _filter(kernelSize: kernelSize, kernelFunc: kernelFunc)
-    }
-}
-
-% end
-% end
-
-% for pt in pixel_types:
-% for dt in large_enough_data_types:
-extension Image where P == ${pt}, T == ${dt} {
+% for dt in int_data_types + fp_data_types:
+extension Image where P == Intensity, T == ${dt} {
     public func minimumFilter(kernelSize: Int) -> Image<P, T> {
         return _minimumFilter(kernelSize: kernelSize)
     }
@@ -29,5 +17,4 @@ extension Image where P == ${pt}, T == ${dt} {
     }
 }
 
-% end
 % end
