@@ -5,25 +5,51 @@ import Swim
 class PixelSubscriptTests: XCTestCase {
     
     func testSubscriptGet() {
-        let data = (0..<64).map { UInt8($0) }
-        let image = Image<RGBA, UInt8>(width: 4, height: 4, data: data)
-        
-        // channel
-        XCTAssertEqual(image[0, 0, 0], 0)
-        XCTAssertEqual(image[1, 0, 1], 5)
-        XCTAssertEqual(image[0, 1, 2], 18)
-        XCTAssertEqual(image[0, 1, 3], 19)
-        
-        // pixel
-        XCTAssertEqual(image[0, 0], Pixel(r: 0, g: 1, b: 2, a: 3))
-        XCTAssertEqual(image[1, 0], Pixel(r: 4, g: 5, b: 6, a: 7))
-        XCTAssertEqual(image[0, 1], Pixel(r: 16, g: 17, b: 18, a: 19))
-        
-        // mix
-        XCTAssertEqual(image[0, 0][0], 0)
-        XCTAssertEqual(image[1, 0][.green], 5)
-        XCTAssertEqual(image[0, 1][2], 18)
-        XCTAssertEqual(image[0, 1][.alpha], 19)
+        do {
+            let data = (0..<16).map { UInt8($0) }
+            let image = Image<Intensity, UInt8>(width: 4, height: 4, data: data)
+            
+            // channel
+            XCTAssertEqual(image[0, 0, 0], 0)
+            XCTAssertEqual(image[1, 0, 0], 1)
+            XCTAssertEqual(image[0, 1, 0], 4)
+            XCTAssertEqual(image[1, 1, 0], 5)
+            
+            // pixel
+            XCTAssertEqual(image[0, 0], Pixel(0))
+            XCTAssertEqual(image[1, 0], Pixel(1))
+            XCTAssertEqual(image[0, 1], Pixel(4))
+            XCTAssertEqual(image[1, 1], Pixel(5))
+            // value
+            XCTAssertEqual(image[0, 0], 0)
+            XCTAssertEqual(image[1, 0], 1)
+            XCTAssertEqual(image[0, 1], 4)
+            XCTAssertEqual(image[1, 1], 5)
+            
+            // mix
+            XCTAssertEqual(image[0, 0][0], 0)
+        }
+        do {
+            let data = (0..<64).map { UInt8($0) }
+            let image = Image<RGBA, UInt8>(width: 4, height: 4, data: data)
+            
+            // channel
+            XCTAssertEqual(image[0, 0, 0], 0)
+            XCTAssertEqual(image[1, 0, 1], 5)
+            XCTAssertEqual(image[0, 1, 2], 18)
+            XCTAssertEqual(image[0, 1, 3], 19)
+            
+            // pixel
+            XCTAssertEqual(image[0, 0], Pixel(r: 0, g: 1, b: 2, a: 3))
+            XCTAssertEqual(image[1, 0], Pixel(r: 4, g: 5, b: 6, a: 7))
+            XCTAssertEqual(image[0, 1], Pixel(r: 16, g: 17, b: 18, a: 19))
+            
+            // mix
+            XCTAssertEqual(image[0, 0][0], 0)
+            XCTAssertEqual(image[1, 0][.green], 5)
+            XCTAssertEqual(image[0, 1][2], 18)
+            XCTAssertEqual(image[0, 1][.alpha], 19)
+        }
     }
     
     func testSubscriptSet() {
