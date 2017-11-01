@@ -2,6 +2,16 @@
 from .type import *
 }%
 
+extension Image where P == RGB, T == Int {
+    public func toBrightness() -> Image<Intensity, T> {
+        return _toBrightness()
+    }
+    
+    public func toLuminane() -> Image<Intensity, T> {
+        return _toLuminane()
+    }
+}
+
 % for dt in fp_data_types:
 extension Image where P == RGB, T == ${dt} {
     public func toBrightness() -> Image<Intensity, T> {

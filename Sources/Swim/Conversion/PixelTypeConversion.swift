@@ -2,6 +2,45 @@
 import Foundation
 
 // MARK: - RGB -> Intensity
+extension Image where P == RGB, T: BinaryInteger {
+    func _toBrightness() -> Image<Intensity, T> {
+        return _converted { px -> T in
+            let r = px[.red]
+            let g = px[.green]
+            let b = px[.blue]
+            return (r + g + b) / 3
+        }
+    }
+    
+    public func toBrightness() -> Image<Intensity, T> {
+        return _toBrightness()
+    }
+    
+    func _toLuminane() -> Image<Intensity, T> {
+        return _converted { px -> T in
+            let r = 2126*px[.red]
+            let g = 7152*px[.green]
+            let b = 722*px[.blue]
+            return (r + g + b) / 10000
+        }
+    }
+    
+    public func toLuminane() -> Image<Intensity, T> {
+        return _toLuminane()
+    }
+}
+
+extension Image where P == RGB, T == UInt8 {
+    @available(*, deprecated, message: "Could cause overflow.")
+    public func toBrightness() -> Image<Intensity, T> {
+        return _toBrightness()
+    }
+    @available(*, deprecated, message: "Could cause overflow.")
+    public func toLuminane() -> Image<Intensity, T> {
+        return _toLuminane()
+    }
+}
+
 extension Image where P == RGB, T: BinaryFloatingPoint {
     func _toBrightness() -> Image<Intensity, T> {
         return _converted { px -> T in

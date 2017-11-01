@@ -23,7 +23,7 @@ class PlatformTests: XCTestCase {
             
             let image = Image<RGBA, UInt8>(nsImage: nsImage)
             
-            let nsImage2 = image!.nsImage()
+            _ = image!.nsImage()
             
         }
         #endif
