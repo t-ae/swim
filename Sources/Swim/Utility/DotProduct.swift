@@ -37,12 +37,4 @@ func dotProduct<T: FloatingPoint>(_ a: [T], _ b: [T]) -> T {
         
         return result
     }
-#else
-    func dotProduct(_ a: [Float], _ b: [Float]) -> Float {
-        return _dotProduct(a, b)
-    }
-    
-    func dotProduct(_ a: [Double], _ b: [Double]) -> Double {
-        return _dotProduct(a, b)
-    }
 #endif

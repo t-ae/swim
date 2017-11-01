@@ -43,5 +43,4 @@ func strideCopy<T>(src: [T], srcOffset: Int, srcStride: Int,
             }
         }
     }
-    
 #endif

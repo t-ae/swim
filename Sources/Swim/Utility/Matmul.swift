@@ -57,12 +57,4 @@ func matmul<T: FloatingPoint>(lhs: [T], rhs: [T], m: Int, n: Int, p: Int) -> [T]
         
         return ret
     }
-#else
-    func matmul(lhs: [Float], rhs: [Float], m: Int, n: Int, p: Int) -> [Float] {
-        return matmul(lhs: lhs, rhs: rhs, m: m, n: n, p: p)
-    }
-    
-    func matmul(lhs: [Double], rhs: [Double], m: Int, n: Int, p: Int) -> [Double] {
-        return matmul(lhs: lhs, rhs: rhs, m: m, n: n, p: p)
-    }
 #endif
