@@ -53,5 +53,79 @@ extension Image where P == Intensity, T: Comparable {
     }
 }
 
-
+#if os(macOS) || os(iOS)
+    import Accelerate
+    
+    extension Image where P == Intensity, T == Float {
+        func _minimumFilter(kernelSize: Int) -> Image<P, T> {
+            let (m, n, matrix) = _im2col(patchWidth: kernelSize,
+                                         patchHeight: kernelSize,
+                                         padding: .constant(T.infinity))
+            
+            var data = [T](matrix[0..<n])
+            matrix.withUnsafeBufferPointer {
+                var p = $0.baseAddress! + n
+                for _ in 1..<m {
+                    vDSP_vmin(data, 1, p, 1, &data, 1, vDSP_Length(n))
+                    p += n
+                }
+            }
+            
+            return Image(width: width, height: height, data: data)
+        }
+        
+        func _maximumFilter(kernelSize: Int) -> Image<P, T> {
+            let (m, n, matrix) = _im2col(patchWidth: kernelSize,
+                                         patchHeight: kernelSize,
+                                         padding: .constant(-T.infinity))
+            
+            var data = [T](matrix[0..<n])
+            matrix.withUnsafeBufferPointer {
+                var p = $0.baseAddress! + n
+                for _ in 1..<m {
+                    vDSP_vmax(data, 1, p, 1, &data, 1, vDSP_Length(n))
+                    p += n
+                }
+            }
+            
+            return Image(width: width, height: height, data: data)
+        }
+    }
+    
+    extension Image where P == Intensity, T == Double {
+        func _minimumFilter(kernelSize: Int) -> Image<P, T> {
+            let (m, n, matrix) = _im2col(patchWidth: kernelSize,
+                                         patchHeight: kernelSize,
+                                         padding: .constant(T.infinity))
+            
+            var data = [T](matrix[0..<n])
+            matrix.withUnsafeBufferPointer {
+                var p = $0.baseAddress! + n
+                for _ in 1..<m {
+                    vDSP_vminD(data, 1, p, 1, &data, 1, vDSP_Length(n))
+                    p += n
+                }
+            }
+            
+            return Image(width: width, height: height, data: data)
+        }
+        
+        func _maximumFilter(kernelSize: Int) -> Image<P, T> {
+            let (m, n, matrix) = _im2col(patchWidth: kernelSize,
+                                         patchHeight: kernelSize,
+                                         padding: .constant(-T.infinity))
+            
+            var data = [T](matrix[0..<n])
+            matrix.withUnsafeBufferPointer {
+                var p = $0.baseAddress! + n
+                for _ in 1..<m {
+                    vDSP_vmaxD(data, 1, p, 1, &data, 1, vDSP_Length(n))
+                    p += n
+                }
+            }
+            
+            return Image(width: width, height: height, data: data)
+        }
+    }
+#endif
 

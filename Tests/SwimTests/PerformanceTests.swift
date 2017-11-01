@@ -74,9 +74,7 @@ class PerformanceTests: XCTestCase {
         var image = Image<RGB, Float>(width: 1920, height: 1080, data: data)
         
         measure {
-            for _ in 0..<1 {
-                image[channel: .red] += 0.01
-            }
+            image[channel: .red] += 0.01
         }
     }
     
@@ -85,9 +83,25 @@ class PerformanceTests: XCTestCase {
         let image = Image<Intensity, Float>(width: 1920, height: 1080, data: data)
         
         measure {
-            for _ in 0..<1 {
-                _ = image.toIntegralImage()
-            }
+            _ = image.toIntegralImage()
+        }
+    }
+    
+    func testConvolution() {
+        let data = [Float](repeating: 0, count: 640*480)
+        let image = Image<Intensity, Float>(width: 640, height: 480, data: data)
+        
+        measure {
+            _ = image.convoluted(Filter.gaussian3x3)
+        }
+    }
+    
+    func testFilter() {
+        let data = [Float](repeating: 0, count: 640*480)
+        let image = Image<Intensity, Float>(width: 640, height: 480, data: data)
+        
+        measure {
+            _ = image.maximumFilter(kernelSize: 3)
         }
     }
     #endif
