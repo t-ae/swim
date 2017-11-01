@@ -33,3 +33,10 @@ extension Image where P == Intensity, T: Numeric {
         return _toIntegralImage()
     }
 }
+
+extension Image where P == Intensity, T == UInt8 {
+    @available(*, deprecated, message: "Could cause overflow")
+    public func toIntegralImage() -> Image<Intensity, T> {
+        return _toIntegralImage()
+    }
+}

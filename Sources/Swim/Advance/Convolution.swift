@@ -1,4 +1,5 @@
 
+// MARK: - Filter
 public enum Filter<T: Numeric&DataType> {
     public static var sobel3x3H: Image<Intensity, T> {
         return Image(width: 3, height: 3, data: [-1, 0, 1,
@@ -49,7 +50,7 @@ extension Filter where T: BinaryFloatingPoint {
     }
 }
 
-
+// MARK: - convoluted
 extension Image where T: Numeric {
     func _convoluted(_ filter: Image<Intensity, T>) -> Image<P, T> {
         var ret = Image<P, T>(width: width, height: height)
@@ -61,6 +62,30 @@ extension Image where T: Numeric {
         }
         
         return ret
+    }
+}
+
+extension Image where P == Intensity, T: Numeric {
+    public func convoluted(_ filter: Image<Intensity, T>) -> Image<P, T> {
+        return _convoluted(filter)
+    }
+}
+extension Image where P == RGB, T: Numeric {
+    public func convoluted(_ filter: Image<Intensity, T>) -> Image<P, T> {
+        return _convoluted(filter)
+    }
+}
+
+extension Image where P == Intensity, T == UInt8 {
+    @available(*, deprecated, message: "Could cause overflow")
+    public func convoluted(_ filter: Image<Intensity, T>) -> Image<P, T> {
+        return _convoluted(filter)
+    }
+}
+extension Image where P == RGB, T == UInt8 {
+    @available(*, deprecated, message: "Could cause overflow")
+    public func convoluted(_ filter: Image<Intensity, T>) -> Image<P, T> {
+        return _convoluted(filter)
     }
 }
 
@@ -93,16 +118,4 @@ extension Image where T: Numeric {
         }
     }
 #endif
-
-extension Image where P == Intensity, T: FloatingPoint {
-    public func convoluted(_ filter: Image<Intensity, T>) -> Image<P, T> {
-        return _convoluted(filter)
-    }
-}
-
-extension Image where P == RGB, T: FloatingPoint {
-    public func convoluted(_ filter: Image<Intensity, T>) -> Image<P, T> {
-        return _convoluted(filter)
-    }
-}
 
