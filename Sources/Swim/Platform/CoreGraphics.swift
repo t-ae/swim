@@ -69,4 +69,11 @@
         }
     }
     
+    extension Image where P == RGB, T == UInt8 {
+        public func cgImage() -> CGImage {
+            let rgba = Image<RGBA, UInt8>(image: self, alpha: 255)
+            return rgba.cgImage()
+        }
+    }
+    
 #endif

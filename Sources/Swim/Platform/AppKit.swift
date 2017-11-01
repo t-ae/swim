@@ -16,4 +16,10 @@
         }
     }
     
+    extension Image where P == RGB, T == UInt8 {
+        public func nsImage() -> NSImage {
+            return NSImage(cgImage: cgImage(), size: .zero)
+        }
+    }
+    
 #endif

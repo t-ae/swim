@@ -17,8 +17,7 @@ class VisualTests: XCTestCase {
         imageBase.alphaBlend(with: imageAlpha)
         
         let rgb256 = (imageBase * 255).converted(to: UInt8.self)
-        let rgba256 = Image<RGBA, UInt8>(image: rgb256, alpha: 255)
-        let nsImage = rgba256.nsImage()
+        let nsImage = rgb256.nsImage()
         
         _ = nsImage
     }

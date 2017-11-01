@@ -16,4 +16,9 @@
         }
     }
     
+    extension Image where P == RGBA, T == UInt8 {
+        public func uiImage() -> UIImage {
+            return UIImage(cgImage: cgImage())
+        }
+    }
 #endif
