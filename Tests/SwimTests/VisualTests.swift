@@ -2,7 +2,7 @@
 import XCTest
 import Swim
 
-
+// Set brakepoints and look NSImages in Xcode debugger
 
 class VisualTests: XCTestCase {
     #if !SWIFT_PACKAGE && os(macOS)
@@ -15,8 +15,6 @@ class VisualTests: XCTestCase {
         imageAlpha[40..<80, 40..<80] = Image(width: 40, height: 40, pixel: Pixel<RGBA, Float>(r: 0, g: 0, b: 1, a: 0.5))
         
         imageBase.alphaBlend(with: imageAlpha)
-        
-        let a = (imageAlpha*255).converted(to: UInt8.self).nsImage()
         
         let rgb256 = (imageBase * 255).converted(to: UInt8.self)
         let rgba256 = Image<RGBA, UInt8>(image: rgb256, alpha: 255)
