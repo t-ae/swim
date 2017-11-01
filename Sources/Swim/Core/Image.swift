@@ -19,6 +19,20 @@ public struct Image<P: PixelType, T: DataType> {
         self.init(width: width, height: height, data: data)
     }
     
+    public init(width: Int, height: Int, pixel: Pixel<P, T>) {
+        var data = [T](repeating: T.swimDefaultValue, count: width*height*P.channels)
+        
+        data.withUnsafeMutableBufferPointer {
+            var dst = $0.baseAddress!
+            for _ in 0..<width*height {
+                memcpy(dst, pixel.data, P.channels*MemoryLayout<T>.size)
+                dst += P.channels
+            }
+        }
+        
+        self.init(width: width, height: height, data: data)
+    }
+    
     init(width: Int, height: Int) {
         self.init(width: width, height: height, value: T.swimDefaultValue)
     }

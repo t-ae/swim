@@ -21,6 +21,7 @@ extension Image where P == RGB, T: BinaryFloatingPoint {
                         }
                         srcColor += P2.channels - P.channels
                     } else {
+                        dst += P.channels
                         srcColor += P2.channels
                     }
                     srcAlpha += P2.channels
