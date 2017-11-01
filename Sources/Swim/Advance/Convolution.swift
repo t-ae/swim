@@ -47,36 +47,14 @@ public enum Filter<T: BinaryFloatingPoint&DataType> {
     }
 }
 
-// padding = nearest
-func im2col<T>(image: Image<Intensity, T>, width: Int, height: Int) -> [T] {
-    
-    let dx = -width/2
-    let dy = -height/2
-    
-    var ret: [T] = []
-    ret.reserveCapacity(width*height)
-    
-    for h in 0..<height {
-        for w in 0..<width {
-            for y in 0..<image.height {
-                let yy = min(max(y + dy + h, 0), image.height-1)
-                for x in 0..<image.width {
-                    let xx = min(max(x + dx + w, 0), image.width-1)
-                    ret.append(image[xx, yy])
-                }
-            }
-        }
-    }
-    return ret
-}
 
 extension Image where T: FloatingPoint {
     func _convoluted(_ filter: Image<Intensity, T>) -> Image<P, T> {
         var ret = Image<P, T>(width: width, height: height)
         
         for c in 0..<P.channels {
-            let matrix = im2col(image: self[channel: c], width: filter.width, height: filter.height)
-            let result = _matmul(lhs: filter.data, rhs: matrix, m: 1, n: width*height, p: filter.width*filter.height)
+            let (m, n, matrix) = self[channel: c]._im2col(patchWidth: filter.width, patchHeight: filter.height)
+            let result = _matmul(lhs: filter.data, rhs: matrix, m: 1, n: n, p: m)
             ret[channel: c] = Image<Intensity, T>(width: width, height: height, data: result)
         }
         
@@ -90,8 +68,8 @@ extension Image where T: FloatingPoint {
             var ret = Image<P, T>(width: width, height: height)
 
             for c in 0..<P.channels {
-                let matrix = im2col(image: self[channel: c], width: filter.width, height: filter.height)
-                let result = _matmul(lhs: filter.data, rhs: matrix, m: 1, n: width*height, p: filter.width*filter.height)
+                let (m, n, matrix) = self[channel: c]._im2col(patchWidth: filter.width, patchHeight: filter.height)
+                let result = _matmul(lhs: filter.data, rhs: matrix, m: 1, n: n, p: m)
                 ret[channel: c] = Image<Intensity, T>(width: width, height: height, data: result)
             }
 
@@ -104,8 +82,8 @@ extension Image where T: FloatingPoint {
             var ret = Image<P, T>(width: width, height: height)
 
             for c in 0..<P.channels {
-                let matrix = im2col(image: self[channel: c], width: filter.width, height: filter.height)
-                let result = _matmul(lhs: filter.data, rhs: matrix, m: 1, n: width*height, p: filter.width*filter.height)
+                let (m, n, matrix) = self[channel: c]._im2col(patchWidth: filter.width, patchHeight: filter.height)
+                let result = _matmul(lhs: filter.data, rhs: matrix, m: 1, n: n, p: m)
                 ret[channel: c] = Image<Intensity, T>(width: width, height: height, data: result)
             }
 
