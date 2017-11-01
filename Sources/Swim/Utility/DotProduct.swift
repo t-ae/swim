@@ -1,7 +1,7 @@
 
 import Foundation
 
-private func _dotProduct<T: FloatingPoint>(_ a: [T], _ b: [T]) -> T {
+private func _dotProduct<T: Numeric>(_ a: [T], _ b: [T]) -> T {
     assert(a.count == b.count)
     
     var result: T = 0

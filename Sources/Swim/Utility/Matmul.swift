@@ -1,5 +1,5 @@
 
-func _matmul<T: FloatingPoint>(lhs: [T], rhs: [T], m: Int, n: Int, p: Int) -> [T] {
+func _matmul<T: Numeric>(lhs: [T], rhs: [T], m: Int, n: Int, p: Int) -> [T] {
     assert(lhs.count == m*p)
     assert(rhs.count == p*n)
     
