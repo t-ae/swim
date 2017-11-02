@@ -11,11 +11,6 @@ unsigned char* load_image(const char* path, int* width, int* height, int* channe
     return pixels;
 }
 
-float* load_image_float(const char* path, int* width, int* height, int* channels, int desired_channels) {
-    float* pixels = stbi_loadf(path, width, height, channels, desired_channels);
-    return pixels;
-}
-
 void free_image(void* pixels){
     stbi_image_free(pixels);
 }
