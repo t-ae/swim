@@ -10,25 +10,10 @@ class ImageIOTests: XCTestCase {
     var baseImage: Image<RGBA, UInt8>!
     
     override func setUp() {
-        self.baseImage = Image<RGBA, UInt8>(width: 4,
-                                            height: 4,
-                                            data: [0, 0, 0, 0,
-                                                   255, 0, 0, 255,
-                                                   0, 255, 0, 255,
-                                                   0, 0, 255, 255,
-                                                   255, 255, 0, 255,
-                                                   255, 0, 255, 255,
-                                                   0, 255, 255, 255,
-                                                   255, 255, 255, 255,
-                                                   1, 2, 3, 4,
-                                                   31, 32, 33, 34,
-                                                   71, 72, 73, 74,
-                                                   131, 132, 133, 134,
-                                                   171, 172, 173, 174,
-                                                   191, 192, 193, 194,
-                                                   231, 232, 233, 234,
-                                                   251, 252, 253, 254])
-        try! self.baseImage.write(path: srcPath, type: .png)
+        self.baseImage = Image<RGBA, UInt8>(width: 8,
+                                            height: 8,
+                                            data: (0..<256).map { UInt8($0) })
+        try! self.baseImage.write(to: srcPath, type: .png)
     }
     
     override func tearDown() {
@@ -57,7 +42,7 @@ class ImageIOTests: XCTestCase {
         
         XCTAssertEqual((image.clipped(low: 0, high: 1)*255).rounded().typeConverted(), baseImage)
         
-        try! image.write(path: dstPath, type: .png)
+        try! image.write(to: dstPath, type: .png)
         
         let reloaded = Image<RGBA, Float>(path: dstPath)!
 
@@ -74,7 +59,7 @@ class ImageIOTests: XCTestCase {
         
         XCTAssertEqual((image.clipped(low: 0, high: 1)*255).rounded().typeConverted(), baseImage)
         
-        try! image.write(path: dstPath, type: .png)
+        try! image.write(to: dstPath, type: .png)
         
         let reloaded = Image<RGBA, Double>(path: dstPath)!
         
