@@ -36,7 +36,7 @@ class ImageIOTests: XCTestCase {
         try? FileManager.default.removeItem(atPath: dstPath)
     }
     
-    func testSaveLoad() {
+    func testSaveLoadUInt8() {
         
         guard FileManager.default.fileExists(atPath: srcPath) else {
             return
@@ -47,7 +47,7 @@ class ImageIOTests: XCTestCase {
         XCTAssertEqual(image, baseImage)
     }
     
-    func testLoadFloat() {
+    func testSaveLoadFloat() {
         
         guard FileManager.default.fileExists(atPath: srcPath) else {
             return
@@ -61,6 +61,23 @@ class ImageIOTests: XCTestCase {
         
         let reloaded = Image<RGBA, Float>(path: dstPath)!
 
+        XCTAssertEqual(reloaded, image)
+    }
+    
+    func testSaveLoadDouble() {
+        
+        guard FileManager.default.fileExists(atPath: srcPath) else {
+            return
+        }
+        
+        let image = Image<RGBA, Double>(path: srcPath)!
+        
+        XCTAssertEqual((image.clipped(low: 0, high: 1)*255).rounded().typeConverted(), baseImage)
+        
+        try! image.write(path: dstPath, type: .png)
+        
+        let reloaded = Image<RGBA, Double>(path: dstPath)!
+        
         XCTAssertEqual(reloaded, image)
     }
 }

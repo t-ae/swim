@@ -106,6 +106,14 @@ extension Image where P: ImageFileFormat, T == Float {
     }
 }
 
+extension Image where P: ImageFileFormat, T == Double {
+    public func write(path: String, type: ImageFileType) throws {
+        let i255 = self.clipped(low: 0, high: 1) * 255
+        let uint8 = i255.rounded().typeConverted(to: UInt8.self)
+        try Swim.write(image: uint8, path: path, type: type)
+    }
+}
+
 extension Image where P == RGBA, T == UInt8 {
     public func write(path: String, type: ImageFileType) throws {
         switch type {
