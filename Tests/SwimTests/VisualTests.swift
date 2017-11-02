@@ -40,7 +40,9 @@ class VisualTests: XCTestCase {
                 let endX = startX + size/8
                 let startY = y*size/8
                 let endY = startY + size/8
-                imageBase[startX..<endX, startY..<endY].fill(0)
+                let value = Float(y*8+x) / 64
+                print(value)
+                imageBase[startX..<endX, startY..<endY].fill(value)
             }
         }
         let nsImageBase = float01ToNSImage(image: imageBase)
@@ -73,6 +75,42 @@ class VisualTests: XCTestCase {
             
             print("break here")
         }
+    }
+    
+    func testOpenClose() {
+        let size = 100
+        var image = Image<Intensity, Float>(width: size, height: size, data: [Float](repeating: 0, count: size*size))
+        
+        // base
+        image[30..<70, 30..<70].fill(1)
+        image[10..<90, 40..<45].fill(1)
+        image[10..<90, 55..<60].fill(1)
+        // noise
+        image[40..<43, 27..<30].fill(1)
+        image[40..<43, 67..<70].fill(0)
+        image[20..<22, 35..<40].fill(1)
+        image[20..<22, 55..<60].fill(0)
+        
+        let nsImage = float01ToNSImage(image: image)
+        
+        let close = image.maximumFilter(kernelSize: 3)
+            .maximumFilter(kernelSize: 3)
+            .minimumFilter(kernelSize: 3)
+            .minimumFilter(kernelSize: 3)
+        let open = image.minimumFilter(kernelSize: 3)
+            .minimumFilter(kernelSize: 3)
+            .maximumFilter(kernelSize: 3)
+            .maximumFilter(kernelSize: 3)
+        let closeOpen = close.minimumFilter(kernelSize: 3)
+            .minimumFilter(kernelSize: 3)
+            .maximumFilter(kernelSize: 3)
+            .maximumFilter(kernelSize: 3)
+        
+        let nsClose = float01ToNSImage(image: close)
+        let nsOpen = float01ToNSImage(image: open)
+        let nsCloseOpen = float01ToNSImage(image: closeOpen)
+        
+        print("break here")
     }
     
     #endif
