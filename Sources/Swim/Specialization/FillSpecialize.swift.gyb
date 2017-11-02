@@ -1,0 +1,23 @@
+%{
+from type import *
+}%
+
+% for dt in bool_data_types + int_data_types + fp_data_types:
+extension Image where P == Intensity, T == ${dt} {
+    public mutating func fill(_ value: T) {
+        _fill(value)
+    }
+}
+
+% end
+
+% for pt in pixel_types:
+% for dt in bool_data_types + int_data_types + fp_data_types:
+extension Image where P == ${pt}, T == ${dt} {
+    public mutating func fill(_ pixel: Pixel<P, T>) {
+        _fill(pixel)
+    }
+}
+
+% end
+% end
