@@ -93,7 +93,7 @@ extension Image where P == Intensity, T: Comparable {
             return Image(width: width, height: height, data: data)
         }
         
-        public func _medianFilter(kernelSize: Int) -> Image<P, T> {
+        func _medianFilter(kernelSize: Int) -> Image<P, T> {
             let (m, n, matrix) = _im2col(patchWidth: kernelSize,
                                          patchHeight: kernelSize,
                                          padding: .constant(T.nan))
@@ -145,7 +145,7 @@ extension Image where P == Intensity, T: Comparable {
             return Image(width: width, height: height, data: data)
         }
         
-        public func _medianFilter(kernelSize: Int) -> Image<P, T> {
+        func _medianFilter(kernelSize: Int) -> Image<P, T> {
             let (m, n, matrix) = _im2col(patchWidth: kernelSize,
                                          patchHeight: kernelSize,
                                          padding: .constant(T.nan))
