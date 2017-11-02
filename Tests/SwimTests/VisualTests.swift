@@ -20,8 +20,57 @@ class VisualTests: XCTestCase {
         let rgb256 = (imageBase * 255).converted(to: UInt8.self)
         let nsImage = rgb256.nsImage()
         
-        _ = nsImage
+        print("break here")
+    }
+    
+    func testFilter() {
+        let size = 128
+        var imageBase = Image<Intensity, Float>(width: size, height: size, data: [Float](repeating: 1, count: size*size))
+        for y in 0..<8 {
+            for x in 0..<8 {
+                guard (x+y) % 2 == 0 else { continue }
+                let startX = x*size/8
+                let endX = startX + size/8
+                let startY = y*size/8
+                let endY = startY + size/8
+                imageBase[startX..<endX, startY..<endY].fill(0)
+            }
+        }
+        let nsImageBase = (imageBase*255).toRGB().converted(to: UInt8.self).nsImage()
+        do {
+            var image = imageBase
+            image = image.convoluted(Filter.gaussian3x3)
+            let blur1 = float01ToNSImage(image: image)
+            image = image.convoluted(Filter.gaussian3x3)
+            let blur2 = float01ToNSImage(image: image)
+            image = image.convoluted(Filter.gaussian3x3)
+            let blur3 = float01ToNSImage(image: image)
+            
+            print("break here")
+        }
+        do {
+            let sobelH = float01ToNSImage(image: imageBase.convoluted(Filter.sobel3x3H))
+            let sobelV = float01ToNSImage(image: imageBase.convoluted(Filter.sobel3x3V))
+            let laplacian = float01ToNSImage(image: imageBase.convoluted(Filter.laplacian3x3))
+            
+            print("break here")
+        }
+        do {
+            let maximum = float01ToNSImage(image: imageBase.maximumFilter(kernelSize: 5))
+            let minimum = float01ToNSImage(image: imageBase.minimumFilter(kernelSize: 5))
+            let median = float01ToNSImage(image: imageBase.medianFilter(kernelSize: 5))
+            
+            print("break here")
+        }
     }
     
     #endif
+}
+
+func float01ToNSImage(image: Image<Intensity, Float>) -> NSImage {
+    var image = image
+    image.clip(low: 0, high: 1)
+    image *= 255
+    let uint = image.converted(to: UInt8.self)
+    return uint.toRGB().nsImage()
 }

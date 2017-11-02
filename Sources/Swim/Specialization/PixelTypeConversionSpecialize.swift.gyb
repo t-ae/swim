@@ -2,6 +2,15 @@
 from .type import *
 }%
 
+% for dt in bool_data_types + int_data_types + fp_data_types:
+extension Image where P == Intensity, T == ${dt} {
+    public func toRGB() -> Image<RGB, T> {
+        return _toRGB()
+    }
+}
+
+% end
+
 % for dt in large_enough_data_types:
 extension Image where P == RGB, T == ${dt} {
     public func toBrightness() -> Image<Intensity, T> {

@@ -1,4 +1,35 @@
 
+extension Image where P == Intensity, T == Bool {
+    public func toRGB() -> Image<RGB, T> {
+        return _toRGB()
+    }
+}
+
+extension Image where P == Intensity, T == UInt8 {
+    public func toRGB() -> Image<RGB, T> {
+        return _toRGB()
+    }
+}
+
+extension Image where P == Intensity, T == Int {
+    public func toRGB() -> Image<RGB, T> {
+        return _toRGB()
+    }
+}
+
+extension Image where P == Intensity, T == Float {
+    public func toRGB() -> Image<RGB, T> {
+        return _toRGB()
+    }
+}
+
+extension Image where P == Intensity, T == Double {
+    public func toRGB() -> Image<RGB, T> {
+        return _toRGB()
+    }
+}
+
+
 extension Image where P == RGB, T == Int {
     public func toBrightness() -> Image<Intensity, T> {
         return _toBrightness()
