@@ -9,13 +9,16 @@ class VisualTests: XCTestCase {
     
     func testAlphaBlend() {
         var imageBase = Image<RGB, Float>(width: 100, height: 100, data: [Float](repeating: 1, count: 100*100*3))
-        imageBase[20..<60, 20..<60].fill(Pixel(r: 1, g: 0, b: 0))
+        imageBase[30..<70, 20..<60].fill(Pixel(r: 1, g: 0, b: 0))
         
+        var imageGreen = Image<RGBA, Float>(width: 100, height: 100, data: [Float](repeating: 0, count: 100*100*4))
+        imageGreen[20..<60, 40..<80].fill(Pixel(r: 0, g: 1, b: 0, a: 0.5))
         
-        var imageAlpha = Image<RGBA, Float>(width: 100, height: 100, data: [Float](repeating: 0, count: 100*100*4))
-        imageAlpha[40..<80, 40..<80].fill(Pixel(r: 0, g: 0, b: 1, a: 0.5))
+        var imageBlue = Image<RGBA, Float>(width: 100, height: 100, data: [Float](repeating: 0, count: 100*100*4))
+        imageBlue[40..<80, 40..<80].fill(Pixel(r: 0, g: 0, b: 1, a: 0.5))
         
-        imageBase.alphaBlend(with: imageAlpha)
+        imageBase.alphaBlend(with: imageGreen)
+        imageBase.alphaBlend(with: imageBlue)
         
         let rgb256 = (imageBase * 255).typeConverted(to: UInt8.self)
         let nsImage = rgb256.nsImage()
