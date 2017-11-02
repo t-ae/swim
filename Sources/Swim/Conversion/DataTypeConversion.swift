@@ -6,37 +6,37 @@
 // MARK: - Generic
 
 extension Image where T: BinaryInteger {
-    public func converted<T2: BinaryInteger>(to: T2.Type = T2.self) -> Image<P, T2> {
+    public func typeConverted<T2: BinaryInteger>(to: T2.Type = T2.self) -> Image<P, T2> {
         return _channelwiseConverted { T2($0) }
     }
 }
 
 extension Image where T: SignedInteger {
-    public func converted<T2: BinaryFloatingPoint>(to: T2.Type = T2.self) -> Image<P, T2> {
+    public func typeConverted<T2: BinaryFloatingPoint>(to: T2.Type = T2.self) -> Image<P, T2> {
         return _channelwiseConverted { T2(Int64($0)) }
     }
 }
 
 extension Image where T: UnsignedInteger {
-    public func converted<T2: BinaryFloatingPoint>(to: T2.Type = T2.self) -> Image<P, T2> {
+    public func typeConverted<T2: BinaryFloatingPoint>(to: T2.Type = T2.self) -> Image<P, T2> {
         return _channelwiseConverted { T2(UInt64($0)) }
     }
 }
 
 extension Image where T: BinaryFloatingPoint {
-    public func converted<T2: BinaryInteger>(to: T2.Type = T2.self) -> Image<P, T2> {
+    public func typeConverted<T2: BinaryInteger>(to: T2.Type = T2.self) -> Image<P, T2> {
         return _channelwiseConverted { T2($0) }
     }
 }
 
 extension Image where T == Float {
-    public func converted<T2: BinaryFloatingPoint>(to: T2.Type = T2.self) -> Image<P, T2> {
+    public func typeConverted<T2: BinaryFloatingPoint>(to: T2.Type = T2.self) -> Image<P, T2> {
         return _channelwiseConverted(T2.init)
     }
 }
 
 extension Image where T == Double {
-    public func converted<T2: BinaryFloatingPoint>(to: T2.Type = T2.self) -> Image<P, T2> {
+    public func typeConverted<T2: BinaryFloatingPoint>(to: T2.Type = T2.self) -> Image<P, T2> {
         return _channelwiseConverted(T2.init)
     }
 }
@@ -44,16 +44,16 @@ extension Image where T == Double {
 // MARK: - Specializations
 
 extension Image where T == UInt8 {
-    public func converted(to: UInt8.Type = UInt8.self) -> Image<P, UInt8> {
+    public func typeConverted(to: UInt8.Type = UInt8.self) -> Image<P, UInt8> {
         return self
     }
     
-    public func converted(to: Int.Type = Int.self) -> Image<P, Int> {
+    public func typeConverted(to: Int.Type = Int.self) -> Image<P, Int> {
         return _channelwiseConverted(Int.init)
     }
     
     #if os(macOS) || os(iOS)
-    public func converted(to: Float.Type = Float.self) -> Image<P, Float> {
+    public func typeConverted(to: Float.Type = Float.self) -> Image<P, Float> {
         var newImage = Image<P, Float>(width: width, height: height)
         data.withUnsafeBufferPointer {
             let src = $0.baseAddress!
@@ -65,7 +65,7 @@ extension Image where T == UInt8 {
         return newImage
     }
     
-    public func converted(to: Double.Type = Double.self) -> Image<P, Double> {
+    public func typeConverted(to: Double.Type = Double.self) -> Image<P, Double> {
         var newImage = Image<P, Double>(width: width, height: height)
         data.withUnsafeBufferPointer {
             let src = $0.baseAddress!
@@ -79,37 +79,37 @@ extension Image where T == UInt8 {
     
     #else
     
-    public func converted(to: Float.Type = Float.self) -> Image<P, Float> {
+    public func typeConverted(to: Float.Type = Float.self) -> Image<P, Float> {
         return _channelwiseConverted(Float.init)
     }
     
-    public func converted(to: Double.Type = Double.self) -> Image<P, Double> {
+    public func typeConverted(to: Double.Type = Double.self) -> Image<P, Double> {
         return _channelwiseConverted(Double.init)
     }
     #endif
 }
 
 extension Image where T == Int {
-    public func converted(to: UInt8.Type = UInt8.self) -> Image<P, UInt8> {
+    public func typeConverted(to: UInt8.Type = UInt8.self) -> Image<P, UInt8> {
         return _channelwiseConverted(UInt8.init)
     }
     
-    public func converted(to: Int.Type = Int.self) -> Image<P, Int> {
+    public func typeConverted(to: Int.Type = Int.self) -> Image<P, Int> {
         return self
     }
     
-    public func converted(to: Float.Type = Float.self) -> Image<P, Float> {
+    public func typeConverted(to: Float.Type = Float.self) -> Image<P, Float> {
         return _channelwiseConverted(Float.init)
     }
     
-    public func converted(to: Double.Type = Double.self) -> Image<P, Double> {
+    public func typeConverted(to: Double.Type = Double.self) -> Image<P, Double> {
         return _channelwiseConverted(Double.init)
     }
 }
 
 extension Image where T == Float {
     #if os(macOS) || os(iOS)
-    public func converted(to: UInt8.Type = UInt8.self) -> Image<P, UInt8> {
+    public func typeConverted(to: UInt8.Type = UInt8.self) -> Image<P, UInt8> {
         var newImage = Image<P, UInt8>(width: width, height: height)
         data.withUnsafeBufferPointer {
             let src = $0.baseAddress!
@@ -121,21 +121,21 @@ extension Image where T == Float {
         return newImage
     }
     #else
-    public func converted(to: UInt8.Type = UInt8.self) -> Image<P, UInt8> {
+    public func typeConverted(to: UInt8.Type = UInt8.self) -> Image<P, UInt8> {
         return _channelwiseConverted(UInt8.init)
     }
     #endif
     
-    public func converted(to: Int.Type = Int.self) -> Image<P, Int> {
+    public func typeConverted(to: Int.Type = Int.self) -> Image<P, Int> {
         return _channelwiseConverted(Int.init)
     }
     
-    public func converted(to: Float.Type = Float.self) -> Image<P, Float> {
+    public func typeConverted(to: Float.Type = Float.self) -> Image<P, Float> {
         return self
     }
     
     #if os(macOS) || os(iOS)
-    public func converted(to: Double.Type = Double.self) -> Image<P, Double> {
+    public func typeConverted(to: Double.Type = Double.self) -> Image<P, Double> {
         var newImage = Image<P, Double>(width: width, height: height)
         data.withUnsafeBufferPointer {
             let src = $0.baseAddress!
@@ -148,7 +148,7 @@ extension Image where T == Float {
     }
     #else
     
-    public func converted(to: Double.Type = Double.self) -> Image<P, Double> {
+    public func typeConverted(to: Double.Type = Double.self) -> Image<P, Double> {
         return _channelwiseConverted(Double.init)
     }
     #endif
@@ -156,7 +156,7 @@ extension Image where T == Float {
 
 extension Image where T == Double {
     #if os(macOS) || os(iOS)
-    public func converted(to: UInt8.Type = UInt8.self) -> Image<P, UInt8> {
+    public func typeConverted(to: UInt8.Type = UInt8.self) -> Image<P, UInt8> {
         var newImage = Image<P, UInt8>(width: width, height: height)
         data.withUnsafeBufferPointer {
             let src = $0.baseAddress!
@@ -168,17 +168,17 @@ extension Image where T == Double {
         return newImage
     }
     #else
-    public func converted(to: UInt8.Type = UInt8.self) -> Image<P, UInt8> {
+    public func typeConverted(to: UInt8.Type = UInt8.self) -> Image<P, UInt8> {
         return _channelwiseConverted(UInt8.init)
     }
     #endif
     
-    public func converted(to: Int.Type = Int.self) -> Image<P, Int> {
+    public func typeConverted(to: Int.Type = Int.self) -> Image<P, Int> {
         return _channelwiseConverted(Int.init)
     }
     
     #if os(macOS) || os(iOS)
-    public func converted(to: Float.Type = Float.self) -> Image<P, Float> {
+    public func typeConverted(to: Float.Type = Float.self) -> Image<P, Float> {
         var newImage = Image<P, Float>(width: width, height: height)
         data.withUnsafeBufferPointer {
             let src = $0.baseAddress!
@@ -190,12 +190,12 @@ extension Image where T == Double {
         return newImage
     }
     #else
-    public func converted(to: Float.Type = Float.self) -> Image<P, Float> {
+    public func typeConverted(to: Float.Type = Float.self) -> Image<P, Float> {
         return _channelwiseConverted(Float.init)
     }
     #endif
     
-    public func converted(to: Double.Type = Double.self) -> Image<P, Double> {
+    public func typeConverted(to: Double.Type = Double.self) -> Image<P, Double> {
         return self
     }
 }

@@ -17,7 +17,7 @@ class VisualTests: XCTestCase {
         
         imageBase.alphaBlend(with: imageAlpha)
         
-        let rgb256 = (imageBase * 255).converted(to: UInt8.self)
+        let rgb256 = (imageBase * 255).typeConverted(to: UInt8.self)
         let nsImage = rgb256.nsImage()
         
         print("break here")
@@ -36,7 +36,7 @@ class VisualTests: XCTestCase {
                 imageBase[startX..<endX, startY..<endY].fill(0)
             }
         }
-        let nsImageBase = (imageBase*255).toRGB().converted(to: UInt8.self).nsImage()
+        let nsImageBase = float01ToNSImage(image: imageBase)
         do {
             var image = imageBase
             image = image.convoluted(Filter.gaussian3x3)
@@ -71,6 +71,6 @@ func float01ToNSImage(image: Image<Intensity, Float>) -> NSImage {
     var image = image
     image.clip(low: 0, high: 1)
     image *= 255
-    let uint = image.converted(to: UInt8.self)
+    let uint = image.typeConverted(to: UInt8.self)
     return uint.toRGB().nsImage()
 }
