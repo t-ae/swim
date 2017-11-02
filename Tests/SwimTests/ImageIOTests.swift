@@ -4,8 +4,8 @@ import Swim
 
 class ImageIOTests: XCTestCase {
     
-    let srcPath = "/tmp/src.png"
-    let dstPath = "/tmp/dst.png"
+    let srcPath = URL(fileURLWithPath: "/tmp/src.png")
+    let dstPath = URL(fileURLWithPath: "/tmp/dst.png")
     
     var baseImage: Image<RGBA, UInt8>!
     
@@ -17,51 +17,36 @@ class ImageIOTests: XCTestCase {
     }
     
     override func tearDown() {
-        try? FileManager.default.removeItem(atPath: srcPath)
-        try? FileManager.default.removeItem(atPath: dstPath)
+        try? FileManager.default.removeItem(at: srcPath)
+        try? FileManager.default.removeItem(at: dstPath)
     }
     
     func testSaveLoadUInt8() {
-        
-        guard FileManager.default.fileExists(atPath: srcPath) else {
-            return
-        }
-        
-        let image = Image<RGBA, UInt8>(path: srcPath)!
+        let image = Image<RGBA, UInt8>(contentsOf: srcPath)!
         
         XCTAssertEqual(image, baseImage)
     }
     
     func testSaveLoadFloat() {
-        
-        guard FileManager.default.fileExists(atPath: srcPath) else {
-            return
-        }
-        
-        let image = Image<RGBA, Float>(path: srcPath)!
+        let image = Image<RGBA, Float>(contentsOf: srcPath)!
         
         XCTAssertEqual((image.clipped(low: 0, high: 1)*255).rounded().typeConverted(), baseImage)
         
         try! image.write(to: dstPath, type: .png)
         
-        let reloaded = Image<RGBA, Float>(path: dstPath)!
+        let reloaded = Image<RGBA, Float>(contentsOf: dstPath)!
 
         XCTAssertEqual(reloaded, image)
     }
     
     func testSaveLoadDouble() {
-        
-        guard FileManager.default.fileExists(atPath: srcPath) else {
-            return
-        }
-        
-        let image = Image<RGBA, Double>(path: srcPath)!
+        let image = Image<RGBA, Double>(contentsOf: srcPath)!
         
         XCTAssertEqual((image.clipped(low: 0, high: 1)*255).rounded().typeConverted(), baseImage)
         
         try! image.write(to: dstPath, type: .png)
         
-        let reloaded = Image<RGBA, Double>(path: dstPath)!
+        let reloaded = Image<RGBA, Double>(contentsOf: dstPath)!
         
         XCTAssertEqual(reloaded, image)
     }

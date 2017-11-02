@@ -1,4 +1,5 @@
 
+import Foundation
 import CStbImage
 
 // MARK: Type
@@ -22,7 +23,12 @@ public enum ImageWriteError: Error {
 
 // MARK: Read
 extension Image where P: ImageFileFormat, T == UInt8 {
-    public init?(path: String) {
+    public init?(contentsOf url: URL) {
+        
+        guard url.isFileURL else {
+            return nil
+        }
+        let path = url.path
         
         var width: Int32 = 0
         var height: Int32 = 0
@@ -46,8 +52,8 @@ extension Image where P: ImageFileFormat, T == UInt8 {
 extension Image where P: ImageFileFormat, T == Float {
     /// Load image file.
     /// All values are in [0, 1].
-    public init?(path: String) {
-        guard let image = Image<P, UInt8>(path: path) else {
+    public init?(contentsOf url: URL) {
+        guard let image = Image<P, UInt8>(contentsOf: url) else {
             return nil
         }
         self = image.typeConverted() / 255
@@ -57,8 +63,8 @@ extension Image where P: ImageFileFormat, T == Float {
 extension Image where P: ImageFileFormat, T == Double {
     /// Load image file.
     /// All values are in [0, 1].
-    public init?(path: String) {
-        guard let image = Image<P, UInt8>(path: path) else {
+    public init?(contentsOf url: URL) {
+        guard let image = Image<P, UInt8>(contentsOf: url) else {
             return nil
         }
         self = image.typeConverted() / 255
@@ -66,7 +72,14 @@ extension Image where P: ImageFileFormat, T == Double {
 }
 
 // MARK: Write
-private func write<P>(image: Image<P, UInt8>, path: String, type: ImageFileType) throws {
+private func write<P>(image: Image<P, UInt8>, url: URL, type: ImageFileType) throws {
+    
+    guard url.isFileURL else {
+        throw ImageWriteError.failedToWrite
+    }
+    
+    let path = url.path
+    
     let width = Int32(image.width)
     let height = Int32(image.height)
     let bpp = Int32(P.channels)
@@ -94,19 +107,19 @@ private func write<P>(image: Image<P, UInt8>, path: String, type: ImageFileType)
 
 extension Image where P: ImageFileFormat, T == UInt8 {
     /// Save image.
-    public func write(to path: String, type: ImageFileType) throws {
-        try Swim.write(image: self, path: path, type: type)
+    public func write(to url: URL, type: ImageFileType) throws {
+        try Swim.write(image: self, url: url, type: type)
     }
 }
 
 extension Image where P == RGBA, T == UInt8 {
     /// Save image.
-    public func write(to path: String, type: ImageFileType) throws {
+    public func write(to url: URL, type: ImageFileType) throws {
         switch type {
         case .bitmap, .jpeg:
             throw ImageWriteError.alphaNotSupported
         default:
-            try Swim.write(image: self, path: path, type: type)
+            try Swim.write(image: self, url: url, type: type)
         }
     }
 }
@@ -114,19 +127,19 @@ extension Image where P == RGBA, T == UInt8 {
 extension Image where P: ImageFileFormat, T == Float {
     /// Save image.
     /// Pixel values are clipped to [0, 1].
-    public func write(to path: String, type: ImageFileType) throws {
+    public func write(to url: URL, type: ImageFileType) throws {
         let i255 = self.clipped(low: 0, high: 1) * 255
         let uint8 = i255.rounded().typeConverted(to: UInt8.self)
-        try Swim.write(image: uint8, path: path, type: type)
+        try Swim.write(image: uint8, url: url, type: type)
     }
 }
 
 extension Image where P: ImageFileFormat, T == Double {
     /// Save image.
     /// Pixel values are clipped to [0, 1].
-    public func write(to path: String, type: ImageFileType) throws {
+    public func write(to url: URL, type: ImageFileType) throws {
         let i255 = self.clipped(low: 0, high: 1) * 255
         let uint8 = i255.rounded().typeConverted(to: UInt8.self)
-        try Swim.write(image: uint8, path: path, type: type)
+        try Swim.write(image: uint8, url: url, type: type)
     }
 }
