@@ -41,10 +41,14 @@ class VisualTests: XCTestCase {
             var image = imageBase
             image = image.convoluted(Filter.gaussian3x3)
             let blur1 = float01ToNSImage(image: image)
-            image = image.convoluted(Filter.gaussian3x3)
-            let blur2 = float01ToNSImage(image: image)
-            image = image.convoluted(Filter.gaussian3x3)
-            let blur3 = float01ToNSImage(image: image)
+            for _ in 0..<4 {
+                image = image.convoluted(Filter.gaussian3x3)
+            }
+            let blur5 = float01ToNSImage(image: image)
+            for _ in 0..<10 {
+                image = image.convoluted(Filter.gaussian3x3)
+            }
+            let blur15 = float01ToNSImage(image: image)
             
             print("break here")
         }
