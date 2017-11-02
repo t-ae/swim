@@ -5,17 +5,6 @@ from type import *
 % for ct in ["Image", "Pixel"]:
 
 % for pt in pixel_types:
-% for dt in signed_data_types:
-extension ${ct} where PT ==${pt}, DT == ${dt} {
-    public static prefix func -(arg: ${ct}) -> ${ct} {
-        return negate(arg: arg)
-    }
-}
-
-%end
-%end
-
-% for pt in pixel_types:
 % for dt in int_data_types + fp_data_types:
 extension ${ct} where PT == ${pt}, DT == ${dt} {
     public static func +(lhs: ${ct}, rhs: DT) -> ${ct} {

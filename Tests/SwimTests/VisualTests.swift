@@ -41,7 +41,6 @@ class VisualTests: XCTestCase {
                 let startY = y*size/8
                 let endY = startY + size/8
                 let value = Float(y*8+x) / 64
-                print(value)
                 imageBase[startX..<endX, startY..<endY].fill(value)
             }
         }
@@ -109,6 +108,9 @@ class VisualTests: XCTestCase {
         let nsClose = float01ToNSImage(image: close)
         let nsOpen = float01ToNSImage(image: open)
         let nsCloseOpen = float01ToNSImage(image: closeOpen)
+        
+        let nsBlackhat = float01ToNSImage(image: close - image)
+        let nsTopHat = float01ToNSImage(image: image - open)
         
         print("break here")
     }

@@ -1,0 +1,53 @@
+%{
+from type import *
+}%
+
+% for ct in ["Image", "Pixel"]:
+
+% for pt in pixel_types:
+% for dt in int_data_types + fp_data_types:
+extension ${ct} where PT == ${pt}, DT == ${dt} {
+    public static func +(lhs: ${ct}, rhs: ${ct}) -> ${ct} {
+        var ret = lhs
+        ret += rhs
+        return ret
+    }
+    
+    public static func +=(lhs: inout ${ct}, rhs: ${ct}) {
+        addAssign(lhs: &lhs, rhs: rhs)
+    }
+    
+    public static func -(lhs: ${ct}, rhs: ${ct}) -> ${ct} {
+        var ret = lhs
+        ret -= rhs
+        return ret
+    }
+
+    public static func -=(lhs: inout ${ct}, rhs: ${ct}) {
+        subtractAssign(lhs: &lhs, rhs: rhs)
+    }
+    
+    public static func *(lhs: ${ct}, rhs: ${ct}) -> ${ct} {
+        var ret = lhs
+        ret *= rhs
+        return ret
+    }
+    
+    public static func *=(lhs: inout ${ct}, rhs: ${ct}) {
+        multiplyAssign(lhs: &lhs, rhs: rhs)
+    }
+    
+    public static func /(lhs: ${ct}, rhs: ${ct}) -> ${ct} {
+        var ret = lhs
+        ret /= rhs
+        return ret
+    }
+    
+    public static func /=(lhs: inout ${ct}, rhs: ${ct}) {
+        divideAssign(lhs: &lhs, rhs: rhs)
+    }
+}
+
+% end
+% end
+% end

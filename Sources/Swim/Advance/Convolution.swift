@@ -9,8 +9,8 @@ public enum Filter<T: Numeric&DataType> {
     
     public static var sobel3x3V: Image<Intensity, T> {
         return Image(width: 3, height: 3, data: [-1, -2, -1,
-                                                 +0, +0, +0,
-                                                 +1, +2, +1])
+                                                 0, 0, 0,
+                                                 1, 2, 1])
     }
     
     public static var prewitt3x3H: Image<Intensity, T> {
@@ -21,14 +21,14 @@ public enum Filter<T: Numeric&DataType> {
     
     public static var prewitt3x3V: Image<Intensity, T> {
         return Image(width: 3, height: 3, data: [-1, -1, -1,
-                                                 +0, +0, +0,
-                                                 +1, +1, +1])
+                                                 0, 0, 0,
+                                                 1, 1, 1])
     }
     
     public static var laplacian3x3: Image<Intensity, T> {
-        return Image(width: 3, height: 3, data: [+0, +1, +0,
-                                                 +1, -4, +1,
-                                                 +0, +1, +0])
+        return Image(width: 3, height: 3, data: [0, 1, 0,
+                                                 1, -4, 1,
+                                                 0, 1, 0])
     }
 }
 
