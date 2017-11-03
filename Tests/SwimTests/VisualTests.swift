@@ -115,6 +115,70 @@ class VisualTests: XCTestCase {
         print("break here")
     }
     
+    func testJulia() {
+        
+        let c = (-0.74543, 0.11301)
+        
+        let size = 256
+        let range: Double = 2
+        let maxIteration = 256
+        
+        func getJuliaImage(c: (Double, Double), color: Pixel<RGBA, Double>) -> Image<RGBA, Double> {
+            var image = Image<RGBA, Double>(width: size,
+                                            height: size,
+                                            data: [Double](repeating: 0, count: size*size*4))
+            image.fill(color)
+            
+            var iterationMax = 0
+            
+            for y in 0..<size {
+                for x in 0..<size {
+                    var z: (Double, Double) = ((Double(x)/Double(size) - 0.5)*range,
+                                               (Double(y)/Double(size) - 0.5)*range)
+                    
+                    for n in 0..<maxIteration {
+                        let zr = z.0*z.0 - z.1*z.1 + c.0
+                        let zi = 2*z.0*z.1 + c.1
+                        z = (zr, zi)
+                        if z.0*z.0 + z.1*z.1 > 2*2 {
+                            image[x, y, 3] = Double(n)
+                            iterationMax = max(iterationMax, n)
+                            break
+                        }
+                        if n == maxIteration - 1 {
+                            image[x, y, 3] = 0
+                        }
+                    }
+                }
+            }
+            
+            image[channel: .alpha] /= Double(iterationMax)
+            
+            return image
+        }
+        
+        
+        let julia1 = getJuliaImage(c: (-0.6180339887498949, 0), color: Pixel(r: 1, g: 0, b: 0, a: 0))
+        let ns1 = (julia1*255).typeConverted(to: UInt8.self).nsImage()
+        
+        let julia2 = getJuliaImage(c: (0.285, 0), color: Pixel(r: 0, g: 1, b: 0, a: 0))
+        let ns2 = (julia2*255).typeConverted(to: UInt8.self).nsImage()
+        
+        let julia3 = getJuliaImage(c: (0.285, 0.01), color: Pixel(r: 0, g: 0, b: 1, a: 0))
+        let ns3 = (julia3*255).typeConverted(to: UInt8.self).nsImage()
+        
+        let julia4 = getJuliaImage(c: (-0.70176, -0.3842), color: Pixel(r: 1, g: 1, b: 0, a: 0))
+        let ns4 = (julia4*255).typeConverted(to: UInt8.self).nsImage()
+        
+        let julia5 = getJuliaImage(c: (-0.835, 0.2321), color: Pixel(r: 1, g: 0, b: 1, a: 0))
+        let ns5 = (julia5*255).typeConverted(to: UInt8.self).nsImage()
+        
+        let julia6 = getJuliaImage(c: (-0.8, 0.156), color: Pixel(r: 0, g: 1, b: 1, a: 0))
+        let ns6 = (julia6*255).typeConverted(to: UInt8.self).nsImage()
+        
+        print("break here")
+    }
+    
     #endif
 }
 
