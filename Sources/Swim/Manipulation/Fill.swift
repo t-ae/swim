@@ -1,7 +1,7 @@
 
 import Foundation
 
-extension Image where P == Intensity {
+extension Image {
     mutating func _fill(_ value: T) {
         data.withUnsafeMutableBufferPointer {
             var dst = $0.baseAddress!
@@ -15,9 +15,7 @@ extension Image where P == Intensity {
     public mutating func fill(_ value: T) {
         _fill(value)
     }
-}
-
-extension Image {
+    
     mutating func _fill(_ pixel: Pixel<P, T>) {
         data.withUnsafeMutableBufferPointer {
             var dst = $0.baseAddress!

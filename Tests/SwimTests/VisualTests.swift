@@ -10,15 +10,15 @@ class VisualTests: XCTestCase {
     func testAlphaBlend() {
         var imageBase = Image<RGB, Float>(width: 100,
                                           height: 100,
-                                          data: [Float](repeating: 1, count: 100*100*3))
+                                          value: 1)
         imageBase[30..<70, 20..<60].fill(Pixel(r: 1, g: 0, b: 0))
         
         var imageGreen = Image<RGBA, Float>(width: 100,
                                             height: 100,
-                                            data: [Float](repeating: 0, count: 100*100*4))
+                                            value: 0)
         imageGreen[20..<60, 40..<80].fill(Pixel(r: 0, g: 1, b: 0, a: 0.5))
         
-        var imageBlue = Image<RGBA, Float>(width: 100, height: 100, data: [Float](repeating: 0, count: 100*100*4))
+        var imageBlue = Image<RGBA, Float>(width: 100, height: 100, value: 0)
         imageBlue[40..<80, 40..<80].fill(Pixel(r: 0, g: 0, b: 1, a: 0.5))
         
         imageBase.alphaBlend(with: imageGreen)
@@ -32,7 +32,7 @@ class VisualTests: XCTestCase {
     
     func testFilter() {
         let size = 128
-        var imageBase = Image<Intensity, Float>(width: size, height: size, data: [Float](repeating: 1, count: size*size))
+        var imageBase = Image<Intensity, Float>(width: size, height: size, value: 1)
         for y in 0..<8 {
             for x in 0..<8 {
                 guard (x+y) % 2 == 0 else { continue }
@@ -78,7 +78,7 @@ class VisualTests: XCTestCase {
     
     func testOpenClose() {
         let size = 100
-        var image = Image<Intensity, Float>(width: size, height: size, data: [Float](repeating: 0, count: size*size))
+        var image = Image<Intensity, Float>(width: size, height: size, value: 0)
         
         // base
         image[30..<70, 30..<70].fill(1)
@@ -126,8 +126,7 @@ class VisualTests: XCTestCase {
         func getJuliaImage(c: (Double, Double), color: Pixel<RGBA, Double>) -> Image<RGBA, Double> {
             var image = Image<RGBA, Double>(width: size,
                                             height: size,
-                                            data: [Double](repeating: 0, count: size*size*4))
-            image.fill(color)
+                                            pixel: color)
             
             var iterationMax = 0
             
@@ -175,6 +174,16 @@ class VisualTests: XCTestCase {
         
         let julia6 = getJuliaImage(c: (-0.8, 0.156), color: Pixel(r: 0, g: 1, b: 1, a: 0))
         let ns6 = (julia6*255).typeConverted(to: UInt8.self).nsImage()
+        
+        var combine = Image<RGB, Double>(width: size, height: size, value: 1)
+        combine.alphaBlend(with: julia1)
+        combine.alphaBlend(with: julia2)
+        combine.alphaBlend(with: julia3)
+        combine.alphaBlend(with: julia4)
+        combine.alphaBlend(with: julia5)
+        combine.alphaBlend(with: julia6)
+        let nsCombine = (combine*255).typeConverted(to: UInt8.self).nsImage()
+        
         
         print("break here")
     }
