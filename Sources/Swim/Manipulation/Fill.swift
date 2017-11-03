@@ -3,8 +3,12 @@ import Foundation
 
 extension Image where P == Intensity {
     mutating func _fill(_ value: T) {
-        for i in 0..<data.count {
-            data[i] = value
+        data.withUnsafeMutableBufferPointer {
+            var dst = $0.baseAddress!
+            for _ in 0..<$0.count {
+                dst.pointee = value
+                dst += 1
+            }
         }
     }
     
