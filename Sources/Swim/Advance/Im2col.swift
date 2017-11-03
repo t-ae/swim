@@ -49,16 +49,15 @@ extension Image where P == Intensity {
                             var sp = src + (yy * width + x)
                             
                             // left padding
-                            let padLeftValue: T
                             switch padding {
                             case .nearest:
-                                padLeftValue = sp.pointee
-                            case .constant(let v):
-                                padLeftValue = v
-                            }
-                            for _ in 0..<max(-dx, 0) {
-                                dst.pointee = padLeftValue
-                                dst += 1
+                                let padLeftValue = sp.pointee
+                                for _ in 0..<max(-dx, 0) {
+                                    dst.pointee = padLeftValue
+                                    dst += 1
+                                }
+                            case .constant:
+                                dst += max(-dx, 0)
                             }
                             
                             // copy
@@ -67,18 +66,18 @@ extension Image where P == Intensity {
                             dst += count
                             
                             // right padding
-                            let padRightValue: T
                             switch padding {
                             case .nearest:
-                                sp += count - 1 // point rightest
-                                padRightValue = sp.pointee
-                            case .constant(let v):
-                                padRightValue = v
+                                sp += count - 1 // point rightest pixel
+                                let padRightValue = sp.pointee
+                                for _ in 0..<max(dx, 0) {
+                                    dst.pointee = padRightValue
+                                    dst += 1
+                                }
+                            case .constant:
+                                dst += max(dx, 0)
                             }
-                            for _ in 0..<max(dx, 0) {
-                                dst.pointee = padRightValue
-                                dst += 1
-                            }
+                            
                         }
                     }
                 }
