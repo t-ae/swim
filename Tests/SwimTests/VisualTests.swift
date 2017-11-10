@@ -120,7 +120,7 @@ class VisualTests: XCTestCase {
         let c = (-0.74543, 0.11301)
         
         let size = 256
-        let range: Double = 2
+        let range: Double = 2.5
         let maxIteration = 256
         
         func getJuliaImage(c: (Double, Double), color: Pixel<RGBA, Double>) -> Image<RGBA, Double> {
@@ -166,7 +166,7 @@ class VisualTests: XCTestCase {
         let julia3 = getJuliaImage(c: (0.285, 0.01), color: Pixel(r: 0, g: 0, b: 1, a: 0))
         let ns3 = (julia3*255).typeConverted(to: UInt8.self).nsImage()
         
-        let julia4 = getJuliaImage(c: (-0.70176, -0.3842), color: Pixel(r: 1, g: 1, b: 0, a: 0))
+        let julia4 = getJuliaImage(c: (-0.70176, -0.3842), color: Pixel(r: 0.7, g: 0.7, b: 0, a: 0))
         let ns4 = (julia4*255).typeConverted(to: UInt8.self).nsImage()
         
         let julia5 = getJuliaImage(c: (-0.835, 0.2321), color: Pixel(r: 1, g: 0, b: 1, a: 0))
@@ -174,16 +174,6 @@ class VisualTests: XCTestCase {
         
         let julia6 = getJuliaImage(c: (-0.8, 0.156), color: Pixel(r: 0, g: 1, b: 1, a: 0))
         let ns6 = (julia6*255).typeConverted(to: UInt8.self).nsImage()
-        
-        var combine = Image<RGB, Double>(width: size, height: size, value: 1)
-        combine.alphaBlend(with: julia1)
-        combine.alphaBlend(with: julia2)
-        combine.alphaBlend(with: julia3)
-        combine.alphaBlend(with: julia4)
-        combine.alphaBlend(with: julia5)
-        combine.alphaBlend(with: julia6)
-        let nsCombine = (combine*255).typeConverted(to: UInt8.self).nsImage()
-        
         
         print("break here")
     }
