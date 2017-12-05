@@ -178,6 +178,58 @@ class VisualTests: XCTestCase {
         print("break here")
     }
     
+    public func testLifeGame() {
+        
+        func next(_ image: Image<Intensity, UInt8>) -> Image<Intensity, UInt8> {
+            let (m, n, matrix) = image.im2col(patchWidth: 3, patchHeight: 3, padding: Padding.zero)
+            // m == 9
+            var sums = [UInt8](repeating: 0, count: n)
+            
+            for i in 0..<m {
+                if i == 4 { continue }  // ignore self
+                for j in 0..<n {
+                    sums[j] += matrix[i*n+j]
+                }
+            }
+            for j in 0..<n {
+                switch (matrix[4*n+j], sums[j]) {
+                case (0, 3), (1, 2), (1, 3): // born and survive
+                    sums[j] = 1
+                default:
+                    sums[j] = 0
+                }
+            }
+            return Image(width: image.width, height: image.height, data: sums)
+        }
+        
+        // pentadecathlon
+        let b0 = Image<Intensity, UInt8>(width: 16,
+                                         height: 16,
+                                         data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                                                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                                                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                                                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                                                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                                                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                                                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                                                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                                                0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0,
+                                                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                                                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                                                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                                                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                                                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                                                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                                                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0])
+        
+        var b = b0
+        for _ in 0..<999 {
+            let ns = (b*255).upsample(4).toRGB().nsImage()
+            print("break here")
+            b = next(b)
+        }
+    }
+    
     #endif
 }
 
@@ -187,4 +239,34 @@ func float01ToNSImage(image: Image<Intensity, Float>) -> NSImage {
     image *= 255
     let uint = image.typeConverted(to: UInt8.self)
     return uint.toRGB().nsImage()
+}
+
+extension Image where P == Intensity, T == UInt8 {
+    func upsample(_ times: Int) -> Image<P, T> {
+        let newWidth = width * times
+        let newHeight = height * times
+        var data = [UInt8](repeating: 0, count: newWidth * newHeight)
+        
+        self.data.withUnsafeBufferPointer {
+            var src = $0.baseAddress!
+            data.withUnsafeMutableBufferPointer {
+                var dst = $0.baseAddress!
+                for _ in 0..<height {
+                    for _ in 0..<width {
+                        for _ in 0..<times {
+                            dst.pointee = src.pointee
+                            dst += 1
+                        }
+                        src += 1
+                    }
+                    for _ in 1..<times {
+                        memcpy(dst, dst - newWidth, MemoryLayout<UInt8>.size * newWidth)
+                        dst += newWidth
+                    }
+                }
+            }
+        }
+        
+        return Image(width: newWidth, height: newHeight, data: data)
+    }
 }
