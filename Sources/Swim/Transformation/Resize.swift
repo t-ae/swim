@@ -1,4 +1,5 @@
 
+import Foundation
 import CStbImage
 
 extension Image where T == UInt8 {
@@ -46,5 +47,26 @@ extension Image where T == Float {
         } else {
             return nil
         }
+    }
+}
+
+extension Image {
+    /// Resize image with Narest Neighbor algorithm.
+    public func resizenn(width: Int, height: Int) -> Image<P, T> {
+        var newImage = Image<P, T>(width: width, height: height)
+        
+        let scaleX = Double(width) / Double(self.width)
+        let scaleY = Double(height) / Double(self.height)
+        
+        for y in 0..<height {
+            for x in 0..<width {
+                let xp = min(Int(Foundation.round(Double(x) / scaleX)), self.width - 1)
+                let yp = min(Int(Foundation.round(Double(y) / scaleY)), self.height - 1)
+                
+                newImage[x, y] = self[xp, yp]
+            }
+        }
+        
+        return newImage
     }
 }
