@@ -6,6 +6,22 @@ public enum Padding<T: DataType> {
     case constant(T)
 }
 
+extension Padding where T: ExpressibleByIntegerLiteral {
+    public static var zero: Padding {
+        return constant(0)
+    }
+    
+    public static var one: Padding {
+        return constant(1)
+    }
+}
+
+extension Padding where T: FloatingPoint {
+    public static var nan: Padding {
+        return constant(.nan)
+    }
+}
+
 extension Image where P == Intensity {
     func _im2col(patchWidth: Int,
                  patchHeight: Int,
