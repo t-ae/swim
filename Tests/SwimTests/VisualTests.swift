@@ -120,7 +120,7 @@ class VisualTests: XCTestCase {
         let c = (-0.74543, 0.11301)
         
         let size = 256
-        let range: Double = 2.5
+        let range: Double = 3.2
         let maxIteration = 256
         
         func getJuliaImage(c: (Double, Double), color: Pixel<RGBA, Double>) -> Image<RGBA, Double> {
