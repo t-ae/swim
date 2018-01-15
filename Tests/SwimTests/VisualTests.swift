@@ -175,6 +175,11 @@ class VisualTests: XCTestCase {
         let julia6 = getJuliaImage(c: (-0.8, 0.156), color: Pixel(r: 0, g: 1, b: 1, a: 0))
         let ns6 = (julia6*255).typeConverted(to: UInt8.self).nsImage()
         
+        let julia7 = getJuliaImage(c: (-0.75, 0.13), color: Pixel(r: 0, g: 0.4, b: 0, a: 0))
+        var base = Image<RGB, Double>(width: size, height: size, value: 0.95)
+        base.alphaBlend(with: julia7)
+        let ns7 = (base*255).typeConverted(to: UInt8.self).nsImage()
+        
         print("break here")
     }
     

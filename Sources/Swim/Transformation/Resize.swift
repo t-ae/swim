@@ -70,3 +70,37 @@ extension Image {
         return newImage
     }
 }
+
+//extension Image where T: FloatingPoint {
+//    public func resizebn(width: Int, height: Int) -> Image<P, T> {
+//        var newImage = Image<P, T>(width: width, height: height)
+//
+//        let scaleX = T(width) / T(self.width)
+//        let scaleY = T(height) / T(self.height)
+//
+//        for y in 0..<height {
+//            for x in 0..<width {
+//                let xp = T(x) / scaleX
+//                let yp = T(y) / scaleY
+//
+//                let xx = Foundation.floor(xp)
+//                let yy = Foundation.floor(yp)
+//
+//                let plu: Pixel<P, T> = (yy + 1 - yp) * self[xx, yy]
+//                let pru: Pixel<P, T> = (yp - yy) * self[xx, yy+1]
+//                let pu: Pixel<P, T> = plu + pru
+//
+//                let pld: Pixel<P, T> = (yy + 1 - yp) * self[xx+1, yy]
+//                let prd: Pixel<P, T> = (yp - yy)*self[xx+1, yy+1]
+//                let pd: Pixel<P, T> = pld + prd
+//
+//                let px = (xx + 1 - xp) * pu + (xp - xx) * pd
+//
+//                newImage[x, y] = px
+//            }
+//        }
+//
+//        return newImage
+//    }
+//}
+
