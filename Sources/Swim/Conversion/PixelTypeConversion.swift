@@ -129,7 +129,7 @@ func imageFromRGBWithAlpha<P: RGBWithAlpha, T>(image: Image<P, T>) -> Image<RGB,
         newImage.data.withUnsafeMutableBufferPointer {
             var dst = $0.baseAddress!
             for _ in 0..<image.width*image.height {
-                memcpy(dst, src, RGB.channels)
+                memcpy(dst, src, RGB.channels * MemoryLayout<T>.size)
                 dst += RGB.channels
                 src += P.channels
             }
