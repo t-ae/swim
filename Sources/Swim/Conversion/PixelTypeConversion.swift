@@ -156,11 +156,13 @@ func permuteChannels<T>(data: [T], permutation: [Int]) -> [T] {
         ret.withUnsafeMutableBufferPointer {
             var dst = $0.baseAddress!
             
-            for c in 0..<numChannels {
-                dst[c] = src[permutation[c]]
+            for _ in 0..<data.count/permutation.count {
+                for c in 0..<numChannels {
+                    dst[c] = src[permutation[c]]
+                }
+                src += numChannels
+                dst += numChannels
             }
-            src += numChannels
-            dst += numChannels
         }
     }
     
