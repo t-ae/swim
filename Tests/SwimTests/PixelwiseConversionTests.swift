@@ -6,7 +6,7 @@ class PixelwiseConversion: XCTestCase {
     
     func testConversion() {
         do {
-            let data = (0..<2*3).map { UInt8($0) }
+            let data = (0..<6).map { UInt8($0) }
             var image = Image<Intensity, UInt8>(width: 2, height: 3, data: data)
             let after = Image<Intensity, UInt8>(width: 2, height: 3, data: data.map { $0 + 1 })
 
@@ -17,7 +17,7 @@ class PixelwiseConversion: XCTestCase {
             XCTAssertEqual(image, after)
         }
         do {
-            let data = (0..<2*3).map { UInt8($0) }
+            let data = (0..<6).map { UInt8($0) }
             var image = Image<Intensity, UInt8>(width: 2, height: 3, data: data)
             let after = Image<Intensity, UInt8>(width: 2, height: 3, data: data.map { $0 + 1 })
 
@@ -28,7 +28,7 @@ class PixelwiseConversion: XCTestCase {
             XCTAssertEqual(image, after)
         }
         do {
-            let data = (0..<2*3).map { UInt8($0) }
+            let data = (0..<6).map { UInt8($0) }
             let image = Image<Intensity, UInt8>(width: 2, height: 3, data: data)
             let a: [UInt8] = data.flatMap { (v: UInt8)-> [UInt8] in [v, v+1, v+2, v+3] }
             let afterData: [Float] = a.map { Float($0) }
@@ -41,7 +41,7 @@ class PixelwiseConversion: XCTestCase {
             XCTAssertEqual(result, after)
         }
         do {
-            let data = (0..<2*3*4).map { UInt8($0) }
+            let data = (0..<24).map { UInt8($0) }
             var image = Image<RGBA, UInt8>(width: 2, height: 3, data: data)
             let after = Image<RGBA, UInt8>(width: 2, height: 3, data: data.map { $0 + 1 })
             
@@ -49,6 +49,18 @@ class PixelwiseConversion: XCTestCase {
             image.convert { px in px + 1 }
             XCTAssertEqual(image, after)
 
+        }
+    }
+    
+    func testConverted() {
+        do {
+            let data = (0..<24).map { UInt8($0) }
+            let image = Image<RGBA, UInt8>(width: 2, height: 3, data: data)
+
+            let red = image.converted { px in
+                px[.red]
+            }
+            XCTAssertEqual(red, Image(width: 2, height: 3, data: [0, 4, 8, 12, 16, 20]))
         }
     }
 }
