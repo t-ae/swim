@@ -94,16 +94,21 @@ extension Image where P == Intensity {
 extension Image {
     func _converted<T2>(_ f: (Pixel<P, T>)->T2) -> Image<Intensity, T2> {
         var newImage = Image<Intensity, T2>(width: width, height: height)
-        newImage.data.withUnsafeMutableBufferPointer {
-            var dst = $0.baseAddress!
-            var px = Pixel<P, T>()
-            
-            for _ in 0..<width*height {
-                memcpy(&px.data, dst, P.channels*MemoryLayout<T>.size)
-                dst.pointee = f(px)
-                dst += 1
+        data.withUnsafeBufferPointer {
+            var src = $0.baseAddress!
+            newImage.data.withUnsafeMutableBufferPointer {
+                var dst = $0.baseAddress!
+                var px = Pixel<P, T>()
+                
+                for _ in 0..<width*height {
+                    memcpy(&px.data, src, P.channels*MemoryLayout<T>.size)
+                    dst.pointee = f(px)
+                    src += P.channels
+                    dst += Intensity.channels
+                }
             }
         }
+        
         return newImage
     }
     

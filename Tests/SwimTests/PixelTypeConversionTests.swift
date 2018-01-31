@@ -4,6 +4,14 @@ import Swim
 
 class PixelTypeConversionTests: XCTestCase {
     
+    func testToBrightness() {
+        let data = (0..<27).map { Float($0) }
+        let rgb = Image<RGB, Float>(width: 3, height: 3, data: data)
+        
+        let brightness = rgb.toBrightness()
+        XCTAssertEqual(brightness, Image(width: 3, height: 3, data: [1, 4, 7, 10, 13, 16, 19, 22, 25]))
+    }
+    
     func testRGBtoRGBA() {
         let data = (0..<27).map { Float($0) }
         let rgb = Image<RGB, Float>(width: 3, height: 3, data: data)
