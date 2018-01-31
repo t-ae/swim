@@ -14,6 +14,15 @@ class PixelTypeConversionTests: XCTestCase {
         XCTAssertEqual(rgba[channel: .alpha], Image<Intensity, Float>(width: 10, height: 10, value: 0.5))
     }
     
+    func testRGBAtoRGB() {
+        let rgba = Image<RGBA, Float>(width: 10, height: 10, data: [Float](repeating: 0, count: 10*10*4))
+        let rgb = Image<RGB, Float>(image: rgba)
+        
+        XCTAssertEqual(rgba[channel: .red], rgb[channel: .red])
+        XCTAssertEqual(rgba[channel: .green], rgb[channel: .green])
+        XCTAssertEqual(rgba[channel: .blue], rgb[channel: .blue])
+    }
+    
     func testARGBtoRGBA() {
         let argb = Image<ARGB, Float>(width: 10, height: 10, data: [Float](repeating: 0, count: 10*10*4))
         let rgba = Image<RGBA, Float>(image: argb)
