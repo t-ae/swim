@@ -35,8 +35,8 @@ extension Image where P == RGB, T == Int {
         return _toBrightness()
     }
     
-    public func toLuminane() -> Image<Intensity, T> {
-        return _toLuminane()
+    public func toLuminance() -> Image<Intensity, T> {
+        return _toLuminance()
     }
 }
 
@@ -45,8 +45,8 @@ extension Image where P == RGB, T == Float {
         return _toBrightness()
     }
     
-    public func toLuminane() -> Image<Intensity, T> {
-        return _toLuminane()
+    public func toLuminance() -> Image<Intensity, T> {
+        return _toLuminance()
     }
 }
 
@@ -55,8 +55,8 @@ extension Image where P == RGB, T == Double {
         return _toBrightness()
     }
     
-    public func toLuminane() -> Image<Intensity, T> {
-        return _toLuminane()
+    public func toLuminance() -> Image<Intensity, T> {
+        return _toLuminance()
     }
 }
 

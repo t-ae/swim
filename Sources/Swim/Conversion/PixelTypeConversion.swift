@@ -44,7 +44,7 @@ extension Image where P == RGB, T: BinaryInteger {
         return _toBrightness()
     }
     
-    func _toLuminane() -> Image<Intensity, T> {
+    func _toLuminance() -> Image<Intensity, T> {
         return _converted { px -> T in
             let r = 2126*px[.red]
             let g = 7152*px[.green]
@@ -53,8 +53,8 @@ extension Image where P == RGB, T: BinaryInteger {
         }
     }
     
-    public func toLuminane() -> Image<Intensity, T> {
-        return _toLuminane()
+    public func toLuminance() -> Image<Intensity, T> {
+        return _toLuminance()
     }
 }
 
@@ -64,8 +64,8 @@ extension Image where P == RGB, T == UInt8 {
         return _toBrightness()
     }
     @available(*, deprecated, message: "Could cause overflow.")
-    public func toLuminane() -> Image<Intensity, T> {
-        return _toLuminane()
+    public func toLuminance() -> Image<Intensity, T> {
+        return _toLuminance()
     }
 }
 
@@ -83,7 +83,7 @@ extension Image where P == RGB, T: BinaryFloatingPoint {
         return _toBrightness()
     }
     
-    func _toLuminane() -> Image<Intensity, T> {
+    func _toLuminance() -> Image<Intensity, T> {
         return _converted { px -> T in
             let r = 0.2126*px[.red]
             let g = 0.7152*px[.green]
@@ -92,8 +92,8 @@ extension Image where P == RGB, T: BinaryFloatingPoint {
         }
     }
     
-    public func toLuminane() -> Image<Intensity, T> {
-        return _toLuminane()
+    public func toLuminance() -> Image<Intensity, T> {
+        return _toLuminance()
     }
 }
 

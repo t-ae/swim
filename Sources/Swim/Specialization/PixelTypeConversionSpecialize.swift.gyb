@@ -17,8 +17,8 @@ extension Image where P == RGB, T == ${dt} {
         return _toBrightness()
     }
     
-    public func toLuminane() -> Image<Intensity, T> {
-        return _toLuminane()
+    public func toLuminance() -> Image<Intensity, T> {
+        return _toLuminance()
     }
 }
 
