@@ -28,6 +28,8 @@ class VisualTests: XCTestCase {
         let nsImage = rgb256.nsImage()
         
         print("break here")
+        
+        _ = nsImage
     }
     
     func testFilter() {
@@ -45,6 +47,7 @@ class VisualTests: XCTestCase {
             }
         }
         let nsImageBase = float01ToNSImage(image: imageBase)
+        _ = nsImageBase
         do {
             var image = imageBase
             image = image.convoluted(Filter.gaussian3x3)
@@ -59,6 +62,8 @@ class VisualTests: XCTestCase {
             let blur15 = float01ToNSImage(image: image)
             
             print("break here")
+            
+            _ = [blur1, blur5, blur15]
         }
         do {
             let sobelH = float01ToNSImage(image: imageBase.convoluted(Filter.sobel3x3H))
@@ -66,6 +71,8 @@ class VisualTests: XCTestCase {
             let laplacian = float01ToNSImage(image: imageBase.convoluted(Filter.laplacian3x3))
             
             print("break here")
+            
+            _ = [sobelH, sobelV, laplacian]
         }
         do {
             let maximum = float01ToNSImage(image: imageBase.maximumFilter(kernelSize: 5))
@@ -73,6 +80,8 @@ class VisualTests: XCTestCase {
             let median = float01ToNSImage(image: imageBase.medianFilter(kernelSize: 5))
             
             print("break here")
+            
+            _ = [maximum, minimum, median]
         }
     }
     
@@ -113,6 +122,8 @@ class VisualTests: XCTestCase {
         let nsTopHat = float01ToNSImage(image: image - open)
         
         print("break here")
+        
+        _ = [nsImage, nsClose, nsOpen, nsCloseOpen, nsBlackhat, nsTopHat]
     }
     
     func testJulia() {
@@ -179,6 +190,8 @@ class VisualTests: XCTestCase {
         let ns7 = (base*255).typeConverted(to: UInt8.self).nsImage()
         
         print("break here")
+        
+        _ = [ns1, ns2, ns3, ns4, ns5, ns6, ns7]
     }
     
     public func testLifeGame() {
@@ -228,6 +241,7 @@ class VisualTests: XCTestCase {
         var b = b0
         for _ in 0..<999 {
             let ns = (b*255).upsample(4).toRGB().nsImage()
+            _ = ns
             print("break here")
             b = next(b)
         }

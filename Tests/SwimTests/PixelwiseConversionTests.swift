@@ -61,6 +61,24 @@ class PixelwiseConversion: XCTestCase {
                 px[.red]
             }
             XCTAssertEqual(red, Image(width: 2, height: 3, data: [0, 4, 8, 12, 16, 20]))
+            
+            let redDouble = image.converted { px in
+                Double(px[.red])
+            }
+            XCTAssertEqual(redDouble, Image(width: 2, height: 3, data: [0, 4, 8, 12, 16, 20]))
         }
+        do {
+            let data = (0..<6).map { UInt8($0) }
+            let image = Image<Intensity, UInt8>(width: 2, height: 3, data: data)
+            
+            let rgb = image.converted { px in
+                Pixel<RGB, Double>(r: Double(px), g: Double(px), b: Double(px))
+            }
+            XCTAssertEqual(rgb,
+                           Image(width: 2,
+                                 height: 3,
+                                 data: [0, 0, 0, 1, 1, 1, 2, 2, 2, 3, 3, 3, 4, 4, 4, 5, 5, 5]))
+        }
+        
     }
 }
