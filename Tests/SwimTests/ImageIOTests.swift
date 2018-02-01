@@ -4,8 +4,8 @@ import Swim
 
 class ImageIOTests: XCTestCase {
     
-    let srcPath = URL(fileURLWithPath: "/tmp/src.png")
-    let dstPath = URL(fileURLWithPath: "/tmp/dst.png")
+    let srcPath = URL(fileURLWithPath: "/tmp/swim_test_src.png")
+    let dstPath = URL(fileURLWithPath: "/tmp/swim_test_dst.png")
     
     var baseImage: Image<RGBA, UInt8>!
     var baseLuminance: Image<Intensity, UInt8>!
