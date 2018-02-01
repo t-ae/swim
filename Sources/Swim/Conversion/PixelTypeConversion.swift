@@ -36,7 +36,7 @@ extension Image where P == RGB, T: BinaryInteger {
             let r = px[.red]
             let g = px[.green]
             let b = px[.blue]
-            return (r + g + b) / 3
+            return (r + g + b + 1) / 3
         }
     }
     
