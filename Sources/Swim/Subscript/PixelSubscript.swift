@@ -54,6 +54,15 @@ extension Image {
         }
     }
     
+    public subscript(x: Int, y: Int, c: P) -> T {
+        get {
+            return getPixel(x: x, y: y, c: c.rawValue)
+        }
+        set {
+            setPixel(x: x, y: y, c: c.rawValue, newValue: newValue)
+        }
+    }
+    
     public subscript(x: Int, y: Int) -> Pixel<P, T> {
         get {
             return getPixel(x: x, y: y)

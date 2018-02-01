@@ -4,7 +4,12 @@ extension Image where P == Intensity, T: Comparable {
         precondition(kernelSize > 0)
         var ret = self
         
-        let kernelRange = -(kernelSize-1)/2...kernelSize/2
+        let kernelRange: CountableClosedRange<Int>
+        do {
+            let l = (1-kernelSize)/2
+            let r = kernelSize/2
+            kernelRange = l...r
+        }
         
         for y in 0..<height {
             for x in 0..<width {
@@ -20,7 +25,7 @@ extension Image where P == Intensity, T: Comparable {
                         guard 0 <= xx && xx < width else {
                             continue
                         }
-                        patch.append(self[xx, yy])
+                        patch.append(self[xx, yy, 0])
                     }
                 }
                 ret[x, y] = kernelFunc(patch)

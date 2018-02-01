@@ -33,10 +33,11 @@ extension Image where P == Intensity {
 extension Image where P == RGB, T: BinaryInteger {
     func _toBrightness() -> Image<Intensity, T> {
         return _converted { px -> T in
-            let r = px[.red]
-            let g = px[.green]
-            let b = px[.blue]
-            return (r + g + b + 1) / 3
+            let r: T = px[P.red]
+            let g: T = px[P.green]
+            let b: T = px[P.blue]
+            let sum = r + g + b + 1
+            return sum / 3
         }
     }
     
@@ -46,9 +47,9 @@ extension Image where P == RGB, T: BinaryInteger {
     
     func _toLuminance() -> Image<Intensity, T> {
         return _converted { px -> T in
-            let r = 2126*px[.red]
-            let g = 7152*px[.green]
-            let b = 722*px[.blue]
+            let r = 2126*px[P.red]
+            let g = 7152*px[P.green]
+            let b = 722*px[P.blue]
             return (r + g + b) / 10000
         }
     }

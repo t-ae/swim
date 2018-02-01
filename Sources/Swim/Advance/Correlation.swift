@@ -102,10 +102,10 @@ public enum Correlation<T: BinaryFloatingPoint&DataType> {
             }
         }
         
-        let c = T(a.width * a.height)
-        let up = (c*sumCross - suma*sumb)
-        let da = (c*sum2a - suma*suma)
-        let db = (c*sum2b - sumb*sumb)
+        let c: T = T(a.width * a.height)
+        let up: T = (c*sumCross - suma*sumb)
+        let da: T = (c*sum2a - suma*suma)
+        let db: T = (c*sum2b - sumb*sumb)
         return up / sqrt(da*db)
     }
     
