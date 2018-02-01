@@ -46,30 +46,15 @@ class BayerTests: XCTestCase {
     }
     
     func testDebayered() {
-        let image = Image<Intensity, Double>(width: 4, height: 4, data: [Double](repeating: 1, count: 16))
+        let image = Image<Intensity, Int>(width: 4, height: 4, data: (0..<16).map { $0 })
         do {
-            let rgb: Image<RGB, Double> = image.debayered(pattern: .bggr)
+            let rgb: Image<RGB, Int> = image.debayered(pattern: .bggr)
             XCTAssertEqual(rgb, Image(width: 4,
                                       height: 4,
-                                      data: [Double](repeating: 1, count: 16*3)))
-        }
-        do {
-            let rgb: Image<RGB, Double> = image.debayered(pattern: .gbrg)
-            XCTAssertEqual(rgb, Image(width: 4,
-                                      height: 4,
-                                      data: [Double](repeating: 1, count: 16*3)))
-        }
-        do {
-            let rgb: Image<RGB, Double> = image.debayered(pattern: .grbg)
-            XCTAssertEqual(rgb, Image(width: 4,
-                                      height: 4,
-                                      data: [Double](repeating: 1, count: 16*3)))
-        }
-        do {
-            let rgb: Image<RGB, Double> = image.debayered(pattern: .rggb)
-            XCTAssertEqual(rgb, Image(width: 4,
-                                      height: 4,
-                                      data: [Double](repeating: 1, count: 16*3)))
+                                      data: [5, 2, 0,  5, 1, 1,  6, 3, 2,  7, 3, 2,
+                                             5, 4, 4,  5, 5, 5,  6, 6, 6,  7, 6, 6,
+                                             9, 8, 8,  9, 9, 9,  10, 10, 10,  11, 11, 10,
+                                             13, 12, 8,  13, 11, 9,  14, 14, 10, 15, 12, 10]))
         }
     }
 }

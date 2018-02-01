@@ -1,0 +1,21 @@
+%{
+from type import *
+}%
+
+% for dt in large_enough_data_types:
+extension Image where P == RGB, DT == ${dt} {
+    public func bayered(pattern: BayerPattern) -> Image<Intensity, T> {
+        return _bayered(pattern: pattern)
+    }
+}
+
+% end
+
+% for dt in large_enough_data_types:
+extension Image where P == Intensity, DT == ${dt} {
+    public func debayered(pattern: BayerPattern) -> Image<RGB, T> {
+        return _debayered(pattern: pattern)
+    }
+}
+
+% end
