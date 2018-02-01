@@ -1,5 +1,5 @@
 
-func _matmul<T: Numeric>(lhs: [T], rhs: [T], m: Int, n: Int, p: Int) -> [T] {
+func matmul<T: Numeric>(lhs: [T], rhs: [T], m: Int, n: Int, p: Int) -> [T] {
     assert(lhs.count == m*p)
     assert(rhs.count == p*n)
     
@@ -27,10 +27,6 @@ func _matmul<T: Numeric>(lhs: [T], rhs: [T], m: Int, n: Int, p: Int) -> [T] {
     }
     
     return ret
-}
-
-func matmul<T: FloatingPoint>(lhs: [T], rhs: [T], m: Int, n: Int, p: Int) -> [T] {
-    return _matmul(lhs: lhs, rhs: rhs, m: m, n: n, p: p)
 }
 
 #if os(macOS) || os(iOS)

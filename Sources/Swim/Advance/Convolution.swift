@@ -58,7 +58,7 @@ extension Image where T: Numeric {
         
         for c in 0..<P.channels {
             let (m, n, matrix) = self[channel: c]._im2col(patchWidth: filter.width, patchHeight: filter.height)
-            let result = _matmul(lhs: filter.data, rhs: matrix, m: 1, n: n, p: m)
+            let result = matmul(lhs: filter.data, rhs: matrix, m: 1, n: n, p: m)
             ret[channel: c] = Image<Intensity, T>(width: width, height: height, data: result)
         }
         
@@ -97,7 +97,7 @@ extension Image where P == RGB, T == UInt8 {
 
             for c in 0..<P.channels {
                 let (m, n, matrix) = self[channel: c]._im2col(patchWidth: filter.width, patchHeight: filter.height)
-                let result = _matmul(lhs: filter.data, rhs: matrix, m: 1, n: n, p: m)
+                let result = matmul(lhs: filter.data, rhs: matrix, m: 1, n: n, p: m)
                 ret[channel: c] = Image<Intensity, T>(width: width, height: height, data: result)
             }
 
@@ -111,7 +111,7 @@ extension Image where P == RGB, T == UInt8 {
 
             for c in 0..<P.channels {
                 let (m, n, matrix) = self[channel: c]._im2col(patchWidth: filter.width, patchHeight: filter.height)
-                let result = _matmul(lhs: filter.data, rhs: matrix, m: 1, n: n, p: m)
+                let result = matmul(lhs: filter.data, rhs: matrix, m: 1, n: n, p: m)
                 ret[channel: c] = Image<Intensity, T>(width: width, height: height, data: result)
             }
 
