@@ -30,7 +30,7 @@ func _matmul<T: Numeric>(lhs: [T], rhs: [T], m: Int, n: Int, p: Int) -> [T] {
 }
 
 func matmul<T: FloatingPoint>(lhs: [T], rhs: [T], m: Int, n: Int, p: Int) -> [T] {
-    return matmul(lhs: lhs, rhs: rhs, m: m, n: n, p: p)
+    return _matmul(lhs: lhs, rhs: rhs, m: m, n: n, p: p)
 }
 
 #if os(macOS) || os(iOS)
