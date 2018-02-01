@@ -85,4 +85,16 @@ class CorrelationTests: XCTestCase {
             XCTAssertEqual(Correlation.zncc(i1, i2), -1)
         }
     }
+    
+    func testScale() {
+        let image1 = Image<Intensity, Float>(width: 3, height: 2, data: [0, 100, 2, 30, 104, 255])
+        let image2 = Image<Intensity, Float>(width: 3, height: 2, data: [255, 0, 10, 102, 30, 4])
+        
+        XCTAssertEqual(Correlation.ncc(image1, image2),
+                       Correlation.ncc(image1/255, image2/255),
+                       accuracy: 1e-3)
+        XCTAssertEqual(Correlation.zncc(image1, image2),
+                       Correlation.zncc(image1/255, image2/255),
+                       accuracy: 1e-3)
+    }
 }
