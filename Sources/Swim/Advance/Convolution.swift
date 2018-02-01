@@ -32,20 +32,21 @@ public enum Filter<T: Numeric&DataType> {
     }
 }
 
-extension Filter where T: BinaryFloatingPoint {
+extension Filter where T: FloatingPoint {
     public static var gaussian3x3: Image<Intensity, T> {
-        return Image(width: 3, height: 3, data: [0.065, 0.125, 0.065,
-                                                 0.125, 0.250, 0.125,
-                                                 0.065, 0.125, 0.065])
+        let data: [T] = [65, 125, 65,
+                         125, 250, 125,
+                         65, 125, 65]
+        return Image(width: 3, height: 3, data: data.map { $0 / 1000 })
     }
     
     public static var mean3x3: Image<Intensity, T> {
-        let mean = T(1.0/9)
+        let mean: T = 1 / 9
         return Image(width: 3, height: 3, data: [T](repeating: mean, count: 9))
     }
     
     public static var mean5x5: Image<Intensity, T> {
-        let mean = T(1.0/25)
+        let mean: T = 1 / 25
         return Image(width: 5, height: 5, data: [T](repeating: mean, count: 25))
     }
 }

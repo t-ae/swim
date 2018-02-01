@@ -1,7 +1,7 @@
 
 import Foundation
 
-public enum Correlation<T: BinaryFloatingPoint&DataType> {
+public enum Correlation<T: FloatingPoint&DataType> {
     static func _ssd(_ a: Image<Intensity, T>, _ b: Image<Intensity, T>) -> T {
         precondition(a.size == b.size, "Images must have same size.")
         

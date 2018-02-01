@@ -127,7 +127,7 @@ extension DataContainer where DT: BinaryInteger {
     }
 }
 
-extension DataContainer where DT: BinaryFloatingPoint {
+extension DataContainer where DT: FloatingPoint {
     static func divideAssign(lhs: inout Self, rhs: DT) {
         lhs.withUnsafeMutableBufferPointer {
             var p = $0.baseAddress!

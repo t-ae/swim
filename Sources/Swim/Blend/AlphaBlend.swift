@@ -1,7 +1,7 @@
 
 import Foundation
 
-extension Image where P == RGB, T: BinaryFloatingPoint {
+extension Image where P == RGB, T: FloatingPoint {
     mutating func _alphaBlend<P2: RGBWithAlpha>(with src: Image<P2, T>) {
         precondition(size == src.size, "Images must have same size.")
         
@@ -35,7 +35,7 @@ extension Image where P == RGB, T: BinaryFloatingPoint {
     }
 }
 
-extension Image where P: RGBWithAlpha, T: BinaryFloatingPoint {
+extension Image where P: RGBWithAlpha, T: FloatingPoint {
     mutating func _alphaBlend(with src: Image<P, T>) {
         precondition(size == src.size, "Images must have same size.")
         
