@@ -7,14 +7,14 @@ class PixelTypeConversionTests: XCTestCase {
     func testToBrightness() {
         do {
             let data = (0..<27).map { Int($0) }
-            let rgb = Image<RGB, Int>(width: 3, height: 3, data: data)
+            let rgb = Image(width: 3, height: 3, rgb: data)
             
             let brightness = rgb.toBrightness()
             XCTAssertEqual(brightness, Image(width: 3, height: 3, data: [1, 4, 7, 10, 13, 16, 19, 22, 25]))
         }
         do {
             let data = (0..<27).map { Double($0) }
-            let rgb = Image<RGB, Double>(width: 3, height: 3, data: data)
+            let rgb = Image(width: 3, height: 3, rgb: data)
             
             let brightness = rgb.toBrightness()
             XCTAssertEqual(brightness, Image(width: 3, height: 3, data: [1, 4, 7, 10, 13, 16, 19, 22, 25]))
@@ -24,7 +24,7 @@ class PixelTypeConversionTests: XCTestCase {
     func testIntensityToRGB() {
         do {
             let data = (0..<9).map { UInt8($0) }
-            let intensity = Image<Intensity, UInt8>(width: 3, height: 3, data: data)
+            let intensity = Image(width: 3, height: 3, intensity: data)
             
             XCTAssertEqual(intensity.toRGB(),
                            Image(width: 3,
@@ -35,7 +35,7 @@ class PixelTypeConversionTests: XCTestCase {
         }
         do {
             let data = (0..<9).map { Double($0) }
-            let intensity = Image<Intensity, Double>(width: 3, height: 3, data: data)
+            let intensity = Image(width: 3, height: 3, intensity: data)
             
             XCTAssertEqual(intensity.toRGB(),
                            Image(width: 3,
@@ -49,7 +49,7 @@ class PixelTypeConversionTests: XCTestCase {
     func testRGBtoRGBA() {
         do {
             let data = (0..<27).map { Int($0) }
-            let rgb = Image<RGB, Int>(width: 3, height: 3, data: data)
+            let rgb = Image(width: 3, height: 3, rgb: data)
             let rgba = Image<RGBA, Int>(image: rgb, alpha: 5)
             
             XCTAssertEqual(rgba[channel: .red], rgb[channel: .red])
@@ -59,7 +59,7 @@ class PixelTypeConversionTests: XCTestCase {
         }
         do {
             let data = (0..<27).map { Double($0) }
-            let rgb = Image<RGB, Double>(width: 3, height: 3, data: data)
+            let rgb = Image(width: 3, height: 3, rgb: data)
             let rgba = Image<RGBA, Double>(image: rgb, alpha: 0.5)
             
             XCTAssertEqual(rgba[channel: .red], rgb[channel: .red])
@@ -72,7 +72,7 @@ class PixelTypeConversionTests: XCTestCase {
     func testRGBAtoRGB() {
         do {
             let data = (0..<36).map { Int($0) }
-            let rgba = Image<RGBA, Int>(width: 3, height: 3, data: data)
+            let rgba = Image(width: 3, height: 3, rgba: data)
             let rgb = Image<RGB, Int>(image: rgba)
             
             XCTAssertEqual(rgb[channel: .red], rgba[channel: .red])
@@ -81,7 +81,7 @@ class PixelTypeConversionTests: XCTestCase {
         }
         do {
             let data = (0..<36).map { Double($0) }
-            let rgba = Image<RGBA, Double>(width: 3, height: 3, data: data)
+            let rgba = Image(width: 3, height: 3, rgba: data)
             let rgb = Image<RGB, Double>(image: rgba)
             
             XCTAssertEqual(rgb[channel: .red], rgba[channel: .red])
@@ -93,7 +93,7 @@ class PixelTypeConversionTests: XCTestCase {
     func testARGBtoRGBA() {
         do {
             let data = (0..<36).map { Int($0) }
-            let argb = Image<ARGB, Int>(width: 3, height: 3, data: data)
+            let argb = Image(width: 3, height: 3, argb: data)
             let rgba = Image<RGBA, Int>(image: argb)
             
             XCTAssertEqual(rgba[channel: .red], argb[channel: .red])
@@ -103,7 +103,7 @@ class PixelTypeConversionTests: XCTestCase {
         }
         do {
             let data = (0..<36).map { Double($0) }
-            let argb = Image<ARGB, Double>(width: 3, height: 3, data: data)
+            let argb = Image(width: 3, height: 3, argb: data)
             let rgba = Image<RGBA, Double>(image: argb)
             
             XCTAssertEqual(rgba[channel: .red], argb[channel: .red])
@@ -116,7 +116,7 @@ class PixelTypeConversionTests: XCTestCase {
     func testRGBAtoARGB() {
         do {
             let data = (0..<36).map { Int($0) }
-            let rgba = Image<RGBA, Int>(width: 3, height: 3, data: data)
+            let rgba = Image(width: 3, height: 3, rgba: data)
             let argb = Image<ARGB, Int>(image: rgba)
             
             XCTAssertEqual(argb[channel: .red], rgba[channel: .red])
@@ -126,7 +126,7 @@ class PixelTypeConversionTests: XCTestCase {
         }
         do {
             let data = (0..<36).map { Double($0) }
-            let rgba = Image<RGBA, Double>(width: 3, height: 3, data: data)
+            let rgba = Image(width: 3, height: 3, rgba: data)
             let argb = Image<ARGB, Double>(image: rgba)
             
             XCTAssertEqual(argb[channel: .red], rgba[channel: .red])

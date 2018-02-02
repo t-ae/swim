@@ -5,7 +5,7 @@ import Swim
 class BayerTests: XCTestCase {
     
     func testBayered() {
-        let image = Image<RGB, UInt8>(width: 4, height: 4, data: (0..<48).map { UInt8($0) })
+        let image = Image(width: 4, height: 4, rgb: (0..<48).map { UInt8($0) })
         
         do {
             let lumi: Image<Intensity, UInt8> = image.bayered(pattern: .bggr)
@@ -46,7 +46,7 @@ class BayerTests: XCTestCase {
     }
     
     func testDebayered() {
-        let image = Image<Intensity, Int>(width: 4, height: 4, data: (0..<16).map { $0 })
+        let image = Image(width: 4, height: 4, intensity: (0..<16).map { $0 })
         do {
             let rgb: Image<RGB, Int> = image.debayered(pattern: .bggr)
             XCTAssertEqual(rgb, Image(width: 4,

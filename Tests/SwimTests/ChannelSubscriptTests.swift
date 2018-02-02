@@ -7,7 +7,7 @@ class ChannelSubscriptTests: XCTestCase {
     func testChannelSubscriptGet() {
         do {
             let data = (0..<16).map { UInt8($0) }
-            let image = Image<RGBA, UInt8>(width: 2, height: 2, data: data)
+            let image = Image(width: 2, height: 2, rgba: data)
             
             let red = image[channel: 0]
             XCTAssertEqual(red, Image(width: 2, height: 2, data: [0, 4, 8, 12]))
@@ -20,7 +20,7 @@ class ChannelSubscriptTests: XCTestCase {
         }
         do {
             let data = (0..<16).map { Float($0) }
-            let image = Image<RGBA, Float>(width: 2, height: 2, data: data)
+            let image = Image(width: 2, height: 2, rgba: data)
             
             let red = image[channel: 0]
             XCTAssertEqual(red, Image(width: 2, height: 2, data: [0, 4, 8, 12]))
@@ -33,7 +33,7 @@ class ChannelSubscriptTests: XCTestCase {
         }
         do {
             let data = (0..<16).map { Double($0) }
-            let image = Image<RGBA, Double>(width: 2, height: 2, data: data)
+            let image = Image(width: 2, height: 2, rgba: data)
             
             let red = image[channel: 0]
             XCTAssertEqual(red, Image(width: 2, height: 2, data: [0, 4, 8, 12]))
@@ -49,8 +49,8 @@ class ChannelSubscriptTests: XCTestCase {
     func testChannelSubscriptSet() {
         do {
             let data = (0..<16).map { UInt8($0) }
-            var image = Image<RGBA, UInt8>(width: 2, height: 2, data: data)
-            let newValue = Image<Intensity, UInt8>(width: 2, height: 2, data: [252, 253, 254, 255])
+            var image = Image(width: 2, height: 2, rgba: data)
+            let newValue = Image(width: 2, height: 2, intensity: [252, 253, 254, 255].map { UInt8($0) })
             
             image[channel: 0] = newValue
             XCTAssertEqual(image,
@@ -89,8 +89,8 @@ class ChannelSubscriptTests: XCTestCase {
         }
         do {
             let data = (0..<16).map { Float($0) }
-            var image = Image<RGBA, Float>(width: 2, height: 2, data: data)
-            let newValue = Image<Intensity, Float>(width: 2, height: 2, data: [252, 253, 254, 255])
+            var image = Image(width: 2, height: 2, rgba: data)
+            let newValue = Image(width: 2, height: 2, intensity: [252, 253, 254, 255].map { Float($0) })
             
             image[channel: 0] = newValue
             XCTAssertEqual(image,
@@ -129,8 +129,8 @@ class ChannelSubscriptTests: XCTestCase {
         }
         do {
             let data = (0..<16).map { Double($0) }
-            var image = Image<RGBA, Double>(width: 2, height: 2, data: data)
-            let newValue = Image<Intensity, Double>(width: 2, height: 2, data: [252, 253, 254, 255])
+            var image = Image(width: 2, height: 2, rgba: data)
+            let newValue = Image(width: 2, height: 2, intensity: [252.0, 253, 254, 255])
             
             image[channel: 0] = newValue
             XCTAssertEqual(image,

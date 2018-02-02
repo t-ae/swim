@@ -6,7 +6,7 @@ class FloatingPointTests: XCTestCase {
     
     func testRound() {
         do {
-            let image = Image<RGBA, Float>(width: 2, height: 2, data: (1...16).map(Float.init))
+            let image = Image(width: 2, height: 2, rgba: (1...16).map(Float.init))
             
             XCTAssertEqual((image + 0.1).rounded(), image)
             
@@ -15,7 +15,7 @@ class FloatingPointTests: XCTestCase {
             XCTAssertEqual(image2, image)
         }
         do {
-            let image = Image<RGBA, Double>(width: 2, height: 2, data: (1...16).map(Double.init))
+            let image = Image(width: 2, height: 2, rgba: (1...16).map(Double.init))
             
             XCTAssertEqual((image + 0.1).rounded(), image)
             
@@ -27,7 +27,7 @@ class FloatingPointTests: XCTestCase {
     
     func testCeil() {
         do {
-            let image = Image<RGBA, Float>(width: 2, height: 2, data: (1...16).map(Float.init))
+            let image = Image(width: 2, height: 2, rgba: (1...16).map(Float.init))
             
             XCTAssertEqual((image - 0.1).ceiled(), image)
             
@@ -36,7 +36,7 @@ class FloatingPointTests: XCTestCase {
             XCTAssertEqual(image2, image)
         }
         do {
-            let image = Image<RGBA, Double>(width: 2, height: 2, data: (1...16).map(Double.init))
+            let image = Image(width: 2, height: 2, rgba: (1...16).map(Double.init))
             
             XCTAssertEqual((image - 0.1).ceiled(), image)
             
@@ -48,7 +48,7 @@ class FloatingPointTests: XCTestCase {
     
     func testFloor() {
         do {
-            let image = Image<RGBA, Float>(width: 2, height: 2, data: (1...16).map(Float.init))
+            let image = Image(width: 2, height: 2, rgba: (1...16).map(Float.init))
             
             XCTAssertEqual((image + 0.1).floored(), image)
             
@@ -57,7 +57,7 @@ class FloatingPointTests: XCTestCase {
             XCTAssertEqual(image2, image)
         }
         do {
-            let image = Image<RGBA, Double>(width: 2, height: 2, data: (1...16).map(Double.init))
+            let image = Image(width: 2, height: 2, rgba: (1...16).map(Double.init))
             
             XCTAssertEqual((image + 0.1).floored(), image)
             

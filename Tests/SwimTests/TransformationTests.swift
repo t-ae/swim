@@ -7,7 +7,7 @@ class TransformationTests: XCTestCase {
     func testFlipLR() {
         do {
             let data = (0..<10).map { UInt8($0) }
-            let image = Image<Intensity, UInt8>(width: 2, height: 5, data: data)
+            let image = Image(width: 2, height: 5, intensity: data)
             
             let flipped = image.flipLR()
             XCTAssertEqual(flipped,
@@ -19,7 +19,7 @@ class TransformationTests: XCTestCase {
         }
         do {
             let data = (0..<16).map { UInt8($0) }
-            let image = Image<RGBA, UInt8>(width: 2, height: 2, data: data)
+            let image = Image(width: 2, height: 2, rgba: data)
             
             let flipped = image.flipLR()
             XCTAssertEqual(flipped,
@@ -33,7 +33,7 @@ class TransformationTests: XCTestCase {
     func testFlipUD() {
         do {
             let data = (0..<10).map { UInt8($0) }
-            let image = Image<Intensity, UInt8>(width: 2, height: 5, data: data)
+            let image = Image(width: 2, height: 5, intensity: data)
             
             let flipped = image.flipUD()
             XCTAssertEqual(flipped,
@@ -45,7 +45,7 @@ class TransformationTests: XCTestCase {
         }
         do {
             let data = (0..<16).map { UInt8($0) }
-            let image = Image<RGBA, UInt8>(width: 2, height: 2, data: data)
+            let image = Image(width: 2, height: 2, rgba: data)
             
             let flipped = image.flipUD()
             XCTAssertEqual(flipped,
@@ -59,7 +59,7 @@ class TransformationTests: XCTestCase {
     func testRot() {
         do {
             let data = (0..<12).map { UInt8($0) }
-            let image = Image<RGB, UInt8>(width: 2, height: 2, data: data)
+            let image = Image(width: 2, height: 2, rgb: data)
             
             XCTAssertEqual(image.rot90(),
                            Image(width: 2, height: 2, data: [6, 7, 8, 0, 1, 2,
@@ -67,7 +67,7 @@ class TransformationTests: XCTestCase {
         }
         do {
             let data = (0..<40).map { UInt8($0) }
-            let image = Image<RGBA, UInt8>(width: 2, height: 5, data: data)
+            let image = Image(width: 2, height: 5, rgba: data)
             
             let r180 = image.rot180()
             let r270 = image.rot270()

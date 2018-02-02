@@ -8,19 +8,19 @@ class ArithmeticTests: XCTestCase {
         do {
             let before = (0..<16).map { Int.init($0) }
             let after = before.map { -$0 }
-            let image = Image<RGBA, Int>(width: 2, height: 2, data: before)
+            let image = Image(width: 2, height: 2, rgba: before)
             XCTAssertEqual(-image, Image(width: 2, height: 2, data: after))
         }
         do {
             let before = (0..<16).map { Float.init($0) }
             let after = before.map { -$0 }
-            let image = Image<RGBA, Float>(width: 2, height: 2, data: before)
+            let image = Image(width: 2, height: 2, rgba: before)
             XCTAssertEqual(-image, Image(width: 2, height: 2, data: after))
         }
         do {
             let before = (0..<16).map { Double.init($0) }
             let after = before.map { -$0 }
-            let image = Image<ARGB, Double>(width: 2, height: 2, data: before)
+            let image = Image(width: 2, height: 2, argb: before)
             XCTAssertEqual(-image, Image(width: 2, height: 2, data: after))
         }
     }
@@ -29,7 +29,7 @@ class ArithmeticTests: XCTestCase {
         do {
             let before = (0..<4).map { UInt8($0) }
             let after = before.map { $0 + 1 }
-            var image = Image<Intensity, UInt8>(width: 2, height: 2, data: before)
+            var image = Image(width: 2, height: 2, intensity: before)
             XCTAssertEqual(image + 1, Image(width: 2, height: 2, data: after))
             XCTAssertEqual(1 + image, Image(width: 2, height: 2, data: after))
             image += 1
@@ -38,7 +38,7 @@ class ArithmeticTests: XCTestCase {
         do {
             let before = (0..<16).map { Float.init($0) }
             let after = before.map { $0 + 1 }
-            var image = Image<RGBA, Float>(width: 2, height: 2, data: before)
+            var image = Image(width: 2, height: 2, rgba: before)
             XCTAssertEqual(image + 1, Image(width: 2, height: 2, data: after))
             XCTAssertEqual(1 + image, Image(width: 2, height: 2, data: after))
             image += 1
@@ -47,7 +47,7 @@ class ArithmeticTests: XCTestCase {
         do {
             let before = (0..<16).map { Double.init($0) }
             let after = before.map { $0 + 1 }
-            var image = Image<ARGB, Double>(width: 2, height: 2, data: before)
+            var image = Image(width: 2, height: 2, argb: before)
             XCTAssertEqual(image + 1, Image(width: 2, height: 2, data: after))
             XCTAssertEqual(1 + image, Image(width: 2, height: 2, data: after))
             image += 1
@@ -58,7 +58,7 @@ class ArithmeticTests: XCTestCase {
     func testSub() {
         do {
             let before = (0..<4).map { UInt8($0+1) }
-            var image = Image<Intensity, UInt8>(width: 2, height: 2, data: before)
+            var image = Image(width: 2, height: 2, intensity: before)
             let after1 = before.map { $0 - 1 }
             XCTAssertEqual(image - 1, Image(width: 2, height: 2, data: after1))
             let after2 = before.map { 255 - $0 }
@@ -68,7 +68,7 @@ class ArithmeticTests: XCTestCase {
         }
         do {
             let before = (0..<16).map { Float.init($0) }
-            var image = Image<RGBA, Float>(width: 2, height: 2, data: before)
+            var image = Image(width: 2, height: 2, rgba: before)
             let after1 = before.map { $0 - 1 }
             XCTAssertEqual(image - 1, Image(width: 2, height: 2, data: after1))
             let after2 = before.map { 255 - $0 }
@@ -78,7 +78,7 @@ class ArithmeticTests: XCTestCase {
         }
         do {
             let before = (0..<16).map { Double.init($0) }
-            var image = Image<ARGB, Double>(width: 2, height: 2, data: before)
+            var image = Image(width: 2, height: 2, argb: before)
             let after1 = before.map { $0 - 1 }
             XCTAssertEqual(image - 1, Image(width: 2, height: 2, data: after1))
             let after2 = before.map { 255 - $0 }
@@ -92,7 +92,7 @@ class ArithmeticTests: XCTestCase {
         do {
             let before = (0..<4).map { UInt8($0) }
             let after = before.map { $0 * 2 }
-            var image = Image<Intensity, UInt8>(width: 2, height: 2, data: before)
+            var image = Image(width: 2, height: 2, intensity: before)
             XCTAssertEqual(image * 2, Image(width: 2, height: 2, data: after))
             XCTAssertEqual(2 * image, Image(width: 2, height: 2, data: after))
             image *= 2
@@ -101,7 +101,7 @@ class ArithmeticTests: XCTestCase {
         do {
             let before = (0..<16).map { Float.init($0) }
             let after = before.map { $0 * 2 }
-            var image = Image<RGBA, Float>(width: 2, height: 2, data: before)
+            var image = Image(width: 2, height: 2, rgba: before)
             XCTAssertEqual(image * 2, Image(width: 2, height: 2, data: after))
             XCTAssertEqual(2 * image, Image(width: 2, height: 2, data: after))
             image *= 2
@@ -110,7 +110,7 @@ class ArithmeticTests: XCTestCase {
         do {
             let before = (0..<16).map { Double.init($0) }
             let after = before.map { $0 * 2 }
-            var image = Image<ARGB, Double>(width: 2, height: 2, data: before)
+            var image = Image(width: 2, height: 2, argb: before)
             XCTAssertEqual(image * 2, Image(width: 2, height: 2, data: after))
             XCTAssertEqual(2 * image, Image(width: 2, height: 2, data: after))
             image *= 2
@@ -121,7 +121,7 @@ class ArithmeticTests: XCTestCase {
     func testDiv() {
         do {
             let before = (0..<4).map { UInt8($0+1) }
-            var image = Image<Intensity, UInt8>(width: 2, height: 2, data: before)
+            var image = Image(width: 2, height: 2, intensity: before)
             let after1 = before.map { $0 / 2 }
             XCTAssertEqual(image / 2, Image(width: 2, height: 2, data: after1))
             let after2 = before.map { 10 / $0 }
@@ -131,7 +131,7 @@ class ArithmeticTests: XCTestCase {
         }
         do {
             let before = (0..<16).map { Float.init($0+1) }
-            var image = Image<RGBA, Float>(width: 2, height: 2, data: before)
+            var image = Image(width: 2, height: 2, rgba: before)
             let after1 = before.map { $0 / 2 }
             XCTAssertEqual(image / 2, Image(width: 2, height: 2, data: after1))
             let after2 = before.map { 10 / $0 }
@@ -141,7 +141,7 @@ class ArithmeticTests: XCTestCase {
         }
         do {
             let before = (0..<16).map { Double.init($0+1) }
-            var image = Image<ARGB, Double>(width: 2, height: 2, data: before)
+            var image = Image(width: 2, height: 2, argb: before)
             let after1 = before.map { $0 / 2 }
             XCTAssertEqual(image / 2, Image(width: 2, height: 2, data: after1))
             let after2 = before.map { 10 / $0 }

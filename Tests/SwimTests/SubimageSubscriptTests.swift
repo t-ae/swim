@@ -6,7 +6,7 @@ class SubimageSubscriptTests: XCTestCase {
     
     func testSubimageSubscriptGet() {
         let data = (0..<400).map { Double($0) }
-        let image = Image<RGBA, Double>(width: 10, height: 10, data: data)
+        let image = Image(width: 10, height: 10, rgba: data)
         
         do {
             let subimage = image[0..<2, 0..<3]
@@ -70,7 +70,7 @@ class SubimageSubscriptTests: XCTestCase {
     
     func testSubimageSubscriptSet() {
         let data = (0..<27).map { Double($0) }
-        var image = Image<RGB, Double>(width: 3, height: 3, data: data)
+        var image = Image(width: 3, height: 3, rgb: data)
         
         XCTAssertEqual(image,
                        Image(width: 3, height: 3, data: [0, 1, 2,

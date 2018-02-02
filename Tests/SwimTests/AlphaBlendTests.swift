@@ -3,7 +3,7 @@ import XCTest
 import Swim
 
 class AlphaBlendTests: XCTestCase {
-
+    
     func testRGBandRGBA() {
         
         let c = 100
@@ -16,8 +16,8 @@ class AlphaBlendTests: XCTestCase {
                     (1-a)*rgb[2] + a*rgba[2]]
         }
         
-        var dst = Image<RGB, Float>(width: c, height: 1, data: rgb.flatMap { $0 })
-        let src = Image<RGBA, Float>(width: c, height: 1, data: rgba.flatMap { $0 })
+        var dst = Image(width: c, height: 1, rgb: rgb.flatMap { $0 })
+        let src = Image(width: c, height: 1, rgba: rgba.flatMap { $0 })
         
         dst.alphaBlend(with: src)
         
@@ -39,8 +39,8 @@ class AlphaBlendTests: XCTestCase {
                     (1-a)*rgb[2] + a*argb[3]]
         }
         
-        var dst = Image<RGB, Float>(width: c, height: 1, data: rgb.flatMap { $0 })
-        let src = Image<ARGB, Float>(width: c, height: 1, data: argb.flatMap { $0 })
+        var dst = Image(width: c, height: 1, rgb: rgb.flatMap { $0 })
+        let src = Image(width: c, height: 1, argb: argb.flatMap { $0 })
         
         dst.alphaBlend(with: src)
         
@@ -63,8 +63,8 @@ class AlphaBlendTests: XCTestCase {
                     ar]
         }
         
-        var dst = Image<RGBA, Float>(width: c, height: 1, data: p1.flatMap { $0 })
-        let src = Image<RGBA, Float>(width: c, height: 1, data: p2.flatMap { $0 })
+        var dst = Image(width: c, height: 1, rgba: p1.flatMap { $0 })
+        let src = Image(width: c, height: 1, rgba: p2.flatMap { $0 })
         
         dst.alphaBlend(with: src)
         
@@ -88,8 +88,8 @@ class AlphaBlendTests: XCTestCase {
                     (p2[3]*p2[0] + p1[3]*(1-p2[0])*p1[0]) / ar]
         }
         
-        var dst = Image<ARGB, Float>(width: c, height: 1, data: p1.flatMap { $0 })
-        let src = Image<ARGB, Float>(width: c, height: 1, data: p2.flatMap { $0 })
+        var dst = Image(width: c, height: 1, argb: p1.flatMap { $0 })
+        let src = Image(width: c, height: 1, argb: p2.flatMap { $0 })
         
         dst.alphaBlend(with: src)
         
@@ -99,5 +99,5 @@ class AlphaBlendTests: XCTestCase {
                              data: answer.flatMap { $0 }),
                        accuracy: 1e-5)
     }
-
+    
 }

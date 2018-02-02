@@ -7,7 +7,7 @@ class PixelSubscriptTests: XCTestCase {
     func testSubscriptGet() {
         do {
             let data = (0..<16).map { UInt8($0) }
-            let image = Image<Intensity, UInt8>(width: 4, height: 4, data: data)
+            let image = Image(width: 4, height: 4, intensity: data)
             
             // channel
             XCTAssertEqual(image[0, 0, 0], 0)
@@ -31,7 +31,7 @@ class PixelSubscriptTests: XCTestCase {
         }
         do {
             let data = (0..<64).map { UInt8($0) }
-            let image = Image<RGBA, UInt8>(width: 4, height: 4, data: data)
+            let image = Image(width: 4, height: 4, rgba: data)
             
             // channel
             XCTAssertEqual(image[0, 0, 0], 0)
@@ -55,7 +55,7 @@ class PixelSubscriptTests: XCTestCase {
     func testSubscriptSet() {
         do {
             let data = (0..<4).map { Double($0) }
-            var image = Image<Intensity, Double>(width: 2, height: 2, data: data)
+            var image = Image(width: 2, height: 2, intensity: data)
             XCTAssertEqual(image, Image(width: 2, height: 2, data: [0, 1, 2, 3]))
             
             image[0, 0] = 100
@@ -72,7 +72,7 @@ class PixelSubscriptTests: XCTestCase {
         }
         do {
             let data = (0..<16).map { UInt8($0) }
-            var image = Image<RGBA, UInt8>(width: 2, height: 2, data: data)
+            var image = Image(width: 2, height: 2, rgba: data)
             
             image[0, 0, 0] = 100
             XCTAssertEqual(image,

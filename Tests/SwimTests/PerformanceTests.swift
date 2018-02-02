@@ -7,7 +7,7 @@ class PerformanceTests: XCTestCase {
     
     func testConvert() {
         let data = [UInt8](repeating: 0, count: 1920*1080*4)
-        var image = Image<RGBA, UInt8>(width: 1920, height: 1080, data: data)
+        var image = Image(width: 1920, height: 1080, rgba: data)
         
         measure {
             image.convert { px in
@@ -18,7 +18,7 @@ class PerformanceTests: XCTestCase {
     
     func testUnsafeConvert() {
         let data = [UInt8](repeating: 0, count: 1920*1080*4)
-        var image = Image<RGBA, UInt8>(width: 1920, height: 1080, data: data)
+        var image = Image(width: 1920, height: 1080, rgba: data)
         
         measure {
             _ = image.unsafeConvert { bp in
@@ -31,7 +31,7 @@ class PerformanceTests: XCTestCase {
     
     func testConverted() {
         let data = [UInt8](repeating: 0, count: 1920*1080*4)
-        let image = Image<RGBA, UInt8>(width: 1920, height: 1080, data: data)
+        let image = Image(width: 1920, height: 1080, rgba: data)
         
         measure {
             _ = image.converted { px in
@@ -42,7 +42,7 @@ class PerformanceTests: XCTestCase {
     
     func testChannelwiseConverted() {
         let data = [UInt8](repeating: 0, count: 1920*1080*4)
-        let image = Image<RGBA, UInt8>(width: 1920, height: 1080, data: data)
+        let image = Image(width: 1920, height: 1080, rgba: data)
         
         measure {
             _ = image.channelwiseConverted { $0 + 1 }
@@ -51,7 +51,7 @@ class PerformanceTests: XCTestCase {
     
     func testBrightness() {
         let data = [Float](repeating: 0, count: 1920*1080*3)
-        let image = Image<RGB, Float>(width: 1920, height: 1080, data: data)
+        let image = Image(width: 1920, height: 1080, rgb: data)
         
         measure {
             _ = image.toBrightness()
@@ -60,7 +60,7 @@ class PerformanceTests: XCTestCase {
     
     func testSubimageSubscript() {
         let data = [Float](repeating: 0, count: 1920*1080*3)
-        var image = Image<RGB, Float>(width: 1920, height: 1080, data: data)
+        var image = Image(width: 1920, height: 1080, rgb: data)
         
         measure {
             for _ in 0..<100_000 {
@@ -71,7 +71,7 @@ class PerformanceTests: XCTestCase {
     
     func testChannelSubscript() {
         let data = [Float](repeating: 0, count: 1920*1080*3)
-        var image = Image<RGB, Float>(width: 1920, height: 1080, data: data)
+        var image = Image(width: 1920, height: 1080, rgb: data)
         
         measure {
             image[channel: .red] += 0.01
@@ -80,7 +80,7 @@ class PerformanceTests: XCTestCase {
     
     func testIntegralImage() {
         let data = [Float](repeating: 0, count: 1920*1080)
-        let image = Image<Intensity, Float>(width: 1920, height: 1080, data: data)
+        let image = Image(width: 1920, height: 1080, intensity: data)
         
         measure {
             _ = image.toIntegralImage()
@@ -89,7 +89,7 @@ class PerformanceTests: XCTestCase {
     
     func testConvolution() {
         let data = [Float](repeating: 0, count: 640*480)
-        let image = Image<Intensity, Float>(width: 640, height: 480, data: data)
+        let image = Image(width: 640, height: 480, intensity: data)
         
         measure {
             _ = image.convoluted(Filter.gaussian3x3)
@@ -98,7 +98,7 @@ class PerformanceTests: XCTestCase {
     
     func testFilter() {
         let data = [Float](repeating: 0, count: 640*480)
-        let image = Image<Intensity, Float>(width: 640, height: 480, data: data)
+        let image = Image(width: 640, height: 480, intensity: data)
         
         measure {
             _ = image.maximumFilter(kernelSize: 3)

@@ -3,9 +3,9 @@ import XCTest
 import Swim
 
 class Im2colTests: XCTestCase {
-
+    
     func testIm2col() {
-        let image = Image<Intensity, Float>(width: 3, height: 2, data: (0..<6).map { Float($0) })
+        let image = Image(width: 3, height: 2, intensity: (0..<6).map { Float($0) })
         
         do {
             let (m, n, matrix) = image.im2col(patchWidth: 4, patchHeight: 3, padding: .constant(9))
@@ -48,5 +48,5 @@ class Im2colTests: XCTestCase {
         
         
     }
-
+    
 }
