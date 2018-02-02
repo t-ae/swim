@@ -27,6 +27,20 @@ let argb = Image(width: 5, height: 3, argb: data)
 let image = Image<RGBA, UInt8>(contentsOf: url)!
 try? image.write(path: dstPath, type: .png)
 ```
+
+## Associate with CoreGraphics
+```swift
+let image = Image<RGBA, UInt8>(contentsOf: url)!
+
+// on macOS
+let nsImage = image.nsImage()
+let imageFromNS = Image<RGBA, UInt8>(nsImage: nsImage)!
+
+// on iOS
+let uiImage = image.uiImage()
+let imageFromUI = Image<RGBA, UInt8>(uiImage: nsImage)!
+```
+
 ## Subscriptions
 ### Pixel manipulation
 ```swift
