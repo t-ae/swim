@@ -5,6 +5,15 @@ import Swim
 class PerformanceTests: XCTestCase {
     #if !SWIFT_PACKAGE
     
+    func testAdd() {
+        let data = [UInt8](repeating: 0, count: 1920*1080*4)
+        let image = Image(width: 1920, height: 1080, rgba: data)
+        
+        measure {
+            _ = image + 1
+        }
+    }
+    
     func testConvert() {
         let data = [UInt8](repeating: 0, count: 1920*1080*4)
         var image = Image(width: 1920, height: 1080, rgba: data)
@@ -102,6 +111,15 @@ class PerformanceTests: XCTestCase {
         
         measure {
             _ = image.maximumFilter(kernelSize: 3)
+        }
+    }
+    
+    func testDebayered() {
+        let data = [Float](repeating: 0, count: 640*480)
+        let image = Image(width: 640, height: 480, intensity: data)
+        
+        measure {
+            _ = image.debayered(pattern: .bggr)
         }
     }
     #endif
