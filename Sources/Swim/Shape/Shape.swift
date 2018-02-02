@@ -21,14 +21,12 @@ extension Shape {
                 let y2 = pow(Double(y)-radius, 2)
                 let d2 = x2 + y2
                 
-                if d2 <= outer2 {
-                    if d2 <= inner2 {
-                        if let fillColor = fillColor {
-                            image[x, y] = fillColor
-                        }
-                    } else {
-                        image[x, y] = lineColor
+                if d2 <= inner2 {
+                    if let fillColor = fillColor {
+                        image[x, y] = fillColor
                     }
+                } else if d2 <= outer2 {
+                    image[x, y] = lineColor
                 }
             }
         }
