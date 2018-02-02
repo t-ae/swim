@@ -54,12 +54,20 @@ extension Pixel where P == IntensityAlpha {
     public init(intensity: T, alpha: T) {
         self.init(data: [intensity, alpha])
     }
+    
+    public init(intensityAlpha: [T]) {
+        self.init(intensityAlpha: intensityAlpha)
+    }
 }
 
 // MARK: RGB
 extension Pixel where P == RGB {
     public init(r: T, g: T, b: T) {
         self.init(data: [r, g, b])
+    }
+    
+    public init(rgb: [T]) {
+        self.init(data: rgb)
     }
 }
 
@@ -68,11 +76,19 @@ extension Pixel where P == RGBA {
     public init(r: T, g: T, b: T, a: T) {
         self.init(data: [r, g, b, a])
     }
+    
+    public init(rgba: [T]) {
+        self.init(data: rgba)
+    }
 }
 
 // MARK: ARGB
 extension Pixel where P == ARGB {
     public init(a: T, r: T, g: T, b: T) {
         self.init(data: [a, r, g, b])
+    }
+    
+    public init(argb: [T]) {
+        self.init(data: argb)
     }
 }

@@ -135,7 +135,7 @@ class VisualTests: XCTestCase {
         let maxIteration = 256
         
         func getJuliaImage(c: (Double, Double), color: Pixel<RGB, Double>) -> Image<RGBA, Double> {
-            let color = Pixel<RGBA, Double>.init(data: color.data + [0])
+            let color = Pixel(rgba: color.data + [0])
             var image = Image<RGBA, Double>(width: size,
                                             height: size,
                                             pixel: color)
