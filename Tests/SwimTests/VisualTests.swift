@@ -245,12 +245,15 @@ class VisualTests: XCTestCase {
                                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0].map { UInt8($0) })
         
         var b = b0
-        for _ in 0..<999 {
+        
+        var steps: [NSImage] = []
+        for _ in 0..<20 {
             let ns = (b*255).upsample(4).toRGB().nsImage()
-            _ = ns
-            print("break here")
+            steps.append(ns)
             b = next(b)
         }
+        print("break here")
+        _ = steps
     }
     
     #endif
