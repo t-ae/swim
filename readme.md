@@ -3,7 +3,7 @@ Image library for Swift.
 
 ## Generics
 ```swift
-Image<P: PixelType, T: DataType>
+struct Image<P: PixelType, T: DataType>
 ```
 
 Supported types  
