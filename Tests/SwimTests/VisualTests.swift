@@ -8,21 +8,27 @@ class VisualTests: XCTestCase {
     #if !SWIFT_PACKAGE && os(macOS)
     
     func testAlphaBlend() {
-        var imageBase = Image<RGB, Float>(width: 100,
-                                          height: 100,
-                                          value: 1)
-        imageBase[30..<70, 20..<60].fill(Pixel(r: 1, g: 0, b: 0))
+        var imageBase = Image<RGB, Double>(width: 500,
+                                           height: 500,
+                                           value: 1)
         
-        var imageGreen = Image<RGBA, Float>(width: 100,
-                                            height: 100,
-                                            value: 0)
-        imageGreen[20..<60, 40..<80].fill(Pixel(r: 0, g: 1, b: 0, a: 0.5))
+        let red = Shape.circle(size: 200,
+                               lineWidth: 3,
+                               lineColor: Pixel(r: 1.0, g: 0.0, b: 0.0, a: 1.0),
+                               fillColor: Pixel(r: 1.0, g: 0.0, b: 0.0, a: 0.5))
+        let green = Shape.circle(size: 200,
+                                 lineWidth: 3,
+                                 lineColor: Pixel(r: 0.0, g: 1.0, b: 0.0, a: 1.0),
+                                 fillColor: Pixel(r: 0.0, g: 1.0, b: 0.0, a: 0.5))
+        let blue = Shape.circle(size: 200,
+                                lineWidth: 3,
+                                lineColor: Pixel(r: 0.0, g: 0.0, b: 1.0, a: 1.0),
+                                fillColor: Pixel(r: 0.0, g: 0.0, b: 1.0, a: 0.5))
         
-        var imageBlue = Image<RGBA, Float>(width: 100, height: 100, value: 0)
-        imageBlue[40..<80, 40..<80].fill(Pixel(r: 0, g: 0, b: 1, a: 0.5))
         
-        imageBase.alphaBlend(with: imageGreen)
-        imageBase.alphaBlend(with: imageBlue)
+        imageBase[150..<350, 100..<300].alphaBlend(with: red)
+        imageBase[100..<300, 200..<400].alphaBlend(with: green)
+        imageBase[200..<400, 200..<400].alphaBlend(with: blue)
         
         let rgb256 = (imageBase * 255).typeConverted(to: UInt8.self)
         let nsImage = rgb256.nsImage()
