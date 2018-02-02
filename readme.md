@@ -131,4 +131,6 @@ let blur = image.convoluted(Filter.gaussian3x3)
 let maximum = image.maximumFilter(kernelSize: 3)
 ```
 
+---
+
 [VisualTests.swift](https://github.com/t-ae/swim/blob/master/Tests/SwimTests/VisualTests.swift) contains examples.
