@@ -2,9 +2,9 @@
 extension DataContainer where DT: Numeric {
     static func addAssign(lhs: inout Self, rhs: Self) {
         precondition(lhs.count == rhs.count, "Size mismatch.")
-        lhs.withUnsafeMutableBufferPointer {
+        lhs.withUnsafeMutableBufferPointerToData {
             var lp = $0.baseAddress!
-            rhs.withUnsafeBufferPointer {
+            rhs.withUnsafeBufferPointerToData {
                 var rp = $0.baseAddress!
                 for _ in 0..<$0.count {
                     lp.pointee += rp.pointee
@@ -17,9 +17,9 @@ extension DataContainer where DT: Numeric {
     
     static func subtractAssign(lhs: inout Self, rhs: Self) {
         precondition(lhs.count == rhs.count, "Size mismatch.")
-        lhs.withUnsafeMutableBufferPointer {
+        lhs.withUnsafeMutableBufferPointerToData {
             var lp = $0.baseAddress!
-            rhs.withUnsafeBufferPointer {
+            rhs.withUnsafeBufferPointerToData {
                 var rp = $0.baseAddress!
                 for _ in 0..<$0.count {
                     lp.pointee -= rp.pointee
@@ -32,9 +32,9 @@ extension DataContainer where DT: Numeric {
     
     static func multiplyAssign(lhs: inout Self, rhs: Self) {
         precondition(lhs.count == rhs.count, "Size mismatch.")
-        lhs.withUnsafeMutableBufferPointer {
+        lhs.withUnsafeMutableBufferPointerToData {
             var lp = $0.baseAddress!
-            rhs.withUnsafeBufferPointer {
+            rhs.withUnsafeBufferPointerToData {
                 var rp = $0.baseAddress!
                 for _ in 0..<$0.count {
                     lp.pointee *= rp.pointee
@@ -79,9 +79,9 @@ extension DataContainer where DT: Numeric {
 extension DataContainer where DT: BinaryInteger {
     static func divideAssign(lhs: inout Self, rhs: Self) {
         precondition(lhs.count == rhs.count, "Size mismatch.")
-        lhs.withUnsafeMutableBufferPointer {
+        lhs.withUnsafeMutableBufferPointerToData {
             var lp = $0.baseAddress!
-            rhs.withUnsafeBufferPointer {
+            rhs.withUnsafeBufferPointerToData {
                 var rp = $0.baseAddress!
                 for _ in 0..<$0.count {
                     lp.pointee /= rp.pointee
@@ -105,9 +105,9 @@ extension DataContainer where DT: BinaryInteger {
 extension DataContainer where DT: FloatingPoint {
     static func divideAssign(lhs: inout Self, rhs: Self) {
         precondition(lhs.count == rhs.count, "Size mismatch.")
-        lhs.withUnsafeMutableBufferPointer {
+        lhs.withUnsafeMutableBufferPointerToData {
             var lp = $0.baseAddress!
-            rhs.withUnsafeBufferPointer {
+            rhs.withUnsafeBufferPointerToData {
                 var rp = $0.baseAddress!
                 for _ in 0..<$0.count {
                     lp.pointee /= rp.pointee
@@ -135,9 +135,9 @@ extension DataContainer where DT: FloatingPoint {
     extension DataContainer where DT == Float {
         static func addAssign(lhs: inout Self, rhs: Self) {
             precondition(lhs.count == rhs.count, "Size mismatch.")
-            lhs.withUnsafeMutableBufferPointer {
+            lhs.withUnsafeMutableBufferPointerToData {
                 let lp = $0.baseAddress!
-                rhs.withUnsafeBufferPointer {
+                rhs.withUnsafeBufferPointerToData {
                     let rp = $0.baseAddress!
                     vDSP_vadd(lp, 1, rp, 1, lp, 1, vDSP_Length($0.count))
                 }
@@ -146,9 +146,9 @@ extension DataContainer where DT: FloatingPoint {
         
         static func subtractAssign(lhs: inout Self, rhs: Self) {
             precondition(lhs.count == rhs.count, "Size mismatch.")
-            lhs.withUnsafeMutableBufferPointer {
+            lhs.withUnsafeMutableBufferPointerToData {
                 let lp = $0.baseAddress!
-                rhs.withUnsafeBufferPointer {
+                rhs.withUnsafeBufferPointerToData {
                     let rp = $0.baseAddress!
                     vDSP_vsub(rp, 1, lp, 1, lp, 1, vDSP_Length($0.count))
                 }
@@ -157,9 +157,9 @@ extension DataContainer where DT: FloatingPoint {
         
         static func multiplyAssign(lhs: inout Self, rhs: Self) {
             precondition(lhs.count == rhs.count, "Size mismatch.")
-            lhs.withUnsafeMutableBufferPointer {
+            lhs.withUnsafeMutableBufferPointerToData {
                 let lp = $0.baseAddress!
-                rhs.withUnsafeBufferPointer {
+                rhs.withUnsafeBufferPointerToData {
                     let rp = $0.baseAddress!
                     vDSP_vmul(lp, 1, rp, 1, lp, 1, vDSP_Length($0.count))
                 }
@@ -168,9 +168,9 @@ extension DataContainer where DT: FloatingPoint {
         
         static func divideAssign(lhs: inout Self, rhs: Self) {
             precondition(lhs.count == rhs.count, "Size mismatch.")
-            lhs.withUnsafeMutableBufferPointer {
+            lhs.withUnsafeMutableBufferPointerToData {
                 let lp = $0.baseAddress!
-                rhs.withUnsafeBufferPointer {
+                rhs.withUnsafeBufferPointerToData {
                     let rp = $0.baseAddress!
                     vDSP_vdiv(rp, 1, lp, 1, lp, 1, vDSP_Length($0.count))
                 }
@@ -181,9 +181,9 @@ extension DataContainer where DT: FloatingPoint {
     extension DataContainer where DT == Double {
         static func addAssign(lhs: inout Self, rhs: Self) {
             precondition(lhs.count == rhs.count, "Size mismatch.")
-            lhs.withUnsafeMutableBufferPointer {
+            lhs.withUnsafeMutableBufferPointerToData {
                 let lp = $0.baseAddress!
-                rhs.withUnsafeBufferPointer {
+                rhs.withUnsafeBufferPointerToData {
                     let rp = $0.baseAddress!
                     vDSP_vaddD(lp, 1, rp, 1, lp, 1, vDSP_Length($0.count))
                 }
@@ -192,9 +192,9 @@ extension DataContainer where DT: FloatingPoint {
         
         static func subtractAssign(lhs: inout Self, rhs: Self) {
             precondition(lhs.count == rhs.count, "Size mismatch.")
-            lhs.withUnsafeMutableBufferPointer {
+            lhs.withUnsafeMutableBufferPointerToData {
                 let lp = $0.baseAddress!
-                rhs.withUnsafeBufferPointer {
+                rhs.withUnsafeBufferPointerToData {
                     let rp = $0.baseAddress!
                     vDSP_vsubD(rp, 1, lp, 1, lp, 1, vDSP_Length($0.count))
                 }
@@ -203,9 +203,9 @@ extension DataContainer where DT: FloatingPoint {
         
         static func multiplyAssign(lhs: inout Self, rhs: Self) {
             precondition(lhs.count == rhs.count, "Size mismatch.")
-            lhs.withUnsafeMutableBufferPointer {
+            lhs.withUnsafeMutableBufferPointerToData {
                 let lp = $0.baseAddress!
-                rhs.withUnsafeBufferPointer {
+                rhs.withUnsafeBufferPointerToData {
                     let rp = $0.baseAddress!
                     vDSP_vmulD(lp, 1, rp, 1, lp, 1, vDSP_Length($0.count))
                 }
@@ -214,9 +214,9 @@ extension DataContainer where DT: FloatingPoint {
         
         static func divideAssign(lhs: inout Self, rhs: Self) {
             precondition(lhs.count == rhs.count, "Size mismatch.")
-            lhs.withUnsafeMutableBufferPointer {
+            lhs.withUnsafeMutableBufferPointerToData {
                 let lp = $0.baseAddress!
-                rhs.withUnsafeBufferPointer {
+                rhs.withUnsafeBufferPointerToData {
                     let rp = $0.baseAddress!
                     vDSP_vdivD(rp, 1, lp, 1, lp, 1, vDSP_Length($0.count))
                 }

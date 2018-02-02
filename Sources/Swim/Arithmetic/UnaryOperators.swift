@@ -2,7 +2,7 @@
 extension DataContainer where DT: SignedNumeric {
     static func negate(arg: Self) -> Self {
         var ret = arg
-        ret.withUnsafeMutableBufferPointer {
+        ret.withUnsafeMutableBufferPointerToData {
             var p = $0.baseAddress!
             for _ in 0..<$0.count {
                 p.pointee = -p.pointee
@@ -29,7 +29,7 @@ extension DataContainer where DT: SignedNumeric {
         
         static func negate(arg: Self) -> Self {
             var ret = arg
-            ret.withUnsafeMutableBufferPointer {
+            ret.withUnsafeMutableBufferPointerToData {
                 vDSP_vneg($0.baseAddress!, 1, $0.baseAddress!, 1, vDSP_Length($0.count))
             }
             return ret
@@ -39,7 +39,7 @@ extension DataContainer where DT: SignedNumeric {
     extension DataContainer where DT == Double {
         static func negate(arg: Self) -> Self {
             var ret = arg
-            ret.withUnsafeMutableBufferPointer {
+            ret.withUnsafeMutableBufferPointerToData {
                 vDSP_vnegD($0.baseAddress!, 1, $0.baseAddress!, 1, vDSP_Length($0.count))
             }
             return ret
