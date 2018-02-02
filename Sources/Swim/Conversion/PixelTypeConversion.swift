@@ -83,12 +83,14 @@ extension Image where P == RGB, T: FloatingPoint {
     public func toBrightness() -> Image<Intensity, T> {
         return _toBrightness()
     }
-    
+}
+
+extension Image where P == RGB, T: BinaryFloatingPoint {
     func _toLuminance() -> Image<Intensity, T> {
         return _converted { px -> T in
-            let r = 2126 * px[P.red] / 10000
-            let g = 7152 * px[P.green] / 10000
-            let b = 0722 * px[P.blue] / 10000
+            let r = 0.2126 * px[P.red]
+            let g = 0.7152 * px[P.green]
+            let b = 0.0722 * px[P.blue]
             return r + g + b
         }
     }

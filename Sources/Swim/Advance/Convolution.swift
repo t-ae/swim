@@ -34,10 +34,10 @@ public enum Filter<T: Numeric&DataType> {
 
 extension Filter where T: FloatingPoint {
     public static var gaussian3x3: Image<Intensity, T> {
-        let data: [T] = [65, 125, 65,
-                         125, 250, 125,
-                         65, 125, 65]
-        return Image(width: 3, height: 3, data: data.map { $0 / 1000 })
+        let data: [T] = [1, 2, 1,
+                         2, 4, 2,
+                         1, 2, 1]
+        return Image(width: 3, height: 3, data: data.map { $0 / 16 })
     }
     
     public static var mean3x3: Image<Intensity, T> {
