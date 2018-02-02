@@ -31,3 +31,23 @@ extension Array where Element: Comparable {
         return index(of: medianValue)
     }
 }
+
+extension Array {
+    func all(_ condition: (Element)->Bool) -> Bool {
+        for e in self {
+            guard condition(e) else {
+                return false
+            }
+        }
+        return true
+    }
+    
+    func some(_ condition: (Element)->Bool) -> Bool {
+        for e in self {
+            guard !condition(e) else {
+                return true
+            }
+        }
+        return false
+    }
+}

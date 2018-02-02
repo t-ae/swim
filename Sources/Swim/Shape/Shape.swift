@@ -51,7 +51,9 @@ extension Shape {
         
         // inner
         if let fillColor = fillColor {
-            image[lineWidth..<width-lineWidth, lineWidth..<height-lineWidth].fill(fillColor)
+            let xRange = lineWidth..<width-lineWidth
+            let yRange = lineWidth..<height-lineWidth
+            image[xRange, yRange].fill(fillColor)
         }
         
         return image

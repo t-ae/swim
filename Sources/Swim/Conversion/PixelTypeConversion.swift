@@ -32,11 +32,10 @@ extension Image where P == Intensity {
 // MARK: - RGB -> Intensity
 extension Image where P == RGB, T: BinaryInteger {
     func _toBrightness() -> Image<Intensity, T> {
-        return _converted { px -> T in
-            let r: T = px[P.red]
-            let g: T = px[P.green]
-            let b: T = px[P.blue]
-            let sum = r + g + b + 1
+        return _converted { (px: Pixel<RGB, T>) -> T in
+            var sum: T = px[P.red]
+            sum += px[P.green]
+            sum += px[P.blue]
             return sum / 3
         }
     }
@@ -46,11 +45,12 @@ extension Image where P == RGB, T: BinaryInteger {
     }
     
     func _toLuminance() -> Image<Intensity, T> {
-        return _converted { px -> T in
-            let r = 2126*px[P.red]
-            let g = 7152*px[P.green]
-            let b = 722*px[P.blue]
-            return (r + g + b) / 10000
+        return _converted { (px: Pixel<RGB, T>) -> T in
+            var sum: T = 0
+            sum += 2126*px[P.red]
+            sum += 7152*px[P.green]
+            sum += 722*px[P.blue]
+            return sum / 10000
         }
     }
     
@@ -72,11 +72,11 @@ extension Image where P == RGB, T == UInt8 {
 
 extension Image where P == RGB, T: FloatingPoint {
     func _toBrightness() -> Image<Intensity, T> {
-        return _converted { px -> T in
-            let r = px[P.red]
-            let g = px[P.green]
-            let b = px[P.blue]
-            return (r + g + b) / 3
+        return _converted { (px: Pixel<RGB, T>) -> T in
+            var sum: T = px[P.red]
+            sum += px[P.green]
+            sum += px[P.blue]
+            return sum / 3
         }
     }
     
@@ -87,10 +87,10 @@ extension Image where P == RGB, T: FloatingPoint {
 
 extension Image where P == RGB, T: BinaryFloatingPoint {
     func _toLuminance() -> Image<Intensity, T> {
-        return _converted { px -> T in
-            let r = 0.2126 * px[P.red]
-            let g = 0.7152 * px[P.green]
-            let b = 0.0722 * px[P.blue]
+        return _converted { (px: Pixel<RGB, T>) -> T in
+            let r: T = 0.2126 * px[P.red]
+            let g: T = 0.7152 * px[P.green]
+            let b: T = 0.0722 * px[P.blue]
             return r + g + b
         }
     }

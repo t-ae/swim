@@ -12,7 +12,8 @@ public enum Correlation<T: FloatingPoint&DataType> {
                 var bp = $0.baseAddress!
                 
                 for _ in 0..<$0.count {
-                    sum += (ap.pointee - bp.pointee) * (ap.pointee - bp.pointee)
+                    let tmp  = ap.pointee - bp.pointee
+                    sum += tmp*tmp
                     ap += 1
                     bp += 1
                 }
@@ -103,9 +104,14 @@ public enum Correlation<T: FloatingPoint&DataType> {
         }
         
         let c: T = T(a.width * a.height)
-        let up: T = (c*sumCross - suma*sumb)
-        let da: T = (c*sum2a - suma*suma)
-        let db: T = (c*sum2b - sumb*sumb)
+        let sumasumb = suma*sumb
+        let suma2 = suma*suma
+        let sumb2 = sumb*sumb
+        let up: T = c*sumCross - sumasumb
+        
+        let da: T = c*sum2a - suma2
+        let db: T = c*sum2b - sumb2
+        
         return up / sqrt(da*db)
     }
     
