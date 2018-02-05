@@ -92,7 +92,7 @@ class ResizeTests: XCTestCase {
         _ = ns
     }
     
-    func testResizebn_4px() {
+    func testResizebn_2x2() {
         let data = [255, 255, 255,
                     255, 0, 0,
                     0, 255, 0,
