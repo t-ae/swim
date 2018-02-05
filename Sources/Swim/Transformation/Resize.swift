@@ -3,6 +3,9 @@ import Foundation
 import CStbImage
 
 extension Image where T: BinaryFloatingPoint {
+    /// Resize image with appropriate algorithm.
+    ///
+    /// Area average method for downsampling and Bilinear interpolation for upsampling.
     func _resized(width: Int, height: Int) -> Image<P, T> {
         
         var baseImage = self
@@ -53,7 +56,7 @@ extension Image {
 }
 
 extension Image where T: BinaryFloatingPoint {
-    /// Resize image with Area Average algorithm.
+    /// Resize image with Area average method.
     func _resizeaa(width: Int, height: Int) -> Image<P, T> {
         
         let xScaleImage: Image<P, T>
