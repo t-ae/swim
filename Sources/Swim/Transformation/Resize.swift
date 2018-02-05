@@ -106,18 +106,18 @@ extension Image where T: BinaryFloatingPoint {
     public func resizebn(width: Int, height: Int) -> Image<P, T> {
         var newImage = Image<P, T>(width: width, height: height)
 
-        let scaleX = T(width) / T(self.width)
-        let scaleY = T(height) / T(self.height)
+        let scaleX = T(self.width) / T(width)
+        let scaleY = T(self.height) / T(height)
 
         for y in 0..<height {
-            let yp = T(y) / scaleY
+            let yp = (T(y) + 0.5) * scaleY
             let yy = Int(Foundation.floor(yp))
             let yy1 = min(yy+1, self.height-1)
             let yy1yp: T = T(yy1) - yp
             let ypyy: T = yp - T(yy)
             
             for x in 0..<width {
-                let xp = T(x) / scaleX
+                let xp = (T(x) + 0.5) * scaleX
                 let xx = Int(Foundation.floor(xp))
                 let xx1 = min(xx+1, self.width-1)
                 let xx1xp: T = T(xx1) - xp

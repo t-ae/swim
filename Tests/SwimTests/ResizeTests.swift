@@ -27,7 +27,7 @@ extension ResizeTests {
                                                          lineColor: Pixel(r: 255, g: 0, b: 0, a: 255))
             
             let resized = image.resized(width: 300, height: 300)!
-            let ns = resized.typeConverted(to: UInt8.self).nsImage()
+            let ns = resized.nsImage()
             print("break here")
             _ = ns
         }
@@ -38,7 +38,7 @@ extension ResizeTests {
                                                          lineColor: Pixel(r: 255, g: 0, b: 0, a: 255))
             
             let resized = image.resized(width: 64, height: 64)!
-            let ns = resized.typeConverted(to: UInt8.self).nsImage()
+            let ns = resized.nsImage()
             print("break here")
             _ = ns
         }
