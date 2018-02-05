@@ -83,21 +83,23 @@ extension Image where T: BinaryFloatingPoint {
         for y in 0..<height {
             let yp = T(y) / scaleY
             let yy = Int(Foundation.floor(yp))
-            let yy1yp: T = T(yy) + 1 - yp
+            let yy1 = min(yy+1, self.height-1)
+            let yy1yp: T = T(yy1) - yp
             let ypyy: T = yp - T(yy)
             
             for x in 0..<width {
                 let xp = T(x) / scaleX
                 let xx = Int(Foundation.floor(xp))
-                let xx1xp: T = T(xx) + 1 - xp
+                let xx1 = min(xx+1, self.width-1)
+                let xx1xp: T = T(xx1) - xp
                 let xpxx: T = xp - T(xx)
 
                 let plu: Pixel<P, T> = yy1yp * self[xx, yy]
-                let pru: Pixel<P, T> = ypyy * self[xx, yy+1]
+                let pru: Pixel<P, T> = ypyy * self[xx, yy1]
                 let pu: Pixel<P, T> = plu + pru
 
-                let pld: Pixel<P, T> = yy1yp * self[xx+1, yy]
-                let prd: Pixel<P, T> = ypyy * self[xx+1, yy+1]
+                let pld: Pixel<P, T> = yy1yp * self[xx1, yy]
+                let prd: Pixel<P, T> = ypyy * self[xx1, yy1]
                 let pd: Pixel<P, T> = pld + prd
 
                 let px1: Pixel<P, T> = xx1xp * pu
