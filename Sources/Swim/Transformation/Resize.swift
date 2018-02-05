@@ -59,9 +59,10 @@ extension Image {
         let scaleY = Double(height) / Double(self.height)
         
         for y in 0..<height {
+            let yp = min(Int(Foundation.round(Double(y) / scaleY)), self.height - 1)
+            
             for x in 0..<width {
                 let xp = min(Int(Foundation.round(Double(x) / scaleX)), self.width - 1)
-                let yp = min(Int(Foundation.round(Double(y) / scaleY)), self.height - 1)
                 
                 newImage[x, y] = self[xp, yp]
             }
@@ -71,36 +72,43 @@ extension Image {
     }
 }
 
-//extension Image where T: FloatingPoint {
-//    public func resizebn(width: Int, height: Int) -> Image<P, T> {
-//        var newImage = Image<P, T>(width: width, height: height)
-//
-//        let scaleX = T(width) / T(self.width)
-//        let scaleY = T(height) / T(self.height)
-//
-//        for y in 0..<height {
-//            for x in 0..<width {
-//                let xp = T(x) / scaleX
-//                let yp = T(y) / scaleY
-//
-//                let xx = Foundation.floor(xp)
-//                let yy = Foundation.floor(yp)
-//
-//                let plu: Pixel<P, T> = (yy + 1 - yp) * self[xx, yy]
-//                let pru: Pixel<P, T> = (yp - yy) * self[xx, yy+1]
-//                let pu: Pixel<P, T> = plu + pru
-//
-//                let pld: Pixel<P, T> = (yy + 1 - yp) * self[xx+1, yy]
-//                let prd: Pixel<P, T> = (yp - yy)*self[xx+1, yy+1]
-//                let pd: Pixel<P, T> = pld + prd
-//
-//                let px = (xx + 1 - xp) * pu + (xp - xx) * pd
-//
-//                newImage[x, y] = px
-//            }
-//        }
-//
-//        return newImage
-//    }
-//}
+extension Image where T: BinaryFloatingPoint {
+    /// Resize image with Bilinear interpolation.
+    public func resizebn(width: Int, height: Int) -> Image<P, T> {
+        var newImage = Image<P, T>(width: width, height: height)
+
+        let scaleX = T(width) / T(self.width)
+        let scaleY = T(height) / T(self.height)
+
+        for y in 0..<height {
+            let yp = T(y) / scaleY
+            let yy = Int(Foundation.floor(yp))
+            let yy1yp: T = T(yy) + 1 - yp
+            let ypyy: T = yp - T(yy)
+            
+            for x in 0..<width {
+                let xp = T(x) / scaleX
+                let xx = Int(Foundation.floor(xp))
+                let xx1xp: T = T(xx) + 1 - xp
+                let xpxx: T = xp - T(xx)
+
+                let plu: Pixel<P, T> = yy1yp * self[xx, yy]
+                let pru: Pixel<P, T> = ypyy * self[xx, yy+1]
+                let pu: Pixel<P, T> = plu + pru
+
+                let pld: Pixel<P, T> = yy1yp * self[xx+1, yy]
+                let prd: Pixel<P, T> = ypyy * self[xx+1, yy+1]
+                let pd: Pixel<P, T> = pld + prd
+
+                let px1: Pixel<P, T> = xx1xp * pu
+                let px2: Pixel<P, T> = xpxx * pd
+                let px: Pixel<P, T> = px1 + px2
+
+                newImage[x, y] = px
+            }
+        }
+
+        return newImage
+    }
+}
 
