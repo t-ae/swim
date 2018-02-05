@@ -5,6 +5,10 @@ from type import *
 % for pt in pixel_types:
 % for dt in fp_data_types:
 extension Image where P == ${pt}, T == ${dt} {
+    public func resized(width: Int, height: Int) -> Image<P, T> {
+        return _resized(width: width, height: height)
+    }
+
     public func resizenn(width: Int, height: Int) -> Image<P, T> {
         return _resizenn(width: width, height: height)
     }

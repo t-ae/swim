@@ -2,6 +2,27 @@
 import Foundation
 import CStbImage
 
+extension Image where T: BinaryFloatingPoint {
+    func _resized(width: Int, height: Int) -> Image<P, T> {
+        
+        var baseImage = self
+        if width < baseImage.width {
+            baseImage = baseImage.resizeaa(width: width, height: baseImage.height)
+        }
+        if height < baseImage.height {
+            baseImage = baseImage.resizeaa(width: baseImage.width, height: height)
+        }
+        if width > baseImage.width || height > baseImage.height {
+            baseImage = baseImage.resizebn(width: width, height: height)
+        }
+        return baseImage
+    }
+    
+    public func resized(width: Int, height: Int) -> Image<P, T> {
+        return _resized(width: width, height: height)
+    }
+}
+
 extension Image {
     /// Resize image with Narest Neighbor algorithm.
     func _resizenn(width: Int, height: Int) -> Image<P, T> {
@@ -47,14 +68,16 @@ extension Image where T: BinaryFloatingPoint {
                     if ceilStartX < floorEndX {
                         if startX < ceilStartX {
                             let dx = Int(Foundation.floor(startX))
-                            newImage[x, y] += baseImage[dx, y] * (ceilStartX - startX)
+                            let len: T = ceilStartX - startX
+                            newImage[x, y] += baseImage[dx, y] * len
                         }
                         for dx in Int(ceilStartX)...Int(floorEndX) {
                             newImage[x, y] += baseImage[dx, y]
                         }
                         if floorEndX < endX {
                             let dx = Int(Foundation.ceil(endX))
-                            newImage[x, y] += baseImage[dx, y] * (endX - floorEndX)
+                            let len: T = endX - floorEndX
+                            newImage[x, y] += baseImage[dx, y] * len
                         }
                         newImage[x, y] /= scaleX
                     } else {
@@ -83,14 +106,16 @@ extension Image where T: BinaryFloatingPoint {
                     if ceilStartY < floorEndY {
                         if startY < ceilStartY {
                             let dy = Int(Foundation.floor(startY))
-                            newImage[x, y] += baseImage[x, dy] * (ceilStartY - startY)
+                            let len: T = ceilStartY - startY
+                            newImage[x, y] += baseImage[x, dy] * len
                         }
                         for dy in Int(ceilStartY)...Int(floorEndY) {
                             newImage[x, y] += baseImage[x, dy]
                         }
                         if floorEndY < endY {
                             let dy = Int(Foundation.ceil(endY))
-                            newImage[x, y] += baseImage[x, dy] * (endY - floorEndY)
+                            let len: T = endY - floorEndY
+                            newImage[x, y] += baseImage[x, dy] * len
                         }
                         newImage[x, y] /= scaleY
                     } else {
