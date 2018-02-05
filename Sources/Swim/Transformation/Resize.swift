@@ -7,12 +7,15 @@ extension Image where T: BinaryFloatingPoint {
         
         var baseImage = self
         if width < baseImage.width {
+            // downsample
             baseImage = baseImage.resizeaa(width: width, height: baseImage.height)
         }
         if height < baseImage.height {
+            // downsample
             baseImage = baseImage.resizeaa(width: baseImage.width, height: height)
         }
         if width > baseImage.width || height > baseImage.height {
+            // upsample
             baseImage = baseImage.resizebn(width: width, height: height)
         }
         return baseImage
@@ -28,14 +31,14 @@ extension Image {
     func _resizenn(width: Int, height: Int) -> Image<P, T> {
         var newImage = Image<P, T>(width: width, height: height)
         
-        let scaleX = Double(width) / Double(self.width)
-        let scaleY = Double(height) / Double(self.height)
+        let scaleX = Double(self.width) / Double(width)
+        let scaleY = Double(self.height) / Double(height)
         
         for y in 0..<height {
-            let yp = min(Int(Foundation.round(Double(y) / scaleY)), self.height - 1)
+            let yp = min(Int(Foundation.round(Double(y) * scaleY)), self.height - 1)
             
             for x in 0..<width {
-                let xp = min(Int(Foundation.round(Double(x) / scaleX)), self.width - 1)
+                let xp = min(Int(Foundation.round(Double(x) * scaleX)), self.width - 1)
                 
                 newImage[x, y] = self[xp, yp]
             }
@@ -66,6 +69,7 @@ extension Image where T: BinaryFloatingPoint {
                     let ceilStartX = Foundation.ceil(startX)
                     let floorEndX = Foundation.floor(endX)
                     if ceilStartX < floorEndX {
+                        // average
                         if startX < ceilStartX {
                             let dx = Int(Foundation.floor(startX))
                             let len: T = ceilStartX - startX
@@ -81,6 +85,7 @@ extension Image where T: BinaryFloatingPoint {
                         }
                         newImage[x, y] /= scaleX
                     } else {
+                        // single pixel
                         newImage[x, y] = baseImage[Int(ceilStartX), y]
                     }
                 }
@@ -104,6 +109,7 @@ extension Image where T: BinaryFloatingPoint {
                 
                 for x in 0..<width {
                     if ceilStartY < floorEndY {
+                        // average
                         if startY < ceilStartY {
                             let dy = Int(Foundation.floor(startY))
                             let len: T = ceilStartY - startY
@@ -119,6 +125,7 @@ extension Image where T: BinaryFloatingPoint {
                         }
                         newImage[x, y] /= scaleY
                     } else {
+                        // single pixel
                         newImage[x, y] = baseImage[x, Int(ceilStartY)]
                     }
                 }
@@ -142,6 +149,7 @@ extension Image where T: BinaryFloatingPoint {
         
         let baseImage: Image<P, T>
         do {
+            // downsample to avoid sparse sampling
             var image = self
             if width*2 < self.width {
                 var newWidth = self.width >> 1
@@ -166,6 +174,7 @@ extension Image where T: BinaryFloatingPoint {
         let scaleY = T(baseImage.height-1) / T(height-1)
 
         for y in 0..<height {
+            // yp \in [0, self.height-1]
             let yp = T(y) * scaleY
             let yy = Int(Foundation.floor(yp))
             let yy1 = Int(Foundation.ceil(yp))
@@ -173,6 +182,7 @@ extension Image where T: BinaryFloatingPoint {
             let ypyy: T = yp - T(yy)
             
             for x in 0..<width {
+                // xp \in [0, self.width-1]
                 let xp = T(x) * scaleX
                 let xx = Int(Foundation.floor(xp))
                 let xx1 = Int(Foundation.ceil(xp))
