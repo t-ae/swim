@@ -73,6 +73,35 @@ extension Image {
 }
 
 extension Image where T: BinaryFloatingPoint {
+    /// Resize image with Area Average algorithm.
+    public func resizeaa(width: Int, height: Int) -> Image<P, T> {
+        var newImage = Image<P, T>(width: width, height: height, value: 0)
+        
+        let scaleX = T(self.width-1) / T(width)
+        let scaleY = T(self.height-1) / T(height)
+        
+        for y in 0..<height {
+            let yStart = Int(Foundation.floor(T(y) * scaleY))
+            let yEnd = Int(Foundation.ceil(T(y+1) * scaleY))
+            
+            for x in 0..<width {
+                let xStart = Int(Foundation.floor(T(x) * scaleX))
+                let xEnd = Int(Foundation.ceil(T(x+1) * scaleX))
+                
+                for dy in yStart..<yEnd {
+                    for dx in xStart..<xEnd {
+                        newImage[x, y] += self[dx, dy]
+                    }
+                }
+                newImage[x, y] /= T((yEnd-yStart) * (xEnd-xStart))
+            }
+        }
+        
+        return newImage
+    }
+}
+
+extension Image where T: BinaryFloatingPoint {
     /// Resize image with Bilinear interpolation.
     public func resizebn(width: Int, height: Int) -> Image<P, T> {
         var newImage = Image<P, T>(width: width, height: height)
