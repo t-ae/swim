@@ -2,54 +2,6 @@
 import Foundation
 import CStbImage
 
-extension Image where T == UInt8 {
-    public func resized(width: Int, height: Int) -> Image<P, T>? {
-        var newImage = Image<P, T>(width: width, height: height)
-        let in_w = Int32(self.width)
-        let in_h = Int32(self.height)
-        let out_w = Int32(width)
-        let out_h = Int32(height)
-        let num_channels = Int32(P.channels)
-        let result: Int32 = data.withUnsafeBufferPointer {
-            let src = $0.baseAddress!
-            return newImage.data.withUnsafeMutableBufferPointer {
-                let dst = $0.baseAddress!
-                return resize_uint8(src, in_w, in_h, dst, out_w, out_h, num_channels)
-            }
-        }
-        
-        if result == 1 {
-            return newImage
-        } else {
-            return nil
-        }
-    }
-}
-
-extension Image where T == Float {
-    public func resized(width: Int, height: Int) -> Image<P, T>? {
-        var newImage = Image<P, T>(width: width, height: height)
-        let in_w = Int32(self.width)
-        let in_h = Int32(self.height)
-        let out_w = Int32(width)
-        let out_h = Int32(height)
-        let num_channels = Int32(P.channels)
-        let result: Int32 = data.withUnsafeBufferPointer {
-            let src = $0.baseAddress!
-            return newImage.data.withUnsafeMutableBufferPointer {
-                let dst = $0.baseAddress!
-                return resize_float(src, in_w, in_h, dst, out_w, out_h, num_channels)
-            }
-        }
-        
-        if result == 1 {
-            return newImage
-        } else {
-            return nil
-        }
-    }
-}
-
 extension Image {
     /// Resize image with Narest Neighbor algorithm.
     func _resizenn(width: Int, height: Int) -> Image<P, T> {
@@ -162,31 +114,52 @@ extension Image where T: BinaryFloatingPoint {
 extension Image where T: BinaryFloatingPoint {
     /// Resize image with Bilinear interpolation.
     func _resizebn(width: Int, height: Int) -> Image<P, T> {
+        
+        let baseImage: Image<P, T>
+        do {
+            var image = self
+            if width*2 < self.width {
+                var newWidth = self.width >> 1
+                while width*2 < newWidth {
+                    newWidth >>= 1
+                }
+                image = image._resizeaa(width: newWidth, height: image.height)
+            }
+            if height*2 < self.height {
+                var newHeight = self.height >> 1
+                while height*2 < newHeight {
+                    newHeight >>= 1
+                }
+                image = image._resizeaa(width: image.width, height: newHeight)
+            }
+            baseImage = image
+        }
+        
         var newImage = Image<P, T>(width: width, height: height)
 
-        let scaleX = T(self.width-1) / T(width)
-        let scaleY = T(self.height-1) / T(height)
+        let scaleX = T(baseImage.width) / T(width)
+        let scaleY = T(baseImage.height) / T(height)
 
         for y in 0..<height {
             let yp = (T(y) + 0.5) * scaleY
             let yy = Int(Foundation.floor(yp))
-            let yy1 = yy+1
+            let yy1 = min(yy+1, baseImage.height-1)
             let yy1yp: T = T(yy1) - yp
             let ypyy: T = yp - T(yy)
             
             for x in 0..<width {
                 let xp = (T(x) + 0.5) * scaleX
                 let xx = Int(Foundation.floor(xp))
-                let xx1 = xx+1
+                let xx1 = min(xx+1, baseImage.width-1)
                 let xx1xp: T = T(xx1) - xp
                 let xpxx: T = xp - T(xx)
 
-                let plu: Pixel<P, T> = yy1yp * self[xx, yy]
-                let pru: Pixel<P, T> = ypyy * self[xx, yy1]
+                let plu: Pixel<P, T> = yy1yp * baseImage[xx, yy]
+                let pru: Pixel<P, T> = ypyy * baseImage[xx, yy1]
                 let pu: Pixel<P, T> = plu + pru
 
-                let pld: Pixel<P, T> = yy1yp * self[xx1, yy]
-                let prd: Pixel<P, T> = ypyy * self[xx1, yy1]
+                let pld: Pixel<P, T> = yy1yp * baseImage[xx1, yy]
+                let prd: Pixel<P, T> = ypyy * baseImage[xx1, yy1]
                 let pd: Pixel<P, T> = pld + prd
 
                 let px1: Pixel<P, T> = xx1xp * pu
