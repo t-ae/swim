@@ -1,0 +1,22 @@
+%{
+from type import *
+}%
+
+% for pt in pixel_types:
+% for dt in fp_data_types:
+extension Image where P == ${pt}, T == ${dt} {
+    public func resizenn(width: Int, height: Int) -> Image<P, T> {
+        return _resizenn(width: width, height: height)
+    }
+
+    public func resizeaa(width: Int, height: Int) -> Image<P, T> {
+        return _resizeaa(width: width, height: height)
+    }
+
+    public func resizebn(width: Int, height: Int) -> Image<P, T> {
+        return _resizebn(width: width, height: height)
+    }
+}
+
+% end
+% end

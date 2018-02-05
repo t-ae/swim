@@ -52,7 +52,7 @@ extension Image where T == Float {
 
 extension Image {
     /// Resize image with Narest Neighbor algorithm.
-    public func resizenn(width: Int, height: Int) -> Image<P, T> {
+    func _resizenn(width: Int, height: Int) -> Image<P, T> {
         var newImage = Image<P, T>(width: width, height: height)
         
         let scaleX = Double(width) / Double(self.width)
@@ -70,11 +70,15 @@ extension Image {
         
         return newImage
     }
+    
+    public func resizenn(width: Int, height: Int) -> Image<P, T> {
+        return _resizenn(width: width, height: height)
+    }
 }
 
 extension Image where T: BinaryFloatingPoint {
     /// Resize image with Area Average algorithm.
-    public func resizeaa(width: Int, height: Int) -> Image<P, T> {
+    func _resizeaa(width: Int, height: Int) -> Image<P, T> {
         var newImage = Image<P, T>(width: width, height: height, value: 0)
         
         let scaleX = T(self.width-1) / T(width)
@@ -99,27 +103,31 @@ extension Image where T: BinaryFloatingPoint {
         
         return newImage
     }
+    
+    public func resizeaa(width: Int, height: Int) -> Image<P, T> {
+        return _resizeaa(width: width, height: height)
+    }
 }
 
 extension Image where T: BinaryFloatingPoint {
     /// Resize image with Bilinear interpolation.
-    public func resizebn(width: Int, height: Int) -> Image<P, T> {
+    func _resizebn(width: Int, height: Int) -> Image<P, T> {
         var newImage = Image<P, T>(width: width, height: height)
 
-        let scaleX = T(self.width) / T(width)
-        let scaleY = T(self.height) / T(height)
+        let scaleX = T(self.width-1) / T(width)
+        let scaleY = T(self.height-1) / T(height)
 
         for y in 0..<height {
             let yp = (T(y) + 0.5) * scaleY
             let yy = Int(Foundation.floor(yp))
-            let yy1 = min(yy+1, self.height-1)
+            let yy1 = yy+1
             let yy1yp: T = T(yy1) - yp
             let ypyy: T = yp - T(yy)
             
             for x in 0..<width {
                 let xp = (T(x) + 0.5) * scaleX
                 let xx = Int(Foundation.floor(xp))
-                let xx1 = min(xx+1, self.width-1)
+                let xx1 = xx+1
                 let xx1xp: T = T(xx1) - xp
                 let xpxx: T = xp - T(xx)
 
@@ -140,6 +148,10 @@ extension Image where T: BinaryFloatingPoint {
         }
 
         return newImage
+    }
+    
+    public func resizebn(width: Int, height: Int) -> Image<P, T> {
+        return _resizebn(width: width, height: height)
     }
 }
 
