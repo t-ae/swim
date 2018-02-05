@@ -12,6 +12,10 @@ public struct Pixel<P: PixelType, T: DataType> {
     init() {
         self.init(data: [T](repeating: T.swimDefaultValue, count: P.channels))
     }
+    
+    public init(value: T) {
+        self.init(data: [T](repeating: value, count: P.channels))
+    }
 }
 
 extension Pixel: Equatable {

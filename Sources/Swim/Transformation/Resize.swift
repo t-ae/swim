@@ -70,20 +70,21 @@ extension Image where T: BinaryFloatingPoint {
                     let floorEndX = Foundation.floor(endX)
                     if ceilStartX < floorEndX {
                         // average
+                        var pixel: Pixel<P, T> = Pixel<P, T>(value: 0)
                         if startX < ceilStartX {
                             let dx = Int(Foundation.floor(startX))
                             let len: T = ceilStartX - startX
-                            newImage[x, y] += baseImage[dx, y] * len
+                            pixel += baseImage[dx, y] * len
                         }
                         for dx in Int(ceilStartX)...Int(floorEndX) {
-                            newImage[x, y] += baseImage[dx, y]
+                            pixel += baseImage[dx, y]
                         }
                         if floorEndX < endX {
                             let dx = Int(Foundation.ceil(endX))
                             let len: T = endX - floorEndX
-                            newImage[x, y] += baseImage[dx, y] * len
+                            pixel += baseImage[dx, y] * len
                         }
-                        newImage[x, y] /= scaleX
+                        newImage[x, y] = pixel / scaleX
                     } else {
                         // single pixel
                         newImage[x, y] = baseImage[Int(ceilStartX), y]
@@ -103,27 +104,28 @@ extension Image where T: BinaryFloatingPoint {
             for y in 0..<height {
                 let startY = T(y) * scaleY
                 let endY = T(y+1) * scaleY
-                
+
                 let ceilStartY = Foundation.ceil(startY)
                 let floorEndY = Foundation.floor(endY)
-                
+
                 for x in 0..<width {
                     if ceilStartY < floorEndY {
                         // average
+                        var pixel: Pixel<P, T> = Pixel<P, T>(value: 0)
                         if startY < ceilStartY {
                             let dy = Int(Foundation.floor(startY))
                             let len: T = ceilStartY - startY
-                            newImage[x, y] += baseImage[x, dy] * len
+                            pixel += baseImage[x, dy] * len
                         }
                         for dy in Int(ceilStartY)...Int(floorEndY) {
-                            newImage[x, y] += baseImage[x, dy]
+                            pixel += baseImage[x, dy]
                         }
                         if floorEndY < endY {
                             let dy = Int(Foundation.ceil(endY))
                             let len: T = endY - floorEndY
-                            newImage[x, y] += baseImage[x, dy] * len
+                            pixel += baseImage[x, dy] * len
                         }
-                        newImage[x, y] /= scaleY
+                        newImage[x, y] = pixel / scaleY
                     } else {
                         // single pixel
                         newImage[x, y] = baseImage[x, Int(ceilStartY)]
