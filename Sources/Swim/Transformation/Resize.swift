@@ -79,29 +79,79 @@ extension Image {
 extension Image where T: BinaryFloatingPoint {
     /// Resize image with Area Average algorithm.
     func _resizeaa(width: Int, height: Int) -> Image<P, T> {
-        var newImage = Image<P, T>(width: width, height: height, value: 0)
         
-        let scaleX = T(self.width-1) / T(width)
-        let scaleY = T(self.height-1) / T(height)
-        
-        for y in 0..<height {
-            let yStart = Int(Foundation.floor(T(y) * scaleY))
-            let yEnd = Int(Foundation.ceil(T(y+1) * scaleY))
-            
-            for x in 0..<width {
-                let xStart = Int(Foundation.floor(T(x) * scaleX))
-                let xEnd = Int(Foundation.ceil(T(x+1) * scaleX))
-                
-                for dy in yStart..<yEnd {
-                    for dx in xStart..<xEnd {
-                        newImage[x, y] += self[dx, dy]
+        let xScaleImage: Image<P, T>
+        if width != self.width {
+            let baseImage = self
+            var newImage = Image<P, T>(width: width, height: self.height, value: 0)
+            let scaleX = T(self.width-1) / T(width)
+            for y in 0..<self.height {
+                for x in 0..<width {
+                    let startX = T(x) * scaleX
+                    let endX = T(x+1) * scaleX
+                    
+                    let ceilStartX = Foundation.ceil(startX)
+                    let floorEndX = Foundation.floor(endX)
+                    if ceilStartX < floorEndX {
+                        if startX < ceilStartX {
+                            let dx = Int(Foundation.floor(startX))
+                            newImage[x, y] += baseImage[dx, y] * (ceilStartX - startX)
+                        }
+                        for dx in Int(ceilStartX)...Int(floorEndX) {
+                            newImage[x, y] += baseImage[dx, y]
+                        }
+                        if floorEndX < endX {
+                            let dx = Int(Foundation.ceil(endX))
+                            newImage[x, y] += baseImage[dx, y] * (endX - floorEndX)
+                        }
+                        newImage[x, y] /= scaleX
+                    } else {
+                        newImage[x, y] = baseImage[Int(ceilStartX), y]
                     }
                 }
-                newImage[x, y] /= T((yEnd-yStart) * (xEnd-xStart))
             }
+            xScaleImage = newImage
+        } else {
+            xScaleImage = self
         }
         
-        return newImage
+        let yScaleImage: Image<P, T>
+        if height != self.height {
+            let baseImage = xScaleImage
+            var newImage = Image<P, T>(width: width, height: height, value: 0)
+            let scaleY = T(self.height-1) / T(height)
+            for y in 0..<height {
+                let startY = T(y) * scaleY
+                let endY = T(y+1) * scaleY
+                
+                let ceilStartY = Foundation.ceil(startY)
+                let floorEndY = Foundation.floor(endY)
+                
+                for x in 0..<width {
+                    if ceilStartY < floorEndY {
+                        if startY < ceilStartY {
+                            let dy = Int(Foundation.floor(startY))
+                            newImage[x, y] += baseImage[x, dy] * (ceilStartY - startY)
+                        }
+                        for dy in Int(ceilStartY)...Int(floorEndY) {
+                            newImage[x, y] += baseImage[x, dy]
+                        }
+                        if floorEndY < endY {
+                            let dy = Int(Foundation.ceil(endY))
+                            newImage[x, y] += baseImage[x, dy] * (endY - floorEndY)
+                        }
+                        newImage[x, y] /= scaleY
+                    } else {
+                        newImage[x, y] = baseImage[x, Int(ceilStartY)]
+                    }
+                }
+            }
+            yScaleImage = newImage
+        } else {
+            yScaleImage = xScaleImage
+        }
+        
+        return yScaleImage
     }
     
     public func resizeaa(width: Int, height: Int) -> Image<P, T> {
