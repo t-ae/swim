@@ -159,9 +159,9 @@ extension Image where P == Intensity, T: FloatingPoint {
         let (offsetX, offsetY) = pattern.offsetToBGGR
         
         for y in 0..<height {
+            let yOdd = (y+offsetY) % 2
             for x in 0..<width {
                 let xOdd = (x+offsetX) % 2
-                let yOdd = (y+offsetY) % 2
                 
                 let type = yOdd*2+xOdd
                 newImage[x, y] = debayerPixel(x: x, y: y, type: type)
