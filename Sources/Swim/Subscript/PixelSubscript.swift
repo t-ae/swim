@@ -75,10 +75,16 @@ extension Image {
 extension Image {
     subscript(unsafe x: Int, y: Int) -> Pixel<P, T> {
         get {
+            assert(0 <= x && x < width, "Index out of range.")
+            assert(0 <= y && y < height, "Index out of range.")
+            
             let start = index(x: x, y: y)
             return Pixel(data: [T](data[start..<start+P.channels]))
         }
         set {
+            assert(0 <= x && x < width, "Index out of range.")
+            assert(0 <= y && y < height, "Index out of range.")
+            
             let start = index(x: x, y: y)
             data.replaceSubrange(start..<start+P.channels, with: newValue.data)
         }
@@ -86,9 +92,17 @@ extension Image {
     
     subscript(unsafe x: Int, y: Int, c: Int) -> T {
         get {
+            assert(0 <= x && x < width, "Index out of range.")
+            assert(0 <= y && y < height, "Index out of range.")
+            assert(0 <= c && c < P.channels, "Index out of range.")
+            
             return data[index(x: x, y: y, c: c)]
         }
         set {
+            assert(0 <= x && x < width, "Index out of range.")
+            assert(0 <= y && y < height, "Index out of range.")
+            assert(0 <= c && c < P.channels, "Index out of range.")
+            
             data[index(x: x, y: y, c: c)] = newValue
         }
     }
