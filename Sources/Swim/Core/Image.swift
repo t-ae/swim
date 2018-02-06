@@ -59,9 +59,9 @@ extension Image: Equatable {
 
 extension Image {
     func index(x: Int, y: Int, c: Int = 0) -> Int {
-        precondition(0 <= x && x < width, "Index out of range.")
-        precondition(0 <= y && y < height, "Index out of range.")
-        precondition(0 <= c && c < P.channels, "Index out of range.")
+        assert(0 <= x && x < width, "Index out of range.")
+        assert(0 <= y && y < height, "Index out of range.")
+        assert(0 <= c && c < P.channels, "Index out of range.")
         
         return ((y * width) + x) * P.channels + c
     }
