@@ -34,16 +34,15 @@ extension Image {
     func _resizenn(width: Int, height: Int) -> Image<P, T> {
         var newImage = Image<P, T>(width: width, height: height)
         
-        let scaleX = Double(self.width) / Double(width)
-        let scaleY = Double(self.height) / Double(height)
+        let scaleX = Double(self.width-1) / Double(width-1)
+        let scaleY = Double(self.height-1) / Double(height-1)
         
         for y in 0..<height {
-            let yp = min(Int(Foundation.round(Double(y) * scaleY)), self.height - 1)
-            
+            let yp = Double(y) * scaleY
             for x in 0..<width {
-                let xp = min(Int(Foundation.round(Double(x) * scaleX)), self.width - 1)
+                let xp = Double(x) * scaleX
                 
-                newImage[x, y] = self[xp, yp]
+                newImage[x, y] = self.nearestNeighbor(x: xp, y: yp)
             }
         }
         
