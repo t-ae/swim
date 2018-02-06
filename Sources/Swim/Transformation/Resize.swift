@@ -181,32 +181,10 @@ extension Image where T: BinaryFloatingPoint {
         for y in 0..<height {
             // yp \in [0, self.height-1]
             let yp = T(y) * scaleY
-            let yy = Int(Foundation.floor(yp))
-            let yy1 = Int(Foundation.ceil(yp))
-            let yy1yp: T = T(yy+1) - yp
-            let ypyy: T = yp - T(yy)
-            
             for x in 0..<width {
                 // xp \in [0, self.width-1]
                 let xp = T(x) * scaleX
-                let xx = Int(Foundation.floor(xp))
-                let xx1 = Int(Foundation.ceil(xp))
-                let xx1xp: T = T(xx+1) - xp
-                let xpxx: T = xp - T(xx)
-
-                let plu: Pixel<P, T> = yy1yp * baseImage[xx, yy]
-                let pru: Pixel<P, T> = ypyy * baseImage[xx, yy1]
-                let pu: Pixel<P, T> = plu + pru
-
-                let pld: Pixel<P, T> = yy1yp * baseImage[xx1, yy]
-                let prd: Pixel<P, T> = ypyy * baseImage[xx1, yy1]
-                let pd: Pixel<P, T> = pld + prd
-
-                let px1: Pixel<P, T> = xx1xp * pu
-                let px2: Pixel<P, T> = xpxx * pd
-                let px: Pixel<P, T> = px1 + px2
-
-                newImage[x, y] = px
+                newImage[x, y] = baseImage.bilinearInterpolation(x: xp, y: yp)
             }
         }
 
