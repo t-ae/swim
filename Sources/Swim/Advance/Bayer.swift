@@ -31,11 +31,11 @@ extension Image where P == RGB {
 
                 switch (xOdd, yOdd) {
                 case (true, true): // r
-                    newImage[x, y] = self[x, y, .red]
+                    newImage[unsafe: x, y, .intensity] = self[unsafe: x, y, .red]
                 case (false, true), (true, false): // g
-                    newImage[x, y] = self[x, y, .green]
+                    newImage[unsafe: x, y, .intensity] = self[unsafe: x, y, .green]
                 case (false, false): // b
-                    newImage[x, y] = self[x, y, .blue]
+                    newImage[unsafe: x, y, .intensity] = self[unsafe: x, y, .blue]
                 }
             }
         }
@@ -58,7 +58,7 @@ extension Image where P == Intensity, T: BinaryInteger {
             var count = 0
             for p in points {
                 if 0 <= p.x && p.x < width && 0 <= p.y && p.y < height {
-                    sum += self[p.x, p.y]
+                    sum += self[unsafe: p.x, p.y, .intensity]
                     count += 1
                 }
             }
@@ -70,17 +70,17 @@ extension Image where P == Intensity, T: BinaryInteger {
         case 0:
             r = mean([(x-1, y-1), (x+1, y-1), (x-1, y+1), (x+1, y+1)])
             g = mean([(x-1, y), (x+1, y), (x, y-1), (x, y+1)])
-            b = self[x, y]
+            b = self[unsafe: x, y, .intensity]
         case 1:
             r = mean([(x, y-1), (x, y+1)])
-            g = self[x, y]
+            g = self[unsafe: x, y, .intensity]
             b = mean([(x-1, y), (x+1, y)])
         case 2:
             r = mean([(x-1, y), (x+1, y)])
-            g = self[x, y]
+            g = self[unsafe: x, y, .intensity]
             b = mean([(x, y-1), (x, y+1)])
         case 3:
-            r = self[x, y]
+            r = self[unsafe: x, y, .intensity]
             g = mean([(x-1, y), (x+1, y), (x, y-1), (x, y+1)])
             b = mean([(x-1, y-1), (x+1, y-1), (x-1, y+1), (x+1, y+1)])
         default:
@@ -122,7 +122,7 @@ extension Image where P == Intensity, T: FloatingPoint {
             var count = 0
             for p in points {
                 if 0 <= p.x && p.x < width && 0 <= p.y && p.y < height {
-                    sum += self[x, y]
+                    sum += self[unsafe: x, y, .intensity]
                     count += 1
                 }
             }
@@ -134,17 +134,17 @@ extension Image where P == Intensity, T: FloatingPoint {
         case 0:
             r = mean([(x-1, y-1), (x+1, y-1), (x-1, y+1), (x+1, y+1)])
             g = mean([(x-1, y), (x+1, y), (x, y-1), (x, y+1)])
-            b = self[x, y]
+            b = self[unsafe: x, y, .intensity]
         case 1:
             r = mean([(x, y-1), (x, y+1)])
-            g = self[x, y]
+            g = self[unsafe: x, y, .intensity]
             b = mean([(x-1, y), (x+1, y)])
         case 2:
             r = mean([(x-1, y), (x+1, y)])
-            g = self[x, y]
+            g = self[unsafe: x, y, .intensity]
             b = mean([(x, y-1), (x, y+1)])
         case 3:
-            r = self[x, y]
+            r = self[unsafe: x, y, .intensity]
             g = mean([(x-1, y), (x+1, y), (x, y-1), (x, y+1)])
             b = mean([(x-1, y-1), (x+1, y-1), (x-1, y+1), (x+1, y+1)])
         default:
@@ -164,7 +164,7 @@ extension Image where P == Intensity, T: FloatingPoint {
                 let xOdd = (x+offsetX) % 2
                 
                 let type = yOdd*2+xOdd
-                newImage[x, y] = debayerPixel(x: x, y: y, type: type)
+                newImage[unsafe: x, y] = debayerPixel(x: x, y: y, type: type)
             }
         }
         

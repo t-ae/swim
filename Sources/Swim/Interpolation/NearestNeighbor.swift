@@ -9,6 +9,6 @@ extension Image {
         let xx = Int(Foundation.round(x))
         let yy = Int(Foundation.round(y))
         
-        return self[xx, yy]
+        return self[unsafe: xx, yy]
     }
 }

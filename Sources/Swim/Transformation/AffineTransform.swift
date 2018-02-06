@@ -172,7 +172,7 @@ extension Image where T: BinaryFloatingPoint {
                     continue
                 }
                 
-                baseImage[x1, y1] = intpl(x0, y0)
+                baseImage[unsafe: x1, y1] = intpl(x0, y0)
             }
         }
     }

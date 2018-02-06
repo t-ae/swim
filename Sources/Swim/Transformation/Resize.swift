@@ -42,7 +42,7 @@ extension Image {
             for x in 0..<width {
                 let xp = Double(x) * scaleX
                 
-                newImage[x, y] = self.nearestNeighbor(x: xp, y: yp)
+                newImage[unsafe: x, y] = self.nearestNeighbor(x: xp, y: yp)
             }
         }
         
@@ -76,20 +76,20 @@ extension Image where T: BinaryFloatingPoint {
                         if startX < ceilStartX {
                             let dx = Int(Foundation.floor(startX))
                             let len: T = ceilStartX - startX
-                            pixel += baseImage[dx, y] * len
+                            pixel += baseImage[unsafe: dx, y] * len
                         }
                         for dx in Int(ceilStartX)...Int(floorEndX) {
-                            pixel += baseImage[dx, y]
+                            pixel += baseImage[unsafe: dx, y]
                         }
                         if floorEndX < endX {
                             let dx = Int(Foundation.ceil(endX))
                             let len: T = endX - floorEndX
-                            pixel += baseImage[dx, y] * len
+                            pixel += baseImage[unsafe: dx, y] * len
                         }
-                        newImage[x, y] = pixel / scaleX
+                        newImage[unsafe: x, y] = pixel / scaleX
                     } else {
                         // single pixel
-                        newImage[x, y] = baseImage[Int(ceilStartX), y]
+                        newImage[unsafe: x, y] = baseImage[unsafe: Int(ceilStartX), y]
                     }
                 }
             }
@@ -117,20 +117,20 @@ extension Image where T: BinaryFloatingPoint {
                         if startY < ceilStartY {
                             let dy = Int(Foundation.floor(startY))
                             let len: T = ceilStartY - startY
-                            pixel += baseImage[x, dy] * len
+                            pixel += baseImage[unsafe: x, dy] * len
                         }
                         for dy in Int(ceilStartY)...Int(floorEndY) {
-                            pixel += baseImage[x, dy]
+                            pixel += baseImage[unsafe: x, dy]
                         }
                         if floorEndY < endY {
                             let dy = Int(Foundation.ceil(endY))
                             let len: T = endY - floorEndY
-                            pixel += baseImage[x, dy] * len
+                            pixel += baseImage[unsafe: x, dy] * len
                         }
-                        newImage[x, y] = pixel / scaleY
+                        newImage[unsafe: x, y] = pixel / scaleY
                     } else {
                         // single pixel
-                        newImage[x, y] = baseImage[x, Int(ceilStartY)]
+                        newImage[unsafe: x, y] = baseImage[unsafe: x, Int(ceilStartY)]
                     }
                 }
             }
@@ -183,7 +183,7 @@ extension Image where T: BinaryFloatingPoint {
             for x in 0..<width {
                 // xp \in [0, self.width-1]
                 let xp = T(x) * scaleX
-                newImage[x, y] = baseImage.bilinearInterpolation(x: xp, y: yp)
+                newImage[unsafe: x, y] = baseImage.bilinearInterpolation(x: xp, y: yp)
             }
         }
 

@@ -25,7 +25,7 @@ extension Image where P == Intensity, T: Comparable {
                         guard 0 <= xx && xx < width else {
                             continue
                         }
-                        patch.append(self[xx, yy, 0])
+                        patch.append(self[xx, yy, .intensity])
                     }
                 }
                 ret[x, y] = kernelFunc(patch)
