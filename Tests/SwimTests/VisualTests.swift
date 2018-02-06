@@ -256,6 +256,34 @@ class VisualTests: XCTestCase {
         _ = steps
     }
     
+    func testWarpAffine() {
+        
+        var baseImage = Image<RGB, Float>(width: 100, height: 100, value: 0)
+        for y in 0..<10 {
+            for x in 0..<10 {
+                guard (x + y) % 2 == 0 else {
+                    continue
+                }
+                baseImage[x*10..<(x+1)*10, y*10..<(y+1)*10].fill(Pixel(r: 1, g: 1, b: 1))
+            }
+        }
+        
+        let src = Image<RGB, Float>(width: 2, height: 2, data: [1, 1, 1,
+                                                                1, 0, 0,
+                                                                0, 1, 0,
+                                                                0, 0, 1])
+        let t = AffineTransformation<Float>.translate(x: 20, y: 20)
+            * AffineTransformation<Float>.rotate(angle: Float.pi/4)
+            * AffineTransformation<Float>.scale(x: 50, y: 50)
+        src.warpAffine(baseImage: &baseImage, transformation: t)
+        
+        let rgb256 = (baseImage * 255).typeConverted(to: UInt8.self)
+        let nsImage = rgb256.nsImage()
+        
+        print("break here")
+        _ = nsImage
+    }
+    
     #endif
 }
 
