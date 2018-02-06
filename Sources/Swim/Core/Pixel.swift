@@ -2,7 +2,7 @@ import Foundation
 
 public struct Pixel<P: PixelType, T: DataType> {
 
-    public internal(set) var data: [T]
+    public var data: [T]
     
     public init(data: [T]) {
         precondition(data.count == P.channels, "Size of `data` must be exact same as the number of channels.")

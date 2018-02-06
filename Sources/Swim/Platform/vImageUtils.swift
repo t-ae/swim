@@ -10,7 +10,7 @@
         // MARK: UInt8
         public static func withBuffer(_ image: inout Image<Intensity, UInt8>,
                                       closure: (inout vImage_Buffer)->Void) {
-            image.withUnsafeMutableBufferPointerToData {
+            image.data.withUnsafeMutableBufferPointer {
                 var buffer = vImage_Buffer(data: $0.baseAddress!,
                                            height: UInt(image.height),
                                            width: UInt(image.width),
@@ -21,7 +21,7 @@
         
         public static func withBuffer(_ image: inout Image<RGBA, UInt8>,
                                       closure: (inout vImage_Buffer)->Void) {
-            image.withUnsafeMutableBufferPointerToData {
+            image.data.withUnsafeMutableBufferPointer {
                 var buffer = vImage_Buffer(data: $0.baseAddress!,
                                            height: UInt(image.height),
                                            width: UInt(image.width),
@@ -32,7 +32,7 @@
         
         public static func withBuffer(_ image: inout Image<ARGB, UInt8>,
                                       closure: (inout vImage_Buffer)->Void) {
-            image.withUnsafeMutableBufferPointerToData {
+            image.data.withUnsafeMutableBufferPointer {
                 var buffer = vImage_Buffer(data: $0.baseAddress!,
                                            height: UInt(image.height),
                                            width: UInt(image.width),
@@ -44,7 +44,7 @@
         // MARK: Float
         public static func withBuffer(_ image: inout Image<Intensity, Float>,
                                       closure: (inout vImage_Buffer)->Void) {
-            image.withUnsafeMutableBufferPointerToData {
+            image.data.withUnsafeMutableBufferPointer {
                 var buffer = vImage_Buffer(data: $0.baseAddress!,
                                            height: UInt(image.height),
                                            width: UInt(image.width),
@@ -55,7 +55,7 @@
 
         public static func withBuffer(_ image: inout Image<RGBA, Float>,
                                       closure: (inout vImage_Buffer)->Void) {
-            image.withUnsafeMutableBufferPointerToData {
+            image.data.withUnsafeMutableBufferPointer {
                 var buffer = vImage_Buffer(data: $0.baseAddress!,
                                            height: UInt(image.height),
                                            width: UInt(image.width),
@@ -66,7 +66,7 @@
         
         public static func withBuffer(_ image: inout Image<ARGB, Float>,
                                       closure: (inout vImage_Buffer)->Void) {
-            image.withUnsafeMutableBufferPointerToData {
+            image.data.withUnsafeMutableBufferPointer {
                 var buffer = vImage_Buffer(data: $0.baseAddress!,
                                            height: UInt(image.height),
                                            width: UInt(image.width),
