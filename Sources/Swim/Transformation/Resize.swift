@@ -62,11 +62,11 @@ extension Image where T: BinaryFloatingPoint {
         if width != self.width {
             let baseImage = self
             var newImage = Image<P, T>(width: width, height: self.height, value: 0)
-            let scaleX = T(self.width-1) / T(width)
+            let scaleX: T = T(self.width-1) / T(width)
             for y in 0..<self.height {
                 for x in 0..<width {
-                    let startX = T(x) * scaleX
-                    let endX = T(x+1) * scaleX
+                    let startX: T = T(x) * scaleX
+                    let endX: T = T(x+1) * scaleX
                     
                     let ceilStartX = Foundation.ceil(startX)
                     let floorEndX = Foundation.floor(endX)
@@ -102,10 +102,10 @@ extension Image where T: BinaryFloatingPoint {
         if height != self.height {
             let baseImage = xScaleImage
             var newImage = Image<P, T>(width: width, height: height, value: 0)
-            let scaleY = T(self.height-1) / T(height)
+            let scaleY: T = T(self.height-1) / T(height)
             for y in 0..<height {
-                let startY = T(y) * scaleY
-                let endY = T(y+1) * scaleY
+                let startY: T = T(y) * scaleY
+                let endY: T = T(y+1) * scaleY
 
                 let ceilStartY = Foundation.ceil(startY)
                 let floorEndY = Foundation.floor(endY)

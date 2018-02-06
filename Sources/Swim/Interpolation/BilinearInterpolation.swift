@@ -10,22 +10,24 @@ extension Image where T: BinaryFloatingPoint {
         let xx1 = Int(Foundation.ceil(x))
         let yy = Int(Foundation.floor(y))
         let yy1 = Int(Foundation.ceil(y))
+        
         let xx1xp: T = T(xx+1) - x
         let xpxx: T = x - T(xx)
         let yy1yp: T = T(yy+1) - y
         let ypyy: T = y - T(yy)
         
-        let plu: Pixel<P, T> = yy1yp * self[xx, yy]
-        let pru: Pixel<P, T> = ypyy * self[xx, yy1]
-        let pu: Pixel<P, T> = plu + pru
+        // interpolate left two pixels
+        var pl: Pixel<P, T> = yy1yp * self[xx, yy]
+        pl += ypyy * self[xx, yy1]
         
-        let pld: Pixel<P, T> = yy1yp * self[xx1, yy]
-        let prd: Pixel<P, T> = ypyy * self[xx1, yy1]
-        let pd: Pixel<P, T> = pld + prd
+        // interpolate right two pixels
+        var pr: Pixel<P, T> = yy1yp * self[xx1, yy]
+        pr += ypyy * self[xx1, yy1]
         
-        let px1: Pixel<P, T> = xx1xp * pu
-        let px2: Pixel<P, T> = xpxx * pd
+        // interpolate two pixel
+        pl *= xx1xp
+        pr *= xpxx
         
-        return px1 + px2
+        return pl + pr
     }
 }

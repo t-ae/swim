@@ -272,14 +272,14 @@ class VisualTests: XCTestCase {
                                                                 1, 0, 0,
                                                                 0, 1, 0,
                                                                 0, 0, 1])
-        let t1 = AffineTransformation<Float>.translate(x: 20, y: 20)
-            * AffineTransformation<Float>.rotate(angle: Float.pi/4)
-            * AffineTransformation<Float>.scale(x: 50, y: 50)
+        var t1 = AffineTransformation<Float>.translate(x: 20, y: 20)
+        t1 *= AffineTransformation<Float>.rotate(angle: Float.pi/4)
+        t1 *= AffineTransformation<Float>.scale(x: 50, y: 50)
         src.warpAffine(baseImage: &baseImage, transformation: t1)
         
-        let t2 = AffineTransformation<Float>.translate(x: 70, y: 20)
-            * AffineTransformation<Float>.rotate(angle: Float.pi/8)
-            * AffineTransformation<Float>.scale(x: 20, y: 30)
+        var t2 = AffineTransformation<Float>.translate(x: 70, y: 20)
+        t2 *= AffineTransformation<Float>.rotate(angle: Float.pi/8)
+        t2 *= AffineTransformation<Float>.scale(x: 20, y: 30)
         src.warpAffine(baseImage: &baseImage, transformation: t2, interpolation: .nearestNeighbor)
         
         let rgb256 = (baseImage * 255).typeConverted(to: UInt8.self)
