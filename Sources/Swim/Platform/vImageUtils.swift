@@ -124,5 +124,111 @@
             return Image(width: width, height: height, data: memory)
         }
     }
+    
+    // MARK: Dilate
+    extension vImageUtils {
+        // MARK: UInt8
+        public static func dilate(src: inout Image<Intensity, UInt8>,
+                                  kernel: Image<Intensity, UInt8>) -> Image<Intensity, UInt8> {
+            let roi = Rect(x: 0, y: 0, width: src.width, height: src.height)
+            return dilate(src: &src, roi: roi, kernel: kernel)
+        }
+        
+        public static func dilate(src: inout Image<Intensity, UInt8>,
+                                  roi: Rect,
+                                  kernel: Image<Intensity, UInt8>) -> Image<Intensity, UInt8> {
+            
+            var memory = [UInt8](repeating: 0, count: roi.width * roi.height)
+            var dest = vImage_Buffer(data: &memory,
+                                     height: UInt(roi.height),
+                                     width: UInt(roi.width),
+                                     rowBytes: MemoryLayout<UInt8>.size*roi.width)
+            
+            withBuffer(&src) { (src: inout vImage_Buffer) -> Void in
+                vImageDilate_Planar8(&src, &dest, UInt(roi.x), UInt(roi.y),
+                                     kernel.data, UInt(kernel.height), UInt(kernel.width), 0)
+            }
+            
+            return Image(width: roi.width, height: roi.height, data: memory)
+        }
+        
+        // MARK: Float
+        public static func dilate(src: inout Image<Intensity, Float>,
+                                  kernel: Image<Intensity, Float>) -> Image<Intensity, Float> {
+            let roi = Rect(x: 0, y: 0, width: src.width, height: src.height)
+            return dilate(src: &src, roi: roi, kernel: kernel)
+        }
+        
+        public static func dilate(src: inout Image<Intensity, Float>,
+                                  roi: Rect,
+                                  kernel: Image<Intensity, Float>) -> Image<Intensity, Float> {
+            
+            var memory = [Float](repeating: 0, count: roi.width * roi.height)
+            var dest = vImage_Buffer(data: &memory,
+                                     height: UInt(roi.height),
+                                     width: UInt(roi.width),
+                                     rowBytes: MemoryLayout<Float>.size*roi.width)
+            
+            withBuffer(&src) { (src: inout vImage_Buffer) -> Void in
+                vImageDilate_PlanarF(&src, &dest, UInt(roi.x), UInt(roi.y),
+                                     kernel.data, UInt(kernel.height), UInt(kernel.width), 0)
+            }
+            
+            return Image(width: roi.width, height: roi.height, data: memory)
+        }
+    }
+    
+    // MARK: Erode
+    extension vImageUtils {
+        // MARK: UInt8
+        public static func erode(src: inout Image<Intensity, UInt8>,
+                                  kernel: Image<Intensity, UInt8>) -> Image<Intensity, UInt8> {
+            let roi = Rect(x: 0, y: 0, width: src.width, height: src.height)
+            return dilate(src: &src, roi: roi, kernel: kernel)
+        }
+        
+        public static func erode(src: inout Image<Intensity, UInt8>,
+                                  roi: Rect,
+                                  kernel: Image<Intensity, UInt8>) -> Image<Intensity, UInt8> {
+            
+            var memory = [UInt8](repeating: 0, count: roi.width * roi.height)
+            var dest = vImage_Buffer(data: &memory,
+                                     height: UInt(roi.height),
+                                     width: UInt(roi.width),
+                                     rowBytes: MemoryLayout<UInt8>.size*roi.width)
+            
+            withBuffer(&src) { (src: inout vImage_Buffer) -> Void in
+                vImageErode_Planar8(&src, &dest, UInt(roi.x), UInt(roi.y),
+                                    kernel.data, UInt(kernel.height), UInt(kernel.width), 0)
+            }
+            
+            return Image(width: roi.width, height: roi.height, data: memory)
+        }
+        
+        // MARK: Float
+        public static func erode(src: inout Image<Intensity, Float>,
+                                  kernel: Image<Intensity, Float>) -> Image<Intensity, Float> {
+            let roi = Rect(x: 0, y: 0, width: src.width, height: src.height)
+            return dilate(src: &src, roi: roi, kernel: kernel)
+        }
+        
+        public static func erode(src: inout Image<Intensity, Float>,
+                                  roi: Rect,
+                                  kernel: Image<Intensity, Float>) -> Image<Intensity, Float> {
+            
+            var memory = [Float](repeating: 0, count: roi.width * roi.height)
+            var dest = vImage_Buffer(data: &memory,
+                                     height: UInt(roi.height),
+                                     width: UInt(roi.width),
+                                     rowBytes: MemoryLayout<Float>.size*roi.width)
+            
+            withBuffer(&src) { (src: inout vImage_Buffer) -> Void in
+                vImageErode_PlanarF(&src, &dest, UInt(roi.x), UInt(roi.y),
+                                    kernel.data, UInt(kernel.height), UInt(kernel.width), 0)
+            }
+            
+            return Image(width: roi.width, height: roi.height, data: memory)
+        }
+    }
 
 #endif
