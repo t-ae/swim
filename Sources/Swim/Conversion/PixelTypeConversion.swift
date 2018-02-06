@@ -32,12 +32,24 @@ extension Image where P == Intensity {
 // MARK: - RGB -> Intensity
 extension Image where P == RGB, T: BinaryInteger {
     func _toBrightness() -> Image<Intensity, T> {
-        return _converted { (px: Pixel<RGB, T>) -> T in
-            var sum: T = px[P.red]
-            sum += px[P.green]
-            sum += px[P.blue]
-            return sum / 3
+        var newImage = Image<Intensity, T>(width: width, height: height, value: 0)
+        self.data.withUnsafeBufferPointer {
+            var src = $0.baseAddress!
+            newImage.data.withUnsafeMutableBufferPointer {
+                var dst = $0.baseAddress!
+                for _ in 0..<width*height {
+                    dst.pointee += src.pointee
+                    src += 1
+                    dst.pointee += src.pointee
+                    src += 1
+                    dst.pointee += src.pointee
+                    src += 1
+                    dst.pointee /= 3
+                    dst += 1
+                }
+            }
         }
+        return newImage
     }
     
     public func toBrightness() -> Image<Intensity, T> {
@@ -45,13 +57,24 @@ extension Image where P == RGB, T: BinaryInteger {
     }
     
     func _toLuminance() -> Image<Intensity, T> {
-        return _converted { (px: Pixel<RGB, T>) -> T in
-            var sum: T = 0
-            sum += 2126*px[P.red]
-            sum += 7152*px[P.green]
-            sum += 722*px[P.blue]
-            return sum / 10000
+        var newImage = Image<Intensity, T>(width: width, height: height, value: 0)
+        self.data.withUnsafeBufferPointer {
+            var src = $0.baseAddress!
+            newImage.data.withUnsafeMutableBufferPointer {
+                var dst = $0.baseAddress!
+                for _ in 0..<width*height {
+                    dst.pointee += 2126 * src.pointee
+                    src += 1
+                    dst.pointee += 7152 * src.pointee
+                    src += 1
+                    dst.pointee += 0722 * src.pointee
+                    src += 1
+                    dst.pointee /= 10000
+                    dst += 1
+                }
+            }
         }
+        return newImage
     }
     
     public func toLuminance() -> Image<Intensity, T> {
@@ -72,12 +95,24 @@ extension Image where P == RGB, T == UInt8 {
 
 extension Image where P == RGB, T: FloatingPoint {
     func _toBrightness() -> Image<Intensity, T> {
-        return _converted { (px: Pixel<RGB, T>) -> T in
-            var sum: T = px[P.red]
-            sum += px[P.green]
-            sum += px[P.blue]
-            return sum / 3
+        var newImage = Image<Intensity, T>(width: width, height: height, value: 0)
+        self.data.withUnsafeBufferPointer {
+            var src = $0.baseAddress!
+            newImage.data.withUnsafeMutableBufferPointer {
+                var dst = $0.baseAddress!
+                for _ in 0..<width*height {
+                    dst.pointee += src.pointee
+                    src += 1
+                    dst.pointee += src.pointee
+                    src += 1
+                    dst.pointee += src.pointee
+                    src += 1
+                    dst.pointee /= 3
+                    dst += 1
+                }
+            }
         }
+        return newImage
     }
     
     public func toBrightness() -> Image<Intensity, T> {
@@ -87,12 +122,23 @@ extension Image where P == RGB, T: FloatingPoint {
 
 extension Image where P == RGB, T: BinaryFloatingPoint {
     func _toLuminance() -> Image<Intensity, T> {
-        return _converted { (px: Pixel<RGB, T>) -> T in
-            let r: T = 0.2126 * px[P.red]
-            let g: T = 0.7152 * px[P.green]
-            let b: T = 0.0722 * px[P.blue]
-            return r + g + b
+        var newImage = Image<Intensity, T>(width: width, height: height, value: 0)
+        self.data.withUnsafeBufferPointer {
+            var src = $0.baseAddress!
+            newImage.data.withUnsafeMutableBufferPointer {
+                var dst = $0.baseAddress!
+                for _ in 0..<width*height {
+                    dst.pointee += 0.2126 * src.pointee
+                    src += 1
+                    dst.pointee += 0.7152 * src.pointee
+                    src += 1
+                    dst.pointee += 0.0722 * src.pointee
+                    src += 1
+                    dst += 1
+                }
+            }
         }
+        return newImage
     }
     
     public func toLuminance() -> Image<Intensity, T> {
