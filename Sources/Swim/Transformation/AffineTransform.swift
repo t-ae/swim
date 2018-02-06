@@ -61,13 +61,22 @@ public func *<T>(lhs: AffineTransformation<T>, rhs: AffineTransformation<T>) -> 
 
 extension Image where T: BinaryFloatingPoint {
     public func warpAffine(baseImage: inout Image<P, T>,
-                           transformation: AffineTransformation<T>) {
+                           transformation: AffineTransformation<T>,
+                           interpolation: Interpolation = .bilinear) {
         
         let ad_minus_bc: T = transformation.a * transformation.d - transformation.b * transformation.c
         let dtx_minus_bty: T = transformation.d * transformation.tx - transformation.b * transformation.ty
         
         let cb_minus_ad: T = transformation.c * transformation.b - transformation.a * transformation.d
         let ctx_minus_aty: T = transformation.c * transformation.tx - transformation.a * transformation.ty
+        
+        let intpl: (T, T) -> Pixel<P, T>
+        switch interpolation {
+        case .nearestNeighbor:
+            intpl = self.nearestNeighbor
+        case .bilinear:
+            intpl = self.bilinearInterpolation
+        }
         
         for y1 in 0..<baseImage.height {
             for x1 in 0..<baseImage.width {
@@ -87,7 +96,7 @@ extension Image where T: BinaryFloatingPoint {
                     continue
                 }
                 
-                baseImage[x1, y1] = bilinearInterpolation(x: x0, y: y0)
+                baseImage[x1, y1] = intpl(x0, y0)
             }
         }
     }
