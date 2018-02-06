@@ -59,16 +59,19 @@ public func *<T>(lhs: AffineTransformation<T>, rhs: AffineTransformation<T>) -> 
     return AffineTransformation(a: a, b: b, c: c, d: d, tx: tx, ty: ty)
 }
 
+func *<T>(lhs: AffineTransformation<T>, rhs: (x: T, y: T)) -> (x: T, y: T) {
+    let x = lhs.a * rhs.x + lhs.b * rhs.y + lhs.tx
+    let y = lhs.c * rhs.x + lhs.d * rhs.y + lhs.ty
+    return (x, y)
+}
+
 extension Image where T: BinaryFloatingPoint {
     public func warpAffine(baseImage: inout Image<P, T>,
                            transformation: AffineTransformation<T>,
                            interpolation: Interpolation = .bilinear) {
         
-        let ad_minus_bc: T = transformation.a * transformation.d - transformation.b * transformation.c
-        let dtx_minus_bty: T = transformation.d * transformation.tx - transformation.b * transformation.ty
-        
-        let cb_minus_ad: T = transformation.c * transformation.b - transformation.a * transformation.d
-        let ctx_minus_aty: T = transformation.c * transformation.tx - transformation.a * transformation.ty
+        // shorthand
+        let tr = transformation
         
         let intpl: (T, T) -> Pixel<P, T>
         switch interpolation {
@@ -78,9 +81,36 @@ extension Image where T: BinaryFloatingPoint {
             intpl = self.bilinearInterpolation
         }
         
-        for y1 in 0..<baseImage.height {
-            for x1 in 0..<baseImage.width {
-                var x0: T = transformation.d * T(x1) - transformation.b * T(y1)
+        // Calculate draw range
+        let x1Range: CountableClosedRange<Int>
+        let y1Range: CountableClosedRange<Int>
+        do {
+            let lt = tr * (0, 0)
+            let rt = tr * (T(width), 0)
+            let lb = tr * (0, T(height))
+            let rb = tr * (T(width), T(height))
+            
+            let xs = [lt.x, rt.x, lb.x, rb.x]
+            let minX = max(Int(Foundation.floor(xs.min()!)), 0)
+            let maxX = min(Int(Foundation.ceil(xs.max()!)), baseImage.width-1)
+            let ys = [lt.y, rt.y, lb.y, rb.y]
+            let minY = max(Int(Foundation.floor(ys.min()!)), 0)
+            let maxY = min(Int(Foundation.ceil(ys.max()!)), baseImage.height-1)
+            
+            x1Range = minX...maxX
+            y1Range = minY...maxY
+        }
+        
+        // for inversion
+        let ad_minus_bc: T = tr.a * tr.d - tr.b * tr.c
+        let dtx_minus_bty: T = tr.d * tr.tx - tr.b * tr.ty
+        
+        let cb_minus_ad: T = tr.c * tr.b - tr.a * tr.d
+        let ctx_minus_aty: T = tr.c * tr.tx - tr.a * tr.ty
+        
+        for y1 in y1Range {
+            for x1 in x1Range {
+                var x0: T = tr.d * T(x1) - tr.b * T(y1)
                 x0 -= dtx_minus_bty
                 x0 /= ad_minus_bc
                 
@@ -88,7 +118,7 @@ extension Image where T: BinaryFloatingPoint {
                     continue
                 }
                 
-                var y0: T = transformation.c * T(x1) - transformation.a * T(y1)
+                var y0: T = tr.c * T(x1) - tr.a * T(y1)
                 y0 -= ctx_minus_aty
                 y0 /= cb_minus_ad
                 
