@@ -11,8 +11,6 @@ extension Image where T: BinaryFloatingPoint {
         let yy = Int(Foundation.floor(y))
         let yy1 = Int(Foundation.ceil(y))
 
-        let xx1xp: T = T(xx+1) - x
-        let xpxx: T = x - T(xx)
         let yy1yp: T = T(yy+1) - y
         let ypyy: T = y - T(yy)
 
@@ -25,7 +23,9 @@ extension Image where T: BinaryFloatingPoint {
         pr += ypyy * self[unsafe: xx1, yy1]
 
         // interpolate two pixel
+        let xx1xp: T = T(xx+1) - x
         pl *= xx1xp
+        let xpxx: T = x - T(xx)
         pr *= xpxx
 
         return pl + pr
