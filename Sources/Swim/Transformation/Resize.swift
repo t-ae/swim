@@ -109,7 +109,7 @@ extension Image where T: BinaryFloatingPoint {
             let baseImage = xScaleImage
             var newImage = Image<P, T>(width: width, height: height, value: 0)
             let volume: T = T(self.height) / T(height)
-            for y in 0..<height {
+            for y in 0..<newImage.height {
                 let startY: T = T(y) * volume
                 let endY: T = T(y+1) * volume
 
@@ -118,7 +118,7 @@ extension Image where T: BinaryFloatingPoint {
                 
                 guard ceilStartY < floorEndY else {
                     // refer single pixel
-                    for x in 0..<width {
+                    for x in 0..<newImage.width {
                         newImage[unsafe: x, y] = baseImage[unsafe: x, Int(startY)]
                     }
                     continue
@@ -129,7 +129,7 @@ extension Image where T: BinaryFloatingPoint {
                 let endY_i = Int(Foundation.ceil(endY))
                 let endVolume = endY - floorEndY
                 
-                for x in 0..<width {
+                for x in 0..<newImage.width {
                     // average
                     var pixel: Pixel<P, T> = Pixel<P, T>(value: 0)
                     if startY < ceilStartY {
