@@ -44,6 +44,18 @@ class vImageUtilsTests: XCTestCase {
             let filtered = try! vImageUtils.dilate(src: &image, kernel: kernel)
             XCTAssertEqual(filtered, Image(width: 3, height: 3, data: [4, 5, 5, 7, 8, 8, 7, 8, 8]))
         }
+        
+        // roi
+        do {
+            var image = Image(width: 5, height: 5, intensity: (0..<25).map { UInt8($0) })
+            let kernel = Image<Intensity, UInt8>(width: 3, height: 3, value: 1)
+            
+            let filtered = try! vImageUtils.dilate(src: &image,
+                                                   roi: Rect(x: 1, y: 1, width: 3, height: 2),
+                                                   kernel: kernel)
+            XCTAssertEqual(filtered, Image(width: 3, height: 2, data: [12, 13, 14,
+                                                                       17, 18, 19]))
+        }
     }
     
     func testErode() {
@@ -60,6 +72,18 @@ class vImageUtilsTests: XCTestCase {
             
             let filtered = try! vImageUtils.erode(src: &image, kernel: kernel)
             XCTAssertEqual(filtered, Image(width: 3, height: 3, data: [0, 0, 1, 0, 0, 1, 3, 3, 4]))
+        }
+        
+        // roi
+        do {
+            var image = Image(width: 5, height: 5, intensity: (0..<25).map { UInt8($0) })
+            let kernel = Image<Intensity, UInt8>(width: 3, height: 3, value: 1)
+            
+            let filtered = try! vImageUtils.erode(src: &image,
+                                                  roi: Rect(x: 1, y: 1, width: 3, height: 2),
+                                                  kernel: kernel)
+            XCTAssertEqual(filtered, Image(width: 3, height: 2, data: [0, 1, 2,
+                                                                       5, 6, 7]))
         }
     }
     

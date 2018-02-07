@@ -1,9 +1,16 @@
 
 public struct Rect {
-    let x: Int
-    let y: Int
-    let width: Int
-    let height: Int
+    public var x: Int
+    public var y: Int
+    public var width: Int
+    public var height: Int
+    
+    public init(x: Int, y: Int, width: Int, height: Int) {
+        self.x = x
+        self.y = y
+        self.width = width
+        self.height = height
+    }
 }
 
 extension Rect: Equatable {
