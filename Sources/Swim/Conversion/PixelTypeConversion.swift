@@ -171,7 +171,7 @@ extension Image where P: RGBWithAlpha {
 }
 
 // MARK: - RGBWithAlpha -> RGB
-func imageFromRGBWithAlpha<P: RGBWithAlpha, T>(image: Image<P, T>) -> Image<RGB, T> {
+func removeAlpha<P: RGBWithAlpha, T>(image: Image<P, T>) -> Image<RGB, T> {
     var newImage = Image<RGB, T>(width: image.width, height: image.height)
     image.data.withUnsafeBufferPointer {
         var src = $0.baseAddress! + P.redIndex
@@ -187,9 +187,15 @@ func imageFromRGBWithAlpha<P: RGBWithAlpha, T>(image: Image<P, T>) -> Image<RGB,
     return newImage
 }
 
+extension Image where P: RGBWithAlpha {
+    public func toRGB() -> Image<RGB, T> {
+        return removeAlpha(image: self)
+    }
+}
+
 extension Image where P == RGB {
     public init<P: RGBWithAlpha>(image: Image<P, T>) {
-        self = imageFromRGBWithAlpha(image: image)
+        self = removeAlpha(image: image)
     }
 }
 
@@ -217,17 +223,18 @@ func permuteChannels<T>(data: [T], permutation: [Int]) -> [T] {
     
     return ret
 }
+
 extension Image where P == RGBA {
-    public init(image: Image<ARGB, T>) {
-        let data = permuteChannels(data: image.data, permutation: [1, 2, 3, 0])
-        self.init(width: image.width, height: image.height, data: data)
+    public func toARGB() -> Image<ARGB, T> {
+        let data = permuteChannels(data: self.data, permutation: [3, 0, 1, 2])
+        return Image<ARGB, T>(width: width, height: height, argb: data)
     }
 }
 
 extension Image where P == ARGB {
-    public init(image: Image<RGBA, T>) {
-        let data = permuteChannels(data: image.data, permutation: [3, 0, 1, 2])
-        self.init(width: image.width, height: image.height, data: data)
+    public func toRGBA() -> Image<RGBA, T> {
+        let data = permuteChannels(data: self.data, permutation: [1, 2, 3, 0])
+        return Image<RGBA, T>(width: width, height: height, rgba: data)
     }
 }
 

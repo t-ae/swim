@@ -146,129 +146,117 @@ extension Image where P == ARGB, T == Double {
 
 
 
-extension Image where P == RGB, T == Bool {
-    public init(image: Image<RGBA, T>) {
-        self = imageFromRGBWithAlpha(image: image)
-    }
-
-    public init(image: Image<ARGB, T>) {
-        self = imageFromRGBWithAlpha(image: image)
-    }
-
-}
-
-extension Image where P == RGB, T == UInt8 {
-    public init(image: Image<RGBA, T>) {
-        self = imageFromRGBWithAlpha(image: image)
-    }
-
-    public init(image: Image<ARGB, T>) {
-        self = imageFromRGBWithAlpha(image: image)
-    }
-
-}
-
-extension Image where P == RGB, T == Int {
-    public init(image: Image<RGBA, T>) {
-        self = imageFromRGBWithAlpha(image: image)
-    }
-
-    public init(image: Image<ARGB, T>) {
-        self = imageFromRGBWithAlpha(image: image)
-    }
-
-}
-
-extension Image where P == RGB, T == Float {
-    public init(image: Image<RGBA, T>) {
-        self = imageFromRGBWithAlpha(image: image)
-    }
-
-    public init(image: Image<ARGB, T>) {
-        self = imageFromRGBWithAlpha(image: image)
-    }
-
-}
-
-extension Image where P == RGB, T == Double {
-    public init(image: Image<RGBA, T>) {
-        self = imageFromRGBWithAlpha(image: image)
-    }
-
-    public init(image: Image<ARGB, T>) {
-        self = imageFromRGBWithAlpha(image: image)
-    }
-
-}
-
-
 extension Image where P == RGBA, T == Bool {
-    public init(image: Image<ARGB, T>) {
-        let data = permuteChannels(data: image.data, permutation: [1, 2, 3, 0])
-        self.init(width: image.width, height: image.height, data: data)
+    public func toRGB() -> Image<RGB, T> {
+        return removeAlpha(image: self)
+    }
+
+    public func toARGB() -> Image<ARGB, T> {
+        let data = permuteChannels(data: self.data, permutation: [3, 0, 1, 2])
+        return Image<ARGB, T>(width: width, height: height, argb: data)
     }
 }
 
 extension Image where P == ARGB, T == Bool  {
-    public init(image: Image<RGBA, T>) {
-        let data = permuteChannels(data: image.data, permutation: [3, 0, 1, 2])
-        self.init(width: image.width, height: image.height, data: data)
+    public func toRGB() -> Image<RGB, T> {
+        return removeAlpha(image: self)
+    }
+
+    public func toRGBA() -> Image<RGBA, T> {
+        let data = permuteChannels(data: self.data, permutation: [1, 2, 3, 0])
+        return Image<RGBA, T>(width: width, height: height, rgba: data)
     }
 }
 
+
 extension Image where P == RGBA, T == UInt8 {
-    public init(image: Image<ARGB, T>) {
-        let data = permuteChannels(data: image.data, permutation: [1, 2, 3, 0])
-        self.init(width: image.width, height: image.height, data: data)
+    public func toRGB() -> Image<RGB, T> {
+        return removeAlpha(image: self)
+    }
+
+    public func toARGB() -> Image<ARGB, T> {
+        let data = permuteChannels(data: self.data, permutation: [3, 0, 1, 2])
+        return Image<ARGB, T>(width: width, height: height, argb: data)
     }
 }
 
 extension Image where P == ARGB, T == UInt8  {
-    public init(image: Image<RGBA, T>) {
-        let data = permuteChannels(data: image.data, permutation: [3, 0, 1, 2])
-        self.init(width: image.width, height: image.height, data: data)
+    public func toRGB() -> Image<RGB, T> {
+        return removeAlpha(image: self)
+    }
+
+    public func toRGBA() -> Image<RGBA, T> {
+        let data = permuteChannels(data: self.data, permutation: [1, 2, 3, 0])
+        return Image<RGBA, T>(width: width, height: height, rgba: data)
     }
 }
 
+
 extension Image where P == RGBA, T == Int {
-    public init(image: Image<ARGB, T>) {
-        let data = permuteChannels(data: image.data, permutation: [1, 2, 3, 0])
-        self.init(width: image.width, height: image.height, data: data)
+    public func toRGB() -> Image<RGB, T> {
+        return removeAlpha(image: self)
+    }
+
+    public func toARGB() -> Image<ARGB, T> {
+        let data = permuteChannels(data: self.data, permutation: [3, 0, 1, 2])
+        return Image<ARGB, T>(width: width, height: height, argb: data)
     }
 }
 
 extension Image where P == ARGB, T == Int  {
-    public init(image: Image<RGBA, T>) {
-        let data = permuteChannels(data: image.data, permutation: [3, 0, 1, 2])
-        self.init(width: image.width, height: image.height, data: data)
+    public func toRGB() -> Image<RGB, T> {
+        return removeAlpha(image: self)
+    }
+
+    public func toRGBA() -> Image<RGBA, T> {
+        let data = permuteChannels(data: self.data, permutation: [1, 2, 3, 0])
+        return Image<RGBA, T>(width: width, height: height, rgba: data)
     }
 }
 
+
 extension Image where P == RGBA, T == Float {
-    public init(image: Image<ARGB, T>) {
-        let data = permuteChannels(data: image.data, permutation: [1, 2, 3, 0])
-        self.init(width: image.width, height: image.height, data: data)
+    public func toRGB() -> Image<RGB, T> {
+        return removeAlpha(image: self)
+    }
+
+    public func toARGB() -> Image<ARGB, T> {
+        let data = permuteChannels(data: self.data, permutation: [3, 0, 1, 2])
+        return Image<ARGB, T>(width: width, height: height, argb: data)
     }
 }
 
 extension Image where P == ARGB, T == Float  {
-    public init(image: Image<RGBA, T>) {
-        let data = permuteChannels(data: image.data, permutation: [3, 0, 1, 2])
-        self.init(width: image.width, height: image.height, data: data)
+    public func toRGB() -> Image<RGB, T> {
+        return removeAlpha(image: self)
+    }
+
+    public func toRGBA() -> Image<RGBA, T> {
+        let data = permuteChannels(data: self.data, permutation: [1, 2, 3, 0])
+        return Image<RGBA, T>(width: width, height: height, rgba: data)
     }
 }
 
+
 extension Image where P == RGBA, T == Double {
-    public init(image: Image<ARGB, T>) {
-        let data = permuteChannels(data: image.data, permutation: [1, 2, 3, 0])
-        self.init(width: image.width, height: image.height, data: data)
+    public func toRGB() -> Image<RGB, T> {
+        return removeAlpha(image: self)
+    }
+
+    public func toARGB() -> Image<ARGB, T> {
+        let data = permuteChannels(data: self.data, permutation: [3, 0, 1, 2])
+        return Image<ARGB, T>(width: width, height: height, argb: data)
     }
 }
 
 extension Image where P == ARGB, T == Double  {
-    public init(image: Image<RGBA, T>) {
-        let data = permuteChannels(data: image.data, permutation: [3, 0, 1, 2])
-        self.init(width: image.width, height: image.height, data: data)
+    public func toRGB() -> Image<RGB, T> {
+        return removeAlpha(image: self)
+    }
+
+    public func toRGBA() -> Image<RGBA, T> {
+        let data = permuteChannels(data: self.data, permutation: [1, 2, 3, 0])
+        return Image<RGBA, T>(width: width, height: height, rgba: data)
     }
 }
 
