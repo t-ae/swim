@@ -28,6 +28,70 @@ class vImageUtilsTests: XCTestCase {
                              data: answer.flatMap { $0 }),
                        accuracy: 1e-5)
     }
+    
+    func testDilate() {
+        do {
+            var image = Image(width: 3, height: 3, intensity: (0..<9).map { UInt8($0) })
+            let kernel = Image<Intensity, UInt8>(width: 3, height: 3, value: 1)
+            
+            let filtered = try! vImageUtils.dilate(src: &image, kernel: kernel)
+            XCTAssertEqual(filtered, Image(width: 3, height: 3, data: [4, 5, 5, 7, 8, 8, 7, 8, 8]))
+        }
+        do {
+            var image = Image(width: 3, height: 3, intensity: (0..<9).map(Float.init))
+            let kernel = Image<Intensity, Float>(width: 3, height: 3, value: 1)
+            
+            let filtered = try! vImageUtils.dilate(src: &image, kernel: kernel)
+            XCTAssertEqual(filtered, Image(width: 3, height: 3, data: [4, 5, 5, 7, 8, 8, 7, 8, 8]))
+        }
+    }
+    
+    func testErode() {
+        do {
+            var image = Image(width: 3, height: 3, intensity: (0..<9).map { UInt8($0) })
+            let kernel = Image<Intensity, UInt8>(width: 3, height: 3, value: 1)
+            
+            let filtered = try! vImageUtils.erode(src: &image, kernel: kernel)
+            XCTAssertEqual(filtered, Image(width: 3, height: 3, data: [0, 0, 1, 0, 0, 1, 3, 3, 4]))
+        }
+        do {
+            var image = Image(width: 3, height: 3, intensity: (0..<9).map(Float.init))
+            let kernel = Image<Intensity, Float>(width: 3, height: 3, value: 1)
+            
+            let filtered = try! vImageUtils.erode(src: &image, kernel: kernel)
+            XCTAssertEqual(filtered, Image(width: 3, height: 3, data: [0, 0, 1, 0, 0, 1, 3, 3, 4]))
+        }
+    }
+    
+    func testMax() {
+        do {
+            var image = Image(width: 3, height: 3, intensity: (0..<9).map { UInt8($0) })
+            
+            let filtered = try! vImageUtils.max(src: &image, kernelWidth: 3, kernelHeight: 3)
+            XCTAssertEqual(filtered, Image(width: 3, height: 3, data: [4, 5, 5, 7, 8, 8, 7, 8, 8]))
+        }
+        do {
+            var image = Image(width: 3, height: 3, intensity: (0..<9).map(Float.init))
+            
+            let filtered = try! vImageUtils.max(src: &image, kernelWidth: 3, kernelHeight: 3)
+            XCTAssertEqual(filtered, Image(width: 3, height: 3, data: [4, 5, 5, 7, 8, 8, 7, 8, 8]))
+        }
+    }
+    
+    func testMin() {
+        do {
+            var image = Image(width: 3, height: 3, intensity: (0..<9).map { UInt8($0) })
+            
+            let filtered = try! vImageUtils.min(src: &image, kernelWidth: 3, kernelHeight: 3)
+            XCTAssertEqual(filtered, Image(width: 3, height: 3, data: [0, 0, 1, 0, 0, 1, 3, 3, 4]))
+        }
+        do {
+            var image = Image(width: 3, height: 3, intensity: (0..<9).map(Float.init))
+            
+            let filtered = try! vImageUtils.min(src: &image, kernelWidth: 3, kernelHeight: 3)
+            XCTAssertEqual(filtered, Image(width: 3, height: 3, data: [0, 0, 1, 0, 0, 1, 3, 3, 4]))
+        }
+    }
     #endif
     
 }
