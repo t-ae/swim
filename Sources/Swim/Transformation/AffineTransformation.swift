@@ -13,6 +13,26 @@ public struct AffineTransformation<T: BinaryFloatingPoint> {
                 c, d, ty,
                 0, 0, 1]
     }
+    
+    public var inverse: AffineTransformation<T> {
+        var inv = self
+        let delta = a*d - b*c
+        
+        inv.a = d / delta
+        inv.b /= -delta
+        inv.c /= -delta
+        inv.d = a / delta
+        
+        inv.tx *= -d
+        inv.tx += b*ty
+        inv.tx /= delta
+        
+        inv.ty *= -a
+        inv.ty += c*tx
+        inv.ty /= delta
+        
+        return inv
+    }
 }
 
 extension AffineTransformation {
@@ -89,6 +109,7 @@ extension Image where T: BinaryFloatingPoint {
         
         // shorthand
         let tr = transformation
+        let inv = tr.inverse
         
         let intpl: (T, T) -> Pixel<P, T>
         switch interpolation {
@@ -130,45 +151,11 @@ extension Image where T: BinaryFloatingPoint {
             y1Range = minY...maxY
         }
         
-        // for inversion
-        let ad_minus_bc: T = run {
-            let ad = tr.a * tr.d
-            let bc = tr.b * tr.c
-            return ad - bc
-        }
-        let dtx_minus_bty: T = run {
-            let dtx = tr.d * tr.tx
-            let bty = tr.b * tr.ty
-            return dtx - bty
-        }
-        let cb_minus_ad: T = run {
-            let cb = tr.c * tr.b
-            let ad = tr.a * tr.d
-            return cb - ad
-        }
-        let ctx_minus_aty: T = run {
-            let ctx = tr.c * tr.tx
-            let aty = tr.a * tr.ty
-            return ctx - aty
-        }
-        
         for y1 in y1Range {
             for x1 in x1Range {
-                var x0: T = tr.d * T(x1)
-                x0 -= tr.b * T(y1)
-                x0 -= dtx_minus_bty
-                x0 /= ad_minus_bc
+                let (x0, y0) = inv * (T(x1), T(y1))
                 
-                guard 0 <= x0 && x0 <= T(width-1) else {
-                    continue
-                }
-                
-                var y0: T = tr.c * T(x1)
-                y0 -= tr.a * T(y1)
-                y0 -= ctx_minus_aty
-                y0 /= cb_minus_ad
-                
-                guard 0 <= y0 && y0 <= T(height-1) else {
+                guard 0 <= x0 && x0 <= T(width-1) && 0 <= y0 && y0 <= T(height-1) else {
                     continue
                 }
                 
