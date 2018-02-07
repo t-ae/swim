@@ -18,6 +18,8 @@ public struct AffineTransformation<T: BinaryFloatingPoint> {
         var inv = self
         let delta = a*d - b*c
         
+        precondition(delta != 0, "AffineTransformation is singular.")
+        
         inv.a = d / delta
         inv.b /= -delta
         inv.c /= -delta
