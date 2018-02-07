@@ -6,24 +6,24 @@ extension Image where T: BinaryFloatingPoint {
         assert(0 <= x && x <= T(width-1))
         assert(0 <= y && y <= T(height-1))
         
-        let xx = Int(x) // floor
-        let xx1 = Int(Foundation.ceil(x))
-        let yy = Int(y) // floor
-        let yy1 = Int(Foundation.ceil(y))
+        let x0 = Int(x) // floor
+        let x1 = Int(Foundation.ceil(x))
+        let y0 = Int(y) // floor
+        let y1 = Int(Foundation.ceil(y))
 
-        let yy1yp: T = T(yy+1) - y
-        let ypyy: T = y - T(yy)
+        let y1y: T = T(y0+1) - y
+        let yy0: T = y - T(y0)
 
         // left two pixels
-        let xx1xp: T = T(xx+1) - x
-        let tmp = xx1xp * yy1yp // somehow can't compile without this
-        var result: Pixel<P, T> = tmp * self[unsafe: xx, yy]
-        result += (xx1xp * ypyy) * self[unsafe: xx, yy1]
+        let x1x: T = T(x0+1) - x
+        let tmp = x1x * y1y // somehow can't compile without this
+        var result: Pixel<P, T> = tmp * self[unsafe: x0, y0]
+        result += (x1x * yy0) * self[unsafe: x0, y1]
 
         // right two pixels
-        let xpxx: T = x - T(xx)
-        result += (xpxx * yy1yp) * self[unsafe: xx1, yy]
-        result += (xpxx * ypyy) * self[unsafe: xx1, yy1]
+        let xx0: T = x - T(x0)
+        result += (xx0 * y1y) * self[unsafe: x1, y0]
+        result += (xx0 * yy0) * self[unsafe: x1, y1]
 
         return result
     }
