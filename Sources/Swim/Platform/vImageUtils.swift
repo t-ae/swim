@@ -125,7 +125,7 @@
         }
     }
     
-    // MARK: Dilate
+    // MARK: - Dilate
     extension vImageUtils {
         // MARK: UInt8
         public static func dilate(src: inout Image<Intensity, UInt8>,
@@ -178,7 +178,7 @@
         }
     }
     
-    // MARK: Erode
+    // MARK: - Erode
     extension vImageUtils {
         // MARK: UInt8
         public static func erode(src: inout Image<Intensity, UInt8>,
@@ -225,6 +225,120 @@
             withBuffer(&src) { (src: inout vImage_Buffer) -> Void in
                 vImageErode_PlanarF(&src, &dest, UInt(roi.x), UInt(roi.y),
                                     kernel.data, UInt(kernel.height), UInt(kernel.width), 0)
+            }
+            
+            return Image(width: roi.width, height: roi.height, data: memory)
+        }
+    }
+    
+    // MARK: - Max
+    extension vImageUtils {
+        // MARK: UInt8
+        public static func max(src: inout Image<Intensity, UInt8>,
+                               kernelWidth: Int,
+                               kernelHeight: Int) -> Image<Intensity, UInt8> {
+            let roi = Rect(x: 0, y: 0, width: src.width, height: src.height)
+            return max(src: &src, roi: roi, kernelWidth: kernelWidth, kernelHeight: kernelHeight)
+        }
+        
+        public static func max(src: inout Image<Intensity, UInt8>,
+                               roi: Rect,
+                               kernelWidth: Int,
+                               kernelHeight: Int) -> Image<Intensity, UInt8> {
+            
+            var memory = [UInt8](repeating: 0, count: roi.width * roi.height)
+            var dest = vImage_Buffer(data: &memory,
+                                     height: UInt(roi.height),
+                                     width: UInt(roi.width),
+                                     rowBytes: MemoryLayout<UInt8>.size*roi.width)
+            
+            withBuffer(&src) { (src: inout vImage_Buffer) -> Void in
+                vImageMax_Planar8(&src, &dest, nil, UInt(roi.x), UInt(roi.y),
+                                  UInt(kernelHeight), UInt(kernelWidth), 0)
+            }
+            
+            return Image(width: roi.width, height: roi.height, data: memory)
+        }
+        
+        // MARK: Float
+        public static func max(src: inout Image<Intensity, Float>,
+                               kernelWidth: Int,
+                               kernelHeight: Int) -> Image<Intensity, Float> {
+            let roi = Rect(x: 0, y: 0, width: src.width, height: src.height)
+            return max(src: &src, roi: roi, kernelWidth: kernelWidth, kernelHeight: kernelHeight)
+        }
+        
+        public static func max(src: inout Image<Intensity, Float>,
+                               roi: Rect,
+                               kernelWidth: Int,
+                               kernelHeight: Int) -> Image<Intensity, Float> {
+            
+            var memory = [Float](repeating: 0, count: roi.width * roi.height)
+            var dest = vImage_Buffer(data: &memory,
+                                     height: UInt(roi.height),
+                                     width: UInt(roi.width),
+                                     rowBytes: MemoryLayout<Float>.size*roi.width)
+            
+            withBuffer(&src) { (src: inout vImage_Buffer) -> Void in
+                vImageMax_PlanarF(&src, &dest, nil, UInt(roi.x), UInt(roi.y),
+                                  UInt(kernelHeight), UInt(kernelWidth), 0)
+            }
+            
+            return Image(width: roi.width, height: roi.height, data: memory)
+        }
+    }
+
+    // MARK: - Min
+    extension vImageUtils {
+        // MARK: UInt8
+        public static func min(src: inout Image<Intensity, UInt8>,
+                               kernelWidth: Int,
+                               kernelHeight: Int) -> Image<Intensity, UInt8> {
+            let roi = Rect(x: 0, y: 0, width: src.width, height: src.height)
+            return min(src: &src, roi: roi, kernelWidth: kernelWidth, kernelHeight: kernelHeight)
+        }
+        
+        public static func min(src: inout Image<Intensity, UInt8>,
+                               roi: Rect,
+                               kernelWidth: Int,
+                               kernelHeight: Int) -> Image<Intensity, UInt8> {
+            
+            var memory = [UInt8](repeating: 0, count: roi.width * roi.height)
+            var dest = vImage_Buffer(data: &memory,
+                                     height: UInt(roi.height),
+                                     width: UInt(roi.width),
+                                     rowBytes: MemoryLayout<UInt8>.size*roi.width)
+            
+            withBuffer(&src) { (src: inout vImage_Buffer) -> Void in
+                vImageMin_Planar8(&src, &dest, nil, UInt(roi.x), UInt(roi.y),
+                                  UInt(kernelHeight), UInt(kernelWidth), 0)
+            }
+            
+            return Image(width: roi.width, height: roi.height, data: memory)
+        }
+        
+        // MARK: Float
+        public static func min(src: inout Image<Intensity, Float>,
+                               kernelWidth: Int,
+                               kernelHeight: Int) -> Image<Intensity, Float> {
+            let roi = Rect(x: 0, y: 0, width: src.width, height: src.height)
+            return min(src: &src, roi: roi, kernelWidth: kernelWidth, kernelHeight: kernelHeight)
+        }
+        
+        public static func min(src: inout Image<Intensity, Float>,
+                               roi: Rect,
+                               kernelWidth: Int,
+                               kernelHeight: Int) -> Image<Intensity, Float> {
+            
+            var memory = [Float](repeating: 0, count: roi.width * roi.height)
+            var dest = vImage_Buffer(data: &memory,
+                                     height: UInt(roi.height),
+                                     width: UInt(roi.width),
+                                     rowBytes: MemoryLayout<Float>.size*roi.width)
+            
+            withBuffer(&src) { (src: inout vImage_Buffer) -> Void in
+                vImageMin_PlanarF(&src, &dest, nil, UInt(roi.x), UInt(roi.y),
+                                  UInt(kernelHeight), UInt(kernelWidth), 0)
             }
             
             return Image(width: roi.width, height: roi.height, data: memory)
