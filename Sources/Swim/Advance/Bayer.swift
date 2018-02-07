@@ -25,10 +25,10 @@ extension Image where P == RGB {
         let (offsetX, offsetY) = pattern.offsetToBGGR
 
         for y in 0..<height {
+            let yOdd = (y+offsetY) % 2 != 0
             for x in 0..<width {
                 let xOdd = (x+offsetX) % 2 != 0
-                let yOdd = (y+offsetY) % 2 != 0
-
+                
                 switch (xOdd, yOdd) {
                 case (true, true): // r
                     newImage[unsafe: x, y, .intensity] = self[unsafe: x, y, .red]
@@ -95,10 +95,10 @@ extension Image where P == Intensity, T: BinaryInteger {
         let (offsetX, offsetY) = pattern.offsetToBGGR
 
         for y in 0..<height {
+            let yOdd = (y+offsetY) % 2
             for x in 0..<width {
                 let xOdd = (x+offsetX) % 2
-                let yOdd = (y+offsetY) % 2
-
+                
                 let type = yOdd*2+xOdd
                 newImage[x, y] = debayerPixel(x: x, y: y, type: type)
             }
