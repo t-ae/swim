@@ -20,7 +20,7 @@ class vImageUtilsTests: XCTestCase {
         var dst = Image(width: c, height: 1, argb: p1.flatMap { $0 })
         var src = Image(width: c, height: 1, argb: p2.flatMap { $0 })
         
-        dst = vImageUtils.alphaBlend(top: &src, bottom: &dst)
+        dst = try! vImageUtils.alphaBlend(top: &src, bottom: &dst)
         
         XCTAssertEqual(dst,
                        Image(width: c,
