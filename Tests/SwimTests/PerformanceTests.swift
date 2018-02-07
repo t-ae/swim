@@ -122,5 +122,14 @@ class PerformanceTests: XCTestCase {
             _ = image.debayered(pattern: .bggr)
         }
     }
+    
+    func testResizeaa() {
+        let data = [Float](repeating: 0, count: 640*480)
+        let image = Image(width: 640, height: 480, intensity: data)
+        
+        measure {
+            _ = image.resizeaa(width: 30, height: 30)
+        }
+    }
     #endif
 }
