@@ -100,7 +100,7 @@ extension Image where P == Intensity, T: BinaryInteger {
                 let xOdd = (x+offsetX) % 2
                 
                 let type = yOdd*2+xOdd
-                newImage[x, y] = debayerPixel(x: x, y: y, type: type)
+                newImage[unsafe: x, y] = debayerPixel(x: x, y: y, type: type)
             }
         }
 

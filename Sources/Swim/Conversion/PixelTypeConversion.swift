@@ -4,10 +4,10 @@ import Foundation
 // MARK: - Intensity -> RGB
 extension Image where P == Intensity {
     func _toRGB() -> Image<RGB, T> {
-        var ret = Image<RGB, T>(width: width, height: height)
+        var newImage = Image<RGB, T>(width: width, height: height)
         data.withUnsafeBufferPointer {
             var src = $0.baseAddress!
-            ret.data.withUnsafeMutableBufferPointer {
+            newImage.data.withUnsafeMutableBufferPointer {
                 var dst = $0.baseAddress!
                 for _ in 0..<width*height {
                     dst.pointee = src.pointee
@@ -21,7 +21,7 @@ extension Image where P == Intensity {
                 }
             }
         }
-        return ret
+        return newImage
     }
     
     public func toRGB() -> Image<RGB, T> {

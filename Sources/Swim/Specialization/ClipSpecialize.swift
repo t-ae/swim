@@ -5,9 +5,9 @@ extension Image where P == Intensity, T == UInt8 {
     }
     
     public func clipped(low: T, high: T) -> Image<P, T> {
-        var ret = self
-        ret._clip(low: low, high: high)
-        return ret
+        var newImage = self
+        newImage._clip(low: low, high: high)
+        return newImage
     }
 }
 
@@ -17,9 +17,9 @@ extension Image where P == Intensity, T == Int {
     }
     
     public func clipped(low: T, high: T) -> Image<P, T> {
-        var ret = self
-        ret._clip(low: low, high: high)
-        return ret
+        var newImage = self
+        newImage._clip(low: low, high: high)
+        return newImage
     }
 }
 
@@ -29,9 +29,9 @@ extension Image where P == Intensity, T == Float {
     }
     
     public func clipped(low: T, high: T) -> Image<P, T> {
-        var ret = self
-        ret._clip(low: low, high: high)
-        return ret
+        var newImage = self
+        newImage._clip(low: low, high: high)
+        return newImage
     }
 }
 
@@ -41,9 +41,9 @@ extension Image where P == Intensity, T == Double {
     }
     
     public func clipped(low: T, high: T) -> Image<P, T> {
-        var ret = self
-        ret._clip(low: low, high: high)
-        return ret
+        var newImage = self
+        newImage._clip(low: low, high: high)
+        return newImage
     }
 }
 
@@ -53,9 +53,9 @@ extension Image where P == IntensityAlpha, T == UInt8 {
     }
     
     public func clipped(low: T, high: T) -> Image<P, T> {
-        var ret = self
-        ret._clip(low: low, high: high)
-        return ret
+        var newImage = self
+        newImage._clip(low: low, high: high)
+        return newImage
     }
 }
 
@@ -65,9 +65,9 @@ extension Image where P == IntensityAlpha, T == Int {
     }
     
     public func clipped(low: T, high: T) -> Image<P, T> {
-        var ret = self
-        ret._clip(low: low, high: high)
-        return ret
+        var newImage = self
+        newImage._clip(low: low, high: high)
+        return newImage
     }
 }
 
@@ -77,9 +77,9 @@ extension Image where P == IntensityAlpha, T == Float {
     }
     
     public func clipped(low: T, high: T) -> Image<P, T> {
-        var ret = self
-        ret._clip(low: low, high: high)
-        return ret
+        var newImage = self
+        newImage._clip(low: low, high: high)
+        return newImage
     }
 }
 
@@ -89,9 +89,9 @@ extension Image where P == IntensityAlpha, T == Double {
     }
     
     public func clipped(low: T, high: T) -> Image<P, T> {
-        var ret = self
-        ret._clip(low: low, high: high)
-        return ret
+        var newImage = self
+        newImage._clip(low: low, high: high)
+        return newImage
     }
 }
 
@@ -101,9 +101,9 @@ extension Image where P == RGB, T == UInt8 {
     }
     
     public func clipped(low: T, high: T) -> Image<P, T> {
-        var ret = self
-        ret._clip(low: low, high: high)
-        return ret
+        var newImage = self
+        newImage._clip(low: low, high: high)
+        return newImage
     }
 }
 
@@ -113,9 +113,9 @@ extension Image where P == RGB, T == Int {
     }
     
     public func clipped(low: T, high: T) -> Image<P, T> {
-        var ret = self
-        ret._clip(low: low, high: high)
-        return ret
+        var newImage = self
+        newImage._clip(low: low, high: high)
+        return newImage
     }
 }
 
@@ -125,9 +125,9 @@ extension Image where P == RGB, T == Float {
     }
     
     public func clipped(low: T, high: T) -> Image<P, T> {
-        var ret = self
-        ret._clip(low: low, high: high)
-        return ret
+        var newImage = self
+        newImage._clip(low: low, high: high)
+        return newImage
     }
 }
 
@@ -137,9 +137,9 @@ extension Image where P == RGB, T == Double {
     }
     
     public func clipped(low: T, high: T) -> Image<P, T> {
-        var ret = self
-        ret._clip(low: low, high: high)
-        return ret
+        var newImage = self
+        newImage._clip(low: low, high: high)
+        return newImage
     }
 }
 
@@ -149,9 +149,9 @@ extension Image where P == RGBA, T == UInt8 {
     }
     
     public func clipped(low: T, high: T) -> Image<P, T> {
-        var ret = self
-        ret._clip(low: low, high: high)
-        return ret
+        var newImage = self
+        newImage._clip(low: low, high: high)
+        return newImage
     }
 }
 
@@ -161,9 +161,9 @@ extension Image where P == RGBA, T == Int {
     }
     
     public func clipped(low: T, high: T) -> Image<P, T> {
-        var ret = self
-        ret._clip(low: low, high: high)
-        return ret
+        var newImage = self
+        newImage._clip(low: low, high: high)
+        return newImage
     }
 }
 
@@ -173,9 +173,9 @@ extension Image where P == RGBA, T == Float {
     }
     
     public func clipped(low: T, high: T) -> Image<P, T> {
-        var ret = self
-        ret._clip(low: low, high: high)
-        return ret
+        var newImage = self
+        newImage._clip(low: low, high: high)
+        return newImage
     }
 }
 
@@ -185,9 +185,9 @@ extension Image where P == RGBA, T == Double {
     }
     
     public func clipped(low: T, high: T) -> Image<P, T> {
-        var ret = self
-        ret._clip(low: low, high: high)
-        return ret
+        var newImage = self
+        newImage._clip(low: low, high: high)
+        return newImage
     }
 }
 
@@ -197,9 +197,9 @@ extension Image where P == ARGB, T == UInt8 {
     }
     
     public func clipped(low: T, high: T) -> Image<P, T> {
-        var ret = self
-        ret._clip(low: low, high: high)
-        return ret
+        var newImage = self
+        newImage._clip(low: low, high: high)
+        return newImage
     }
 }
 
@@ -209,9 +209,9 @@ extension Image where P == ARGB, T == Int {
     }
     
     public func clipped(low: T, high: T) -> Image<P, T> {
-        var ret = self
-        ret._clip(low: low, high: high)
-        return ret
+        var newImage = self
+        newImage._clip(low: low, high: high)
+        return newImage
     }
 }
 
@@ -221,9 +221,9 @@ extension Image where P == ARGB, T == Float {
     }
     
     public func clipped(low: T, high: T) -> Image<P, T> {
-        var ret = self
-        ret._clip(low: low, high: high)
-        return ret
+        var newImage = self
+        newImage._clip(low: low, high: high)
+        return newImage
     }
 }
 
@@ -233,9 +233,9 @@ extension Image where P == ARGB, T == Double {
     }
     
     public func clipped(low: T, high: T) -> Image<P, T> {
-        var ret = self
-        ret._clip(low: low, high: high)
-        return ret
+        var newImage = self
+        newImage._clip(low: low, high: high)
+        return newImage
     }
 }
 

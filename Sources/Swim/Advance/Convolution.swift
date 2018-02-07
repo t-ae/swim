@@ -54,15 +54,15 @@ extension Filter where T: FloatingPoint {
 // MARK: - convoluted
 extension Image where T: Numeric {
     func _convoluted(_ filter: Image<Intensity, T>) -> Image<P, T> {
-        var ret = Image<P, T>(width: width, height: height)
+        var newImage = Image<P, T>(width: width, height: height)
         
         for c in 0..<P.channels {
             let (m, n, matrix) = self[channel: c]._im2col(patchWidth: filter.width, patchHeight: filter.height)
             let result = matmul(lhs: filter.data, rhs: matrix, m: 1, n: n, p: m)
-            ret[channel: c] = Image<Intensity, T>(width: width, height: height, data: result)
+            newImage[channel: c] = Image<Intensity, T>(width: width, height: height, data: result)
         }
         
-        return ret
+        return newImage
     }
 }
 
@@ -93,29 +93,29 @@ extension Image where P == RGB, T == UInt8 {
 #if os(macOS) || os(iOS)
     extension Image where T == Float {
         func _convoluted(_ filter: Image<Intensity, T>) -> Image<P, T> {
-            var ret = Image<P, T>(width: width, height: height)
+            var newImage = Image<P, T>(width: width, height: height)
 
             for c in 0..<P.channels {
                 let (m, n, matrix) = self[channel: c]._im2col(patchWidth: filter.width, patchHeight: filter.height)
                 let result = matmul(lhs: filter.data, rhs: matrix, m: 1, n: n, p: m)
-                ret[channel: c] = Image<Intensity, T>(width: width, height: height, data: result)
+                newImage[channel: c] = Image<Intensity, T>(width: width, height: height, data: result)
             }
 
-            return ret
+            return newImage
         }
     }
 
     extension Image where T == Double {
         func _convoluted(_ filter: Image<Intensity, T>) -> Image<P, T> {
-            var ret = Image<P, T>(width: width, height: height)
+            var newImage = Image<P, T>(width: width, height: height)
 
             for c in 0..<P.channels {
                 let (m, n, matrix) = self[channel: c]._im2col(patchWidth: filter.width, patchHeight: filter.height)
                 let result = matmul(lhs: filter.data, rhs: matrix, m: 1, n: n, p: m)
-                ret[channel: c] = Image<Intensity, T>(width: width, height: height, data: result)
+                newImage[channel: c] = Image<Intensity, T>(width: width, height: height, data: result)
             }
 
-            return ret
+            return newImage
         }
     }
 #endif

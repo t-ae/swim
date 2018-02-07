@@ -9,9 +9,9 @@ extension Image where T: Comparable {
     }
     
     public func clipped(low: T, high: T) -> Image<P, T> {
-        var ret = self
-        ret._clip(low: low, high: high)
-        return ret
+        var newImage = self
+        newImage._clip(low: low, high: high)
+        return newImage
     }
 }
 
@@ -30,9 +30,9 @@ extension Image where T: Comparable {
         }
         
         public func clipped(low: T, high: T) -> Image<P, T> {
-            var ret = self
-            ret._clip(low: low, high: high)
-            return ret
+            var newImage = self
+            newImage._clip(low: low, high: high)
+            return newImage
         }
     }
     
@@ -47,9 +47,9 @@ extension Image where T: Comparable {
         }
         
         public func clipped(low: T, high: T) -> Image<P, T> {
-            var ret = self
-            ret._clip(low: low, high: high)
-            return ret
+            var newImage = self
+            newImage._clip(low: low, high: high)
+            return newImage
         }
     }
 #endif

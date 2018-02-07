@@ -2,7 +2,7 @@
 extension Image where P == Intensity, T: Comparable {
     func _filter(kernelSize: Int, kernelFunc: ([T])->T) -> Image<P, T> {
         precondition(kernelSize > 0)
-        var ret = self
+        var newImage = self
         
         let kernelRange: CountableClosedRange<Int>
         do {
@@ -28,11 +28,11 @@ extension Image where P == Intensity, T: Comparable {
                         patch.append(self[xx, yy, .intensity])
                     }
                 }
-                ret[x, y] = kernelFunc(patch)
+                newImage[unsafe: x, y, .intensity] = kernelFunc(patch)
             }
         }
         
-        return ret
+        return newImage
     }
     
     func _minimumFilter(kernelSize: Int) -> Image<P, T> {
