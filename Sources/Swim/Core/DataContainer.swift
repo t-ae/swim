@@ -5,7 +5,6 @@ public protocol DataContainer {
     associatedtype PT: PixelType
     associatedtype DT: DataType
     
-    // get-only to make deta internal(set)
     var data: [DT] { get set }
 }
 
