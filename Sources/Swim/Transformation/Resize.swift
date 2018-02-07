@@ -74,7 +74,7 @@ extension Image where T: BinaryFloatingPoint {
                         // average
                         var pixel: Pixel<P, T> = Pixel<P, T>(value: 0)
                         if startX < ceilStartX {
-                            let dx = Int(Foundation.floor(startX))
+                            let dx = Int(startX) // floor
                             let len: T = ceilStartX - startX
                             pixel += baseImage[unsafe: dx, y] * len
                         }
@@ -115,7 +115,7 @@ extension Image where T: BinaryFloatingPoint {
                         // average
                         var pixel: Pixel<P, T> = Pixel<P, T>(value: 0)
                         if startY < ceilStartY {
-                            let dy = Int(Foundation.floor(startY))
+                            let dy = Int(startY) // floor
                             let len: T = ceilStartY - startY
                             pixel += baseImage[unsafe: x, dy] * len
                         }

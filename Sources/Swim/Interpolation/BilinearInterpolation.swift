@@ -6,9 +6,9 @@ extension Image where T: BinaryFloatingPoint {
         assert(0 <= x && x <= T(width-1))
         assert(0 <= y && y <= T(height-1))
         
-        let xx = Int(Foundation.floor(x))
+        let xx = Int(x) // floor
         let xx1 = Int(Foundation.ceil(x))
-        let yy = Int(Foundation.floor(y))
+        let yy = Int(y) // floor
         let yy1 = Int(Foundation.ceil(y))
 
         let yy1yp: T = T(yy+1) - y
