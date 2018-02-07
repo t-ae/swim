@@ -1,4 +1,6 @@
 
+import Foundation
+
 extension Image {
     func getPixel(x: Int, y: Int, c: Int = 0) -> T {
         precondition(0 <= x && x < width, "Index out of range.")
@@ -86,7 +88,10 @@ extension Image {
             assert(0 <= y && y < height, "Index out of range.")
             
             let start = index(x: x, y: y)
-            data.replaceSubrange(start..<start+P.channels, with: newValue.data)
+            data.withUnsafeMutableBufferPointer {
+                let dst = $0.baseAddress! + start
+                memcpy(dst, newValue.data, MemoryLayout<T>.size * P.channels)
+            }
         }
     }
     
