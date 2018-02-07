@@ -62,35 +62,41 @@ extension Image where T: BinaryFloatingPoint {
         if width != self.width {
             let baseImage = self
             var newImage = Image<P, T>(width: width, height: self.height, value: 0)
-            let scaleX: T = T(self.width-1) / T(width)
-            for y in 0..<self.height {
-                for x in 0..<width {
-                    let startX: T = T(x) * scaleX
-                    let endX: T = T(x+1) * scaleX
-                    
-                    let ceilStartX = Foundation.ceil(startX)
-                    let floorEndX = Foundation.floor(endX)
-                    if ceilStartX < floorEndX {
-                        // average
-                        var pixel: Pixel<P, T> = Pixel<P, T>(value: 0)
-                        if startX < ceilStartX {
-                            let dx = Int(startX) // floor
-                            let len: T = ceilStartX - startX
-                            pixel += baseImage[unsafe: dx, y] * len
-                        }
-                        for dx in Int(ceilStartX)...Int(floorEndX) {
-                            pixel += baseImage[unsafe: dx, y]
-                        }
-                        if floorEndX < endX {
-                            let dx = Int(Foundation.ceil(endX))
-                            let len: T = endX - floorEndX
-                            pixel += baseImage[unsafe: dx, y] * len
-                        }
-                        newImage[unsafe: x, y] = pixel / scaleX
-                    } else {
-                        // single pixel
-                        newImage[unsafe: x, y] = baseImage[unsafe: Int(ceilStartX), y]
+            
+            let volume: T = T(self.width) / T(width)
+            for x in 0..<newImage.width {
+                let startX: T = T(x) * volume
+                let endX: T = T(x+1) * volume
+                
+                let ceilStartX = Foundation.ceil(startX)
+                let floorEndX = Foundation.floor(endX)
+                
+                guard ceilStartX < floorEndX else {
+                    // refer single pixel
+                    for y in 0..<newImage.height {
+                        newImage[unsafe: x, y] = baseImage[unsafe: Int(startX), y]
                     }
+                    continue
+                }
+                
+                let startX_i = Int(startX) // floor
+                let startVolume = ceilStartX - startX
+                let endX_i = Int(Foundation.ceil(endX))
+                let endVolume = endX - floorEndX
+                
+                for y in 0..<newImage.height {
+                    // average
+                    var pixel: Pixel<P, T> = Pixel<P, T>(value: 0)
+                    if startX < ceilStartX {
+                        pixel += baseImage[unsafe: startX_i, y] * startVolume
+                    }
+                    for dx in Int(ceilStartX)..<Int(floorEndX) {
+                        pixel += baseImage[unsafe: dx, y]
+                    }
+                    if floorEndX < endX {
+                        pixel += baseImage[unsafe: endX_i, y] * endVolume
+                    }
+                    newImage[unsafe: x, y] = pixel / volume
                 }
             }
             xScaleImage = newImage
@@ -102,36 +108,40 @@ extension Image where T: BinaryFloatingPoint {
         if height != self.height {
             let baseImage = xScaleImage
             var newImage = Image<P, T>(width: width, height: height, value: 0)
-            let scaleY: T = T(self.height-1) / T(height)
+            let volume: T = T(self.height) / T(height)
             for y in 0..<height {
-                let startY: T = T(y) * scaleY
-                let endY: T = T(y+1) * scaleY
+                let startY: T = T(y) * volume
+                let endY: T = T(y+1) * volume
 
                 let ceilStartY = Foundation.ceil(startY)
                 let floorEndY = Foundation.floor(endY)
-
-                for x in 0..<width {
-                    if ceilStartY < floorEndY {
-                        // average
-                        var pixel: Pixel<P, T> = Pixel<P, T>(value: 0)
-                        if startY < ceilStartY {
-                            let dy = Int(startY) // floor
-                            let len: T = ceilStartY - startY
-                            pixel += baseImage[unsafe: x, dy] * len
-                        }
-                        for dy in Int(ceilStartY)...Int(floorEndY) {
-                            pixel += baseImage[unsafe: x, dy]
-                        }
-                        if floorEndY < endY {
-                            let dy = Int(Foundation.ceil(endY))
-                            let len: T = endY - floorEndY
-                            pixel += baseImage[unsafe: x, dy] * len
-                        }
-                        newImage[unsafe: x, y] = pixel / scaleY
-                    } else {
-                        // single pixel
-                        newImage[unsafe: x, y] = baseImage[unsafe: x, Int(ceilStartY)]
+                
+                guard ceilStartY < floorEndY else {
+                    // refer single pixel
+                    for x in 0..<width {
+                        newImage[unsafe: x, y] = baseImage[unsafe: x, Int(startY)]
                     }
+                    continue
+                }
+                
+                let startY_i = Int(startY) // floor
+                let startVolume = ceilStartY - startY
+                let endY_i = Int(Foundation.ceil(endY))
+                let endVolume = endY - floorEndY
+                
+                for x in 0..<width {
+                    // average
+                    var pixel: Pixel<P, T> = Pixel<P, T>(value: 0)
+                    if startY < ceilStartY {
+                        pixel += baseImage[unsafe: x, startY_i] * startVolume
+                    }
+                    for dy in Int(ceilStartY)..<Int(floorEndY) {
+                        pixel += baseImage[unsafe: x, dy]
+                    }
+                    if floorEndY < endY {
+                        pixel += baseImage[unsafe: x, endY_i] * endVolume
+                    }
+                    newImage[unsafe: x, y] = pixel / volume
                 }
             }
             yScaleImage = newImage
