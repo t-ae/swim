@@ -248,7 +248,7 @@ class VisualTests: XCTestCase {
         
         var steps: [NSImage] = []
         for _ in 0..<20 {
-            let ns = (b*255).upsample(4).toRGB().nsImage()
+            let ns = (b*255).resizeNN(width: 128, height: 128).toRGB().nsImage()
             steps.append(ns)
             b = next(b)
         }
@@ -306,34 +306,4 @@ func float01ToNSImage(image: Image<Intensity, Float>) -> NSImage {
     image *= 255
     let uint = image.typeConverted(to: UInt8.self)
     return uint.toRGB().nsImage()
-}
-
-extension Image where P == Intensity, T == UInt8 {
-    func upsample(_ times: Int) -> Image<P, T> {
-        let newWidth = width * times
-        let newHeight = height * times
-        var data = [UInt8](repeating: 0, count: newWidth * newHeight)
-        
-        self.data.withUnsafeBufferPointer {
-            var src = $0.baseAddress!
-            data.withUnsafeMutableBufferPointer {
-                var dst = $0.baseAddress!
-                for _ in 0..<height {
-                    for _ in 0..<width {
-                        for _ in 0..<times {
-                            dst.pointee = src.pointee
-                            dst += 1
-                        }
-                        src += 1
-                    }
-                    for _ in 1..<times {
-                        memcpy(dst, dst - newWidth, MemoryLayout<UInt8>.size * newWidth)
-                        dst += newWidth
-                    }
-                }
-            }
-        }
-        
-        return Image(width: newWidth, height: newHeight, data: data)
-    }
 }
