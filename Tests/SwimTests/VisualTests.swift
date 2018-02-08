@@ -297,6 +297,40 @@ class VisualTests: XCTestCase {
         _ = nsImage
     }
     
+    func testResize() {
+        let image = Image<RGB, Float>(width: 4,
+                                      height: 4,
+                                      data: [
+                                        1, 1, 1, //
+                                        1, 0, 0,
+                                        0, 1, 0,
+                                        0, 0, 1,
+                                        0, 0, 0, //
+                                        1, 0, 0,
+                                        1, 0, 0,
+                                        1, 0, 0,
+                                        1, 0, 0, //
+                                        1, 0, 0,
+                                        1, 0, 0,
+                                        1, 0, 0,
+                                        1, 0, 0, //
+                                        1, 0, 0,
+                                        1, 0, 0,
+                                        1, 0, 0])
+        
+        let resizeNN = image.resizeNN(width: 128, height: 128)
+        let resizedBL = image.resizeBL(width: 128, height: 128)
+//        let resizedBC = image.resizeBC(width: 128, height: 128)
+        
+        let concat = Image.concatH([resizeNN, resizedBL])
+        
+        let rgb256 = (concat * 255).typeConverted(to: UInt8.self)
+        let nsImage = rgb256.nsImage()
+        
+        print("break here")
+        _ = nsImage
+    }
+    
     #endif
 }
 
