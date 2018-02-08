@@ -26,3 +26,11 @@ func XCTAssertEqual<P, T: FloatingPoint>(_ expression1: Image<P, T>,
     XCTAssertEqual(expression1.data, expression2.data, accuracy: accuracy, file: file, line: line)
 }
 
+func XCTAssertEqual<P, T: FloatingPoint>(_ expression1: Pixel<P, T>,
+                                         _ expression2: Pixel<P, T>,
+                                         accuracy: T,
+                                         file: StaticString = #file,
+                                         line: UInt = #line) {
+    XCTAssertEqual(expression1.data, expression2.data, accuracy: accuracy, file: file, line: line)
+}
+
