@@ -157,7 +157,7 @@ extension Image where T: BinaryFloatingPoint {
             for x1 in x1Range {
                 let (x0, y0) = inv * (T(x1), T(y1))
                 
-                guard 0 <= x0 && x0 <= T(width-1) && 0 <= y0 && y0 <= T(height-1) else {
+                guard 0 <= x0 && x0 < T(width) && 0 <= y0 && y0 < T(height) else {
                     continue
                 }
                 

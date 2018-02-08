@@ -277,17 +277,17 @@ class VisualTests: XCTestCase {
         
         var t1 = AffineTransformation<Float>.translate(x: 20, y: 20)
         t1 *= AffineTransformation<Float>.rotate(angle: Float.pi/4)
-        t1 *= AffineTransformation<Float>.scale(x: 50, y: 50)
+        t1 *= AffineTransformation<Float>.scale(x: 30, y: 30)
         src.warpAffine(baseImage: &baseImage, transformation: t1)
         
         var t2 = AffineTransformation<Float>.translate(x: 70, y: 20)
         t2 *= AffineTransformation<Float>.rotate(angle: Float.pi/8)
-        t2 *= AffineTransformation<Float>.scale(x: 20, y: 30)
+        t2 *= AffineTransformation<Float>.scale(x: 10, y: 15)
         src.warpAffine(baseImage: &baseImage, transformation: t2, interpolation: .nearestNeighbor)
         
         var t3 = AffineTransformation<Float>.translate(x: 95, y: 75)
         t3 *= AffineTransformation<Float>.rotate(angle: Float.pi/2)
-        t3 *= AffineTransformation<Float>.scale(x: 20, y: 20)
+        t3 *= AffineTransformation<Float>.scale(x: 10, y: 10)
         src.warpAffine(baseImage: &baseImage, transformation: t3)
         
         let rgb256 = (baseImage * 255).typeConverted(to: UInt8.self)
@@ -307,15 +307,15 @@ class VisualTests: XCTestCase {
                                         0, 0, 1,
                                         0, 0, 0, //
                                         1, 0, 0,
-                                        1, 0, 0,
-                                        1, 0, 0,
+                                        0, 0, 1,
+                                        0, 1, 0,
                                         1, 0, 0, //
+                                        1, 1, 0,
                                         1, 0, 0,
                                         1, 0, 0,
-                                        1, 0, 0,
-                                        1, 0, 0, //
-                                        1, 0, 0,
-                                        1, 0, 0,
+                                        1, 1, 1, //
+                                        1, 1, 0,
+                                        1, 0, 1,
                                         1, 0, 0])
         
         let resizeNN = image.resizeNN(width: 128, height: 128)

@@ -3,11 +3,11 @@ import Foundation
 
 extension Image {
     func nearestNeighbor<F: BinaryFloatingPoint>(x: F, y: F) -> Pixel<P, T> {
-        assert(0 <= x && x <= F(width-1))
-        assert(0 <= y && y <= F(height-1))
+        assert(0 <= x && x < F(width))
+        assert(0 <= y && y < F(height))
         
-        let xx = Int(Foundation.round(x))
-        let yy = Int(Foundation.round(y))
+        let xx = Int(x)
+        let yy = Int(y)
         
         return self[unsafe: xx, yy]
     }

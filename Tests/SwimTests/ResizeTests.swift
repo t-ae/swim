@@ -94,37 +94,5 @@ class ResizeTests: XCTestCase {
         XCTAssertEqual(resizedX.resizeAA(width: width, height: height), resized, accuracy: 1e-3)
         XCTAssertEqual(resizedY.resizeAA(width: width, height: height), resized, accuracy: 1e-3)
     }
-    
-    func testResizeBL_upscale() {
-        let image = Image<Intensity, Float>(width: 2, height: 2, data: [0, 1,
-                                                                        2, 3])
-        let resized3 = image.resizeBL(width: 3, height: 3)
-        XCTAssertEqual(resized3, Image(width: 3, height: 3, data: [0, 0.5, 1,
-                                                                   1, 1.5, 2,
-                                                                   2, 2.5, 3]))
-        
-        let resized4 = image.resizeBL(width: 4, height: 4)
-        XCTAssertEqual(resized4,
-                       Image(width: 4, height: 4, data: [0, 1, 2, 3,
-                                                         2, 3, 4, 5,
-                                                         4, 5, 6, 7,
-                                                         6, 7, 8, 9].map { Float($0)/3 }),
-                       accuracy: 1e-3)
-    }
-    
-    func testResizeBL_downscale() {
-        let image = Image(width: 4, height: 4, intensity: (0..<16).map { Float($0) })
-        
-        let resized2 = image.resizeBL(width: 2, height: 2)
-        XCTAssertEqual(resized2, Image(width: 2, height: 2, data: [0, 3,
-                                                                   12, 15]))
-        
-        let resized3 = image.resizeBL(width: 3, height: 3)
-        XCTAssertEqual(resized3,
-                       Image(width: 3, height: 3, intensity: [0, 1.5, 3,
-                                                              6, 7.5, 9,
-                                                              12, 13.5, 15]),
-                       accuracy: 1e-3)
-    }
 }
 

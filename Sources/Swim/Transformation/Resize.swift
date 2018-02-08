@@ -34,8 +34,8 @@ extension Image {
     func _resizeNN(width: Int, height: Int) -> Image<P, T> {
         var newImage = Image<P, T>(width: width, height: height)
         
-        let scaleX = Double(self.width-1) / Double(width-1)
-        let scaleY = Double(self.height-1) / Double(height-1)
+        let scaleX = Double(self.width) / Double(width)
+        let scaleY = Double(self.height) / Double(height)
         
         for y in 0..<height {
             let yp = Double(y) * scaleY
@@ -184,8 +184,8 @@ extension Image where T: BinaryFloatingPoint {
         
         var newImage = Image<P, T>(width: width, height: height)
 
-        let scaleX = T(baseImage.width-1) / T(width-1)
-        let scaleY = T(baseImage.height-1) / T(height-1)
+        let scaleX = T(baseImage.width) / T(width)
+        let scaleY = T(baseImage.height) / T(height)
 
         for y in 0..<height {
             // yp \in [0, self.height-1]
