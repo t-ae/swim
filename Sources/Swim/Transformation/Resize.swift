@@ -193,7 +193,7 @@ extension Image where T: BinaryFloatingPoint {
             for x in 0..<width {
                 // xp \in [0, self.width-1]
                 let xp = T(x) * scaleX
-                newImage[unsafe: x, y] = baseImage.bilinearInterpolation(x: xp, y: yp)
+                newImage[unsafe: x, y] = baseImage.interpolateBilinear(x: xp, y: yp)
             }
         }
 

@@ -118,7 +118,7 @@ extension Image where T: BinaryFloatingPoint {
         case .nearestNeighbor:
             intpl = self.nearestNeighbor
         case .bilinear:
-            intpl = self.bilinearInterpolation
+            intpl = self.interpolateBilinear
         }
         
         // Calculate draw range

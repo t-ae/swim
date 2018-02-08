@@ -2,7 +2,7 @@
 import Foundation
 
 extension Image where T: BinaryFloatingPoint {
-    func bilinearInterpolation(x: T, y: T) -> Pixel<P, T> {
+    func interpolateBilinear(x: T, y: T) -> Pixel<P, T> {
         assert(0 <= x && x < T(width))
         assert(0 <= y && y < T(height))
         
