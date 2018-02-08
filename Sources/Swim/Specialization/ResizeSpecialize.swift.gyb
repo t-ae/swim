@@ -20,6 +20,10 @@ extension Image where P == ${pt}, T == ${dt} {
     public func resizeBL(width: Int, height: Int) -> Image<P, T> {
         return _resizeBL(width: width, height: height)
     }
+
+    public func resizeBC(width: Int, height: Int) -> Image<P, T> {
+        return _resizeBC(width: width, height: height)
+    }
 }
 
 % end
