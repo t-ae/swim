@@ -71,7 +71,7 @@ extension Image where T: BinaryFloatingPoint {
                 let ceilStartX = Foundation.ceil(startX)
                 let floorEndX = Foundation.floor(endX)
                 
-                guard ceilStartX < floorEndX else {
+                guard ceilStartX <= floorEndX else {
                     // refer single pixel
                     for y in 0..<newImage.height {
                         newImage[unsafe: x, y] = baseImage[unsafe: Int(startX), y]
@@ -81,19 +81,19 @@ extension Image where T: BinaryFloatingPoint {
                 
                 let startX_i = Int(startX) // floor
                 let startVolume = ceilStartX - startX
-                let endX_i = Int(Foundation.ceil(endX))
+                let endX_i = Int(endX) // floor
                 let endVolume = endX - floorEndX
                 
                 for y in 0..<newImage.height {
                     // average
                     var pixel: Pixel<P, T> = Pixel<P, T>(value: 0)
-                    if startX < ceilStartX {
+                    if startVolume > 0 {
                         pixel += baseImage[unsafe: startX_i, y] * startVolume
                     }
                     for dx in Int(ceilStartX)..<Int(floorEndX) {
                         pixel += baseImage[unsafe: dx, y]
                     }
-                    if floorEndX < endX {
+                    if endVolume > 0 {
                         pixel += baseImage[unsafe: endX_i, y] * endVolume
                     }
                     newImage[unsafe: x, y] = pixel / volume
@@ -116,7 +116,7 @@ extension Image where T: BinaryFloatingPoint {
                 let ceilStartY = Foundation.ceil(startY)
                 let floorEndY = Foundation.floor(endY)
                 
-                guard ceilStartY < floorEndY else {
+                guard ceilStartY <= floorEndY else {
                     // refer single pixel
                     for x in 0..<newImage.width {
                         newImage[unsafe: x, y] = baseImage[unsafe: x, Int(startY)]
@@ -126,19 +126,19 @@ extension Image where T: BinaryFloatingPoint {
                 
                 let startY_i = Int(startY) // floor
                 let startVolume = ceilStartY - startY
-                let endY_i = Int(Foundation.ceil(endY))
+                let endY_i = Int(endY)
                 let endVolume = endY - floorEndY
                 
                 for x in 0..<newImage.width {
                     // average
                     var pixel: Pixel<P, T> = Pixel<P, T>(value: 0)
-                    if startY < ceilStartY {
+                    if startVolume > 0 {
                         pixel += baseImage[unsafe: x, startY_i] * startVolume
                     }
                     for dy in Int(ceilStartY)..<Int(floorEndY) {
                         pixel += baseImage[unsafe: x, dy]
                     }
-                    if floorEndY < endY {
+                    if endVolume > 0 {
                         pixel += baseImage[unsafe: x, endY_i] * endVolume
                     }
                     newImage[unsafe: x, y] = pixel / volume
