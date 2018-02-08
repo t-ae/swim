@@ -205,3 +205,50 @@ extension Image where T: BinaryFloatingPoint {
     }
 }
 
+extension Image where T: BinaryFloatingPoint {
+    /// Resize image with Bicubic interpolation.
+    func _resizeBC(width: Int, height: Int) -> Image<P, T> {
+        
+        let baseImage: Image<P, T>
+        do {
+            // downsample to avoid sparse sampling
+            var image = self
+            if width*2 < self.width {
+                var newWidth = self.width >> 1
+                while width*2 < newWidth {
+                    newWidth >>= 1
+                }
+                image = image._resizeAA(width: newWidth, height: image.height)
+            }
+            if height*2 < self.height {
+                var newHeight = self.height >> 1
+                while height*2 < newHeight {
+                    newHeight >>= 1
+                }
+                image = image._resizeAA(width: image.width, height: newHeight)
+            }
+            baseImage = image
+        }
+        
+        var newImage = Image<P, T>(width: width, height: height)
+        
+        let scaleX = T(baseImage.width) / T(width)
+        let scaleY = T(baseImage.height) / T(height)
+        
+        for y in 0..<height {
+            // yp \in [0, self.height-1]
+            let yp = T(y) * scaleY
+            for x in 0..<width {
+                // xp \in [0, self.width-1]
+                let xp = T(x) * scaleX
+                newImage[unsafe: x, y] = baseImage.interpolateBicubic(x: xp, y: yp)
+            }
+        }
+        
+        return newImage
+    }
+    
+    public func resizeBC(width: Int, height: Int) -> Image<P, T> {
+        return _resizeBC(width: width, height: height)
+    }
+}

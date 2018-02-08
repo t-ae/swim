@@ -258,13 +258,13 @@ class VisualTests: XCTestCase {
     
     func testWarpAffine() {
         
-        var baseImage = Image<RGB, Float>(width: 100, height: 100, value: 0)
-        for y in 0..<10 {
-            for x in 0..<10 {
+        var baseImage = Image<RGB, Float>(width: 256, height: 256, value: 0)
+        for y in 0..<16 {
+            for x in 0..<16 {
                 guard (x + y) % 2 == 0 else {
                     continue
                 }
-                baseImage[x*10..<(x+1)*10, y*10..<(y+1)*10].fill(Pixel(r: 1, g: 1, b: 1))
+                baseImage[x*16..<(x+1)*16, y*16..<(y+1)*16].fill(Pixel(r: 1, g: 1, b: 1))
             }
         }
         
@@ -272,22 +272,23 @@ class VisualTests: XCTestCase {
                                                                 1, 0, 0,
                                                                 0, 1, 0,
                                                                 0, 0, 1])
-        let t0 = AffineTransformation<Float>.scale(x: 10, y: 10)
+        let t0 = AffineTransformation<Float>.scale(x: 16, y: 16)
         src.warpAffine(baseImage: &baseImage, transformation: t0, interpolation: .nearestNeighbor)
         
-        var t1 = AffineTransformation<Float>.translate(x: 20, y: 20)
+        var t1 = AffineTransformation<Float>.translate(x: 32, y: 32)
         t1 *= AffineTransformation<Float>.rotate(angle: Float.pi/4)
-        t1 *= AffineTransformation<Float>.scale(x: 30, y: 30)
-        src.warpAffine(baseImage: &baseImage, transformation: t1)
+        t1 *= AffineTransformation<Float>.scale(x: 70, y: 70)
+        src.warpAffine(baseImage: &baseImage, transformation: t1, interpolation: .bicubic)
         
-        var t2 = AffineTransformation<Float>.translate(x: 70, y: 20)
+        var t2 = AffineTransformation<Float>.translate(x: 80, y: 32)
         t2 *= AffineTransformation<Float>.rotate(angle: Float.pi/8)
         t2 *= AffineTransformation<Float>.scale(x: 10, y: 15)
         src.warpAffine(baseImage: &baseImage, transformation: t2, interpolation: .nearestNeighbor)
         
-        var t3 = AffineTransformation<Float>.translate(x: 95, y: 75)
+        var t3 = AffineTransformation<Float>.translate(x: 192, y: 192)
         t3 *= AffineTransformation<Float>.rotate(angle: Float.pi/2)
-        t3 *= AffineTransformation<Float>.scale(x: 10, y: 10)
+        t3 *= AffineTransformation<Float>.scale(x: 32, y: 32)
+        t3 *= AffineTransformation<Float>.translate(x: -1, y: -1)
         src.warpAffine(baseImage: &baseImage, transformation: t3)
         
         let rgb256 = (baseImage * 255).typeConverted(to: UInt8.self)
@@ -300,29 +301,13 @@ class VisualTests: XCTestCase {
     func testResize() {
         let image = Image<RGB, Float>(width: 4,
                                       height: 4,
-                                      data: [
-                                        1, 1, 1, //
-                                        1, 0, 0,
-                                        0, 1, 0,
-                                        0, 0, 1,
-                                        0, 0, 0, //
-                                        1, 0, 0,
-                                        0, 0, 1,
-                                        0, 1, 0,
-                                        1, 0, 0, //
-                                        1, 1, 0,
-                                        1, 0, 0,
-                                        1, 0, 0,
-                                        1, 1, 1, //
-                                        1, 1, 0,
-                                        1, 0, 1,
-                                        1, 0, 0])
+                                      data: randomArray(count: 4*4*3))
         
         let resizeNN = image.resizeNN(width: 128, height: 128)
         let resizedBL = image.resizeBL(width: 128, height: 128)
-//        let resizedBC = image.resizeBC(width: 128, height: 128)
+        let resizedBC = image.resizeBC(width: 128, height: 128)
         
-        let concat = Image.concatH([resizeNN, resizedBL])
+        let concat = Image.concatH([resizeNN, resizedBL, resizedBC])
         
         let rgb256 = (concat * 255).typeConverted(to: UInt8.self)
         let nsImage = rgb256.nsImage()
