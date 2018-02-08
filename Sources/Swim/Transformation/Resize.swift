@@ -11,15 +11,15 @@ extension Image where T: BinaryFloatingPoint {
         var baseImage = self
         if width < baseImage.width {
             // downsample
-            baseImage = baseImage.resizeaa(width: width, height: baseImage.height)
+            baseImage = baseImage.resizeAA(width: width, height: baseImage.height)
         }
         if height < baseImage.height {
             // downsample
-            baseImage = baseImage.resizeaa(width: baseImage.width, height: height)
+            baseImage = baseImage.resizeAA(width: baseImage.width, height: height)
         }
         if width > baseImage.width || height > baseImage.height {
             // upsample
-            baseImage = baseImage.resizebn(width: width, height: height)
+            baseImage = baseImage.resizeBL(width: width, height: height)
         }
         return baseImage
     }
@@ -31,7 +31,7 @@ extension Image where T: BinaryFloatingPoint {
 
 extension Image {
     /// Resize image with Narest Neighbor algorithm.
-    func _resizenn(width: Int, height: Int) -> Image<P, T> {
+    func _resizeNN(width: Int, height: Int) -> Image<P, T> {
         var newImage = Image<P, T>(width: width, height: height)
         
         let scaleX = Double(self.width-1) / Double(width-1)
@@ -49,14 +49,14 @@ extension Image {
         return newImage
     }
     
-    public func resizenn(width: Int, height: Int) -> Image<P, T> {
-        return _resizenn(width: width, height: height)
+    public func resizeNN(width: Int, height: Int) -> Image<P, T> {
+        return _resizeNN(width: width, height: height)
     }
 }
 
 extension Image where T: BinaryFloatingPoint {
     /// Resize image with Area average method.
-    func _resizeaa(width: Int, height: Int) -> Image<P, T> {
+    func _resizeAA(width: Int, height: Int) -> Image<P, T> {
         
         let xScaleImage: Image<P, T>
         if width != self.width {
@@ -152,14 +152,14 @@ extension Image where T: BinaryFloatingPoint {
         return yScaleImage
     }
     
-    public func resizeaa(width: Int, height: Int) -> Image<P, T> {
-        return _resizeaa(width: width, height: height)
+    public func resizeAA(width: Int, height: Int) -> Image<P, T> {
+        return _resizeAA(width: width, height: height)
     }
 }
 
 extension Image where T: BinaryFloatingPoint {
     /// Resize image with Bilinear interpolation.
-    func _resizebn(width: Int, height: Int) -> Image<P, T> {
+    func _resizeBL(width: Int, height: Int) -> Image<P, T> {
         
         let baseImage: Image<P, T>
         do {
@@ -170,14 +170,14 @@ extension Image where T: BinaryFloatingPoint {
                 while width*2 < newWidth {
                     newWidth >>= 1
                 }
-                image = image._resizeaa(width: newWidth, height: image.height)
+                image = image._resizeAA(width: newWidth, height: image.height)
             }
             if height*2 < self.height {
                 var newHeight = self.height >> 1
                 while height*2 < newHeight {
                     newHeight >>= 1
                 }
-                image = image._resizeaa(width: image.width, height: newHeight)
+                image = image._resizeAA(width: image.width, height: newHeight)
             }
             baseImage = image
         }
@@ -200,8 +200,8 @@ extension Image where T: BinaryFloatingPoint {
         return newImage
     }
     
-    public func resizebn(width: Int, height: Int) -> Image<P, T> {
-        return _resizebn(width: width, height: height)
+    public func resizeBL(width: Int, height: Int) -> Image<P, T> {
+        return _resizeBL(width: width, height: height)
     }
 }
 

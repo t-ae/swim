@@ -4,16 +4,16 @@ extension Image where P == Intensity, T == Float {
         return _resized(width: width, height: height)
     }
 
-    public func resizenn(width: Int, height: Int) -> Image<P, T> {
-        return _resizenn(width: width, height: height)
+    public func resizeNN(width: Int, height: Int) -> Image<P, T> {
+        return _resizeNN(width: width, height: height)
     }
 
-    public func resizeaa(width: Int, height: Int) -> Image<P, T> {
-        return _resizeaa(width: width, height: height)
+    public func resizeAA(width: Int, height: Int) -> Image<P, T> {
+        return _resizeAA(width: width, height: height)
     }
 
-    public func resizebn(width: Int, height: Int) -> Image<P, T> {
-        return _resizebn(width: width, height: height)
+    public func resizeBL(width: Int, height: Int) -> Image<P, T> {
+        return _resizeBL(width: width, height: height)
     }
 }
 
@@ -22,16 +22,16 @@ extension Image where P == Intensity, T == Double {
         return _resized(width: width, height: height)
     }
 
-    public func resizenn(width: Int, height: Int) -> Image<P, T> {
-        return _resizenn(width: width, height: height)
+    public func resizeNN(width: Int, height: Int) -> Image<P, T> {
+        return _resizeNN(width: width, height: height)
     }
 
-    public func resizeaa(width: Int, height: Int) -> Image<P, T> {
-        return _resizeaa(width: width, height: height)
+    public func resizeAA(width: Int, height: Int) -> Image<P, T> {
+        return _resizeAA(width: width, height: height)
     }
 
-    public func resizebn(width: Int, height: Int) -> Image<P, T> {
-        return _resizebn(width: width, height: height)
+    public func resizeBL(width: Int, height: Int) -> Image<P, T> {
+        return _resizeBL(width: width, height: height)
     }
 }
 
@@ -40,16 +40,16 @@ extension Image where P == IntensityAlpha, T == Float {
         return _resized(width: width, height: height)
     }
 
-    public func resizenn(width: Int, height: Int) -> Image<P, T> {
-        return _resizenn(width: width, height: height)
+    public func resizeNN(width: Int, height: Int) -> Image<P, T> {
+        return _resizeNN(width: width, height: height)
     }
 
-    public func resizeaa(width: Int, height: Int) -> Image<P, T> {
-        return _resizeaa(width: width, height: height)
+    public func resizeAA(width: Int, height: Int) -> Image<P, T> {
+        return _resizeAA(width: width, height: height)
     }
 
-    public func resizebn(width: Int, height: Int) -> Image<P, T> {
-        return _resizebn(width: width, height: height)
+    public func resizeBL(width: Int, height: Int) -> Image<P, T> {
+        return _resizeBL(width: width, height: height)
     }
 }
 
@@ -58,16 +58,16 @@ extension Image where P == IntensityAlpha, T == Double {
         return _resized(width: width, height: height)
     }
 
-    public func resizenn(width: Int, height: Int) -> Image<P, T> {
-        return _resizenn(width: width, height: height)
+    public func resizeNN(width: Int, height: Int) -> Image<P, T> {
+        return _resizeNN(width: width, height: height)
     }
 
-    public func resizeaa(width: Int, height: Int) -> Image<P, T> {
-        return _resizeaa(width: width, height: height)
+    public func resizeAA(width: Int, height: Int) -> Image<P, T> {
+        return _resizeAA(width: width, height: height)
     }
 
-    public func resizebn(width: Int, height: Int) -> Image<P, T> {
-        return _resizebn(width: width, height: height)
+    public func resizeBL(width: Int, height: Int) -> Image<P, T> {
+        return _resizeBL(width: width, height: height)
     }
 }
 
@@ -76,16 +76,16 @@ extension Image where P == RGB, T == Float {
         return _resized(width: width, height: height)
     }
 
-    public func resizenn(width: Int, height: Int) -> Image<P, T> {
-        return _resizenn(width: width, height: height)
+    public func resizeNN(width: Int, height: Int) -> Image<P, T> {
+        return _resizeNN(width: width, height: height)
     }
 
-    public func resizeaa(width: Int, height: Int) -> Image<P, T> {
-        return _resizeaa(width: width, height: height)
+    public func resizeAA(width: Int, height: Int) -> Image<P, T> {
+        return _resizeAA(width: width, height: height)
     }
 
-    public func resizebn(width: Int, height: Int) -> Image<P, T> {
-        return _resizebn(width: width, height: height)
+    public func resizeBL(width: Int, height: Int) -> Image<P, T> {
+        return _resizeBL(width: width, height: height)
     }
 }
 
@@ -94,16 +94,16 @@ extension Image where P == RGB, T == Double {
         return _resized(width: width, height: height)
     }
 
-    public func resizenn(width: Int, height: Int) -> Image<P, T> {
-        return _resizenn(width: width, height: height)
+    public func resizeNN(width: Int, height: Int) -> Image<P, T> {
+        return _resizeNN(width: width, height: height)
     }
 
-    public func resizeaa(width: Int, height: Int) -> Image<P, T> {
-        return _resizeaa(width: width, height: height)
+    public func resizeAA(width: Int, height: Int) -> Image<P, T> {
+        return _resizeAA(width: width, height: height)
     }
 
-    public func resizebn(width: Int, height: Int) -> Image<P, T> {
-        return _resizebn(width: width, height: height)
+    public func resizeBL(width: Int, height: Int) -> Image<P, T> {
+        return _resizeBL(width: width, height: height)
     }
 }
 
@@ -112,16 +112,16 @@ extension Image where P == RGBA, T == Float {
         return _resized(width: width, height: height)
     }
 
-    public func resizenn(width: Int, height: Int) -> Image<P, T> {
-        return _resizenn(width: width, height: height)
+    public func resizeNN(width: Int, height: Int) -> Image<P, T> {
+        return _resizeNN(width: width, height: height)
     }
 
-    public func resizeaa(width: Int, height: Int) -> Image<P, T> {
-        return _resizeaa(width: width, height: height)
+    public func resizeAA(width: Int, height: Int) -> Image<P, T> {
+        return _resizeAA(width: width, height: height)
     }
 
-    public func resizebn(width: Int, height: Int) -> Image<P, T> {
-        return _resizebn(width: width, height: height)
+    public func resizeBL(width: Int, height: Int) -> Image<P, T> {
+        return _resizeBL(width: width, height: height)
     }
 }
 
@@ -130,16 +130,16 @@ extension Image where P == RGBA, T == Double {
         return _resized(width: width, height: height)
     }
 
-    public func resizenn(width: Int, height: Int) -> Image<P, T> {
-        return _resizenn(width: width, height: height)
+    public func resizeNN(width: Int, height: Int) -> Image<P, T> {
+        return _resizeNN(width: width, height: height)
     }
 
-    public func resizeaa(width: Int, height: Int) -> Image<P, T> {
-        return _resizeaa(width: width, height: height)
+    public func resizeAA(width: Int, height: Int) -> Image<P, T> {
+        return _resizeAA(width: width, height: height)
     }
 
-    public func resizebn(width: Int, height: Int) -> Image<P, T> {
-        return _resizebn(width: width, height: height)
+    public func resizeBL(width: Int, height: Int) -> Image<P, T> {
+        return _resizeBL(width: width, height: height)
     }
 }
 
@@ -148,16 +148,16 @@ extension Image where P == ARGB, T == Float {
         return _resized(width: width, height: height)
     }
 
-    public func resizenn(width: Int, height: Int) -> Image<P, T> {
-        return _resizenn(width: width, height: height)
+    public func resizeNN(width: Int, height: Int) -> Image<P, T> {
+        return _resizeNN(width: width, height: height)
     }
 
-    public func resizeaa(width: Int, height: Int) -> Image<P, T> {
-        return _resizeaa(width: width, height: height)
+    public func resizeAA(width: Int, height: Int) -> Image<P, T> {
+        return _resizeAA(width: width, height: height)
     }
 
-    public func resizebn(width: Int, height: Int) -> Image<P, T> {
-        return _resizebn(width: width, height: height)
+    public func resizeBL(width: Int, height: Int) -> Image<P, T> {
+        return _resizeBL(width: width, height: height)
     }
 }
 
@@ -166,16 +166,16 @@ extension Image where P == ARGB, T == Double {
         return _resized(width: width, height: height)
     }
 
-    public func resizenn(width: Int, height: Int) -> Image<P, T> {
-        return _resizenn(width: width, height: height)
+    public func resizeNN(width: Int, height: Int) -> Image<P, T> {
+        return _resizeNN(width: width, height: height)
     }
 
-    public func resizeaa(width: Int, height: Int) -> Image<P, T> {
-        return _resizeaa(width: width, height: height)
+    public func resizeAA(width: Int, height: Int) -> Image<P, T> {
+        return _resizeAA(width: width, height: height)
     }
 
-    public func resizebn(width: Int, height: Int) -> Image<P, T> {
-        return _resizebn(width: width, height: height)
+    public func resizeBL(width: Int, height: Int) -> Image<P, T> {
+        return _resizeBL(width: width, height: height)
     }
 }
 
