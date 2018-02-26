@@ -6,8 +6,8 @@ class CorrelationTests: XCTestCase {
     
     func testSSD() {
         do {
-            let image1 = Image(width: 3, height: 2, intensity: [0, 1, 2, 3, 4, 5].map { Float($0) })
-            let image2 = Image(width: 3, height: 2, intensity: [2, 4, 6, 2, 4, 6].map { Float($0) })
+            let image1 = Image(width: 3, height: 2, intensity: [0, 1, 2, 3, 4, 5] as [Float])
+            let image2 = Image(width: 3, height: 2, intensity: [2, 4, 6, 2, 4, 6] as [Float])
             
             XCTAssertEqual(Correlation.ssd(image1, image1), 0)
             XCTAssertEqual(Correlation.ssd(image1, image2), 31)
@@ -23,8 +23,8 @@ class CorrelationTests: XCTestCase {
     
     func testSAD() {
         do {
-            let image1 = Image(width: 3, height: 2, intensity: [0, 1, 2, 3, 4, 5].map { Float($0) })
-            let image2 = Image(width: 3, height: 2, intensity: [2, 4, 6, 2, 4, 6].map { Float($0) })
+            let image1 = Image(width: 3, height: 2, intensity: [0, 1, 2, 3, 4, 5] as [Float])
+            let image2 = Image(width: 3, height: 2, intensity: [2, 4, 6, 2, 4, 6] as [Float])
             
             XCTAssertEqual(Correlation.sad(image1, image1), 0)
             XCTAssertEqual(Correlation.sad(image1, image2), 11)
@@ -40,8 +40,8 @@ class CorrelationTests: XCTestCase {
     
     func testNCC() {
         do {
-            let image1 = Image(width: 3, height: 2, intensity: [0, 1, 2, 3, 4, 5].map { Float($0) })
-            let image2 = Image(width: 3, height: 2, intensity: [2, 4, 6, 2, 4, 6].map { Float($0) })
+            let image1 = Image(width: 3, height: 2, intensity: [0, 1, 2, 3, 4, 5] as [Float])
+            let image2 = Image(width: 3, height: 2, intensity: [2, 4, 6, 2, 4, 6] as [Float])
             
             let ip = zip(image1.data, image2.data).map { $0*$1 }.reduce(0, +)
             let l1 = zip(image1.data, image1.data).map { $0*$1 }.reduce(0, +)
@@ -65,12 +65,12 @@ class CorrelationTests: XCTestCase {
     
     func testZNCC() {
         do {
-            let image1 = Image(width: 3, height: 2, intensity: [0, 1, 2, 3, 4, 5].map { Float($0) })
+            let image1 = Image(width: 3, height: 2, intensity: [0, 1, 2, 3, 4, 5] as [Float])
             
             XCTAssertEqual(Correlation.zncc(image1, image1), 1)
             
-            let i1 = Image(width: 3, height: 1, intensity: [0, 1, 0].map { Float($0) })
-            let i2 = Image(width: 3, height: 1, intensity: [1, 0, 1].map { Float($0) })
+            let i1 = Image(width: 3, height: 1, intensity: [0, 1, 0] as [Float])
+            let i2 = Image(width: 3, height: 1, intensity: [1, 0, 1] as [Float])
             
             XCTAssertEqual(Correlation.zncc(i1, i2), -1)
         }

@@ -242,7 +242,7 @@ class VisualTests: XCTestCase {
                                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
                                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
                                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                                   0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0].map { UInt8($0) })
+                                   0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] as [UInt8])
         
         var b = b0
         
@@ -303,11 +303,11 @@ class VisualTests: XCTestCase {
                                       height: 4,
                                       data: randomArray(count: 4*4*3))
         
-        let resizeNN = image.resizeNN(width: 128, height: 128)
+        let resizedNN = image.resizeNN(width: 128, height: 128)
         let resizedBL = image.resizeBL(width: 128, height: 128)
         let resizedBC = image.resizeBC(width: 128, height: 128)
         
-        let concat = Image.concatH([resizeNN, resizedBL, resizedBC])
+        let concat = Image.concatH([resizedNN, resizedBL, resizedBC])
         
         let rgb256 = (concat * 255).typeConverted(to: UInt8.self)
         let nsImage = rgb256.nsImage()
