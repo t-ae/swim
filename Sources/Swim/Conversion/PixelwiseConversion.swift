@@ -5,7 +5,7 @@ import Foundation
 extension Image {
     
     mutating func _convert(_ f: (Pixel<P, T>)->Pixel<P, T>) {
-        
+        let (width, height) = size
         data.withUnsafeMutableBufferPointer {
             var p = $0.baseAddress!
             var pixel = Pixel<P, T>(data: [T](repeating: T.swimDefaultValue, count: P.channels))
@@ -20,6 +20,7 @@ extension Image {
     }
     
     mutating func _unsafeConvert(_ f: (UnsafeMutableBufferPointer<T>)->Void) {
+        let (width, height) = size
         data.withUnsafeMutableBufferPointer {
             var p = $0.baseAddress!
             
@@ -43,6 +44,7 @@ extension Image {
 // MARK: - Intensity
 extension Image where P == Intensity {
     mutating func _convert(_ f: (T)->T) {
+        let (width, height) = size
         data.withUnsafeMutableBufferPointer {
             var dst = $0.baseAddress!
             for _ in 0..<width*height {

@@ -17,6 +17,7 @@ extension Image {
     }
     
     mutating func _fill(_ pixel: Pixel<P, T>) {
+        let (width, height) = size
         data.withUnsafeMutableBufferPointer {
             var dst = $0.baseAddress!
             for _ in 0..<width*height {

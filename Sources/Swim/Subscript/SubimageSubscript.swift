@@ -37,7 +37,7 @@ extension Image {
         precondition((width, height) == newValue.size)
         
         let start = index(x: x, y: y)
-        
+        let baseWidth = self.width
         newValue.data.withUnsafeBufferPointer {
             var src = $0.baseAddress!
             data.withUnsafeMutableBufferPointer {
@@ -45,7 +45,7 @@ extension Image {
                 for _ in 0..<height {
                     memcpy(dst, src, width*P.channels*MemoryLayout<T>.size)
                     src += width*P.channels
-                    dst += self.width*P.channels
+                    dst += baseWidth*P.channels
                 }
             }
         }

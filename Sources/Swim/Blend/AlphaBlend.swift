@@ -4,14 +4,14 @@ import Foundation
 extension Image where P == RGB, T: FloatingPoint {
     mutating func _alphaBlend<P2: RGBWithAlpha>(with src: Image<P2, T>) {
         precondition(size == src.size, "Images must have same size.")
-        
+        let (width, height) = size
         src.data.withUnsafeBufferPointer {
             var srcColor = $0.baseAddress! + P2.redIndex
             var srcAlpha = $0.baseAddress! + P2.alphaIndex
             data.withUnsafeMutableBufferPointer {
                 var dst = $0.baseAddress!
                 
-                for _ in 0..<pixelCount {
+                for _ in 0..<width*height {
                     if srcAlpha.pointee != 0 {
                         for _ in 0..<P.channels {
                             dst.pointee *= 1-srcAlpha.pointee
@@ -38,6 +38,7 @@ extension Image where P == RGB, T: FloatingPoint {
 extension Image where P: RGBWithAlpha, T: FloatingPoint {
     mutating func _alphaBlend(with src: Image<P, T>) {
         precondition(size == src.size, "Images must have same size.")
+        let (width, height) = size
         
         src.data.withUnsafeBufferPointer {
             var srcColor = $0.baseAddress! + P.redIndex
@@ -46,7 +47,7 @@ extension Image where P: RGBWithAlpha, T: FloatingPoint {
                 var dstColor = $0.baseAddress! + P.redIndex
                 var dstAlpha = $0.baseAddress! + P.alphaIndex
                 
-                for _ in 0..<pixelCount {
+                for _ in 0..<width*height {
                     if srcAlpha.pointee != 0 {
                         let blendAlpha = srcAlpha.pointee + (1-srcAlpha.pointee)*dstAlpha.pointee
                         for _ in 0..<P.channels-1 {
