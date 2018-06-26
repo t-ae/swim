@@ -2,13 +2,12 @@
 import Foundation
 
 extension Image where T: BinaryFloatingPoint {
+    /// - Preconditions:
+    ///   - 0 <= x <= width-1
+    ///   - 0 <= y <= height-1
     func interpolateBilinear(x: T, y: T) -> Pixel<P, T> {
-        assert(0 <= x && x < T(width))
-        assert(0 <= y && y < T(height))
-        
-        // change range
-        let x = x * T(width-1) / T(width)
-        let y = y * T(height-1) / T(height)
+        assert(0 <= x && x <= T(width-1))
+        assert(0 <= y && y <= T(height-1))
         
         let x0 = Int(x) // floor
         let x1 = Int(Foundation.ceil(x))

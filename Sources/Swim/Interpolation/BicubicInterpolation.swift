@@ -23,13 +23,12 @@ extension Image where T: BinaryFloatingPoint {
         }
     }
     
+    /// - Preconditions:
+    ///   - 0 <= x <= width-1
+    ///   - 0 <= y <= height-1
     func interpolateBicubic(x: T, y: T) -> Pixel<P, T> {
         assert(0 <= x && x < T(width))
         assert(0 <= y && y < T(height))
-        
-        // change range
-        let x = x * T(width-1) / T(width)
-        let y = y * T(height-1) / T(height)
         
         let xmin = Int(x)-1
         let xmax = Int(x)+2

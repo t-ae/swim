@@ -184,8 +184,8 @@ extension Image where T: BinaryFloatingPoint {
         
         var newImage = Image<P, T>(width: width, height: height)
 
-        let scaleX = T(baseImage.width) / T(width)
-        let scaleY = T(baseImage.height) / T(height)
+        let scaleX = T(baseImage.width-1) / T(width-1)
+        let scaleY = T(baseImage.height-1) / T(height-1)
 
         for y in 0..<height {
             // yp \in [0, self.height-1]
@@ -232,8 +232,8 @@ extension Image where T: BinaryFloatingPoint {
         
         var newImage = Image<P, T>(width: width, height: height)
         
-        let scaleX = T(baseImage.width) / T(width)
-        let scaleY = T(baseImage.height) / T(height)
+        let scaleX = T(baseImage.width-1) / T(width-1)
+        let scaleY = T(baseImage.height-1) / T(height-1)
         
         for y in 0..<height {
             // yp \in [0, self.height-1]
