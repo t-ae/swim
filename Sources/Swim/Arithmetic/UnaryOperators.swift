@@ -1,4 +1,3 @@
-
 extension DataContainer where DT: SignedNumeric {
     static func negate(arg: Self) -> Self {
         var ret = arg
@@ -22,27 +21,29 @@ extension DataContainer where DT: SignedNumeric {
 }
 
 // MARK: - Accelerate
-#if os(macOS) || os(iOS)
-    import Accelerate
+#if canImport(Accelerate)
+
+import Accelerate
+
+extension DataContainer where DT == Float {
     
-    extension DataContainer where DT == Float {
-        
-        static func negate(arg: Self) -> Self {
-            var ret = arg
-            ret.data.withUnsafeMutableBufferPointer {
-                vDSP_vneg($0.baseAddress!, 1, $0.baseAddress!, 1, vDSP_Length($0.count))
-            }
-            return ret
+    static func negate(arg: Self) -> Self {
+        var ret = arg
+        ret.data.withUnsafeMutableBufferPointer {
+            vDSP_vneg($0.baseAddress!, 1, $0.baseAddress!, 1, vDSP_Length($0.count))
         }
+        return ret
     }
-    
-    extension DataContainer where DT == Double {
-        static func negate(arg: Self) -> Self {
-            var ret = arg
-            ret.data.withUnsafeMutableBufferPointer {
-                vDSP_vnegD($0.baseAddress!, 1, $0.baseAddress!, 1, vDSP_Length($0.count))
-            }
-            return ret
+}
+
+extension DataContainer where DT == Double {
+    static func negate(arg: Self) -> Self {
+        var ret = arg
+        ret.data.withUnsafeMutableBufferPointer {
+            vDSP_vnegD($0.baseAddress!, 1, $0.baseAddress!, 1, vDSP_Length($0.count))
         }
+        return ret
     }
+}
+
 #endif

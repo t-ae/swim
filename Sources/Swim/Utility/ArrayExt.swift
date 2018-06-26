@@ -1,4 +1,3 @@
-
 extension Array where Element: Comparable {
     func minIndex() -> Int? {
         guard let minValue = self.min() else {

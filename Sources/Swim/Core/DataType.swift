@@ -1,4 +1,3 @@
-
 public protocol DataType: Equatable {
     static var swimDefaultValue: Self { get }
 }

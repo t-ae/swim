@@ -1,4 +1,3 @@
-
 extension Image where P == Intensity {
     public init(width: Int, height: Int, intensity: [T]) {
         self.init(width: width, height: height, data: intensity)

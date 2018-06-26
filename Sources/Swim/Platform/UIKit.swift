@@ -1,24 +1,24 @@
+#if canImport(UIKit)
 
-#if os(iOS)
+import UIKit
 
-    import UIKit
-    
-    extension Image where P == RGBA, T == UInt8 {
-        public init?(uiImage: UIImage) {
-            guard let cgImage = uiImage.cgImage else {
-                return nil
-            }
-            self.init(cgImage: cgImage)
+extension Image where P == RGBA, T == UInt8 {
+    public init?(uiImage: UIImage) {
+        guard let cgImage = uiImage.cgImage else {
+            return nil
         }
-        
-        public func uiImage() -> UIImage {
-            return UIImage(cgImage: cgImage())
-        }
+        self.init(cgImage: cgImage)
     }
     
-    extension Image where P == RGB, T == UInt8 {
-        public func uiImage() -> UIImage {
-            return UIImage(cgImage: cgImage())
-        }
+    public func uiImage() -> UIImage {
+        return UIImage(cgImage: cgImage())
     }
+}
+
+extension Image where P == RGB, T == UInt8 {
+    public func uiImage() -> UIImage {
+        return UIImage(cgImage: cgImage())
+    }
+}
+
 #endif

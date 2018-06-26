@@ -1,4 +1,3 @@
-
 import Foundation
 
 extension Image where T: FloatingPoint {
@@ -45,58 +44,60 @@ extension Image where T: FloatingPoint {
     }
 }
 
-#if os(macOS) || os(iOS)
-    import Accelerate
-    
-    extension Image where T == Float {
-        mutating func _round() {
-            data.withUnsafeMutableBufferPointer {
-                let p = $0.baseAddress!
-                var count = Int32($0.count)
-                vvnintf(p, p, &count)
-            }
-        }
-        
-        mutating func _ceil() {
-            data.withUnsafeMutableBufferPointer {
-                let p = $0.baseAddress!
-                var count = Int32($0.count)
-                vvceilf(p, p, &count)
-            }
-        }
-        
-        mutating func _floor() {
-            data.withUnsafeMutableBufferPointer {
-                let p = $0.baseAddress!
-                var count = Int32($0.count)
-                vvfloorf(p, p, &count)
-            }
+#if canImport(Accelerate)
+
+import Accelerate
+
+extension Image where T == Float {
+    mutating func _round() {
+        data.withUnsafeMutableBufferPointer {
+            let p = $0.baseAddress!
+            var count = Int32($0.count)
+            vvnintf(p, p, &count)
         }
     }
     
-    extension Image where T == Double {
-        mutating func _round() {
-            data.withUnsafeMutableBufferPointer {
-                let p = $0.baseAddress!
-                var count = Int32($0.count)
-                vvnint(p, p, &count)
-            }
-        }
-        
-        mutating func _ceil() {
-            data.withUnsafeMutableBufferPointer {
-                let p = $0.baseAddress!
-                var count = Int32($0.count)
-                vvceil(p, p, &count)
-            }
-        }
-        
-        mutating func _floor() {
-            data.withUnsafeMutableBufferPointer {
-                let p = $0.baseAddress!
-                var count = Int32($0.count)
-                vvfloor(p, p, &count)
-            }
+    mutating func _ceil() {
+        data.withUnsafeMutableBufferPointer {
+            let p = $0.baseAddress!
+            var count = Int32($0.count)
+            vvceilf(p, p, &count)
         }
     }
+    
+    mutating func _floor() {
+        data.withUnsafeMutableBufferPointer {
+            let p = $0.baseAddress!
+            var count = Int32($0.count)
+            vvfloorf(p, p, &count)
+        }
+    }
+}
+
+extension Image where T == Double {
+    mutating func _round() {
+        data.withUnsafeMutableBufferPointer {
+            let p = $0.baseAddress!
+            var count = Int32($0.count)
+            vvnint(p, p, &count)
+        }
+    }
+    
+    mutating func _ceil() {
+        data.withUnsafeMutableBufferPointer {
+            let p = $0.baseAddress!
+            var count = Int32($0.count)
+            vvceil(p, p, &count)
+        }
+    }
+    
+    mutating func _floor() {
+        data.withUnsafeMutableBufferPointer {
+            let p = $0.baseAddress!
+            var count = Int32($0.count)
+            vvfloor(p, p, &count)
+        }
+    }
+}
+
 #endif

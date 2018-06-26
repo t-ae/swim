@@ -1,4 +1,3 @@
-
 extension Image {
     mutating func _channelwiseConvert(_ f: (T)->T) {
         data.withUnsafeMutableBufferPointer {

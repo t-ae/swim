@@ -1,4 +1,3 @@
-
 import Foundation
 
 extension Image where T: BinaryFloatingPoint {

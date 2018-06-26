@@ -1,4 +1,3 @@
-
 import Foundation
 
 // MARK: - Same Pixel/Data type conversion

@@ -1,5 +1,5 @@
-
 import Foundation
+
 extension Image {
     /// Sequence of pixels.
     /// - Attention: Since the iterator has no specializations, it may be slow.

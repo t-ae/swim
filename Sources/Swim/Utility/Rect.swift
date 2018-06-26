@@ -1,4 +1,3 @@
-
 public struct Rect {
     public var x: Int
     public var y: Int

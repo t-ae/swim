@@ -1,4 +1,3 @@
-
 extension Image {
     static func _concatH<P, T>(_ images: [Image<P, T>]) -> Image<P, T> {
         let width: Int = images.map { $0.width }.reduce(0, +)

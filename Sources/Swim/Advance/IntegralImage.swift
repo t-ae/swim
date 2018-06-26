@@ -1,4 +1,3 @@
-
 extension Image where P == Intensity, T: Numeric {
     func _toIntegralImage() -> Image<Intensity, T> {
         var newImage = self

@@ -1,4 +1,3 @@
-
 import Foundation
 
 private func dotProduct<T: Numeric>(_ a: [T], _ b: [T]) -> T {
@@ -13,24 +12,26 @@ private func dotProduct<T: Numeric>(_ a: [T], _ b: [T]) -> T {
     return result
 }
 
-#if os(macOS) || os(iOS)
-    import Accelerate
-    
-    func dotProduct(_ a: [Float], _ b: [Float]) -> Float {
-        assert(a.count == b.count)
+#if canImport(Accelerate)
 
-        var result: Float = 0
-        vDSP_dotpr(a, 1, b, 1, &result, vDSP_Length(a.count))
-        
-        return result
-    }
+import Accelerate
+
+func dotProduct(_ a: [Float], _ b: [Float]) -> Float {
+    assert(a.count == b.count)
     
-    func dotProduct(_ a: [Double], _ b: [Double]) -> Double {
-        assert(a.count == b.count)
-        
-        var result: Double = 0
-        vDSP_dotprD(a, 1, b, 1, &result, vDSP_Length(a.count))
-        
-        return result
-    }
+    var result: Float = 0
+    vDSP_dotpr(a, 1, b, 1, &result, vDSP_Length(a.count))
+    
+    return result
+}
+
+func dotProduct(_ a: [Double], _ b: [Double]) -> Double {
+    assert(a.count == b.count)
+    
+    var result: Double = 0
+    vDSP_dotprD(a, 1, b, 1, &result, vDSP_Length(a.count))
+    
+    return result
+}
+
 #endif

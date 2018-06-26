@@ -1,25 +1,24 @@
+#if canImport(AppKit)
 
-#if os(macOS)
-    
-    import AppKit
-    
-    extension Image where P == RGBA, T == UInt8 {
-        public init?(nsImage: NSImage) {
-            guard let cgImage = nsImage.cgImage(forProposedRect: nil, context: nil,hints: nil) else {
-                return nil
-            }
-            self.init(cgImage: cgImage)
+import AppKit
+
+extension Image where P == RGBA, T == UInt8 {
+    public init?(nsImage: NSImage) {
+        guard let cgImage = nsImage.cgImage(forProposedRect: nil, context: nil,hints: nil) else {
+            return nil
         }
-        
-        public func nsImage() -> NSImage {
-            return NSImage(cgImage: cgImage(), size: .zero)
-        }
+        self.init(cgImage: cgImage)
     }
     
-    extension Image where P == RGB, T == UInt8 {
-        public func nsImage() -> NSImage {
-            return NSImage(cgImage: cgImage(), size: .zero)
-        }
+    public func nsImage() -> NSImage {
+        return NSImage(cgImage: cgImage(), size: .zero)
     }
-    
+}
+
+extension Image where P == RGB, T == UInt8 {
+    public func nsImage() -> NSImage {
+        return NSImage(cgImage: cgImage(), size: .zero)
+    }
+}
+
 #endif

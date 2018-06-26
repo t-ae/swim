@@ -1,4 +1,3 @@
-
 import Foundation
 
 public struct Image<P: PixelType, T: DataType> {

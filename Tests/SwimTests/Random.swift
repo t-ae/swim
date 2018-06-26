@@ -1,4 +1,3 @@
-
 import Foundation
 
 func randomArray<T: BinaryFloatingPoint>(count: Int) -> [T] {

@@ -1,4 +1,3 @@
-
 #include "CStbImage.h"
 
 #define STB_IMAGE_IMPLEMENTATION

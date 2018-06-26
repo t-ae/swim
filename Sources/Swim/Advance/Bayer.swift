@@ -1,4 +1,3 @@
-
 public enum BayerPattern {
     case bggr, gbrg, grbg, rggb
 }

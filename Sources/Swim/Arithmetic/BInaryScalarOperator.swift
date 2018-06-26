@@ -1,4 +1,3 @@
-
 extension DataContainer where DT: Numeric {
     static func addAssign(lhs: inout Self, rhs: DT) {
         lhs.data.withUnsafeMutableBufferPointer {
@@ -166,93 +165,94 @@ extension DataContainer where DT: FloatingPoint {
 }
 
 // MARK: - Accelerate
-#if os(macOS) || os(iOS)
-    import Accelerate
-    
-    extension DataContainer where DT == Float {
+#if canImport(Accelerate)
 
-        static func addAssign(lhs: inout Self, rhs: DT) {
-            var rhs = rhs
-            lhs.data.withUnsafeMutableBufferPointer {
-                vDSP_vsadd($0.baseAddress!, 1, &rhs, $0.baseAddress!, 1, vDSP_Length($0.count))
-            }
-        }
-        
-        static func subtractAssign(lhs: inout Self, rhs: DT) {
-            addAssign(lhs: &lhs, rhs: -rhs)
-        }
-        
-        static func subtract(lhs: DT, rhs: Self) -> Self {
-            var ret = negate(arg: rhs)
-            addAssign(lhs: &ret, rhs: lhs)
-            return ret
-        }
-        
-        static func multiplyAssign(lhs: inout Self, rhs: DT) {
-            var rhs = rhs
-            lhs.data.withUnsafeMutableBufferPointer {
-                vDSP_vsmul($0.baseAddress!, 1, &rhs, $0.baseAddress!, 1, vDSP_Length($0.count))
-            }
-        }
-        
-        static func divideAssign(lhs: inout Self, rhs: DT) {
-            var rhs = rhs
-            lhs.data.withUnsafeMutableBufferPointer {
-                vDSP_vsdiv($0.baseAddress!, 1, &rhs, $0.baseAddress!, 1, vDSP_Length($0.count))
-            }
-        }
-        
-        static func divide(lhs: DT, rhs: Self) -> Self {
-            var ret = rhs
-            var lhs = lhs
-            ret.data.withUnsafeMutableBufferPointer {
-                vDSP_svdiv(&lhs, $0.baseAddress!, 1, $0.baseAddress!, 1, vDSP_Length($0.count))
-            }
-            return ret
+import Accelerate
+
+extension DataContainer where DT == Float {
+    
+    static func addAssign(lhs: inout Self, rhs: DT) {
+        var rhs = rhs
+        lhs.data.withUnsafeMutableBufferPointer {
+            vDSP_vsadd($0.baseAddress!, 1, &rhs, $0.baseAddress!, 1, vDSP_Length($0.count))
         }
     }
     
-    extension DataContainer where DT == Double {
-        
-        static func addAssign(lhs: inout Self, rhs: DT) {
-            var rhs = rhs
-            lhs.data.withUnsafeMutableBufferPointer {
-                vDSP_vsaddD($0.baseAddress!, 1, &rhs, $0.baseAddress!, 1, vDSP_Length($0.count))
-            }
-        }
-        
-        static func subtractAssign(lhs: inout Self, rhs: DT) {
-            addAssign(lhs: &lhs, rhs: -rhs)
-        }
-        
-        static func subtract(lhs: DT, rhs: Self) -> Self {
-            var ret = negate(arg: rhs)
-            addAssign(lhs: &ret, rhs: lhs)
-            return ret
-        }
-        
-        static func multiplyAssign(lhs: inout Self, rhs: DT) {
-            var rhs = rhs
-            lhs.data.withUnsafeMutableBufferPointer {
-                vDSP_vsmulD($0.baseAddress!, 1, &rhs, $0.baseAddress!, 1, vDSP_Length($0.count))
-            }
-        }
-        
-        static func divideAssign(lhs: inout Self, rhs: DT) {
-            var rhs = rhs
-            lhs.data.withUnsafeMutableBufferPointer {
-                vDSP_vsdivD($0.baseAddress!, 1, &rhs, $0.baseAddress!, 1, vDSP_Length($0.count))
-            }
-        }
-        
-        static func divide(lhs: DT, rhs: Self) -> Self {
-            var ret = rhs
-            var lhs = lhs
-            ret.data.withUnsafeMutableBufferPointer {
-                vDSP_svdivD(&lhs, $0.baseAddress!, 1, $0.baseAddress!, 1, vDSP_Length($0.count))
-            }
-            return ret
+    static func subtractAssign(lhs: inout Self, rhs: DT) {
+        addAssign(lhs: &lhs, rhs: -rhs)
+    }
+    
+    static func subtract(lhs: DT, rhs: Self) -> Self {
+        var ret = negate(arg: rhs)
+        addAssign(lhs: &ret, rhs: lhs)
+        return ret
+    }
+    
+    static func multiplyAssign(lhs: inout Self, rhs: DT) {
+        var rhs = rhs
+        lhs.data.withUnsafeMutableBufferPointer {
+            vDSP_vsmul($0.baseAddress!, 1, &rhs, $0.baseAddress!, 1, vDSP_Length($0.count))
         }
     }
     
+    static func divideAssign(lhs: inout Self, rhs: DT) {
+        var rhs = rhs
+        lhs.data.withUnsafeMutableBufferPointer {
+            vDSP_vsdiv($0.baseAddress!, 1, &rhs, $0.baseAddress!, 1, vDSP_Length($0.count))
+        }
+    }
+    
+    static func divide(lhs: DT, rhs: Self) -> Self {
+        var ret = rhs
+        var lhs = lhs
+        ret.data.withUnsafeMutableBufferPointer {
+            vDSP_svdiv(&lhs, $0.baseAddress!, 1, $0.baseAddress!, 1, vDSP_Length($0.count))
+        }
+        return ret
+    }
+}
+
+extension DataContainer where DT == Double {
+    
+    static func addAssign(lhs: inout Self, rhs: DT) {
+        var rhs = rhs
+        lhs.data.withUnsafeMutableBufferPointer {
+            vDSP_vsaddD($0.baseAddress!, 1, &rhs, $0.baseAddress!, 1, vDSP_Length($0.count))
+        }
+    }
+    
+    static func subtractAssign(lhs: inout Self, rhs: DT) {
+        addAssign(lhs: &lhs, rhs: -rhs)
+    }
+    
+    static func subtract(lhs: DT, rhs: Self) -> Self {
+        var ret = negate(arg: rhs)
+        addAssign(lhs: &ret, rhs: lhs)
+        return ret
+    }
+    
+    static func multiplyAssign(lhs: inout Self, rhs: DT) {
+        var rhs = rhs
+        lhs.data.withUnsafeMutableBufferPointer {
+            vDSP_vsmulD($0.baseAddress!, 1, &rhs, $0.baseAddress!, 1, vDSP_Length($0.count))
+        }
+    }
+    
+    static func divideAssign(lhs: inout Self, rhs: DT) {
+        var rhs = rhs
+        lhs.data.withUnsafeMutableBufferPointer {
+            vDSP_vsdivD($0.baseAddress!, 1, &rhs, $0.baseAddress!, 1, vDSP_Length($0.count))
+        }
+    }
+    
+    static func divide(lhs: DT, rhs: Self) -> Self {
+        var ret = rhs
+        var lhs = lhs
+        ret.data.withUnsafeMutableBufferPointer {
+            vDSP_svdivD(&lhs, $0.baseAddress!, 1, $0.baseAddress!, 1, vDSP_Length($0.count))
+        }
+        return ret
+    }
+}
+
 #endif

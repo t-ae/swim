@@ -1,4 +1,3 @@
-
 func matmul<T: Numeric>(lhs: [T], rhs: [T], m: Int, n: Int, p: Int) -> [T] {
     assert(lhs.count == m*p)
     assert(rhs.count == p*n)
@@ -29,28 +28,30 @@ func matmul<T: Numeric>(lhs: [T], rhs: [T], m: Int, n: Int, p: Int) -> [T] {
     return ret
 }
 
-#if os(macOS) || os(iOS)
-    import Accelerate
+#if canImport(Accelerate)
+
+import Accelerate
+
+func matmul(lhs: [Float], rhs: [Float], m: Int, n: Int, p: Int) -> [Float] {
+    assert(lhs.count == m*p)
+    assert(rhs.count == p*n)
     
-    func matmul(lhs: [Float], rhs: [Float], m: Int, n: Int, p: Int) -> [Float] {
-        assert(lhs.count == m*p)
-        assert(rhs.count == p*n)
-        
-        var ret = [Float](repeating: 0, count: m*n)
-        
-        vDSP_mmul(lhs, 1, rhs, 1, &ret, 1, vDSP_Length(m), vDSP_Length(n), vDSP_Length(p))
-        
-        return ret
-    }
+    var ret = [Float](repeating: 0, count: m*n)
     
-    func matmul(lhs: [Double], rhs: [Double], m: Int, n: Int, p: Int) -> [Double] {
-        assert(lhs.count == m*p)
-        assert(rhs.count == p*n)
-        
-        var ret = [Double](repeating: 0, count: m*n)
-        
-        vDSP_mmulD(lhs, 1, rhs, 1, &ret, 1, vDSP_Length(m), vDSP_Length(n), vDSP_Length(p))
-        
-        return ret
-    }
+    vDSP_mmul(lhs, 1, rhs, 1, &ret, 1, vDSP_Length(m), vDSP_Length(n), vDSP_Length(p))
+    
+    return ret
+}
+
+func matmul(lhs: [Double], rhs: [Double], m: Int, n: Int, p: Int) -> [Double] {
+    assert(lhs.count == m*p)
+    assert(rhs.count == p*n)
+    
+    var ret = [Double](repeating: 0, count: m*n)
+    
+    vDSP_mmulD(lhs, 1, rhs, 1, &ret, 1, vDSP_Length(m), vDSP_Length(n), vDSP_Length(p))
+    
+    return ret
+}
+
 #endif
