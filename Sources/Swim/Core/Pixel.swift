@@ -60,7 +60,7 @@ extension Pixel where P == IntensityAlpha {
     }
     
     public init(intensityAlpha: [T]) {
-        self.init(intensityAlpha: intensityAlpha)
+        self.init(data: intensityAlpha)
     }
 }
 
