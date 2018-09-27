@@ -29,24 +29,24 @@ extension Image where T: BinaryFloatingPoint {
         precondition(0 <= x && x < T(width))
         precondition(0 <= y && y < T(height))
         
-        let xmin = Int(x)-1
-        let xmax = Int(x)+2
-        let ymin = Int(y)-1
-        let ymax = Int(y)+2
+        let xmin = Int(x-0.5)-1
+        let xmax = xmin+2
+        let ymin = Int(y-0.5)-1
+        let ymax = ymin+2
         
         var pixel = Pixel<P, T>(value: 0)
         var weightSum: T = 0
         
         for yp in ymin...ymax {
             let yy = clamp(yp, min: 0, max: height-1)
-            let wy = bicubicWeight(distance: abs(y - T(yp)))
+            let wy = bicubicWeight(distance: abs(y - 0.5 - T(yp)))
             guard wy > 0 else {
                 continue
             }
             
             for xp in xmin...xmax {
                 let xx = clamp(xp, min: 0, max: width-1)
-                let wx = bicubicWeight(distance: abs(x - T(xp)))
+                let wx = bicubicWeight(distance: abs(x - 0.5 - T(xp)))
                 guard wx > 0 else {
                     continue
                 }
