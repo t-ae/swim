@@ -267,16 +267,15 @@ class VisualTests: XCTestCase {
             }
         }
         
-        let src = Image<RGB, Float>(width: 2, height: 2, data: [1, 1, 1,
-                                                                1, 0, 0,
-                                                                0, 1, 0,
-                                                                0, 0, 1])
+        let src = Image<RGB, Float>(width: 4,
+                                    height: 4,
+                                    data: randomArray(count: 4*4*3))
         let t0 = AffineTransformation<Float>.scale(x: 16, y: 16)
         src.warpAffine(baseImage: &baseImage, transformation: t0, interpolation: .nearestNeighbor)
         
         var t1 = AffineTransformation<Float>.translate(x: 32, y: 32)
         t1 *= AffineTransformation<Float>.rotate(angle: Float.pi/4)
-        t1 *= AffineTransformation<Float>.scale(x: 70, y: 70)
+        t1 *= AffineTransformation<Float>.scale(x: 30, y: 30)
         src.warpAffine(baseImage: &baseImage, transformation: t1, interpolation: .bicubic)
         
         var t2 = AffineTransformation<Float>.translate(x: 80, y: 32)
@@ -286,7 +285,7 @@ class VisualTests: XCTestCase {
         
         var t3 = AffineTransformation<Float>.translate(x: 192, y: 192)
         t3 *= AffineTransformation<Float>.rotate(angle: Float.pi/2)
-        t3 *= AffineTransformation<Float>.scale(x: 32, y: 32)
+        t3 *= AffineTransformation<Float>.scale(x: 10, y: 10)
         t3 *= AffineTransformation<Float>.translate(x: -1, y: -1)
         src.warpAffine(baseImage: &baseImage, transformation: t3)
         
@@ -298,21 +297,37 @@ class VisualTests: XCTestCase {
     }
     
     func testResize() {
-        let image = Image<RGB, Float>(width: 4,
-                                      height: 4,
-                                      data: randomArray(count: 4*4*3))
-        
-        let resizedNN = image.resizeNN(width: 128, height: 128)
-        let resizedBL = image.resizeBL(width: 128, height: 128)
-        let resizedBC = image.resizeBC(width: 128, height: 128)
-        
-        let concat = Image.concatH([resizedNN, resizedBL, resizedBC])
-        
-        let rgb256 = (concat * 255).typeConverted(to: UInt8.self)
-        let nsImage = rgb256.nsImage()
-        
-        print("break here")
-        _ = nsImage
+        do {
+            let image = Image<RGB, Float>(width: 4,
+                                          height: 4,
+                                          data: randomArray(count: 4*4*3))
+            
+            let resizedNN = image.resizeNN(width: 128, height: 128)
+            let resizedBL = image.resizeBL(width: 128, height: 128)
+            let resizedBC = image.resizeBC(width: 128, height: 128)
+            
+            let concat = Image.concatH([resizedNN, resizedBL, resizedBC])
+            
+            let rgb256 = (concat * 255).typeConverted(to: UInt8.self)
+            let nsImage = rgb256.nsImage()
+            
+            print("break here")
+            _ = nsImage
+        }
+        do {
+            let image = Shape.circle(size: 64, lineWidth: 3, lineColor: Pixel(r: 1.0, g: 0, b: 0))
+            let resizedNN = image.resizeNN(width: 128, height: 128)
+            let resizedBL = image.resizeBL(width: 128, height: 128)
+            let resizedBC = image.resizeBC(width: 128, height: 128)
+            
+            let concat = Image.concatH([resizedNN, resizedBL, resizedBC])
+            
+            let rgb256 = (concat * 255).typeConverted(to: UInt8.self)
+            let nsImage = rgb256.nsImage()
+            
+            print("break here")
+            _ = nsImage
+        }
     }
     
     #endif

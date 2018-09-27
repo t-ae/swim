@@ -2,30 +2,32 @@ import Foundation
 
 extension Image where T: BinaryFloatingPoint {
     /// - Preconditions:
-    ///   - 0 <= x <= width-1
-    ///   - 0 <= y <= height-1
+    ///   - 0 <= x < width
+    ///   - 0 <= y < height
     func interpolateBilinear(x: T, y: T) -> Pixel<P, T> {
-        assert(0 <= x && x <= T(width-1))
-        assert(0 <= y && y <= T(height-1))
+        precondition(0 <= x && x < T(width))
+        precondition(0 <= y && y < T(height))
         
-        let x0 = Int(x) // floor
-        let x1 = Int(Foundation.ceil(x))
-        let y0 = Int(y) // floor
-        let y1 = Int(Foundation.ceil(y))
-
-        let y1y: T = T(y0+1) - y
-        let yy0: T = y - T(y0)
+        // area
+        let x0x = x + 0.5 - Foundation.round(x)
+        let y0y = y + 0.5 - Foundation.round(y)
+        let xx1 = 1 - x0x
+        let yy1 = 1 - y0y
+        
+        // pixel coord
+        let lx = max(Int(x-0.5), 0)
+        let rx = min(Int(Foundation.round(x)), width-1)
+        let uy = max(Int(y-0.5), 0)
+        let dy = min(Int(Foundation.round(y)), height-1)
 
         // left two pixels
-        let x1x: T = T(x0+1) - x
-        let tmp = x1x * y1y // somehow can't compile without this
-        var result: Pixel<P, T> = tmp * self[unsafe: x0, y0]
-        result += (x1x * yy0) * self[unsafe: x0, y1]
+        let tmp = xx1 * yy1 // somehow can't compile without this
+        var result: Pixel<P, T> = tmp * self[unsafe: lx, uy]
+        result += (xx1 * y0y) * self[unsafe: lx, dy]
 
         // right two pixels
-        let xx0: T = x - T(x0)
-        result += (xx0 * y1y) * self[unsafe: x1, y0]
-        result += (xx0 * yy0) * self[unsafe: x1, y1]
+        result += (x0x * yy1) * self[unsafe: rx, uy]
+        result += (x0x * y0y) * self[unsafe: rx, dy]
 
         return result
     }

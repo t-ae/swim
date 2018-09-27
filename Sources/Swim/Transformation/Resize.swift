@@ -183,14 +183,14 @@ extension Image where T: BinaryFloatingPoint {
         
         var newImage = Image<P, T>(width: width, height: height)
 
-        let scaleX = T(baseImage.width-1) / T(width-1)
-        let scaleY = T(baseImage.height-1) / T(height-1)
+        let scaleX = T(baseImage.width) / T(width)
+        let scaleY = T(baseImage.height) / T(height)
 
         for y in 0..<height {
-            // yp \in [0, self.height-1]
+            // yp \in [0, self.height)
             let yp = T(y) * scaleY
             for x in 0..<width {
-                // xp \in [0, self.width-1]
+                // xp \in [0, self.width)
                 let xp = T(x) * scaleX
                 newImage[unsafe: x, y] = baseImage.interpolateBilinear(x: xp, y: yp)
             }
@@ -212,16 +212,16 @@ extension Image where T: BinaryFloatingPoint {
         do {
             // downsample to avoid sparse sampling
             var image = self
-            if width*2 < self.width {
+            if width*4 < self.width {
                 var newWidth = self.width >> 1
-                while width*2 < newWidth {
+                while width*4 < newWidth {
                     newWidth >>= 1
                 }
                 image = image._resizeAA(width: newWidth, height: image.height)
             }
-            if height*2 < self.height {
+            if height*4 < self.height {
                 var newHeight = self.height >> 1
-                while height*2 < newHeight {
+                while height*4 < newHeight {
                     newHeight >>= 1
                 }
                 image = image._resizeAA(width: image.width, height: newHeight)
@@ -231,14 +231,14 @@ extension Image where T: BinaryFloatingPoint {
         
         var newImage = Image<P, T>(width: width, height: height)
         
-        let scaleX = T(baseImage.width-1) / T(width-1)
-        let scaleY = T(baseImage.height-1) / T(height-1)
+        let scaleX = T(baseImage.width) / T(width)
+        let scaleY = T(baseImage.height) / T(height)
         
         for y in 0..<height {
-            // yp \in [0, self.height-1]
+            // yp \in [0, self.height)
             let yp = T(y) * scaleY
             for x in 0..<width {
-                // xp \in [0, self.width-1]
+                // xp \in [0, self.width)
                 let xp = T(x) * scaleX
                 newImage[unsafe: x, y] = baseImage.interpolateBicubic(x: xp, y: yp)
             }
