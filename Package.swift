@@ -25,5 +25,8 @@ let package = Package(
         .testTarget(
             name: "SwimTests",
             dependencies: ["Swim"]),
+        .testTarget(
+            name: "PerformanceTests",
+            dependencies: ["Swim"]),
     ]
 )

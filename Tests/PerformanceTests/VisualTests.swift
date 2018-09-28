@@ -4,7 +4,7 @@ import Swim
 // Set brakepoints and look NSImages in Xcode debugger
 
 class VisualTests: XCTestCase {
-    #if !SWIFT_PACKAGE && os(macOS)
+    #if !DEBUG && os(macOS)
     
     func testAlphaBlend() {
         var imageBase = Image<RGB, Double>(width: 500,

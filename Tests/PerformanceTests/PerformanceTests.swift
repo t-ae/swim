@@ -2,7 +2,7 @@ import XCTest
 import Swim
 
 class PerformanceTests: XCTestCase {
-    #if !SWIFT_PACKAGE
+    #if !DEBUG
     
     func testAdd() {
         let data = [UInt8](repeating: 0, count: 1920*1080*4)
