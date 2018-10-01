@@ -269,7 +269,8 @@ class VisualTests: XCTestCase {
         
         let src = Image<RGB, Float>(width: 4,
                                     height: 4,
-                                    data: randomArray(count: 4*4*3))
+                                    data: (0..<4*4*3).map { _ in Float.random(in: 0..<1) })
+        
         let t0 = AffineTransformation<Float>.scale(x: 16, y: 16)
         src.warpAffine(baseImage: &baseImage, transformation: t0, interpolation: .nearestNeighbor)
         
@@ -300,7 +301,7 @@ class VisualTests: XCTestCase {
         do {
             let image = Image<RGB, Float>(width: 4,
                                           height: 4,
-                                          data: randomArray(count: 4*4*3))
+                                          data: (0..<4*4*3).map { _ in Float.random(in: 0..<1) })
             
             let resizedNN = image.resizeNN(width: 128, height: 128)
             let resizedBL = image.resizeBL(width: 128, height: 128)

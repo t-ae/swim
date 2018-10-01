@@ -1,11 +1,5 @@
 import Foundation
 
-func randomArray<T: BinaryFloatingPoint>(count: Int) -> [T] {
-    var ret = [T](repeating: 0, count: count)
-    
-    for i in 0..<count {
-        ret[i] = T(arc4random_uniform(UInt32.max)) / T(UInt32.max)
-    }
-    
-    return ret
+func randomArray<T: BinaryFloatingPoint>(count: Int) -> [T] where T.RawSignificand: FixedWidthInteger {
+    return (0..<count).map { _ in T.random(in: 0..<1) }
 }
