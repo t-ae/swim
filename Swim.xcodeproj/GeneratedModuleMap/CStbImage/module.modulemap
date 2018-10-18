@@ -1,0 +1,4 @@
+module CStbImage {
+    umbrella header "/Users/araki/Desktop/t-ae/Swim/Sources/CStbImage/include/CStbImage.h"
+    export *
+}
