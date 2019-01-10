@@ -19,11 +19,4 @@ extension Rect: Equatable {
 }
 
 extension Rect: Hashable {
-    public var hashValue: Int {
-        var hash = x.hashValue
-        hash = hash &* 31 &+ y.hashValue
-        hash = hash &* 31 &+ width.hashValue
-        hash = hash &* 31 &+ height.hashValue
-        return hash
-    }
 }
