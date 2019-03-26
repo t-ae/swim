@@ -3,14 +3,14 @@ extension Array where Element: Comparable {
         guard let minValue = self.min() else {
             return nil
         }
-        return index(of: minValue)
+        return firstIndex(of: minValue)
     }
     
     func maxIndex() -> Int? {
         guard let maxValue = self.max() else {
             return nil
         }
-        return index(of: maxValue)
+        return firstIndex(of: maxValue)
     }
 }
 
@@ -27,7 +27,7 @@ extension Array where Element: Comparable {
         guard let medianValue = median() else {
             return nil
         }
-        return index(of: medianValue)
+        return firstIndex(of: medianValue)
     }
 }
 
