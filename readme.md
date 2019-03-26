@@ -134,3 +134,7 @@ let maximum = image.maximumFilter(kernelSize: 3)
 ---
 
 [VisualTests.swift](https://github.com/t-ae/swim/blob/master/Tests/PerformanceTests/VisualTests.swift) contains examples.
+
+## License
+
+[The MIT License](https://github.com/t-ae/swim/blob/master/LICENSE)
