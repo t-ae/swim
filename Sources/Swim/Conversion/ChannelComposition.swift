@@ -100,7 +100,7 @@ func compoundChannels<T: DataType>(data1: [T], data2: [T], data3: [T], data4: [T
 }
 
 func compoundChannels<T>(intensity: Image<Intensity, T>,
-                      alpha: Image<Intensity, T>) -> Image<IntensityAlpha, T> {
+                         alpha: Image<Intensity, T>) -> Image<IntensityAlpha, T> {
     precondition(intensity.size == alpha.size, "Images must have same size.")
     
     let width = intensity.width
@@ -111,8 +111,8 @@ func compoundChannels<T>(intensity: Image<Intensity, T>,
 }
 
 func compoundChannels<T>(r: Image<Intensity, T>,
-                      g: Image<Intensity, T>,
-                      b: Image<Intensity, T>) -> Image<RGB, T> {
+                         g: Image<Intensity, T>,
+                         b: Image<Intensity, T>) -> Image<RGB, T> {
     precondition(r.size == g.size && g.size == b.size, "Images must have same size.")
     
     let width = r.width
@@ -123,9 +123,9 @@ func compoundChannels<T>(r: Image<Intensity, T>,
 }
 
 func compoundChannels<T>(r: Image<Intensity, T>,
-                      g: Image<Intensity, T>,
-                      b: Image<Intensity, T>,
-                      a: Image<Intensity, T>) -> Image<RGBA, T> {
+                         g: Image<Intensity, T>,
+                         b: Image<Intensity, T>,
+                         a: Image<Intensity, T>) -> Image<RGBA, T> {
     precondition(r.size == g.size && g.size == b.size && b.size == a.size, "Images must have same size.")
     
     let width = r.width
@@ -136,9 +136,9 @@ func compoundChannels<T>(r: Image<Intensity, T>,
 }
 
 func compoundChannels<T>(a: Image<Intensity, T>,
-                      r: Image<Intensity, T>,
-                      g: Image<Intensity, T>,
-                      b: Image<Intensity, T>) -> Image<ARGB, T> {
+                         r: Image<Intensity, T>,
+                         g: Image<Intensity, T>,
+                         b: Image<Intensity, T>) -> Image<ARGB, T> {
     precondition(a.size == r.size && r.size == g.size && g.size == b.size, "Images must have same size.")
     
     let width = a.width
