@@ -1,5 +1,6 @@
 extension Image where P == Intensity, T: Comparable {
-    func _filter(kernelSize: Int, kernelFunc: ([T])->T) -> Image<P, T> {
+    @usableFromInline
+    func filter(kernelSize: Int, kernelFunc: ([T])->T) -> Image<P, T> {
         precondition(kernelSize > 0)
         var newImage = self
         
@@ -34,28 +35,19 @@ extension Image where P == Intensity, T: Comparable {
         return newImage
     }
     
-    func _minimumFilter(kernelSize: Int) -> Image<P, T> {
-        return _filter(kernelSize: kernelSize) { $0.min()! }
-    }
-    
-    func _maximumFilter(kernelSize: Int) -> Image<P, T> {
-        return _filter(kernelSize: kernelSize) { $0.max()! }
-    }
-    
-    func _medianFilter(kernelSize: Int) -> Image<P, T> {
-        return _filter(kernelSize: kernelSize) { $0.median()! }
-    }
-    
+    @inlinable
     public func minimumFilter(kernelSize: Int) -> Image<P, T> {
-        return _minimumFilter(kernelSize: kernelSize)
+        return filter(kernelSize: kernelSize) { $0.min()! }
     }
     
+    @inlinable
     public func maximumFilter(kernelSize: Int) -> Image<P, T> {
-        return _maximumFilter(kernelSize: kernelSize)
+        return filter(kernelSize: kernelSize) { $0.max()! }
     }
     
+    @inlinable
     public func medianFilter(kernelSize: Int) -> Image<P, T> {
-        return _medianFilter(kernelSize: kernelSize)
+        return filter(kernelSize: kernelSize) { $0.median()! }
     }
 }
 
@@ -64,7 +56,8 @@ extension Image where P == Intensity, T: Comparable {
 import Accelerate
 
 extension Image where P == Intensity, T == Float {
-    func _minimumFilter(kernelSize: Int) -> Image<P, T> {
+    @inlinable
+    public func minimumFilter(kernelSize: Int) -> Image<P, T> {
         let (m, n, matrix) = im2col(patchWidth: kernelSize,
                                     patchHeight: kernelSize,
                                     padding: .constant(T.infinity))
@@ -81,7 +74,8 @@ extension Image where P == Intensity, T == Float {
         return Image(width: width, height: height, data: data)
     }
     
-    func _maximumFilter(kernelSize: Int) -> Image<P, T> {
+    @inlinable
+    public func maximumFilter(kernelSize: Int) -> Image<P, T> {
         let (m, n, matrix) = im2col(patchWidth: kernelSize,
                                     patchHeight: kernelSize,
                                     padding: .constant(-T.infinity))
@@ -98,7 +92,8 @@ extension Image where P == Intensity, T == Float {
         return Image(width: width, height: height, data: data)
     }
     
-    func _medianFilter(kernelSize: Int) -> Image<P, T> {
+    @inlinable
+    public func medianFilter(kernelSize: Int) -> Image<P, T> {
         let (m, n, matrix) = im2col(patchWidth: kernelSize,
                                     patchHeight: kernelSize,
                                     padding: .constant(T.nan))
@@ -116,7 +111,8 @@ extension Image where P == Intensity, T == Float {
 }
 
 extension Image where P == Intensity, T == Double {
-    func _minimumFilter(kernelSize: Int) -> Image<P, T> {
+    @inlinable
+    public func minimumFilter(kernelSize: Int) -> Image<P, T> {
         let (m, n, matrix) = im2col(patchWidth: kernelSize,
                                     patchHeight: kernelSize,
                                     padding: .constant(T.infinity))
@@ -133,7 +129,8 @@ extension Image where P == Intensity, T == Double {
         return Image(width: width, height: height, data: data)
     }
     
-    func _maximumFilter(kernelSize: Int) -> Image<P, T> {
+    @inlinable
+    public func maximumFilter(kernelSize: Int) -> Image<P, T> {
         let (m, n, matrix) = im2col(patchWidth: kernelSize,
                                     patchHeight: kernelSize,
                                     padding: .constant(-T.infinity))
@@ -150,7 +147,8 @@ extension Image where P == Intensity, T == Double {
         return Image(width: width, height: height, data: data)
     }
     
-    func _medianFilter(kernelSize: Int) -> Image<P, T> {
+    @inlinable
+    public func medianFilter(kernelSize: Int) -> Image<P, T> {
         let (m, n, matrix) = im2col(patchWidth: kernelSize,
                                     patchHeight: kernelSize,
                                     padding: .constant(T.nan))
