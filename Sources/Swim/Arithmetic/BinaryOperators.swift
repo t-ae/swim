@@ -197,6 +197,54 @@ extension DataContainer where DT == Float {
             }
         }
     }
+    
+    @inlinable
+    public static func +(lhs: Self, rhs: Self) -> Self {
+        var ret = lhs
+        ret += rhs
+        return ret
+    }
+    
+    @inlinable
+    public static func +=(lhs: inout Self, rhs: Self) {
+        addAssign(lhs: &lhs, rhs: rhs)
+    }
+    
+    @inlinable
+    public static func -(lhs: Self, rhs: Self) -> Self {
+        var ret = lhs
+        ret -= rhs
+        return ret
+    }
+    
+    @inlinable
+    public static func -=(lhs: inout Self, rhs: Self) {
+        subtractAssign(lhs: &lhs, rhs: rhs)
+    }
+    
+    @inlinable
+    public static func *(lhs: Self, rhs: Self) -> Self {
+        var ret = lhs
+        ret *= rhs
+        return ret
+    }
+    
+    @inlinable
+    public static func *=(lhs: inout Self, rhs: Self) {
+        multiplyAssign(lhs: &lhs, rhs: rhs)
+    }
+    
+    @inlinable
+    public static func /(lhs: Self, rhs: Self) -> Self {
+        var ret = lhs
+        ret /= rhs
+        return ret
+    }
+    
+    @inlinable
+    public static func /=(lhs: inout Self, rhs: Self) {
+        divideAssign(lhs: &lhs, rhs: rhs)
+    }
 }
 
 extension DataContainer where DT == Double {
@@ -246,6 +294,54 @@ extension DataContainer where DT == Double {
                 vDSP_vdivD(rp, 1, lp, 1, lp, 1, vDSP_Length($0.count))
             }
         }
+    }
+    
+    @inlinable
+    public static func +(lhs: Self, rhs: Self) -> Self {
+        var ret = lhs
+        ret += rhs
+        return ret
+    }
+    
+    @inlinable
+    public static func +=(lhs: inout Self, rhs: Self) {
+        addAssign(lhs: &lhs, rhs: rhs)
+    }
+    
+    @inlinable
+    public static func -(lhs: Self, rhs: Self) -> Self {
+        var ret = lhs
+        ret -= rhs
+        return ret
+    }
+    
+    @inlinable
+    public static func -=(lhs: inout Self, rhs: Self) {
+        subtractAssign(lhs: &lhs, rhs: rhs)
+    }
+    
+    @inlinable
+    public static func *(lhs: Self, rhs: Self) -> Self {
+        var ret = lhs
+        ret *= rhs
+        return ret
+    }
+    
+    @inlinable
+    public static func *=(lhs: inout Self, rhs: Self) {
+        multiplyAssign(lhs: &lhs, rhs: rhs)
+    }
+    
+    @inlinable
+    public static func /(lhs: Self, rhs: Self) -> Self {
+        var ret = lhs
+        ret /= rhs
+        return ret
+    }
+    
+    @inlinable
+    public static func /=(lhs: inout Self, rhs: Self) {
+        divideAssign(lhs: &lhs, rhs: rhs)
     }
 }
 

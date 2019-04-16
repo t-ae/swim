@@ -26,13 +26,16 @@ extension DataContainer where DT: SignedNumeric {
 import Accelerate
 
 extension DataContainer where DT == Float {
-    
     static func negate(arg: Self) -> Self {
         var ret = arg
         ret.data.withUnsafeMutableBufferPointer {
             vDSP_vneg($0.baseAddress!, 1, $0.baseAddress!, 1, vDSP_Length($0.count))
         }
         return ret
+    }
+    
+    public static prefix func -(arg: Self) -> Self {
+        return negate(arg: arg)
     }
 }
 
@@ -43,6 +46,10 @@ extension DataContainer where DT == Double {
             vDSP_vnegD($0.baseAddress!, 1, $0.baseAddress!, 1, vDSP_Length($0.count))
         }
         return ret
+    }
+    
+    public static prefix func -(arg: Self) -> Self {
+        return negate(arg: arg)
     }
 }
 

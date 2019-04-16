@@ -238,6 +238,78 @@ extension DataContainer where DT == Float {
         }
         return ret
     }
+    
+    @inlinable
+    public static func +(lhs: Self, rhs: DT) -> Self {
+        var ret = lhs
+        ret += rhs
+        return ret
+    }
+    
+    @inlinable
+    public static func +(lhs: DT, rhs: Self) -> Self {
+        var ret = rhs
+        ret += lhs
+        return ret
+    }
+    
+    @inlinable
+    public static func +=(lhs: inout Self, rhs: DT) {
+        addAssign(lhs: &lhs, rhs: rhs)
+    }
+    
+    @inlinable
+    public static func -(lhs: Self, rhs: DT) -> Self {
+        var ret = lhs
+        ret -= rhs
+        return ret
+    }
+    
+    @inlinable
+    public static func -(lhs: DT, rhs: Self) -> Self {
+        return subtract(lhs: lhs, rhs: rhs)
+    }
+    
+    @inlinable
+    public static func -=(lhs: inout Self, rhs: DT) {
+        subtractAssign(lhs: &lhs, rhs: rhs)
+    }
+    
+    @inlinable
+    public static func *(lhs: Self, rhs: DT) -> Self {
+        var ret = lhs
+        ret *= rhs
+        return ret
+    }
+    
+    @inlinable
+    public static func *(lhs: DT, rhs: Self) -> Self {
+        var ret = rhs
+        ret *= lhs
+        return ret
+    }
+    
+    @inlinable
+    public static func *=(lhs: inout Self, rhs: DT) {
+        multiplyAssign(lhs: &lhs, rhs: rhs)
+    }
+    
+    @inlinable
+    public static func /(lhs: Self, rhs: DT) -> Self {
+        var ret = lhs
+        ret /= rhs
+        return ret
+    }
+    
+    @inlinable
+    public static func /(lhs: DT, rhs: Self) -> Self {
+        return divide(lhs: lhs, rhs: rhs)
+    }
+    
+    @inlinable
+    public static func /=(lhs: inout Self, rhs: DT) {
+        divideAssign(lhs: &lhs, rhs: rhs)
+    }
 }
 
 extension DataContainer where DT == Double {
@@ -285,6 +357,78 @@ extension DataContainer where DT == Double {
             vDSP_svdivD(&lhs, $0.baseAddress!, 1, $0.baseAddress!, 1, vDSP_Length($0.count))
         }
         return ret
+    }
+    
+    @inlinable
+    public static func +(lhs: Self, rhs: DT) -> Self {
+        var ret = lhs
+        ret += rhs
+        return ret
+    }
+    
+    @inlinable
+    public static func +(lhs: DT, rhs: Self) -> Self {
+        var ret = rhs
+        ret += lhs
+        return ret
+    }
+    
+    @inlinable
+    public static func +=(lhs: inout Self, rhs: DT) {
+        addAssign(lhs: &lhs, rhs: rhs)
+    }
+    
+    @inlinable
+    public static func -(lhs: Self, rhs: DT) -> Self {
+        var ret = lhs
+        ret -= rhs
+        return ret
+    }
+    
+    @inlinable
+    public static func -(lhs: DT, rhs: Self) -> Self {
+        return subtract(lhs: lhs, rhs: rhs)
+    }
+    
+    @inlinable
+    public static func -=(lhs: inout Self, rhs: DT) {
+        subtractAssign(lhs: &lhs, rhs: rhs)
+    }
+    
+    @inlinable
+    public static func *(lhs: Self, rhs: DT) -> Self {
+        var ret = lhs
+        ret *= rhs
+        return ret
+    }
+    
+    @inlinable
+    public static func *(lhs: DT, rhs: Self) -> Self {
+        var ret = rhs
+        ret *= lhs
+        return ret
+    }
+    
+    @inlinable
+    public static func *=(lhs: inout Self, rhs: DT) {
+        multiplyAssign(lhs: &lhs, rhs: rhs)
+    }
+    
+    @inlinable
+    public static func /(lhs: Self, rhs: DT) -> Self {
+        var ret = lhs
+        ret /= rhs
+        return ret
+    }
+    
+    @inlinable
+    public static func /(lhs: DT, rhs: Self) -> Self {
+        return divide(lhs: lhs, rhs: rhs)
+    }
+    
+    @inlinable
+    public static func /=(lhs: inout Self, rhs: DT) {
+        divideAssign(lhs: &lhs, rhs: rhs)
     }
 }
 

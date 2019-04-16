@@ -178,7 +178,7 @@ extension Image where T == Float {
     
     @inlinable
     public func typeConverted(to: Double.Type = Double.self) -> Image<P, Double> {
-        return _channelwiseConverted(Double.init)
+        return channelwiseConverted(Double.init)
     }
     
     #endif
@@ -202,7 +202,7 @@ extension Image where T == Double {
     #else
     
     public func typeConverted(to: UInt8.Type = UInt8.self) -> Image<P, UInt8> {
-        return _channelwiseConverted(UInt8.init)
+        return channelwiseConverted(UInt8.init)
     }
     
     #endif
@@ -228,7 +228,7 @@ extension Image where T == Double {
     #else
     
     public func typeConverted(to: Float.Type = Float.self) -> Image<P, Float> {
-        return _channelwiseConverted(Float.init)
+        return channelwiseConverted(Float.init)
     }
     
     #endif

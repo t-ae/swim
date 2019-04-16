@@ -62,6 +62,26 @@ extension Image where T == Float {
                    dst: &data, dstOffset: channel, dstStride: P.channels,
                    count: newValue.data.count)
     }
+    
+    @inlinable
+    public subscript(channel channel: Int) -> Image<Intensity, T> {
+        get{
+            return getChannel(channel: channel)
+        }
+        set {
+            setChannel(channel: channel, newValue: newValue)
+        }
+    }
+    
+    @inlinable
+    public subscript(channel channel: P) -> Image<Intensity, T> {
+        get {
+            return getChannel(channel: channel.rawValue)
+        }
+        set {
+            setChannel(channel: channel.rawValue, newValue: newValue)
+        }
+    }
 }
 
 extension Image where T == Double {
@@ -82,6 +102,26 @@ extension Image where T == Double {
         strideCopy(src: newValue.data, srcOffset: 0, srcStride: 1,
                    dst: &data, dstOffset: channel, dstStride: P.channels,
                    count: newValue.data.count)
+    }
+    
+    @inlinable
+    public subscript(channel channel: Int) -> Image<Intensity, T> {
+        get{
+            return getChannel(channel: channel)
+        }
+        set {
+            setChannel(channel: channel, newValue: newValue)
+        }
+    }
+    
+    @inlinable
+    public subscript(channel channel: P) -> Image<Intensity, T> {
+        get {
+            return getChannel(channel: channel.rawValue)
+        }
+        set {
+            setChannel(channel: channel.rawValue, newValue: newValue)
+        }
     }
 }
 
