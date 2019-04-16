@@ -54,8 +54,13 @@ public protocol RGBWithAlpha: PixelType {
     static var alphaIndex: Int { get }
 }
 extension RGBWithAlpha {
+    @inlinable
     public static var greenIndex: Int { return Self.redIndex + 1 }
+    
+    @inlinable
     public static var blueIndex: Int { return Self.redIndex + 2 }
+    
+    @inlinable
     public static var alphaIndex: Int { return (Self.redIndex + 3) % 4 }
 }
 extension RGBA: RGBWithAlpha {

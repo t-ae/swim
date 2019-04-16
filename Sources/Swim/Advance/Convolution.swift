@@ -52,11 +52,12 @@ extension Filter where T: FloatingPoint {
 
 // MARK: - convoluted
 extension Image where T: Numeric {
-    func _convoluted(_ filter: Image<Intensity, T>) -> Image<P, T> {
+    @inlinable
+    public func convoluted(_ filter: Image<Intensity, T>) -> Image<P, T> {
         var newImage = Image<P, T>(width: width, height: height)
         
         for c in 0..<P.channels {
-            let (m, n, matrix) = self[channel: c]._im2col(patchWidth: filter.width, patchHeight: filter.height)
+            let (m, n, matrix) = self[channel: c].im2col(patchWidth: filter.width, patchHeight: filter.height)
             let result = matmul(lhs: filter.data, rhs: matrix, m: 1, n: n, p: m)
             newImage[channel: c] = Image<Intensity, T>(width: width, height: height, data: result)
         }
@@ -64,39 +65,15 @@ extension Image where T: Numeric {
         return newImage
     }
 }
-
-extension Image where P == Intensity, T: Numeric {
-    public func convoluted(_ filter: Image<Intensity, T>) -> Image<P, T> {
-        return _convoluted(filter)
-    }
-}
-extension Image where P == RGB, T: Numeric {
-    public func convoluted(_ filter: Image<Intensity, T>) -> Image<P, T> {
-        return _convoluted(filter)
-    }
-}
-
-extension Image where P == Intensity, T == UInt8 {
-    @available(*, deprecated, message: "Could cause overflow")
-    public func convoluted(_ filter: Image<Intensity, T>) -> Image<P, T> {
-        return _convoluted(filter)
-    }
-}
-extension Image where P == RGB, T == UInt8 {
-    @available(*, deprecated, message: "Could cause overflow")
-    public func convoluted(_ filter: Image<Intensity, T>) -> Image<P, T> {
-        return _convoluted(filter)
-    }
-}
-
 #if canImport(Accelerate)
 
 extension Image where T == Float {
-    func _convoluted(_ filter: Image<Intensity, T>) -> Image<P, T> {
+    @inlinable
+    public func convoluted(_ filter: Image<Intensity, T>) -> Image<P, T> {
         var newImage = Image<P, T>(width: width, height: height)
         
         for c in 0..<P.channels {
-            let (m, n, matrix) = self[channel: c]._im2col(patchWidth: filter.width, patchHeight: filter.height)
+            let (m, n, matrix) = self[channel: c].im2col(patchWidth: filter.width, patchHeight: filter.height)
             let result = matmul(lhs: filter.data, rhs: matrix, m: 1, n: n, p: m)
             newImage[channel: c] = Image<Intensity, T>(width: width, height: height, data: result)
         }
@@ -106,11 +83,12 @@ extension Image where T == Float {
 }
 
 extension Image where T == Double {
-    func _convoluted(_ filter: Image<Intensity, T>) -> Image<P, T> {
+    @inlinable
+    public func convoluted(_ filter: Image<Intensity, T>) -> Image<P, T> {
         var newImage = Image<P, T>(width: width, height: height)
         
         for c in 0..<P.channels {
-            let (m, n, matrix) = self[channel: c]._im2col(patchWidth: filter.width, patchHeight: filter.height)
+            let (m, n, matrix) = self[channel: c].im2col(patchWidth: filter.width, patchHeight: filter.height)
             let result = matmul(lhs: filter.data, rhs: matrix, m: 1, n: n, p: m)
             newImage[channel: c] = Image<Intensity, T>(width: width, height: height, data: result)
         }

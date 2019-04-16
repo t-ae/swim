@@ -2,7 +2,8 @@ import Foundation
 
 // MARK: - Intensity -> RGB
 extension Image where P == Intensity {
-    func _toRGB() -> Image<RGB, T> {
+    @inlinable
+    public func toRGB() -> Image<RGB, T> {
         var newImage = Image<RGB, T>(width: width, height: height)
         data.withUnsafeBufferPointer {
             var src = $0.baseAddress!
@@ -22,15 +23,12 @@ extension Image where P == Intensity {
         }
         return newImage
     }
-    
-    public func toRGB() -> Image<RGB, T> {
-        return _toRGB()
-    }
 }
 
 // MARK: - RGB -> Intensity
 extension Image where P == RGB, T: BinaryInteger {
-    func _toBrightness() -> Image<Intensity, T> {
+    @inlinable
+    public func toBrightness() -> Image<Intensity, T> {
         var newImage = Image<Intensity, T>(width: width, height: height, value: 0)
         self.data.withUnsafeBufferPointer {
             var src = $0.baseAddress!
@@ -51,11 +49,8 @@ extension Image where P == RGB, T: BinaryInteger {
         return newImage
     }
     
-    public func toBrightness() -> Image<Intensity, T> {
-        return _toBrightness()
-    }
-    
-    func _toLuminance() -> Image<Intensity, T> {
+    @inlinable
+    public func toLuminance() -> Image<Intensity, T> {
         var newImage = Image<Intensity, T>(width: width, height: height, value: 0)
         self.data.withUnsafeBufferPointer {
             var src = $0.baseAddress!
@@ -75,25 +70,11 @@ extension Image where P == RGB, T: BinaryInteger {
         }
         return newImage
     }
-    
-    public func toLuminance() -> Image<Intensity, T> {
-        return _toLuminance()
-    }
-}
-
-extension Image where P == RGB, T == UInt8 {
-    @available(*, deprecated, message: "Could cause overflow.")
-    public func toBrightness() -> Image<Intensity, T> {
-        return _toBrightness()
-    }
-    @available(*, deprecated, message: "Could cause overflow.")
-    public func toLuminance() -> Image<Intensity, T> {
-        return _toLuminance()
-    }
 }
 
 extension Image where P == RGB, T: FloatingPoint {
-    func _toBrightness() -> Image<Intensity, T> {
+    @inlinable
+    public func toBrightness() -> Image<Intensity, T> {
         var newImage = Image<Intensity, T>(width: width, height: height, value: 0)
         self.data.withUnsafeBufferPointer {
             var src = $0.baseAddress!
@@ -113,14 +94,11 @@ extension Image where P == RGB, T: FloatingPoint {
         }
         return newImage
     }
-    
-    public func toBrightness() -> Image<Intensity, T> {
-        return _toBrightness()
-    }
 }
 
 extension Image where P == RGB, T: BinaryFloatingPoint {
-    func _toLuminance() -> Image<Intensity, T> {
+    @inlinable
+    public func toLuminance() -> Image<Intensity, T> {
         var newImage = Image<Intensity, T>(width: width, height: height, value: 0)
         self.data.withUnsafeBufferPointer {
             var src = $0.baseAddress!
@@ -139,13 +117,10 @@ extension Image where P == RGB, T: BinaryFloatingPoint {
         }
         return newImage
     }
-    
-    public func toLuminance() -> Image<Intensity, T> {
-        return _toLuminance()
-    }
 }
 
 // MARK: - RGB -> RGBWithAlpha
+@usableFromInline
 func imageFromRGB<P: RGBWithAlpha, T>(image: Image<RGB, T>, alpha: T) -> Image<P, T> {
     var newImage = Image<P, T>(width: image.width, height: image.height, value: alpha)
     image.data.withUnsafeBufferPointer {
@@ -164,12 +139,14 @@ func imageFromRGB<P: RGBWithAlpha, T>(image: Image<RGB, T>, alpha: T) -> Image<P
 }
 
 extension Image where P: RGBWithAlpha {
+    @inlinable
     public init(image: Image<RGB, T>, alpha: T) {
         self = imageFromRGB(image: image, alpha: alpha)
     }
 }
 
 // MARK: - RGBWithAlpha -> RGB
+@usableFromInline
 func removeAlpha<P: RGBWithAlpha, T>(image: Image<P, T>) -> Image<RGB, T> {
     var newImage = Image<RGB, T>(width: image.width, height: image.height)
     image.data.withUnsafeBufferPointer {
@@ -187,19 +164,21 @@ func removeAlpha<P: RGBWithAlpha, T>(image: Image<P, T>) -> Image<RGB, T> {
 }
 
 extension Image where P: RGBWithAlpha {
+    @inlinable
     public func toRGB() -> Image<RGB, T> {
         return removeAlpha(image: self)
     }
 }
 
 extension Image where P == RGB {
+    @inlinable
     public init<P: RGBWithAlpha>(image: Image<P, T>) {
         self = removeAlpha(image: image)
     }
 }
 
 // MARK: - RGBA <-> ARGB
-
+@usableFromInline
 func permuteChannels<T>(data: [T], permutation: [Int]) -> [T] {
     assert(Set(permutation) == Set(0..<permutation.count))
     var ret = data
@@ -224,6 +203,7 @@ func permuteChannels<T>(data: [T], permutation: [Int]) -> [T] {
 }
 
 extension Image where P == RGBA {
+    @inlinable
     public func toARGB() -> Image<ARGB, T> {
         let data = permuteChannels(data: self.data, permutation: [3, 0, 1, 2])
         return Image<ARGB, T>(width: width, height: height, argb: data)
@@ -231,6 +211,7 @@ extension Image where P == RGBA {
 }
 
 extension Image where P == ARGB {
+    @inlinable
     public func toRGBA() -> Image<RGBA, T> {
         let data = permuteChannels(data: self.data, permutation: [1, 2, 3, 0])
         return Image<RGBA, T>(width: width, height: height, rgba: data)

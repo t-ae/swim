@@ -1,4 +1,5 @@
 extension Image {
+    @usableFromInline
     func getChannel(channel: Int) ->Image<Intensity, T> {
         precondition(0 <= channel && channel < P.channels, "Index out of range.")
         var newImage = Image<Intensity, T>(width: width, height: height)
@@ -8,6 +9,7 @@ extension Image {
         return newImage
     }
     
+    @usableFromInline
     mutating func setChannel(channel: Int, newValue: Image<Intensity, T>) {
         precondition(0 <= channel && channel < P.channels, "Index out of range.")
         precondition(size == newValue.size, "Invalid `size`.")
@@ -16,6 +18,7 @@ extension Image {
                    count: newValue.data.count)
     }
     
+    @inlinable
     public subscript(channel channel: Int) -> Image<Intensity, T> {
         get{
             return getChannel(channel: channel)
@@ -25,6 +28,7 @@ extension Image {
         }
     }
     
+    @inlinable
     public subscript(channel channel: P) -> Image<Intensity, T> {
         get {
             return getChannel(channel: channel.rawValue)
@@ -40,6 +44,7 @@ extension Image {
 import Accelerate
 
 extension Image where T == Float {
+    @usableFromInline
     func getChannel(channel: Int) ->Image<Intensity, T> {
         precondition(0 <= channel && channel < P.channels, "Index out of range.")
         var newImage = Image<Intensity, T>(width: width, height: height)
@@ -49,6 +54,7 @@ extension Image where T == Float {
         return newImage
     }
     
+    @usableFromInline
     mutating func setChannel(channel: Int, newValue: Image<Intensity, T>) {
         precondition(0 <= channel && channel < P.channels, "Index out of range.")
         precondition(size == newValue.size, "Images must have same size.")
@@ -59,6 +65,7 @@ extension Image where T == Float {
 }
 
 extension Image where T == Double {
+    @usableFromInline
     func getChannel(channel: Int) ->Image<Intensity, T> {
         precondition(0 <= channel && channel < P.channels, "Index out of range.")
         var newImage = Image<Intensity, T>(width: width, height: height)
@@ -68,6 +75,7 @@ extension Image where T == Double {
         return newImage
     }
     
+    @usableFromInline
     mutating func setChannel(channel: Int, newValue: Image<Intensity, T>) {
         precondition(0 <= channel && channel < P.channels, "Index out of range.")
         precondition(size == newValue.size, "Images must have same size.")

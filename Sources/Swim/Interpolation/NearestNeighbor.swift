@@ -4,6 +4,7 @@ extension Image {
     /// - Preconditions:
     ///   - 0 <= x < width
     ///   - 0 <= y < height
+    @usableFromInline
     func nearestNeighbor<F: BinaryFloatingPoint>(x: F, y: F) -> Pixel<P, T> {
         assert(0 <= x && x < F(width))
         assert(0 <= y && y < F(height))

@@ -2,7 +2,8 @@ import Foundation
 
 // MARK: - Flip
 extension Image {
-    func _flipLR() -> Image<P, T> {
+    @inlinable
+    public func flipLR() -> Image<P, T> {
         
         var newImage = Image<P, T>(width: width, height: height)
         
@@ -24,11 +25,8 @@ extension Image {
         return newImage
     }
     
-    public func flipLR() -> Image<P, T> {
-        return _flipLR()
-    }
-    
-    func _flipUD() -> Image<P, T> {
+    @inlinable
+    public func flipUD() -> Image<P, T> {
         
         var newImage = Image<P, T>(width: width, height: height)
         
@@ -46,16 +44,12 @@ extension Image {
         
         return newImage
     }
-    
-    public func flipUD() -> Image<P, T> {
-        return _flipUD()
-    }
 }
 
 // MARK: - Rotate
 extension Image {
-    
-    func _rot90() -> Image<P, T> {
+    @inlinable
+    public func rot90() -> Image<P, T> {
         var newImage = Image<P, T>(width: height, height: width)
         
         data.withUnsafeBufferPointer {
@@ -76,11 +70,8 @@ extension Image {
         return newImage
     }
     
-    public func rot90() -> Image<P, T> {
-        return _rot90()
-    }
-    
-    func _rot180() -> Image<P, T> {
+    @inlinable
+    public func rot180() -> Image<P, T> {
         
         var newImage = Image<P, T>(width: width, height: height)
         
@@ -99,11 +90,8 @@ extension Image {
         return newImage
     }
     
-    public func rot180() -> Image<P, T> {
-        return _rot180()
-    }
-    
-    func _rot270() -> Image<P, T> {
+    @inlinable
+    public func rot270() -> Image<P, T> {
         var newImage = Image<P, T>(width: height, height: width)
         
         data.withUnsafeBufferPointer {
@@ -122,9 +110,5 @@ extension Image {
             }
         }
         return newImage
-    }
-    
-    public func rot270() -> Image<P, T> {
-        return _rot270()
     }
 }

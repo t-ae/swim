@@ -1,5 +1,6 @@
 extension Image where P == Intensity, T: Numeric {
-    func _toIntegralImage() -> Image<Intensity, T> {
+    @inlinable
+    public func toIntegralImage() -> Image<Intensity, T> {
         var newImage = self
         
         newImage.data.withUnsafeMutableBufferPointer {
@@ -26,16 +27,5 @@ extension Image where P == Intensity, T: Numeric {
         }
         
         return newImage
-    }
-    
-    public func toIntegralImage() -> Image<Intensity, T> {
-        return _toIntegralImage()
-    }
-}
-
-extension Image where P == Intensity, T == UInt8 {
-    @available(*, deprecated, message: "Could cause overflow")
-    public func toIntegralImage() -> Image<Intensity, T> {
-        return _toIntegralImage()
     }
 }

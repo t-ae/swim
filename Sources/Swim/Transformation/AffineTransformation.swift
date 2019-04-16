@@ -94,6 +94,7 @@ public func *=<T>(lhs: inout AffineTransformation<T>, rhs: AffineTransformation<
     lhs = lhs * rhs
 }
 
+@usableFromInline
 func *<T>(lhs: AffineTransformation<T>, rhs: (x: T, y: T)) -> (x: T, y: T) {
     var x: T = lhs.a * rhs.x
     x += lhs.b * rhs.y
@@ -105,7 +106,8 @@ func *<T>(lhs: AffineTransformation<T>, rhs: (x: T, y: T)) -> (x: T, y: T) {
 }
 
 extension Image where T: BinaryFloatingPoint {
-    func _warpAffine(baseImage: inout Image<P, T>,
+    @inlinable
+    public func warpAffine(baseImage: inout Image<P, T>,
                            transformation: AffineTransformation<T>,
                            interpolation: Interpolation = .bilinear) {
         
@@ -166,13 +168,5 @@ extension Image where T: BinaryFloatingPoint {
                 baseImage[unsafe: x1, y1] = intpl(x0, y0)
             }
         }
-    }
-    
-    public func warpAffine(baseImage: inout Image<P, T>,
-                            transformation: AffineTransformation<T>,
-                            interpolation: Interpolation = .bilinear) {
-        _warpAffine(baseImage: &baseImage,
-                    transformation: transformation,
-                    interpolation: interpolation)
     }
 }

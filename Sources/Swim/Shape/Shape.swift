@@ -3,6 +3,7 @@ import Foundation
 public enum Shape {}
 
 extension Shape {
+    @inlinable
     public static func circle<P, T>(size: Int,
                                     lineWidth: Double,
                                     lineColor: Pixel<P, T>,
@@ -33,6 +34,7 @@ extension Shape {
         return image
     }
     
+    @inlinable
     public static func rect<P, T>(width: Int,
                                   height: Int,
                                   lineWidth: Int,

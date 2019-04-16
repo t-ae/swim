@@ -1,45 +1,39 @@
 import Foundation
 
 extension Image where T: FloatingPoint {
-    mutating func _round() {
+    @inlinable
+    public mutating func round() {
         channelwiseConvert(Foundation.round)
     }
     
-    public mutating func round() {
-        _round()
-    }
-    
+    @inlinable
     public func rounded() -> Image<P, T> {
         var newImage = self
-        newImage._round()
+        newImage.round()
         return newImage
     }
     
-    mutating func _ceil() {
+    @inlinable
+    public mutating func ceil() {
         channelwiseConvert(Foundation.ceil)
     }
-    
-    public mutating func ceil() {
-        _ceil()
-    }
-    
+
+    @inlinable
     public func ceiled() -> Image<P, T> {
         var newImage = self
-        newImage._ceil()
+        newImage.ceil()
         return newImage
     }
     
-    mutating func _floor() {
+    @inlinable
+    public mutating func floor() {
         channelwiseConvert(Foundation.floor)
     }
     
-    public mutating func floor() {
-        _floor()
-    }
-    
+    @inlinable
     public func floored() -> Image<P, T> {
         var newImage = self
-        newImage._floor()
+        newImage.floor()
         return newImage
     }
 }
@@ -49,7 +43,8 @@ extension Image where T: FloatingPoint {
 import Accelerate
 
 extension Image where T == Float {
-    mutating func _round() {
+    @inlinable
+    public mutating func round() {
         data.withUnsafeMutableBufferPointer {
             let p = $0.baseAddress!
             var count = Int32($0.count)
@@ -57,7 +52,8 @@ extension Image where T == Float {
         }
     }
     
-    mutating func _ceil() {
+    @inlinable
+    public mutating func ceil() {
         data.withUnsafeMutableBufferPointer {
             let p = $0.baseAddress!
             var count = Int32($0.count)
@@ -65,7 +61,8 @@ extension Image where T == Float {
         }
     }
     
-    mutating func _floor() {
+    @inlinable
+    public mutating func floor() {
         data.withUnsafeMutableBufferPointer {
             let p = $0.baseAddress!
             var count = Int32($0.count)
@@ -75,7 +72,8 @@ extension Image where T == Float {
 }
 
 extension Image where T == Double {
-    mutating func _round() {
+    @inlinable
+    public mutating func round() {
         data.withUnsafeMutableBufferPointer {
             let p = $0.baseAddress!
             var count = Int32($0.count)
@@ -83,7 +81,8 @@ extension Image where T == Double {
         }
     }
     
-    mutating func _ceil() {
+    @inlinable
+    public mutating func ceil() {
         data.withUnsafeMutableBufferPointer {
             let p = $0.baseAddress!
             var count = Int32($0.count)
@@ -91,7 +90,8 @@ extension Image where T == Double {
         }
     }
     
-    mutating func _floor() {
+    @inlinable
+    public mutating func floor() {
         data.withUnsafeMutableBufferPointer {
             let p = $0.baseAddress!
             var count = Int32($0.count)

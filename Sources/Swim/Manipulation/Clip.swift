@@ -1,15 +1,13 @@
 extension Image where T: Comparable {
-    mutating func _clip(low: T, high: T) {
-        self._channelwiseConvert { Swift.max(Swift.min($0, high), low) }
-    }
-    
+    @inlinable
     public mutating func clip(low: T, high: T) {
-        self._clip(low: low, high: high)
+        self.channelwiseConvert { Swift.max(Swift.min($0, high), low) }
     }
     
+    @inlinable
     public func clipped(low: T, high: T) -> Image<P, T> {
         var newImage = self
-        newImage._clip(low: low, high: high)
+        newImage.clip(low: low, high: high)
         return newImage
     }
 }
@@ -20,7 +18,8 @@ extension Image where T: Comparable {
 import Accelerate
 
 extension Image where T == Float {
-    mutating func _clip(low: T, high: T) {
+    @inlinable
+    public mutating func clip(low: T, high: T) {
         var low = low
         var high = high
         data.withUnsafeMutableBufferPointer {
@@ -29,15 +28,17 @@ extension Image where T == Float {
         }
     }
     
+    @inlinable
     public func clipped(low: T, high: T) -> Image<P, T> {
         var newImage = self
-        newImage._clip(low: low, high: high)
+        newImage.clip(low: low, high: high)
         return newImage
     }
 }
 
 extension Image where T == Double {
-    mutating func _clip(low: T, high: T) {
+    @inlinable
+    public mutating func clip(low: T, high: T) {
         var low = low
         var high = high
         data.withUnsafeMutableBufferPointer {
@@ -46,9 +47,10 @@ extension Image where T == Double {
         }
     }
     
+    @inlinable
     public func clipped(low: T, high: T) -> Image<P, T> {
         var newImage = self
-        newImage._clip(low: low, high: high)
+        newImage.clip(low: low, high: high)
         return newImage
     }
 }

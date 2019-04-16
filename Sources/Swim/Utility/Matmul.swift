@@ -1,3 +1,4 @@
+@usableFromInline
 func matmul<T: Numeric>(lhs: [T], rhs: [T], m: Int, n: Int, p: Int) -> [T] {
     assert(lhs.count == m*p)
     assert(rhs.count == p*n)
@@ -32,6 +33,7 @@ func matmul<T: Numeric>(lhs: [T], rhs: [T], m: Int, n: Int, p: Int) -> [T] {
 
 import Accelerate
 
+@usableFromInline
 func matmul(lhs: [Float], rhs: [Float], m: Int, n: Int, p: Int) -> [Float] {
     assert(lhs.count == m*p)
     assert(rhs.count == p*n)
@@ -43,6 +45,7 @@ func matmul(lhs: [Float], rhs: [Float], m: Int, n: Int, p: Int) -> [Float] {
     return ret
 }
 
+@usableFromInline
 func matmul(lhs: [Double], rhs: [Double], m: Int, n: Int, p: Int) -> [Double] {
     assert(lhs.count == m*p)
     assert(rhs.count == p*n)

@@ -3,6 +3,7 @@
 import CoreGraphics
 
 extension Image where P == RGBA, T == UInt8 {
+    @inlinable
     public init?(cgImage: CGImage) {
         
         let width = cgImage.width
@@ -22,7 +23,7 @@ extension Image where P == RGBA, T == UInt8 {
         self.init(width: cgImage.width, height: cgImage.height, data: data)
         
         // cancel premultiplication
-        _unsafeConvert { px in
+        unsafeConvert { px in
             let alpha = Int(px[P.alpha.rawValue])
             if alpha == 0 { return }
             for c in [P.red.rawValue, P.green.rawValue, P.blue.rawValue] {
@@ -31,6 +32,7 @@ extension Image where P == RGBA, T == UInt8 {
         }
     }
     
+    @inlinable
     public func cgImage() -> CGImage {
         
         let bitsPerComponent = MemoryLayout<T>.size * 8
@@ -56,7 +58,8 @@ extension Image where P == RGBA, T == UInt8 {
                        intent: .defaultIntent)!
     }
     
-    private func premultipliedImage() -> Image<P, T> {
+    @usableFromInline
+    func premultipliedImage() -> Image<P, T> {
         var newImage = self
         newImage._unsafeConvert { px in
             let alpha = Int(px[P.alpha.rawValue])
@@ -69,6 +72,7 @@ extension Image where P == RGBA, T == UInt8 {
 }
 
 extension Image where P == RGB, T == UInt8 {
+    @inlinable
     public func cgImage() -> CGImage {
         let rgba = Image<RGBA, UInt8>(image: self, alpha: 255)
         return rgba.cgImage()

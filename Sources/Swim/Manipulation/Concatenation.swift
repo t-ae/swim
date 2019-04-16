@@ -1,5 +1,6 @@
 extension Image {
-    static func _concatH<P, T>(_ images: [Image<P, T>]) -> Image<P, T> {
+    @inlinable
+    public static func concatH<P, T>(_ images: [Image<P, T>]) -> Image<P, T> {
         let width: Int = images.map { $0.width }.reduce(0, +)
         let height: Int = images[0].height
         precondition(images.all { $0.height == height }, "All images must have same `height`.")
@@ -15,14 +16,11 @@ extension Image {
         
         return image
     }
-    
-    public static func concatH<P, T>(_ images: [Image<P, T>]) -> Image<P, T> {
-        return _concatH(images)
-    }
 }
 
 extension Image {
-    static func _concatV<P, T>(_ images: [Image<P, T>]) -> Image<P, T> {
+    @inlinable
+    public static func concatV<P, T>(_ images: [Image<P, T>]) -> Image<P, T> {
         let width: Int = images[0].width
         let height: Int = images.map { $0.height }.reduce(0, +)
         
@@ -38,10 +36,6 @@ extension Image {
         }
         
         return image
-    }
-    
-    public static func concatV<P, T>(_ images: [Image<P, T>]) -> Image<P, T> {
-        return _concatV(images)
     }
 }
 

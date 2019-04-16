@@ -65,9 +65,9 @@ import Accelerate
 
 extension Image where P == Intensity, T == Float {
     func _minimumFilter(kernelSize: Int) -> Image<P, T> {
-        let (m, n, matrix) = _im2col(patchWidth: kernelSize,
-                                     patchHeight: kernelSize,
-                                     padding: .constant(T.infinity))
+        let (m, n, matrix) = im2col(patchWidth: kernelSize,
+                                    patchHeight: kernelSize,
+                                    padding: .constant(T.infinity))
         
         var data = [T](matrix[0..<n])
         matrix.withUnsafeBufferPointer {
@@ -82,9 +82,9 @@ extension Image where P == Intensity, T == Float {
     }
     
     func _maximumFilter(kernelSize: Int) -> Image<P, T> {
-        let (m, n, matrix) = _im2col(patchWidth: kernelSize,
-                                     patchHeight: kernelSize,
-                                     padding: .constant(-T.infinity))
+        let (m, n, matrix) = im2col(patchWidth: kernelSize,
+                                    patchHeight: kernelSize,
+                                    padding: .constant(-T.infinity))
         
         var data = [T](matrix[0..<n])
         matrix.withUnsafeBufferPointer {
@@ -99,9 +99,9 @@ extension Image where P == Intensity, T == Float {
     }
     
     func _medianFilter(kernelSize: Int) -> Image<P, T> {
-        let (m, n, matrix) = _im2col(patchWidth: kernelSize,
-                                     patchHeight: kernelSize,
-                                     padding: .constant(T.nan))
+        let (m, n, matrix) = im2col(patchWidth: kernelSize,
+                                    patchHeight: kernelSize,
+                                    padding: .constant(T.nan))
         
         var data = [T](repeating: 0, count: n)
         var values = [T](repeating: 0, count: m)
@@ -117,9 +117,9 @@ extension Image where P == Intensity, T == Float {
 
 extension Image where P == Intensity, T == Double {
     func _minimumFilter(kernelSize: Int) -> Image<P, T> {
-        let (m, n, matrix) = _im2col(patchWidth: kernelSize,
-                                     patchHeight: kernelSize,
-                                     padding: .constant(T.infinity))
+        let (m, n, matrix) = im2col(patchWidth: kernelSize,
+                                    patchHeight: kernelSize,
+                                    padding: .constant(T.infinity))
         
         var data = [T](matrix[0..<n])
         matrix.withUnsafeBufferPointer {
@@ -134,9 +134,9 @@ extension Image where P == Intensity, T == Double {
     }
     
     func _maximumFilter(kernelSize: Int) -> Image<P, T> {
-        let (m, n, matrix) = _im2col(patchWidth: kernelSize,
-                                     patchHeight: kernelSize,
-                                     padding: .constant(-T.infinity))
+        let (m, n, matrix) = im2col(patchWidth: kernelSize,
+                                    patchHeight: kernelSize,
+                                    padding: .constant(-T.infinity))
         
         var data = [T](matrix[0..<n])
         matrix.withUnsafeBufferPointer {
@@ -151,9 +151,9 @@ extension Image where P == Intensity, T == Double {
     }
     
     func _medianFilter(kernelSize: Int) -> Image<P, T> {
-        let (m, n, matrix) = _im2col(patchWidth: kernelSize,
-                                     patchHeight: kernelSize,
-                                     padding: .constant(T.nan))
+        let (m, n, matrix) = im2col(patchWidth: kernelSize,
+                                    patchHeight: kernelSize,
+                                    padding: .constant(T.nan))
         
         var data = [T](repeating: 0, count: n)
         var values = [T](repeating: 0, count: m)

@@ -1,6 +1,7 @@
 import Foundation
 
 extension Image {
+    @usableFromInline
     func getPixel(x: Int, y: Int, c: Int = 0) -> T {
         precondition(0 <= x && x < width, "Index out of range.")
         precondition(0 <= y && y < height, "Index out of range.")
@@ -9,6 +10,7 @@ extension Image {
         return self[unsafe: x, y, c]
     }
     
+    @usableFromInline
     mutating func setPixel(x: Int, y: Int, c: Int = 0, newValue: T) {
         precondition(0 <= x && x < width, "Index out of range.")
         precondition(0 <= y && y < height, "Index out of range.")
@@ -17,6 +19,7 @@ extension Image {
         self[unsafe: x, y, c] = newValue
     }
     
+    @usableFromInline
     func getPixel(x: Int, y: Int) -> Pixel<P, T> {
         precondition(0 <= x && x < width, "Index out of range.")
         precondition(0 <= y && y < height, "Index out of range.")
@@ -24,6 +27,7 @@ extension Image {
         return self[unsafe: x, y]
     }
     
+    @usableFromInline
     mutating func setPixel(x: Int, y: Int, newValue: Pixel<P, T>) {
         precondition(0 <= x && x < width, "Index out of range.")
         precondition(0 <= y && y < height, "Index out of range.")
@@ -33,6 +37,7 @@ extension Image {
 }
 
 extension Image where P == Intensity {
+    @inlinable
     public subscript(x: Int, y: Int) -> T {
         get {
             return getPixel(x: x, y: y)
@@ -44,6 +49,7 @@ extension Image where P == Intensity {
 }
 
 extension Image {
+    @inlinable
     public subscript(x: Int, y: Int, c: Int) -> T {
         get {
             return getPixel(x: x, y: y, c: c)
@@ -53,6 +59,7 @@ extension Image {
         }
     }
     
+    @inlinable
     public subscript(x: Int, y: Int, c: P) -> T {
         get {
             return getPixel(x: x, y: y, c: c.rawValue)
@@ -62,6 +69,7 @@ extension Image {
         }
     }
     
+    @inlinable
     public subscript(x: Int, y: Int) -> Pixel<P, T> {
         get {
             return getPixel(x: x, y: y)
@@ -74,6 +82,7 @@ extension Image {
 
 // MARK: - internal
 extension Image {
+    @usableFromInline
     subscript(unsafe x: Int, y: Int) -> Pixel<P, T> {
         get {
             assert(0 <= x && x < width, "Index out of range.")
@@ -94,6 +103,7 @@ extension Image {
         }
     }
     
+    @usableFromInline
     subscript(unsafe x: Int, y: Int, c: Int) -> T {
         get {
             assert(0 <= x && x < width, "Index out of range.")
@@ -111,6 +121,7 @@ extension Image {
         }
     }
     
+    @usableFromInline
     subscript(unsafe x: Int, y: Int, c: P) -> T {
         get {
             return data[index(x: x, y: y, c: c.rawValue)]
