@@ -1,33 +1,26 @@
 import XCTest
 import Swim
 
-func XCTAssertEqual<T>(_ expression1: AffineTransformation<T>,
-                       _ expression2: AffineTransformation<T>,
-                       rateAccuracy: T,
-                       file: StaticString = #file,
-                       line: UInt = #line) {
-    
-    XCTAssertEqual(expression1.a, expression2.a, rateAccuracy: rateAccuracy, file: file, line: line)
-    XCTAssertEqual(expression1.b, expression2.b, rateAccuracy: rateAccuracy, file: file, line: line)
-    XCTAssertEqual(expression1.c, expression2.c, rateAccuracy: rateAccuracy, file: file, line: line)
-    XCTAssertEqual(expression1.d, expression2.d, rateAccuracy: rateAccuracy, file: file, line: line)
-    XCTAssertEqual(expression1.tx, expression2.tx, rateAccuracy: rateAccuracy, file: file, line: line)
-    XCTAssertEqual(expression1.ty, expression2.ty, rateAccuracy: rateAccuracy, file: file, line: line)
-}
-
 class AffineTransformationTests: XCTestCase {
     func testAffineTransform() {
         do { // Scale
             let a = AffineTransformation.scale(x: 2, y: 3)
-            XCTAssertEqual(a, AffineTransformation(a: 2, b: 0, c: 0, d: 3, tx: 0, ty: 0), rateAccuracy: 0)
+            XCTAssertEqual(a.matrix, [2, 0, 0, 0, 3, 0, 0, 0, 1], accuracy: 0)
         }
         do { // Rotate
             let a = AffineTransformation.rotate(angle: Double.pi/3)
-            XCTAssertEqual(a, AffineTransformation(a: 0.5, b: -sqrt(3)/2, c: sqrt(3)/2, d: 0.5, tx: 0, ty: 0 ), rateAccuracy: 0.01)
+            XCTAssertEqual(a.matrix, [0.5, -sqrt(3)/2, 0, sqrt(3)/2, 0.5, 0, 0, 0, 1], accuracy: 0.01)
         }
         do { // Translate
             let a = AffineTransformation.translate(x: 2, y: 3)
-            XCTAssertEqual(a, AffineTransformation(a: 1, b: 0, c: 0, d: 1, tx: 2, ty: 3), rateAccuracy: 0)
+            XCTAssertEqual(a.matrix, [1, 0, 2, 0, 1, 3, 0, 0, 1], accuracy: 1e-4)
+        }
+        do {
+            let a = AffineTransformation.scale(x: 2, y: 3)
+                * AffineTransformation.translate(x: 2, y: 3)
+                * AffineTransformation.rotate(angle: 1.0)
+            let id = a * a.inverse
+            XCTAssertEqual(id.matrix, [1, 0, 0, 0, 1, 0, 0, 0, 1], accuracy: 1e-4)
         }
     }
 }
