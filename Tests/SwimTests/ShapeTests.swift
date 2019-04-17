@@ -3,7 +3,7 @@ import Swim
 
 class ShapeTests: XCTestCase {
     
-    #if !SWIFT_PACKAGE && os(macOS)
+    #if !DEBUG && os(macOS)
     
     func testCircle() {
         let x = Shape.circle(size: 512,

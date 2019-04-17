@@ -22,6 +22,7 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		A739F4382266D21A0008F50C /* ResourcePath.swift in Sources */ = {isa = PBXBuildFile; fileRef = A739F4342266D2150008F50C /* ResourcePath.swift */; };
 		OBJ_150 /* image_io.c in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_9 /* image_io.c */; };
 		OBJ_152 /* stb_image_write.h in Headers */ = {isa = PBXBuildFile; fileRef = OBJ_11 /* stb_image_write.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		OBJ_153 /* stb_image.h in Headers */ = {isa = PBXBuildFile; fileRef = OBJ_12 /* stb_image.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -152,9 +153,24 @@
 			remoteGlobalIDString = "Swim::CStbImage";
 			remoteInfo = CStbImage;
 		};
+		A739F4362266D2160008F50C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = "Swim::PerformanceTests";
+			remoteInfo = PerformanceTests;
+		};
+		A739F4372266D2160008F50C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = "Swim::SwimTests";
+			remoteInfo = SwimTests;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A739F4342266D2150008F50C /* ResourcePath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourcePath.swift; sourceTree = "<group>"; };
 		OBJ_100 /* Run.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Run.swift; sourceTree = "<group>"; };
 		OBJ_101 /* StrideCopy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StrideCopy.swift; sourceTree = "<group>"; };
 		OBJ_104 /* PerformanceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerformanceTests.swift; sourceTree = "<group>"; };
@@ -244,10 +260,10 @@
 		OBJ_97 /* DotProduct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DotProduct.swift; sourceTree = "<group>"; };
 		OBJ_98 /* Matmul.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Matmul.swift; sourceTree = "<group>"; };
 		OBJ_99 /* Rect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rect.swift; sourceTree = "<group>"; };
-		"Swim::CStbImage::Product" /* CStbImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CStbImage.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		"Swim::PerformanceTests::Product" /* PerformanceTests.xctest */ = {isa = PBXFileReference; lastKnownFileType = file; path = PerformanceTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		"Swim::CStbImage::Product" /* CStbImage.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = CStbImage.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		"Swim::PerformanceTests::Product" /* PerformanceTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; path = PerformanceTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		"Swim::Swim::Product" /* Swim.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Swim.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		"Swim::SwimTests::Product" /* SwimTests.xctest */ = {isa = PBXFileReference; lastKnownFileType = file; path = SwimTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		"Swim::SwimTests::Product" /* SwimTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; path = SwimTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -350,6 +366,7 @@
 				OBJ_135 /* TransformationTests.swift */,
 				OBJ_136 /* XCTAssertEqualWithAccuracy.swift */,
 				OBJ_137 /* vImageUtilsTests.swift */,
+				A739F4342266D2150008F50C /* ResourcePath.swift */,
 			);
 			name = SwimTests;
 			path = Tests/SwimTests;
@@ -474,7 +491,7 @@
 			path = Manipulation;
 			sourceTree = "<group>";
 		};
-		OBJ_5 /*  */ = {
+		OBJ_5 = {
 			isa = PBXGroup;
 			children = (
 				OBJ_6 /* Package.swift */,
@@ -484,7 +501,6 @@
 				OBJ_143 /* specialize.sh */,
 				OBJ_144 /* readme.md */,
 			);
-			name = "";
 			sourceTree = "<group>";
 		};
 		OBJ_54 /* Platform */ = {
@@ -667,6 +683,11 @@
 			attributes = {
 				LastSwiftMigration = 9999;
 				LastUpgradeCheck = 9999;
+				TargetAttributes = {
+					"Swim::CStbImage" = {
+						LastSwiftMigration = 1020;
+					};
+				};
 			};
 			buildConfigurationList = OBJ_2 /* Build configuration list for PBXProject "Swim" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -676,7 +697,7 @@
 				English,
 				en,
 			);
-			mainGroup = OBJ_5 /*  */;
+			mainGroup = OBJ_5;
 			productRefGroup = OBJ_138 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -779,6 +800,7 @@
 			files = (
 				OBJ_266 /* AlphaBlendTests.swift in Sources */,
 				OBJ_267 /* ArithmeticTests.swift in Sources */,
+				A739F4382266D21A0008F50C /* ResourcePath.swift in Sources */,
 				OBJ_268 /* BayerTests.swift in Sources */,
 				OBJ_269 /* ChannelCompositionTests.swift in Sources */,
 				OBJ_270 /* ChannelSubscriptTests.swift in Sources */,
@@ -832,12 +854,12 @@
 		OBJ_259 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = "Swim::PerformanceTests" /* PerformanceTests */;
-			targetProxy = "Swim::PerformanceTests" /* PerformanceTests */;
+			targetProxy = A739F4362266D2160008F50C /* PBXContainerItemProxy */;
 		};
 		OBJ_260 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = "Swim::SwimTests" /* SwimTests */;
-			targetProxy = "Swim::SwimTests" /* SwimTests */;
+			targetProxy = A739F4372266D2160008F50C /* PBXContainerItemProxy */;
 		};
 		OBJ_300 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -878,6 +900,8 @@
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 				TARGET_NAME = CStbImage;
 				TVOS_DEPLOYMENT_TARGET = 9.0;
 				WATCHOS_DEPLOYMENT_TARGET = 2.0;
@@ -910,6 +934,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited)";
+				SWIFT_VERSION = 5.0;
 				TARGET_NAME = CStbImage;
 				TVOS_DEPLOYMENT_TARGET = 9.0;
 				WATCHOS_DEPLOYMENT_TARGET = 2.0;
