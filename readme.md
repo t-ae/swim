@@ -38,7 +38,7 @@ let imageFromNS = Image<RGBA, UInt8>(nsImage: nsImage)!
 
 // on iOS
 let uiImage = image.uiImage()
-let imageFromUI = Image<RGBA, UInt8>(uiImage: nsImage)!
+let imageFromUI = Image<RGBA, UInt8>(uiImage: uiImage)!
 ```
 
 ## Subscriptions
