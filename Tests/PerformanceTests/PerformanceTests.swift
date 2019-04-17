@@ -13,6 +13,15 @@ class PerformanceTests: XCTestCase {
         }
     }
     
+    func testSub() {
+        let data = [Double](repeating: 0, count: 1920*1080*4)
+        let image = Image(width: 1920, height: 1080, rgba: data)
+        
+        measure {
+            _ = 1 - image
+        }
+    }
+    
     func testConvert() {
         let data = [UInt8](repeating: 0, count: 1920*1080*4)
         var image = Image(width: 1920, height: 1080, rgba: data)
