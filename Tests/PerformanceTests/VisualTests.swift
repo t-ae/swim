@@ -275,17 +275,17 @@ class VisualTests: XCTestCase {
         src.warpAffine(baseImage: &baseImage, transformation: t0, interpolation: .nearestNeighbor)
         
         var t1 = AffineTransformation<Float>.translate(x: 32, y: 32)
-        t1 *= AffineTransformation<Float>.rotate(angle: Float.pi/4)
+        t1 *= AffineTransformation.rotate(angle: Float.pi/4)
         t1 *= AffineTransformation<Float>.scale(x: 30, y: 30)
         src.warpAffine(baseImage: &baseImage, transformation: t1, interpolation: .bicubic)
         
         var t2 = AffineTransformation<Float>.translate(x: 80, y: 32)
-        t2 *= AffineTransformation<Float>.rotate(angle: Float.pi/8)
+        t2 *= AffineTransformation.rotate(angle: Float.pi/8)
         t2 *= AffineTransformation<Float>.scale(x: 10, y: 15)
         src.warpAffine(baseImage: &baseImage, transformation: t2, interpolation: .nearestNeighbor)
         
         var t3 = AffineTransformation<Float>.translate(x: 192, y: 192)
-        t3 *= AffineTransformation<Float>.rotate(angle: Float.pi/2)
+        t3 *= AffineTransformation.rotate(angle: Float.pi/2)
         t3 *= AffineTransformation<Float>.scale(x: 10, y: 10)
         t3 *= AffineTransformation<Float>.translate(x: -1, y: -1)
         src.warpAffine(baseImage: &baseImage, transformation: t3)

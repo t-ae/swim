@@ -1,6 +1,6 @@
 extension Image {
     @inlinable
-    public static func concatH<P, T>(_ images: [Image<P, T>]) -> Image<P, T> {
+    public static func concatH(_ images: [Image<P, T>]) -> Image<P, T> {
         let width: Int = images.map { $0.width }.reduce(0, +)
         let height: Int = images[0].height
         precondition(images.all { $0.height == height }, "All images must have same `height`.")
@@ -20,7 +20,7 @@ extension Image {
 
 extension Image {
     @inlinable
-    public static func concatV<P, T>(_ images: [Image<P, T>]) -> Image<P, T> {
+    public static func concatV(_ images: [Image<P, T>]) -> Image<P, T> {
         let width: Int = images[0].width
         let height: Int = images.map { $0.height }.reduce(0, +)
         
