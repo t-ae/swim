@@ -208,8 +208,11 @@ extension DataContainer where DT == Float {
     
     @inlinable
     static func subtract(lhs: DT, rhs: Self) -> Self {
-        var ret = negate(arg: rhs)
-        addAssign(lhs: &ret, rhs: lhs)
+        var lhs = lhs
+        var ret = rhs
+        ret.data.withUnsafeMutableBufferPointer {
+            vDSP_vsub(rhs.data, 1, &lhs, 0, $0.baseAddress!, 1, vDSP_Length($0.count))
+        }
         return ret
     }
     
@@ -328,8 +331,11 @@ extension DataContainer where DT == Double {
     
     @inlinable
     static func subtract(lhs: DT, rhs: Self) -> Self {
-        var ret = negate(arg: rhs)
-        addAssign(lhs: &ret, rhs: lhs)
+        var lhs = lhs
+        var ret = rhs
+        ret.data.withUnsafeMutableBufferPointer {
+            vDSP_vsubD(rhs.data, 1, &lhs, 0, $0.baseAddress!, 1, vDSP_Length($0.count))
+        }
         return ret
     }
     
