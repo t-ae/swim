@@ -27,6 +27,8 @@
 		A739F4482266E9820008F50C /* vImageAlphaBlend.swift in Sources */ = {isa = PBXBuildFile; fileRef = A739F4462266E9630008F50C /* vImageAlphaBlend.swift */; };
 		A739F44A2266EA730008F50C /* vImageMorphology.swift in Sources */ = {isa = PBXBuildFile; fileRef = A739F4492266EA730008F50C /* vImageMorphology.swift */; };
 		A739F45D2267078E0008F50C /* AffineTransformationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A739F45B226702AA0008F50C /* AffineTransformationTests.swift */; };
+		A739F45F226734180008F50C /* Warp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A739F45E226734180008F50C /* Warp.swift */; };
+		A739F4642267364E0008F50C /* WarpTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A739F462226734FA0008F50C /* WarpTests.swift */; };
 		OBJ_150 /* image_io.c in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_9 /* image_io.c */; };
 		OBJ_152 /* stb_image_write.h in Headers */ = {isa = PBXBuildFile; fileRef = OBJ_11 /* stb_image_write.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		OBJ_153 /* stb_image.h in Headers */ = {isa = PBXBuildFile; fileRef = OBJ_12 /* stb_image.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -179,6 +181,8 @@
 		A739F4462266E9630008F50C /* vImageAlphaBlend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = vImageAlphaBlend.swift; sourceTree = "<group>"; };
 		A739F4492266EA730008F50C /* vImageMorphology.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = vImageMorphology.swift; sourceTree = "<group>"; };
 		A739F45B226702AA0008F50C /* AffineTransformationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AffineTransformationTests.swift; sourceTree = "<group>"; };
+		A739F45E226734180008F50C /* Warp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Warp.swift; sourceTree = "<group>"; };
+		A739F462226734FA0008F50C /* WarpTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WarpTests.swift; sourceTree = "<group>"; };
 		OBJ_100 /* Run.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Run.swift; sourceTree = "<group>"; };
 		OBJ_101 /* StrideCopy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StrideCopy.swift; sourceTree = "<group>"; };
 		OBJ_104 /* PerformanceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerformanceTests.swift; sourceTree = "<group>"; };
@@ -404,6 +408,7 @@
 				A739F45B226702AA0008F50C /* AffineTransformationTests.swift */,
 				OBJ_131 /* ResizeTests.swift */,
 				OBJ_135 /* TransformationTests.swift */,
+				A739F462226734FA0008F50C /* WarpTests.swift */,
 			);
 			path = TransformationTests;
 			sourceTree = "<group>";
@@ -686,6 +691,7 @@
 		OBJ_90 /* Transformation */ = {
 			isa = PBXGroup;
 			children = (
+				A739F45E226734180008F50C /* Warp.swift */,
 				OBJ_91 /* AffineTransformation.swift */,
 				OBJ_92 /* Resize.swift */,
 				OBJ_93 /* Transformation.swift */,
@@ -914,6 +920,7 @@
 				OBJ_239 /* ArrayExt.swift in Sources */,
 				OBJ_240 /* Clamp.swift in Sources */,
 				OBJ_241 /* DotProduct.swift in Sources */,
+				A739F45F226734180008F50C /* Warp.swift in Sources */,
 				OBJ_242 /* Matmul.swift in Sources */,
 				OBJ_243 /* Rect.swift in Sources */,
 				OBJ_244 /* Run.swift in Sources */,
@@ -954,6 +961,7 @@
 				OBJ_283 /* InterpolationTests.swift in Sources */,
 				OBJ_284 /* MatmulTests.swift in Sources */,
 				OBJ_285 /* PixelSubscriptTests.swift in Sources */,
+				A739F4642267364E0008F50C /* WarpTests.swift in Sources */,
 				OBJ_286 /* PixelTypeConversionTests.swift in Sources */,
 				OBJ_287 /* PixelwiseConversionTests.swift in Sources */,
 				OBJ_288 /* PlatformTests.swift in Sources */,
