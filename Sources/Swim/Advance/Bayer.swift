@@ -3,7 +3,8 @@ public enum BayerPattern {
 }
 
 extension BayerPattern {
-    fileprivate var offsetToBGGR: (x: Int, y: Int) {
+    @inlinable
+    var offsetToBGGR: (x: Int, y: Int) {
         switch self {
         case .bggr:
             return (0, 0)
@@ -18,7 +19,8 @@ extension BayerPattern {
 }
 
 extension Image where P == RGB {
-    func _bayered(pattern: BayerPattern) -> Image<Intensity, T> {
+    @inlinable
+    public func bayered(pattern: BayerPattern) -> Image<Intensity, T> {
         var newImage = Image<Intensity, T>(width: width, height: height)
 
         let (offsetX, offsetY) = pattern.offsetToBGGR
@@ -41,16 +43,12 @@ extension Image where P == RGB {
 
         return newImage
     }
-    
-    public func bayered(pattern: BayerPattern) -> Image<Intensity, T> {
-        return _bayered(pattern: pattern)
-    }
 }
 
 extension Image where P == Intensity, T: BinaryInteger {
-
     // type b,g,g,r <-> 0,1,2,3
-    private func debayerPixel(x: Int, y: Int, type: Int) -> Pixel<RGB, T> {
+    @inlinable
+    func debayerPixel(x: Int, y: Int, type: Int) -> Pixel<RGB, T> {
 
         func mean(_ points: [(x: Int, y: Int)]) -> T {
             var sum: T = 0
@@ -87,8 +85,9 @@ extension Image where P == Intensity, T: BinaryInteger {
         }
         return Pixel(r: r, g: g, b: b)
     }
-
-    func _debayered(pattern: BayerPattern) -> Image<RGB, T> {
+    
+    @inlinable
+    public func debayered(pattern: BayerPattern) -> Image<RGB, T> {
         var newImage = Image<RGB, T>(width: width, height: height)
 
         let (offsetX, offsetY) = pattern.offsetToBGGR
@@ -105,16 +104,12 @@ extension Image where P == Intensity, T: BinaryInteger {
 
         return newImage
     }
-    
-    public func debayered(pattern: BayerPattern) -> Image<RGB, T> {
-        return _debayered(pattern: pattern)
-    }
 }
 
 extension Image where P == Intensity, T: FloatingPoint {
-    
     // type b,g,g,r <-> 0,1,2,3
-    private func debayerPixel(x: Int, y: Int, type: Int) -> Pixel<RGB, T> {
+    @inlinable
+    func debayerPixel(x: Int, y: Int, type: Int) -> Pixel<RGB, T> {
         
         func mean(_ points: [(x: Int, y: Int)]) -> T {
             var sum: T = 0
@@ -152,7 +147,8 @@ extension Image where P == Intensity, T: FloatingPoint {
         return Pixel(r: r, g: g, b: b)
     }
     
-    func _debayered(pattern: BayerPattern) -> Image<RGB, T> {
+    @inlinable
+    public func debayered(pattern: BayerPattern) -> Image<RGB, T> {
         var newImage = Image<RGB, T>(width: width, height: height)
         
         let (offsetX, offsetY) = pattern.offsetToBGGR
@@ -168,22 +164,5 @@ extension Image where P == Intensity, T: FloatingPoint {
         }
         
         return newImage
-    }
-    
-    public func debayered(pattern: BayerPattern) -> Image<RGB, T> {
-        return _debayered(pattern: pattern)
-    }
-}
-
-extension Image where P == RGB, DT == UInt8 {
-    public func bayered(pattern: BayerPattern) -> Image<Intensity, T> {
-    return _bayered(pattern: pattern)
-    }
-}
-
-extension Image where P == Intensity, DT == UInt8 {
-    @available(*, deprecated, message: "Could cause overflow.")
-    public func debayered(pattern: BayerPattern) -> Image<RGB, T> {
-        return _debayered(pattern: pattern)
     }
 }

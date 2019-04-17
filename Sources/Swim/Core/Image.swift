@@ -5,6 +5,7 @@ public struct Image<P: PixelType, T: DataType> {
     public let height: Int
     public var data: [T]
 
+    @inlinable
     public init(width: Int, height: Int, data: [T]) {
         precondition(width >= 0 && height >= 0, "Image can't have negative size.")
         precondition(data.count == width * height * P.channels, "Size of `data` must be exaclty `width` * `height` * number of channels")
@@ -13,11 +14,13 @@ public struct Image<P: PixelType, T: DataType> {
         self.data = data
     }
     
+    @inlinable
     public init(width: Int, height: Int, value: T) {
         let data = [T](repeating: value, count: width*height*P.channels)
         self.init(width: width, height: height, data: data)
     }
     
+    @inlinable
     public init(width: Int, height: Int, pixel: Pixel<P, T>) {
         var data = [T](repeating: T.swimDefaultValue, count: width*height*P.channels)
         
@@ -32,22 +35,26 @@ public struct Image<P: PixelType, T: DataType> {
         self.init(width: width, height: height, data: data)
     }
     
+    @inlinable
     init(width: Int, height: Int) {
         self.init(width: width, height: height, value: T.swimDefaultValue)
     }
 }
 
 extension Image {
+    @inlinable
     public var size: (width: Int, height: Int) {
         return (width, height)
     }
     
+    @inlinable
     public var pixelCount: Int {
         return width * height
     }
 }
 
 extension Image: Equatable {
+    @inlinable
     public static func ==(lhs: Image, rhs: Image) -> Bool {
         guard lhs.size == rhs.size else {
             return false
@@ -57,6 +64,7 @@ extension Image: Equatable {
 }
 
 extension Image {
+    @inlinable
     func index(x: Int, y: Int, c: Int = 0) -> Int {
         assert(0 <= x && x < width, "Index out of range.")
         assert(0 <= y && y < height, "Index out of range.")

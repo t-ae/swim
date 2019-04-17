@@ -4,6 +4,7 @@ extension Image where T: BinaryFloatingPoint {
     /// - Preconditions:
     ///   - 0 <= x < width
     ///   - 0 <= y < height
+    @inlinable
     func interpolateBilinear(x: T, y: T) -> Pixel<P, T> {
         precondition(0 <= x && x < T(width))
         precondition(0 <= y && y < T(height))

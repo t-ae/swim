@@ -1,6 +1,7 @@
 import Foundation
 
 extension Image {
+    @inlinable
     func getSubimage(x: Int, y: Int, width: Int, height: Int) -> Image<P, T> {
         assert(0 <= width && 0 <= height)
         precondition(0 <= x && 0 <= y, "Index out of range.")
@@ -25,6 +26,7 @@ extension Image {
         return newImage
     }
     
+    @inlinable
     mutating func setSubimage(x: Int, y: Int, width: Int, height: Int, newValue: Image<P, T>) {
         precondition(0 <= x && 0 <= y, "Index out of range.")
         precondition(x+width <= self.width, "Index out of range.")
@@ -50,6 +52,7 @@ extension Image {
         }
     }
     
+    @inlinable
     func getSubimage(xRange: CountableRange<Int>, yRange: CountableRange<Int>) -> Image<P, T> {
         let x = xRange.lowerBound
         let y = yRange.lowerBound
@@ -59,6 +62,7 @@ extension Image {
         return getSubimage(x: x, y: y, width: width, height: height)
     }
     
+    @inlinable
     mutating func setSubimage(xRange: CountableRange<Int>, yRange: CountableRange<Int>, newValue: Image<P, T>) {
         let x = xRange.lowerBound
         let y = yRange.lowerBound
@@ -70,6 +74,7 @@ extension Image {
 }
 
 extension Image {
+    @inlinable
     public subscript(xRange: CountableRange<Int>, yRange: CountableRange<Int>) -> Image<P, T> {
         get {
             return getSubimage(xRange: xRange, yRange: yRange)
@@ -79,6 +84,7 @@ extension Image {
         }
     }
     
+    @inlinable
     public subscript(rows rows: CountableRange<Int>) -> Image<P, T> {
         get {
             return self[0..<width, rows]
@@ -88,6 +94,7 @@ extension Image {
         }
     }
     
+    @inlinable
     public subscript(cols cols: CountableRange<Int>) -> Image<P, T> {
         get {
             return self[cols, 0..<height]
@@ -97,6 +104,7 @@ extension Image {
         }
     }
     
+    @inlinable
     public subscript(row row: Int) -> Image<P, T> {
         get {
             return getSubimage(x: 0, y: row, width: width, height: 1)
@@ -106,6 +114,7 @@ extension Image {
         }
     }
     
+    @inlinable
     public subscript(col col: Int) -> Image<P, T> {
         get {
             return getSubimage(x: col, y: 0, width: 1, height: height)

@@ -307,7 +307,7 @@ class VisualTests: XCTestCase {
             let resizedBL = image.resizeBL(width: 128, height: 128)
             let resizedBC = image.resizeBC(width: 128, height: 128)
             
-            let concat = Image.concatH([resizedNN, resizedBL, resizedBC])
+            let concat = Image<RGB, Float>.concatH([resizedNN, resizedBL, resizedBC])
             
             let rgb256 = (concat * 255).typeConverted(to: UInt8.self)
             let nsImage = rgb256.nsImage()
@@ -321,7 +321,7 @@ class VisualTests: XCTestCase {
             let resizedBL = image.resizeBL(width: 128, height: 128)
             let resizedBC = image.resizeBC(width: 128, height: 128)
             
-            let concat = Image.concatH([resizedNN, resizedBL, resizedBC])
+            let concat = Image<RGB, Double>.concatH([resizedNN, resizedBL, resizedBC])
             
             let rgb256 = (concat * 255).typeConverted(to: UInt8.self)
             let nsImage = rgb256.nsImage()

@@ -22,9 +22,10 @@ extension Padding where T: FloatingPoint {
 }
 
 extension Image where P == Intensity {
-    func _im2col(patchWidth: Int,
-                 patchHeight: Int,
-                 padding: Padding<T> = .nearest) -> (m: Int, n: Int, matrix: [T]) {
+    @inlinable
+    public func im2col(patchWidth: Int,
+                       patchHeight: Int,
+                       padding: Padding<T> = .nearest) -> (m: Int, n: Int, matrix: [T]) {
         
         let m = patchWidth*patchHeight
         let n = width*height
@@ -100,13 +101,5 @@ extension Image where P == Intensity {
         }
         
         return (m, n, ret)
-    }
-    
-    public func im2col(patchWidth: Int,
-                       patchHeight: Int,
-                       padding: Padding<T> = .nearest) -> (m: Int, n: Int, matrix: [T]) {
-        return _im2col(patchWidth: patchWidth,
-                       patchHeight: patchHeight,
-                       padding: padding)
     }
 }

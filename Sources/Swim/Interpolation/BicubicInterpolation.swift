@@ -1,9 +1,8 @@
 import Foundation
 
 extension Image where T: BinaryFloatingPoint {
-    
-    private func bicubicWeight(distance: T) -> T {
-        
+    @inlinable
+    func bicubicWeight(distance: T) -> T {
         guard distance < 2 else {
             return 0
         }
@@ -25,6 +24,7 @@ extension Image where T: BinaryFloatingPoint {
     /// - Preconditions:
     ///   - 0 <= x < width
     ///   - 0 <= y < height
+    @inlinable
     func interpolateBicubic(x: T, y: T) -> Pixel<P, T> {
         precondition(0 <= x && x < T(width))
         precondition(0 <= y && y < T(height))

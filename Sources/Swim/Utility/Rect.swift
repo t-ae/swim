@@ -4,6 +4,7 @@ public struct Rect {
     public var width: Int
     public var height: Int
     
+    @inlinable
     public init(x: Int, y: Int, width: Int, height: Int) {
         self.x = x
         self.y = y
@@ -13,6 +14,7 @@ public struct Rect {
 }
 
 extension Rect: Equatable {
+    @inlinable
     public static func ==(lhs: Rect, rhs: Rect) -> Bool {
         return lhs.x == rhs.x && lhs.y == rhs.y && lhs.width == rhs.width && lhs.height == rhs.height
     }

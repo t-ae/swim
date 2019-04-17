@@ -1,7 +1,8 @@
 import Foundation
 
 extension Image {
-    mutating func _fill(_ value: T) {
+    @inlinable
+    public mutating func fill(_ value: T) {
         data.withUnsafeMutableBufferPointer {
             var dst = $0.baseAddress!
             for _ in 0..<$0.count {
@@ -11,11 +12,8 @@ extension Image {
         }
     }
     
-    public mutating func fill(_ value: T) {
-        _fill(value)
-    }
-    
-    mutating func _fill(_ pixel: Pixel<P, T>) {
+    @inlinable
+    public mutating func fill(_ pixel: Pixel<P, T>) {
         let (width, height) = size
         data.withUnsafeMutableBufferPointer {
             var dst = $0.baseAddress!
@@ -24,9 +22,5 @@ extension Image {
                 dst += P.channels
             }
         }
-    }
-    
-    public mutating func fill(_ pixel: Pixel<P, T>) {
-        _fill(pixel)
     }
 }

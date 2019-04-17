@@ -1,7 +1,8 @@
 import Foundation
 
 extension Image where P == RGB, T: FloatingPoint {
-    mutating func _alphaBlend<P2: RGBWithAlpha>(with src: Image<P2, T>) {
+    @inlinable
+    public mutating func alphaBlend<P2: RGBWithAlpha>(with src: Image<P2, T>) {
         precondition(size == src.size, "Images must have same size.")
         let (width, height) = size
         src.data.withUnsafeBufferPointer {
@@ -28,14 +29,11 @@ extension Image where P == RGB, T: FloatingPoint {
             }
         }
     }
-    
-    public mutating func alphaBlend<P2: RGBWithAlpha>(with src: Image<P2, T>) {
-        self._alphaBlend(with: src)
-    }
 }
 
 extension Image where P: RGBWithAlpha, T: FloatingPoint {
-    mutating func _alphaBlend(with src: Image<P, T>) {
+    @inlinable
+    public mutating func alphaBlend(with src: Image<P, T>) {
         precondition(size == src.size, "Images must have same size.")
         let (width, height) = size
         
@@ -68,9 +66,5 @@ extension Image where P: RGBWithAlpha, T: FloatingPoint {
                 }
             }
         }
-    }
-    
-    public mutating func alphaBlend(with src: Image<P, T>) {
-        self._alphaBlend(with: src)
     }
 }

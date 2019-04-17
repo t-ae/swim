@@ -22,6 +22,7 @@ public enum ImageWriteError: Error {
 
 // MARK: Read
 extension Image where P: ImageFileFormat, T == UInt8 {
+    @inlinable
     public init?(contentsOf url: URL) {
         
         guard url.isFileURL else {
@@ -51,6 +52,7 @@ extension Image where P: ImageFileFormat, T == UInt8 {
 extension Image where P: ImageFileFormat, T == Float {
     /// Load image file.
     /// All values are in [0, 1].
+    @inlinable
     public init?(contentsOf url: URL) {
         guard let image = Image<P, UInt8>(contentsOf: url) else {
             return nil
@@ -62,6 +64,7 @@ extension Image where P: ImageFileFormat, T == Float {
 extension Image where P: ImageFileFormat, T == Double {
     /// Load image file.
     /// All values are in [0, 1].
+    @inlinable
     public init?(contentsOf url: URL) {
         guard let image = Image<P, UInt8>(contentsOf: url) else {
             return nil
@@ -71,7 +74,8 @@ extension Image where P: ImageFileFormat, T == Double {
 }
 
 // MARK: Write
-private func write<P>(image: Image<P, UInt8>, url: URL, type: ImageFileType) throws {
+@inlinable
+func write<P>(image: Image<P, UInt8>, url: URL, type: ImageFileType) throws {
     
     guard url.isFileURL else {
         throw ImageWriteError.failedToWrite
@@ -106,6 +110,7 @@ private func write<P>(image: Image<P, UInt8>, url: URL, type: ImageFileType) thr
 
 extension Image where P: ImageFileFormat, T == UInt8 {
     /// Save image.
+    @inlinable
     public func write(to url: URL, type: ImageFileType) throws {
         try Swim.write(image: self, url: url, type: type)
     }
@@ -113,6 +118,7 @@ extension Image where P: ImageFileFormat, T == UInt8 {
 
 extension Image where P == RGBA, T == UInt8 {
     /// Save image.
+    @inlinable
     public func write(to url: URL, type: ImageFileType) throws {
         switch type {
         case .bitmap, .jpeg:
@@ -126,6 +132,7 @@ extension Image where P == RGBA, T == UInt8 {
 extension Image where P: ImageFileFormat, T == Float {
     /// Save image.
     /// Pixel values are clipped to [0, 1].
+    @inlinable
     public func write(to url: URL, type: ImageFileType) throws {
         let i255 = self.clipped(low: 0, high: 1) * 255
         let uint8 = i255.rounded().typeConverted(to: UInt8.self)
@@ -136,6 +143,7 @@ extension Image where P: ImageFileFormat, T == Float {
 extension Image where P: ImageFileFormat, T == Double {
     /// Save image.
     /// Pixel values are clipped to [0, 1].
+    @inlinable
     public func write(to url: URL, type: ImageFileType) throws {
         let i255 = self.clipped(low: 0, high: 1) * 255
         let uint8 = i255.rounded().typeConverted(to: UInt8.self)
