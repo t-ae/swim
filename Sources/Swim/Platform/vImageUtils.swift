@@ -6,7 +6,7 @@ public enum vImageUtils {
 }
 
 public struct vImageUtilsError: Error {
-    @usableFromInline let vImageErrorCode: Int
+    public let vImageErrorCode: Int
     
     @inlinable
     init(vImageErrorCode: Int) {
