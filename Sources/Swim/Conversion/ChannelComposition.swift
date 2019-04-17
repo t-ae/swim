@@ -1,6 +1,6 @@
 import Foundation
 
-@usableFromInline
+@inlinable
 func compoundChannels<T: DataType>(data1: [T], data2: [T]) -> [T] {
     assert(data1.count == data2.count)
     
@@ -28,7 +28,7 @@ func compoundChannels<T: DataType>(data1: [T], data2: [T]) -> [T] {
     return newData
 }
 
-@usableFromInline
+@inlinable
 func compoundChannels<T: DataType>(data1: [T], data2: [T], data3: [T]) -> [T] {
     assert(data1.count == data2.count && data2.count == data3.count)
     
@@ -62,7 +62,7 @@ func compoundChannels<T: DataType>(data1: [T], data2: [T], data3: [T]) -> [T] {
     return newData
 }
 
-@usableFromInline
+@inlinable
 func compoundChannels<T: DataType>(data1: [T], data2: [T], data3: [T], data4: [T]) -> [T] {
     assert(data1.count == data2.count && data2.count == data3.count && data3.count == data4.count)
     
@@ -102,7 +102,7 @@ func compoundChannels<T: DataType>(data1: [T], data2: [T], data3: [T], data4: [T
     return newData
 }
 
-@usableFromInline
+@inlinable
 func compoundChannels<T>(intensity: Image<Intensity, T>,
                       alpha: Image<Intensity, T>) -> Image<IntensityAlpha, T> {
     precondition(intensity.size == alpha.size, "Images must have same size.")
@@ -114,7 +114,7 @@ func compoundChannels<T>(intensity: Image<Intensity, T>,
     return Image(width: width, height: height, data: data)
 }
 
-@usableFromInline
+@inlinable
 func compoundChannels<T>(r: Image<Intensity, T>,
                       g: Image<Intensity, T>,
                       b: Image<Intensity, T>) -> Image<RGB, T> {
@@ -127,7 +127,7 @@ func compoundChannels<T>(r: Image<Intensity, T>,
     return Image(width: width, height: height, data: data)
 }
 
-@usableFromInline
+@inlinable
 func compoundChannels<T>(r: Image<Intensity, T>,
                       g: Image<Intensity, T>,
                       b: Image<Intensity, T>,
@@ -141,7 +141,7 @@ func compoundChannels<T>(r: Image<Intensity, T>,
     return Image(width: width, height: height, data: data)
 }
 
-@usableFromInline
+@inlinable
 func compoundChannels<T>(a: Image<Intensity, T>,
                       r: Image<Intensity, T>,
                       g: Image<Intensity, T>,
@@ -189,7 +189,7 @@ extension Image where P == ARGB {
 import Accelerate
 
 // MARK: Float
-@usableFromInline
+@inlinable
 func compoundChannels(datas: [[Float]]) -> [Float] {
     let pixelCount = datas.first!.count
     assert(!datas.contains { $0.count != pixelCount})
@@ -204,22 +204,22 @@ func compoundChannels(datas: [[Float]]) -> [Float] {
     return newData
 }
 
-@usableFromInline
+@inlinable
 func compoundChannels(data1: [Float], data2: [Float]) -> [Float] {
     return compoundChannels(datas: [data1, data2])
 }
 
-@usableFromInline
+@inlinable
 func compoundChannels(data1: [Float], data2: [Float], data3: [Float]) -> [Float] {
     return compoundChannels(datas: [data1, data2, data3])
 }
 
-@usableFromInline
+@inlinable
 func compoundChannels(data1: [Float], data2: [Float], data3: [Float], data4: [Float]) -> [Float] {
     return compoundChannels(datas: [data1, data2, data3, data4])
 }
 
-@usableFromInline
+@inlinable
 func compoundChannels(intensity: Image<Intensity, Float>,
                       alpha: Image<Intensity, Float>) -> Image<IntensityAlpha, Float> {
     precondition(intensity.size == alpha.size, "Images must have same size.")
@@ -231,7 +231,7 @@ func compoundChannels(intensity: Image<Intensity, Float>,
     return Image(width: width, height: height, data: data)
 }
 
-@usableFromInline
+@inlinable
 func compoundChannels(r: Image<Intensity, Float>,
                       g: Image<Intensity, Float>,
                       b: Image<Intensity, Float>) -> Image<RGB, Float> {
@@ -244,7 +244,7 @@ func compoundChannels(r: Image<Intensity, Float>,
     return Image(width: width, height: height, data: data)
 }
 
-@usableFromInline
+@inlinable
 func compoundChannels(r: Image<Intensity, Float>,
                       g: Image<Intensity, Float>,
                       b: Image<Intensity, Float>,
@@ -258,7 +258,7 @@ func compoundChannels(r: Image<Intensity, Float>,
     return Image(width: width, height: height, data: data)
 }
 
-@usableFromInline
+@inlinable
 func compoundChannels(a: Image<Intensity, Float>,
                       r: Image<Intensity, Float>,
                       g: Image<Intensity, Float>,
@@ -273,7 +273,7 @@ func compoundChannels(a: Image<Intensity, Float>,
 }
 
 // MARK: Double
-@usableFromInline
+@inlinable
 func compoundChannels(datas: [[Double]]) -> [Double] {
     let pixelCount = datas.first!.count
     assert(!datas.contains { $0.count != pixelCount})
@@ -288,22 +288,22 @@ func compoundChannels(datas: [[Double]]) -> [Double] {
     return newData
 }
 
-@usableFromInline
+@inlinable
 func compoundChannels(data1: [Double], data2: [Double]) -> [Double] {
     return compoundChannels(datas: [data1, data2])
 }
 
-@usableFromInline
+@inlinable
 func compoundChannels(data1: [Double], data2: [Double], data3: [Double]) -> [Double] {
     return compoundChannels(datas: [data1, data2, data3])
 }
 
-@usableFromInline
+@inlinable
 func compoundChannels(data1: [Double], data2: [Double], data3: [Double], data4: [Double]) -> [Double] {
     return compoundChannels(datas: [data1, data2, data3, data4])
 }
 
-@usableFromInline
+@inlinable
 func compoundChannels(intensity: Image<Intensity, Double>,
                       alpha: Image<Intensity, Double>) -> Image<IntensityAlpha, Double> {
     precondition(intensity.size == alpha.size, "Images must have same size.")
@@ -315,7 +315,7 @@ func compoundChannels(intensity: Image<Intensity, Double>,
     return Image(width: width, height: height, data: data)
 }
 
-@usableFromInline
+@inlinable
 func compoundChannels(r: Image<Intensity, Double>,
                       g: Image<Intensity, Double>,
                       b: Image<Intensity, Double>) -> Image<RGB, Double> {
@@ -328,7 +328,7 @@ func compoundChannels(r: Image<Intensity, Double>,
     return Image(width: width, height: height, data: data)
 }
 
-@usableFromInline
+@inlinable
 func compoundChannels(r: Image<Intensity, Double>,
                       g: Image<Intensity, Double>,
                       b: Image<Intensity, Double>,
@@ -342,7 +342,7 @@ func compoundChannels(r: Image<Intensity, Double>,
     return Image(width: width, height: height, data: data)
 }
 
-@usableFromInline
+@inlinable
 func compoundChannels(a: Image<Intensity, Double>,
                       r: Image<Intensity, Double>,
                       g: Image<Intensity, Double>,

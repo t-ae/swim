@@ -1,4 +1,4 @@
-@usableFromInline
+@inlinable
 func strideCopy<T>(src: [T], srcOffset: Int, srcStride: Int,
                     dst: inout [T], dstOffset: Int, dstStride: Int,
                     count: Int) {
@@ -19,7 +19,7 @@ func strideCopy<T>(src: [T], srcOffset: Int, srcStride: Int,
 
 import Accelerate
 
-@usableFromInline
+@inlinable
 func strideCopy(src: [Float], srcOffset: Int, srcStride: Int,
                 dst: inout [Float], dstOffset: Int, dstStride: Int,
                 count: Int) {
@@ -33,7 +33,7 @@ func strideCopy(src: [Float], srcOffset: Int, srcStride: Int,
     }
 }
 
-@usableFromInline
+@inlinable
 func strideCopy(src: [Double], srcOffset: Int, srcStride: Int,
                 dst: inout [Double], dstOffset: Int, dstStride: Int,
                 count: Int) {

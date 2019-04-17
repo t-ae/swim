@@ -58,10 +58,10 @@ extension Image where P == RGBA, T == UInt8 {
                        intent: .defaultIntent)!
     }
     
-    @usableFromInline
+    @inlinable
     func premultipliedImage() -> Image<P, T> {
         var newImage = self
-        newImage._unsafeConvert { px in
+        newImage.unsafeConvert { px in
             let alpha = Int(px[P.alpha.rawValue])
             for c in [P.red.rawValue, P.green.rawValue, P.blue.rawValue] {
                 px[c] = UInt8(Int(px[c]) * alpha / 255)

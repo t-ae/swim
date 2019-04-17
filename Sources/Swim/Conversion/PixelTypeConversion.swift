@@ -120,7 +120,7 @@ extension Image where P == RGB, T: BinaryFloatingPoint {
 }
 
 // MARK: - RGB -> RGBWithAlpha
-@usableFromInline
+@inlinable
 func imageFromRGB<P: RGBWithAlpha, T>(image: Image<RGB, T>, alpha: T) -> Image<P, T> {
     var newImage = Image<P, T>(width: image.width, height: image.height, value: alpha)
     image.data.withUnsafeBufferPointer {
@@ -146,7 +146,7 @@ extension Image where P: RGBWithAlpha {
 }
 
 // MARK: - RGBWithAlpha -> RGB
-@usableFromInline
+@inlinable
 func removeAlpha<P: RGBWithAlpha, T>(image: Image<P, T>) -> Image<RGB, T> {
     var newImage = Image<RGB, T>(width: image.width, height: image.height)
     image.data.withUnsafeBufferPointer {
@@ -178,7 +178,7 @@ extension Image where P == RGB {
 }
 
 // MARK: - RGBA <-> ARGB
-@usableFromInline
+@inlinable
 func permuteChannels<T>(data: [T], permutation: [Int]) -> [T] {
     assert(Set(permutation) == Set(0..<permutation.count))
     var ret = data

@@ -1,7 +1,7 @@
 import Foundation
 
 extension Image {
-    @usableFromInline
+    @inlinable
     func getSubimage(x: Int, y: Int, width: Int, height: Int) -> Image<P, T> {
         assert(0 <= width && 0 <= height)
         precondition(0 <= x && 0 <= y, "Index out of range.")
@@ -26,7 +26,7 @@ extension Image {
         return newImage
     }
     
-    @usableFromInline
+    @inlinable
     mutating func setSubimage(x: Int, y: Int, width: Int, height: Int, newValue: Image<P, T>) {
         precondition(0 <= x && 0 <= y, "Index out of range.")
         precondition(x+width <= self.width, "Index out of range.")
@@ -52,7 +52,7 @@ extension Image {
         }
     }
     
-    @usableFromInline
+    @inlinable
     func getSubimage(xRange: CountableRange<Int>, yRange: CountableRange<Int>) -> Image<P, T> {
         let x = xRange.lowerBound
         let y = yRange.lowerBound
@@ -62,7 +62,7 @@ extension Image {
         return getSubimage(x: x, y: y, width: width, height: height)
     }
     
-    @usableFromInline
+    @inlinable
     mutating func setSubimage(xRange: CountableRange<Int>, yRange: CountableRange<Int>, newValue: Image<P, T>) {
         let x = xRange.lowerBound
         let y = yRange.lowerBound

@@ -1,5 +1,5 @@
 extension Image {
-    @usableFromInline
+    @inlinable
     func getChannel(channel: Int) ->Image<Intensity, T> {
         precondition(0 <= channel && channel < P.channels, "Index out of range.")
         var newImage = Image<Intensity, T>(width: width, height: height)
@@ -9,7 +9,7 @@ extension Image {
         return newImage
     }
     
-    @usableFromInline
+    @inlinable
     mutating func setChannel(channel: Int, newValue: Image<Intensity, T>) {
         precondition(0 <= channel && channel < P.channels, "Index out of range.")
         precondition(size == newValue.size, "Invalid `size`.")
@@ -44,7 +44,7 @@ extension Image {
 import Accelerate
 
 extension Image where T == Float {
-    @usableFromInline
+    @inlinable
     func getChannel(channel: Int) ->Image<Intensity, T> {
         precondition(0 <= channel && channel < P.channels, "Index out of range.")
         var newImage = Image<Intensity, T>(width: width, height: height)
@@ -54,7 +54,7 @@ extension Image where T == Float {
         return newImage
     }
     
-    @usableFromInline
+    @inlinable
     mutating func setChannel(channel: Int, newValue: Image<Intensity, T>) {
         precondition(0 <= channel && channel < P.channels, "Index out of range.")
         precondition(size == newValue.size, "Images must have same size.")
@@ -85,7 +85,7 @@ extension Image where T == Float {
 }
 
 extension Image where T == Double {
-    @usableFromInline
+    @inlinable
     func getChannel(channel: Int) ->Image<Intensity, T> {
         precondition(0 <= channel && channel < P.channels, "Index out of range.")
         var newImage = Image<Intensity, T>(width: width, height: height)
@@ -95,7 +95,7 @@ extension Image where T == Double {
         return newImage
     }
     
-    @usableFromInline
+    @inlinable
     mutating func setChannel(channel: Int, newValue: Image<Intensity, T>) {
         precondition(0 <= channel && channel < P.channels, "Index out of range.")
         precondition(size == newValue.size, "Images must have same size.")

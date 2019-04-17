@@ -1,5 +1,5 @@
 extension DataContainer where DT: Numeric {
-    @usableFromInline
+    @inlinable
     static func addAssign(lhs: inout Self, rhs: Self) {
         precondition(lhs.data.count == rhs.data.count, "Size mismatch.")
         lhs.data.withUnsafeMutableBufferPointer {
@@ -15,7 +15,7 @@ extension DataContainer where DT: Numeric {
         }
     }
     
-    @usableFromInline
+    @inlinable
     static func subtractAssign(lhs: inout Self, rhs: Self) {
         precondition(lhs.data.count == rhs.data.count, "Size mismatch.")
         lhs.data.withUnsafeMutableBufferPointer {
@@ -31,7 +31,7 @@ extension DataContainer where DT: Numeric {
         }
     }
     
-    @usableFromInline
+    @inlinable
     static func multiplyAssign(lhs: inout Self, rhs: Self) {
         precondition(lhs.data.count == rhs.data.count, "Size mismatch.")
         lhs.data.withUnsafeMutableBufferPointer {
@@ -85,7 +85,7 @@ extension DataContainer where DT: Numeric {
 }
 
 extension DataContainer where DT: BinaryInteger {
-    @usableFromInline
+    @inlinable
     static func divideAssign(lhs: inout Self, rhs: Self) {
         precondition(lhs.data.count == rhs.data.count, "Size mismatch.")
         lhs.data.withUnsafeMutableBufferPointer {
@@ -115,7 +115,7 @@ extension DataContainer where DT: BinaryInteger {
 }
 
 extension DataContainer where DT: FloatingPoint {
-    @usableFromInline
+    @inlinable
     static func divideAssign(lhs: inout Self, rhs: Self) {
         precondition(lhs.data.count == rhs.data.count, "Size mismatch.")
         lhs.data.withUnsafeMutableBufferPointer {
@@ -150,7 +150,7 @@ extension DataContainer where DT: FloatingPoint {
 import Accelerate
 
 extension DataContainer where DT == Float {
-    @usableFromInline
+    @inlinable
     static func addAssign(lhs: inout Self, rhs: Self) {
         precondition(lhs.data.count == rhs.data.count, "Size mismatch.")
         lhs.data.withUnsafeMutableBufferPointer {
@@ -162,7 +162,7 @@ extension DataContainer where DT == Float {
         }
     }
     
-    @usableFromInline
+    @inlinable
     static func subtractAssign(lhs: inout Self, rhs: Self) {
         precondition(lhs.data.count == rhs.data.count, "Size mismatch.")
         lhs.data.withUnsafeMutableBufferPointer {
@@ -174,7 +174,7 @@ extension DataContainer where DT == Float {
         }
     }
     
-    @usableFromInline
+    @inlinable
     static func multiplyAssign(lhs: inout Self, rhs: Self) {
         precondition(lhs.data.count == rhs.data.count, "Size mismatch.")
         lhs.data.withUnsafeMutableBufferPointer {
@@ -186,7 +186,7 @@ extension DataContainer where DT == Float {
         }
     }
     
-    @usableFromInline
+    @inlinable
     static func divideAssign(lhs: inout Self, rhs: Self) {
         precondition(lhs.data.count == rhs.data.count, "Size mismatch.")
         lhs.data.withUnsafeMutableBufferPointer {
@@ -248,7 +248,7 @@ extension DataContainer where DT == Float {
 }
 
 extension DataContainer where DT == Double {
-    @usableFromInline
+    @inlinable
     static func addAssign(lhs: inout Self, rhs: Self) {
         precondition(lhs.data.count == rhs.data.count, "Size mismatch.")
         lhs.data.withUnsafeMutableBufferPointer {
@@ -260,7 +260,7 @@ extension DataContainer where DT == Double {
         }
     }
     
-    @usableFromInline
+    @inlinable
     static func subtractAssign(lhs: inout Self, rhs: Self) {
         precondition(lhs.data.count == rhs.data.count, "Size mismatch.")
         lhs.data.withUnsafeMutableBufferPointer {
@@ -272,7 +272,7 @@ extension DataContainer where DT == Double {
         }
     }
     
-    @usableFromInline
+    @inlinable
     static func multiplyAssign(lhs: inout Self, rhs: Self) {
         precondition(lhs.data.count == rhs.data.count, "Size mismatch.")
         lhs.data.withUnsafeMutableBufferPointer {
@@ -284,7 +284,7 @@ extension DataContainer where DT == Double {
         }
     }
     
-    @usableFromInline
+    @inlinable
     static func divideAssign(lhs: inout Self, rhs: Self) {
         precondition(lhs.data.count == rhs.data.count, "Size mismatch.")
         lhs.data.withUnsafeMutableBufferPointer {

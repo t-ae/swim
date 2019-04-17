@@ -1,5 +1,5 @@
 extension Image where P == Intensity, T: Comparable {
-    @usableFromInline
+    @inlinable
     func filter(kernelSize: Int, kernelFunc: ([T])->T) -> Image<P, T> {
         precondition(kernelSize > 0)
         var newImage = self

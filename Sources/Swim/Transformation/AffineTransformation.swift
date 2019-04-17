@@ -94,7 +94,7 @@ public func *=<T>(lhs: inout AffineTransformation<T>, rhs: AffineTransformation<
     lhs = lhs * rhs
 }
 
-@usableFromInline
+@inlinable
 func *<T>(lhs: AffineTransformation<T>, rhs: (x: T, y: T)) -> (x: T, y: T) {
     var x: T = lhs.a * rhs.x
     x += lhs.b * rhs.y

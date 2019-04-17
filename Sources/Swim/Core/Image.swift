@@ -35,7 +35,7 @@ public struct Image<P: PixelType, T: DataType> {
         self.init(width: width, height: height, data: data)
     }
     
-    @usableFromInline
+    @inlinable
     init(width: Int, height: Int) {
         self.init(width: width, height: height, value: T.swimDefaultValue)
     }
@@ -64,7 +64,7 @@ extension Image: Equatable {
 }
 
 extension Image {
-    @usableFromInline
+    @inlinable
     func index(x: Int, y: Int, c: Int = 0) -> Int {
         assert(0 <= x && x < width, "Index out of range.")
         assert(0 <= y && y < height, "Index out of range.")

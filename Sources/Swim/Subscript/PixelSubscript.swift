@@ -1,7 +1,7 @@
 import Foundation
 
 extension Image {
-    @usableFromInline
+    @inlinable
     func getPixel(x: Int, y: Int, c: Int = 0) -> T {
         precondition(0 <= x && x < width, "Index out of range.")
         precondition(0 <= y && y < height, "Index out of range.")
@@ -10,7 +10,7 @@ extension Image {
         return self[unsafe: x, y, c]
     }
     
-    @usableFromInline
+    @inlinable
     mutating func setPixel(x: Int, y: Int, c: Int = 0, newValue: T) {
         precondition(0 <= x && x < width, "Index out of range.")
         precondition(0 <= y && y < height, "Index out of range.")
@@ -19,7 +19,7 @@ extension Image {
         self[unsafe: x, y, c] = newValue
     }
     
-    @usableFromInline
+    @inlinable
     func getPixel(x: Int, y: Int) -> Pixel<P, T> {
         precondition(0 <= x && x < width, "Index out of range.")
         precondition(0 <= y && y < height, "Index out of range.")
@@ -27,7 +27,7 @@ extension Image {
         return self[unsafe: x, y]
     }
     
-    @usableFromInline
+    @inlinable
     mutating func setPixel(x: Int, y: Int, newValue: Pixel<P, T>) {
         precondition(0 <= x && x < width, "Index out of range.")
         precondition(0 <= y && y < height, "Index out of range.")
@@ -82,7 +82,7 @@ extension Image {
 
 // MARK: - internal
 extension Image {
-    @usableFromInline
+    @inlinable
     subscript(unsafe x: Int, y: Int) -> Pixel<P, T> {
         get {
             assert(0 <= x && x < width, "Index out of range.")
@@ -103,7 +103,7 @@ extension Image {
         }
     }
     
-    @usableFromInline
+    @inlinable
     subscript(unsafe x: Int, y: Int, c: Int) -> T {
         get {
             assert(0 <= x && x < width, "Index out of range.")
@@ -121,7 +121,7 @@ extension Image {
         }
     }
     
-    @usableFromInline
+    @inlinable
     subscript(unsafe x: Int, y: Int, c: P) -> T {
         get {
             return data[index(x: x, y: y, c: c.rawValue)]

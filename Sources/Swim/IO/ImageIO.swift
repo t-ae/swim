@@ -74,7 +74,7 @@ extension Image where P: ImageFileFormat, T == Double {
 }
 
 // MARK: Write
-@usableFromInline
+@inlinable
 func write<P>(image: Image<P, UInt8>, url: URL, type: ImageFileType) throws {
     
     guard url.isFileURL else {

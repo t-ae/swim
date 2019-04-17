@@ -1,6 +1,6 @@
 import Foundation
 
-@usableFromInline
+@inlinable
 func dotProduct<T: Numeric>(_ a: [T], _ b: [T]) -> T {
     assert(a.count == b.count)
     
@@ -17,7 +17,7 @@ func dotProduct<T: Numeric>(_ a: [T], _ b: [T]) -> T {
 
 import Accelerate
 
-@usableFromInline
+@inlinable
 func dotProduct(_ a: [Float], _ b: [Float]) -> Float {
     assert(a.count == b.count)
     
@@ -27,7 +27,7 @@ func dotProduct(_ a: [Float], _ b: [Float]) -> Float {
     return result
 }
 
-@usableFromInline
+@inlinable
 func dotProduct(_ a: [Double], _ b: [Double]) -> Double {
     assert(a.count == b.count)
     

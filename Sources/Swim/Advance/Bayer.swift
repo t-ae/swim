@@ -3,7 +3,7 @@ public enum BayerPattern {
 }
 
 extension BayerPattern {
-    @usableFromInline
+    @inlinable
     var offsetToBGGR: (x: Int, y: Int) {
         switch self {
         case .bggr:
@@ -47,7 +47,7 @@ extension Image where P == RGB {
 
 extension Image where P == Intensity, T: BinaryInteger {
     // type b,g,g,r <-> 0,1,2,3
-    @usableFromInline
+    @inlinable
     func debayerPixel(x: Int, y: Int, type: Int) -> Pixel<RGB, T> {
 
         func mean(_ points: [(x: Int, y: Int)]) -> T {
@@ -108,7 +108,7 @@ extension Image where P == Intensity, T: BinaryInteger {
 
 extension Image where P == Intensity, T: FloatingPoint {
     // type b,g,g,r <-> 0,1,2,3
-    @usableFromInline
+    @inlinable
     func debayerPixel(x: Int, y: Int, type: Int) -> Pixel<RGB, T> {
         
         func mean(_ points: [(x: Int, y: Int)]) -> T {

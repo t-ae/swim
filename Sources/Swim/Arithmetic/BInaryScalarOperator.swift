@@ -1,5 +1,5 @@
 extension DataContainer where DT: Numeric {
-    @usableFromInline
+    @inlinable
     static func addAssign(lhs: inout Self, rhs: DT) {
         lhs.data.withUnsafeMutableBufferPointer {
             var p = $0.baseAddress!
@@ -10,7 +10,7 @@ extension DataContainer where DT: Numeric {
         }
     }
     
-    @usableFromInline
+    @inlinable
     static func subtractAssign(lhs: inout Self, rhs: DT) {
         lhs.data.withUnsafeMutableBufferPointer {
             var p = $0.baseAddress!
@@ -21,7 +21,7 @@ extension DataContainer where DT: Numeric {
         }
     }
     
-    @usableFromInline
+    @inlinable
     static func subtract(lhs: DT, rhs: Self) -> Self {
         var ret = rhs
         ret.data.withUnsafeMutableBufferPointer {
@@ -34,7 +34,7 @@ extension DataContainer where DT: Numeric {
         return ret
     }
     
-    @usableFromInline
+    @inlinable
     static func multiplyAssign(lhs: inout Self, rhs: DT) {
         lhs.data.withUnsafeMutableBufferPointer {
             var p = $0.baseAddress!
@@ -102,7 +102,7 @@ extension DataContainer where DT: Numeric {
 }
 
 extension DataContainer where DT: BinaryInteger {
-    @usableFromInline
+    @inlinable
     static func divideAssign(lhs: inout Self, rhs: DT) {
         lhs.data.withUnsafeMutableBufferPointer {
             var p = $0.baseAddress!
@@ -113,7 +113,7 @@ extension DataContainer where DT: BinaryInteger {
         }
     }
     
-    @usableFromInline
+    @inlinable
     static func divide(lhs: DT, rhs: Self) -> Self {
         var ret = rhs
         ret.data.withUnsafeMutableBufferPointer {
@@ -145,7 +145,7 @@ extension DataContainer where DT: BinaryInteger {
 }
 
 extension DataContainer where DT: FloatingPoint {
-    @usableFromInline
+    @inlinable
     static func divideAssign(lhs: inout Self, rhs: DT) {
         lhs.data.withUnsafeMutableBufferPointer {
             var p = $0.baseAddress!
@@ -193,7 +193,7 @@ extension DataContainer where DT: FloatingPoint {
 import Accelerate
 
 extension DataContainer where DT == Float {
-    @usableFromInline
+    @inlinable
     static func addAssign(lhs: inout Self, rhs: DT) {
         var rhs = rhs
         lhs.data.withUnsafeMutableBufferPointer {
@@ -201,19 +201,19 @@ extension DataContainer where DT == Float {
         }
     }
     
-    @usableFromInline
+    @inlinable
     static func subtractAssign(lhs: inout Self, rhs: DT) {
         addAssign(lhs: &lhs, rhs: -rhs)
     }
     
-    @usableFromInline
+    @inlinable
     static func subtract(lhs: DT, rhs: Self) -> Self {
         var ret = negate(arg: rhs)
         addAssign(lhs: &ret, rhs: lhs)
         return ret
     }
     
-    @usableFromInline
+    @inlinable
     static func multiplyAssign(lhs: inout Self, rhs: DT) {
         var rhs = rhs
         lhs.data.withUnsafeMutableBufferPointer {
@@ -221,7 +221,7 @@ extension DataContainer where DT == Float {
         }
     }
     
-    @usableFromInline
+    @inlinable
     static func divideAssign(lhs: inout Self, rhs: DT) {
         var rhs = rhs
         lhs.data.withUnsafeMutableBufferPointer {
@@ -229,7 +229,7 @@ extension DataContainer where DT == Float {
         }
     }
     
-    @usableFromInline
+    @inlinable
     static func divide(lhs: DT, rhs: Self) -> Self {
         var ret = rhs
         var lhs = lhs
@@ -313,7 +313,7 @@ extension DataContainer where DT == Float {
 }
 
 extension DataContainer where DT == Double {
-    @usableFromInline
+    @inlinable
     static func addAssign(lhs: inout Self, rhs: DT) {
         var rhs = rhs
         lhs.data.withUnsafeMutableBufferPointer {
@@ -321,19 +321,19 @@ extension DataContainer where DT == Double {
         }
     }
     
-    @usableFromInline
+    @inlinable
     static func subtractAssign(lhs: inout Self, rhs: DT) {
         addAssign(lhs: &lhs, rhs: -rhs)
     }
     
-    @usableFromInline
+    @inlinable
     static func subtract(lhs: DT, rhs: Self) -> Self {
         var ret = negate(arg: rhs)
         addAssign(lhs: &ret, rhs: lhs)
         return ret
     }
     
-    @usableFromInline
+    @inlinable
     static func multiplyAssign(lhs: inout Self, rhs: DT) {
         var rhs = rhs
         lhs.data.withUnsafeMutableBufferPointer {
@@ -341,7 +341,7 @@ extension DataContainer where DT == Double {
         }
     }
     
-    @usableFromInline
+    @inlinable
     static func divideAssign(lhs: inout Self, rhs: DT) {
         var rhs = rhs
         lhs.data.withUnsafeMutableBufferPointer {
@@ -349,7 +349,7 @@ extension DataContainer where DT == Double {
         }
     }
     
-    @usableFromInline
+    @inlinable
     static func divide(lhs: DT, rhs: Self) -> Self {
         var ret = rhs
         var lhs = lhs
