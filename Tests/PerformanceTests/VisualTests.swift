@@ -316,7 +316,7 @@ class VisualTests: XCTestCase {
             _ = nsImage
         }
         do {
-            let image = Shape.circle(size: 64, lineWidth: 3, lineColor: Pixel(r: 1.0, g: 0, b: 0))
+            let image = Shape.circle(size: 32, lineWidth: 3, lineColor: Pixel(r: 1.0, g: 0, b: 0))
             let resizedNN = image.resizeNN(width: 128, height: 128)
             let resizedBL = image.resizeBL(width: 128, height: 128)
             let resizedBC = image.resizeBC(width: 128, height: 128)
