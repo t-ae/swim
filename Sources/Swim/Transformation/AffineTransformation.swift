@@ -8,6 +8,15 @@ public struct AffineTransformation<T: BinaryFloatingPoint> {
     public var tx: T
     public var ty: T
     
+    public init(a: T, b: T, c: T, d: T, tx: T, ty: T) {
+        self.a = a
+        self.b = b
+        self.c = c
+        self.d = d
+        self.tx = tx
+        self.ty = ty
+    }
+    
     public var matrix: [T] {
         return [a, b, tx,
                 c, d, ty,

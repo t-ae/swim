@@ -1,6 +1,10 @@
 import XCTest
 import Swim
 
+#if canImport(Accelerate)
+import Accelerate
+#endif
+
 class vImageUtilsTests: XCTestCase {
     
     #if canImport(Accelerate)

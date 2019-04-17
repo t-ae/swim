@@ -23,6 +23,9 @@
 
 /* Begin PBXBuildFile section */
 		A739F4382266D21A0008F50C /* ResourcePath.swift in Sources */ = {isa = PBXBuildFile; fileRef = A739F4342266D2150008F50C /* ResourcePath.swift */; };
+		A739F4452266E8B50008F50C /* vImageBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A739F4432266E88D0008F50C /* vImageBuffer.swift */; };
+		A739F4482266E9820008F50C /* vImageAlphaBlend.swift in Sources */ = {isa = PBXBuildFile; fileRef = A739F4462266E9630008F50C /* vImageAlphaBlend.swift */; };
+		A739F44A2266EA730008F50C /* vImageMorphology.swift in Sources */ = {isa = PBXBuildFile; fileRef = A739F4492266EA730008F50C /* vImageMorphology.swift */; };
 		OBJ_150 /* image_io.c in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_9 /* image_io.c */; };
 		OBJ_152 /* stb_image_write.h in Headers */ = {isa = PBXBuildFile; fileRef = OBJ_11 /* stb_image_write.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		OBJ_153 /* stb_image.h in Headers */ = {isa = PBXBuildFile; fileRef = OBJ_12 /* stb_image.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -171,6 +174,9 @@
 
 /* Begin PBXFileReference section */
 		A739F4342266D2150008F50C /* ResourcePath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourcePath.swift; sourceTree = "<group>"; };
+		A739F4432266E88D0008F50C /* vImageBuffer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = vImageBuffer.swift; sourceTree = "<group>"; };
+		A739F4462266E9630008F50C /* vImageAlphaBlend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = vImageAlphaBlend.swift; sourceTree = "<group>"; };
+		A739F4492266EA730008F50C /* vImageMorphology.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = vImageMorphology.swift; sourceTree = "<group>"; };
 		OBJ_100 /* Run.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Run.swift; sourceTree = "<group>"; };
 		OBJ_101 /* StrideCopy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StrideCopy.swift; sourceTree = "<group>"; };
 		OBJ_104 /* PerformanceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerformanceTests.swift; sourceTree = "<group>"; };
@@ -303,6 +309,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A739F4422266E8770008F50C /* vImage */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_58 /* vImageUtils.swift */,
+				A739F4432266E88D0008F50C /* vImageBuffer.swift */,
+				A739F4462266E9630008F50C /* vImageAlphaBlend.swift */,
+				A739F4492266EA730008F50C /* vImageMorphology.swift */,
+			);
+			path = vImage;
+			sourceTree = "<group>";
+		};
 		OBJ_10 /* include */ = {
 			isa = PBXGroup;
 			children = (
@@ -506,10 +523,10 @@
 		OBJ_54 /* Platform */ = {
 			isa = PBXGroup;
 			children = (
+				A739F4422266E8770008F50C /* vImage */,
 				OBJ_55 /* AppKit.swift */,
 				OBJ_56 /* CoreGraphics.swift */,
 				OBJ_57 /* UIKit.swift */,
-				OBJ_58 /* vImageUtils.swift */,
 			);
 			path = Platform;
 			sourceTree = "<group>";
@@ -758,6 +775,7 @@
 				OBJ_194 /* Sequence.swift in Sources */,
 				OBJ_195 /* ImageIO.swift in Sources */,
 				OBJ_196 /* BicubicInterpolation.swift in Sources */,
+				A739F44A2266EA730008F50C /* vImageMorphology.swift in Sources */,
 				OBJ_197 /* BilinearInterpolation.swift in Sources */,
 				OBJ_198 /* Interpolation.swift in Sources */,
 				OBJ_199 /* NearestNeighbor.swift in Sources */,
@@ -765,6 +783,7 @@
 				OBJ_201 /* Concatenation.swift in Sources */,
 				OBJ_202 /* Fill.swift in Sources */,
 				OBJ_203 /* FloatingPoint.swift in Sources */,
+				A739F4482266E9820008F50C /* vImageAlphaBlend.swift in Sources */,
 				OBJ_204 /* AppKit.swift in Sources */,
 				OBJ_205 /* CoreGraphics.swift in Sources */,
 				OBJ_206 /* UIKit.swift in Sources */,
@@ -774,6 +793,7 @@
 				OBJ_234 /* PixelSubscript.swift in Sources */,
 				OBJ_235 /* SubimageSubscript.swift in Sources */,
 				OBJ_236 /* AffineTransformation.swift in Sources */,
+				A739F4452266E8B50008F50C /* vImageBuffer.swift in Sources */,
 				OBJ_237 /* Resize.swift in Sources */,
 				OBJ_238 /* Transformation.swift in Sources */,
 				OBJ_239 /* ArrayExt.swift in Sources */,
