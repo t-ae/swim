@@ -1,7 +1,7 @@
 import Foundation
 
 @inlinable
-func compoundChannels<T: DataType>(data1: [T], data2: [T]) -> [T] {
+func interleave<T: DataType>(data1: [T], data2: [T]) -> [T] {
     assert(data1.count == data2.count)
     
     let pixelCount = data1.count
@@ -29,7 +29,7 @@ func compoundChannels<T: DataType>(data1: [T], data2: [T]) -> [T] {
 }
 
 @inlinable
-func compoundChannels<T: DataType>(data1: [T], data2: [T], data3: [T]) -> [T] {
+func interleave<T: DataType>(data1: [T], data2: [T], data3: [T]) -> [T] {
     assert(data1.count == data2.count && data2.count == data3.count)
     
     let pixelCount = data1.count
@@ -63,7 +63,7 @@ func compoundChannels<T: DataType>(data1: [T], data2: [T], data3: [T]) -> [T] {
 }
 
 @inlinable
-func compoundChannels<T: DataType>(data1: [T], data2: [T], data3: [T], data4: [T]) -> [T] {
+func interleave<T: DataType>(data1: [T], data2: [T], data3: [T], data4: [T]) -> [T] {
     assert(data1.count == data2.count && data2.count == data3.count && data3.count == data4.count)
     
     let pixelCount = data1.count
@@ -109,7 +109,7 @@ func compoundChannels<T>(intensity: Image<Intensity, T>,
     
     let width = intensity.width
     let height = alpha.height
-    let data = compoundChannels(data1: intensity.data, data2: alpha.data)
+    let data = interleave(data1: intensity.data, data2: alpha.data)
     
     return Image(width: width, height: height, data: data)
 }
@@ -122,7 +122,7 @@ func compoundChannels<T>(r: Image<Intensity, T>,
     
     let width = r.width
     let height = r.height
-    let data = compoundChannels(data1: r.data, data2: g.data, data3: b.data)
+    let data = interleave(data1: r.data, data2: g.data, data3: b.data)
     
     return Image(width: width, height: height, data: data)
 }
@@ -136,7 +136,7 @@ func compoundChannels<T>(r: Image<Intensity, T>,
     
     let width = r.width
     let height = r.height
-    let data = compoundChannels(data1: r.data, data2: g.data, data3: b.data, data4: a.data)
+    let data = interleave(data1: r.data, data2: g.data, data3: b.data, data4: a.data)
     
     return Image(width: width, height: height, data: data)
 }
@@ -150,7 +150,7 @@ func compoundChannels<T>(a: Image<Intensity, T>,
     
     let width = a.width
     let height = a.height
-    let data = compoundChannels(data1: a.data, data2: r.data, data3: g.data, data4: b.data)
+    let data = interleave(data1: a.data, data2: r.data, data3: g.data, data4: b.data)
     
     return Image(width: width, height: height, data: data)
 }

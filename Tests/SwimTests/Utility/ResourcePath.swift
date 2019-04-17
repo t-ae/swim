@@ -7,5 +7,6 @@ func testResoruceRoot() -> URL {
         .deletingLastPathComponent()
         .deletingLastPathComponent()
         .deletingLastPathComponent()
+        .deletingLastPathComponent()
         .appendingPathComponent("TestResources")
 }
