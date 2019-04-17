@@ -99,10 +99,6 @@ public func *<T>(lhs: AffineTransformation<T>, rhs: AffineTransformation<T>) -> 
     return tr
 }
 
-public func *=<T>(lhs: inout AffineTransformation<T>, rhs: AffineTransformation<T>) {
-    lhs = lhs * rhs
-}
-
 @inlinable
 func *<T>(lhs: AffineTransformation<T>, rhs: (x: T, y: T)) -> (x: T, y: T) {
     var x: T = lhs.a * rhs.x

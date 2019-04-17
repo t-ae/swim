@@ -26,6 +26,7 @@
 		A739F4452266E8B50008F50C /* vImageBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A739F4432266E88D0008F50C /* vImageBuffer.swift */; };
 		A739F4482266E9820008F50C /* vImageAlphaBlend.swift in Sources */ = {isa = PBXBuildFile; fileRef = A739F4462266E9630008F50C /* vImageAlphaBlend.swift */; };
 		A739F44A2266EA730008F50C /* vImageMorphology.swift in Sources */ = {isa = PBXBuildFile; fileRef = A739F4492266EA730008F50C /* vImageMorphology.swift */; };
+		A739F45D2267078E0008F50C /* AffineTransformationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A739F45B226702AA0008F50C /* AffineTransformationTests.swift */; };
 		OBJ_150 /* image_io.c in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_9 /* image_io.c */; };
 		OBJ_152 /* stb_image_write.h in Headers */ = {isa = PBXBuildFile; fileRef = OBJ_11 /* stb_image_write.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		OBJ_153 /* stb_image.h in Headers */ = {isa = PBXBuildFile; fileRef = OBJ_12 /* stb_image.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -177,6 +178,7 @@
 		A739F4432266E88D0008F50C /* vImageBuffer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = vImageBuffer.swift; sourceTree = "<group>"; };
 		A739F4462266E9630008F50C /* vImageAlphaBlend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = vImageAlphaBlend.swift; sourceTree = "<group>"; };
 		A739F4492266EA730008F50C /* vImageMorphology.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = vImageMorphology.swift; sourceTree = "<group>"; };
+		A739F45B226702AA0008F50C /* AffineTransformationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AffineTransformationTests.swift; sourceTree = "<group>"; };
 		OBJ_100 /* Run.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Run.swift; sourceTree = "<group>"; };
 		OBJ_101 /* StrideCopy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StrideCopy.swift; sourceTree = "<group>"; };
 		OBJ_104 /* PerformanceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerformanceTests.swift; sourceTree = "<group>"; };
@@ -320,6 +322,137 @@
 			path = vImage;
 			sourceTree = "<group>";
 		};
+		A739F44D2267008B0008F50C /* BlendTests */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_107 /* AlphaBlendTests.swift */,
+			);
+			path = BlendTests;
+			sourceTree = "<group>";
+		};
+		A739F44E226700950008F50C /* ArithmeticTests */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_108 /* ArithmeticTests.swift */,
+			);
+			path = ArithmeticTests;
+			sourceTree = "<group>";
+		};
+		A739F44F226700A30008F50C /* ConversionTests */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_110 /* ChannelCompositionTests.swift */,
+				OBJ_112 /* ChannelwiseConversionTests.swift */,
+				OBJ_117 /* DataTypeConversionTests.swift */,
+				OBJ_127 /* PixelTypeConversionTests.swift */,
+				OBJ_128 /* PixelwiseConversionTests.swift */,
+			);
+			path = ConversionTests;
+			sourceTree = "<group>";
+		};
+		A739F450226700C40008F50C /* AdvanceTests */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_109 /* BayerTests.swift */,
+				OBJ_115 /* ConvolutionTests.swift */,
+				OBJ_116 /* CorrelationTests.swift */,
+				OBJ_118 /* FilterTests.swift */,
+				OBJ_120 /* Im2colTests.swift */,
+				OBJ_123 /* IntegralImageTests.swift */,
+			);
+			path = AdvanceTests;
+			sourceTree = "<group>";
+		};
+		A739F451226700D80008F50C /* CoreTests */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_122 /* ImageTests.swift */,
+				OBJ_132 /* SequenceTests.swift */,
+			);
+			path = CoreTests;
+			sourceTree = "<group>";
+		};
+		A739F452226700ED0008F50C /* IOTests */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_121 /* ImageIOTests.swift */,
+			);
+			path = IOTests;
+			sourceTree = "<group>";
+		};
+		A739F453226701060008F50C /* InterpolationTests */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_124 /* InterpolationTests.swift */,
+			);
+			path = InterpolationTests;
+			sourceTree = "<group>";
+		};
+		A739F454226701430008F50C /* SubscriptTests */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_111 /* ChannelSubscriptTests.swift */,
+				OBJ_126 /* PixelSubscriptTests.swift */,
+				OBJ_134 /* SubimageSubscriptTests.swift */,
+			);
+			path = SubscriptTests;
+			sourceTree = "<group>";
+		};
+		A739F4552267015B0008F50C /* TransformationTests */ = {
+			isa = PBXGroup;
+			children = (
+				A739F45B226702AA0008F50C /* AffineTransformationTests.swift */,
+				OBJ_131 /* ResizeTests.swift */,
+				OBJ_135 /* TransformationTests.swift */,
+			);
+			path = TransformationTests;
+			sourceTree = "<group>";
+		};
+		A739F456226701930008F50C /* ManipulationTests */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_113 /* ClipTests.swift */,
+				OBJ_114 /* ConcatenateTests.swift */,
+				OBJ_119 /* FloatingPointTests.swift */,
+			);
+			path = ManipulationTests;
+			sourceTree = "<group>";
+		};
+		A739F457226701C20008F50C /* UtilityTests */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_125 /* MatmulTests.swift */,
+			);
+			path = UtilityTests;
+			sourceTree = "<group>";
+		};
+		A739F458226701D80008F50C /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_130 /* Random.swift */,
+				OBJ_136 /* XCTAssertEqualWithAccuracy.swift */,
+				A739F4342266D2150008F50C /* ResourcePath.swift */,
+			);
+			path = Utility;
+			sourceTree = "<group>";
+		};
+		A739F459226702020008F50C /* PlatformTests */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_129 /* PlatformTests.swift */,
+				OBJ_137 /* vImageUtilsTests.swift */,
+			);
+			path = PlatformTests;
+			sourceTree = "<group>";
+		};
+		A739F45A2267021B0008F50C /* ShapeTests */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_133 /* ShapeTests.swift */,
+			);
+			path = ShapeTests;
+			sourceTree = "<group>";
+		};
 		OBJ_10 /* include */ = {
 			isa = PBXGroup;
 			children = (
@@ -352,38 +485,20 @@
 		OBJ_106 /* SwimTests */ = {
 			isa = PBXGroup;
 			children = (
-				OBJ_107 /* AlphaBlendTests.swift */,
-				OBJ_108 /* ArithmeticTests.swift */,
-				OBJ_109 /* BayerTests.swift */,
-				OBJ_110 /* ChannelCompositionTests.swift */,
-				OBJ_111 /* ChannelSubscriptTests.swift */,
-				OBJ_112 /* ChannelwiseConversionTests.swift */,
-				OBJ_113 /* ClipTests.swift */,
-				OBJ_114 /* ConcatenateTests.swift */,
-				OBJ_115 /* ConvolutionTests.swift */,
-				OBJ_116 /* CorrelationTests.swift */,
-				OBJ_117 /* DataTypeConversionTests.swift */,
-				OBJ_118 /* FilterTests.swift */,
-				OBJ_119 /* FloatingPointTests.swift */,
-				OBJ_120 /* Im2colTests.swift */,
-				OBJ_121 /* ImageIOTests.swift */,
-				OBJ_122 /* ImageTests.swift */,
-				OBJ_123 /* IntegralImageTests.swift */,
-				OBJ_124 /* InterpolationTests.swift */,
-				OBJ_125 /* MatmulTests.swift */,
-				OBJ_126 /* PixelSubscriptTests.swift */,
-				OBJ_127 /* PixelTypeConversionTests.swift */,
-				OBJ_128 /* PixelwiseConversionTests.swift */,
-				OBJ_129 /* PlatformTests.swift */,
-				OBJ_130 /* Random.swift */,
-				OBJ_131 /* ResizeTests.swift */,
-				OBJ_132 /* SequenceTests.swift */,
-				OBJ_133 /* ShapeTests.swift */,
-				OBJ_134 /* SubimageSubscriptTests.swift */,
-				OBJ_135 /* TransformationTests.swift */,
-				OBJ_136 /* XCTAssertEqualWithAccuracy.swift */,
-				OBJ_137 /* vImageUtilsTests.swift */,
-				A739F4342266D2150008F50C /* ResourcePath.swift */,
+				A739F450226700C40008F50C /* AdvanceTests */,
+				A739F44E226700950008F50C /* ArithmeticTests */,
+				A739F44D2267008B0008F50C /* BlendTests */,
+				A739F44F226700A30008F50C /* ConversionTests */,
+				A739F451226700D80008F50C /* CoreTests */,
+				A739F452226700ED0008F50C /* IOTests */,
+				A739F453226701060008F50C /* InterpolationTests */,
+				A739F456226701930008F50C /* ManipulationTests */,
+				A739F459226702020008F50C /* PlatformTests */,
+				A739F45A2267021B0008F50C /* ShapeTests */,
+				A739F454226701430008F50C /* SubscriptTests */,
+				A739F4552267015B0008F50C /* TransformationTests */,
+				A739F457226701C20008F50C /* UtilityTests */,
+				A739F458226701D80008F50C /* Utility */,
 			);
 			name = SwimTests;
 			path = Tests/SwimTests;
@@ -849,6 +964,7 @@
 				OBJ_293 /* SubimageSubscriptTests.swift in Sources */,
 				OBJ_294 /* TransformationTests.swift in Sources */,
 				OBJ_295 /* XCTAssertEqualWithAccuracy.swift in Sources */,
+				A739F45D2267078E0008F50C /* AffineTransformationTests.swift in Sources */,
 				OBJ_296 /* vImageUtilsTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
