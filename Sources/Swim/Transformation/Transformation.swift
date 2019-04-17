@@ -4,7 +4,6 @@ import Foundation
 extension Image {
     @inlinable
     public func flipLR() -> Image<P, T> {
-        
         var newImage = Image<P, T>(width: width, height: height)
         
         data.withUnsafeBufferPointer { src in
@@ -27,7 +26,6 @@ extension Image {
     
     @inlinable
     public func flipUD() -> Image<P, T> {
-        
         var newImage = Image<P, T>(width: width, height: height)
         
         data.withUnsafeBufferPointer { src in
@@ -72,7 +70,6 @@ extension Image {
     
     @inlinable
     public func rot180() -> Image<P, T> {
-        
         var newImage = Image<P, T>(width: width, height: height)
         
         data.withUnsafeBufferPointer {

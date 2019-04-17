@@ -57,12 +57,13 @@ class TransformationTests: XCTestCase {
     
     func testRot() {
         do {
-            let data = (0..<12).map { UInt8($0) }
-            let image = Image(width: 2, height: 2, rgb: data)
+            let data = (0..<2*3*3).map { UInt8($0) }
+            let image = Image(width: 3, height: 2, rgb: data)
             
             XCTAssertEqual(image.rot90(),
-                           Image(width: 2, height: 2, data: [6, 7, 8, 0, 1, 2,
-                                                             9, 10, 11, 3, 4, 5 ]))
+                           Image(width: 2, height: 3, data: [9, 10, 11, 0, 1, 2,
+                                                             12, 13, 14, 3, 4, 5,
+                                                             15, 16, 17, 6, 7, 8]))
         }
         do {
             let data = (0..<40).map { UInt8($0) }
