@@ -51,6 +51,10 @@ extension AffineTransformation: HomogeneousTransformationMatrixProtocol {
                                                           c, d, ty,
                                                           0, 0, 1])
     }
+    
+    public func invertedMatrix() throws -> HomogeneousTransformationMatrix<T> {
+        return try inverted().matrix
+    }
 }
 
 extension AffineTransformation {

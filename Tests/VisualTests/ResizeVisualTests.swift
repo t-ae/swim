@@ -8,9 +8,9 @@ class ResizeVisualTests: XCTestCase {
                                           height: 4,
                                           data: (0..<4*4*3).map { _ in Float.random(in: 0..<1) })
             
-            let resizedNN = image.resize(width: 128, height: 128, method: .nearestNeighbor)
-            let resizedBL = image.resize(width: 128, height: 128, method: .bilinear)
-            let resizedBC = image.resize(width: 128, height: 128, method: .bicubic)
+            let resizedNN = image.resize(width: 128, height: 192, method: .nearestNeighbor)
+            let resizedBL = image.resize(width: 128, height: 192, method: .bilinear)
+            let resizedBC = image.resize(width: 128, height: 192, method: .bicubic)
                 .clipped(low: 0, high: 1)
             
             let concat = Image<RGB, Float>.concatH([resizedNN, resizedBL, resizedBC])

@@ -7,7 +7,7 @@ class WarpTests: XCTestCase {
             let a = HomogeneousTransformationMatrix(elements: [1, -1, 1,
                                                                1, 1, 0,
                                                                0, 3, 1])
-            let inv = try! a.inverted().matrix
+            let inv = try! a.invertedMatrix().matrix
             let id = a * inv
             
             XCTAssertEqual(id.elements, [1, 0, 0,
