@@ -12,7 +12,7 @@ class AffineTransformationTests: XCTestCase {
                            accuracy: 0)
         }
         do { // Rotate
-            let a = AffineTransformation.rotate(angle: Double.pi/3)
+            let a = AffineTransformation.rotation(angle: Double.pi/3)
             XCTAssertEqual(a.matrix.elements,
                            [0.5, -sqrt(3)/2, 0,
                             sqrt(3)/2, 0.5, 0,
@@ -20,7 +20,7 @@ class AffineTransformationTests: XCTestCase {
                            accuracy: 0.01)
         }
         do { // Translate
-            let a = AffineTransformation.translate(x: 2, y: 3)
+            let a = AffineTransformation.translation(x: 2, y: 3)
             XCTAssertEqual(a.matrix.elements,
                            [1, 0, 2,
                             0, 1, 3,
@@ -29,8 +29,8 @@ class AffineTransformationTests: XCTestCase {
         }
         do { // Inverse
             let a = AffineTransformation.scale(x: 2, y: 3)
-                * AffineTransformation.translate(x: 2, y: 3)
-                * AffineTransformation.rotate(angle: 1.0)
+                * AffineTransformation.translation(x: 2, y: 3)
+                * AffineTransformation.rotation(angle: 1.0)
             let id = try! a * a.inverted()
             XCTAssertEqual(id.matrix.elements,
                            [1, 0, 0,

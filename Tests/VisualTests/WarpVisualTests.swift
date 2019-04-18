@@ -14,9 +14,8 @@ class WarpVisualTests: XCTestCase {
                                         1, 1, 1,
                                         0.5, 0.5, 0.5,
                                         0.3, 0.3, 0.3])
-    let trans = AffineTransformation.translate(x: 150, y: 0)
-        * AffineTransformation.rotate(angle: Double.pi/6)
-        * AffineTransformation.scale(x: 50, y: 50)
+    
+    let trans = AffineTransformation(scale: (50, 50), rotation: Double.pi/6, translation: (150, 0))
     
     func testWarpNN() {
         typealias Intpl = NearestNeighborInterpolator
