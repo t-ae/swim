@@ -24,12 +24,12 @@ public struct BilinearInterpolator<T: BinaryFloatingPoint&DataType>: Interpolato
         let ld = getPixel(x: Int(x0), y: Int(y1), in: image)
         let rd = getPixel(x: Int(x1), y: Int(y1), in: image)
         
-        var top = xx1 * lu
-        top += x0x * ru
+        var result = xx1 * yy1 * lu
+        result += x0x * yy1 * ru
         
-        var bottom = xx1 * ld
-        bottom += x0x * rd
+        result += xx1 * y0y * ld
+        result += x0x * y0y * rd
         
-        return top * yy1 + bottom * y0y
+        return result
     }
 }
