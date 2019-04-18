@@ -53,13 +53,9 @@
 		OBJ_203 /* PixelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_40 /* PixelType.swift */; };
 		OBJ_204 /* Sequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_41 /* Sequence.swift */; };
 		OBJ_205 /* ImageIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_43 /* ImageIO.swift */; };
-		OBJ_206 /* BicubicInterpolation.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_45 /* BicubicInterpolation.swift */; };
 		OBJ_207 /* BicubicInterpolator.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_46 /* BicubicInterpolator.swift */; };
-		OBJ_208 /* BilinearInterpolation.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_47 /* BilinearInterpolation.swift */; };
 		OBJ_209 /* BilinearInterpolator.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_48 /* BilinearInterpolator.swift */; };
-		OBJ_210 /* Interpolation.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_49 /* Interpolation.swift */; };
 		OBJ_211 /* Interpolator.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_50 /* Interpolator.swift */; };
-		OBJ_212 /* NearestNeighbor.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_51 /* NearestNeighbor.swift */; };
 		OBJ_213 /* NearestNeighborInterpolator.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_52 /* NearestNeighborInterpolator.swift */; };
 		OBJ_214 /* Clip.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_54 /* Clip.swift */; };
 		OBJ_215 /* Concatenation.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_55 /* Concatenation.swift */; };
@@ -107,7 +103,6 @@
 		OBJ_277 /* ImageIOTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_111 /* ImageIOTests.swift */; };
 		OBJ_278 /* BicubicInterpolationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_113 /* BicubicInterpolationTests.swift */; };
 		OBJ_279 /* BilinearInterpolationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_114 /* BilinearInterpolationTests.swift */; };
-		OBJ_280 /* InterpolationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_115 /* InterpolationTests.swift */; };
 		OBJ_281 /* NearestNeighborInterpolatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_116 /* NearestNeighborInterpolatorTests.swift */; };
 		OBJ_282 /* ClipTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_118 /* ClipTests.swift */; };
 		OBJ_283 /* ConcatenateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_119 /* ConcatenateTests.swift */; };
@@ -223,7 +218,6 @@
 		OBJ_111 /* ImageIOTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageIOTests.swift; sourceTree = "<group>"; };
 		OBJ_113 /* BicubicInterpolationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BicubicInterpolationTests.swift; sourceTree = "<group>"; };
 		OBJ_114 /* BilinearInterpolationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BilinearInterpolationTests.swift; sourceTree = "<group>"; };
-		OBJ_115 /* InterpolationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterpolationTests.swift; sourceTree = "<group>"; };
 		OBJ_116 /* NearestNeighborInterpolatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearestNeighborInterpolatorTests.swift; sourceTree = "<group>"; };
 		OBJ_118 /* ClipTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipTests.swift; sourceTree = "<group>"; };
 		OBJ_119 /* ConcatenateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConcatenateTests.swift; sourceTree = "<group>"; };
@@ -275,13 +269,9 @@
 		OBJ_40 /* PixelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PixelType.swift; sourceTree = "<group>"; };
 		OBJ_41 /* Sequence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sequence.swift; sourceTree = "<group>"; };
 		OBJ_43 /* ImageIO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageIO.swift; sourceTree = "<group>"; };
-		OBJ_45 /* BicubicInterpolation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BicubicInterpolation.swift; sourceTree = "<group>"; };
 		OBJ_46 /* BicubicInterpolator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BicubicInterpolator.swift; sourceTree = "<group>"; };
-		OBJ_47 /* BilinearInterpolation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BilinearInterpolation.swift; sourceTree = "<group>"; };
 		OBJ_48 /* BilinearInterpolator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BilinearInterpolator.swift; sourceTree = "<group>"; };
-		OBJ_49 /* Interpolation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Interpolation.swift; sourceTree = "<group>"; };
 		OBJ_50 /* Interpolator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Interpolator.swift; sourceTree = "<group>"; };
-		OBJ_51 /* NearestNeighbor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearestNeighbor.swift; sourceTree = "<group>"; };
 		OBJ_52 /* NearestNeighborInterpolator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearestNeighborInterpolator.swift; sourceTree = "<group>"; };
 		OBJ_54 /* Clip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Clip.swift; sourceTree = "<group>"; };
 		OBJ_55 /* Concatenation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Concatenation.swift; sourceTree = "<group>"; };
@@ -416,7 +406,6 @@
 			children = (
 				OBJ_113 /* BicubicInterpolationTests.swift */,
 				OBJ_114 /* BilinearInterpolationTests.swift */,
-				OBJ_115 /* InterpolationTests.swift */,
 				OBJ_116 /* NearestNeighborInterpolatorTests.swift */,
 			);
 			path = InterpolationTests;
@@ -602,19 +591,15 @@
 		OBJ_44 /* Interpolation */ = {
 			isa = PBXGroup;
 			children = (
-				OBJ_45 /* BicubicInterpolation.swift */,
 				OBJ_46 /* BicubicInterpolator.swift */,
-				OBJ_47 /* BilinearInterpolation.swift */,
 				OBJ_48 /* BilinearInterpolator.swift */,
-				OBJ_49 /* Interpolation.swift */,
 				OBJ_50 /* Interpolator.swift */,
-				OBJ_51 /* NearestNeighbor.swift */,
 				OBJ_52 /* NearestNeighborInterpolator.swift */,
 			);
 			path = Interpolation;
 			sourceTree = "<group>";
 		};
-		OBJ_5 /*  */ = {
+		OBJ_5 = {
 			isa = PBXGroup;
 			children = (
 				OBJ_6 /* Package.swift */,
@@ -625,7 +610,6 @@
 				OBJ_154 /* LICENSE */,
 				OBJ_155 /* readme.md */,
 			);
-			name = "";
 			sourceTree = "<group>";
 		};
 		OBJ_53 /* Manipulation */ = {
@@ -933,7 +917,7 @@
 				English,
 				en,
 			);
-			mainGroup = OBJ_5 /*  */;
+			mainGroup = OBJ_5;
 			productRefGroup = OBJ_147 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -993,13 +977,9 @@
 				OBJ_203 /* PixelType.swift in Sources */,
 				OBJ_204 /* Sequence.swift in Sources */,
 				OBJ_205 /* ImageIO.swift in Sources */,
-				OBJ_206 /* BicubicInterpolation.swift in Sources */,
 				OBJ_207 /* BicubicInterpolator.swift in Sources */,
-				OBJ_208 /* BilinearInterpolation.swift in Sources */,
 				OBJ_209 /* BilinearInterpolator.swift in Sources */,
-				OBJ_210 /* Interpolation.swift in Sources */,
 				OBJ_211 /* Interpolator.swift in Sources */,
-				OBJ_212 /* NearestNeighbor.swift in Sources */,
 				OBJ_213 /* NearestNeighborInterpolator.swift in Sources */,
 				OBJ_214 /* Clip.swift in Sources */,
 				OBJ_215 /* Concatenation.swift in Sources */,
@@ -1060,7 +1040,6 @@
 				OBJ_277 /* ImageIOTests.swift in Sources */,
 				OBJ_278 /* BicubicInterpolationTests.swift in Sources */,
 				OBJ_279 /* BilinearInterpolationTests.swift in Sources */,
-				OBJ_280 /* InterpolationTests.swift in Sources */,
 				OBJ_281 /* NearestNeighborInterpolatorTests.swift in Sources */,
 				OBJ_282 /* ClipTests.swift in Sources */,
 				OBJ_283 /* ConcatenateTests.swift in Sources */,
