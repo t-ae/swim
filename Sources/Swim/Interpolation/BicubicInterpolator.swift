@@ -59,7 +59,7 @@ public struct BicubicInterpolator<T: BinaryFloatingPoint&DataType>: Interpolator
                 
                 if let coord = inImageCoord(x: xp_, y: yp_, width: image.width, height: image.height) {
                     for c in 0..<P.channels {
-                        result[c] += weight * image[coord.x, coord.y, c]
+                        result[c] += weight * image[unsafe: coord.x, coord.y, c]
                     }
                 } else if let constant = constant {
                     result += weight * constant
@@ -75,7 +75,7 @@ public struct BicubicInterpolator<T: BinaryFloatingPoint&DataType>: Interpolator
                 
                 if let coord = inImageCoord(x: xp_, y: yp_, width: image.width, height: image.height) {
                     for c in 0..<P.channels {
-                        result[c] += weight * image[coord.x, coord.y, c]
+                        result[c] += weight * image[unsafe: coord.x, coord.y, c]
                     }
                 } else if let constant = constant {
                     result += weight * constant
@@ -91,7 +91,7 @@ public struct BicubicInterpolator<T: BinaryFloatingPoint&DataType>: Interpolator
                 
                 if let coord = inImageCoord(x: xp_, y: yp_, width: image.width, height: image.height) {
                     for c in 0..<P.channels {
-                        result[c] += weight * image[coord.x, coord.y, c]
+                        result[c] += weight * image[unsafe: coord.x, coord.y, c]
                     }
                 } else if let constant = constant {
                     result += weight * constant
@@ -107,7 +107,7 @@ public struct BicubicInterpolator<T: BinaryFloatingPoint&DataType>: Interpolator
                 
                 if let coord = inImageCoord(x: xp_, y: yp_, width: image.width, height: image.height) {
                     for c in 0..<P.channels {
-                        result[c] += weight * image[coord.x, coord.y, c]
+                        result[c] += weight * image[unsafe: coord.x, coord.y, c]
                     }
                 } else if let constant = constant {
                     result += weight * constant
@@ -132,7 +132,7 @@ public struct BicubicInterpolator<T: BinaryFloatingPoint&DataType>: Interpolator
                 
                 if let coord = inImageCoord(x: xp_, y: yp_, width: image.width, height: image.height) {
                     for c in 0..<P.channels {
-                        result[c] += weight * image[coord.x, coord.y, c]
+                        result[c] += weight * image[unsafe: coord.x, coord.y, c]
                     }
                 } else if let constant = constant {
                     result += weight * constant
@@ -148,7 +148,7 @@ public struct BicubicInterpolator<T: BinaryFloatingPoint&DataType>: Interpolator
                 
                 if let coord = inImageCoord(x: xp_, y: yp_, width: image.width, height: image.height) {
                     for c in 0..<P.channels {
-                        result[c] += weight * image[coord.x, coord.y, c]
+                        result[c] += weight * image[unsafe: coord.x, coord.y, c]
                     }
                 } else if let constant = constant {
                     result += weight * constant
@@ -164,7 +164,7 @@ public struct BicubicInterpolator<T: BinaryFloatingPoint&DataType>: Interpolator
                 
                 if let coord = inImageCoord(x: xp_, y: yp_, width: image.width, height: image.height) {
                     for c in 0..<P.channels {
-                        result[c] += weight * image[coord.x, coord.y, c]
+                        result[c] += weight * image[unsafe: coord.x, coord.y, c]
                     }
                 } else if let constant = constant {
                     result += weight * constant
@@ -180,7 +180,7 @@ public struct BicubicInterpolator<T: BinaryFloatingPoint&DataType>: Interpolator
                 
                 if let coord = inImageCoord(x: xp_, y: yp_, width: image.width, height: image.height) {
                     for c in 0..<P.channels {
-                        result[c] += weight * image[coord.x, coord.y, c]
+                        result[c] += weight * image[unsafe: coord.x, coord.y, c]
                     }
                 } else if let constant = constant {
                     result += weight * constant
@@ -205,7 +205,7 @@ public struct BicubicInterpolator<T: BinaryFloatingPoint&DataType>: Interpolator
                 
                 if let coord = inImageCoord(x: xp_, y: yp_, width: image.width, height: image.height) {
                     for c in 0..<P.channels {
-                        result[c] += weight * image[coord.x, coord.y, c]
+                        result[c] += weight * image[unsafe: coord.x, coord.y, c]
                     }
                 } else if let constant = constant {
                     result += weight * constant
@@ -221,7 +221,7 @@ public struct BicubicInterpolator<T: BinaryFloatingPoint&DataType>: Interpolator
                 
                 if let coord = inImageCoord(x: xp_, y: yp_, width: image.width, height: image.height) {
                     for c in 0..<P.channels {
-                        result[c] += weight * image[coord.x, coord.y, c]
+                        result[c] += weight * image[unsafe: coord.x, coord.y, c]
                     }
                 } else if let constant = constant {
                     result += weight * constant
@@ -237,7 +237,7 @@ public struct BicubicInterpolator<T: BinaryFloatingPoint&DataType>: Interpolator
                 
                 if let coord = inImageCoord(x: xp_, y: yp_, width: image.width, height: image.height) {
                     for c in 0..<P.channels {
-                        result[c] += weight * image[coord.x, coord.y, c]
+                        result[c] += weight * image[unsafe: coord.x, coord.y, c]
                     }
                 } else if let constant = constant {
                     result += weight * constant
@@ -253,7 +253,7 @@ public struct BicubicInterpolator<T: BinaryFloatingPoint&DataType>: Interpolator
                 
                 if let coord = inImageCoord(x: xp_, y: yp_, width: image.width, height: image.height) {
                     for c in 0..<P.channels {
-                        result[c] += weight * image[coord.x, coord.y, c]
+                        result[c] += weight * image[unsafe: coord.x, coord.y, c]
                     }
                 } else if let constant = constant {
                     result += weight * constant
@@ -278,7 +278,7 @@ public struct BicubicInterpolator<T: BinaryFloatingPoint&DataType>: Interpolator
                 
                 if let coord = inImageCoord(x: xp_, y: yp_, width: image.width, height: image.height) {
                     for c in 0..<P.channels {
-                        result[c] += weight * image[coord.x, coord.y, c]
+                        result[c] += weight * image[unsafe: coord.x, coord.y, c]
                     }
                 } else if let constant = constant {
                     result += weight * constant
@@ -294,7 +294,7 @@ public struct BicubicInterpolator<T: BinaryFloatingPoint&DataType>: Interpolator
                 
                 if let coord = inImageCoord(x: xp_, y: yp_, width: image.width, height: image.height) {
                     for c in 0..<P.channels {
-                        result[c] += weight * image[coord.x, coord.y, c]
+                        result[c] += weight * image[unsafe: coord.x, coord.y, c]
                     }
                 } else if let constant = constant {
                     result += weight * constant
@@ -310,7 +310,7 @@ public struct BicubicInterpolator<T: BinaryFloatingPoint&DataType>: Interpolator
                 
                 if let coord = inImageCoord(x: xp_, y: yp_, width: image.width, height: image.height) {
                     for c in 0..<P.channels {
-                        result[c] += weight * image[coord.x, coord.y, c]
+                        result[c] += weight * image[unsafe: coord.x, coord.y, c]
                     }
                 } else if let constant = constant {
                     result += weight * constant
@@ -326,7 +326,7 @@ public struct BicubicInterpolator<T: BinaryFloatingPoint&DataType>: Interpolator
                 
                 if let coord = inImageCoord(x: xp_, y: yp_, width: image.width, height: image.height) {
                     for c in 0..<P.channels {
-                        result[c] += weight * image[coord.x, coord.y, c]
+                        result[c] += weight * image[unsafe: coord.x, coord.y, c]
                     }
                 } else if let constant = constant {
                     result += weight * constant
