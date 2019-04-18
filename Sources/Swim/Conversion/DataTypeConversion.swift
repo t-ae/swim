@@ -47,7 +47,7 @@ extension Image where T == Double {
 }
 
 // MARK: - Specializations
-
+// MARK: UInt8 -> ?
 extension Image where T == UInt8 {
     @inlinable
     public func typeConverted(to: UInt8.Type = UInt8.self) -> Image<P, UInt8> {
@@ -102,6 +102,7 @@ extension Image where T == UInt8 {
     #endif
 }
 
+// MARK: Int -> ?
 extension Image where T == Int {
     @inlinable
     public func typeConverted(to: UInt8.Type = UInt8.self) -> Image<P, UInt8> {
@@ -124,6 +125,7 @@ extension Image where T == Int {
     }
 }
 
+// MARK: Float -> ?
 extension Image where T == Float {
     #if canImport(Accelerate)
     
@@ -184,6 +186,7 @@ extension Image where T == Float {
     #endif
 }
 
+// MARK: Double -> ?
 extension Image where T == Double {
     #if canImport(Accelerate)
     
