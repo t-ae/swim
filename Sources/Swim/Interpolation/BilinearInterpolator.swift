@@ -19,16 +19,68 @@ public struct BilinearInterpolator<T: BinaryFloatingPoint&DataType>: Interpolato
         let y0y = y - y0
         let yy1 = y1 - y
         
-        let lu = getPixel(x: Int(x0), y: Int(y0), in: image)
-        let ru = getPixel(x: Int(x1), y: Int(y0), in: image)
-        let ld = getPixel(x: Int(x0), y: Int(y1), in: image)
-        let rd = getPixel(x: Int(x1), y: Int(y1), in: image)
+        var result = Pixel<P, T>(value: 0)
         
-        var result = xx1 * yy1 * lu
-        result += x0x * yy1 * ru
+        var constant: T?
+        switch edgeMode {
+        case let .constant(value):
+            constant = value
+        default:
+            constant = nil
+        }
         
-        result += xx1 * y0y * ld
-        result += x0x * y0y * rd
+        if let lu = inImageCoord(x: Int(x0), y: Int(y0), width: image.width, height: image.height) {
+            for c in 0..<P.channels {
+                result[c] += xx1 * yy1 * image[lu.x, lu.y, c]
+            }
+        } else if let constant = constant {
+            result += xx1 * yy1 * constant
+        } else {
+            fatalError("Never happens.")
+        }
+        
+        if let ru = inImageCoord(x: Int(x1), y: Int(y0), width: image.width, height: image.height) {
+            for c in 0..<P.channels {
+                result[c] += x0x * yy1 * image[ru.x, ru.y, c]
+            }
+        } else if let constant = constant {
+            result += x0x * yy1 * constant
+        } else {
+            fatalError("Never happens.")
+        }
+        
+        if let ld = inImageCoord(x: Int(x0), y: Int(y1), width: image.width, height: image.height) {
+            for c in 0..<P.channels {
+                result[c] += xx1 * y0y * image[ld.x, ld.y, c]
+            }
+        } else if let constant = constant {
+            result += xx1 * y0y * constant
+        } else {
+            fatalError("Never happens.")
+        }
+        
+        if let rd = inImageCoord(x: Int(x1), y: Int(y1), width: image.width, height: image.height) {
+            for c in 0..<P.channels {
+                result[c] += x0x * y0y * image[rd.x, rd.y, c]
+            }
+        } else if let constant = constant {
+            result += x0x * y0y * constant
+        } else {
+            fatalError("Never happens.")
+        }
+        
+        // Equivalent code, but much slower.
+        //
+        // let lu = getPixel(x: Int(x0), y: Int(y0), in: image)
+        // let ru = getPixel(x: Int(x1), y: Int(y0), in: image)
+        // let ld = getPixel(x: Int(x0), y: Int(y1), in: image)
+        // let rd = getPixel(x: Int(x1), y: Int(y1), in: image)
+        //
+        // var result = xx1 * yy1 * lu
+        // result += x0x * yy1 * ru
+        //
+        // result += xx1 * y0y * ld
+        // result += x0x * y0y * rd
         
         return result
     }
