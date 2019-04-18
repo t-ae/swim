@@ -33,6 +33,10 @@
 		A7CAD4AC22680983007B0E08 /* NearestNeighborInterpolator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7CAD4AA22680981007B0E08 /* NearestNeighborInterpolator.swift */; };
 		A7CAD4AF22680F88007B0E08 /* WarpVisualTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7CAD4AE22680F88007B0E08 /* WarpVisualTests.swift */; };
 		A7CAD4B122681178007B0E08 /* BilinearInterpolator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7CAD4B022681178007B0E08 /* BilinearInterpolator.swift */; };
+		A7CAD4B322681CFF007B0E08 /* BicubicInterpolator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7CAD4B222681CFF007B0E08 /* BicubicInterpolator.swift */; };
+		A7CAD4B62268255B007B0E08 /* NearestNeighborInterpolatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7CAD4B422682551007B0E08 /* NearestNeighborInterpolatorTests.swift */; };
+		A7CAD4B822682D58007B0E08 /* BicubicInterpolationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7CAD4B722682D58007B0E08 /* BicubicInterpolationTests.swift */; };
+		A7CAD4BA22682EE9007B0E08 /* BilinearInterpolationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7CAD4B922682EE9007B0E08 /* BilinearInterpolationTests.swift */; };
 		OBJ_150 /* image_io.c in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_9 /* image_io.c */; };
 		OBJ_152 /* stb_image_write.h in Headers */ = {isa = PBXBuildFile; fileRef = OBJ_11 /* stb_image_write.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		OBJ_153 /* stb_image.h in Headers */ = {isa = PBXBuildFile; fileRef = OBJ_12 /* stb_image.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -191,6 +195,10 @@
 		A7CAD4AA22680981007B0E08 /* NearestNeighborInterpolator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearestNeighborInterpolator.swift; sourceTree = "<group>"; };
 		A7CAD4AE22680F88007B0E08 /* WarpVisualTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WarpVisualTests.swift; sourceTree = "<group>"; };
 		A7CAD4B022681178007B0E08 /* BilinearInterpolator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BilinearInterpolator.swift; sourceTree = "<group>"; };
+		A7CAD4B222681CFF007B0E08 /* BicubicInterpolator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BicubicInterpolator.swift; sourceTree = "<group>"; };
+		A7CAD4B422682551007B0E08 /* NearestNeighborInterpolatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearestNeighborInterpolatorTests.swift; sourceTree = "<group>"; };
+		A7CAD4B722682D58007B0E08 /* BicubicInterpolationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BicubicInterpolationTests.swift; sourceTree = "<group>"; };
+		A7CAD4B922682EE9007B0E08 /* BilinearInterpolationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BilinearInterpolationTests.swift; sourceTree = "<group>"; };
 		OBJ_100 /* Run.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Run.swift; sourceTree = "<group>"; };
 		OBJ_101 /* StrideCopy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StrideCopy.swift; sourceTree = "<group>"; };
 		OBJ_104 /* PerformanceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerformanceTests.swift; sourceTree = "<group>"; };
@@ -396,6 +404,9 @@
 			isa = PBXGroup;
 			children = (
 				OBJ_124 /* InterpolationTests.swift */,
+				A7CAD4B422682551007B0E08 /* NearestNeighborInterpolatorTests.swift */,
+				A7CAD4B922682EE9007B0E08 /* BilinearInterpolationTests.swift */,
+				A7CAD4B722682D58007B0E08 /* BicubicInterpolationTests.swift */,
 			);
 			path = InterpolationTests;
 			sourceTree = "<group>";
@@ -470,6 +481,7 @@
 			isa = PBXGroup;
 			children = (
 				A7CAD4AE22680F88007B0E08 /* WarpVisualTests.swift */,
+				OBJ_105 /* VisualTests.swift */,
 			);
 			path = VisualTests;
 			sourceTree = "<group>";
@@ -498,7 +510,6 @@
 			isa = PBXGroup;
 			children = (
 				OBJ_104 /* PerformanceTests.swift */,
-				OBJ_105 /* VisualTests.swift */,
 			);
 			name = PerformanceTests;
 			path = Tests/PerformanceTests;
@@ -627,12 +638,13 @@
 			isa = PBXGroup;
 			children = (
 				A7CAD4A72267FFDD007B0E08 /* Interpolator.swift */,
+				A7CAD4AA22680981007B0E08 /* NearestNeighborInterpolator.swift */,
+				A7CAD4B022681178007B0E08 /* BilinearInterpolator.swift */,
+				A7CAD4B222681CFF007B0E08 /* BicubicInterpolator.swift */,
 				OBJ_45 /* BicubicInterpolation.swift */,
 				OBJ_46 /* BilinearInterpolation.swift */,
 				OBJ_47 /* Interpolation.swift */,
 				OBJ_48 /* NearestNeighbor.swift */,
-				A7CAD4AA22680981007B0E08 /* NearestNeighborInterpolator.swift */,
-				A7CAD4B022681178007B0E08 /* BilinearInterpolator.swift */,
 			);
 			path = Interpolation;
 			sourceTree = "<group>";
@@ -885,6 +897,8 @@
 			files = (
 				OBJ_161 /* PerformanceTests.swift in Sources */,
 				A7CAD4AF22680F88007B0E08 /* WarpVisualTests.swift in Sources */,
+				A7CAD4BA22682EE9007B0E08 /* BilinearInterpolationTests.swift in Sources */,
+				A7CAD4B822682D58007B0E08 /* BicubicInterpolationTests.swift in Sources */,
 				OBJ_162 /* VisualTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -949,6 +963,7 @@
 				OBJ_244 /* Run.swift in Sources */,
 				OBJ_245 /* StrideCopy.swift in Sources */,
 				A7CAD4AC22680983007B0E08 /* NearestNeighborInterpolator.swift in Sources */,
+				A7CAD4B322681CFF007B0E08 /* BicubicInterpolator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -984,6 +999,7 @@
 				OBJ_282 /* IntegralImageTests.swift in Sources */,
 				OBJ_283 /* InterpolationTests.swift in Sources */,
 				OBJ_284 /* MatmulTests.swift in Sources */,
+				A7CAD4B62268255B007B0E08 /* NearestNeighborInterpolatorTests.swift in Sources */,
 				OBJ_285 /* PixelSubscriptTests.swift in Sources */,
 				A739F4642267364E0008F50C /* WarpTests.swift in Sources */,
 				OBJ_286 /* PixelTypeConversionTests.swift in Sources */,

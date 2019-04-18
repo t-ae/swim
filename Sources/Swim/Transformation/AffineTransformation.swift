@@ -17,11 +17,13 @@ public struct AffineTransformation<T: BinaryFloatingPoint> {
         self.ty = ty
     }
     
-    public var inverse: AffineTransformation<T> {
+    public func inverted() throws -> AffineTransformation<T> {
         var inv = self
         let delta = a*d - b*c
         
-        precondition(delta != 0, "AffineTransformation is singular.")
+        guard delta != 0 else {
+            throw MatrixInversionError.singularMatrix
+        }
         
         inv.a = d / delta
         inv.b /= -delta
@@ -45,10 +47,6 @@ extension AffineTransformation: HomogeneousTransformationMatrixProtocol {
         return HomogeneousTransformationMatrix(elements: [a, b, tx,
                                                           c, d, ty,
                                                           0, 0, 1])
-    }
-    
-    public func inverted() throws -> HomogeneousTransformationMatrix<T> {
-        return inverse.matrix
     }
 }
 
@@ -124,7 +122,7 @@ extension Image where T: BinaryFloatingPoint {
         
         // shorthand
         let tr = transformation
-        let inv = tr.inverse
+        let inv = try! tr.inverted()
         
         let intpl: (T, T) -> Pixel<P, T>
         switch interpolation {

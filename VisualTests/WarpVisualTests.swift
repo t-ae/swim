@@ -2,13 +2,22 @@ import XCTest
 import Swim
 
 class WarpVisualTests: XCTestCase {
+    let src = Image<RGB, Double>(width: 3,
+                                 height: 3,
+                                 data: [1, 0, 0,
+                                        0, 1, 0,
+                                        0, 0, 1,
+                                        1, 1, 0,
+                                        1, 0, 1,
+                                        0, 1, 1,
+                                        1, 1, 1,
+                                        0.5, 0.5, 0.5,
+                                        0.3, 0.3, 0.3])
+    let trans = AffineTransformation.translate(x: 150, y: 0)
+        * AffineTransformation.rotate(angle: Double.pi/6)
+        * AffineTransformation.scale(x: 50, y: 50)
+    
     func testWarpNN() {
-        let src = Image<RGB, Double>(width: 4,
-                                     height: 4,
-                                     data: (0..<4*4*3).map { _ in .random(in: 0..<1) })
-        let trans = AffineTransformation.translate(x: 150, y: 0)
-            * AffineTransformation.rotate(angle: Double.pi/6)
-            * AffineTransformation.scale(x: 100, y: 100)
         typealias Intpl = NearestNeighborInterpolator
         
         var nsImages = [String: NSImage]()
@@ -26,6 +35,13 @@ class WarpVisualTests: XCTestCase {
             let rgb256 = (result * 255).typeConverted(to: UInt8.self)
             
             nsImages["reflect"] = rgb256.nsImage()
+        }
+        do {
+            let intpl = Intpl<Double>(mode: .symmetric)
+            let result = try! src.warp(transformation: trans, outputSize: (512, 512), interpolator: intpl)
+            let rgb256 = (result * 255).typeConverted(to: UInt8.self)
+            
+            nsImages["symmetric"] = rgb256.nsImage()
         }
         do {
             let intpl = Intpl<Double>(mode: .edge)
@@ -47,12 +63,6 @@ class WarpVisualTests: XCTestCase {
     }
     
     func testWarpBL() {
-        let src = Image<RGB, Double>(width: 4,
-                                     height: 4,
-                                     data: (0..<4*4*3).map { _ in .random(in: 0..<1) })
-        let trans = AffineTransformation.translate(x: 150, y: 0)
-            * AffineTransformation.rotate(angle: Double.pi/6)
-            * AffineTransformation.scale(x: 100, y: 100)
         typealias Intpl = BilinearInterpolator
         
         var nsImages = [String: NSImage]()
@@ -65,11 +75,11 @@ class WarpVisualTests: XCTestCase {
             nsImages["constant0"] = rgb256.nsImage()
         }
         do {
-            let intpl = Intpl<Double>(mode: .reflect)
+            let intpl = Intpl<Double>(mode: .symmetric)
             let result = try! src.warp(transformation: trans, outputSize: (512, 512), interpolator: intpl)
             let rgb256 = (result * 255).typeConverted(to: UInt8.self)
             
-            nsImages["reflect"] = rgb256.nsImage()
+            nsImages["symmetric"] = rgb256.nsImage()
         }
         do {
             let intpl = Intpl<Double>(mode: .edge)
@@ -81,6 +91,56 @@ class WarpVisualTests: XCTestCase {
         do {
             let intpl = Intpl<Double>(mode: .wrap)
             let result = try! src.warp(transformation: trans, outputSize: (512, 512), interpolator: intpl)
+            let rgb256 = (result * 255).typeConverted(to: UInt8.self)
+            
+            nsImages["wrap"] = rgb256.nsImage()
+        }
+        
+        print("break here")
+        XCTAssertFalse(nsImages.isEmpty)
+    }
+    
+    func testWarpBC() {
+        typealias Intpl = BicubicInterpolator
+        
+        var nsImages = [String: NSImage]()
+        
+        do {
+            let intpl = Intpl<Double>()
+            var result = try! src.warp(transformation: trans, outputSize: (512, 512), interpolator: intpl)
+            result.clip(low: 0, high: 1)
+            let rgb256 = (result * 255).typeConverted(to: UInt8.self)
+            
+            nsImages["constant0"] = rgb256.nsImage()
+        }
+        do {
+            let intpl = Intpl<Double>(a: -0.2)
+            var result = try! src.warp(transformation: trans, outputSize: (512, 512), interpolator: intpl)
+            result.clip(low: 0, high: 1)
+            let rgb256 = (result * 255).typeConverted(to: UInt8.self)
+            
+            nsImages["constant0 a-0.2"] = rgb256.nsImage()
+        }
+        do {
+            let intpl = Intpl<Double>(mode: .symmetric)
+            var result = try! src.warp(transformation: trans, outputSize: (512, 512), interpolator: intpl)
+            result.clip(low: 0, high: 1)
+            let rgb256 = (result * 255).typeConverted(to: UInt8.self)
+            
+            nsImages["symmetric"] = rgb256.nsImage()
+        }
+        do {
+            let intpl = Intpl<Double>(mode: .edge)
+            var result = try! src.warp(transformation: trans, outputSize: (512, 512), interpolator: intpl)
+            result.clip(low: 0, high: 1)
+            let rgb256 = (result * 255).typeConverted(to: UInt8.self)
+            
+            nsImages["edge"] = rgb256.nsImage()
+        }
+        do {
+            let intpl = Intpl<Double>(mode: .wrap)
+            var result = try! src.warp(transformation: trans, outputSize: (512, 512), interpolator: intpl)
+            result.clip(low: 0, high: 1)
             let rgb256 = (result * 255).typeConverted(to: UInt8.self)
             
             nsImages["wrap"] = rgb256.nsImage()

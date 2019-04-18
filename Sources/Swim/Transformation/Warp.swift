@@ -7,7 +7,7 @@ public enum MatrixInversionError: Error {
 public protocol HomogeneousTransformationMatrixProtocol {
     associatedtype T: BinaryFloatingPoint
     var matrix: HomogeneousTransformationMatrix<T> { get }
-    func inverted() throws -> HomogeneousTransformationMatrix<T>
+    func inverted() throws -> Self
 }
 
 public struct HomogeneousTransformationMatrix<T: BinaryFloatingPoint>: HomogeneousTransformationMatrixProtocol {
@@ -84,9 +84,7 @@ extension Image where T: BinaryFloatingPoint {
                                height: outputSize.height,
                                value: T.swimDefaultValue)
 
-        // shorthand
-        let tr = transformation.matrix
-        let inv = try tr.inverted()
+        let inv = try transformation.inverted().matrix
 
         for y1 in 0..<outputSize.width {
             for x1 in 0..<outputSize.height {

@@ -1,10 +1,10 @@
 import Foundation
 
 public struct BilinearInterpolator<T: BinaryFloatingPoint&DataType>: Interpolator {
-    public var mode: InterpolationMode<T>
+    public var edgeMode: EdgeMode<T>
     
-    public init(mode: InterpolationMode<T> = .constant(0)) {
-        self.mode = mode
+    public init(mode: EdgeMode<T> = .constant(0)) {
+        self.edgeMode = mode
     }
     
     @inlinable
@@ -19,10 +19,10 @@ public struct BilinearInterpolator<T: BinaryFloatingPoint&DataType>: Interpolato
         let y0y = y - y0
         let yy1 = y1 - y
         
-        let lu = getPixel(x: x0, y: y0, in: image)
-        let ru = getPixel(x: x1, y: y0, in: image)
-        let ld = getPixel(x: x0, y: y1, in: image)
-        let rd = getPixel(x: x1, y: y1, in: image)
+        let lu = getPixel(x: Int(x0), y: Int(y0), in: image)
+        let ru = getPixel(x: Int(x1), y: Int(y0), in: image)
+        let ld = getPixel(x: Int(x0), y: Int(y1), in: image)
+        let rd = getPixel(x: Int(x1), y: Int(y1), in: image)
         
         var top = xx1 * lu
         top += x0x * ru

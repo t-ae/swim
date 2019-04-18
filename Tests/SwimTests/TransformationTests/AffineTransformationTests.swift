@@ -31,7 +31,7 @@ class AffineTransformationTests: XCTestCase {
             let a = AffineTransformation.scale(x: 2, y: 3)
                 * AffineTransformation.translate(x: 2, y: 3)
                 * AffineTransformation.rotate(angle: 1.0)
-            let id = a * a.inverse
+            let id = try! a * a.inverted()
             XCTAssertEqual(id.matrix.elements,
                            [1, 0, 0,
                             0, 1, 0,
