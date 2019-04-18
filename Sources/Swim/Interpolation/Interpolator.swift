@@ -3,7 +3,7 @@ import Foundation
 public protocol Interpolator {
     associatedtype T: BinaryFloatingPoint & DataType
     
-    var edgeMode: EdgeMode<T> { get }
+    var edgeMode: EdgeMode<T> { get set }
     @inlinable func interpolate<P>(x: T, y: T, in image: Image<P, T>) -> Pixel<P, T>
 }
 

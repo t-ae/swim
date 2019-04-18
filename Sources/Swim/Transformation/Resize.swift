@@ -1,50 +1,7 @@
 import Foundation
-import CStbImage
 
-extension Image where T: BinaryFloatingPoint {
-    /// Resize image with appropriate algorithm.
-    ///
-    /// Area average method for downsampling and Bilinear interpolation for upsampling.
-    @inlinable
-    public func resized(width: Int, height: Int) -> Image<P, T> {
-        
-        var baseImage = self
-        if width < baseImage.width {
-            // downsample
-            baseImage = baseImage.resizeAA(width: width, height: baseImage.height)
-        }
-        if height < baseImage.height {
-            // downsample
-            baseImage = baseImage.resizeAA(width: baseImage.width, height: height)
-        }
-        if width > baseImage.width || height > baseImage.height {
-            // upsample
-            baseImage = baseImage.resizeBL(width: width, height: height)
-        }
-        return baseImage
-    }
-}
-
-extension Image {
-    /// Resize image with Narest Neighbor algorithm.
-    @inlinable
-    public func resizeNN(width: Int, height: Int) -> Image<P, T> {
-        var newImage = Image<P, T>(width: width, height: height)
-        
-        let scaleX = Double(self.width) / Double(width)
-        let scaleY = Double(self.height) / Double(height)
-        
-        for y in 0..<height {
-            let yp = Double(y) * scaleY
-            for x in 0..<width {
-                let xp = Double(x) * scaleX
-                
-                newImage[unsafe: x, y] = self.nearestNeighbor(x: xp, y: yp)
-            }
-        }
-        
-        return newImage
-    }
+extension Image where T: BinaryInteger {
+    
 }
 
 extension Image where T: BinaryFloatingPoint {
@@ -106,7 +63,7 @@ extension Image where T: BinaryFloatingPoint {
             for y in 0..<newImage.height {
                 let startY: T = T(y) * volume
                 let endY: T = T(y+1) * volume
-
+                
                 let ceilStartY = Foundation.ceil(startY)
                 let floorEndY = Foundation.floor(endY)
                 
@@ -145,59 +102,15 @@ extension Image where T: BinaryFloatingPoint {
         
         return yScaleImage
     }
-}
-
-extension Image where T: BinaryFloatingPoint {
-    /// Resize image with Bilinear interpolation.
-    public func resizeBL(width: Int, height: Int) -> Image<P, T> {
-        
-        let baseImage: Image<P, T>
-        do {
-            // downsample to avoid sparse sampling
-            var image = self
-            if width*2 < self.width {
-                var newWidth = self.width >> 1
-                while width*2 < newWidth {
-                    newWidth >>= 1
-                }
-                image = image.resizeAA(width: newWidth, height: image.height)
-            }
-            if height*2 < self.height {
-                var newHeight = self.height >> 1
-                while height*2 < newHeight {
-                    newHeight >>= 1
-                }
-                image = image.resizeAA(width: image.width, height: newHeight)
-            }
-            baseImage = image
-        }
-        
-        var newImage = Image<P, T>(width: width, height: height)
-
-        let scaleX = T(baseImage.width) / T(width)
-        let scaleY = T(baseImage.height) / T(height)
-
-        for y in 0..<height {
-            // yp \in [0, self.height)
-            let yp = T(y) * scaleY
-            for x in 0..<width {
-                // xp \in [0, self.width)
-                let xp = T(x) * scaleX
-                newImage[unsafe: x, y] = baseImage.interpolateBilinear(x: xp, y: yp)
-            }
-        }
-
-        return newImage
-    }
-}
-
-extension Image where T: BinaryFloatingPoint {
-    /// Resize image with Bicubic interpolation.
+    
     @inlinable
-    public func resizeBC(width: Int, height: Int) -> Image<P, T> {
+    public func resize(width: Int,
+                       height: Int,
+                       method: ResizeMethod = .bilinear,
+                       areaAverageResizeBeforeDownSample: Bool = true) -> Image<P, T> {
         
         let baseImage: Image<P, T>
-        do {
+        if areaAverageResizeBeforeDownSample {
             // downsample to avoid sparse sampling
             var image = self
             if width*4 < self.width {
@@ -215,23 +128,36 @@ extension Image where T: BinaryFloatingPoint {
                 image = image.resizeAA(width: image.width, height: newHeight)
             }
             baseImage = image
+        } else {
+            baseImage = self
         }
         
-        var newImage = Image<P, T>(width: width, height: height)
+        var dest = Image<P, T>(width: width, height: height)
         
-        let scaleX = T(baseImage.width) / T(width)
-        let scaleY = T(baseImage.height) / T(height)
+        let intpl: (T, T, Image<P, T>) -> Pixel<P, T>
+        switch method {
+        case .nearestNeighbor:
+            intpl = NearestNeighborInterpolator(mode: .edge).interpolate
+        case .bilinear:
+            intpl = BilinearInterpolator(mode: .edge).interpolate
+        case .bicubic:
+            intpl = BicubicInterpolator(mode: .edge).interpolate
+        }
         
         for y in 0..<height {
-            // yp \in [0, self.height)
-            let yp = T(y) * scaleY
+            let yp = T(baseImage.height) * T(y) / T(height)
             for x in 0..<width {
-                // xp \in [0, self.width)
-                let xp = T(x) * scaleX
-                newImage[unsafe: x, y] = baseImage.interpolateBicubic(x: xp, y: yp)
+                let xp = T(baseImage.width) * T(x) / T(width)
+                dest[x, y] = intpl(xp-0.5, yp-0.5, baseImage)
             }
         }
         
-        return newImage
+        return dest
     }
+}
+
+public enum ResizeMethod {
+    case nearestNeighbor
+    case bilinear
+    case bicubic
 }

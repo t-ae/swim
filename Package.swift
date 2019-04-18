@@ -26,6 +26,9 @@ let package = Package(
             name: "SwimTests",
             dependencies: ["Swim"]),
         .testTarget(
+            name: "VisualTests",
+            dependencies: ["Swim"]),
+        .testTarget(
             name: "PerformanceTests",
             dependencies: ["Swim"]),
     ]

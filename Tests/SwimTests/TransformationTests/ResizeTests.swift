@@ -2,34 +2,6 @@ import XCTest
 import Swim
 
 class ResizeTests: XCTestCase {
-    func testResizeNN_upscale() {
-        let image = Image<Intensity, Float>(width: 2, height: 2, data: [0, 1,
-                                                                        2, 3])
-        let resized3 = image.resizeNN(width: 3, height: 3)
-        XCTAssertEqual(resized3, Image(width: 3, height: 3, data: [0, 0, 1,
-                                                                   0, 0, 1,
-                                                                   2, 2, 3]))
-        
-        let resized4 = image.resizeNN(width: 4, height: 4)
-        XCTAssertEqual(resized4, Image(width: 4, height: 4, data: [0, 0, 1, 1,
-                                                                   0, 0, 1, 1,
-                                                                   2, 2, 3, 3,
-                                                                   2, 2, 3, 3]))
-    }
-    
-    func testResizeNN_downscale() {
-        let image = Image(width: 4, height: 4, intensity: (0..<16).map { Float($0) })
-        
-        let resized2 = image.resizeNN(width: 2, height: 2)
-        XCTAssertEqual(resized2, Image(width: 2, height: 2, data: [0, 2,
-                                                                   8, 10]))
-        
-        let resized3 = image.resizeNN(width: 3, height: 3)
-        XCTAssertEqual(resized3, Image(width: 3, height: 3, data: [0, 1,  2,
-                                                                   4, 5, 6,
-                                                                   8, 9, 10]))
-    }
-    
     func testResizeAA_upscale() {
         let image = Image<Intensity, Float>(width: 2, height: 2, data: [0, 1,
                                                                         2, 3])

@@ -1,93 +1,7 @@
 import XCTest
 import Swim
 
-// Set brakepoints and look NSImages in Xcode debugger
-
-class VisualTests: XCTestCase {
-    func testAlphaBlend() {
-        var imageBase = Image<RGB, Double>(width: 500,
-                                           height: 500,
-                                           value: 1)
-        
-        let red = Shape.circle(size: 200,
-                               lineWidth: 3,
-                               lineColor: Pixel(r: 1.0, g: 0.0, b: 0.0, a: 1.0),
-                               fillColor: Pixel(r: 1.0, g: 0.0, b: 0.0, a: 0.5))
-        let green = Shape.circle(size: 200,
-                                 lineWidth: 3,
-                                 lineColor: Pixel(r: 0.0, g: 1.0, b: 0.0, a: 1.0),
-                                 fillColor: Pixel(r: 0.0, g: 1.0, b: 0.0, a: 0.5))
-        let blue = Shape.circle(size: 200,
-                                lineWidth: 3,
-                                lineColor: Pixel(r: 0.0, g: 0.0, b: 1.0, a: 1.0),
-                                fillColor: Pixel(r: 0.0, g: 0.0, b: 1.0, a: 0.5))
-        
-        
-        imageBase[150..<350, 100..<300].alphaBlend(with: red)
-        imageBase[100..<300, 200..<400].alphaBlend(with: green)
-        imageBase[200..<400, 200..<400].alphaBlend(with: blue)
-        
-        let rgb256 = (imageBase * 255).typeConverted(to: UInt8.self)
-        let nsImage = rgb256.nsImage()
-        
-        print("break here")
-        
-        _ = nsImage
-    }
-    
-    func testFilter() {
-        let size = 128
-        var imageBase = Image<Intensity, Float>(width: size, height: size, value: 1)
-        for y in 0..<8 {
-            for x in 0..<8 {
-                guard (x+y) % 2 == 0 else { continue }
-                let startX = x*size/8
-                let endX = startX + size/8
-                let startY = y*size/8
-                let endY = startY + size/8
-                let value = Float(y*8+x) / 64
-                imageBase[startX..<endX, startY..<endY].fill(value)
-            }
-        }
-        let nsImageBase = float01ToNSImage(image: imageBase)
-        _ = nsImageBase
-        do {
-            var image = imageBase
-            image = image.convoluted(Filter.gaussian3x3)
-            let blur1 = float01ToNSImage(image: image)
-            for _ in 0..<4 {
-                image = image.convoluted(Filter.gaussian3x3)
-            }
-            let blur5 = float01ToNSImage(image: image)
-            for _ in 0..<10 {
-                image = image.convoluted(Filter.gaussian3x3)
-            }
-            let blur15 = float01ToNSImage(image: image)
-            
-            print("break here")
-            
-            _ = [blur1, blur5, blur15]
-        }
-        do {
-            let sobelH = float01ToNSImage(image: imageBase.convoluted(Filter.sobel3x3H))
-            let sobelV = float01ToNSImage(image: imageBase.convoluted(Filter.sobel3x3V))
-            let laplacian = float01ToNSImage(image: imageBase.convoluted(Filter.laplacian3x3))
-            
-            print("break here")
-            
-            _ = [sobelH, sobelV, laplacian]
-        }
-        do {
-            let maximum = float01ToNSImage(image: imageBase.maximumFilter(kernelSize: 5))
-            let minimum = float01ToNSImage(image: imageBase.minimumFilter(kernelSize: 5))
-            let median = float01ToNSImage(image: imageBase.medianFilter(kernelSize: 5))
-            
-            print("break here")
-            
-            _ = [maximum, minimum, median]
-        }
-    }
-    
+class OtherVisualTests: XCTestCase {
     func testOpenClose() {
         let size = 100
         var image = Image<Intensity, Float>(width: size, height: size, value: 0)
@@ -124,9 +38,8 @@ class VisualTests: XCTestCase {
         let nsBlackhat = float01ToNSImage(image: close - image)
         let nsTopHat = float01ToNSImage(image: image - open)
         
-        print("break here")
-        
-        _ = [nsImage, nsClose, nsOpen, nsCloseOpen, nsBlackhat, nsTopHat]
+        XCTAssertFalse([nsImage, nsClose, nsOpen, nsCloseOpen, nsBlackhat, nsTopHat].isEmpty,
+                       "Break and check nsImage in debugger.")
     }
     
     func testJulia() {
@@ -192,9 +105,8 @@ class VisualTests: XCTestCase {
         base.alphaBlend(with: julia7)
         let ns7 = (base*255).typeConverted(to: UInt8.self).nsImage()
         
-        print("break here")
-        
-        _ = [ns1, ns2, ns3, ns4, ns5, ns6, ns7]
+        XCTAssertFalse([ns1, ns2, ns3, ns4, ns5, ns6, ns7].isEmpty,
+                       "Break and check nsImage in debugger.")
     }
     
     public func testLifeGame() {
@@ -245,46 +157,14 @@ class VisualTests: XCTestCase {
         
         var steps: [NSImage] = []
         for _ in 0..<20 {
-            let ns = (b*255).resizeNN(width: 128, height: 128).toRGB().nsImage()
+            var bd = b.typeConverted(to: Double.self)
+            bd = bd.resize(width: 128, height: 128, method: .nearestNeighbor)
+            let ns = (bd.typeConverted(to: UInt8.self) * 255).toRGB().nsImage()
             steps.append(ns)
             b = next(b)
         }
-        print("break here")
-        _ = steps
-    }
-
-    func testResize() {
-        do {
-            let image = Image<RGB, Float>(width: 4,
-                                          height: 4,
-                                          data: (0..<4*4*3).map { _ in Float.random(in: 0..<1) })
-            
-            let resizedNN = image.resizeNN(width: 128, height: 128)
-            let resizedBL = image.resizeBL(width: 128, height: 128)
-            let resizedBC = image.resizeBC(width: 128, height: 128)
-            
-            let concat = Image<RGB, Float>.concatH([resizedNN, resizedBL, resizedBC])
-            
-            let rgb256 = (concat * 255).typeConverted(to: UInt8.self)
-            let nsImage = rgb256.nsImage()
-            
-            print("break here")
-            _ = nsImage
-        }
-        do {
-            let image = Shape.circle(size: 32, lineWidth: 3, lineColor: Pixel(r: 1.0, g: 0, b: 0))
-            let resizedNN = image.resizeNN(width: 128, height: 128)
-            let resizedBL = image.resizeBL(width: 128, height: 128)
-            let resizedBC = image.resizeBC(width: 128, height: 128)
-            
-            let concat = Image<RGB, Double>.concatH([resizedNN, resizedBL, resizedBC])
-            
-            let rgb256 = (concat * 255).typeConverted(to: UInt8.self)
-            let nsImage = rgb256.nsImage()
-            
-            print("break here")
-            _ = nsImage
-        }
+        
+        XCTAssertFalse(steps.isEmpty, "Break and check nsImage in debugger.")
     }
 }
 
