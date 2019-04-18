@@ -17,12 +17,6 @@ public struct AffineTransformation<T: BinaryFloatingPoint> {
         self.ty = ty
     }
     
-    public var matrix: [T] {
-        return [a, b, tx,
-                c, d, ty,
-                0, 0, 1]
-    }
-    
     public var inverse: AffineTransformation<T> {
         var inv = self
         let delta = a*d - b*c
@@ -43,6 +37,18 @@ public struct AffineTransformation<T: BinaryFloatingPoint> {
         inv.ty /= delta
         
         return inv
+    }
+}
+
+extension AffineTransformation: HomogeneousTransformationMatrixProtocol {
+    public var matrix: HomogeneousTransformationMatrix<T> {
+        return HomogeneousTransformationMatrix(elements: [a, b, tx,
+                                                          c, d, ty,
+                                                          0, 0, 1])
+    }
+    
+    public func inverted() throws -> HomogeneousTransformationMatrix<T> {
+        return inverse.matrix
     }
 }
 

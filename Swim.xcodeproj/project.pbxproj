@@ -29,6 +29,10 @@
 		A739F45D2267078E0008F50C /* AffineTransformationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A739F45B226702AA0008F50C /* AffineTransformationTests.swift */; };
 		A739F45F226734180008F50C /* Warp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A739F45E226734180008F50C /* Warp.swift */; };
 		A739F4642267364E0008F50C /* WarpTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A739F462226734FA0008F50C /* WarpTests.swift */; };
+		A7CAD4A922680000007B0E08 /* Interpolator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7CAD4A72267FFDD007B0E08 /* Interpolator.swift */; };
+		A7CAD4AC22680983007B0E08 /* NearestNeighborInterpolator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7CAD4AA22680981007B0E08 /* NearestNeighborInterpolator.swift */; };
+		A7CAD4AF22680F88007B0E08 /* WarpVisualTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7CAD4AE22680F88007B0E08 /* WarpVisualTests.swift */; };
+		A7CAD4B122681178007B0E08 /* BilinearInterpolator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7CAD4B022681178007B0E08 /* BilinearInterpolator.swift */; };
 		OBJ_150 /* image_io.c in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_9 /* image_io.c */; };
 		OBJ_152 /* stb_image_write.h in Headers */ = {isa = PBXBuildFile; fileRef = OBJ_11 /* stb_image_write.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		OBJ_153 /* stb_image.h in Headers */ = {isa = PBXBuildFile; fileRef = OBJ_12 /* stb_image.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -183,6 +187,10 @@
 		A739F45B226702AA0008F50C /* AffineTransformationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AffineTransformationTests.swift; sourceTree = "<group>"; };
 		A739F45E226734180008F50C /* Warp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Warp.swift; sourceTree = "<group>"; };
 		A739F462226734FA0008F50C /* WarpTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WarpTests.swift; sourceTree = "<group>"; };
+		A7CAD4A72267FFDD007B0E08 /* Interpolator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Interpolator.swift; sourceTree = "<group>"; };
+		A7CAD4AA22680981007B0E08 /* NearestNeighborInterpolator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearestNeighborInterpolator.swift; sourceTree = "<group>"; };
+		A7CAD4AE22680F88007B0E08 /* WarpVisualTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WarpVisualTests.swift; sourceTree = "<group>"; };
+		A7CAD4B022681178007B0E08 /* BilinearInterpolator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BilinearInterpolator.swift; sourceTree = "<group>"; };
 		OBJ_100 /* Run.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Run.swift; sourceTree = "<group>"; };
 		OBJ_101 /* StrideCopy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StrideCopy.swift; sourceTree = "<group>"; };
 		OBJ_104 /* PerformanceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerformanceTests.swift; sourceTree = "<group>"; };
@@ -458,6 +466,14 @@
 			path = ShapeTests;
 			sourceTree = "<group>";
 		};
+		A7CAD4AD22680F63007B0E08 /* VisualTests */ = {
+			isa = PBXGroup;
+			children = (
+				A7CAD4AE22680F88007B0E08 /* WarpVisualTests.swift */,
+			);
+			path = VisualTests;
+			sourceTree = "<group>";
+		};
 		OBJ_10 /* include */ = {
 			isa = PBXGroup;
 			children = (
@@ -471,6 +487,7 @@
 		OBJ_102 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				A7CAD4AD22680F63007B0E08 /* VisualTests */,
 				OBJ_103 /* PerformanceTests */,
 				OBJ_106 /* SwimTests */,
 			);
@@ -609,10 +626,13 @@
 		OBJ_44 /* Interpolation */ = {
 			isa = PBXGroup;
 			children = (
+				A7CAD4A72267FFDD007B0E08 /* Interpolator.swift */,
 				OBJ_45 /* BicubicInterpolation.swift */,
 				OBJ_46 /* BilinearInterpolation.swift */,
 				OBJ_47 /* Interpolation.swift */,
 				OBJ_48 /* NearestNeighbor.swift */,
+				A7CAD4AA22680981007B0E08 /* NearestNeighborInterpolator.swift */,
+				A7CAD4B022681178007B0E08 /* BilinearInterpolator.swift */,
 			);
 			path = Interpolation;
 			sourceTree = "<group>";
@@ -864,6 +884,7 @@
 			buildActionMask = 0;
 			files = (
 				OBJ_161 /* PerformanceTests.swift in Sources */,
+				A7CAD4AF22680F88007B0E08 /* WarpVisualTests.swift in Sources */,
 				OBJ_162 /* VisualTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -902,6 +923,7 @@
 				OBJ_199 /* NearestNeighbor.swift in Sources */,
 				OBJ_200 /* Clip.swift in Sources */,
 				OBJ_201 /* Concatenation.swift in Sources */,
+				A7CAD4B122681178007B0E08 /* BilinearInterpolator.swift in Sources */,
 				OBJ_202 /* Fill.swift in Sources */,
 				OBJ_203 /* FloatingPoint.swift in Sources */,
 				A739F4482266E9820008F50C /* vImageAlphaBlend.swift in Sources */,
@@ -916,6 +938,7 @@
 				OBJ_236 /* AffineTransformation.swift in Sources */,
 				A739F4452266E8B50008F50C /* vImageBuffer.swift in Sources */,
 				OBJ_237 /* Resize.swift in Sources */,
+				A7CAD4A922680000007B0E08 /* Interpolator.swift in Sources */,
 				OBJ_238 /* Transformation.swift in Sources */,
 				OBJ_239 /* ArrayExt.swift in Sources */,
 				OBJ_240 /* Clamp.swift in Sources */,
@@ -925,6 +948,7 @@
 				OBJ_243 /* Rect.swift in Sources */,
 				OBJ_244 /* Run.swift in Sources */,
 				OBJ_245 /* StrideCopy.swift in Sources */,
+				A7CAD4AC22680983007B0E08 /* NearestNeighborInterpolator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

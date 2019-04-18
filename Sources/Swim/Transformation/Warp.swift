@@ -1,8 +1,16 @@
+import Foundation
+
 public enum MatrixInversionError: Error {
     case singularMatrix
 }
 
-public struct HomogeneousTransformationMatrix<T: BinaryFloatingPoint> {
+public protocol HomogeneousTransformationMatrixProtocol {
+    associatedtype T: BinaryFloatingPoint
+    var matrix: HomogeneousTransformationMatrix<T> { get }
+    func inverted() throws -> HomogeneousTransformationMatrix<T>
+}
+
+public struct HomogeneousTransformationMatrix<T: BinaryFloatingPoint>: HomogeneousTransformationMatrixProtocol {
     public var elements: [T]
     
     public init(elements: [T]) {
@@ -20,6 +28,10 @@ public struct HomogeneousTransformationMatrix<T: BinaryFloatingPoint> {
         det -= e[1]*e[3]*e[8]
         det -= e[2]*e[4]*e[6]
         return det
+    }
+    
+    public var matrix: HomogeneousTransformationMatrix {
+        return self
     }
     
     public func inverted() throws -> HomogeneousTransformationMatrix {
@@ -50,4 +62,40 @@ public func *<T: BinaryFloatingPoint>(lhs: HomogeneousTransformationMatrix<T>,
                                       rhs: HomogeneousTransformationMatrix<T>) -> HomogeneousTransformationMatrix<T> {
     let elements = matmul(lhs: lhs.elements, rhs: rhs.elements, m: 3, n: 3, p: 3)
     return HomogeneousTransformationMatrix(elements: elements)
+}
+
+public func *<T: BinaryFloatingPoint>(lhs: HomogeneousTransformationMatrix<T>,
+                                      rhs: (x: T, y: T)) -> (x: T, y: T) {
+    let e = lhs.elements
+    let x = e[0]*rhs.0 + e[1]*rhs.1 + e[2]
+    let y = e[3]*rhs.0 + e[4]*rhs.1 + e[5]
+    let w = e[6]*rhs.0 + e[7]*rhs.1 + e[8]
+    return (x / w, y / w)
+}
+
+extension Image where T: BinaryFloatingPoint {
+    @inlinable
+    public func warp<M: HomogeneousTransformationMatrixProtocol, Intpl: Interpolator>(
+        transformation: M,
+        outputSize: (width: Int, height: Int),
+        interpolator: Intpl) throws -> Image<P, T> where M.T == T, Intpl.T == T {
+        
+        var dest = Image<P, T>(width: outputSize.width,
+                               height: outputSize.height,
+                               value: T.swimDefaultValue)
+
+        // shorthand
+        let tr = transformation.matrix
+        let inv = try tr.inverted()
+
+        for y1 in 0..<outputSize.width {
+            for x1 in 0..<outputSize.height {
+                let (x0, y0) = inv * (T(x1), T(y1))
+
+                dest[unsafe: x1, y1] = interpolator.interpolate(x: x0, y: y0, in: self)
+            }
+        }
+        
+        return dest
+    }
 }
