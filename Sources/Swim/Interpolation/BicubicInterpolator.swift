@@ -36,10 +36,6 @@ public struct BicubicInterpolator<T: BinaryFloatingPoint&DataType>: Interpolator
         
         var result = Pixel<P, T>(value: 0)
         
-        
-        let xmin_ = Int(xmin)
-        let ymin_ = Int(ymin)
-        
         var constant: T?
         switch edgeMode {
         case let .constant(value):
@@ -48,259 +44,295 @@ public struct BicubicInterpolator<T: BinaryFloatingPoint&DataType>: Interpolator
             constant = nil
         }
         
+        var yp = ymin
+        var yp_ = Int(yp)
+        
+        // dy = 0
         do {
-            let xp = xmin + 0
-            let yp = ymin + 0
-            let weight = bicubicWeight(distance: x - xp) * bicubicWeight(distance: y - yp)
+            let yw = bicubicWeight(distance: y - yp)
             
-            if let coord = inImageCoord(x: xmin_+0, y: ymin_+0, width: image.width, height: image.height) {
-                for c in 0..<P.channels {
-                    result[c] += weight * image[coord.x, coord.y, c]
+            var xp = xmin
+            var xp_ = Int(xp)
+            
+            do {
+                let weight = bicubicWeight(distance: x - xp) * yw
+                
+                if let coord = inImageCoord(x: xp_, y: yp_, width: image.width, height: image.height) {
+                    for c in 0..<P.channels {
+                        result[c] += weight * image[coord.x, coord.y, c]
+                    }
+                } else if let constant = constant {
+                    result += weight * constant
+                } else {
+                    fatalError("Never happens.")
                 }
-            } else if let constant = constant {
-                result += weight * constant
-            } else {
-                fatalError("Never happens.")
+            }
+            xp += 1
+            xp_ += 1
+            
+            do {
+                let weight = bicubicWeight(distance: x - xp) * yw
+                
+                if let coord = inImageCoord(x: xp_, y: yp_, width: image.width, height: image.height) {
+                    for c in 0..<P.channels {
+                        result[c] += weight * image[coord.x, coord.y, c]
+                    }
+                } else if let constant = constant {
+                    result += weight * constant
+                } else {
+                    fatalError("Never happens.")
+                }
+            }
+            xp += 1
+            xp_ += 1
+            
+            do {
+                let weight = bicubicWeight(distance: xp - x) * yw
+                
+                if let coord = inImageCoord(x: xp_, y: yp_, width: image.width, height: image.height) {
+                    for c in 0..<P.channels {
+                        result[c] += weight * image[coord.x, coord.y, c]
+                    }
+                } else if let constant = constant {
+                    result += weight * constant
+                } else {
+                    fatalError("Never happens.")
+                }
+            }
+            xp += 1
+            xp_ += 1
+            
+            do {
+                let weight = bicubicWeight(distance: xp - x) * yw
+                
+                if let coord = inImageCoord(x: xp_, y: yp_, width: image.width, height: image.height) {
+                    for c in 0..<P.channels {
+                        result[c] += weight * image[coord.x, coord.y, c]
+                    }
+                } else if let constant = constant {
+                    result += weight * constant
+                } else {
+                    fatalError("Never happens.")
+                }
             }
         }
         
+        yp += 1
+        yp_ += 1
+
+        // dy = 1
         do {
-            let xp = xmin + 1
-            let yp = ymin + 0
-            let weight = bicubicWeight(distance: x - xp) * bicubicWeight(distance: y - yp)
+            let yw = bicubicWeight(distance: y - yp)
             
-            if let coord = inImageCoord(x: xmin_+1, y: ymin_+0, width: image.width, height: image.height) {
-                for c in 0..<P.channels {
-                    result[c] += weight * image[coord.x, coord.y, c]
+            var xp = xmin
+            var xp_ = Int(xp)
+            
+            do {
+                let weight = bicubicWeight(distance: x - xp) * yw
+                
+                if let coord = inImageCoord(x: xp_, y: yp_, width: image.width, height: image.height) {
+                    for c in 0..<P.channels {
+                        result[c] += weight * image[coord.x, coord.y, c]
+                    }
+                } else if let constant = constant {
+                    result += weight * constant
+                } else {
+                    fatalError("Never happens.")
                 }
-            } else if let constant = constant {
-                result += weight * constant
-            } else {
-                fatalError("Never happens.")
+            }
+            xp += 1
+            xp_ += 1
+            
+            do {
+                let weight = bicubicWeight(distance: x - xp) * yw
+                
+                if let coord = inImageCoord(x: xp_, y: yp_, width: image.width, height: image.height) {
+                    for c in 0..<P.channels {
+                        result[c] += weight * image[coord.x, coord.y, c]
+                    }
+                } else if let constant = constant {
+                    result += weight * constant
+                } else {
+                    fatalError("Never happens.")
+                }
+            }
+            xp += 1
+            xp_ += 1
+            
+            do {
+                let weight = bicubicWeight(distance: xp - x) * yw
+                
+                if let coord = inImageCoord(x: xp_, y: yp_, width: image.width, height: image.height) {
+                    for c in 0..<P.channels {
+                        result[c] += weight * image[coord.x, coord.y, c]
+                    }
+                } else if let constant = constant {
+                    result += weight * constant
+                } else {
+                    fatalError("Never happens.")
+                }
+            }
+            xp += 1
+            xp_ += 1
+            
+            do {
+                let weight = bicubicWeight(distance: xp - x) * yw
+                
+                if let coord = inImageCoord(x: xp_, y: yp_, width: image.width, height: image.height) {
+                    for c in 0..<P.channels {
+                        result[c] += weight * image[coord.x, coord.y, c]
+                    }
+                } else if let constant = constant {
+                    result += weight * constant
+                } else {
+                    fatalError("Never happens.")
+                }
             }
         }
         
+        yp += 1
+        yp_ += 1
+        
+        // dy = 2
         do {
-            let xp = xmin + 2
-            let yp = ymin + 0
-            let weight = bicubicWeight(distance: xp - x) * bicubicWeight(distance: y - yp)
+            let yw = bicubicWeight(distance: yp - y)
             
-            if let coord = inImageCoord(x: xmin_+2, y: ymin_+0, width: image.width, height: image.height) {
-                for c in 0..<P.channels {
-                    result[c] += weight * image[coord.x, coord.y, c]
+            var xp = xmin
+            var xp_ = Int(xp)
+            
+            do {
+                let weight = bicubicWeight(distance: x - xp) * yw
+                
+                if let coord = inImageCoord(x: xp_, y: yp_, width: image.width, height: image.height) {
+                    for c in 0..<P.channels {
+                        result[c] += weight * image[coord.x, coord.y, c]
+                    }
+                } else if let constant = constant {
+                    result += weight * constant
+                } else {
+                    fatalError("Never happens.")
                 }
-            } else if let constant = constant {
-                result += weight * constant
-            } else {
-                fatalError("Never happens.")
+            }
+            xp += 1
+            xp_ += 1
+            
+            do {
+                let weight = bicubicWeight(distance: x - xp) * yw
+                
+                if let coord = inImageCoord(x: xp_, y: yp_, width: image.width, height: image.height) {
+                    for c in 0..<P.channels {
+                        result[c] += weight * image[coord.x, coord.y, c]
+                    }
+                } else if let constant = constant {
+                    result += weight * constant
+                } else {
+                    fatalError("Never happens.")
+                }
+            }
+            xp += 1
+            xp_ += 1
+            
+            do {
+                let weight = bicubicWeight(distance: xp - x) * yw
+                
+                if let coord = inImageCoord(x: xp_, y: yp_, width: image.width, height: image.height) {
+                    for c in 0..<P.channels {
+                        result[c] += weight * image[coord.x, coord.y, c]
+                    }
+                } else if let constant = constant {
+                    result += weight * constant
+                } else {
+                    fatalError("Never happens.")
+                }
+            }
+            xp += 1
+            xp_ += 1
+            
+            do {
+                let weight = bicubicWeight(distance: xp - x) * yw
+                
+                if let coord = inImageCoord(x: xp_, y: yp_, width: image.width, height: image.height) {
+                    for c in 0..<P.channels {
+                        result[c] += weight * image[coord.x, coord.y, c]
+                    }
+                } else if let constant = constant {
+                    result += weight * constant
+                } else {
+                    fatalError("Never happens.")
+                }
             }
         }
         
-        do {
-            let xp = xmin + 3
-            let yp = ymin + 0
-            let weight = bicubicWeight(distance: xp - x) * bicubicWeight(distance: y - yp)
-            
-            if let coord = inImageCoord(x: xmin_+3, y: ymin_+0, width: image.width, height: image.height) {
-                for c in 0..<P.channels {
-                    result[c] += weight * image[coord.x, coord.y, c]
-                }
-            } else if let constant = constant {
-                result += weight * constant
-            } else {
-                fatalError("Never happens.")
-            }
-        }
+        yp += 1
+        yp_ += 1
         
+        // dy = 3
         do {
-            let xp = xmin + 0
-            let yp = ymin + 1
-            let weight = bicubicWeight(distance: x - xp) * bicubicWeight(distance: y - yp)
+            let yw = bicubicWeight(distance: yp - y)
             
-            if let coord = inImageCoord(x: xmin_+0, y: ymin_+1, width: image.width, height: image.height) {
-                for c in 0..<P.channels {
-                    result[c] += weight * image[coord.x, coord.y, c]
+            var xp = xmin
+            var xp_ = Int(xp)
+            
+            do {
+                let weight = bicubicWeight(distance: x - xp) * yw
+                
+                if let coord = inImageCoord(x: xp_, y: yp_, width: image.width, height: image.height) {
+                    for c in 0..<P.channels {
+                        result[c] += weight * image[coord.x, coord.y, c]
+                    }
+                } else if let constant = constant {
+                    result += weight * constant
+                } else {
+                    fatalError("Never happens.")
                 }
-            } else if let constant = constant {
-                result += weight * constant
-            } else {
-                fatalError("Never happens.")
             }
-        }
-        
-        do {
-            let xp = xmin + 1
-            let yp = ymin + 1
-            let weight = bicubicWeight(distance: x - xp) * bicubicWeight(distance: y - yp)
+            xp += 1
+            xp_ += 1
             
-            if let coord = inImageCoord(x: xmin_+1, y: ymin_+1, width: image.width, height: image.height) {
-                for c in 0..<P.channels {
-                    result[c] += weight * image[coord.x, coord.y, c]
+            do {
+                let weight = bicubicWeight(distance: x - xp) * yw
+                
+                if let coord = inImageCoord(x: xp_, y: yp_, width: image.width, height: image.height) {
+                    for c in 0..<P.channels {
+                        result[c] += weight * image[coord.x, coord.y, c]
+                    }
+                } else if let constant = constant {
+                    result += weight * constant
+                } else {
+                    fatalError("Never happens.")
                 }
-            } else if let constant = constant {
-                result += weight * constant
-            } else {
-                fatalError("Never happens.")
             }
-        }
-        
-        do {
-            let xp = xmin + 2
-            let yp = ymin + 1
-            let weight = bicubicWeight(distance: xp - x) * bicubicWeight(distance: y - yp)
+            xp += 1
+            xp_ += 1
             
-            if let coord = inImageCoord(x: xmin_+2, y: ymin_+1, width: image.width, height: image.height) {
-                for c in 0..<P.channels {
-                    result[c] += weight * image[coord.x, coord.y, c]
+            do {
+                let weight = bicubicWeight(distance: xp - x) * yw
+                
+                if let coord = inImageCoord(x: xp_, y: yp_, width: image.width, height: image.height) {
+                    for c in 0..<P.channels {
+                        result[c] += weight * image[coord.x, coord.y, c]
+                    }
+                } else if let constant = constant {
+                    result += weight * constant
+                } else {
+                    fatalError("Never happens.")
                 }
-            } else if let constant = constant {
-                result += weight * constant
-            } else {
-                fatalError("Never happens.")
             }
-        }
-        
-        do {
-            let xp = xmin + 3
-            let yp = ymin + 1
-            let weight = bicubicWeight(distance: xp - x) * bicubicWeight(distance: y - yp)
+            xp += 1
+            xp_ += 1
             
-            if let coord = inImageCoord(x: xmin_+3, y: ymin_+1, width: image.width, height: image.height) {
-                for c in 0..<P.channels {
-                    result[c] += weight * image[coord.x, coord.y, c]
+            do {
+                let weight = bicubicWeight(distance: xp - x) * yw
+                
+                if let coord = inImageCoord(x: xp_, y: yp_, width: image.width, height: image.height) {
+                    for c in 0..<P.channels {
+                        result[c] += weight * image[coord.x, coord.y, c]
+                    }
+                } else if let constant = constant {
+                    result += weight * constant
+                } else {
+                    fatalError("Never happens.")
                 }
-            } else if let constant = constant {
-                result += weight * constant
-            } else {
-                fatalError("Never happens.")
-            }
-        }
-        
-        do {
-            let xp = xmin + 0
-            let yp = ymin + 2
-            let weight = bicubicWeight(distance: x - xp) * bicubicWeight(distance: yp - y)
-            
-            if let coord = inImageCoord(x: xmin_+0, y: ymin_+2, width: image.width, height: image.height) {
-                for c in 0..<P.channels {
-                    result[c] += weight * image[coord.x, coord.y, c]
-                }
-            } else if let constant = constant {
-                result += weight * constant
-            } else {
-                fatalError("Never happens.")
-            }
-        }
-        
-        do {
-            let xp = xmin + 1
-            let yp = ymin + 2
-            let weight = bicubicWeight(distance: x - xp) * bicubicWeight(distance: yp - y)
-            
-            if let coord = inImageCoord(x: xmin_+1, y: ymin_+2, width: image.width, height: image.height) {
-                for c in 0..<P.channels {
-                    result[c] += weight * image[coord.x, coord.y, c]
-                }
-            } else if let constant = constant {
-                result += weight * constant
-            } else {
-                fatalError("Never happens.")
-            }
-        }
-        
-        do {
-            let xp = xmin + 2
-            let yp = ymin + 2
-            let weight = bicubicWeight(distance: xp - x) * bicubicWeight(distance: yp - y)
-            
-            if let coord = inImageCoord(x: xmin_+2, y: ymin_+2, width: image.width, height: image.height) {
-                for c in 0..<P.channels {
-                    result[c] += weight * image[coord.x, coord.y, c]
-                }
-            } else if let constant = constant {
-                result += weight * constant
-            } else {
-                fatalError("Never happens.")
-            }
-        }
-        
-        do {
-            let xp = xmin + 3
-            let yp = ymin + 2
-            let weight = bicubicWeight(distance: xp - x) * bicubicWeight(distance: yp - y)
-            
-            if let coord = inImageCoord(x: xmin_+3, y: ymin_+2, width: image.width, height: image.height) {
-                for c in 0..<P.channels {
-                    result[c] += weight * image[coord.x, coord.y, c]
-                }
-            } else if let constant = constant {
-                result += weight * constant
-            } else {
-                fatalError("Never happens.")
-            }
-        }
-        
-        do {
-            let xp = xmin + 0
-            let yp = ymin + 3
-            let weight = bicubicWeight(distance: x - xp) * bicubicWeight(distance: yp - y)
-            
-            if let coord = inImageCoord(x: xmin_+0, y: ymin_+3, width: image.width, height: image.height) {
-                for c in 0..<P.channels {
-                    result[c] += weight * image[coord.x, coord.y, c]
-                }
-            } else if let constant = constant {
-                result += weight * constant
-            } else {
-                fatalError("Never happens.")
-            }
-        }
-        
-        do {
-            let xp = xmin + 1
-            let yp = ymin + 3
-            let weight = bicubicWeight(distance: x - xp) * bicubicWeight(distance: yp - y)
-            
-            if let coord = inImageCoord(x: xmin_+1, y: ymin_+3, width: image.width, height: image.height) {
-                for c in 0..<P.channels {
-                    result[c] += weight * image[coord.x, coord.y, c]
-                }
-            } else if let constant = constant {
-                result += weight * constant
-            } else {
-                fatalError("Never happens.")
-            }
-        }
-        
-        do {
-            let xp = xmin + 2
-            let yp = ymin + 3
-            let weight = bicubicWeight(distance: xp - x) * bicubicWeight(distance: yp - y)
-            
-            if let coord = inImageCoord(x: xmin_+2, y: ymin_+3, width: image.width, height: image.height) {
-                for c in 0..<P.channels {
-                    result[c] += weight * image[coord.x, coord.y, c]
-                }
-            } else if let constant = constant {
-                result += weight * constant
-            } else {
-                fatalError("Never happens.")
-            }
-        }
-        
-        do {
-            let xp = xmin + 3
-            let yp = ymin + 3
-            let weight = bicubicWeight(distance: xp - x) * bicubicWeight(distance: yp - y)
-            
-            if let coord = inImageCoord(x: xmin_+3, y: ymin_+3, width: image.width, height: image.height) {
-                for c in 0..<P.channels {
-                    result[c] += weight * image[coord.x, coord.y, c]
-                }
-            } else if let constant = constant {
-                result += weight * constant
-            } else {
-                fatalError("Never happens.")
             }
         }
         
