@@ -39,6 +39,11 @@ extension DataTypeConverter where T: BinaryInteger {
     public func cast<T2: BinaryFloatingPoint>(to: T2.Type = T2.self) -> Image<P, T2> {
         return image.channelwiseConverted { T2($0) }
     }
+    
+    @inlinable
+    public func uncheckedCast(to: UInt8.Type = UInt8.self) -> Image<P, UInt8> {
+        return image.channelwiseConverted { UInt8(Int($0) | 0xff) }
+    }
 }
 
 extension DataTypeConverter where T: BinaryFloatingPoint {
