@@ -39,6 +39,15 @@ extension Filter where T: FloatingPoint {
         return Image(width: 3, height: 3, data: data.map { $0 / 16 })
     }
     
+    public static var gaussian5x5: Image<Intensity, T> {
+        let data: [T] = [1,  4,  6,  4, 1,
+                         4, 16, 24, 16, 4,
+                         6, 24, 36, 24, 6,
+                         4, 16, 24, 16, 4,
+                         1,  4,  6,  4, 1]
+        return Image(width: 5, height: 5, data: data.map { $0 / 256 })
+    }
+    
     public static var mean3x3: Image<Intensity, T> {
         let mean: T = 1 / 9
         return Image(width: 3, height: 3, data: [T](repeating: mean, count: 9))
@@ -65,6 +74,8 @@ extension Image where T: Numeric {
         return newImage
     }
 }
+
+
 #if canImport(Accelerate)
 
 extension Image where T == Float {

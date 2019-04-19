@@ -170,13 +170,6 @@ extension Image where P: RGBWithAlpha {
     }
 }
 
-extension Image where P == RGB {
-    @inlinable
-    public init<P: RGBWithAlpha>(image: Image<P, T>) {
-        self = removeAlpha(image: image)
-    }
-}
-
 // MARK: - RGBA <-> ARGB
 @inlinable
 func permuteChannels<T>(data: [T], permutation: [Int]) -> [T] {

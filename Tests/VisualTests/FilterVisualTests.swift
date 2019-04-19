@@ -63,4 +63,22 @@ class FilterVisualTests: XCTestCase {
         
         XCTAssertFalse([maximum, minimum, median].isEmpty, "Break and check nsImages in debugger")
     }
+    
+    func testLena() {
+        let path = testResoruceRoot().appendingPathComponent("lena_512.png")
+        let image = Image<RGB, Double>(contentsOf: path)!
+        
+        let nsBase = doubleToNSImage(image)
+        
+        var gaussian = image
+        for _ in 0..<30 {
+            gaussian = image.convoluted(Filter.gaussian5x5)
+        }
+        let nsGaussian = doubleToNSImage(gaussian)
+        
+        let laplacian = image.toLuminance().convoluted(Filter.laplacian3x3)
+        let nsLaplacian = doubleToNSImage(laplacian)
+        
+        XCTAssertFalse([nsBase, nsGaussian, nsLaplacian].isEmpty, "Break and check nsImages in debugger")
+    }
 }
