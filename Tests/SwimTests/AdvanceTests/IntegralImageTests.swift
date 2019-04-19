@@ -7,7 +7,7 @@ class IntegralImageTests: XCTestCase {
         do {
             let image = Image(width: 3, height: 3, intensity: [Int](repeating: 1, count: 9))
             
-            let integral = image.toIntegralImage()
+            let integral = IntegralImageConverter.convert(image: image)
             
             XCTAssertEqual(integral, Image(width: 3, height: 3, data: [1, 2, 3, 2, 4, 6, 3, 6, 9]))
         }
@@ -18,7 +18,7 @@ class IntegralImageTests: XCTestCase {
                                           4.0, 4.0, 2.0,
                                           2.0, 1.0, 1.0])
             
-            let integral = image.toIntegralImage()
+            let integral = IntegralImageConverter.convert(image: image)
             
             XCTAssertEqual(integral,
                            Image(width: 3,
