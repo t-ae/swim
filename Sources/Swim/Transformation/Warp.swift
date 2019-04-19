@@ -117,8 +117,8 @@ extension Image where T: BinaryFloatingPoint {
 
         let inv = try transformation.invertedMatrix()
 
-        for y1 in 0..<outputSize.width {
-            for x1 in 0..<outputSize.height {
+        for y1 in 0..<outputSize.height {
+            for x1 in 0..<outputSize.width {
                 let (x0, y0) = inv * (T(x1), T(y1))
 
                 dest[unsafe: x1, y1] = interpolator.interpolate(x: x0, y: y0, in: self)

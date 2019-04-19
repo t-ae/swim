@@ -85,7 +85,9 @@ extension AffineTransformation where T == Float {
     }
     
     @inlinable
-    public init(scale: (x: T, y: T), rotation: T, translation: (x: T, y: T)) {
+    public init(scale: (x: T, y: T) = (0, 0),
+                rotation: T = 0,
+                translation: (x: T, y: T) = (0, 0)) {
         self = AffineTransformation.translation(x: translation.x, y: translation.y)
             * AffineTransformation.rotation(angle: rotation)
             * AffineTransformation.scale(x: scale.x, y: scale.y)
@@ -103,7 +105,9 @@ extension AffineTransformation where T == Double {
     }
     
     @inlinable
-    public init(scale: (x: T, y: T), rotation: T, translation: (x: T, y: T)) {
+    public init(scale: (x: T, y: T) = (1, 1),
+                rotation: T = 0,
+                translation: (x: T, y: T) = (0, 0)) {
         self = AffineTransformation.translation(x: translation.x, y: translation.y)
             * AffineTransformation.rotation(angle: rotation)
             * AffineTransformation.scale(x: scale.x, y: scale.y)
