@@ -7,9 +7,9 @@ class ResizeVisualTests: XCTestCase {
                                        height: 4,
                                        data: (0..<4*4*3).map { _ in Double.random(in: 0..<1) })
         
-        let resizedNN = image.transform.resize(width: 128, height: 192, method: .nearestNeighbor)
-        let resizedBL = image.transform.resize(width: 128, height: 192, method: .bilinear)
-        let resizedBC = image.transform.resize(width: 128, height: 192, method: .bicubic)
+        let resizedNN = image.resize(width: 128, height: 192, method: .nearestNeighbor)
+        let resizedBL = image.resize(width: 128, height: 192, method: .bilinear)
+        let resizedBC = image.resize(width: 128, height: 192, method: .bicubic)
             .clipped(low: 0, high: 1)
         
         let concat = Image.concatH([resizedNN, resizedBL, resizedBC])
@@ -26,9 +26,9 @@ class ResizeVisualTests: XCTestCase {
         
         var images = [Image<RGB, Double>]()
         
-        images.append(lena.transform.resize(width: 700, height: 700, method: .nearestNeighbor))
-        images.append(lena.transform.resize(width: 700, height: 700, method: .bilinear))
-        images.append(lena.transform.resize(width: 700, height: 700, method: .bicubic))
+        images.append(lena.resize(width: 700, height: 700, method: .nearestNeighbor))
+        images.append(lena.resize(width: 700, height: 700, method: .bilinear))
+        images.append(lena.resize(width: 700, height: 700, method: .bicubic))
         
         let image = Image.concatH(images)
         
@@ -43,9 +43,9 @@ class ResizeVisualTests: XCTestCase {
         
         var images = [Image<RGB, Double>]()
         
-        images.append(lena.transform.resize(width: 112, height: 112, method: .nearestNeighbor))
-        images.append(lena.transform.resize(width: 112, height: 112, method: .bilinear))
-        images.append(lena.transform.resize(width: 112, height: 112, method: .bicubic))
+        images.append(lena.resize(width: 112, height: 112, method: .nearestNeighbor))
+        images.append(lena.resize(width: 112, height: 112, method: .bilinear))
+        images.append(lena.resize(width: 112, height: 112, method: .bicubic))
         
         let image = Image.concatH(images)
         

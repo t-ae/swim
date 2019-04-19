@@ -156,7 +156,7 @@ class PerformanceTests: XCTestCase {
         let image = Image(width: 640, height: 480, intensity: data)
         
         measure {
-            _ = image.transform.resizeAA(width: 30, height: 30)
+            _ = image.resizeAA(width: 30, height: 30)
         }
     }
 }
