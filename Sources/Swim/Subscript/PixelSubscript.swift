@@ -88,14 +88,14 @@ extension Image {
             assert(0 <= x && x < width, "Index out of range.")
             assert(0 <= y && y < height, "Index out of range.")
             
-            let start = index(x: x, y: y)
+            let start = dataIndex(x: x, y: y)
             return Pixel(data: [T](data[start..<start+P.channels]))
         }
         set {
             assert(0 <= x && x < width, "Index out of range.")
             assert(0 <= y && y < height, "Index out of range.")
             
-            let start = index(x: x, y: y)
+            let start = dataIndex(x: x, y: y)
             data.withUnsafeMutableBufferPointer {
                 let dst = $0.baseAddress! + start
                 memcpy(dst, newValue.data, MemoryLayout<T>.size * P.channels)
@@ -110,24 +110,24 @@ extension Image {
             assert(0 <= y && y < height, "Index out of range.")
             assert(0 <= c && c < P.channels, "Index out of range.")
             
-            return data[index(x: x, y: y, c: c)]
+            return data[dataIndex(x: x, y: y, c: c)]
         }
         set {
             assert(0 <= x && x < width, "Index out of range.")
             assert(0 <= y && y < height, "Index out of range.")
             assert(0 <= c && c < P.channels, "Index out of range.")
             
-            data[index(x: x, y: y, c: c)] = newValue
+            data[dataIndex(x: x, y: y, c: c)] = newValue
         }
     }
     
     @inlinable
     subscript(unsafe x: Int, y: Int, c: P) -> T {
         get {
-            return data[index(x: x, y: y, c: c.rawValue)]
+            return data[dataIndex(x: x, y: y, c: c.rawValue)]
         }
         set {
-            data[index(x: x, y: y, c: c.rawValue)] = newValue
+            data[dataIndex(x: x, y: y, c: c.rawValue)] = newValue
         }
     }
 }

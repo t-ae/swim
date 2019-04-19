@@ -8,7 +8,7 @@ extension Image {
         precondition(x+width <= self.width, "Index out of range.")
         precondition(y+height <= self.height, "Index out of range.")
         
-        let start = index(x: x, y: y)
+        let start = dataIndex(x: x, y: y)
         
         var newImage = Image<P, T>(width: width, height: height)
         data.withUnsafeBufferPointer {
@@ -38,7 +38,7 @@ extension Image {
         precondition((width, height) == newValue.size,
                      "Invalid size: \((width, height)) != \(newValue.size)")
         
-        let start = index(x: x, y: y)
+        let start = dataIndex(x: x, y: y)
         let baseWidth = self.width
         newValue.data.withUnsafeBufferPointer {
             var src = $0.baseAddress!

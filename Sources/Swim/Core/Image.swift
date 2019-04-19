@@ -65,7 +65,7 @@ extension Image: Equatable {
 
 extension Image {
     @inlinable
-    func index(x: Int, y: Int, c: Int = 0) -> Int {
+    func dataIndex(x: Int, y: Int, c: Int = 0) -> Int {
         assert(0 <= x && x < width, "Index out of range.")
         assert(0 <= y && y < height, "Index out of range.")
         assert(0 <= c && c < P.channels, "Index out of range.")
