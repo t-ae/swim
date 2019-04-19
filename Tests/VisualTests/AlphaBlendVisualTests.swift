@@ -25,7 +25,7 @@ class AlphaBlendVisualTests: XCTestCase {
         imageBase[100..<300, 200..<400].alphaBlend(with: green)
         imageBase[200..<400, 200..<400].alphaBlend(with: blue)
         
-        let rgb256 = (imageBase * 255).typeConverted(to: UInt8.self)
+        let rgb256 = (imageBase * 255).dataTypeConverter.cast(to: UInt8.self)
         let nsImage = rgb256.nsImage()
         
         XCTAssertTrue(nsImage.isValid, "Break and check nsImage in debugger.")

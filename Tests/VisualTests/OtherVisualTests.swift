@@ -4,7 +4,7 @@ import Swim
 class OtherVisualTests: XCTestCase {
     func testOpenClose() {
         let size = 100
-        var image = Image<Intensity, Float>(width: size, height: size, value: 0)
+        var image = Image<Intensity, Double>(width: size, height: size, value: 0)
         
         // base
         image[30..<70, 30..<70].fill(1)
@@ -16,7 +16,7 @@ class OtherVisualTests: XCTestCase {
         image[20..<22, 35..<40].fill(1)
         image[20..<22, 55..<60].fill(0)
         
-        let nsImage = float01ToNSImage(image: image)
+        let nsImage = doubleToNSImage(image)
         
         let close = image.maximumFilter(kernelSize: 3)
             .maximumFilter(kernelSize: 3)
@@ -31,12 +31,12 @@ class OtherVisualTests: XCTestCase {
             .maximumFilter(kernelSize: 3)
             .maximumFilter(kernelSize: 3)
         
-        let nsClose = float01ToNSImage(image: close)
-        let nsOpen = float01ToNSImage(image: open)
-        let nsCloseOpen = float01ToNSImage(image: closeOpen)
+        let nsClose = doubleToNSImage(close)
+        let nsOpen = doubleToNSImage(open)
+        let nsCloseOpen = doubleToNSImage(closeOpen)
         
-        let nsBlackhat = float01ToNSImage(image: close - image)
-        let nsTopHat = float01ToNSImage(image: image - open)
+        let nsBlackhat = doubleToNSImage(close - image)
+        let nsTopHat = doubleToNSImage(image - open)
         
         XCTAssertFalse([nsImage, nsClose, nsOpen, nsCloseOpen, nsBlackhat, nsTopHat].isEmpty,
                        "Break and check nsImage in debugger.")
@@ -83,27 +83,27 @@ class OtherVisualTests: XCTestCase {
         
         
         let julia1 = getJuliaImage(c: (-0.6180339887498949, 0), color: Pixel(r: 1, g: 0, b: 0))
-        let ns1 = (julia1*255).typeConverted(to: UInt8.self).nsImage()
+        let ns1 = (julia1*255).dataTypeConverter.cast(to: UInt8.self).nsImage()
 
         let julia2 = getJuliaImage(c: (0.285, 0), color: Pixel(r: 0, g: 1, b: 0))
-        let ns2 = (julia2*255).typeConverted(to: UInt8.self).nsImage()
+        let ns2 = doubleToNSImage(julia2)
 
         let julia3 = getJuliaImage(c: (0.285, 0.01), color: Pixel(r: 0, g: 0, b: 1))
-        let ns3 = (julia3*255).typeConverted(to: UInt8.self).nsImage()
+        let ns3 = doubleToNSImage(julia3)
 
         let julia4 = getJuliaImage(c: (-0.70176, -0.3842), color: Pixel(r: 0.7, g: 0.7, b: 0))
-        let ns4 = (julia4*255).typeConverted(to: UInt8.self).nsImage()
+        let ns4 = doubleToNSImage(julia4)
 
         let julia5 = getJuliaImage(c: (-0.835, 0.2321), color: Pixel(r: 1, g: 0, b: 1))
-        let ns5 = (julia5*255).typeConverted(to: UInt8.self).nsImage()
+        let ns5 = doubleToNSImage(julia5)
 
         let julia6 = getJuliaImage(c: (-0.8, 0.156), color: Pixel(r: 0, g: 1, b: 1))
-        let ns6 = (julia6*255).typeConverted(to: UInt8.self).nsImage()
+        let ns6 = doubleToNSImage(julia6)
         
         let julia7 = getJuliaImage(c: (-0.75, 0.13), color: Pixel(r: 0, g: 0.4, b: 0))
         var base = Image<RGB, Double>(width: size, height: size, value: 0.95)
         base.alphaBlend(with: julia7)
-        let ns7 = (base*255).typeConverted(to: UInt8.self).nsImage()
+        let ns7 = doubleToNSImage(julia7)
         
         XCTAssertFalse([ns1, ns2, ns3, ns4, ns5, ns6, ns7].isEmpty,
                        "Break and check nsImage in debugger.")
@@ -157,21 +157,13 @@ class OtherVisualTests: XCTestCase {
         
         var steps: [NSImage] = []
         for _ in 0..<20 {
-            var bd = b.typeConverted(to: Double.self)
+            var bd = b.dataTypeConverter.cast(to: Double.self)
             bd = bd.resize(width: 128, height: 128, method: .nearestNeighbor)
-            let ns = (bd.typeConverted(to: UInt8.self) * 255).toRGB().nsImage()
+            let ns = doubleToNSImage(bd)
             steps.append(ns)
             b = next(b)
         }
         
         XCTAssertFalse(steps.isEmpty, "Break and check nsImage in debugger.")
     }
-}
-
-func float01ToNSImage(image: Image<Intensity, Float>) -> NSImage {
-    var image = image
-    image.clip(low: 0, high: 1)
-    image *= 255
-    let uint = image.typeConverted(to: UInt8.self)
-    return uint.toRGB().nsImage()
 }

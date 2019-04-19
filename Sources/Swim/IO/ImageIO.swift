@@ -57,7 +57,7 @@ extension Image where P: ImageFileFormat, T == Float {
         guard let image = Image<P, UInt8>(contentsOf: url) else {
             return nil
         }
-        self = image.typeConverted() / 255
+        self = image.dataTypeConverter.cast() / 255
     }
 }
 
@@ -69,7 +69,7 @@ extension Image where P: ImageFileFormat, T == Double {
         guard let image = Image<P, UInt8>(contentsOf: url) else {
             return nil
         }
-        self = image.typeConverted() / 255
+        self = image.dataTypeConverter.cast() / 255
     }
 }
 
@@ -135,7 +135,7 @@ extension Image where P: ImageFileFormat, T == Float {
     @inlinable
     public func write(to url: URL, type: ImageFileType) throws {
         let i255 = self.clipped(low: 0, high: 1) * 255
-        let uint8 = i255.rounded().typeConverted(to: UInt8.self)
+        let uint8 = i255.rounded().dataTypeConverter.uncheckedCast()
         try Swim.write(image: uint8, url: url, type: type)
     }
 }
@@ -146,7 +146,7 @@ extension Image where P: ImageFileFormat, T == Double {
     @inlinable
     public func write(to url: URL, type: ImageFileType) throws {
         let i255 = self.clipped(low: 0, high: 1) * 255
-        let uint8 = i255.rounded().typeConverted(to: UInt8.self)
+        let uint8 = i255.rounded().dataTypeConverter.uncheckedCast()
         try Swim.write(image: uint8, url: url, type: type)
     }
 }

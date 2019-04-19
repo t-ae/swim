@@ -1,70 +1,74 @@
-#if canImport(Accelerate)
-import Accelerate
-#endif
+public struct DataTypeConverter<P: PixelType, T: DataType> {
+    public var image: Image<P, T>
+    
+    @inlinable
+    public init(_ image: Image<P, T>) {
+        self.image = image
+    }
+    
+    @inlinable
+    public func cast<T2: DataType>(to: T2.Type = T2.self,
+                                   transform: (T)->T2) -> Image<P, T2> {
+        return image.channelwiseConverted(transform)
+    }
+}
+
+extension Image {
+    @inlinable
+    public var dataTypeConverter: DataTypeConverter<P, T> {
+        return DataTypeConverter(self)
+    }
+}
 
 // MARK: - Generic
 
-extension Image where T: BinaryInteger {
+extension DataTypeConverter {
     @inlinable
-    public func typeConverted<T2: BinaryInteger>(to: T2.Type = T2.self) -> Image<P, T2> {
-        return channelwiseConverted { T2($0) }
+    public func cast(to: T.Type = T.self) -> Image<P, T> {
+        return image
     }
 }
 
-extension Image where T: SignedInteger {
+extension DataTypeConverter where T: BinaryInteger {
     @inlinable
-    public func typeConverted<T2: BinaryFloatingPoint>(to: T2.Type = T2.self) -> Image<P, T2> {
-        return channelwiseConverted { T2(Int64($0)) }
-    }
-}
-
-extension Image where T: UnsignedInteger {
-    @inlinable
-    public func typeConverted<T2: BinaryFloatingPoint>(to: T2.Type = T2.self) -> Image<P, T2> {
-        return channelwiseConverted { T2(UInt64($0)) }
-    }
-}
-
-extension Image where T: BinaryFloatingPoint {
-    @inlinable
-    public func typeConverted<T2: BinaryInteger>(to: T2.Type = T2.self) -> Image<P, T2> {
-        return channelwiseConverted { T2($0) }
-    }
-}
-
-extension Image where T == Float {
-    @inlinable
-    public func typeConverted<T2: BinaryFloatingPoint>(to: T2.Type = T2.self) -> Image<P, T2> {
-        return channelwiseConverted(T2.init)
-    }
-}
-
-extension Image where T == Double {
-    @inlinable
-    public func typeConverted<T2: BinaryFloatingPoint>(to: T2.Type = T2.self) -> Image<P, T2> {
-        return channelwiseConverted(T2.init)
-    }
-}
-
-// MARK: - Specializations
-// MARK: UInt8 -> ?
-extension Image where T == UInt8 {
-    @inlinable
-    public func typeConverted(to: UInt8.Type = UInt8.self) -> Image<P, UInt8> {
-        return self
+    public func cast<T2: BinaryInteger>(to: T2.Type = T2.self) -> Image<P, T2> {
+        return image.channelwiseConverted { T2($0) }
     }
     
     @inlinable
-    public func typeConverted(to: Int.Type = Int.self) -> Image<P, Int> {
-        return channelwiseConverted(Int.init)
+    public func cast<T2: BinaryFloatingPoint>(to: T2.Type = T2.self) -> Image<P, T2> {
+        return image.channelwiseConverted { T2($0) }
+    }
+}
+
+extension DataTypeConverter where T: BinaryFloatingPoint {
+    @inlinable
+    public func cast<T2: BinaryInteger>(to: T2.Type = T2.self) -> Image<P, T2> {
+        return image.channelwiseConverted { T2($0) }
     }
     
-    #if canImport(Accelerate)
+    @inlinable
+    public func cast<T2: BinaryFloatingPoint>(to: T2.Type = T2.self) -> Image<P, T2> {
+        return image.channelwiseConverted { T2($0) }
+    }
     
     @inlinable
-    public func typeConverted(to: Float.Type = Float.self) -> Image<P, Float> {
-        var newImage = Image<P, Float>(width: width, height: height)
-        data.withUnsafeBufferPointer {
+    public func uncheckedCast(to: UInt8.Type = UInt8.self) -> Image<P, UInt8> {
+        return image.channelwiseConverted { UInt8(Int($0) | 0xff) }
+    }
+}
+
+// MARK: - Accelerate
+
+#if canImport(Accelerate)
+
+import Accelerate
+
+extension DataTypeConverter where T == UInt8 {
+    @inlinable
+    public func cast(to: Float.Type = Float.self) -> Image<P, Float> {
+        var newImage = Image<P, Float>(width: image.width, height: image.height)
+        image.data.withUnsafeBufferPointer {
             let src = $0.baseAddress!
             newImage.data.withUnsafeMutableBufferPointer {
                 let dst = $0.baseAddress!
@@ -75,9 +79,9 @@ extension Image where T == UInt8 {
     }
     
     @inlinable
-    public func typeConverted(to: Double.Type = Double.self) -> Image<P, Double> {
-        var newImage = Image<P, Double>(width: width, height: height)
-        data.withUnsafeBufferPointer {
+    public func cast(to: Double.Type = Double.self) -> Image<P, Double> {
+        var newImage = Image<P, Double>(width: image.width, height: image.height)
+        image.data.withUnsafeBufferPointer {
             let src = $0.baseAddress!
             newImage.data.withUnsafeMutableBufferPointer {
                 let dst = $0.baseAddress!
@@ -86,53 +90,12 @@ extension Image where T == UInt8 {
         }
         return newImage
     }
-    
-    #else
-    
-    @inlinable
-    public func typeConverted(to: Float.Type = Float.self) -> Image<P, Float> {
-        return _channelwiseConverted(Float.init)
-    }
-    
-    @inlinable
-    public func typeConverted(to: Double.Type = Double.self) -> Image<P, Double> {
-        return _channelwiseConverted(Double.init)
-    }
-    
-    #endif
 }
 
-// MARK: Int -> ?
-extension Image where T == Int {
-    @inlinable
-    public func typeConverted(to: UInt8.Type = UInt8.self) -> Image<P, UInt8> {
-        return channelwiseConverted(UInt8.init)
-    }
-    
-    @inlinable
-    public func typeConverted(to: Int.Type = Int.self) -> Image<P, Int> {
-        return self
-    }
-    
-    @inlinable
-    public func typeConverted(to: Float.Type = Float.self) -> Image<P, Float> {
-        return channelwiseConverted(Float.init)
-    }
-    
-    @inlinable
-    public func typeConverted(to: Double.Type = Double.self) -> Image<P, Double> {
-        return channelwiseConverted(Double.init)
-    }
-}
-
-// MARK: Float -> ?
-extension Image where T == Float {
-    #if canImport(Accelerate)
-    
-    @inlinable
-    public func typeConverted(to: UInt8.Type = UInt8.self) -> Image<P, UInt8> {
-        var newImage = Image<P, UInt8>(width: width, height: height)
-        data.withUnsafeBufferPointer {
+extension DataTypeConverter where T == Float {
+    public func uncheckedCast(to: UInt8.Type = UInt8.self) -> Image<P, UInt8> {
+        var newImage = Image<P, UInt8>(width: image.width, height: image.height)
+        image.data.withUnsafeBufferPointer {
             let src = $0.baseAddress!
             newImage.data.withUnsafeMutableBufferPointer {
                 let dst = $0.baseAddress!
@@ -142,31 +105,10 @@ extension Image where T == Float {
         return newImage
     }
     
-    #else
-    
     @inlinable
-    public func typeConverted(to: UInt8.Type = UInt8.self) -> Image<P, UInt8> {
-        return channelwiseConverted(UInt8.init)
-    }
-    
-    #endif
-    
-    @inlinable
-    public func typeConverted(to: Int.Type = Int.self) -> Image<P, Int> {
-        return channelwiseConverted(Int.init)
-    }
-    
-    @inlinable
-    public func typeConverted(to: Float.Type = Float.self) -> Image<P, Float> {
-        return self
-    }
-    
-    #if canImport(Accelerate)
-    
-    @inlinable
-    public func typeConverted(to: Double.Type = Double.self) -> Image<P, Double> {
-        var newImage = Image<P, Double>(width: width, height: height)
-        data.withUnsafeBufferPointer {
+    public func cast(to: Double.Type = Double.self) -> Image<P, Double> {
+        var newImage = Image<P, Double>(width: image.width, height: image.height)
+        image.data.withUnsafeBufferPointer {
             let src = $0.baseAddress!
             newImage.data.withUnsafeMutableBufferPointer {
                 let dst = $0.baseAddress!
@@ -175,24 +117,12 @@ extension Image where T == Float {
         }
         return newImage
     }
-    
-    #else
-    
-    @inlinable
-    public func typeConverted(to: Double.Type = Double.self) -> Image<P, Double> {
-        return channelwiseConverted(Double.init)
-    }
-    
-    #endif
 }
 
-// MARK: Double -> ?
-extension Image where T == Double {
-    #if canImport(Accelerate)
-    
-    public func typeConverted(to: UInt8.Type = UInt8.self) -> Image<P, UInt8> {
-        var newImage = Image<P, UInt8>(width: width, height: height)
-        data.withUnsafeBufferPointer {
+extension DataTypeConverter where T == Double {
+    public func uncheckedCast(to: UInt8.Type = UInt8.self) -> Image<P, UInt8> {
+        var newImage = Image<P, UInt8>(width: image.width, height: image.height)
+        image.data.withUnsafeBufferPointer {
             let src = $0.baseAddress!
             newImage.data.withUnsafeMutableBufferPointer {
                 let dst = $0.baseAddress!
@@ -202,23 +132,10 @@ extension Image where T == Double {
         return newImage
     }
     
-    #else
-    
-    public func typeConverted(to: UInt8.Type = UInt8.self) -> Image<P, UInt8> {
-        return channelwiseConverted(UInt8.init)
-    }
-    
-    #endif
-    
-    public func typeConverted(to: Int.Type = Int.self) -> Image<P, Int> {
-        return channelwiseConverted(Int.init)
-    }
-    
-    #if canImport(Accelerate)
-    
-    public func typeConverted(to: Float.Type = Float.self) -> Image<P, Float> {
-        var newImage = Image<P, Float>(width: width, height: height)
-        data.withUnsafeBufferPointer {
+    @inlinable
+    public func cast(to: Float.Type = Float.self) -> Image<P, Float> {
+        var newImage = Image<P, Float>(width: image.width, height: image.height)
+        image.data.withUnsafeBufferPointer {
             let src = $0.baseAddress!
             newImage.data.withUnsafeMutableBufferPointer {
                 let dst = $0.baseAddress!
@@ -227,16 +144,6 @@ extension Image where T == Double {
         }
         return newImage
     }
-    
-    #else
-    
-    public func typeConverted(to: Float.Type = Float.self) -> Image<P, Float> {
-        return channelwiseConverted(Float.init)
-    }
-    
-    #endif
-    
-    public func typeConverted(to: Double.Type = Double.self) -> Image<P, Double> {
-        return self
-    }
 }
+
+#endif
