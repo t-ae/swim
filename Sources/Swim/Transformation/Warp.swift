@@ -81,6 +81,31 @@ public func *<T: BinaryFloatingPoint>(lhs: HomogeneousTransformationMatrix<T>,
 
 extension Image where T: BinaryFloatingPoint {
     @inlinable
+    public func warp<M: HomogeneousTransformationMatrixProtocol>(transformation: M) throws -> Image<P, T> where M.T == T {
+        
+        return try warp(transformation: transformation,
+                        outputSize: (width, height))
+    }
+    
+    @inlinable
+    public func warp<M: HomogeneousTransformationMatrixProtocol, Intpl: Interpolator>(
+        transformation: M,
+        interpolator: Intpl) throws -> Image<P, T> where M.T == T, Intpl.T == T {
+        return try warp(transformation: transformation,
+                        outputSize: (width, height),
+                        interpolator: interpolator)
+    }
+    
+    @inlinable
+    public func warp<M: HomogeneousTransformationMatrixProtocol>(
+        transformation: M,
+        outputSize: (width: Int, height: Int)) throws -> Image<P, T> where M.T == T {
+        return try warp(transformation: transformation,
+                        outputSize: outputSize,
+                        interpolator: BilinearInterpolator<T>())
+    }
+    
+    @inlinable
     public func warp<M: HomogeneousTransformationMatrixProtocol, Intpl: Interpolator>(
         transformation: M,
         outputSize: (width: Int, height: Int),

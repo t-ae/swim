@@ -124,7 +124,7 @@ class WarpVisualTests: XCTestCase {
         let lena = Image<RGB, Double>(contentsOf: path)!
         
         let size = Double(lena.width)
-        let scale: Double = 3
+        let scale: Double = 2.3
         var affine = AffineTransformation<Double>.identity
         affine = AffineTransformation.scale(x: scale, y: scale) * affine
         affine = AffineTransformation.translation(x: scale/2, y: scale/2) * affine
