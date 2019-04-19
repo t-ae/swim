@@ -24,27 +24,27 @@ class WarpVisualTests: XCTestCase {
         
         do {
             let intpl = Intpl<Double>()
-            let result = try! src.transform.warp(transformation: affine, outputSize: (512, 512), interpolator: intpl)
+            let result = try! src.warp(transformation: affine, outputSize: (512, 512), interpolator: intpl)
             nsImages["constant0"] = doubleToNSImage(result)
         }
         do {
             let intpl = Intpl<Double>(edgeMode: .reflect)
-            let result = try! src.transform.warp(transformation: affine, outputSize: (512, 512), interpolator: intpl)
+            let result = try! src.warp(transformation: affine, outputSize: (512, 512), interpolator: intpl)
             nsImages["reflect"] = doubleToNSImage(result)
         }
         do {
             let intpl = Intpl<Double>(edgeMode: .symmetric)
-            let result = try! src.transform.warp(transformation: affine, outputSize: (512, 512), interpolator: intpl)
+            let result = try! src.warp(transformation: affine, outputSize: (512, 512), interpolator: intpl)
             nsImages["symmetric"] = doubleToNSImage(result)
         }
         do {
             let intpl = Intpl<Double>(edgeMode: .edge)
-            let result = try! src.transform.warp(transformation: affine, outputSize: (512, 512), interpolator: intpl)
+            let result = try! src.warp(transformation: affine, outputSize: (512, 512), interpolator: intpl)
             nsImages["edge"] = doubleToNSImage(result)
         }
         do {
             let intpl = Intpl<Double>(edgeMode: .wrap)
-            let result = try! src.transform.warp(transformation: affine, outputSize: (512, 512), interpolator: intpl)
+            let result = try! src.warp(transformation: affine, outputSize: (512, 512), interpolator: intpl)
             nsImages["wrap"] = doubleToNSImage(result)
         }
         
@@ -58,22 +58,22 @@ class WarpVisualTests: XCTestCase {
         
         do {
             let intpl = Intpl<Double>()
-            let result = try! src.transform.warp(transformation: affine, outputSize: (512, 512), interpolator: intpl)
+            let result = try! src.warp(transformation: affine, outputSize: (512, 512), interpolator: intpl)
             nsImages["constant0"] = doubleToNSImage(result)
         }
         do {
             let intpl = Intpl<Double>(edgeMode: .symmetric)
-            let result = try! src.transform.warp(transformation: affine, outputSize: (512, 512), interpolator: intpl)
+            let result = try! src.warp(transformation: affine, outputSize: (512, 512), interpolator: intpl)
             nsImages["symmetric"] = doubleToNSImage(result)
         }
         do {
             let intpl = Intpl<Double>(edgeMode: .edge)
-            let result = try! src.transform.warp(transformation: affine, outputSize: (512, 512), interpolator: intpl)
+            let result = try! src.warp(transformation: affine, outputSize: (512, 512), interpolator: intpl)
             nsImages["edge"] = doubleToNSImage(result)
         }
         do {
             let intpl = Intpl<Double>(edgeMode: .wrap)
-            let result = try! src.transform.warp(transformation: affine, outputSize: (512, 512), interpolator: intpl)
+            let result = try! src.warp(transformation: affine, outputSize: (512, 512), interpolator: intpl)
             nsImages["wrap"] = doubleToNSImage(result)
         }
         
@@ -87,31 +87,31 @@ class WarpVisualTests: XCTestCase {
         
         do {
             let intpl = Intpl<Double>()
-            var result = try! src.transform.warp(transformation: affine, outputSize: (512, 512), interpolator: intpl)
+            var result = try! src.warp(transformation: affine, outputSize: (512, 512), interpolator: intpl)
             result.clip(low: 0, high: 1)
             nsImages["constant0"] = doubleToNSImage(result)
         }
         do {
             let intpl = Intpl<Double>(a: -0.2)
-            var result = try! src.transform.warp(transformation: affine, outputSize: (512, 512), interpolator: intpl)
+            var result = try! src.warp(transformation: affine, outputSize: (512, 512), interpolator: intpl)
             result.clip(low: 0, high: 1)
             nsImages["constant0 a-0.2"] = doubleToNSImage(result)
         }
         do {
             let intpl = Intpl<Double>(edgeMode: .symmetric)
-            var result = try! src.transform.warp(transformation: affine, outputSize: (512, 512), interpolator: intpl)
+            var result = try! src.warp(transformation: affine, outputSize: (512, 512), interpolator: intpl)
             result.clip(low: 0, high: 1)
             nsImages["symmetric"] = doubleToNSImage(result)
         }
         do {
             let intpl = Intpl<Double>(edgeMode: .edge)
-            var result = try! src.transform.warp(transformation: affine, outputSize: (512, 512), interpolator: intpl)
+            var result = try! src.warp(transformation: affine, outputSize: (512, 512), interpolator: intpl)
             result.clip(low: 0, high: 1)
             nsImages["edge"] = doubleToNSImage(result)
         }
         do {
             let intpl = Intpl<Double>(edgeMode: .wrap)
-            var result = try! src.transform.warp(transformation: affine, outputSize: (512, 512), interpolator: intpl)
+            var result = try! src.warp(transformation: affine, outputSize: (512, 512), interpolator: intpl)
             result.clip(low: 0, high: 1)
             nsImages["wrap"] = doubleToNSImage(result)
         }
@@ -133,7 +133,7 @@ class WarpVisualTests: XCTestCase {
         affine = AffineTransformation.translation(x: size*scale/2, y: size*scale/2) * affine
         
         let intpl = NearestNeighborInterpolator<Double>(edgeMode: .reflect)
-        let result = try! lena.transform.warp(transformation: affine, outputSize: (512, 512), interpolator: intpl)
+        let result = try! lena.warp(transformation: affine, outputSize: (512, 512), interpolator: intpl)
         let nsImage = doubleToNSImage(result)
         
         XCTAssertTrue(nsImage.isValid, "Break and check nsImages in debugger.")

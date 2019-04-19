@@ -128,7 +128,7 @@ extension Transform where T: BinaryFloatingPoint {
             } else {
                 newHeight = image.height
             }
-            baseImage = resizeAA(width: newWidth, height: newHeight)
+            baseImage = image.transform.resizeAA(width: newWidth, height: newHeight)
         } else {
             baseImage = image
         }

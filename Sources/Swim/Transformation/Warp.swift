@@ -79,12 +79,12 @@ public func *<T: BinaryFloatingPoint>(lhs: HomogeneousTransformationMatrix<T>,
     return (x / w, y / w)
 }
 
-extension Transform where T: BinaryFloatingPoint {
+extension Image where T: BinaryFloatingPoint {
     @inlinable
     public func warp<M: HomogeneousTransformationMatrixProtocol>(transformation: M) throws -> Image<P, T> where M.T == T {
         
         return try warp(transformation: transformation,
-                        outputSize: (image.width, image.height))
+                        outputSize: (width, height))
     }
     
     @inlinable
@@ -92,7 +92,7 @@ extension Transform where T: BinaryFloatingPoint {
         transformation: M,
         interpolator: Intpl) throws -> Image<P, T> where M.T == T, Intpl.T == T {
         return try warp(transformation: transformation,
-                        outputSize: (image.width, image.height),
+                        outputSize: (width, height),
                         interpolator: interpolator)
     }
     
@@ -121,7 +121,7 @@ extension Transform where T: BinaryFloatingPoint {
             for x1 in 0..<outputSize.width {
                 let (x0, y0) = inv * (T(x1), T(y1))
 
-                dest[unsafe: x1, y1] = interpolator.interpolate(x: x0, y: y0, in: image)
+                dest[unsafe: x1, y1] = interpolator.interpolate(x: x0, y: y0, in: self)
             }
         }
         
