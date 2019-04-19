@@ -3,7 +3,7 @@ import Swim
 
 class BayerVisualTests: XCTestCase {
     
-    var lena = Image<RGB, Double>(contentsOf: testResoruceRoot().appendingPathComponent("lena_128.png"))!
+    var lena = Image<RGB, Double>(contentsOf: testResoruceRoot().appendingPathComponent("lena_512.png"))!
 
     func testBGGR() {
         let conv = BayerConverter(pattern: .bggr)
