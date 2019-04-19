@@ -1,5 +1,6 @@
 public struct DataTypeConverter<P: PixelType, T: DataType> {
-    public var image: Image<P, T>
+    @usableFromInline
+    let image: Image<P, T>
     
     @inlinable
     public init(_ image: Image<P, T>) {
