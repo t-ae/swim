@@ -111,7 +111,7 @@ extension Image where T: BinaryFloatingPoint {
         
         let baseImage: Image<P, T>
         if areaAverageResizeBeforeDownSample {
-            // downsample to avoid sparse sampling
+            // downsample for avoiding sparse sampling
             var image = self
             if width*4 < self.width {
                 var newWidth = self.width >> 1

@@ -23,13 +23,36 @@ class ResizeVisualTests: XCTestCase {
     }
     
     func testResizeUpscale_lena() {
-        let path = testResoruceRoot().appendingPathComponent("lena.png")
-        let lena = Image<RGBA, Double>(contentsOf: path)!
+        let path = testResoruceRoot().appendingPathComponent("lena_128.png")
+        let lena = Image<RGB, Double>(contentsOf: path)!
         
-        let images = [Image<RGBA, Double>]()
+        var images = [Image<RGB, Double>]()
         
-        do {
-            let resized = lena.resize(width: 768, height: 768)
-        }
+        images.append(lena.resize(width: 768, height: 768, method: .nearestNeighbor))
+        images.append(lena.resize(width: 768, height: 768, method: .bilinear))
+        images.append(lena.resize(width: 768, height: 768, method: .bicubic))
+        
+        let image = Image.concatH(images)
+        
+        let nsImage = doubleToNSImage(Image<RGBA, Double>(image: image, alpha: 1))
+        
+        XCTAssertTrue(nsImage.isValid, "Break and check nsImage in debugger.")
+    }
+    
+    func testResizeDownscale_lena() {
+        let path = testResoruceRoot().appendingPathComponent("lena_512.png")
+        let lena = Image<RGB, Double>(contentsOf: path)!
+        
+        var images = [Image<RGB, Double>]()
+        
+        images.append(lena.resize(width: 112, height: 112, method: .nearestNeighbor))
+        images.append(lena.resize(width: 112, height: 112, method: .bilinear))
+        images.append(lena.resize(width: 112, height: 112, method: .bicubic))
+        
+        let image = Image.concatH(images)
+        
+        let nsImage = doubleToNSImage(Image<RGBA, Double>(image: image, alpha: 1))
+        
+        XCTAssertTrue(nsImage.isValid, "Break and check nsImage in debugger.")
     }
 }

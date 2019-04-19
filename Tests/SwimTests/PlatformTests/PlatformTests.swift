@@ -2,8 +2,8 @@ import XCTest
 import Swim
 
 class PlatformTests: XCTestCase {
-    let rgbaPath = testResoruceRoot().appendingPathComponent("lena.png")
-    let grayPath = testResoruceRoot().appendingPathComponent("lena_gray.png")
+    let rgbaPath = testResoruceRoot().appendingPathComponent("lena_512.png")
+    let grayPath = testResoruceRoot().appendingPathComponent("lena_512_gray.png")
 }
 
 #if canImport(AppKit)
