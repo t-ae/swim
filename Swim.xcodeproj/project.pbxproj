@@ -27,6 +27,9 @@
 		A7CAD50C226954BA007B0E08 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7CAD50A226954B7007B0E08 /* Utils.swift */; };
 		A7CAD50F22697055007B0E08 /* Interleave.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7CAD50E22697055007B0E08 /* Interleave.swift */; };
 		A7CAD5122269826C007B0E08 /* BayerVisualTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7CAD51022698268007B0E08 /* BayerVisualTests.swift */; };
+		A7CAD5142269A1DC007B0E08 /* Transform.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7CAD5132269A1DC007B0E08 /* Transform.swift */; };
+		A7CAD5162269A266007B0E08 /* Flip.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7CAD5152269A266007B0E08 /* Flip.swift */; };
+		A7CAD5182269A2C1007B0E08 /* Rotate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7CAD5172269A2C1007B0E08 /* Rotate.swift */; };
 		OBJ_161 /* image_io.c in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_9 /* image_io.c */; };
 		OBJ_163 /* stb_image_write.h in Headers */ = {isa = PBXBuildFile; fileRef = OBJ_11 /* stb_image_write.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		OBJ_164 /* stb_image.h in Headers */ = {isa = PBXBuildFile; fileRef = OBJ_12 /* stb_image.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -78,7 +81,6 @@
 		OBJ_228 /* SubimageSubscript.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_72 /* SubimageSubscript.swift */; };
 		OBJ_229 /* AffineTransformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_74 /* AffineTransformation.swift */; };
 		OBJ_230 /* Resize.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_75 /* Resize.swift */; };
-		OBJ_231 /* Transformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_76 /* Transformation.swift */; };
 		OBJ_232 /* Warp.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_77 /* Warp.swift */; };
 		OBJ_233 /* ArrayExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_79 /* ArrayExt.swift */; };
 		OBJ_234 /* Clamp.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_80 /* Clamp.swift */; };
@@ -212,6 +214,9 @@
 		A7CAD50A226954B7007B0E08 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		A7CAD50E22697055007B0E08 /* Interleave.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Interleave.swift; sourceTree = "<group>"; };
 		A7CAD51022698268007B0E08 /* BayerVisualTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BayerVisualTests.swift; sourceTree = "<group>"; };
+		A7CAD5132269A1DC007B0E08 /* Transform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transform.swift; sourceTree = "<group>"; };
+		A7CAD5152269A266007B0E08 /* Flip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Flip.swift; sourceTree = "<group>"; };
+		A7CAD5172269A2C1007B0E08 /* Rotate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rotate.swift; sourceTree = "<group>"; };
 		OBJ_100 /* AlphaBlendTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlphaBlendTests.swift; sourceTree = "<group>"; };
 		OBJ_102 /* ChannelCompositionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelCompositionTests.swift; sourceTree = "<group>"; };
 		OBJ_103 /* ChannelwiseConversionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelwiseConversionTests.swift; sourceTree = "<group>"; };
@@ -297,7 +302,6 @@
 		OBJ_72 /* SubimageSubscript.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubimageSubscript.swift; sourceTree = "<group>"; };
 		OBJ_74 /* AffineTransformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AffineTransformation.swift; sourceTree = "<group>"; };
 		OBJ_75 /* Resize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resize.swift; sourceTree = "<group>"; };
-		OBJ_76 /* Transformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transformation.swift; sourceTree = "<group>"; };
 		OBJ_77 /* Warp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Warp.swift; sourceTree = "<group>"; };
 		OBJ_79 /* ArrayExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayExt.swift; sourceTree = "<group>"; };
 		OBJ_80 /* Clamp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Clamp.swift; sourceTree = "<group>"; };
@@ -685,8 +689,10 @@
 			children = (
 				OBJ_74 /* AffineTransformation.swift */,
 				OBJ_75 /* Resize.swift */,
-				OBJ_76 /* Transformation.swift */,
 				OBJ_77 /* Warp.swift */,
+				A7CAD5132269A1DC007B0E08 /* Transform.swift */,
+				A7CAD5152269A266007B0E08 /* Flip.swift */,
+				A7CAD5172269A2C1007B0E08 /* Rotate.swift */,
 			);
 			path = Transformation;
 			sourceTree = "<group>";
@@ -971,6 +977,7 @@
 				OBJ_188 /* IntegralImage.swift in Sources */,
 				OBJ_189 /* BInaryScalarOperator.swift in Sources */,
 				OBJ_190 /* BinaryOperators.swift in Sources */,
+				A7CAD5162269A266007B0E08 /* Flip.swift in Sources */,
 				OBJ_191 /* UnaryOperators.swift in Sources */,
 				OBJ_192 /* AlphaBlend.swift in Sources */,
 				OBJ_193 /* ChannelComposition.swift in Sources */,
@@ -985,6 +992,7 @@
 				OBJ_202 /* Pixel.swift in Sources */,
 				OBJ_203 /* PixelType.swift in Sources */,
 				OBJ_204 /* Sequence.swift in Sources */,
+				A7CAD5142269A1DC007B0E08 /* Transform.swift in Sources */,
 				OBJ_205 /* ImageIO.swift in Sources */,
 				OBJ_207 /* BicubicInterpolator.swift in Sources */,
 				OBJ_209 /* BilinearInterpolator.swift in Sources */,
@@ -1004,11 +1012,11 @@
 				OBJ_225 /* Shape.swift in Sources */,
 				OBJ_226 /* ChannelSubscript.swift in Sources */,
 				OBJ_227 /* PixelSubscript.swift in Sources */,
+				A7CAD5182269A2C1007B0E08 /* Rotate.swift in Sources */,
 				OBJ_228 /* SubimageSubscript.swift in Sources */,
 				A7CAD50F22697055007B0E08 /* Interleave.swift in Sources */,
 				OBJ_229 /* AffineTransformation.swift in Sources */,
 				OBJ_230 /* Resize.swift in Sources */,
-				OBJ_231 /* Transformation.swift in Sources */,
 				OBJ_232 /* Warp.swift in Sources */,
 				OBJ_233 /* ArrayExt.swift in Sources */,
 				OBJ_234 /* Clamp.swift in Sources */,
