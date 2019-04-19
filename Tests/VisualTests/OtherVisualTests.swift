@@ -158,7 +158,7 @@ class OtherVisualTests: XCTestCase {
         var steps: [NSImage] = []
         for _ in 0..<20 {
             var bd = b.dataTypeConverter.cast(to: Double.self)
-            bd = bd.resize(width: 128, height: 128, method: .nearestNeighbor)
+            bd = bd.transform.resize(width: 128, height: 128, method: .nearestNeighbor)
             let ns = doubleToNSImage(bd)
             steps.append(ns)
             b = next(b)

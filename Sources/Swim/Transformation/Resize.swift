@@ -1,20 +1,16 @@
 import Foundation
 
-extension Image where T: BinaryInteger {
-    
-}
-
-extension Image where T: BinaryFloatingPoint {
+extension Transform where T: BinaryFloatingPoint {
     /// Resize image with Area average method.
     @inlinable
     public func resizeAA(width: Int, height: Int) -> Image<P, T> {
         
         let xScaleImage: Image<P, T>
-        if width != self.width {
-            let baseImage = self
-            var newImage = Image<P, T>(width: width, height: self.height, value: 0)
+        if width != image.width {
+            let baseImage = image
+            var newImage = Image<P, T>(width: width, height: image.height, value: 0)
             
-            let volume: T = T(self.width) / T(width)
+            let volume: T = T(image.width) / T(width)
             for x in 0..<newImage.width {
                 let startX: T = T(x) * volume
                 let endX: T = T(x+1) * volume
@@ -52,14 +48,14 @@ extension Image where T: BinaryFloatingPoint {
             }
             xScaleImage = newImage
         } else {
-            xScaleImage = self
+            xScaleImage = image
         }
         
         let yScaleImage: Image<P, T>
-        if height != self.height {
+        if height != xScaleImage.height {
             let baseImage = xScaleImage
             var newImage = Image<P, T>(width: width, height: height, value: 0)
-            let volume: T = T(self.height) / T(height)
+            let volume: T = T(xScaleImage.height) / T(height)
             for y in 0..<newImage.height {
                 let startY: T = T(y) * volume
                 let endY: T = T(y+1) * volume
@@ -112,26 +108,31 @@ extension Image where T: BinaryFloatingPoint {
         let baseImage: Image<P, T>
         if areaAverageResizeBeforeDownSample {
             // downsample for avoiding sparse sampling
-            var image = self
-            if width*4 < self.width {
-                var newWidth = self.width >> 1
-                while width*4 < newWidth {
-                    newWidth >>= 1
+            let newWidth: Int
+            if width*4 < image.width {
+                var w = image.width >> 1
+                while width*4 < w {
+                    w >>= 1
                 }
-                image = image.resizeAA(width: newWidth, height: image.height)
+                newWidth = w
+            } else {
+                newWidth = image.width
             }
-            if height*4 < self.height {
-                var newHeight = self.height >> 1
-                while height*4 < newHeight {
-                    newHeight >>= 1
+            let newHeight: Int
+            if height*4 < image.height {
+                var h = image.height >> 1
+                while height*4 < h {
+                    h >>= 1
                 }
-                image = image.resizeAA(width: image.width, height: newHeight)
+                newHeight = h
+            } else {
+                newHeight = image.height
             }
-            baseImage = image
+            baseImage = image.transform.resizeAA(width: newWidth, height: newHeight)
         } else {
-            baseImage = self
+            baseImage = image
         }
-        
+    
         var dest = Image<P, T>(width: width, height: height)
         
         let intpl: (T, T, Image<P, T>) -> Pixel<P, T>
