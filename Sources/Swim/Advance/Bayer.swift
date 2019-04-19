@@ -1,8 +1,16 @@
-public enum BayerPattern {
-    case bggr, gbrg, grbg, rggb
+public struct BayerConverter {
+    public enum Pattern {
+        case bggr, gbrg, grbg, rggb
+    }
+    
+    public var pattern: Pattern
+    
+    public init(pattern: Pattern) {
+        self.pattern = pattern
+    }
 }
 
-extension BayerPattern {
+extension BayerConverter.Pattern {
     @inlinable
     var offsetToBGGR: (x: Int, y: Int) {
         switch self {
@@ -18,148 +26,153 @@ extension BayerPattern {
     }
 }
 
-extension Image where P == RGB {
+extension BayerConverter {
     @inlinable
-    public func bayered(pattern: BayerPattern) -> Image<Intensity, T> {
-        var newImage = Image<Intensity, T>(width: width, height: height)
-
+    public func convert<T>(image: Image<RGB, T>) -> Image<Intensity, T> {
+        var newImage = Image<Intensity, T>(width: image.width, height: image.height)
+        
         let (offsetX, offsetY) = pattern.offsetToBGGR
-
-        for y in 0..<height {
-            let yOdd = (y+offsetY) % 2 != 0
-            for x in 0..<width {
-                let xOdd = (x+offsetX) % 2 != 0
-                
+        
+        var yOdd = offsetY % 2 != 0
+        for y in 0..<image.height {
+            var xOdd = offsetX % 2 != 0
+            for x in 0..<image.width {
                 switch (xOdd, yOdd) {
                 case (true, true): // r
-                    newImage[unsafe: x, y, .intensity] = self[unsafe: x, y, .red]
+                    newImage[unsafe: x, y, .intensity] = image[unsafe: x, y, .red]
                 case (false, true), (true, false): // g
-                    newImage[unsafe: x, y, .intensity] = self[unsafe: x, y, .green]
+                    newImage[unsafe: x, y, .intensity] = image[unsafe: x, y, .green]
                 case (false, false): // b
-                    newImage[unsafe: x, y, .intensity] = self[unsafe: x, y, .blue]
+                    newImage[unsafe: x, y, .intensity] = image[unsafe: x, y, .blue]
                 }
-            }
-        }
-
-        return newImage
-    }
-}
-
-extension Image where P == Intensity, T: BinaryInteger {
-    // type b,g,g,r <-> 0,1,2,3
-    @inlinable
-    func debayerPixel(x: Int, y: Int, type: Int) -> Pixel<RGB, T> {
-
-        func mean(_ points: [(x: Int, y: Int)]) -> T {
-            var sum: T = 0
-            var count = 0
-            for p in points {
-                if 0 <= p.x && p.x < width && 0 <= p.y && p.y < height {
-                    sum += self[unsafe: p.x, p.y, .intensity]
-                    count += 1
-                }
-            }
-            return sum / T(count)
-        }
-
-        let r, g, b: T
-        switch type {
-        case 0:
-            r = mean([(x-1, y-1), (x+1, y-1), (x-1, y+1), (x+1, y+1)])
-            g = mean([(x-1, y), (x+1, y), (x, y-1), (x, y+1)])
-            b = self[unsafe: x, y, .intensity]
-        case 1:
-            r = mean([(x, y-1), (x, y+1)])
-            g = self[unsafe: x, y, .intensity]
-            b = mean([(x-1, y), (x+1, y)])
-        case 2:
-            r = mean([(x-1, y), (x+1, y)])
-            g = self[unsafe: x, y, .intensity]
-            b = mean([(x, y-1), (x, y+1)])
-        case 3:
-            r = self[unsafe: x, y, .intensity]
-            g = mean([(x-1, y), (x+1, y), (x, y-1), (x, y+1)])
-            b = mean([(x-1, y-1), (x+1, y-1), (x-1, y+1), (x+1, y+1)])
-        default:
-            preconditionFailure("Never reach here.")
-        }
-        return Pixel(r: r, g: g, b: b)
-    }
-    
-    @inlinable
-    public func debayered(pattern: BayerPattern) -> Image<RGB, T> {
-        var newImage = Image<RGB, T>(width: width, height: height)
-
-        let (offsetX, offsetY) = pattern.offsetToBGGR
-
-        for y in 0..<height {
-            let yOdd = (y+offsetY) % 2
-            for x in 0..<width {
-                let xOdd = (x+offsetX) % 2
                 
-                let type = yOdd*2+xOdd
-                newImage[unsafe: x, y] = debayerPixel(x: x, y: y, type: type)
+                xOdd.toggle()
             }
+            
+            yOdd.toggle()
         }
-
+        
         return newImage
     }
 }
 
-extension Image where P == Intensity, T: FloatingPoint {
-    // type b,g,g,r <-> 0,1,2,3
+extension BayerConverter {
     @inlinable
-    func debayerPixel(x: Int, y: Int, type: Int) -> Pixel<RGB, T> {
+    public func demosaic<T: BinaryInteger>(image: Image<Intensity, T>) -> Image<RGB, T> {
+        let (offsetX, offsetY) = pattern.offsetToBGGR
+        
+        var newImage = Image<RGB, T>(width: image.width, height: image.height)
         
         func mean(_ points: [(x: Int, y: Int)]) -> T {
             var sum: T = 0
             var count = 0
             for p in points {
-                if 0 <= p.x && p.x < width && 0 <= p.y && p.y < height {
-                    sum += self[unsafe: x, y, .intensity]
+                if 0 <= p.x && p.x < image.width && 0 <= p.y && p.y < image.height {
+                    sum += image[unsafe: p.x, p.y, .intensity]
                     count += 1
                 }
             }
             return sum / T(count)
         }
         
-        let r, g, b: T
-        switch type {
-        case 0:
-            r = mean([(x-1, y-1), (x+1, y-1), (x-1, y+1), (x+1, y+1)])
-            g = mean([(x-1, y), (x+1, y), (x, y-1), (x, y+1)])
-            b = self[unsafe: x, y, .intensity]
-        case 1:
-            r = mean([(x, y-1), (x, y+1)])
-            g = self[unsafe: x, y, .intensity]
-            b = mean([(x-1, y), (x+1, y)])
-        case 2:
-            r = mean([(x-1, y), (x+1, y)])
-            g = self[unsafe: x, y, .intensity]
-            b = mean([(x, y-1), (x, y+1)])
-        case 3:
-            r = self[unsafe: x, y, .intensity]
-            g = mean([(x-1, y), (x+1, y), (x, y-1), (x, y+1)])
-            b = mean([(x-1, y-1), (x+1, y-1), (x-1, y+1), (x+1, y+1)])
-        default:
-            preconditionFailure("Never reach here.")
+        func getPixelValue(x: Int, y: Int, channel: RGB) -> T {
+            let xOdd = (x + offsetX) % 2 == 1
+            let yOdd = (y + offsetY) % 2 == 1
+            
+            switch (xOdd, yOdd, channel) {
+            case (false, false, .red):
+                return mean([(x-1, y-1), (x+1, y-1), (x-1, y+1), (x+1, y+1)])
+            case (false, false, .green):
+                return mean([(x-1, y), (x+1, y), (x, y-1), (x, y+1)])
+            case (false, false, .blue):
+                return image[x, y]
+            case (true, false, .red):
+                return mean([(x, y-1), (x, y+1)])
+            case (true, false, .green):
+                return image[x, y]
+            case (true, false, .blue):
+                return mean([(x-1, y), (x+1, y)])
+            case (false, true, .red):
+                return mean([(x-1, y), (x+1, y)])
+            case (false, true, .green):
+                return image[x, y]
+            case (false, true, .blue):
+                return mean([(x, y-1), (x, y+1)])
+            case (true, true, .red):
+                return image[x, y]
+            case (true, true, .green):
+                return mean([(x-1, y), (x+1, y), (x, y-1), (x, y+1)])
+            case (true, true, .blue):
+                return mean([(x-1, y-1), (x+1, y-1), (x-1, y+1), (x+1, y+1)])
+            }
         }
-        return Pixel(r: r, g: g, b: b)
+        
+        for y in 0..<image.height {
+            for x in 0..<image.width {
+                for c in [RGB.red, .green, .blue] {
+                    newImage[x, y, c] = getPixelValue(x: x, y: y, channel: c)
+                }
+            }
+        }
+        
+        return newImage
     }
     
     @inlinable
-    public func debayered(pattern: BayerPattern) -> Image<RGB, T> {
-        var newImage = Image<RGB, T>(width: width, height: height)
-        
+    public func demosaic<T: BinaryFloatingPoint>(image: Image<Intensity, T>) -> Image<RGB, T> {
         let (offsetX, offsetY) = pattern.offsetToBGGR
         
-        for y in 0..<height {
-            let yOdd = (y+offsetY) % 2
-            for x in 0..<width {
-                let xOdd = (x+offsetX) % 2
-                
-                let type = yOdd*2+xOdd
-                newImage[unsafe: x, y] = debayerPixel(x: x, y: y, type: type)
+        var newImage = Image<RGB, T>(width: image.width, height: image.height)
+        
+        func mean(_ points: [(x: Int, y: Int)]) -> T {
+            var sum: T = 0
+            var count = 0
+            for p in points {
+                if 0 <= p.x && p.x < image.width && 0 <= p.y && p.y < image.height {
+                    sum += image[unsafe: p.x, p.y, .intensity]
+                    count += 1
+                }
+            }
+            return sum / T(count)
+        }
+        
+        func getPixelValue(x: Int, y: Int, channel: RGB) -> T {
+            let xOdd = (x + offsetX) % 2 == 1
+            let yOdd = (y + offsetY) % 2 == 1
+            
+            switch (xOdd, yOdd, channel) {
+            case (false, false, .red):
+                return mean([(x-1, y-1), (x+1, y-1), (x-1, y+1), (x+1, y+1)])
+            case (false, false, .green):
+                return mean([(x-1, y), (x+1, y), (x, y-1), (x, y+1)])
+            case (false, false, .blue):
+                return image[x, y]
+            case (true, false, .red):
+                return mean([(x, y-1), (x, y+1)])
+            case (true, false, .green):
+                return image[x, y]
+            case (true, false, .blue):
+                return mean([(x-1, y), (x+1, y)])
+            case (false, true, .red):
+                return mean([(x-1, y), (x+1, y)])
+            case (false, true, .green):
+                return image[x, y]
+            case (false, true, .blue):
+                return mean([(x, y-1), (x, y+1)])
+            case (true, true, .red):
+                return image[x, y]
+            case (true, true, .green):
+                return mean([(x-1, y), (x+1, y), (x, y-1), (x, y+1)])
+            case (true, true, .blue):
+                return mean([(x-1, y-1), (x+1, y-1), (x-1, y+1), (x+1, y+1)])
+            }
+        }
+        
+        for y in 0..<image.height {
+            for x in 0..<image.width {
+                for c in [RGB.red, .green, .blue] {
+                    newImage[x, y, c] = getPixelValue(x: x, y: y, channel: c)
+                }
             }
         }
         

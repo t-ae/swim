@@ -35,7 +35,8 @@ extension Image {
             // No effects
             return
         }
-        precondition((width, height) == newValue.size)
+        precondition((width, height) == newValue.size,
+                     "Invalid size: \((width, height)) != \(newValue.size)")
         
         let start = index(x: x, y: y)
         let baseWidth = self.width

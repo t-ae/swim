@@ -7,7 +7,8 @@ class BayerTests: XCTestCase {
         let image = Image(width: 4, height: 4, rgb: (0..<48).map { UInt8($0) })
         
         do {
-            let lumi: Image<Intensity, UInt8> = image.bayered(pattern: .bggr)
+            let conv = BayerConverter(pattern: .bggr)
+            let lumi = conv.convert(image: image)
             XCTAssertEqual(lumi, Image(width: 4,
                                        height: 4,
                                        data: [2, 4, 8, 10,
@@ -16,7 +17,8 @@ class BayerTests: XCTestCase {
                                               37, 39, 43, 45]))
         }
         do {
-            let lumi: Image<Intensity, UInt8> = image.bayered(pattern: .gbrg)
+            let conv = BayerConverter(pattern: .gbrg)
+            let lumi = conv.convert(image: image)
             XCTAssertEqual(lumi, Image(width: 4,
                                        height: 4,
                                        data: [1, 5, 7, 11,
@@ -25,7 +27,8 @@ class BayerTests: XCTestCase {
                                               36, 40, 42, 46]))
         }
         do {
-            let lumi: Image<Intensity, UInt8> = image.bayered(pattern: .grbg)
+            let conv = BayerConverter(pattern: .grbg)
+            let lumi = conv.convert(image: image)
             XCTAssertEqual(lumi, Image(width: 4,
                                        height: 4,
                                        data: [1, 3, 7, 9,
@@ -34,7 +37,8 @@ class BayerTests: XCTestCase {
                                               38, 40, 44, 46]))
         }
         do {
-            let lumi: Image<Intensity, UInt8> = image.bayered(pattern: .rggb)
+            let conv = BayerConverter(pattern: .rggb)
+            let lumi = conv.convert(image: image)
             XCTAssertEqual(lumi, Image(width: 4,
                                        height: 4,
                                        data: [0, 4, 6, 10,
@@ -45,9 +49,10 @@ class BayerTests: XCTestCase {
     }
     
     func testDebayered() {
-        let image = Image(width: 4, height: 4, intensity: (0..<16).map { $0 })
         do {
-            let rgb: Image<RGB, Int> = image.debayered(pattern: .bggr)
+            let image = Image(width: 4, height: 4, intensity: (0..<16).map { $0 })
+            let conv = BayerConverter(pattern: .bggr)
+            let rgb = conv.demosaic(image: image)
             XCTAssertEqual(rgb, Image(width: 4,
                                       height: 4,
                                       data: [5, 2, 0,  5, 1, 1,  6, 3, 2,  7, 3, 2,
