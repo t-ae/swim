@@ -45,7 +45,7 @@ class ImageIOTests: XCTestCase {
             try! self.baseImage.write(to: srcPath, type: .png)
             let image = Image<RGBA, Float>(contentsOf: srcPath)!
             
-            XCTAssertEqual((image.clipped(low: 0, high: 1)*255).rounded().dataTypeConverter.cast(),
+            XCTAssertEqual(Image(cast: (image.clipped(low: 0, high: 1)*255).rounded()),
                            baseImage)
             
             try! image.write(to: dstPath, type: .png)
@@ -58,7 +58,7 @@ class ImageIOTests: XCTestCase {
             try! self.baseLuminance.write(to: srcPath, type: .png)
             let image = Image<Intensity, Float>(contentsOf: srcPath)!
             
-            XCTAssertEqual((image.clipped(low: 0, high: 1)*255).rounded().dataTypeConverter.cast(),
+            XCTAssertEqual(Image(cast: (image.clipped(low: 0, high: 1)*255).rounded()),
                            baseLuminance)
             
             try! image.write(to: dstPath, type: .png)
@@ -75,7 +75,7 @@ class ImageIOTests: XCTestCase {
             
             let image = Image<RGBA, Double>(contentsOf: srcPath)!
             
-            XCTAssertEqual((image.clipped(low: 0, high: 1)*255).rounded().dataTypeConverter.cast(),
+            XCTAssertEqual(Image(cast: (image.clipped(low: 0, high: 1)*255).rounded()),
                            baseImage)
             
             try! image.write(to: dstPath, type: .png)
@@ -89,7 +89,7 @@ class ImageIOTests: XCTestCase {
             
             let image = Image<Intensity, Double>(contentsOf: srcPath)!
             
-            XCTAssertEqual((image.clipped(low: 0, high: 1)*255).rounded().dataTypeConverter.cast(),
+            XCTAssertEqual(Image(cast: (image.clipped(low: 0, high: 1)*255).rounded()),
                            baseLuminance)
             
             try! image.write(to: dstPath, type: .png)

@@ -83,7 +83,7 @@ class OtherVisualTests: XCTestCase {
         
         
         let julia1 = getJuliaImage(c: (-0.6180339887498949, 0), color: Pixel(r: 1, g: 0, b: 0))
-        let ns1 = (julia1*255).dataTypeConverter.cast(to: UInt8.self).nsImage()
+        let ns1 = doubleToNSImage(julia1)
 
         let julia2 = getJuliaImage(c: (0.285, 0), color: Pixel(r: 0, g: 1, b: 0))
         let ns2 = doubleToNSImage(julia2)
@@ -157,7 +157,7 @@ class OtherVisualTests: XCTestCase {
         
         var steps: [NSImage] = []
         for _ in 0..<20 {
-            var bd = b.dataTypeConverter.cast(to: Double.self)
+            var bd = Image(cast: b, to: Double.self)
             bd = bd.resize(width: 128, height: 128, method: .nearestNeighbor)
             let ns = doubleToNSImage(bd)
             steps.append(ns)
