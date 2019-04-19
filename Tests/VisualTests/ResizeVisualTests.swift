@@ -28,9 +28,9 @@ class ResizeVisualTests: XCTestCase {
         
         var images = [Image<RGB, Double>]()
         
-        images.append(lena.resize(width: 768, height: 768, method: .nearestNeighbor))
-        images.append(lena.resize(width: 768, height: 768, method: .bilinear))
-        images.append(lena.resize(width: 768, height: 768, method: .bicubic))
+        images.append(lena.resize(width: 700, height: 700, method: .nearestNeighbor))
+        images.append(lena.resize(width: 700, height: 700, method: .bilinear))
+        images.append(lena.resize(width: 700, height: 700, method: .bicubic))
         
         let image = Image.concatH(images)
         
