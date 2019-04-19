@@ -100,7 +100,7 @@ class PerformanceTests: XCTestCase {
         let image = Image(width: 1920, height: 1080, intensity: data)
         
         measure {
-            _ = image.toIntegralImage()
+            _ = IntegralImageConverter.convert(image: image)
         }
     }
     
@@ -126,8 +126,10 @@ class PerformanceTests: XCTestCase {
         let data = [Float](repeating: 0, count: 640*480)
         let image = Image(width: 640, height: 480, intensity: data)
         
+        let conv = BayerConverter(pattern: .bggr)
+        
         measure {
-            _ = image.debayered(pattern: .bggr)
+            _ = conv.demosaic(image: image)
         }
     }
     
