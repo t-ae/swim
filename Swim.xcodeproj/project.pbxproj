@@ -25,6 +25,7 @@
 /* Begin PBXBuildFile section */
 		A7CAD50722694FB3007B0E08 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_137 /* Utils.swift */; };
 		A7CAD50C226954BA007B0E08 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7CAD50A226954B7007B0E08 /* Utils.swift */; };
+		A7CAD50F22697055007B0E08 /* Interleave.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7CAD50E22697055007B0E08 /* Interleave.swift */; };
 		OBJ_161 /* image_io.c in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_9 /* image_io.c */; };
 		OBJ_163 /* stb_image_write.h in Headers */ = {isa = PBXBuildFile; fileRef = OBJ_11 /* stb_image_write.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		OBJ_164 /* stb_image.h in Headers */ = {isa = PBXBuildFile; fileRef = OBJ_12 /* stb_image.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -208,6 +209,7 @@
 
 /* Begin PBXFileReference section */
 		A7CAD50A226954B7007B0E08 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		A7CAD50E22697055007B0E08 /* Interleave.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Interleave.swift; sourceTree = "<group>"; };
 		OBJ_100 /* AlphaBlendTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlphaBlendTests.swift; sourceTree = "<group>"; };
 		OBJ_102 /* ChannelCompositionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelCompositionTests.swift; sourceTree = "<group>"; };
 		OBJ_103 /* ChannelwiseConversionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelwiseConversionTests.swift; sourceTree = "<group>"; };
@@ -696,6 +698,7 @@
 				OBJ_83 /* Rect.swift */,
 				OBJ_84 /* Run.swift */,
 				OBJ_85 /* StrideCopy.swift */,
+				A7CAD50E22697055007B0E08 /* Interleave.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -999,6 +1002,7 @@
 				OBJ_226 /* ChannelSubscript.swift in Sources */,
 				OBJ_227 /* PixelSubscript.swift in Sources */,
 				OBJ_228 /* SubimageSubscript.swift in Sources */,
+				A7CAD50F22697055007B0E08 /* Interleave.swift in Sources */,
 				OBJ_229 /* AffineTransformation.swift in Sources */,
 				OBJ_230 /* Resize.swift in Sources */,
 				OBJ_231 /* Transformation.swift in Sources */,
