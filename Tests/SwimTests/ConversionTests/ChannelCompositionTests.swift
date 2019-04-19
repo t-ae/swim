@@ -5,6 +5,15 @@ class ChannelCompositionTests: XCTestCase {
     
     func testCompound() {
         do {
+            let intensity = Image(width: 2, height: 2, intensity: [0, 1, 2, 3])
+            let alpha = Image(width: 2, height: 2, intensity: [4, 5, 6, 7])
+            
+            let image = Image(intensity: intensity, alpha: alpha)
+            
+            XCTAssertEqual(image[channel: .intensity], intensity)
+            XCTAssertEqual(image[channel: .alpha], alpha)
+        }
+        do {
             let red = Image(width: 2, height: 2, intensity: [0, 1, 2, 3])
             let green = Image(width: 2, height: 2, intensity: [4, 5, 6, 7])
             let blue = Image(width: 2, height: 2, intensity: [8, 9, 10, 11])

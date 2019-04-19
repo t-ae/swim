@@ -118,4 +118,24 @@ class WarpVisualTests: XCTestCase {
         
         XCTAssertFalse(nsImages.isEmpty, "Break and check nsImages in debugger.")
     }
+    
+    func testMatrix() {
+        let path = testResoruceRoot().appendingPathComponent("lena_128.png")
+        let lena = Image<RGB, Double>(contentsOf: path)!
+        
+        let size = Double(lena.width)
+        let scale: Double = 3
+        var affine = AffineTransformation<Double>.identity
+        affine = AffineTransformation.scale(x: scale, y: scale) * affine
+        affine = AffineTransformation.translation(x: scale/2, y: scale/2) * affine
+        affine = AffineTransformation.translation(x: -size*scale/2, y: -size*scale/2) * affine
+        affine = AffineTransformation.rotation(angle: .pi / 4) * affine
+        affine = AffineTransformation.translation(x: size*scale/2, y: size*scale/2) * affine
+        
+        let intpl = NearestNeighborInterpolator<Double>(mode: .reflect)
+        let result = try! lena.warp(transformation: affine, outputSize: (512, 512), interpolator: intpl)
+        let nsImage = doubleToNSImage(result)
+        
+        XCTAssertTrue(nsImage.isValid, "Break and check nsImages in debugger.")
+    }
 }
