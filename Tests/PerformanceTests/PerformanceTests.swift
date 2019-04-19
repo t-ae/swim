@@ -98,7 +98,7 @@ class PerformanceTests: XCTestCase {
         let image = Image(width: 1920, height: 1080, rgb: data)
         
         measure {
-            _ = image.transform.flipLR()
+            _ = image.flipLR()
         }
     }
     

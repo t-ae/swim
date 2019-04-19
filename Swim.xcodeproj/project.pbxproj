@@ -27,7 +27,6 @@
 		A7CAD50C226954BA007B0E08 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7CAD50A226954B7007B0E08 /* Utils.swift */; };
 		A7CAD50F22697055007B0E08 /* Interleave.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7CAD50E22697055007B0E08 /* Interleave.swift */; };
 		A7CAD5122269826C007B0E08 /* BayerVisualTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7CAD51022698268007B0E08 /* BayerVisualTests.swift */; };
-		A7CAD5142269A1DC007B0E08 /* Transform.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7CAD5132269A1DC007B0E08 /* Transform.swift */; };
 		A7CAD5162269A266007B0E08 /* Flip.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7CAD5152269A266007B0E08 /* Flip.swift */; };
 		A7CAD5182269A2C1007B0E08 /* Rotate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7CAD5172269A2C1007B0E08 /* Rotate.swift */; };
 		OBJ_161 /* image_io.c in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_9 /* image_io.c */; };
@@ -214,7 +213,6 @@
 		A7CAD50A226954B7007B0E08 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		A7CAD50E22697055007B0E08 /* Interleave.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Interleave.swift; sourceTree = "<group>"; };
 		A7CAD51022698268007B0E08 /* BayerVisualTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BayerVisualTests.swift; sourceTree = "<group>"; };
-		A7CAD5132269A1DC007B0E08 /* Transform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transform.swift; sourceTree = "<group>"; };
 		A7CAD5152269A266007B0E08 /* Flip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Flip.swift; sourceTree = "<group>"; };
 		A7CAD5172269A2C1007B0E08 /* Rotate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rotate.swift; sourceTree = "<group>"; };
 		OBJ_100 /* AlphaBlendTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlphaBlendTests.swift; sourceTree = "<group>"; };
@@ -690,7 +688,6 @@
 				OBJ_74 /* AffineTransformation.swift */,
 				OBJ_75 /* Resize.swift */,
 				OBJ_77 /* Warp.swift */,
-				A7CAD5132269A1DC007B0E08 /* Transform.swift */,
 				A7CAD5152269A266007B0E08 /* Flip.swift */,
 				A7CAD5172269A2C1007B0E08 /* Rotate.swift */,
 			);
@@ -992,7 +989,6 @@
 				OBJ_202 /* Pixel.swift in Sources */,
 				OBJ_203 /* PixelType.swift in Sources */,
 				OBJ_204 /* Sequence.swift in Sources */,
-				A7CAD5142269A1DC007B0E08 /* Transform.swift in Sources */,
 				OBJ_205 /* ImageIO.swift in Sources */,
 				OBJ_207 /* BicubicInterpolator.swift in Sources */,
 				OBJ_209 /* BilinearInterpolator.swift in Sources */,

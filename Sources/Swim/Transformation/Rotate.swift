@@ -1,12 +1,11 @@
 import Foundation
 
-extension Transform {
+extension Image {
     @inlinable
     public func rot90() -> Image<P, T> {
-        let (width, height) = image.size
         var newImage = Image<P, T>(width: height, height: width)
         
-        image.data.withUnsafeBufferPointer {
+        data.withUnsafeBufferPointer {
             var src = $0.baseAddress!
             newImage.data.withUnsafeMutableBufferPointer {
                 var dst = $0.baseAddress! + (height - 1)*P.channels
@@ -26,11 +25,9 @@ extension Transform {
     
     @inlinable
     public func rot180() -> Image<P, T> {
-        let (width, height) = image.size
-        let pixelCount = image.pixelCount
         var newImage = Image<P, T>(width: width, height: height)
         
-        image.data.withUnsafeBufferPointer {
+        data.withUnsafeBufferPointer {
             var src = $0.baseAddress!
             newImage.data.withUnsafeMutableBufferPointer {
                 var dst = $0.baseAddress! + (pixelCount-1) * P.channels
@@ -47,10 +44,9 @@ extension Transform {
     
     @inlinable
     public func rot270() -> Image<P, T> {
-        let (width, height) = image.size
         var newImage = Image<P, T>(width: height, height: width)
         
-        image.data.withUnsafeBufferPointer {
+        data.withUnsafeBufferPointer {
             var src = $0.baseAddress!
             newImage.data.withUnsafeMutableBufferPointer {
                 var dst = $0.baseAddress!
