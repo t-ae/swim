@@ -53,7 +53,7 @@ extension Image {
     }
     
     @inlinable
-    func getSubimage(xRange: CountableRange<Int>, yRange: CountableRange<Int>) -> Image<P, T> {
+    func getSubimage(xRange: Range<Int>, yRange: Range<Int>) -> Image<P, T> {
         let x = xRange.lowerBound
         let y = yRange.lowerBound
         let width = xRange.upperBound - x
@@ -63,7 +63,7 @@ extension Image {
     }
     
     @inlinable
-    mutating func setSubimage(xRange: CountableRange<Int>, yRange: CountableRange<Int>, newValue: Image<P, T>) {
+    mutating func setSubimage(xRange: Range<Int>, yRange: Range<Int>, newValue: Image<P, T>) {
         let x = xRange.lowerBound
         let y = yRange.lowerBound
         let width = xRange.upperBound - x
@@ -75,7 +75,7 @@ extension Image {
 
 extension Image {
     @inlinable
-    public subscript(xRange: CountableRange<Int>, yRange: CountableRange<Int>) -> Image<P, T> {
+    public subscript(xRange: Range<Int>, yRange: Range<Int>) -> Image<P, T> {
         get {
             return getSubimage(xRange: xRange, yRange: yRange)
         }
@@ -85,7 +85,7 @@ extension Image {
     }
     
     @inlinable
-    public subscript(rows rows: CountableRange<Int>) -> Image<P, T> {
+    public subscript(rows rows: Range<Int>) -> Image<P, T> {
         get {
             return self[0..<width, rows]
         }
@@ -95,7 +95,7 @@ extension Image {
     }
     
     @inlinable
-    public subscript(cols cols: CountableRange<Int>) -> Image<P, T> {
+    public subscript(cols cols: Range<Int>) -> Image<P, T> {
         get {
             return self[cols, 0..<height]
         }

@@ -4,7 +4,7 @@ extension Image where P == Intensity, T: Comparable {
         precondition(kernelSize > 0)
         var newImage = self
         
-        let kernelRange: CountableClosedRange<Int>
+        let kernelRange: ClosedRange<Int>
         do {
             let l = (1-kernelSize)/2
             let r = kernelSize/2

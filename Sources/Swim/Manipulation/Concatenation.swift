@@ -9,7 +9,7 @@ extension Image {
         
         var start = 0
         for im in images {
-            let cols: CountableRange<Int> = start..<start+im.width
+            let cols: Range<Int> = start..<start+im.width
             image[cols: cols] = im
             start += im.width
         }
