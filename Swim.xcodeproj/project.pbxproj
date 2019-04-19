@@ -23,6 +23,7 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		A7CAD50722694FB3007B0E08 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_137 /* Utils.swift */; };
 		OBJ_161 /* image_io.c in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_9 /* image_io.c */; };
 		OBJ_163 /* stb_image_write.h in Headers */ = {isa = PBXBuildFile; fileRef = OBJ_11 /* stb_image_write.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		OBJ_164 /* stb_image.h in Headers */ = {isa = PBXBuildFile; fileRef = OBJ_12 /* stb_image.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -118,7 +119,6 @@
 		OBJ_293 /* TransformationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_133 /* TransformationTests.swift */; };
 		OBJ_294 /* WarpTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_134 /* WarpTests.swift */; };
 		OBJ_295 /* Random.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_136 /* Random.swift */; };
-		OBJ_296 /* ResourcePath.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_137 /* ResourcePath.swift */; };
 		OBJ_297 /* XCTAssertEqualWithAccuracy.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_138 /* XCTAssertEqualWithAccuracy.swift */; };
 		OBJ_298 /* MatmulTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_140 /* MatmulTests.swift */; };
 		OBJ_300 /* Swim.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Swim::Swim::Product" /* Swim.framework */; };
@@ -235,7 +235,7 @@
 		OBJ_133 /* TransformationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransformationTests.swift; sourceTree = "<group>"; };
 		OBJ_134 /* WarpTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WarpTests.swift; sourceTree = "<group>"; };
 		OBJ_136 /* Random.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Random.swift; sourceTree = "<group>"; };
-		OBJ_137 /* ResourcePath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourcePath.swift; sourceTree = "<group>"; };
+		OBJ_137 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		OBJ_138 /* XCTAssertEqualWithAccuracy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XCTAssertEqualWithAccuracy.swift; sourceTree = "<group>"; };
 		OBJ_140 /* MatmulTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatmulTests.swift; sourceTree = "<group>"; };
 		OBJ_142 /* AlphaBlendVisualTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlphaBlendVisualTests.swift; sourceTree = "<group>"; };
@@ -463,7 +463,6 @@
 			isa = PBXGroup;
 			children = (
 				OBJ_136 /* Random.swift */,
-				OBJ_137 /* ResourcePath.swift */,
 				OBJ_138 /* XCTAssertEqualWithAccuracy.swift */,
 			);
 			path = Utility;
@@ -501,6 +500,7 @@
 		OBJ_141 /* VisualTests */ = {
 			isa = PBXGroup;
 			children = (
+				OBJ_137 /* Utils.swift */,
 				OBJ_142 /* AlphaBlendVisualTests.swift */,
 				OBJ_143 /* FilterVisualTests.swift */,
 				OBJ_144 /* OtherVisualTests.swift */,
@@ -1055,7 +1055,6 @@
 				OBJ_293 /* TransformationTests.swift in Sources */,
 				OBJ_294 /* WarpTests.swift in Sources */,
 				OBJ_295 /* Random.swift in Sources */,
-				OBJ_296 /* ResourcePath.swift in Sources */,
 				OBJ_297 /* XCTAssertEqualWithAccuracy.swift in Sources */,
 				OBJ_298 /* MatmulTests.swift in Sources */,
 			);
@@ -1065,6 +1064,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 0;
 			files = (
+				A7CAD50722694FB3007B0E08 /* Utils.swift in Sources */,
 				OBJ_308 /* AlphaBlendVisualTests.swift in Sources */,
 				OBJ_309 /* FilterVisualTests.swift in Sources */,
 				OBJ_310 /* OtherVisualTests.swift in Sources */,

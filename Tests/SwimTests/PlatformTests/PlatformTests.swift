@@ -14,7 +14,7 @@ extension PlatformTests {
     func testAppkit() {
         print(testResoruceRoot())
         
-        let imagePath = testResoruceRoot().appendingPathComponent("icon256.jpg")
+        let imagePath = testResoruceRoot().appendingPathComponent("lena.png")
         
         guard FileManager.default.fileExists(atPath: imagePath.path) else {
             XCTFail("Invalid path: \(imagePath)")
@@ -35,3 +35,16 @@ extension PlatformTests {
 }
 
 #endif
+
+import Foundation
+
+func testResoruceRoot() -> URL {
+    let f = #file
+    
+    return URL(fileURLWithPath: f)
+        .deletingLastPathComponent()
+        .deletingLastPathComponent()
+        .deletingLastPathComponent()
+        .deletingLastPathComponent()
+        .appendingPathComponent("TestResources")
+}
