@@ -6,20 +6,20 @@ public protocol PixelType {
     var rawValue: Int { get }
 }
 
-public enum Intensity: Int, PixelType {
+public enum Intensity: Int, PixelType, CaseIterable {
     public static var channels: Int = 1
     
     case intensity = 0
 }
 
-public enum IntensityAlpha: Int, PixelType {
+public enum IntensityAlpha: Int, PixelType, CaseIterable {
     public static var channels: Int = 2
     
     case intensity = 0
     case alpha = 1
 }
 
-public enum RGB: Int, PixelType {
+public enum RGB: Int, PixelType, CaseIterable {
     public static var channels: Int = 3
     
     case red = 0
@@ -27,7 +27,7 @@ public enum RGB: Int, PixelType {
     case blue = 2
 }
 
-public enum RGBA: Int, PixelType {
+public enum RGBA: Int, PixelType, CaseIterable {
     public static var channels: Int = 4
     
     case red = 0
@@ -36,7 +36,7 @@ public enum RGBA: Int, PixelType {
     case alpha = 3
 }
 
-public enum ARGB: Int, PixelType {
+public enum ARGB: Int, PixelType, CaseIterable {
     public static var channels: Int = 4
     
     case alpha = 0
