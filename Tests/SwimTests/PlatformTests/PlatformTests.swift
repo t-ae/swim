@@ -2,7 +2,8 @@ import XCTest
 import Swim
 
 class PlatformTests: XCTestCase {
-    
+    let rgbaPath = testResoruceRoot().appendingPathComponent("lena.png")
+    let grayPath = testResoruceRoot().appendingPathComponent("lena_gray.png")
 }
 
 #if canImport(AppKit)
@@ -10,41 +11,32 @@ class PlatformTests: XCTestCase {
 import AppKit
 
 extension PlatformTests {
-    #if !DEBUG
-    func testAppkit() {
-        print(testResoruceRoot())
+    func testGray() {
+        let image = Image<Intensity, UInt8>(contentsOf: grayPath)!
         
-        let imagePath = testResoruceRoot().appendingPathComponent("lena.png")
+        let nsImage1 = image.nsImage()
         
-        guard FileManager.default.fileExists(atPath: imagePath.path) else {
-            XCTFail("Invalid path: \(imagePath)")
-            return
-        }
+        let image2 = Image<Intensity, UInt8>(nsImage: nsImage1)!
+        let nsImage2 = image2.nsImage()
         
-        let nsImage = NSImage(contentsOf: imagePath)!
-        
-        let image = Image<RGBA, UInt8>(nsImage: nsImage)
-        
-        let nsImage2 = image!.nsImage()
-        
-        print("break here")
-        
-        _ = nsImage2
+        XCTAssertTrue(nsImage1.isValid && nsImage2.isValid,
+                      "Break and check image")
     }
-    #endif
+    
+    func testRGBA() {
+        let baseImage = NSImage(contentsOf: rgbaPath)!
+        
+        let image = Image<RGBA, UInt8>(nsImage: baseImage)!
+        
+        let nsImage1 = image.nsImage()
+        
+        let image2 = Image<RGBA, UInt8>(nsImage: nsImage1)!
+        let nsImage2 = image2.nsImage()
+        
+        XCTAssertTrue(nsImage1.isValid && nsImage2.isValid,
+                      "Break and check image")
+    }
 }
 
 #endif
 
-import Foundation
-
-func testResoruceRoot() -> URL {
-    let f = #file
-    
-    return URL(fileURLWithPath: f)
-        .deletingLastPathComponent()
-        .deletingLastPathComponent()
-        .deletingLastPathComponent()
-        .deletingLastPathComponent()
-        .appendingPathComponent("TestResources")
-}

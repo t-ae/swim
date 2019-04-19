@@ -24,6 +24,7 @@
 
 /* Begin PBXBuildFile section */
 		A7CAD50722694FB3007B0E08 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_137 /* Utils.swift */; };
+		A7CAD50C226954BA007B0E08 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7CAD50A226954B7007B0E08 /* Utils.swift */; };
 		OBJ_161 /* image_io.c in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_9 /* image_io.c */; };
 		OBJ_163 /* stb_image_write.h in Headers */ = {isa = PBXBuildFile; fileRef = OBJ_11 /* stb_image_write.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		OBJ_164 /* stb_image.h in Headers */ = {isa = PBXBuildFile; fileRef = OBJ_12 /* stb_image.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -206,6 +207,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A7CAD50A226954B7007B0E08 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		OBJ_100 /* AlphaBlendTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlphaBlendTests.swift; sourceTree = "<group>"; };
 		OBJ_102 /* ChannelCompositionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelCompositionTests.swift; sourceTree = "<group>"; };
 		OBJ_103 /* ChannelwiseConversionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelwiseConversionTests.swift; sourceTree = "<group>"; };
@@ -464,6 +466,7 @@
 			children = (
 				OBJ_136 /* Random.swift */,
 				OBJ_138 /* XCTAssertEqualWithAccuracy.swift */,
+				A7CAD50A226954B7007B0E08 /* Utils.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -1033,6 +1036,7 @@
 				OBJ_270 /* ChannelCompositionTests.swift in Sources */,
 				OBJ_271 /* ChannelwiseConversionTests.swift in Sources */,
 				OBJ_272 /* DataTypeConversionTests.swift in Sources */,
+				A7CAD50C226954BA007B0E08 /* Utils.swift in Sources */,
 				OBJ_273 /* PixelTypeConversionTests.swift in Sources */,
 				OBJ_274 /* PixelwiseConversionTests.swift in Sources */,
 				OBJ_275 /* ImageTests.swift in Sources */,

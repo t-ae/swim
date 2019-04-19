@@ -21,4 +21,15 @@ class ResizeVisualTests: XCTestCase {
             XCTAssertTrue(nsImage.isValid, "Break and check nsImage in debugger.")
         }
     }
+    
+    func testResizeUpscale_lena() {
+        let path = testResoruceRoot().appendingPathComponent("lena.png")
+        let lena = Image<RGBA, Double>(contentsOf: path)!
+        
+        let images = [Image<RGBA, Double>]()
+        
+        do {
+            let resized = lena.resize(width: 768, height: 768)
+        }
+    }
 }

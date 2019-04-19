@@ -10,12 +10,12 @@ class ImageIOTests: XCTestCase {
     var baseLuminance: Image<Intensity, UInt8>!
     
     override func setUp() {
-        self.baseImage = Image(width: 8,
-                               height: 8,
-                               data: (0..<256).map { UInt8($0) })
-        self.baseLuminance = Image(width: 4,
-                                   height: 4,
-                                   data: (0..<16).map { UInt8($0) })
+        self.baseImage = Image(width: 128,
+                               height: 128,
+                               data: (0..<128*128*4).map { _ in UInt8.random(in: 0...255) })
+        self.baseLuminance = Image(width: 128,
+                                   height: 128,
+                                   data: (0..<128*128).map { _ in UInt8.random(in: 0...255) })
     }
     
     override func tearDown() {
