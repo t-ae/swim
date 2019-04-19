@@ -109,7 +109,7 @@ class PerformanceTests: XCTestCase {
         let affine = AffineTransformation<Float>(scale: (-1, 1), translation: (640, 0))
         
         measure {
-            _ = try? image.warp(transformation: affine)
+            _ = try? image.transform.warp(transformation: affine)
         }
     }
     
