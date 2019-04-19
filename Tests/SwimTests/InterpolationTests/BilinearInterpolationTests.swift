@@ -3,7 +3,7 @@ import Swim
 
 class BilinearInterpolationTests: XCTestCase {
     func testInterpolate() {
-        let intpl = BilinearInterpolator(mode: .constant(255))
+        let intpl = BilinearInterpolator(edgeMode: .constant(255))
         
         let image = Image<Intensity, Double>(width: 4,
                                              height: 4,

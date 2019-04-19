@@ -137,11 +137,11 @@ extension Image where T: BinaryFloatingPoint {
         let intpl: (T, T, Image<P, T>) -> Pixel<P, T>
         switch method {
         case .nearestNeighbor:
-            intpl = NearestNeighborInterpolator(mode: .edge).interpolate
+            intpl = NearestNeighborInterpolator(edgeMode: .edge).interpolate
         case .bilinear:
-            intpl = BilinearInterpolator(mode: .edge).interpolate
+            intpl = BilinearInterpolator(edgeMode: .edge).interpolate
         case .bicubic:
-            intpl = BicubicInterpolator(mode: .edge).interpolate
+            intpl = BicubicInterpolator(edgeMode: .edge).interpolate
         }
         
         for y in 0..<height {

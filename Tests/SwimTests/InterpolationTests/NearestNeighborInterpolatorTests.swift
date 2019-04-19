@@ -4,7 +4,7 @@ import Swim
 class NearestNeighborInterpolatorTests: XCTestCase {
 
     func testInterpolate() {
-        let intpl = NearestNeighborInterpolator(mode: .constant(255))
+        let intpl = NearestNeighborInterpolator(edgeMode: .constant(255))
         
         let image = Image<Intensity, Double>(width: 4,
                                              height: 4,
