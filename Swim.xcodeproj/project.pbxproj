@@ -24,6 +24,8 @@
 
 /* Begin PBXBuildFile section */
 		A70DA64C226B911C0051AA54 /* Blender.swift in Sources */ = {isa = PBXBuildFile; fileRef = A70DA64A226B91180051AA54 /* Blender.swift */; };
+		A70DA653226B97440051AA54 /* MultiplyBlend.swift in Sources */ = {isa = PBXBuildFile; fileRef = A70DA651226B973F0051AA54 /* MultiplyBlend.swift */; };
+		A70DA656226B99380051AA54 /* AddBlend.swift in Sources */ = {isa = PBXBuildFile; fileRef = A70DA654226B99310051AA54 /* AddBlend.swift */; };
 		A74A604C226B51A300312113 /* WriteImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74A604A226B519300312113 /* WriteImage.swift */; };
 		A74A604F226B51EC00312113 /* ReadImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74A604D226B51D500312113 /* ReadImage.swift */; };
 		A7CAD50722694FB3007B0E08 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_137 /* Utils.swift */; };
@@ -130,7 +132,7 @@
 		OBJ_298 /* MatmulTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_140 /* MatmulTests.swift */; };
 		OBJ_300 /* Swim.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Swim::Swim::Product" /* Swim.framework */; };
 		OBJ_301 /* CStbImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Swim::CStbImage::Product" /* CStbImage.framework */; };
-		OBJ_308 /* AlphaBlendVisualTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_142 /* AlphaBlendVisualTests.swift */; };
+		OBJ_308 /* BlendVisualTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_142 /* BlendVisualTests.swift */; };
 		OBJ_309 /* FilterVisualTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_143 /* FilterVisualTests.swift */; };
 		OBJ_310 /* OtherVisualTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_144 /* OtherVisualTests.swift */; };
 		OBJ_311 /* ResizeVisualTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_145 /* ResizeVisualTests.swift */; };
@@ -214,6 +216,8 @@
 
 /* Begin PBXFileReference section */
 		A70DA64A226B91180051AA54 /* Blender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Blender.swift; sourceTree = "<group>"; };
+		A70DA651226B973F0051AA54 /* MultiplyBlend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiplyBlend.swift; sourceTree = "<group>"; };
+		A70DA654226B99310051AA54 /* AddBlend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBlend.swift; sourceTree = "<group>"; };
 		A74A604A226B519300312113 /* WriteImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteImage.swift; sourceTree = "<group>"; };
 		A74A604D226B51D500312113 /* ReadImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadImage.swift; sourceTree = "<group>"; };
 		A7CAD50A226954B7007B0E08 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
@@ -253,7 +257,7 @@
 		OBJ_137 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		OBJ_138 /* XCTAssertEqualWithAccuracy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XCTAssertEqualWithAccuracy.swift; sourceTree = "<group>"; };
 		OBJ_140 /* MatmulTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatmulTests.swift; sourceTree = "<group>"; };
-		OBJ_142 /* AlphaBlendVisualTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlphaBlendVisualTests.swift; sourceTree = "<group>"; };
+		OBJ_142 /* BlendVisualTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlendVisualTests.swift; sourceTree = "<group>"; };
 		OBJ_143 /* FilterVisualTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterVisualTests.swift; sourceTree = "<group>"; };
 		OBJ_144 /* OtherVisualTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherVisualTests.swift; sourceTree = "<group>"; };
 		OBJ_145 /* ResizeVisualTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResizeVisualTests.swift; sourceTree = "<group>"; };
@@ -516,7 +520,7 @@
 			isa = PBXGroup;
 			children = (
 				OBJ_137 /* Utils.swift */,
-				OBJ_142 /* AlphaBlendVisualTests.swift */,
+				OBJ_142 /* BlendVisualTests.swift */,
 				OBJ_143 /* FilterVisualTests.swift */,
 				OBJ_144 /* OtherVisualTests.swift */,
 				OBJ_145 /* ResizeVisualTests.swift */,
@@ -567,6 +571,8 @@
 			children = (
 				OBJ_27 /* AlphaBlend.swift */,
 				A70DA64A226B91180051AA54 /* Blender.swift */,
+				A70DA651226B973F0051AA54 /* MultiplyBlend.swift */,
+				A70DA654226B99310051AA54 /* AddBlend.swift */,
 			);
 			path = Blend;
 			sourceTree = "<group>";
@@ -1014,6 +1020,7 @@
 				OBJ_221 /* vImageAlphaBlend.swift in Sources */,
 				OBJ_222 /* vImageBuffer.swift in Sources */,
 				A70DA64C226B911C0051AA54 /* Blender.swift in Sources */,
+				A70DA653226B97440051AA54 /* MultiplyBlend.swift in Sources */,
 				OBJ_223 /* vImageMorphology.swift in Sources */,
 				OBJ_224 /* vImageUtils.swift in Sources */,
 				OBJ_225 /* Shape.swift in Sources */,
@@ -1029,6 +1036,7 @@
 				OBJ_233 /* ArrayExt.swift in Sources */,
 				OBJ_234 /* Clamp.swift in Sources */,
 				OBJ_235 /* DotProduct.swift in Sources */,
+				A70DA656226B99380051AA54 /* AddBlend.swift in Sources */,
 				OBJ_236 /* Matmul.swift in Sources */,
 				OBJ_237 /* Rect.swift in Sources */,
 				OBJ_238 /* Run.swift in Sources */,
@@ -1093,7 +1101,7 @@
 			files = (
 				A7CAD5122269826C007B0E08 /* BayerVisualTests.swift in Sources */,
 				A7CAD50722694FB3007B0E08 /* Utils.swift in Sources */,
-				OBJ_308 /* AlphaBlendVisualTests.swift in Sources */,
+				OBJ_308 /* BlendVisualTests.swift in Sources */,
 				OBJ_309 /* FilterVisualTests.swift in Sources */,
 				OBJ_310 /* OtherVisualTests.swift in Sources */,
 				OBJ_311 /* ResizeVisualTests.swift in Sources */,

@@ -1,7 +1,7 @@
 import XCTest
 import Swim
 
-class AlphaBlendVisualTests: XCTestCase {
+class BlendVisualTests: XCTestCase {
     func testAlphaBlend() {
         var imageBase = Image<RGB, Double>(width: 500,
                                            height: 500,
@@ -25,6 +25,28 @@ class AlphaBlendVisualTests: XCTestCase {
         Blender.alphaBlend(src: blue, dst: &imageBase[200..<400, 200..<400])
         
         let nsImage = doubleToNSImage(imageBase)
+        
+        XCTAssertTrue(nsImage.isValid, "Break and check nsImage in debugger.")
+    }
+    
+    func testMultiplyBlend() {
+        var lena512 = try! Image<RGB, Double>(contentsOf: testResoruceRoot().appendingPathComponent("lena_512.png"))
+        let lena128 = try! Image<RGB, Double>(contentsOf: testResoruceRoot().appendingPathComponent("lena_128.png"))
+        
+        Blender.multiplyBlend(src: lena128, dst: &lena512[128..<256, 128..<256])
+        
+        let nsImage = doubleToNSImage(lena512)
+        
+        XCTAssertTrue(nsImage.isValid, "Break and check nsImage in debugger.")
+    }
+    
+    func testAddBlend() {
+        var lena512 = try! Image<RGB, Double>(contentsOf: testResoruceRoot().appendingPathComponent("lena_512.png"))
+        let lena128 = try! Image<RGB, Double>(contentsOf: testResoruceRoot().appendingPathComponent("lena_128.png"))
+        
+        Blender.addBlend(src: lena128, dst: &lena512[128..<256, 128..<256])
+        
+        let nsImage = doubleToNSImage(lena512)
         
         XCTAssertTrue(nsImage.isValid, "Break and check nsImage in debugger.")
     }
