@@ -4,7 +4,7 @@ import CStbImage
 // MAKR: WriteFormat
 
 public enum WriteFormat {
-    case bitmap, jpeg, png
+    case bitmap, jpeg(quality: Int), png
 }
 
 // MARK: - Utility
@@ -31,12 +31,15 @@ func write<P: ImageFileFormat>(image: Image<P, UInt8>, url: URL, format: WriteFo
         code = image.data.withUnsafeBufferPointer {
             write_image_bmp(path, width, height, bpp, $0.baseAddress!)
         }
-    case .jpeg:
+    case let .jpeg(quality):
         guard !(image is HasAlpha) else {
             throw ImageWriteError.alphaNotSupported
         }
+        guard (1...100).contains(quality) else {
+            throw ImageWriteError.qualityOutOfRange
+        }
         code = image.data.withUnsafeBufferPointer {
-            write_image_jpg(path, width, height, bpp, $0.baseAddress!)
+            write_image_jpg(path, width, height, bpp, $0.baseAddress!, Int32(quality))
         }
     case .png:
         code = image.data.withUnsafeBufferPointer {
@@ -90,4 +93,5 @@ extension Image where P: ImageFileFormat, T == Double {
 public enum ImageWriteError: Error {
     case alphaNotSupported
     case failedToWrite
+    case qualityOutOfRange
 }

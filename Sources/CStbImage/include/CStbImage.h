@@ -11,7 +11,7 @@ extern "C" {
     void free_image(void* pixels);
     
     int write_image_bmp(const char* path, int width, int height, int bpp, const void* data);
-    int write_image_jpg(const char* path, int width, int height, int bpp, const void* data);
+    int write_image_jpg(const char* path, int width, int height, int bpp, const void* data, int quality);
     int write_image_png(const char* path, int width, int height, int bpp, const void* data);
     
     // Resize
