@@ -1,8 +1,16 @@
 import Foundation
 import CStbImage
 
+// MAKR: WriteFormat
+
+public enum WriteFormat {
+    case bitmap, jpeg, png
+}
+
+// MARK: - Utility
+
 @inlinable
-func write<P: ImageFileFormat>(image: Image<P, UInt8>, url: URL, type: ImageFileType) throws {
+func write<P: ImageFileFormat>(image: Image<P, UInt8>, url: URL, format: WriteFormat) throws {
     
     guard url.isFileURL else {
         throw ImageWriteError.failedToWrite
@@ -15,7 +23,7 @@ func write<P: ImageFileFormat>(image: Image<P, UInt8>, url: URL, type: ImageFile
     let bpp = Int32(P.channels)
     
     let code: Int32
-    switch type {
+    switch format {
     case .bitmap:
         guard !(image is HasAlpha) else {
             throw ImageWriteError.alphaNotSupported
@@ -45,8 +53,8 @@ func write<P: ImageFileFormat>(image: Image<P, UInt8>, url: URL, type: ImageFile
 extension Image where P: ImageFileFormat, T == UInt8 {
     /// Save image.
     @inlinable
-    public func write(to url: URL, type: ImageFileType) throws {
-        try Swim.write(image: self, url: url, type: type)
+    public func write(to url: URL, format: WriteFormat) throws {
+        try Swim.write(image: self, url: url, format: format)
     }
 }
 
@@ -55,11 +63,11 @@ extension Image where P: ImageFileFormat, T == Float {
     /// Save image.
     /// Pixel values are clipped to [0, 1].
     @inlinable
-    public func write(to url: URL, type: ImageFileType) throws {
+    public func write(to url: URL, format: WriteFormat) throws {
         var i255 = self.clipped(low: 0, high: 1) * 255
         i255.round()
         let uint8 = Image<P, UInt8>(uncheckedCast: i255)
-        try Swim.write(image: uint8, url: url, type: type)
+        try Swim.write(image: uint8, url: url, format: format)
     }
 }
 
@@ -69,11 +77,11 @@ extension Image where P: ImageFileFormat, T == Double {
     /// Save image.
     /// Pixel values are clipped to [0, 1].
     @inlinable
-    public func write(to url: URL, type: ImageFileType) throws {
+    public func write(to url: URL, format: WriteFormat) throws {
         var i255 = self.clipped(low: 0, high: 1) * 255
         i255.round()
         let uint8 = Image<P, UInt8>(uncheckedCast: i255)
-        try Swim.write(image: uint8, url: url, type: type)
+        try Swim.write(image: uint8, url: url, format: format)
     }
 }
 

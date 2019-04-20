@@ -25,42 +25,42 @@ class ImageIOTests: XCTestCase {
     
     func testSaveLoadUInt8() {
         do { // RGBA
-            try! self.baseImage.write(to: srcPath, type: .png)
+            try! self.baseImage.write(to: srcPath, format: .png)
             
             let image = try? Image<RGBA, UInt8>(contentsOf: srcPath)
             
             XCTAssertEqual(image, baseImage)
         }
         do { // Intensity
-            try! self.baseLuminance.write(to: srcPath, type: .png)
+            try! self.baseLuminance.write(to: srcPath, format: .png)
             
             let image = try? Image<Intensity, UInt8>(contentsOf: srcPath)
             
             XCTAssertEqual(image, baseLuminance)
         }
         do { // read Intensity as IntensityAlpha
-            try! self.baseLuminance.write(to: srcPath, type: .png)
+            try! self.baseLuminance.write(to: srcPath, format: .png)
             
             let image = try? Image<IntensityAlpha, UInt8>(contentsOf: srcPath)
             
             XCTAssertEqual(image?[channel: .intensity], baseLuminance)
         }
         do { // read Intensity as RGB
-            try! self.baseLuminance.write(to: srcPath, type: .png)
+            try! self.baseLuminance.write(to: srcPath, format: .png)
             
             let image = try? Image<RGB, UInt8>(contentsOf: srcPath)
             
             XCTAssertEqual(image?[channel: .red], baseLuminance)
         }
         do { // read Intensity as RGBA
-            try! self.baseLuminance.write(to: srcPath, type: .png)
+            try! self.baseLuminance.write(to: srcPath, format: .png)
             
             let image = try? Image<RGBA, UInt8>(contentsOf: srcPath)
             
             XCTAssertEqual(image?[channel: .red], baseLuminance)
         }
         do { // read RGBA as Intensity
-            try! self.baseImage.write(to: srcPath, type: .png)
+            try! self.baseImage.write(to: srcPath, format: .png)
             
             let image = try? Image<Intensity, UInt8>(contentsOf: srcPath)
             
@@ -70,24 +70,24 @@ class ImageIOTests: XCTestCase {
     
     func testSaveLoadFloat() {
         do {
-            try! self.baseImage.write(to: srcPath, type: .png)
+            try! self.baseImage.write(to: srcPath, format: .png)
             let image = try! Image<RGBA, Float>(contentsOf: srcPath)
             
             XCTAssertEqual(Image(cast: (image*255).rounded()), baseImage)
             
-            try! image.write(to: dstPath, type: .png)
+            try! image.write(to: dstPath, format: .png)
             
             let reloaded = try! Image<RGBA, Float>(contentsOf: dstPath)
             
             XCTAssertEqual(reloaded, image)
         }
         do {
-            try! self.baseLuminance.write(to: srcPath, type: .png)
+            try! self.baseLuminance.write(to: srcPath, format: .png)
             let image = try! Image<Intensity, Float>(contentsOf: srcPath)
             
             XCTAssertEqual(Image(cast: (image*255).rounded()), baseLuminance)
             
-            try! image.write(to: dstPath, type: .png)
+            try! image.write(to: dstPath, format: .png)
             
             let reloaded = try! Image<Intensity, Float>(contentsOf: dstPath)
             
@@ -97,26 +97,26 @@ class ImageIOTests: XCTestCase {
     
     func testSaveLoadDouble() {
         do {
-            try! self.baseImage.write(to: srcPath, type: .png)
+            try! self.baseImage.write(to: srcPath, format: .png)
             
             let image = try! Image<RGBA, Double>(contentsOf: srcPath)
             
             XCTAssertEqual(Image(cast: (image*255).rounded()), baseImage)
             
-            try! image.write(to: dstPath, type: .png)
+            try! image.write(to: dstPath, format: .png)
             
             let reloaded = try! Image<RGBA, Double>(contentsOf: dstPath)
             
             XCTAssertEqual(reloaded, image)
         }
         do {
-            try! self.baseLuminance.write(to: srcPath, type: .png)
+            try! self.baseLuminance.write(to: srcPath, format: .png)
             
             let image = try! Image<Intensity, Double>(contentsOf: srcPath)
             
             XCTAssertEqual(Image(cast: (image*255).rounded()), baseLuminance)
             
-            try! image.write(to: dstPath, type: .png)
+            try! image.write(to: dstPath, format: .png)
             
             let reloaded = try! Image<Intensity, Double>(contentsOf: dstPath)
             
