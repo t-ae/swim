@@ -1,53 +1,24 @@
 import Foundation
 
-extension Image where P == RGB, T: FloatingPoint {
+extension Blender {
     @inlinable
-    public mutating func alphaBlend<P2: RGBWithAlpha>(with src: Image<P2, T>) {
-        precondition(size == src.size, "Images must have same size.")
-        let (width, height) = size
-        src.data.withUnsafeBufferPointer {
-            var srcColor = $0.baseAddress! + P2.redIndex
-            var srcAlpha = $0.baseAddress! + P2.alphaIndex
-            data.withUnsafeMutableBufferPointer {
-                var dst = $0.baseAddress!
-                
-                for _ in 0..<width*height {
-                    if srcAlpha.pointee != 0 {
-                        for _ in 0..<P.channels {
-                            dst.pointee *= 1-srcAlpha.pointee
-                            dst.pointee += srcColor.pointee * srcAlpha.pointee
-                            srcColor += 1
-                            dst += 1
-                        }
-                        srcColor += P2.channels - P.channels
-                    } else {
-                        dst += P.channels
-                        srcColor += P2.channels
-                    }
-                    srcAlpha += P2.channels
-                }
-            }
-        }
-    }
-}
-
-extension Image where P: RGBWithAlpha, T: FloatingPoint {
-    @inlinable
-    public mutating func alphaBlend(with src: Image<P, T>) {
-        precondition(size == src.size, "Images must have same size.")
-        let (width, height) = size
+    public static func alphaBlend<P1: RGBWithAlpha, P2: RGBWithAlpha, T: FloatingPoint>(
+        src: Image<P1, T>, dst: inout Image<P2, T>) {
+        
+        precondition(src.size == dst.size, "Images must have same size.")
+        let (width, height) = src.size
         
         src.data.withUnsafeBufferPointer {
-            var srcColor = $0.baseAddress! + P.redIndex
-            var srcAlpha = $0.baseAddress! + P.alphaIndex
-            data.withUnsafeMutableBufferPointer {
-                var dstColor = $0.baseAddress! + P.redIndex
-                var dstAlpha = $0.baseAddress! + P.alphaIndex
+            var srcColor = $0.baseAddress! + P1.redIndex
+            var srcAlpha = $0.baseAddress! + P1.alphaIndex
+            dst.data.withUnsafeMutableBufferPointer {
+                var dstColor = $0.baseAddress! + P2.redIndex
+                var dstAlpha = $0.baseAddress! + P2.alphaIndex
                 
                 for _ in 0..<width*height {
                     if srcAlpha.pointee != 0 {
                         let blendAlpha = srcAlpha.pointee + (1-srcAlpha.pointee)*dstAlpha.pointee
-                        for _ in 0..<P.channels-1 {
+                        for _ in 0..<P1.channels-1 {
                             dstColor.pointee *= (1-srcAlpha.pointee)*dstAlpha.pointee
                             dstColor.pointee += srcColor.pointee * srcAlpha.pointee
                             dstColor.pointee /= blendAlpha
@@ -58,11 +29,43 @@ extension Image where P: RGBWithAlpha, T: FloatingPoint {
                         srcColor += 1
                         dstColor += 1
                     } else {
+                        srcColor += P1.channels
+                        dstColor += P2.channels
+                    }
+                    srcAlpha += P1.channels
+                    dstAlpha += P2.channels
+                }
+            }
+        }
+    }
+}
+
+extension Blender {
+    @inlinable
+    public static func alphaBlend<P: RGBWithAlpha, T: FloatingPoint>(
+        src: Image<P, T>, dst: inout Image<RGB, T>) {
+        precondition(src.size == dst.size, "Images must have same size.")
+        let (width, height) = src.size
+        src.data.withUnsafeBufferPointer {
+            var srcColor = $0.baseAddress! + P.redIndex
+            var srcAlpha = $0.baseAddress! + P.alphaIndex
+            dst.data.withUnsafeMutableBufferPointer {
+                var dst = $0.baseAddress!
+                
+                for _ in 0..<width*height {
+                    if srcAlpha.pointee != 0 {
+                        for _ in 0..<RGB.channels {
+                            dst.pointee *= 1-srcAlpha.pointee
+                            dst.pointee += srcColor.pointee * srcAlpha.pointee
+                            srcColor += 1
+                            dst += 1
+                        }
+                        srcColor += P.channels - RGB.channels
+                    } else {
+                        dst += RGB.channels
                         srcColor += P.channels
-                        dstColor += P.channels
                     }
                     srcAlpha += P.channels
-                    dstAlpha += P.channels
                 }
             }
         }

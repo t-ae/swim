@@ -23,6 +23,7 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		A70DA64C226B911C0051AA54 /* Blender.swift in Sources */ = {isa = PBXBuildFile; fileRef = A70DA64A226B91180051AA54 /* Blender.swift */; };
 		A74A604C226B51A300312113 /* WriteImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74A604A226B519300312113 /* WriteImage.swift */; };
 		A74A604F226B51EC00312113 /* ReadImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74A604D226B51D500312113 /* ReadImage.swift */; };
 		A7CAD50722694FB3007B0E08 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_137 /* Utils.swift */; };
@@ -212,6 +213,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A70DA64A226B91180051AA54 /* Blender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Blender.swift; sourceTree = "<group>"; };
 		A74A604A226B519300312113 /* WriteImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteImage.swift; sourceTree = "<group>"; };
 		A74A604D226B51D500312113 /* ReadImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadImage.swift; sourceTree = "<group>"; };
 		A7CAD50A226954B7007B0E08 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
@@ -564,6 +566,7 @@
 			isa = PBXGroup;
 			children = (
 				OBJ_27 /* AlphaBlend.swift */,
+				A70DA64A226B91180051AA54 /* Blender.swift */,
 			);
 			path = Blend;
 			sourceTree = "<group>";
@@ -1010,6 +1013,7 @@
 				OBJ_220 /* UIKit.swift in Sources */,
 				OBJ_221 /* vImageAlphaBlend.swift in Sources */,
 				OBJ_222 /* vImageBuffer.swift in Sources */,
+				A70DA64C226B911C0051AA54 /* Blender.swift in Sources */,
 				OBJ_223 /* vImageMorphology.swift in Sources */,
 				OBJ_224 /* vImageUtils.swift in Sources */,
 				OBJ_225 /* Shape.swift in Sources */,
