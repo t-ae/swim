@@ -23,6 +23,8 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		A74A604C226B51A300312113 /* WriteImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74A604A226B519300312113 /* WriteImage.swift */; };
+		A74A604F226B51EC00312113 /* ReadImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74A604D226B51D500312113 /* ReadImage.swift */; };
 		A7CAD50722694FB3007B0E08 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_137 /* Utils.swift */; };
 		A7CAD50C226954BA007B0E08 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7CAD50A226954B7007B0E08 /* Utils.swift */; };
 		A7CAD50F22697055007B0E08 /* Interleave.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7CAD50E22697055007B0E08 /* Interleave.swift */; };
@@ -58,7 +60,7 @@
 		OBJ_202 /* Pixel.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_39 /* Pixel.swift */; };
 		OBJ_203 /* PixelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_40 /* PixelType.swift */; };
 		OBJ_204 /* Sequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_41 /* Sequence.swift */; };
-		OBJ_205 /* ImageIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_43 /* ImageIO.swift */; };
+		OBJ_205 /* ImageFileFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_43 /* ImageFileFormat.swift */; };
 		OBJ_207 /* BicubicInterpolator.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_46 /* BicubicInterpolator.swift */; };
 		OBJ_209 /* BilinearInterpolator.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_48 /* BilinearInterpolator.swift */; };
 		OBJ_211 /* Interpolator.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_50 /* Interpolator.swift */; };
@@ -210,6 +212,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A74A604A226B519300312113 /* WriteImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteImage.swift; sourceTree = "<group>"; };
+		A74A604D226B51D500312113 /* ReadImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadImage.swift; sourceTree = "<group>"; };
 		A7CAD50A226954B7007B0E08 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		A7CAD50E22697055007B0E08 /* Interleave.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Interleave.swift; sourceTree = "<group>"; };
 		A7CAD51022698268007B0E08 /* BayerVisualTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BayerVisualTests.swift; sourceTree = "<group>"; };
@@ -277,7 +281,7 @@
 		OBJ_39 /* Pixel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pixel.swift; sourceTree = "<group>"; };
 		OBJ_40 /* PixelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PixelType.swift; sourceTree = "<group>"; };
 		OBJ_41 /* Sequence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sequence.swift; sourceTree = "<group>"; };
-		OBJ_43 /* ImageIO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageIO.swift; sourceTree = "<group>"; };
+		OBJ_43 /* ImageFileFormat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageFileFormat.swift; sourceTree = "<group>"; };
 		OBJ_46 /* BicubicInterpolator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BicubicInterpolator.swift; sourceTree = "<group>"; };
 		OBJ_48 /* BilinearInterpolator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BilinearInterpolator.swift; sourceTree = "<group>"; };
 		OBJ_50 /* Interpolator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Interpolator.swift; sourceTree = "<group>"; };
@@ -593,7 +597,9 @@
 		OBJ_42 /* IO */ = {
 			isa = PBXGroup;
 			children = (
-				OBJ_43 /* ImageIO.swift */,
+				OBJ_43 /* ImageFileFormat.swift */,
+				A74A604A226B519300312113 /* WriteImage.swift */,
+				A74A604D226B51D500312113 /* ReadImage.swift */,
 			);
 			path = IO;
 			sourceTree = "<group>";
@@ -989,8 +995,9 @@
 				OBJ_202 /* Pixel.swift in Sources */,
 				OBJ_203 /* PixelType.swift in Sources */,
 				OBJ_204 /* Sequence.swift in Sources */,
-				OBJ_205 /* ImageIO.swift in Sources */,
+				OBJ_205 /* ImageFileFormat.swift in Sources */,
 				OBJ_207 /* BicubicInterpolator.swift in Sources */,
+				A74A604C226B51A300312113 /* WriteImage.swift in Sources */,
 				OBJ_209 /* BilinearInterpolator.swift in Sources */,
 				OBJ_211 /* Interpolator.swift in Sources */,
 				OBJ_213 /* NearestNeighborInterpolator.swift in Sources */,
@@ -1006,6 +1013,7 @@
 				OBJ_223 /* vImageMorphology.swift in Sources */,
 				OBJ_224 /* vImageUtils.swift in Sources */,
 				OBJ_225 /* Shape.swift in Sources */,
+				A74A604F226B51EC00312113 /* ReadImage.swift in Sources */,
 				OBJ_226 /* ChannelSubscript.swift in Sources */,
 				OBJ_227 /* PixelSubscript.swift in Sources */,
 				A7CAD5182269A2C1007B0E08 /* Rotate.swift in Sources */,

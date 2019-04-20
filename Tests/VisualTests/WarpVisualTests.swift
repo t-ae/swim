@@ -121,7 +121,7 @@ class WarpVisualTests: XCTestCase {
     
     func testMatrix() {
         let path = testResoruceRoot().appendingPathComponent("lena_128.png")
-        let lena = Image<RGB, Double>(contentsOf: path)!
+        let lena = try! Image<RGB, Double>(contentsOf: path)
         
         let size = Double(lena.width)
         let scale: Double = 2.3

@@ -22,7 +22,7 @@ class ResizeVisualTests: XCTestCase {
     
     func testResizeUpscale_lena() {
         let path = testResoruceRoot().appendingPathComponent("lena_128.png")
-        let lena = Image<RGB, Double>(contentsOf: path)!
+        let lena = try! Image<RGB, Double>(contentsOf: path)
         
         var images = [Image<RGB, Double>]()
         
@@ -39,7 +39,7 @@ class ResizeVisualTests: XCTestCase {
     
     func testResizeDownscale_lena() {
         let path = testResoruceRoot().appendingPathComponent("lena_512.png")
-        let lena = Image<RGB, Double>(contentsOf: path)!
+        let lena = try! Image<RGB, Double>(contentsOf: path)
         
         var images = [Image<RGB, Double>]()
         

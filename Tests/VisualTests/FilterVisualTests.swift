@@ -66,7 +66,7 @@ class FilterVisualTests: XCTestCase {
     
     func testLena() {
         let path = testResoruceRoot().appendingPathComponent("lena_512.png")
-        let image = Image<RGB, Double>(contentsOf: path)!
+        let image = try! Image<RGB, Double>(contentsOf: path)
         
         let nsBase = doubleToNSImage(image)
         

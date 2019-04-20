@@ -12,7 +12,7 @@ import AppKit
 
 extension PlatformTests {
     func testGray() {
-        let image = Image<Intensity, UInt8>(contentsOf: grayPath)!
+        let image = try! Image<Intensity, UInt8>(contentsOf: grayPath)
         
         let nsImage1 = image.nsImage()
         

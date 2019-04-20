@@ -31,9 +31,13 @@ extension Image where T: BinaryFloatingPoint {
 }
 
 extension Image where T == UInt8 {
+    /// - Note:
+    /// It's not unchecked indeed.
+    /// We need this for making some functions Accelerate supported.
+    /// See Image<RGBA, Double>.write for example.
     @inlinable
-    public init<T2: BinaryFloatingPoint>(uncheckedCast image: Image<P, T2>, to: T.Type = T.self) {
-        self = image.channelwiseConverted { T(Int($0) & 0xff) }
+    internal init<T2: BinaryFloatingPoint>(uncheckedCast image: Image<P, T2>, to: T.Type = T.self) {
+        self.init(cast: image)
     }
 }
 
