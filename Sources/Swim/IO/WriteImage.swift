@@ -7,7 +7,7 @@ public enum WriteFormat {
     case bitmap, jpeg(quality: Int), png
 }
 
-// MARK: - Utility
+// MARK: - Utilities
 
 @inlinable
 func write<P: ImageFileFormat>(image: Image<P, UInt8>, url: URL, format: WriteFormat) throws {
@@ -52,8 +52,27 @@ func write<P: ImageFileFormat>(image: Image<P, UInt8>, url: URL, format: WriteFo
     }
 }
 
+@inlinable
+func detectFormat(url: URL) -> WriteFormat {
+    switch url.pathExtension.lowercased() {
+    case "bmp":
+        return .bitmap
+    case "jpg", "jpeg":
+        return .jpeg(quality: 90)
+    default:
+        return .png
+    }
+}
+
 // MARK: - UInt8
 extension Image where P: ImageFileFormat, T == UInt8 {
+    /// Save image.
+    @inlinable
+    public func write(to url: URL) throws {
+        let format = detectFormat(url: url)
+        try write(to: url, format: format)
+    }
+    
     /// Save image.
     @inlinable
     public func write(to url: URL, format: WriteFormat) throws {
@@ -66,17 +85,11 @@ extension Image where P: ImageFileFormat, T == Float {
     /// Save image.
     /// Pixel values are clipped to [0, 1].
     @inlinable
-    public func write(to url: URL, format: WriteFormat) throws {
-        var i255 = self.clipped(low: 0, high: 1) * 255
-        i255.round()
-        let uint8 = Image<P, UInt8>(uncheckedCast: i255)
-        try Swim.write(image: uint8, url: url, format: format)
+    public func write(to url: URL) throws {
+        let format = detectFormat(url: url)
+        try write(to: url, format: format)
     }
-}
-
-
-// MARK: - Double
-extension Image where P: ImageFileFormat, T == Double {
+    
     /// Save image.
     /// Pixel values are clipped to [0, 1].
     @inlinable
@@ -84,7 +97,27 @@ extension Image where P: ImageFileFormat, T == Double {
         var i255 = self.clipped(low: 0, high: 1) * 255
         i255.round()
         let uint8 = Image<P, UInt8>(uncheckedCast: i255)
-        try Swim.write(image: uint8, url: url, format: format)
+        try uint8.write(to: url, format: format)
+    }
+}
+
+
+// MARK: - Double
+extension Image where P: ImageFileFormat, T == Double {
+    @inlinable
+    public func write(to url: URL) throws {
+        let format = detectFormat(url: url)
+        try write(to: url, format: format)
+    }
+    
+    /// Save image.
+    /// Pixel values are clipped to [0, 1].
+    @inlinable
+    public func write(to url: URL, format: WriteFormat) throws {
+        var i255 = self.clipped(low: 0, high: 1) * 255
+        i255.round()
+        let uint8 = Image<P, UInt8>(uncheckedCast: i255)
+        try uint8.write(to: url, format: format)
     }
 }
 
