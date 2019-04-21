@@ -32,8 +32,13 @@ class BlendVisualTests: XCTestCase {
     func testMultiplyBlend() {
         var lena512 = try! Image<RGB, Double>(contentsOf: testResoruceRoot().appendingPathComponent("lena_512.png"))
         let lena128 = try! Image<RGB, Double>(contentsOf: testResoruceRoot().appendingPathComponent("lena_128.png"))
+        let circle = Shape.circle(size: 128,
+                                  lineWidth: 3,
+                                  lineColor: Pixel(r: 1.0, g: 0.0, b: 0.0, a: 1.0),
+                                  fillColor: Pixel(r: 1.0, g: 0.0, b: 0.0, a: 0.5))
         
         Blender.multiplyBlend(top: lena128, bottom: &lena512[128..<256, 128..<256])
+        Blender.multiplyBlend(top: circle, bottom: &lena512[256..<384, 256..<384])
         
         let nsImage = doubleToNSImage(lena512)
         
@@ -43,8 +48,13 @@ class BlendVisualTests: XCTestCase {
     func testAddBlend() {
         var lena512 = try! Image<RGB, Double>(contentsOf: testResoruceRoot().appendingPathComponent("lena_512.png"))
         let lena128 = try! Image<RGB, Double>(contentsOf: testResoruceRoot().appendingPathComponent("lena_128.png"))
+        let circle = Shape.circle(size: 128,
+                                  lineWidth: 3,
+                                  lineColor: Pixel(r: 1.0, g: 0.0, b: 0.0, a: 1.0),
+                                  fillColor: Pixel(r: 1.0, g: 0.0, b: 0.0, a: 0.5))
         
         Blender.addBlend(top: lena128, bottom: &lena512[128..<256, 128..<256])
+        Blender.addBlend(top: circle, bottom: &lena512[256..<384, 256..<384])
         
         let nsImage = doubleToNSImage(lena512)
         
