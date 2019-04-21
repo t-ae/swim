@@ -39,4 +39,10 @@ extension Image {
     }
 }
 
-
+extension Image {
+    @inlinable
+    public static func concat(_ images: [[Image<P, T>]]) -> Image<P, T> {
+        let colConcated = images.map { concatH($0) }
+        return concatV(colConcated)
+    }
+}
