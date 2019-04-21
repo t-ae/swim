@@ -50,4 +50,26 @@ class BlendVisualTests: XCTestCase {
         
         XCTAssertTrue(nsImage.isValid, "Break and check nsImage in debugger.")
     }
+    
+    func testScreenBlend() {
+        var lena512 = try! Image<RGB, Double>(contentsOf: testResoruceRoot().appendingPathComponent("lena_512.png"))
+        let lena128 = try! Image<RGB, Double>(contentsOf: testResoruceRoot().appendingPathComponent("lena_128.png"))
+        
+        Blender.screenBlend(top: lena128, bottom: &lena512[128..<256, 128..<256])
+        
+        let nsImage = doubleToNSImage(lena512)
+        
+        XCTAssertTrue(nsImage.isValid, "Break and check nsImage in debugger.")
+    }
+    
+    func testOverlayBlend() {
+        var lena512 = try! Image<RGB, Double>(contentsOf: testResoruceRoot().appendingPathComponent("lena_512.png"))
+        let lena128 = try! Image<RGB, Double>(contentsOf: testResoruceRoot().appendingPathComponent("lena_128.png"))
+        
+        Blender.overlayBlend(top: lena128, bottom: &lena512[128..<256, 128..<256])
+        
+        let nsImage = doubleToNSImage(lena512)
+        
+        XCTAssertTrue(nsImage.isValid, "Break and check nsImage in debugger.")
+    }
 }

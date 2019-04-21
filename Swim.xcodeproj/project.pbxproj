@@ -26,6 +26,8 @@
 		A70DA64C226B911C0051AA54 /* Blender.swift in Sources */ = {isa = PBXBuildFile; fileRef = A70DA64A226B91180051AA54 /* Blender.swift */; };
 		A70DA653226B97440051AA54 /* MultiplyBlend.swift in Sources */ = {isa = PBXBuildFile; fileRef = A70DA651226B973F0051AA54 /* MultiplyBlend.swift */; };
 		A70DA656226B99380051AA54 /* AddBlend.swift in Sources */ = {isa = PBXBuildFile; fileRef = A70DA654226B99310051AA54 /* AddBlend.swift */; };
+		A70DA658226BFDA80051AA54 /* ScreenBlend.swift in Sources */ = {isa = PBXBuildFile; fileRef = A70DA657226BFDA80051AA54 /* ScreenBlend.swift */; };
+		A70DA65A226BFE790051AA54 /* OverlayBlend.swift in Sources */ = {isa = PBXBuildFile; fileRef = A70DA659226BFE790051AA54 /* OverlayBlend.swift */; };
 		A74A604C226B51A300312113 /* WriteImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74A604A226B519300312113 /* WriteImage.swift */; };
 		A74A604F226B51EC00312113 /* ReadImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74A604D226B51D500312113 /* ReadImage.swift */; };
 		A7CAD50722694FB3007B0E08 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_137 /* Utils.swift */; };
@@ -218,6 +220,8 @@
 		A70DA64A226B91180051AA54 /* Blender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Blender.swift; sourceTree = "<group>"; };
 		A70DA651226B973F0051AA54 /* MultiplyBlend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiplyBlend.swift; sourceTree = "<group>"; };
 		A70DA654226B99310051AA54 /* AddBlend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBlend.swift; sourceTree = "<group>"; };
+		A70DA657226BFDA80051AA54 /* ScreenBlend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenBlend.swift; sourceTree = "<group>"; };
+		A70DA659226BFE790051AA54 /* OverlayBlend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverlayBlend.swift; sourceTree = "<group>"; };
 		A74A604A226B519300312113 /* WriteImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteImage.swift; sourceTree = "<group>"; };
 		A74A604D226B51D500312113 /* ReadImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadImage.swift; sourceTree = "<group>"; };
 		A7CAD50A226954B7007B0E08 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
@@ -573,6 +577,8 @@
 				A70DA64A226B91180051AA54 /* Blender.swift */,
 				A70DA651226B973F0051AA54 /* MultiplyBlend.swift */,
 				A70DA654226B99310051AA54 /* AddBlend.swift */,
+				A70DA657226BFDA80051AA54 /* ScreenBlend.swift */,
+				A70DA659226BFE790051AA54 /* OverlayBlend.swift */,
 			);
 			path = Blend;
 			sourceTree = "<group>";
@@ -981,6 +987,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 0;
 			files = (
+				A70DA65A226BFE790051AA54 /* OverlayBlend.swift in Sources */,
 				OBJ_183 /* Bayer.swift in Sources */,
 				OBJ_184 /* Convolution.swift in Sources */,
 				OBJ_185 /* Correlation.swift in Sources */,
@@ -1021,6 +1028,7 @@
 				OBJ_222 /* vImageBuffer.swift in Sources */,
 				A70DA64C226B911C0051AA54 /* Blender.swift in Sources */,
 				A70DA653226B97440051AA54 /* MultiplyBlend.swift in Sources */,
+				A70DA658226BFDA80051AA54 /* ScreenBlend.swift in Sources */,
 				OBJ_223 /* vImageMorphology.swift in Sources */,
 				OBJ_224 /* vImageUtils.swift in Sources */,
 				OBJ_225 /* Shape.swift in Sources */,
