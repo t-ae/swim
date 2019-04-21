@@ -2,12 +2,12 @@ import Foundation
 
 extension Blender {
     @inlinable
-    public static func addBlend<T: BinaryFloatingPoint>(src: Image<RGB, T>, dst: inout Image<RGB, T>) {
-        precondition(src.size == dst.size, "Images must have same size.")
+    public static func addBlend<T: BinaryFloatingPoint>(top: Image<RGB, T>, bottom: inout Image<RGB, T>) {
+        precondition(top.size == bottom.size, "Images must have same size.")
         
-        src.data.withUnsafeBufferPointer {
+        top.data.withUnsafeBufferPointer {
             var src = $0.baseAddress!
-            dst.data.withUnsafeMutableBufferPointer {
+            bottom.data.withUnsafeMutableBufferPointer {
                 var dst = $0.baseAddress!
                 
                 for _ in 0..<$0.count {

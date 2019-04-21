@@ -33,7 +33,7 @@ class BlendVisualTests: XCTestCase {
         var lena512 = try! Image<RGB, Double>(contentsOf: testResoruceRoot().appendingPathComponent("lena_512.png"))
         let lena128 = try! Image<RGB, Double>(contentsOf: testResoruceRoot().appendingPathComponent("lena_128.png"))
         
-        Blender.multiplyBlend(src: lena128, dst: &lena512[128..<256, 128..<256])
+        Blender.multiplyBlend(top: lena128, bottom: &lena512[128..<256, 128..<256])
         
         let nsImage = doubleToNSImage(lena512)
         
@@ -44,7 +44,7 @@ class BlendVisualTests: XCTestCase {
         var lena512 = try! Image<RGB, Double>(contentsOf: testResoruceRoot().appendingPathComponent("lena_512.png"))
         let lena128 = try! Image<RGB, Double>(contentsOf: testResoruceRoot().appendingPathComponent("lena_128.png"))
         
-        Blender.addBlend(src: lena128, dst: &lena512[128..<256, 128..<256])
+        Blender.addBlend(top: lena128, bottom: &lena512[128..<256, 128..<256])
         
         let nsImage = doubleToNSImage(lena512)
         

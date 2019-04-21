@@ -3,15 +3,15 @@ import Foundation
 extension Blender {
     @inlinable
     public static func alphaBlend<P1: RGBWithAlpha, P2: RGBWithAlpha, T: FloatingPoint>(
-        src: Image<P1, T>, dst: inout Image<P2, T>) {
+        top: Image<P1, T>, bottom: inout Image<P2, T>) {
         
-        precondition(src.size == dst.size, "Images must have same size.")
-        let (width, height) = src.size
+        precondition(top.size == bottom.size, "Images must have same size.")
+        let (width, height) = top.size
         
-        src.data.withUnsafeBufferPointer {
+        top.data.withUnsafeBufferPointer {
             var srcColor = $0.baseAddress! + P1.redIndex
             var srcAlpha = $0.baseAddress! + P1.alphaIndex
-            dst.data.withUnsafeMutableBufferPointer {
+            bottom.data.withUnsafeMutableBufferPointer {
                 var dstColor = $0.baseAddress! + P2.redIndex
                 var dstAlpha = $0.baseAddress! + P2.alphaIndex
                 
