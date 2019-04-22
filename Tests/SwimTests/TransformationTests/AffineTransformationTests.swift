@@ -42,4 +42,9 @@ private func XCTAssertEqual<T: BinaryFloatingPoint>(_ expression1: AffineTransfo
                                                     file: StaticString = #file,
                                                     line: UInt = #line) {
     XCTAssertEqual(expression1.a, expression2.a, accuracy: accuracy, file: file, line: line)
+    XCTAssertEqual(expression1.b, expression2.b, accuracy: accuracy, file: file, line: line)
+    XCTAssertEqual(expression1.tx, expression2.tx, accuracy: accuracy, file: file, line: line)
+    XCTAssertEqual(expression1.c, expression2.c, accuracy: accuracy, file: file, line: line)
+    XCTAssertEqual(expression1.d, expression2.d, accuracy: accuracy, file: file, line: line)
+    XCTAssertEqual(expression1.ty, expression2.ty, accuracy: accuracy, file: file, line: line)
 }
