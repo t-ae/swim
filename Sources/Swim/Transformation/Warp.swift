@@ -4,18 +4,16 @@ public enum MatrixInversionError: Error {
     case singularMatrix
 }
 
+// MARK: - HomogeneousTransformationMatrixProtocol
 public protocol HomogeneousTransformationMatrixProtocol {
     associatedtype T: BinaryFloatingPoint
-    var matrix: HomogeneousTransformationMatrix<T> { get }
-    func invertedMatrix() throws -> HomogeneousTransformationMatrix<T>
+    associatedtype InvertedMatrix: HomogeneousTransformationMatrixProtocol where InvertedMatrix.T == T
+    func inverted() throws -> InvertedMatrix
+    static func *(lhs: Self, rhs: (x: T, y: T)) -> (x: T, y: T)
 }
 
-extension HomogeneousTransformationMatrixProtocol {
-    public func invertedMatrix() throws -> HomogeneousTransformationMatrix<T> {
-        return try matrix.invertedMatrix()
-    }
-}
 
+// MARK: - HomogeneousTransformationMatrix
 public struct HomogeneousTransformationMatrix<T: BinaryFloatingPoint>: HomogeneousTransformationMatrixProtocol {
     public var elements: [T]
     
@@ -36,11 +34,7 @@ public struct HomogeneousTransformationMatrix<T: BinaryFloatingPoint>: Homogeneo
         return det
     }
     
-    public var matrix: HomogeneousTransformationMatrix {
-        return self
-    }
-    
-    public func invertedMatrix() throws -> HomogeneousTransformationMatrix {
+    public func inverted() throws -> HomogeneousTransformationMatrix {
         let e = elements
         let det = determinant
         
@@ -79,6 +73,8 @@ public func *<T: BinaryFloatingPoint>(lhs: HomogeneousTransformationMatrix<T>,
     return (x / w, y / w)
 }
 
+// MARK: - Warp
+
 extension Image where T: BinaryFloatingPoint {
     @inlinable
     public func warp<M: HomogeneousTransformationMatrixProtocol>(transformation: M) throws -> Image<P, T> where M.T == T {
@@ -115,7 +111,7 @@ extension Image where T: BinaryFloatingPoint {
                                height: outputSize.height,
                                value: T.swimDefaultValue)
 
-        let inv = try transformation.invertedMatrix()
+        let inv = try transformation.inverted()
 
         for y1 in 0..<outputSize.height {
             for x1 in 0..<outputSize.width {

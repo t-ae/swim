@@ -135,7 +135,7 @@ public func *<T>(lhs: AffineTransformation<T>, rhs: AffineTransformation<T>) -> 
 }
 
 @inlinable
-func *<T>(lhs: AffineTransformation<T>, rhs: (x: T, y: T)) -> (x: T, y: T) {
+public func *<T>(lhs: AffineTransformation<T>, rhs: (x: T, y: T)) -> (x: T, y: T) {
     var x: T = lhs.a * rhs.x
     x += lhs.b * rhs.y
     x += lhs.tx
