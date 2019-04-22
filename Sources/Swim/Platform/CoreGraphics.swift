@@ -2,6 +2,7 @@
 
 import CoreGraphics
 
+// MARK: - Protocol
 public protocol ConvertibleToCGImage: PixelType {
     static func toCGImage(image: Image<Self, UInt8>) -> CGImage
 }

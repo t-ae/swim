@@ -46,16 +46,6 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "Swim::SwimTests"
-               BuildableName = "SwimTests.xctest"
-               BlueprintName = "SwimTests"
-               ReferencedContainer = "container:Swim.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
                BlueprintIdentifier = "Swim::VisualTests"
                BuildableName = "VisualTests.xctest"
                BlueprintName = "VisualTests"
@@ -69,6 +59,16 @@
                BlueprintIdentifier = "Swim::PerformanceTests"
                BuildableName = "PerformanceTests.xctest"
                BlueprintName = "PerformanceTests"
+               ReferencedContainer = "container:Swim.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "Swim::SwimTests"
+               BuildableName = "SwimTests.xctest"
+               BlueprintName = "SwimTests"
                ReferencedContainer = "container:Swim.xcodeproj">
             </BuildableReference>
          </TestableReference>
