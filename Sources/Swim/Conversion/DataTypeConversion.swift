@@ -1,4 +1,4 @@
-// MARK: Generic
+// MARK: - Generic
 extension Image {
     @inlinable
     public init(cast image: Image<P, T>, to: T.Type = T.self) {
@@ -41,7 +41,7 @@ extension Image where T == UInt8 {
     }
 }
 
-// MARK: Accelerate
+// MARK: - Accelerate
 
 #if canImport(Accelerate)
 

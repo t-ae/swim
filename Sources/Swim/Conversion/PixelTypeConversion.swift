@@ -31,7 +31,8 @@ extension Image where P == IntensityAlpha {
     public init(image: Image<Intensity, T>, alpha: T) {
         self = Image<P, T>(width: image.width, height: image.height, value: alpha)
         
-        strideCopy(src: image.data, srcOffset: 0, srcStride: 1, dst: &data, dstOffset: 0, dstStride: 2, count: pixelCount)
+        strideCopy(src: image.data, srcOffset: 0, srcStride: 1,
+                   dst: &data, dstOffset: 0, dstStride: 2, count: pixelCount)
     }
 }
 
