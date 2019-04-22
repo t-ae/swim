@@ -1,7 +1,7 @@
 import XCTest
 import Swim
 
-class WarpTests: XCTestCase {
+class HomogeneousTransformationMatrixTests: XCTestCase {
     func testHomogeneousTransform() {
         do {
             let a = HomogeneousTransformationMatrix(elements: [1, -1, 1,
