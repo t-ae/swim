@@ -13,13 +13,15 @@ public protocol ConvertibleFromCGImage: PixelType {
 
 // MARK: - Image
 extension Image where P: ConvertibleFromCGImage, T == UInt8 {
+    /// Create Image from CGImage.
     @inlinable
-    public init?(cgImage: CGImage) {
+    public init(cgImage: CGImage) {
         self = P.fromCGImage(cgImage: cgImage)
     }
 }
 
 extension Image where P: ConvertibleToCGImage, T == UInt8 {
+    /// Create CGImage.
     @inlinable
     public func cgImage() -> CGImage {
         return P.toCGImage(image: self)
@@ -27,38 +29,51 @@ extension Image where P: ConvertibleToCGImage, T == UInt8 {
 }
 
 extension Image where P: ConvertibleFromCGImage, T == Float {
+    /// Create Image from CGImage.
+    ///
+    /// All pixel values will be in [0, 1] range.
     @inlinable
-    public init?(cgImage: CGImage) {
-        let uint8 = P.fromCGImage(cgImage: cgImage)
+    public init(cgImage: CGImage) {
+        let uint8 = Image<P, UInt8>(cgImage: cgImage)
         self.init(cast: uint8)
         self /= T(UInt8.max)
     }
 }
 
 extension Image where P: ConvertibleToCGImage, T == Float {
+    /// Create CGImage.
+    ///
+    /// All pixel values will be clipped to [0, 1] range.
     @inlinable
     public func cgImage() -> CGImage {
-        let i255 = clipped(low: 0, high: 1) * 255
+        var i255 = clipped(low: 0, high: 1) * 255
+        i255.round()
         let uint8 = Image<P, UInt8>(uncheckedCast: i255)
-        return P.toCGImage(image: uint8)
+        return uint8.cgImage()
     }
 }
 
 extension Image where P: ConvertibleFromCGImage, T == Double {
+    /// Create Image from CGImage.
+    ///
+    /// All pixel values will be in [0, 1] range.
     @inlinable
-    public init?(cgImage: CGImage) {
-        let uint8 = P.fromCGImage(cgImage: cgImage)
+    public init(cgImage: CGImage) {
+        let uint8 = Image<P, UInt8>(cgImage: cgImage)
         self.init(cast: uint8)
         self /= T(UInt8.max)
     }
 }
 
 extension Image where P: ConvertibleToCGImage, T == Double {
+    /// Create CGImage.
+    ///
+    /// All pixel values will be clipped to [0, 1] range.
     @inlinable
     public func cgImage() -> CGImage {
         let i255 = clipped(low: 0, high: 1) * 255
         let uint8 = Image<P, UInt8>(uncheckedCast: i255)
-        return P.toCGImage(image: uint8)
+        return uint8.cgImage()
     }
 }
 

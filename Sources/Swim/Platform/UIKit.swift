@@ -3,61 +3,67 @@
 import UIKit
 
 extension Image where P: ConvertibleFromCGImage, T == UInt8 {
+    /// Create Image from UIImage.
     @inlinable
     public init?(uiImage: UIImage) {
         guard let cgImage = uiImage.cgImage else {
             return nil
         }
-        self = P.fromCGImage(cgImage: cgImage)
+        self.init(cgImage: cgImage)
     }
 }
 
 extension Image where P: ConvertibleToCGImage, T == UInt8 {
+    /// Create UIImage.
     @inlinable
     public func uiImage() -> UIImage {
-        return UIImage(cgImage: P.toCGImage(image: self))
+        return UIImage(cgImage: cgImage())
     }
 }
 
 extension Image where P: ConvertibleFromCGImage, T == Float {
+    /// Create Image from UIImage.
+    ///
+    /// All pixel values will be in [0, 1] range.
     @inlinable
     public init?(uiImage: UIImage) {
         guard let cgImage = uiImage.cgImage else {
             return nil
         }
-        let uint8 = P.fromCGImage(cgImage: cgImage)
-        self.init(cast: uint8)
-        self /= T(UInt8.max)
+        self.init(cgImage: cgImage)
     }
 }
 
 extension Image where P: ConvertibleToCGImage, T == Float {
+    /// Create UIImage.
+    ///
+    /// All pixel values will be clipped to [0, 1] range.
     @inlinable
     public func uiImage() -> UIImage {
-        let i255 = clipped(low: 0, high: 1) * 255
-        let uint8 = Image<P, UInt8>(uncheckedCast: i255)
-        return UIImage(cgImage: P.toCGImage(image: uint8))
+        return UIImage(cgImage: cgImage())
     }
 }
 
 extension Image where P: ConvertibleFromCGImage, T == Double {
+    /// Create Image from UIImage.
+    ///
+    /// All pixel values will be in [0, 1] range.
     @inlinable
     public init?(uiImage: UIImage) {
         guard let cgImage = uiImage.cgImage else {
             return nil
         }
-        let uint8 = P.fromCGImage(cgImage: cgImage)
-        self.init(cast: uint8)
-        self /= T(UInt8.max)
+        self.init(cgImage: cgImage)
     }
 }
 
 extension Image where P: ConvertibleToCGImage, T == Double {
+    /// Create UIImage.
+    ///
+    /// All pixel values will be clipped to [0, 1] range.
     @inlinable
     public func uiImage() -> UIImage {
-        let i255 = clipped(low: 0, high: 1) * 255
-        let uint8 = Image<P, UInt8>(uncheckedCast: i255)
-        return UIImage(cgImage: P.toCGImage(image: uint8))
+        return UIImage(cgImage: cgImage())
     }
 }
 
