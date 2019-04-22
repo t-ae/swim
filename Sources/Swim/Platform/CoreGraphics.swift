@@ -10,6 +10,7 @@ public protocol ConvertibleFromCGImage: PixelType {
     static func fromCGImage(cgImage: CGImage) -> Image<Self, UInt8>
 }
 
+// MARK: - Image
 extension Image where P: ConvertibleFromCGImage, T == UInt8 {
     @inlinable
     public init?(cgImage: CGImage) {
@@ -21,6 +22,42 @@ extension Image where P: ConvertibleToCGImage, T == UInt8 {
     @inlinable
     public func cgImage() -> CGImage {
         return P.toCGImage(image: self)
+    }
+}
+
+extension Image where P: ConvertibleFromCGImage, T == Float {
+    @inlinable
+    public init?(cgImage: CGImage) {
+        let uint8 = P.fromCGImage(cgImage: cgImage)
+        self.init(cast: uint8)
+        self /= T(UInt8.max)
+    }
+}
+
+extension Image where P: ConvertibleToCGImage, T == Float {
+    @inlinable
+    public func cgImage() -> CGImage {
+        let i255 = clipped(low: 0, high: 1) * 255
+        let uint8 = Image<P, UInt8>(uncheckedCast: i255)
+        return P.toCGImage(image: uint8)
+    }
+}
+
+extension Image where P: ConvertibleFromCGImage, T == Double {
+    @inlinable
+    public init?(cgImage: CGImage) {
+        let uint8 = P.fromCGImage(cgImage: cgImage)
+        self.init(cast: uint8)
+        self /= T(UInt8.max)
+    }
+}
+
+extension Image where P: ConvertibleToCGImage, T == Double {
+    @inlinable
+    public func cgImage() -> CGImage {
+        let i255 = clipped(low: 0, high: 1) * 255
+        let uint8 = Image<P, UInt8>(uncheckedCast: i255)
+        return P.toCGImage(image: uint8)
     }
 }
 
@@ -72,6 +109,7 @@ extension Intensity: ConvertibleFromCGImage, ConvertibleToCGImage {
     }
 }
 
+// MARK: - RGB
 extension RGB: ConvertibleToCGImage {
     @inlinable
     public static func toCGImage(image: Image<RGB, UInt8>) -> CGImage {
@@ -79,6 +117,7 @@ extension RGB: ConvertibleToCGImage {
     }
 }
 
+// MARK: - RGBA
 extension RGBA: ConvertibleFromCGImage, ConvertibleToCGImage {
     @inlinable
     public static func fromCGImage(cgImage: CGImage) -> Image<RGBA, UInt8> {

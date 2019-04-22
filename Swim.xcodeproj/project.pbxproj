@@ -119,7 +119,7 @@
 		OBJ_282 /* ClipTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_118 /* ClipTests.swift */; };
 		OBJ_283 /* ConcatenateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_119 /* ConcatenateTests.swift */; };
 		OBJ_284 /* FloatingPointTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_120 /* FloatingPointTests.swift */; };
-		OBJ_285 /* PlatformTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_122 /* PlatformTests.swift */; };
+		OBJ_285 /* AppKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_122 /* AppKitTests.swift */; };
 		OBJ_286 /* vImageUtilsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_123 /* vImageUtilsTests.swift */; };
 		OBJ_287 /* ShapeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_125 /* ShapeTests.swift */; };
 		OBJ_288 /* ChannelSubscriptTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_127 /* ChannelSubscriptTests.swift */; };
@@ -246,7 +246,7 @@
 		OBJ_119 /* ConcatenateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConcatenateTests.swift; sourceTree = "<group>"; };
 		OBJ_12 /* stb_image.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = stb_image.h; sourceTree = "<group>"; };
 		OBJ_120 /* FloatingPointTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingPointTests.swift; sourceTree = "<group>"; };
-		OBJ_122 /* PlatformTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlatformTests.swift; sourceTree = "<group>"; };
+		OBJ_122 /* AppKitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppKitTests.swift; sourceTree = "<group>"; };
 		OBJ_123 /* vImageUtilsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = vImageUtilsTests.swift; sourceTree = "<group>"; };
 		OBJ_125 /* ShapeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShapeTests.swift; sourceTree = "<group>"; };
 		OBJ_127 /* ChannelSubscriptTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelSubscriptTests.swift; sourceTree = "<group>"; };
@@ -446,7 +446,7 @@
 		OBJ_121 /* PlatformTests */ = {
 			isa = PBXGroup;
 			children = (
-				OBJ_122 /* PlatformTests.swift */,
+				OBJ_122 /* AppKitTests.swift */,
 				OBJ_123 /* vImageUtilsTests.swift */,
 			);
 			path = PlatformTests;
@@ -1087,7 +1087,7 @@
 				OBJ_282 /* ClipTests.swift in Sources */,
 				OBJ_283 /* ConcatenateTests.swift in Sources */,
 				OBJ_284 /* FloatingPointTests.swift in Sources */,
-				OBJ_285 /* PlatformTests.swift in Sources */,
+				OBJ_285 /* AppKitTests.swift in Sources */,
 				OBJ_286 /* vImageUtilsTests.swift in Sources */,
 				OBJ_287 /* ShapeTests.swift in Sources */,
 				OBJ_288 /* ChannelSubscriptTests.swift in Sources */,
