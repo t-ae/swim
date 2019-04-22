@@ -23,7 +23,7 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
-		A732ABED226D6A3900B2256E /* UIKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A732ABEC226D6A3900B2256E /* UIKitTests.swift */; };
+		A732ABEE226D6DBB00B2256E /* UIKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A732ABEC226D6A3900B2256E /* UIKitTests.swift */; };
 		OBJ_167 /* image_io.c in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_9 /* image_io.c */; };
 		OBJ_169 /* stb_image_write.h in Headers */ = {isa = PBXBuildFile; fileRef = OBJ_11 /* stb_image_write.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		OBJ_170 /* stb_image.h in Headers */ = {isa = PBXBuildFile; fileRef = OBJ_12 /* stb_image.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -983,7 +983,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 0;
 			files = (
-				A732ABED226D6A3900B2256E /* UIKitTests.swift in Sources */,
 				OBJ_178 /* PerformanceTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1105,6 +1104,7 @@
 				OBJ_306 /* Utils.swift in Sources */,
 				OBJ_307 /* XCTAssertEqualWithAccuracy.swift in Sources */,
 				OBJ_308 /* MatmulTests.swift in Sources */,
+				A732ABEE226D6DBB00B2256E /* UIKitTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

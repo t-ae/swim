@@ -113,13 +113,13 @@ var imageGreen = Image<RGBA, Float>(width: 100,
                                     data: [Float](repeating: 0, count: 100*100*4))
 imageGreen[20..<60, 40..<80].fill(Pixel(r: 0, g: 1, b: 0, a: 0.5))
 
-imageBase.alphaBlend(with: imageGreen)
+Blender.alphaBlend(top: imageGreen, bottom: &imageBase)
 ```
 
 ### Integral image
 ```swift 
 let image = Image<Intensity, Float>(contentsOf: url)!
-let integral = image.toIntegralImage()
+let integral = IntegralImageConverter.convert(image: image)
 ```
 
 ### Convolution/Filter
@@ -132,7 +132,7 @@ let maximum = image.maximumFilter(kernelSize: 3)
 
 ---
 
-[VisualTests](https://github.com/t-ae/swim/blob/master/Tests/VisualTests) contains examples.
+[VisualTests](https://github.com/t-ae/swim/blob/master/Tests/VisualTests) contains examples (works only on macOS).
 
 ## License
 
