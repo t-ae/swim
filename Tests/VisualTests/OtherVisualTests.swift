@@ -108,7 +108,7 @@ extension OtherVisualTests {
         let julia7 = getJuliaImage(c: (-0.75, 0.13), color: Pixel(r: 0, g: 0.4, b: 0))
         var base = Image<RGB, Double>(width: size, height: size, value: 0.95)
         
-        Blender.alphaBlend(src: julia7, dst: &base)
+        Blender.alphaBlend(top: julia7, bottom: &base)
         let ns7 = doubleToNSImage(julia7)
         
         XCTAssertFalse([ns1, ns2, ns3, ns4, ns5, ns6, ns7].isEmpty,

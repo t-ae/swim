@@ -25,9 +25,9 @@ extension BlendVisualTests {
                                 lineColor: Pixel(r: 0.0, g: 0.0, b: 1.0, a: 1.0),
                                 fillColor: Pixel(r: 0.0, g: 0.0, b: 1.0, a: 0.5))
         
-        Blender.alphaBlend(src: red, dst: &imageBase[150..<350, 100..<300])
-        Blender.alphaBlend(src: green, dst: &imageBase[100..<300, 200..<400])
-        Blender.alphaBlend(src: blue, dst: &imageBase[200..<400, 200..<400])
+        Blender.alphaBlend(top: red, bottom: &imageBase[150..<350, 100..<300])
+        Blender.alphaBlend(top: green, bottom: &imageBase[100..<300, 200..<400])
+        Blender.alphaBlend(top: blue, bottom: &imageBase[200..<400, 200..<400])
         
         let nsImage = doubleToNSImage(imageBase)
         

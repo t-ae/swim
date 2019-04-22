@@ -43,13 +43,13 @@ extension Blender {
 extension Blender {
     @inlinable
     public static func alphaBlend<P: RGBWithAlpha, T: FloatingPoint>(
-        src: Image<P, T>, dst: inout Image<RGB, T>) {
-        precondition(src.size == dst.size, "Images must have same size.")
-        let (width, height) = src.size
-        src.data.withUnsafeBufferPointer {
+        top: Image<P, T>, bottom: inout Image<RGB, T>) {
+        precondition(top.size == bottom.size, "Images must have same size.")
+        let (width, height) = top.size
+        top.data.withUnsafeBufferPointer {
             var srcColor = $0.baseAddress! + P.redIndex
             var srcAlpha = $0.baseAddress! + P.alphaIndex
-            dst.data.withUnsafeMutableBufferPointer {
+            bottom.data.withUnsafeMutableBufferPointer {
                 var dst = $0.baseAddress!
                 
                 for _ in 0..<width*height {

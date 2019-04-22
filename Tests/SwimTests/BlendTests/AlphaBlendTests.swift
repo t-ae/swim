@@ -18,7 +18,7 @@ class AlphaBlendTests: XCTestCase {
         var dst = Image(width: c, height: 1, rgb: rgb.flatMap { $0 })
         let src = Image(width: c, height: 1, rgba: rgba.flatMap { $0 })
         
-        Blender.alphaBlend(src: src, dst: &dst)
+        Blender.alphaBlend(top: src, bottom: &dst)
         
         XCTAssertEqual(dst,
                        Image(width: c,
@@ -41,7 +41,7 @@ class AlphaBlendTests: XCTestCase {
         var dst = Image(width: c, height: 1, rgb: rgb.flatMap { $0 })
         let src = Image(width: c, height: 1, argb: argb.flatMap { $0 })
         
-        Blender.alphaBlend(src: src, dst: &dst)
+        Blender.alphaBlend(top: src, bottom: &dst)
         
         XCTAssertEqual(dst,
                        Image(width: c,
