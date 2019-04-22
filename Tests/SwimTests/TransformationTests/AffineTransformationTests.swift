@@ -15,7 +15,7 @@ class AffineTransformationTests: XCTestCase {
             XCTAssertEqual(a,
                            AffineTransformation(a: 0.5, b: -sqrt(3)/2, tx: 0,
                                                 c: sqrt(3)/2, d: 0.5, ty: 0),
-                           accuracy: 0.01)
+                           accuracy: 1e-4)
         }
         do { // Translate
             let a = AffineTransformation.translation(x: 2, y: 3)

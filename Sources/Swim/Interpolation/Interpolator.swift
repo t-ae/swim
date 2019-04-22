@@ -56,11 +56,6 @@ extension Interpolator {
     
     @inlinable
     func inImageCoord(x: Int, y: Int, width: Int, height: Int) -> (x: Int, y: Int)? {
-        guard x < 0 || x >= width || y < 0 || y >= height else {
-            // Already inside image
-            return (x, y)
-        }
-        
         if let x = clampValue(x: x, max: width), let y = clampValue(x: y, max: height) {
             return (x, y)
         } else {
