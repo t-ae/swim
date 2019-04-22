@@ -5,26 +5,26 @@ class AffineTransformationTests: XCTestCase {
     func testAffineTransform() {
         do { // Scale
             let a = AffineTransformation.scale(x: 2, y: 3)
-            XCTAssertEqual(a.matrix.elements,
-                           [2, 0, 0,
-                            0, 3, 0,
-                            0, 0, 1],
+            XCTAssertEqual(a,
+                           AffineTransformation(a: 2, b: 0,
+                                                c: 0, d: 3,
+                                                tx: 0, ty: 0),
                            accuracy: 0)
         }
         do { // Rotate
             let a = AffineTransformation.rotation(angle: Double.pi/3)
-            XCTAssertEqual(a.matrix.elements,
-                           [0.5, -sqrt(3)/2, 0,
-                            sqrt(3)/2, 0.5, 0,
-                            0, 0, 1],
+            XCTAssertEqual(a,
+                           AffineTransformation(a: 0.5, b: -sqrt(3)/2,
+                                                c: sqrt(3)/2, d: 0.5,
+                                                tx: 0, ty: 0),
                            accuracy: 0.01)
         }
         do { // Translate
             let a = AffineTransformation.translation(x: 2, y: 3)
-            XCTAssertEqual(a.matrix.elements,
-                           [1, 0, 2,
-                            0, 1, 3,
-                            0, 0, 1],
+            XCTAssertEqual(a,
+                           AffineTransformation(a: 1, b: 0,
+                                                c: 0, d: 1,
+                                                tx: 2, ty: 3),
                            accuracy: 1e-4)
         }
         do { // Inverse
@@ -32,11 +32,17 @@ class AffineTransformationTests: XCTestCase {
                 * AffineTransformation.translation(x: 2, y: 3)
                 * AffineTransformation.rotation(angle: 1.0)
             let id = try! a * a.inverted()
-            XCTAssertEqual(id.matrix.elements,
-                           [1, 0, 0,
-                            0, 1, 0,
-                            0, 0, 1],
+            XCTAssertEqual(id,
+                           AffineTransformation.identity,
                            accuracy: 1e-4)
         }
     }
+}
+
+private func XCTAssertEqual<T: BinaryFloatingPoint>(_ expression1: AffineTransformation<T>,
+                                                    _ expression2: AffineTransformation<T>,
+                                                    accuracy: T,
+                                                    file: StaticString = #file,
+                                                    line: UInt = #line) {
+    XCTAssertEqual(expression1.a, expression2.a, accuracy: accuracy, file: file, line: line)
 }
