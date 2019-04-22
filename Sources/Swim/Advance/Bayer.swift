@@ -27,6 +27,7 @@ extension BayerConverter.Pattern {
 }
 
 extension BayerConverter {
+    /// Convert color image to bayer format.
     @inlinable
     public func convert<T>(image: Image<RGB, T>) -> Image<Intensity, T> {
         var newImage = Image<Intensity, T>(width: image.width, height: image.height)
@@ -57,6 +58,7 @@ extension BayerConverter {
 }
 
 extension BayerConverter {
+    /// Reconstruct color image from bayer format image.
     @inlinable
     public func demosaic<T: BinaryInteger>(image: Image<Intensity, T>) -> Image<RGB, T> {
         let (offsetX, offsetY) = pattern.offsetToBGGR
@@ -118,6 +120,7 @@ extension BayerConverter {
         return newImage
     }
     
+    /// Reconstruct color image from bayer format image.
     @inlinable
     public func demosaic<T: BinaryFloatingPoint>(image: Image<Intensity, T>) -> Image<RGB, T> {
         let (offsetX, offsetY) = pattern.offsetToBGGR
