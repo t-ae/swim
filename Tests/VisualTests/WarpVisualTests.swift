@@ -139,11 +139,11 @@ extension WarpVisualTests {
         let size = Double(lena.width)
         let scale: Double = 2.3
         var affine = AffineTransformation<Double>.identity
-        affine = AffineTransformation.scale(x: scale, y: scale) * affine
-        affine = AffineTransformation.translation(x: scale/2, y: scale/2) * affine
-        affine = AffineTransformation.translation(x: -size*scale/2, y: -size*scale/2) * affine
-        affine = AffineTransformation.rotation(angle: .pi / 4) * affine
-        affine = AffineTransformation.translation(x: size*scale/2, y: size*scale/2) * affine
+        affine = .scale(x: scale, y: scale) * affine
+        affine = .translation(x: scale/2, y: scale/2) * affine
+        affine = .translation(x: -size*scale/2, y: -size*scale/2) * affine
+        affine = .rotation(angle: .pi / 4) * affine
+        affine = .translation(x: size*scale/2, y: size*scale/2) * affine
         
         let intpl = NearestNeighborInterpolator<Double>(edgeMode: .reflect)
         let result = try! lena.warp(transformation: affine, outputSize: (512, 512), interpolator: intpl)
