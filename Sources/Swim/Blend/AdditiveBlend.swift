@@ -2,7 +2,7 @@ import Foundation
 
 extension Blender {
     @inlinable
-    public static func addBlend<T: FloatingPoint>(top: Image<RGB, T>, bottom: inout Image<RGB, T>) {
+    public static func additiveBlend<T: FloatingPoint>(top: Image<RGB, T>, bottom: inout Image<RGB, T>) {
         precondition(top.size == bottom.size, "Images must have same size.")
         
         top.data.withUnsafeBufferPointer {
@@ -20,8 +20,8 @@ extension Blender {
     }
     
     @inlinable
-    public static func addBlend<P: RGBWithAlpha, T: FloatingPoint>(top: Image<P, T>,
-                                                                   bottom: inout Image<RGB, T>) {
+    public static func additiveBlend<P: RGBWithAlpha, T: FloatingPoint>(top: Image<P, T>,
+                                                                        bottom: inout Image<RGB, T>) {
         precondition(top.size == bottom.size, "Images must have same size.")
         let (width, height) = top.size
         
@@ -51,7 +51,7 @@ import Accelerate
 
 extension Blender {
     @inlinable
-    public static func addBlend(top: Image<RGB, Float>, bottom: inout Image<RGB, Float>) {
+    public static func additiveBlend(top: Image<RGB, Float>, bottom: inout Image<RGB, Float>) {
         precondition(top.size == bottom.size, "Images must have same size.")
         
         top.data.withUnsafeBufferPointer {
@@ -70,7 +70,7 @@ extension Blender {
 
 extension Blender {
     @inlinable
-    public static func addBlend(top: Image<RGB, Double>, bottom: inout Image<RGB, Double>) {
+    public static func additiveBlend(top: Image<RGB, Double>, bottom: inout Image<RGB, Double>) {
         precondition(top.size == bottom.size, "Images must have same size.")
         
         top.data.withUnsafeBufferPointer {

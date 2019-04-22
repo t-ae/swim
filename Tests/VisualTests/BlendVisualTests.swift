@@ -50,7 +50,7 @@ extension BlendVisualTests {
         XCTAssertTrue(nsImage.isValid, "Break and check nsImage in debugger.")
     }
     
-    func testAddBlend() {
+    func testAdditiveBlend() {
         var lena512 = try! Image<RGB, Double>(contentsOf: testResoruceRoot().appendingPathComponent("lena_512.png"))
         let lena128 = try! Image<RGB, Double>(contentsOf: testResoruceRoot().appendingPathComponent("lena_128.png"))
         let circle = Shape.circle(size: 128,
@@ -58,8 +58,8 @@ extension BlendVisualTests {
                                   lineColor: Pixel(r: 1.0, g: 0.0, b: 0.0, a: 0.6),
                                   fillColor: Pixel(r: 1.0, g: 0.0, b: 0.0, a: 0.3))
         
-        Blender.addBlend(top: lena128, bottom: &lena512[128..<256, 128..<256])
-        Blender.addBlend(top: circle, bottom: &lena512[256..<384, 256..<384])
+        Blender.additiveBlend(top: lena128, bottom: &lena512[128..<256, 128..<256])
+        Blender.additiveBlend(top: circle, bottom: &lena512[256..<384, 256..<384])
         
         let nsImage = doubleToNSImage(lena512)
         
@@ -106,7 +106,7 @@ extension BlendVisualTests {
                                   fillColor: Pixel(r: 1.0, g: 0.0, b: 0.0, a: 0.3))
         var images: [[Image<RGB, Double>]] = [[lena, lena], [lena, lena]]
         
-        Blender.addBlend(top: circle, bottom: &images[0][0])
+        Blender.additiveBlend(top: circle, bottom: &images[0][0])
         Blender.multiplyBlend(top: circle, bottom: &images[0][1])
         Blender.screenBlend(top: circle, bottom: &images[1][0])
         Blender.overlayBlend(top: circle, bottom: &images[1][1])

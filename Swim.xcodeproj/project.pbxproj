@@ -40,7 +40,7 @@
 		OBJ_195 /* BInaryScalarOperator.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_23 /* BInaryScalarOperator.swift */; };
 		OBJ_196 /* BinaryOperators.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_24 /* BinaryOperators.swift */; };
 		OBJ_197 /* UnaryOperators.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_25 /* UnaryOperators.swift */; };
-		OBJ_198 /* AddBlend.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_27 /* AddBlend.swift */; };
+		OBJ_198 /* AdditiveBlend.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_27 /* AdditiveBlend.swift */; };
 		OBJ_199 /* AlphaBlend.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_28 /* AlphaBlend.swift */; };
 		OBJ_200 /* Blender.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_29 /* Blender.swift */; };
 		OBJ_201 /* MultiplyBlend.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_30 /* MultiplyBlend.swift */; };
@@ -273,7 +273,7 @@
 		OBJ_23 /* BInaryScalarOperator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BInaryScalarOperator.swift; sourceTree = "<group>"; };
 		OBJ_24 /* BinaryOperators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BinaryOperators.swift; sourceTree = "<group>"; };
 		OBJ_25 /* UnaryOperators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnaryOperators.swift; sourceTree = "<group>"; };
-		OBJ_27 /* AddBlend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBlend.swift; sourceTree = "<group>"; };
+		OBJ_27 /* AdditiveBlend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdditiveBlend.swift; sourceTree = "<group>"; };
 		OBJ_28 /* AlphaBlend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlphaBlend.swift; sourceTree = "<group>"; };
 		OBJ_29 /* Blender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Blender.swift; sourceTree = "<group>"; };
 		OBJ_30 /* MultiplyBlend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiplyBlend.swift; sourceTree = "<group>"; };
@@ -592,7 +592,7 @@
 		OBJ_26 /* Blend */ = {
 			isa = PBXGroup;
 			children = (
-				OBJ_27 /* AddBlend.swift */,
+				OBJ_27 /* AdditiveBlend.swift */,
 				OBJ_28 /* AlphaBlend.swift */,
 				OBJ_29 /* Blender.swift */,
 				OBJ_30 /* MultiplyBlend.swift */,
@@ -638,7 +638,7 @@
 			path = IO;
 			sourceTree = "<group>";
 		};
-		OBJ_5 /*  */ = {
+		OBJ_5 = {
 			isa = PBXGroup;
 			children = (
 				OBJ_6 /* Package.swift */,
@@ -649,7 +649,6 @@
 				OBJ_160 /* LICENSE */,
 				OBJ_161 /* readme.md */,
 			);
-			name = "";
 			sourceTree = "<group>";
 		};
 		OBJ_51 /* Interpolation */ = {
@@ -954,7 +953,7 @@
 				English,
 				en,
 			);
-			mainGroup = OBJ_5 /*  */;
+			mainGroup = OBJ_5;
 			productRefGroup = OBJ_153 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -1000,7 +999,7 @@
 				OBJ_195 /* BInaryScalarOperator.swift in Sources */,
 				OBJ_196 /* BinaryOperators.swift in Sources */,
 				OBJ_197 /* UnaryOperators.swift in Sources */,
-				OBJ_198 /* AddBlend.swift in Sources */,
+				OBJ_198 /* AdditiveBlend.swift in Sources */,
 				OBJ_199 /* AlphaBlend.swift in Sources */,
 				OBJ_200 /* Blender.swift in Sources */,
 				OBJ_201 /* MultiplyBlend.swift in Sources */,
