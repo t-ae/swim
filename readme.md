@@ -88,6 +88,14 @@ let red0 = image.pixelwiseConverted { px in
 }
 ```
 
+## Resize
+```swift 
+let image = Image<RGB, Float>(contentsOf: url)!
+let image2 = image.resize(width: 512, height: 512) // default bilinear
+let image3 = image.resize(width: 512, height: 512, method: .nearestNeighbor)
+let image4 = image.resize(width: 512, height: 512, method: .bicubic)
+```
+
 ## Advanced
 
 ### Correlation
@@ -101,7 +109,7 @@ let ncc = Correlation.ncc(image1, image2)
 let zncc = Correlation.zncc(image1, image2)
 ```
 
-### Alpha blending
+### Blending
 ```swift
 var imageBase = Image<RGB, Float>(width: 100,
                                   height: 100,
@@ -113,7 +121,14 @@ var imageGreen = Image<RGBA, Float>(width: 100,
                                     data: [Float](repeating: 0, count: 100*100*4))
 imageGreen[20..<60, 40..<80].fill(Pixel(r: 0, g: 1, b: 0, a: 0.5))
 
+// Alpha blending
 Blender.alphaBlend(top: imageGreen, bottom: &imageBase)
+
+// or other blend modes
+Blender.multiplyBlend(top: imageGreen, bottom: &imageBase)
+Blender.additiveBlend(top: imageGreen, bottom: &imageBase)
+Blender.screenBlend(top: imageGreen, bottom: &imageBase)
+Blender.overlayBlend(top: imageGreen, bottom: &imageBase)
 ```
 
 ### Integral image
