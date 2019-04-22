@@ -2,6 +2,13 @@ import XCTest
 import Swim
 
 class ResizeVisualTests: XCTestCase {
+}
+
+#if canImport(AppKit)
+
+import AppKit
+
+extension ResizeVisualTests {
     func testResize() {
         let image = Image<RGB, Double>(width: 4,
                                        height: 4,
@@ -15,7 +22,6 @@ class ResizeVisualTests: XCTestCase {
         let concat = Image.concatH([resizedNN, resizedBL, resizedBC])
         
         let nsImage = doubleToNSImage(concat)
-        
         
         XCTAssertTrue(nsImage.isValid, "Break and check nsImage in debugger.")
     }
@@ -54,3 +60,5 @@ class ResizeVisualTests: XCTestCase {
         XCTAssertTrue(nsImage.isValid, "Break and check nsImage in debugger.")
     }
 }
+
+#endif

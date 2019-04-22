@@ -4,7 +4,11 @@ import Swim
 class BayerVisualTests: XCTestCase {
     
     var lena = try! Image<RGB, Double>(contentsOf: testResoruceRoot().appendingPathComponent("lena_128.png"))
+}
 
+#if canImport(AppKit)
+
+extension BayerVisualTests {
     func testBGGR() {
         let conv = BayerConverter(pattern: .bggr)
         
@@ -73,3 +77,5 @@ class BayerVisualTests: XCTestCase {
                       "Break and check nsImages")
     }
 }
+
+#endif

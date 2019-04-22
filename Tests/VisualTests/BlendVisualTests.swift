@@ -2,6 +2,11 @@ import XCTest
 import Swim
 
 class BlendVisualTests: XCTestCase {
+}
+
+#if canImport(AppKit)
+
+extension BlendVisualTests {
     func testAlphaBlend() {
         var imageBase = Image<RGB, Double>(width: 500,
                                            height: 500,
@@ -112,3 +117,5 @@ class BlendVisualTests: XCTestCase {
         XCTAssertTrue(nsImage.isValid, "Break and check nsImage in debugger.")
     }
 }
+
+#endif

@@ -2,6 +2,11 @@ import XCTest
 import Swim
 
 class OtherVisualTests: XCTestCase {
+}
+
+#if canImport(AppKit)
+
+extension OtherVisualTests {
     func testOpenClose() {
         let size = 100
         var image = Image<Intensity, Double>(width: size, height: size, value: 0)
@@ -168,3 +173,5 @@ class OtherVisualTests: XCTestCase {
         XCTAssertFalse(steps.isEmpty, "Break and check nsImage in debugger.")
     }
 }
+
+#endif

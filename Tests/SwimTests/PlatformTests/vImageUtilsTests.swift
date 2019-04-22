@@ -1,14 +1,14 @@
 import XCTest
 import Swim
 
-#if canImport(Accelerate)
-import Accelerate
-#endif
-
 class vImageUtilsTests: XCTestCase {
     
-    #if canImport(Accelerate)
-    
+}
+#if canImport(Accelerate)
+
+import Accelerate
+
+extension vImageUtilsTests {
     func testAlphaBlend() {
         let c = 100
         let p1: [[Float]] = (0..<c).map { _ in randomArray(count: 4) }
@@ -120,7 +120,6 @@ class vImageUtilsTests: XCTestCase {
             XCTAssertEqual(filtered, Image(width: 3, height: 3, data: [0, 0, 1, 0, 0, 1, 3, 3, 4]))
         }
     }
-    
-    #endif
-    
 }
+
+#endif

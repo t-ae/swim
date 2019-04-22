@@ -2,7 +2,6 @@ import XCTest
 import Swim
 
 class WarpVisualTests: XCTestCase {
-    
     let src = Image<RGB, Double>(width: 3,
                                  height: 3,
                                  data: [1, 0, 0,
@@ -16,7 +15,11 @@ class WarpVisualTests: XCTestCase {
                                         0.3, 0.3, 0.3])
     
     let affine = AffineTransformation(scale: (50, 50), rotation: Double.pi/6, translation: (150, 0))
-    
+}
+
+#if canImport(AppKit)
+
+extension WarpVisualTests {
     func testWarpNN() {
         typealias Intpl = NearestNeighborInterpolator
         
@@ -139,3 +142,5 @@ class WarpVisualTests: XCTestCase {
         XCTAssertTrue(nsImage.isValid, "Break and check nsImages in debugger.")
     }
 }
+
+#endif

@@ -19,10 +19,11 @@ class FilterVisualTests: XCTestCase {
                 imageBase[startX..<endX, startY..<endY].fill(value)
             }
         }
-        let nsImageBase = doubleToNSImage(imageBase)
-        _ = nsImageBase
     }
-    
+}
+#if canImport(AppKit)
+
+extension FilterVisualTests {
     func testGaussian() {
         var image = imageBase!
         var nsImages = [NSImage]()
@@ -82,3 +83,5 @@ class FilterVisualTests: XCTestCase {
         XCTAssertFalse([nsBase, nsGaussian, nsLaplacian].isEmpty, "Break and check nsImages in debugger")
     }
 }
+
+#endif
