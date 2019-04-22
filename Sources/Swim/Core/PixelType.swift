@@ -12,7 +12,7 @@ public enum Intensity: Int, PixelType, CaseIterable {
     case intensity = 0
 }
 
-public enum IntensityAlpha: Int, PixelType, CaseIterable {
+public enum IntensityAlpha: Int, PixelType, HasAlpha, CaseIterable {
     public static var channels: Int = 2
     
     case intensity = 0
@@ -45,9 +45,11 @@ public enum ARGB: Int, PixelType, CaseIterable {
     case blue = 3
 }
 
+// MARK: - HasAlpha
+public protocol HasAlpha {}
 
 // MARK: - RGBWithAlpha
-public protocol RGBWithAlpha: PixelType {
+public protocol RGBWithAlpha: PixelType, HasAlpha {
     static var redIndex: Int { get }
     static var greenIndex: Int { get }
     static var blueIndex: Int { get }

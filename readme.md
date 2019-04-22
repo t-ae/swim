@@ -12,20 +12,19 @@ DataType: `Bool`, `UInt8`, `Int`, `Float`, `Double`
 
 ## Creation
 ```swift
-let data = [UInt8](repeating: 0, count: 3*4*5)
-let image = Image<RGBA, UInt8>(width: 3, height: 5, data: data)
+let image = Image<RGBA, UInt8>(width: 3, height: 5, data: [...]])
 
 // Can use type inference
-let intensity = Image(width: 3, height: 20, intensity: data)
-let rgb = Image(width: 4, height: 5, rgb: data)
-let rgba = Image(width: 3, height: 5, rgba: data)
-let argb = Image(width: 5, height: 3, argb: data)
+let intensity = Image(width: 3, height: 20, intensity: [...])
+let rgb = Image(width: 4, height: 5, rgb: [...])
+let rgba = Image(width: 3, height: 5, rgba: [...])
+let argb = Image(width: 5, height: 3, argb: [...])
 ```
 
 ## Save/Load image
 ```swift
 let image = Image<RGBA, UInt8>(contentsOf: url)!
-try? image.write(path: dstPath, type: .png)
+try? image.write(path: dstPath)
 ```
 
 ## Associate with CoreGraphics
@@ -78,8 +77,8 @@ let brightness: Image<Intensity, Float> = image.toBrightness()
 let luminance: Image<Intensity, Float> = image.toLuminance()
 
 // type conversion
-let doubleImage = image.typeConverted(to: Double.self)
-let doubleImage2: Image<RGB, Double> = image.typeConverted() // type inference
+let doubleImage1 = Image<RGB, Double>(cast: image)
+let doubleImage2 = Image(cast: image, to: Double.self) // ditto
 
 // pixel conversion
 let red0 = image.converted { px in 
@@ -133,7 +132,7 @@ let maximum = image.maximumFilter(kernelSize: 3)
 
 ---
 
-[VisualTests.swift](https://github.com/t-ae/swim/blob/master/Tests/PerformanceTests/VisualTests.swift) contains examples.
+[VisualTests](https://github.com/t-ae/swim/blob/master/Tests/VisualTests) contains examples.
 
 ## License
 

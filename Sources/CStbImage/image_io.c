@@ -18,8 +18,8 @@ int write_image_bmp(const char* path, int width, int height, int bpp, const void
     return stbi_write_bmp(path, width, height, bpp, data);
 }
 
-int write_image_jpg(const char* path, int width, int height, int bpp, const void* data) {
-    return stbi_write_jpg(path, width, height, bpp, data, 90);
+int write_image_jpg(const char* path, int width, int height, int bpp, const void* data, int quality) {
+    return stbi_write_jpg(path, width, height, bpp, data, quality);
 }
 
 int write_image_png(const char* path, int width, int height, int bpp, const void* data) {

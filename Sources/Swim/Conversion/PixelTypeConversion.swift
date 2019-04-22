@@ -25,6 +25,16 @@ extension Image where P == Intensity {
     }
 }
 
+// MARK: - Intensity -> IntensityAlpha
+extension Image where P == IntensityAlpha {
+    @inlinable
+    public init(image: Image<Intensity, T>, alpha: T) {
+        self = Image<P, T>(width: image.width, height: image.height, value: alpha)
+        
+        strideCopy(src: image.data, srcOffset: 0, srcStride: 1, dst: &data, dstOffset: 0, dstStride: 2, count: pixelCount)
+    }
+}
+
 // MARK: - RGB -> Intensity
 extension Image where P == RGB, T: BinaryInteger {
     @inlinable
@@ -120,28 +130,21 @@ extension Image where P == RGB, T: BinaryFloatingPoint {
 }
 
 // MARK: - RGB -> RGBWithAlpha
-@inlinable
-func imageFromRGB<P: RGBWithAlpha, T>(image: Image<RGB, T>, alpha: T) -> Image<P, T> {
-    var newImage = Image<P, T>(width: image.width, height: image.height, value: alpha)
-    image.data.withUnsafeBufferPointer {
-        var src = $0.baseAddress!
-        newImage.data.withUnsafeMutableBufferPointer {
-            var dst = $0.baseAddress! + P.redIndex
-            for _ in 0..<image.width*image.height {
-                memcpy(dst, src, RGB.channels * MemoryLayout<T>.size)
-                src += RGB.channels
-                dst += P.channels
-            }
-        }
-    }
-    
-    return newImage
-}
-
 extension Image where P: RGBWithAlpha {
     @inlinable
     public init(image: Image<RGB, T>, alpha: T) {
-        self = imageFromRGB(image: image, alpha: alpha)
+        self = Image<P, T>(width: image.width, height: image.height, value: alpha)
+        image.data.withUnsafeBufferPointer {
+            var src = $0.baseAddress!
+            data.withUnsafeMutableBufferPointer {
+                var dst = $0.baseAddress! + P.redIndex
+                for _ in 0..<image.width*image.height {
+                    memcpy(dst, src, RGB.channels * MemoryLayout<T>.size)
+                    src += RGB.channels
+                    dst += P.channels
+                }
+            }
+        }
     }
 }
 
