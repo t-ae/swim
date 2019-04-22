@@ -83,6 +83,7 @@ extension Image where P: ImageFileFormat, T == UInt8 {
 // MARK: - Float
 extension Image where P: ImageFileFormat, T == Float {
     /// Save image.
+    ///
     /// Pixel values are clipped to [0, 1].
     @inlinable
     public func write(to url: URL) throws {
@@ -91,6 +92,7 @@ extension Image where P: ImageFileFormat, T == Float {
     }
     
     /// Save image.
+    ///
     /// Pixel values are clipped to [0, 1].
     @inlinable
     public func write(to url: URL, format: WriteFormat) throws {
@@ -104,6 +106,9 @@ extension Image where P: ImageFileFormat, T == Float {
 
 // MARK: - Double
 extension Image where P: ImageFileFormat, T == Double {
+    /// Save image.
+    ///
+    /// Pixel values are clipped to [0, 1].
     @inlinable
     public func write(to url: URL) throws {
         let format = detectFormat(url: url)
@@ -111,6 +116,7 @@ extension Image where P: ImageFileFormat, T == Double {
     }
     
     /// Save image.
+    ///
     /// Pixel values are clipped to [0, 1].
     @inlinable
     public func write(to url: URL, format: WriteFormat) throws {

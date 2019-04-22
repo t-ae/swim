@@ -44,6 +44,7 @@ func readImage(url: URL) throws -> STBImageData {
 // MARK: - UInt8
 
 extension Image where P == Intensity, T == UInt8 {
+    /// Read image from file.
     @inlinable
     public init(contentsOf url: URL) throws {
         let imageData = try readImage(url: url)
@@ -57,6 +58,7 @@ extension Image where P == Intensity, T == UInt8 {
 }
 
 extension Image where P == IntensityAlpha, T == UInt8 {
+    /// Read image from file.
     @inlinable
     public init(contentsOf url: URL) throws {
         let imageData = try readImage(url: url)
@@ -76,6 +78,7 @@ extension Image where P == IntensityAlpha, T == UInt8 {
 }
 
 extension Image where P == RGB, T == UInt8 {
+    /// Read image from file.
     @inlinable
     public init(contentsOf url: URL) throws {
         let imageData = try readImage(url: url)
@@ -95,6 +98,7 @@ extension Image where P == RGB, T == UInt8 {
 }
 
 extension Image where P == RGBA, T == UInt8 {
+    /// Read image from file.
     @inlinable
     public init(contentsOf url: URL) throws {
         let imageData = try readImage(url: url)
@@ -127,8 +131,10 @@ extension Image where P == RGBA, T == UInt8 {
 }
 
 // MARK: - Float
-
 extension Image where P == Intensity, T == Float {
+    /// Read image from file.
+    ///
+    /// All pixel values will be in [0, 1] range.
     @inlinable
     public init(contentsOf url: URL) throws {
         let uint8 = try Image<P, UInt8>(contentsOf: url)
@@ -138,6 +144,9 @@ extension Image where P == Intensity, T == Float {
 }
 
 extension Image where P == IntensityAlpha, T == Float {
+    /// Read image from file.
+    ///
+    /// All pixel values will be in [0, 1] range.
     @inlinable
     public init(contentsOf url: URL) throws {
         let uint8 = try Image<P, UInt8>(contentsOf: url)
@@ -147,6 +156,9 @@ extension Image where P == IntensityAlpha, T == Float {
 }
 
 extension Image where P == RGB, T == Float {
+    /// Read image from file.
+    ///
+    /// All pixel values will be in [0, 1] range.
     @inlinable
     public init(contentsOf url: URL) throws {
         let uint8 = try Image<P, UInt8>(contentsOf: url)
@@ -156,6 +168,9 @@ extension Image where P == RGB, T == Float {
 }
 
 extension Image where P == RGBA, T == Float {
+    /// Read image from file.
+    ///
+    /// All pixel values will be in [0, 1] range.
     @inlinable
     public init(contentsOf url: URL) throws {
         let uint8 = try Image<P, UInt8>(contentsOf: url)
@@ -166,6 +181,9 @@ extension Image where P == RGBA, T == Float {
 
 // MARK: - Double
 extension Image where P == Intensity, T == Double {
+    /// Read image from file.
+    ///
+    /// All pixel values will be in [0, 1] range.
     @inlinable
     public init(contentsOf url: URL) throws {
         let uint8 = try Image<P, UInt8>(contentsOf: url)
@@ -175,6 +193,9 @@ extension Image where P == Intensity, T == Double {
 }
 
 extension Image where P == IntensityAlpha, T == Double {
+    /// Read image from file.
+    ///
+    /// All pixel values will be in [0, 1] range.
     @inlinable
     public init(contentsOf url: URL) throws {
         let uint8 = try Image<P, UInt8>(contentsOf: url)
@@ -184,6 +205,9 @@ extension Image where P == IntensityAlpha, T == Double {
 }
 
 extension Image where P == RGB, T == Double {
+    /// Read image from file.
+    ///
+    /// All pixel values will be in [0, 1] range.
     @inlinable
     public init(contentsOf url: URL) throws {
         let uint8 = try Image<P, UInt8>(contentsOf: url)
@@ -193,6 +217,9 @@ extension Image where P == RGB, T == Double {
 }
 
 extension Image where P == RGBA, T == Double {
+    /// Read image from file.
+    ///
+    /// All pixel values will be in [0, 1] range.
     @inlinable
     public init(contentsOf url: URL) throws {
         let uint8 = try Image<P, UInt8>(contentsOf: url)
