@@ -65,6 +65,11 @@ extension WarpVisualTests {
             nsImages["constant0"] = doubleToNSImage(result)
         }
         do {
+            let intpl = Intpl<Double>(edgeMode: .reflect)
+            let result = try! src.warp(transformation: affine, outputSize: (512, 512), interpolator: intpl)
+            nsImages["reflect"] = doubleToNSImage(result)
+        }
+        do {
             let intpl = Intpl<Double>(edgeMode: .symmetric)
             let result = try! src.warp(transformation: affine, outputSize: (512, 512), interpolator: intpl)
             nsImages["symmetric"] = doubleToNSImage(result)
@@ -99,6 +104,11 @@ extension WarpVisualTests {
             var result = try! src.warp(transformation: affine, outputSize: (512, 512), interpolator: intpl)
             result.clip(low: 0, high: 1)
             nsImages["constant0 a-0.2"] = doubleToNSImage(result)
+        }
+        do {
+            let intpl = Intpl<Double>(edgeMode: .reflect)
+            let result = try! src.warp(transformation: affine, outputSize: (512, 512), interpolator: intpl)
+            nsImages["reflect"] = doubleToNSImage(result)
         }
         do {
             let intpl = Intpl<Double>(edgeMode: .symmetric)
