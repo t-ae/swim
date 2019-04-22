@@ -3,18 +3,18 @@ import Foundation
 public struct AffineTransformation<T: BinaryFloatingPoint> {
     public var a: T
     public var b: T
+    public var tx: T
     public var c: T
     public var d: T
-    public var tx: T
     public var ty: T
     
     @inlinable
-    public init(a: T, b: T, c: T, d: T, tx: T, ty: T) {
+    public init(a: T, b: T, tx: T, c: T, d: T, ty: T) {
         self.a = a
         self.b = b
+        self.tx = tx
         self.c = c
         self.d = d
-        self.tx = tx
         self.ty = ty
     }
 }
@@ -22,17 +22,20 @@ public struct AffineTransformation<T: BinaryFloatingPoint> {
 extension AffineTransformation {
     @inlinable
     public static var identity: AffineTransformation<T> {
-        return AffineTransformation(a: 1, b: 0, c: 0, d: 1, tx: 0, ty: 0)
+        return AffineTransformation(a: 1, b: 0, tx: 0,
+                                    c: 0, d: 1, ty: 0)
     }
     
     @inlinable
     public static func translation(x: T, y: T) -> AffineTransformation<T> {
-        return AffineTransformation(a: 1, b: 0, c: 0, d: 1, tx: x, ty: y)
+        return AffineTransformation(a: 1, b: 0, tx: x,
+                                    c: 0, d: 1, ty: y)
     }
     
     @inlinable
     public static func scale(x: T, y: T) -> AffineTransformation<T> {
-        return AffineTransformation(a: x, b: 0, c: 0, d: y, tx: 0, ty: 0)
+        return AffineTransformation(a: x, b: 0, tx: 0,
+                                    c: 0, d: y, ty: 0)
     }
 }
 
@@ -41,9 +44,8 @@ extension AffineTransformation where T == Float {
     public static func rotation(angle: T) -> AffineTransformation<T> {
         let sinx = sin(angle)
         let cosx = cos(angle)
-        return AffineTransformation(a: cosx, b: -sinx,
-                                    c: sinx, d: cosx,
-                                    tx: 0, ty: 0)
+        return AffineTransformation(a: cosx, b: -sinx, tx: 0,
+                                    c: sinx, d: cosx, ty: 0)
     }
     
     @inlinable
@@ -61,9 +63,8 @@ extension AffineTransformation where T == Double {
     public static func rotation(angle: T) -> AffineTransformation<T> {
         let sinx = sin(angle)
         let cosx = cos(angle)
-        return AffineTransformation(a: cosx, b: -sinx,
-                                    c: sinx, d: cosx,
-                                    tx: 0, ty: 0)
+        return AffineTransformation(a: cosx, b: -sinx, tx: 0,
+                                    c: sinx, d: cosx, ty: 0)
     }
     
     @inlinable
@@ -80,24 +81,24 @@ extension AffineTransformation: HomogeneousTransformationMatrixProtocol {
     @inlinable
     public func inverted() throws -> AffineTransformation<T> {
         var inv = self
-        let delta = a*d - b*c
+        let det = a*d - b*c
         
-        guard delta != 0 else {
+        guard det != 0 else {
             throw MatrixInversionError.singularMatrix
         }
         
-        inv.a = d / delta
-        inv.b /= -delta
-        inv.c /= -delta
-        inv.d = a / delta
+        inv.a = d / det
+        inv.b /= -det
+        inv.c /= -det
+        inv.d = a / det
         
         inv.tx *= -d
         inv.tx += b*ty
-        inv.tx /= delta
+        inv.tx /= det
         
         inv.ty *= -a
         inv.ty += c*tx
-        inv.ty /= delta
+        inv.ty /= det
         
         return inv
     }

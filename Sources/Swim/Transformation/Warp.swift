@@ -8,8 +8,8 @@ public enum MatrixInversionError: Error {
 public protocol HomogeneousTransformationMatrixProtocol {
     associatedtype T: BinaryFloatingPoint
     associatedtype InvertedMatrix: HomogeneousTransformationMatrixProtocol where InvertedMatrix.T == T
-    func inverted() throws -> InvertedMatrix
-    static func *(lhs: Self, rhs: (x: T, y: T)) -> (x: T, y: T)
+    @inlinable func inverted() throws -> InvertedMatrix
+    @inlinable static func *(lhs: Self, rhs: (x: T, y: T)) -> (x: T, y: T)
 }
 
 
@@ -22,6 +22,7 @@ public struct HomogeneousTransformationMatrix<T: BinaryFloatingPoint>: Homogeneo
         self.elements = elements
     }
     
+    @inlinable
     public var determinant: T {
         let e = elements
         var det: T = 0
@@ -34,6 +35,7 @@ public struct HomogeneousTransformationMatrix<T: BinaryFloatingPoint>: Homogeneo
         return det
     }
     
+    @inlinable
     public func inverted() throws -> HomogeneousTransformationMatrix {
         let e = elements
         let det = determinant
