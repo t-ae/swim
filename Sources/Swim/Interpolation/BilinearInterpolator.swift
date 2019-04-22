@@ -77,8 +77,8 @@ public struct BilinearInterpolator<T: BinaryFloatingPoint&DataType>: Interpolato
 public struct _BilinearInterpolator<T: BinaryFloatingPoint&DataType>: Interpolator {
     public var edgeMode: EdgeMode<T>
     
-    public init(mode: EdgeMode<T> = .constant(0)) {
-        self.edgeMode = mode
+    public init(edgeMode: EdgeMode<T> = .constant(0)) {
+        self.edgeMode = edgeMode
     }
     
     @inlinable

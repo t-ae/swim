@@ -345,9 +345,9 @@ public struct _BicubicInterpolator<T: BinaryFloatingPoint&DataType>: Interpolato
     public var a: T
     public var edgeMode: EdgeMode<T>
     
-    public init(a: T = -1, mode: EdgeMode<T> = .constant(0)) {
+    public init(a: T = -1, edgeMode: EdgeMode<T> = .constant(0)) {
         self.a = a
-        self.edgeMode = mode
+        self.edgeMode = edgeMode
     }
     
     @inlinable
