@@ -81,7 +81,7 @@ let doubleImage1 = Image<RGB, Double>(cast: image)
 let doubleImage2 = Image(cast: image, to: Double.self) // ditto
 
 // pixel conversion
-let red0 = image.converted { px in 
+let red0 = image.pixelwiseConverted { px in 
     var px = px
     px[.red] = 0
     return px

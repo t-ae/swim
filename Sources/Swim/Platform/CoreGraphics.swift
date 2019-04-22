@@ -154,7 +154,7 @@ extension RGBA: ConvertibleFromCGImage, ConvertibleToCGImage {
         var image = Image<RGBA, UInt8>(width: cgImage.width, height: cgImage.height, data: data)
         
         // cancel premultiplication
-        image.unsafeConvert { px in
+        image.unsafePixelwiseConvert { px in
             let alpha = Int(px[RGBA.alpha.rawValue])
             if alpha == 0 { return }
             for c in RGBA.allCases {
@@ -196,7 +196,7 @@ extension Image where P == RGBA, T == UInt8 {
     @inlinable
     func premultipliedImage() -> Image<P, T> {
         var newImage = self
-        newImage.unsafeConvert { px in
+        newImage.unsafePixelwiseConvert { px in
             let alpha = Int(px[P.alpha.rawValue])
             for c in [P.red.rawValue, P.green.rawValue, P.blue.rawValue] {
                 px[c] = UInt8(Int(px[c]) * alpha / 255)

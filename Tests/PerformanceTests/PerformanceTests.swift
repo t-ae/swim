@@ -25,7 +25,7 @@ class PerformanceTests: XCTestCase {
         var image = Image(width: 1920, height: 1080, rgba: data)
         
         measure {
-            image.convert { px in
+            image.pixelwiseConvert { px in
                 px + 1
             }
         }
@@ -36,7 +36,7 @@ class PerformanceTests: XCTestCase {
         var image = Image(width: 1920, height: 1080, rgba: data)
         
         measure {
-            _ = image.unsafeConvert { bp in
+            _ = image.unsafePixelwiseConvert { bp in
                 for i in 0..<bp.count {
                     bp[i] += 1
                 }
@@ -49,7 +49,7 @@ class PerformanceTests: XCTestCase {
         let image = Image(width: 1920, height: 1080, rgba: data)
         
         measure {
-            _ = image.converted { px in
+            _ = image.pixelwiseConverted { px in
                 px + 1
             }
         }

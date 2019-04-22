@@ -9,8 +9,8 @@ class PixelwiseConversion: XCTestCase {
             var image = Image(width: 2, height: 3, intensity: data)
             let after = Image(width: 2, height: 3, intensity: data.map { $0 + 1 })
 
-            XCTAssertEqual(image.converted { (px: UInt8) in px + 1 }, after)
-            image.convert { (px: UInt8) -> UInt8 in
+            XCTAssertEqual(image.pixelwiseConverted { (px: UInt8) in px + 1 }, after)
+            image.pixelwiseConvert { (px: UInt8) -> UInt8 in
                 px + 1
             }
             XCTAssertEqual(image, after)
@@ -20,8 +20,8 @@ class PixelwiseConversion: XCTestCase {
             var image = Image(width: 2, height: 3, intensity: data)
             let after = Image(width: 2, height: 3, intensity: data.map { $0 + 1 })
 
-            XCTAssertEqual(image.converted { (px: Pixel<Intensity, UInt8>) -> Pixel<Intensity, UInt8> in px + 1 }, after)
-            image.convert { (px: Pixel<Intensity, UInt8>) -> Pixel<Intensity, UInt8> in
+            XCTAssertEqual(image.pixelwiseConverted { (px: Pixel<Intensity, UInt8>) -> Pixel<Intensity, UInt8> in px + 1 }, after)
+            image.pixelwiseConvert { (px: Pixel<Intensity, UInt8>) -> Pixel<Intensity, UInt8> in
                 px + 1
             }
             XCTAssertEqual(image, after)
@@ -33,7 +33,7 @@ class PixelwiseConversion: XCTestCase {
             let afterData: [Float] = a.map { Float($0) }
             let after = Image(width: 2, height: 3, rgba: afterData)
 
-            let result: Image<RGBA, Float> = image.converted { (px: UInt8) in
+            let result: Image<RGBA, Float> = image.pixelwiseConverted { (px: UInt8) in
                 let uints: [UInt8] = [px, px+1, px+2, px+3]
                 return Pixel<RGBA, Float>(data: uints.map(Float.init))
             }
@@ -44,8 +44,8 @@ class PixelwiseConversion: XCTestCase {
             var image = Image(width: 2, height: 3, rgba: data)
             let after = Image(width: 2, height: 3, rgba: data.map { $0 + 1 })
             
-            XCTAssertEqual(image.converted { (px: Pixel<RGBA, UInt8>) in px + 1 }, after)
-            image.convert { px in px + 1 }
+            XCTAssertEqual(image.pixelwiseConverted { (px: Pixel<RGBA, UInt8>) in px + 1 }, after)
+            image.pixelwiseConvert { px in px + 1 }
             XCTAssertEqual(image, after)
 
         }
@@ -56,12 +56,12 @@ class PixelwiseConversion: XCTestCase {
             let data = (0..<24).map { UInt8($0) }
             let image = Image(width: 2, height: 3, rgba: data)
 
-            let red = image.converted { (px: Pixel<RGBA, UInt8>) -> UInt8 in
+            let red = image.pixelwiseConverted { (px: Pixel<RGBA, UInt8>) -> UInt8 in
                 px[.red]
             }
             XCTAssertEqual(red, Image(width: 2, height: 3, data: [0, 4, 8, 12, 16, 20]))
             
-            let redDouble = image.converted { (px: Pixel<RGBA, UInt8>) -> Double in
+            let redDouble = image.pixelwiseConverted { (px: Pixel<RGBA, UInt8>) -> Double in
                 Double(px[.red])
             }
             XCTAssertEqual(redDouble, Image(width: 2, height: 3, data: [0, 4, 8, 12, 16, 20]))
@@ -70,7 +70,7 @@ class PixelwiseConversion: XCTestCase {
             let data = (0..<6).map { UInt8($0) }
             let image = Image(width: 2, height: 3, intensity: data)
             
-            let rgb = image.converted { (px: UInt8) -> Pixel<RGB, Double> in
+            let rgb = image.pixelwiseConverted { (px: UInt8) -> Pixel<RGB, Double> in
                 Pixel<RGB, Double>(r: Double(px), g: Double(px), b: Double(px))
             }
             XCTAssertEqual(rgb,

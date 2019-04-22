@@ -3,7 +3,7 @@ import Foundation
 // MARK: - Same Pixel/Data type conversion
 extension Image {
     @inlinable
-    public mutating func convert(_ f: (Pixel<P, T>)->Pixel<P, T>) {
+    public mutating func pixelwiseConvert(_ f: (Pixel<P, T>)->Pixel<P, T>) {
         let (width, height) = size
         data.withUnsafeMutableBufferPointer {
             var p = $0.baseAddress!
@@ -19,7 +19,7 @@ extension Image {
     }
     
     @inlinable
-    public mutating func unsafeConvert(_ f: (UnsafeMutableBufferPointer<T>)->Void) {
+    public mutating func unsafePixelwiseConvert(_ f: (UnsafeMutableBufferPointer<T>)->Void) {
         let (width, height) = size
         data.withUnsafeMutableBufferPointer {
             var p = $0.baseAddress!
@@ -36,7 +36,7 @@ extension Image {
 // MARK: - Intensity
 extension Image where P == Intensity {
     @inlinable
-    public mutating func convert(_ f: (T)->T) {
+    public mutating func pixelwiseConvert(_ f: (T)->T) {
         let (width, height) = size
         data.withUnsafeMutableBufferPointer {
             var dst = $0.baseAddress!
@@ -48,7 +48,7 @@ extension Image where P == Intensity {
     }
     
     @inlinable
-    public func converted<T2>(_ f: (T)->T2) -> Image<Intensity, T2> {
+    public func pixelwiseConverted<T2>(_ f: (T)->T2) -> Image<Intensity, T2> {
         var newImage = Image<Intensity, T2>(width: width, height: height)
         newImage.data.withUnsafeMutableBufferPointer {
             var dst = $0.baseAddress!
@@ -61,7 +61,7 @@ extension Image where P == Intensity {
     }
     
     @inlinable
-    public func converted<P2, T2>(_ f: (T)->Pixel<P2, T2>) -> Image<P2, T2> {
+    public func pixelwiseConverted<P2, T2>(_ f: (T)->Pixel<P2, T2>) -> Image<P2, T2> {
         var newImage = Image<P2, T2>(width: width, height: height)
         newImage.data.withUnsafeMutableBufferPointer {
             var dst = $0.baseAddress!
@@ -78,7 +78,7 @@ extension Image where P == Intensity {
 // MARK: - General conversion
 extension Image {
     @inlinable
-    public func converted<T2>(_ f: (Pixel<P, T>)->T2) -> Image<Intensity, T2> {
+    public func pixelwiseConverted<T2>(_ f: (Pixel<P, T>)->T2) -> Image<Intensity, T2> {
         var newImage = Image<Intensity, T2>(width: width, height: height)
         data.withUnsafeBufferPointer {
             var src = $0.baseAddress!
@@ -99,7 +99,7 @@ extension Image {
     }
     
     @inlinable
-    public func converted<P2, T2>(_ f: (Pixel<P, T>)->Pixel<P2, T2>) -> Image<P2, T2> {
+    public func pixelwiseConverted<P2, T2>(_ f: (Pixel<P, T>)->Pixel<P2, T2>) -> Image<P2, T2> {
         var newImage = Image<P2, T2>(width: width, height: height)
         data.withUnsafeBufferPointer {
             var src = $0.baseAddress!
