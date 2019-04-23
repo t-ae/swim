@@ -8,6 +8,7 @@ public struct PixelRef<P: PixelType, T: DataType> {
     
     @inlinable
     init(_x: Int, _y: Int, pointer: UnsafeBufferPointer<T>) {
+        assert(pointer.count == P.channels)
         self._x = _x
         self._y = _y
         self.pointer = pointer
@@ -46,6 +47,7 @@ public struct MutablePixelRef<P: PixelType, T: DataType> {
     
     @inlinable
     init(_x: Int, _y: Int, pointer: UnsafeMutableBufferPointer<T>) {
+        assert(pointer.count == P.channels)
         self._x = _x
         self._y = _y
         self.pointer = pointer
