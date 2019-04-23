@@ -69,7 +69,6 @@
 		OBJ_212 /* Initializers.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_43 /* Initializers.swift */; };
 		OBJ_213 /* Pixel.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_44 /* Pixel.swift */; };
 		OBJ_214 /* PixelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_45 /* PixelType.swift */; };
-		OBJ_215 /* Sequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_46 /* Sequence.swift */; };
 		OBJ_216 /* ImageFileFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_48 /* ImageFileFormat.swift */; };
 		OBJ_217 /* ReadImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_49 /* ReadImage.swift */; };
 		OBJ_218 /* WriteImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_50 /* WriteImage.swift */; };
@@ -121,7 +120,6 @@
 		OBJ_284 /* PixelTypeConversionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_110 /* PixelTypeConversionTests.swift */; };
 		OBJ_285 /* PixelwiseConversionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_111 /* PixelwiseConversionTests.swift */; };
 		OBJ_286 /* ImageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_113 /* ImageTests.swift */; };
-		OBJ_287 /* SequenceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_114 /* SequenceTests.swift */; };
 		OBJ_288 /* ImageIOTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_116 /* ImageIOTests.swift */; };
 		OBJ_289 /* BicubicInterpolationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_118 /* BicubicInterpolationTests.swift */; };
 		OBJ_290 /* BilinearInterpolationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_119 /* BilinearInterpolationTests.swift */; };
@@ -254,7 +252,6 @@
 		OBJ_110 /* PixelTypeConversionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PixelTypeConversionTests.swift; sourceTree = "<group>"; };
 		OBJ_111 /* PixelwiseConversionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PixelwiseConversionTests.swift; sourceTree = "<group>"; };
 		OBJ_113 /* ImageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageTests.swift; sourceTree = "<group>"; };
-		OBJ_114 /* SequenceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SequenceTests.swift; sourceTree = "<group>"; };
 		OBJ_116 /* ImageIOTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageIOTests.swift; sourceTree = "<group>"; };
 		OBJ_118 /* BicubicInterpolationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BicubicInterpolationTests.swift; sourceTree = "<group>"; };
 		OBJ_119 /* BilinearInterpolationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BilinearInterpolationTests.swift; sourceTree = "<group>"; };
@@ -314,7 +311,6 @@
 		OBJ_43 /* Initializers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Initializers.swift; sourceTree = "<group>"; };
 		OBJ_44 /* Pixel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pixel.swift; sourceTree = "<group>"; };
 		OBJ_45 /* PixelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PixelType.swift; sourceTree = "<group>"; };
-		OBJ_46 /* Sequence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sequence.swift; sourceTree = "<group>"; };
 		OBJ_48 /* ImageFileFormat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageFileFormat.swift; sourceTree = "<group>"; };
 		OBJ_49 /* ReadImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadImage.swift; sourceTree = "<group>"; };
 		OBJ_50 /* WriteImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteImage.swift; sourceTree = "<group>"; };
@@ -453,7 +449,6 @@
 			isa = PBXGroup;
 			children = (
 				OBJ_113 /* ImageTests.swift */,
-				OBJ_114 /* SequenceTests.swift */,
 			);
 			path = CoreTests;
 			sourceTree = "<group>";
@@ -657,7 +652,6 @@
 				OBJ_42 /* Image.swift */,
 				OBJ_43 /* Initializers.swift */,
 				OBJ_45 /* PixelType.swift */,
-				OBJ_46 /* Sequence.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -1055,7 +1049,6 @@
 				OBJ_213 /* Pixel.swift in Sources */,
 				OBJ_214 /* PixelType.swift in Sources */,
 				A732AC21226EAB4600B2256E /* PixelBinaryScalarOperator.swift in Sources */,
-				OBJ_215 /* Sequence.swift in Sources */,
 				OBJ_216 /* ImageFileFormat.swift in Sources */,
 				OBJ_217 /* ReadImage.swift in Sources */,
 				OBJ_218 /* WriteImage.swift in Sources */,
@@ -1128,7 +1121,6 @@
 				OBJ_284 /* PixelTypeConversionTests.swift in Sources */,
 				OBJ_285 /* PixelwiseConversionTests.swift in Sources */,
 				OBJ_286 /* ImageTests.swift in Sources */,
-				OBJ_287 /* SequenceTests.swift in Sources */,
 				OBJ_288 /* ImageIOTests.swift in Sources */,
 				OBJ_289 /* BicubicInterpolationTests.swift in Sources */,
 				OBJ_290 /* BilinearInterpolationTests.swift in Sources */,
