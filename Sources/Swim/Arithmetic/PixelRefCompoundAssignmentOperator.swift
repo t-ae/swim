@@ -1,3 +1,5 @@
+import Foundation
+
 extension MutablePixelRef where T: AdditiveArithmetic {
     @inlinable
     static func addAssign<P2: PixelProtocol>(lhs: MutablePixelRef, rhs: P2) where P2.P == P, P2.T == T {
@@ -121,6 +123,16 @@ extension MutablePixelRef where T: Numeric {
                 lp += 1
                 rp += 1
             }
+        }
+    }
+    
+    @inlinable
+    func assign<P2: PixelProtocol>(pixel: P2) where P2.P == P, P2.T == T {
+        let lp = self.pointer.baseAddress!
+        pixel.withUnsafeBufferPointer { rbp in
+            assert(self.pointer.count == rbp.count)
+            let rp = rbp.baseAddress!
+            memcpy(lp, rp, MemoryLayout<T>.size*self.pointer.count)
         }
     }
 }
