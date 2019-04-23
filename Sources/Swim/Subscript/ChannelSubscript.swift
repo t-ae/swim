@@ -39,7 +39,7 @@ extension Image {
     }
 }
 
-#if canImport(Accelerate)
+#if canImport(Accelerate) && !DISABLE_ACCELERATE
 
 import Accelerate
 

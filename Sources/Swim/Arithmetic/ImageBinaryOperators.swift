@@ -42,7 +42,7 @@ extension Image where T: FloatingPoint {
 }
 
 // MARK: - Accelerate
-#if canImport(Accelerate)
+#if canImport(Accelerate) && !DISABLE_ACCELERATE
 
 extension Image where T == Float {
     @inlinable

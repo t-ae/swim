@@ -24,7 +24,7 @@ extension Image where T: SignedNumeric {
 }
 
 // MARK: - Accelerate
-#if canImport(Accelerate)
+#if canImport(Accelerate) && !DISABLE_ACCELERATE
 
 import Accelerate
 

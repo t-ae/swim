@@ -13,7 +13,7 @@ func dotProduct<T: Numeric>(_ a: [T], _ b: [T]) -> T {
     return result
 }
 
-#if canImport(Accelerate)
+#if canImport(Accelerate) && !DISABLE_ACCELERATE
 
 import Accelerate
 

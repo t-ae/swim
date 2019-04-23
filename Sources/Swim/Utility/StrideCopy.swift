@@ -15,7 +15,7 @@ func strideCopy<T>(src: [T], srcOffset: Int, srcStride: Int,
     }
 }
 
-#if canImport(Accelerate)
+#if canImport(Accelerate) && !DISABLE_ACCELERATE
 
 import Accelerate
 

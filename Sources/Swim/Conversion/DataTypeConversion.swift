@@ -43,7 +43,7 @@ extension Image where T == UInt8 {
 
 // MARK: - Accelerate
 
-#if canImport(Accelerate)
+#if canImport(Accelerate) && !DISABLE_ACCELERATE
 
 import Accelerate
 

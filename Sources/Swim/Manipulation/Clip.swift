@@ -13,7 +13,7 @@ extension Image where T: Comparable {
 }
 
 // MARK: - Accelerate
-#if canImport(Accelerate)
+#if canImport(Accelerate) && !DISABLE_ACCELERATE
 
 import Accelerate
 

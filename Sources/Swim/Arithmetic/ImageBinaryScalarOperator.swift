@@ -122,7 +122,7 @@ extension Image where T: FloatingPoint {
 }
 
 // MARK: - Accelerate
-#if canImport(Accelerate)
+#if canImport(Accelerate) && !DISABLE_ACCELERATE
 
 import Accelerate
 

@@ -29,7 +29,7 @@ func matmul<T: Numeric>(lhs: [T], rhs: [T], m: Int, n: Int, p: Int) -> [T] {
     return ret
 }
 
-#if canImport(Accelerate)
+#if canImport(Accelerate) && !DISABLE_ACCELERATE
 
 import Accelerate
 

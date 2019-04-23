@@ -38,7 +38,7 @@ extension Image where T: FloatingPoint {
     }
 }
 
-#if canImport(Accelerate)
+#if canImport(Accelerate) && !DISABLE_ACCELERATE
 
 import Accelerate
 

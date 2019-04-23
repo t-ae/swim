@@ -4,20 +4,20 @@ class BasicPerformanceTests: XCTestCase {
 
 }
 
-#if canImport(Accelerate)
+#if canImport(Accelerate) && !DISABLE_ACCELERATE
 
 import Accelerate
 
 extension BasicPerformanceTests {
-    func testAddPixel() {
+    func testMultiplyImage() {
+        var rgba = [Double](repeating: 1, count: 4000000)
+        let scalar: Double = 0.99
         measure {
-            var rgba = [Double](repeating: 0, count: 4)
-            let scalar: Double = 1
-            for _ in 0..<100000 {
+            for _ in 0..<10 {
                 rgba.withUnsafeMutableBufferPointer {
                     var p = $0.baseAddress!
                     for _ in 0..<$0.count {
-                        p.pointee += scalar
+                        p.pointee *= scalar
                         p += 1
                     }
                 }
@@ -25,25 +25,54 @@ extension BasicPerformanceTests {
         }
     }
     
-    func testAddPixel_accelerate() {
+    func testMultiplyImage_accelerate() {
+        var rgba = [Double](repeating: 1, count: 4000000)
+        var scalar: Double = 0.99
         measure {
-            for _ in 0..<100000 {
-                var rgba = [Double](repeating: 0, count: 4)
-                var scalar: Double = 1
+            for _ in 0..<10 {
                 rgba.withUnsafeMutableBufferPointer {
                     let p = $0.baseAddress!
-                    vDSP_vsaddD(p, 1, &scalar, p, 1, vDSP_Length($0.count))
+                    vDSP_vsmulD(p, 1, &scalar, p, 1, vDSP_Length($0.count))
+                }
+            }
+        }
+    }
+    
+    func testMultiplyPixel() {
+        var rgba = [Double](repeating: 1, count: 4)
+        let scalar: Double = 0.99
+        measure {
+            for _ in 0..<300000 {
+                rgba.withUnsafeMutableBufferPointer {
+                    var p = $0.baseAddress!
+                    for _ in 0..<$0.count {
+                        p.pointee *= scalar
+                        p += 1
+                    }
+                }
+            }
+        }
+    }
+    
+    func testMultiplyPixel_accelerate() {
+        var rgba = [Double](repeating: 1, count: 4)
+        var scalar: Double = 0.99
+        measure {
+            for _ in 0..<300000 {
+                rgba.withUnsafeMutableBufferPointer {
+                    let p = $0.baseAddress!
+                    vDSP_vsmulD(p, 1, &scalar, p, 1, vDSP_Length($0.count))
                 }
             }
         }
     }
     
     func testInterleave() {
-        let cnt = 1000000
+        let cnt = 10000000
         let x = [Double](repeating: 0, count: cnt)
         let y = [Double](repeating: 1, count: cnt)
+        var result = [Double](repeating: 0, count: 2*cnt)
         measure {
-            var result = [Double](repeating: 0, count: 2*cnt)
             x.withUnsafeBufferPointer {
                 var xp = $0.baseAddress!
                 y.withUnsafeBufferPointer {
@@ -66,11 +95,11 @@ extension BasicPerformanceTests {
     }
     
     func testInterleave_accelerate() {
-        let cnt = 1000000
+        let cnt = 10000000
         let x = [Double](repeating: 0, count: cnt)
         let y = [Double](repeating: 1, count: cnt)
+        var result = [Double](repeating: 0, count: 2*cnt)
         measure {
-            var result = [Double](repeating: 0, count: 2*cnt)
             result.withUnsafeMutableBufferPointer {
                 var p = $0.baseAddress!
                 x.withUnsafeBufferPointer {

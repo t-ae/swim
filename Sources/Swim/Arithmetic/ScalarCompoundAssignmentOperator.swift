@@ -86,7 +86,7 @@ extension MutableDataContainer where T: FloatingPoint {
     }
 }
 
-#if canImport(Accelerate)
+#if canImport(Accelerate) && !DISABLE_ACCELERATE
 
 // For Image only.
 // Pixel only has up to 4 elements. So overhead will be overwhelming.

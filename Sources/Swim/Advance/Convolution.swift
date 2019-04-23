@@ -76,7 +76,7 @@ extension Image where T: Numeric {
 }
 
 
-#if canImport(Accelerate)
+#if canImport(Accelerate) && !DISABLE_ACCELERATE
 
 extension Image where T == Float {
     @inlinable
