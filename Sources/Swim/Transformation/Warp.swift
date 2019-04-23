@@ -36,7 +36,7 @@ extension Image where T: BinaryFloatingPoint {
         
         var dest = Image<P, T>(width: outputSize.width,
                                height: outputSize.height,
-                               value: T.swimDefaultValue)
+                               value: 0)
 
         let inv = try transformation.inverted()
 
