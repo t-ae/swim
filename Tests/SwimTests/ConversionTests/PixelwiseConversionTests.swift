@@ -29,12 +29,12 @@ class PixelwiseConversion: XCTestCase {
             let data = (0..<24).map { UInt8($0) }
             let image = Image(width: 2, height: 3, rgba: data)
 
-            let red = image.pixelwiseConverted { (px: Pixel<RGBA, UInt8>) in
+            let red = image.pixelwiseConverted { px in
                 Pixel(intensity: px[.red])
             }
             XCTAssertEqual(red, Image(width: 2, height: 3, data: [0, 4, 8, 12, 16, 20]))
             
-            let redDouble = image.pixelwiseConverted { (px: Pixel<RGBA, UInt8>) in
+            let redDouble = image.pixelwiseConverted { px in
                 Pixel(intensity: Double(px[.red]))
             }
             XCTAssertEqual(redDouble, Image(width: 2, height: 3, data: [0, 4, 8, 12, 16, 20]))

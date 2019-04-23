@@ -22,22 +22,24 @@ extension Image {
 // MARK: - Different type conversion
 extension Image {
     @inlinable
-    public func pixelwiseConverted<P2, T2>(_ f: (Pixel<P, T>)->Pixel<P2, T2>) -> Image<P2, T2> {
+    public func pixelwiseConverted<P2, T2>(_ f: (PixelRef<P, T>)->Pixel<P2, T2>) -> Image<P2, T2> {
         var newImage = Image<P2, T2>(width: width, height: height)
-        data.withUnsafeBufferPointer {
-            var src = $0.baseAddress!
-            
+        data.withUnsafeBufferPointer { src in
             newImage.data.withUnsafeMutableBufferPointer {
                 var dst = $0.baseAddress!
-                var px = Pixel<P, T>()
                 
-                for _ in 0..<width*height {
-                    memcpy(&px.data, src, P.channels*MemoryLayout<T>.size)
-                    let out = f(px)
-                    memcpy(dst, out.data, P2.channels*MemoryLayout<T2>.size)
-                    
-                    src += P.channels
-                    dst += P2.channels
+                var start = 0
+                for y in 0..<height {
+                    for x in 0..<width {
+                        let bp = UnsafeBufferPointer(rebasing: src[start..<start+P.channels])
+                        let ref = PixelRef<P, T>(_x: x, _y: y, pointer: bp)
+                        
+                        let out = f(ref)
+                        memcpy(dst, out.data, P2.channels*MemoryLayout<T2>.size)
+                        
+                        start += P.channels
+                        dst += P2.channels
+                    }
                 }
             }
         }
