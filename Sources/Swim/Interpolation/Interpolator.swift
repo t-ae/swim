@@ -1,10 +1,11 @@
 import Foundation
 
 public protocol Interpolator {
+    associatedtype P: PixelType
     associatedtype T: BinaryFloatingPoint & DataType
     
-    var edgeMode: EdgeMode<T> { get set }
-    @inlinable func interpolate<P>(x: T, y: T, in image: Image<P, T>) -> Pixel<P, T>
+    var edgeMode: EdgeMode<P, T> { get set }
+    @inlinable func interpolate(x: T, y: T, in image: Image<P, T>) -> Pixel<P, T>
 }
 
 extension Interpolator {
@@ -64,13 +65,13 @@ extension Interpolator {
     }
     
     @inlinable
-    func getPixel<P>(x: Int, y: Int, in image: Image<P, T>) -> Pixel<P, T> {
+    func getPixel(x: Int, y: Int, in image: Image<P, T>) -> Pixel<P, T> {
         if let (x, y) = inImageCoord(x: x, y: y, width: image.width, height: image.height) {
             return image[unsafe: x, y]
         } else {
             switch edgeMode {
-            case let .constant(value):
-                return Pixel(value: value)
+            case let .constant(pixel):
+                return pixel
             default:
                 preconditionFailure("Never happens")
             }
@@ -78,10 +79,14 @@ extension Interpolator {
     }
 }
 
-public enum EdgeMode<T: BinaryFloatingPoint> {
-    case constant(T)
+public enum EdgeMode<P: PixelType, T: BinaryFloatingPoint&DataType> {
+    case constant(pixel: Pixel<P, T>)
     case edge
     case symmetric
     case reflect
     case wrap
+    
+    public static func constant(value: T) -> EdgeMode<P, T> {
+        return .constant(pixel: Pixel(value: value))
+    }
 }

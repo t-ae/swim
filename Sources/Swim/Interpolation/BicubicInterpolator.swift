@@ -1,10 +1,10 @@
 import Foundation
 
-public struct BicubicInterpolator<T: BinaryFloatingPoint&DataType>: Interpolator {
+public struct BicubicInterpolator<P: PixelType, T: BinaryFloatingPoint&DataType>: Interpolator {
     public var a: T
-    public var edgeMode: EdgeMode<T>
+    public var edgeMode: EdgeMode<P, T>
     
-    public init(a: T = -1, edgeMode: EdgeMode<T> = .constant(0)) {
+    public init(a: T = -1, edgeMode: EdgeMode<P, T> = .constant(value: 0)) {
         self.a = a
         self.edgeMode = edgeMode
     }
@@ -30,16 +30,16 @@ public struct BicubicInterpolator<T: BinaryFloatingPoint&DataType>: Interpolator
     }
     
     @inlinable
-    public func interpolate<P>(x: T, y: T, in image: Image<P, T>) -> Pixel<P, T> {
+    public func interpolate(x: T, y: T, in image: Image<P, T>) -> Pixel<P, T> {
         let xmin = floor(x) - 1
         let ymin = floor(y) - 1
         
         var result = Pixel<P, T>(value: 0)
         
-        var constant: T?
+        var constant: Pixel<P, T>?
         switch edgeMode {
-        case let .constant(value):
-            constant = value
+        case let .constant(px):
+            constant = px
         default:
             constant = nil
         }
@@ -258,11 +258,11 @@ public struct BicubicInterpolator<T: BinaryFloatingPoint&DataType>: Interpolator
 }
 
 /// Slower but simpler version
-public struct _BicubicInterpolator<T: BinaryFloatingPoint&DataType>: Interpolator {
+public struct _BicubicInterpolator<P: PixelType, T: BinaryFloatingPoint&DataType>: Interpolator {
     public var a: T
-    public var edgeMode: EdgeMode<T>
+    public var edgeMode: EdgeMode<P, T>
     
-    public init(a: T = -1, edgeMode: EdgeMode<T> = .constant(0)) {
+    public init(a: T = -1, edgeMode: EdgeMode<P, T> = .constant(value: 0)) {
         self.a = a
         self.edgeMode = edgeMode
     }
@@ -288,7 +288,7 @@ public struct _BicubicInterpolator<T: BinaryFloatingPoint&DataType>: Interpolato
     }
     
     @inlinable
-    public func interpolate<P>(x: T, y: T, in image: Image<P, T>) -> Pixel<P, T> {
+    public func interpolate(x: T, y: T, in image: Image<P, T>) -> Pixel<P, T> {
         let xmin = floor(x) - 1
         let ymin = floor(y) - 1
         

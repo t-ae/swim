@@ -1,14 +1,14 @@
 import Foundation
 
-public struct BilinearInterpolator<T: BinaryFloatingPoint&DataType>: Interpolator {
-    public var edgeMode: EdgeMode<T>
+public struct BilinearInterpolator<P:PixelType, T: BinaryFloatingPoint&DataType>: Interpolator {
+    public var edgeMode: EdgeMode<P, T>
     
-    public init(edgeMode: EdgeMode<T> = .constant(0)) {
+    public init(edgeMode: EdgeMode<P, T> = .constant(value: 0)) {
         self.edgeMode = edgeMode
     }
     
     @inlinable
-    public func interpolate<P>(x: T, y: T, in image: Image<P, T>) -> Pixel<P, T> {
+    public func interpolate(x: T, y: T, in image: Image<P, T>) -> Pixel<P, T> {
         let x0 = floor(x)
         let x1 = x0 + 1
         let y0 = floor(y)
@@ -21,7 +21,7 @@ public struct BilinearInterpolator<T: BinaryFloatingPoint&DataType>: Interpolato
         
         var result = Pixel<P, T>(value: 0)
         
-        var constant: T?
+        var constant: Pixel<P, T>?
         switch edgeMode {
         case let .constant(value):
             constant = value
@@ -74,15 +74,15 @@ public struct BilinearInterpolator<T: BinaryFloatingPoint&DataType>: Interpolato
 }
 
 /// Slower but simpler version
-public struct _BilinearInterpolator<T: BinaryFloatingPoint&DataType>: Interpolator {
-    public var edgeMode: EdgeMode<T>
+public struct _BilinearInterpolator<P: PixelType, T: BinaryFloatingPoint&DataType>: Interpolator {
+    public var edgeMode: EdgeMode<P, T>
     
-    public init(edgeMode: EdgeMode<T> = .constant(0)) {
+    public init(edgeMode: EdgeMode<P, T> = .constant(value: 0)) {
         self.edgeMode = edgeMode
     }
     
     @inlinable
-    public func interpolate<P>(x: T, y: T, in image: Image<P, T>) -> Pixel<P, T> {
+    public func interpolate(x: T, y: T, in image: Image<P, T>) -> Pixel<P, T> {
         let x0 = floor(x)
         let x1 = x0 + 1
         let y0 = floor(y)
