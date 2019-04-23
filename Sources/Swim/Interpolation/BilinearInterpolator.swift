@@ -19,7 +19,7 @@ public struct BilinearInterpolator<P:PixelType, T: BinaryFloatingPoint&DataType>
         let y0y = y - y0
         let yy1 = y1 - y
         
-        var result = Pixel<P, T>(value: 0)
+        var result = Pixel<P, T>.zero
         
         var constant: Pixel<P, T>?
         switch edgeMode {

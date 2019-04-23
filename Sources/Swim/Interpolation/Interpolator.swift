@@ -68,13 +68,10 @@ extension Interpolator {
     func getPixel(x: Int, y: Int, in image: Image<P, T>) -> Pixel<P, T> {
         if let (x, y) = inImageCoord(x: x, y: y, width: image.width, height: image.height) {
             return image[unsafe: x, y]
+        } else if case let .constant(pixel) = edgeMode {
+            return pixel
         } else {
-            switch edgeMode {
-            case let .constant(pixel):
-                return pixel
-            default:
-                preconditionFailure("Never happens")
-            }
+            preconditionFailure("Never happens")
         }
     }
 }

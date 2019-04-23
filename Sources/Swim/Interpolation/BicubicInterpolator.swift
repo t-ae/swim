@@ -34,7 +34,7 @@ public struct BicubicInterpolator<P: PixelType, T: BinaryFloatingPoint&DataType>
         let xmin = floor(x) - 1
         let ymin = floor(y) - 1
         
-        var result = Pixel<P, T>(value: 0)
+        var result = Pixel<P, T>.zero
         
         var constant: Pixel<P, T>?
         switch edgeMode {
