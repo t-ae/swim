@@ -1,27 +1,23 @@
 // MARK: - PixelRef
 public struct PixelRef<P: PixelType, T: DataType> {
+    public let x: Int
+    public let y: Int
+    
     @usableFromInline
-    var _x: Int
-    @usableFromInline
-    var _y: Int
-    @usableFromInline
-    var pointer: UnsafeBufferPointer<T>
+    let pointer: UnsafeBufferPointer<T>
     
     @inlinable
-    init(_x: Int, _y: Int, pointer: UnsafeBufferPointer<T>) {
+    init(x: Int, y: Int, pointer: UnsafeBufferPointer<T>) {
         assert(pointer.count == P.channels)
-        self._x = _x
-        self._y = _y
+        self.x = x
+        self.y = y
         self.pointer = pointer
     }
     
     @inlinable
-    init(_x: Int, _y: Int, rebasing slice: Slice<UnsafeBufferPointer<T>>) {
-        self.init(_x: _x, _y: _y, pointer: UnsafeBufferPointer(rebasing: slice))
+    init(x: Int, y: Int, rebasing slice: Slice<UnsafeBufferPointer<T>>) {
+        self.init(x: x, y: y, pointer: UnsafeBufferPointer(rebasing: slice))
     }
-    
-    public var x: Int { return _x }
-    public var y: Int { return _y }
 }
 
 extension PixelRef {
@@ -43,28 +39,24 @@ extension PixelRef {
 
 // MARK: - MutablePixelRef
 public struct MutablePixelRef<P: PixelType, T: DataType> {
-    @usableFromInline
-    var _x: Int
-    @usableFromInline
-    var _y: Int
+    public let x: Int
+    public let y: Int
+    
     @usableFromInline
     var pointer: UnsafeMutableBufferPointer<T>
     
     @inlinable
-    init(_x: Int, _y: Int, pointer: UnsafeMutableBufferPointer<T>) {
+    init(x: Int, y: Int, pointer: UnsafeMutableBufferPointer<T>) {
         assert(pointer.count == P.channels)
-        self._x = _x
-        self._y = _y
+        self.x = x
+        self.y = y
         self.pointer = pointer
     }
     
     @inlinable
-    init(_x: Int, _y: Int, rebasing slice: Slice<UnsafeMutableBufferPointer<T>>) {
-        self.init(_x: _x, _y: _y, pointer: UnsafeMutableBufferPointer(rebasing: slice))
+    init(x: Int, y: Int, rebasing slice: Slice<UnsafeMutableBufferPointer<T>>) {
+        self.init(x: x, y: y, pointer: UnsafeMutableBufferPointer(rebasing: slice))
     }
-    
-    public var x: Int { return _x }
-    public var y: Int { return _y }
 }
 
 extension MutablePixelRef {
@@ -98,7 +90,7 @@ extension Image {
         return data.withUnsafeBufferPointer {
             let start = (y*width + x) * P.channels
             let bp = UnsafeBufferPointer(rebasing: $0[start..<start+P.channels])
-            let ref = PixelRef<P, T>(_x: x, _y: y, pointer: bp)
+            let ref = PixelRef<P, T>(x: x, y: y, pointer: bp)
             return body(ref)
         }
     }
@@ -109,7 +101,7 @@ extension Image {
         return data.withUnsafeMutableBufferPointer {
             let start = (y*width + x) * P.channels
             let bp = UnsafeMutableBufferPointer(rebasing: $0[start..<start+P.channels])
-            let ref = MutablePixelRef<P, T>(_x: x, _y: y, pointer: bp)
+            let ref = MutablePixelRef<P, T>(x: x, y: y, pointer: bp)
             return body(ref)
         }
     }

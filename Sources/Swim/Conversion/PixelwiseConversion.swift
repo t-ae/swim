@@ -9,7 +9,7 @@ extension Image {
             var start = 0
             for y in 0..<height {
                 for x in 0..<width {
-                    let pixel = MutablePixelRef<P, T>(_x: x, _y: y, rebasing: $0[start..<start+P.channels])
+                    let pixel = MutablePixelRef<P, T>(x: x, y: y, rebasing: $0[start..<start+P.channels])
                     f(pixel)
                     start += P.channels
                 }
@@ -30,7 +30,7 @@ extension Image {
                 var start = 0
                 for y in 0..<height {
                     for x in 0..<width {
-                        let ref = PixelRef<P, T>(_x: x, _y: y, rebasing: src[start..<start+P.channels])
+                        let ref = PixelRef<P, T>(x: x, y: y, rebasing: src[start..<start+P.channels])
                         
                         let out = f(ref)
                         memcpy(dst, out.data, P2.channels*MemoryLayout<T2>.size)

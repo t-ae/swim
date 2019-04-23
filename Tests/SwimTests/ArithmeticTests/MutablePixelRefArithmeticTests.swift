@@ -7,7 +7,7 @@ class MutablePixelRefArithmeticTests: XCTestCase {
         var answer = image
         
         image.withUnsafeMutableBufferPointer { bp in
-            let ref = MutablePixelRef<RGBA, UInt8>(_x: 0, _y: 0, pointer: UnsafeMutableBufferPointer(rebasing: bp[0..<4]))
+            let ref = MutablePixelRef<RGBA, UInt8>(x: 0, y: 0, pointer: UnsafeMutableBufferPointer(rebasing: bp[0..<4]))
             ref += 1
         }
         
