@@ -26,20 +26,7 @@ class PerformanceTests: XCTestCase {
         
         measure {
             image.pixelwiseConvert { px in
-                px + 1
-            }
-        }
-    }
-    
-    func testUnsafeConvert() {
-        let data = [UInt8](repeating: 0, count: 1920*1080*4)
-        var image = Image(width: 1920, height: 1080, rgba: data)
-        
-        measure {
-            _ = image.unsafePixelwiseConvert { bp in
-                for i in 0..<bp.count {
-                    bp[i] += 1
-                }
+                px += 1
             }
         }
     }
@@ -49,8 +36,8 @@ class PerformanceTests: XCTestCase {
         let image = Image(width: 1920, height: 1080, rgba: data)
         
         measure {
-            _ = image.pixelwiseConverted { px in
-                px + 1
+            _ = image.pixelwiseConverted { src in
+                src + 1
             }
         }
     }

@@ -81,6 +81,14 @@ extension Pixel where P == Intensity {
 //    }
 //}
 
+// MARK: Intensity
+extension Pixel where P == Intensity {
+    @inlinable
+    public init(intensity: T) {
+        self.init(data: [intensity])
+    }
+}
+
 // MARK: IntensityAlpha
 extension Pixel where P == IntensityAlpha {
     @inlinable

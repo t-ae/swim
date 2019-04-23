@@ -33,6 +33,9 @@
 		A732AC26226EB5D600B2256E /* PixelUnaryOperator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A732AC24226EB5D100B2256E /* PixelUnaryOperator.swift */; };
 		A732AC28226EB6A200B2256E /* BasicPerformanceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A732AC27226EB6A200B2256E /* BasicPerformanceTests.swift */; };
 		A732AC2B226EBAC100B2256E /* ImageCompoundAssignmentOperator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A732AC29226EBA9900B2256E /* ImageCompoundAssignmentOperator.swift */; };
+		A732AC2E226EC6D000B2256E /* PixelRefCompoundAssignmentOperator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A732AC2C226EC6BB00B2256E /* PixelRefCompoundAssignmentOperator.swift */; };
+		A732AE99226ECF4000B2256E /* MutablePixelRefArithmeticTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A732AE96226ECF3300B2256E /* MutablePixelRefArithmeticTests.swift */; };
+		A732AE9B226ED0AE00B2256E /* PixelRefScalarCompoundAssignmentOperator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A732AE9A226ED0AE00B2256E /* PixelRefScalarCompoundAssignmentOperator.swift */; };
 		OBJ_167 /* image_io.c in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_9 /* image_io.c */; };
 		OBJ_169 /* stb_image_write.h in Headers */ = {isa = PBXBuildFile; fileRef = OBJ_11 /* stb_image_write.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		OBJ_170 /* stb_image.h in Headers */ = {isa = PBXBuildFile; fileRef = OBJ_12 /* stb_image.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -237,6 +240,9 @@
 		A732AC24226EB5D100B2256E /* PixelUnaryOperator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PixelUnaryOperator.swift; sourceTree = "<group>"; };
 		A732AC27226EB6A200B2256E /* BasicPerformanceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicPerformanceTests.swift; sourceTree = "<group>"; };
 		A732AC29226EBA9900B2256E /* ImageCompoundAssignmentOperator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCompoundAssignmentOperator.swift; sourceTree = "<group>"; };
+		A732AC2C226EC6BB00B2256E /* PixelRefCompoundAssignmentOperator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PixelRefCompoundAssignmentOperator.swift; sourceTree = "<group>"; };
+		A732AE96226ECF3300B2256E /* MutablePixelRefArithmeticTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MutablePixelRefArithmeticTests.swift; sourceTree = "<group>"; };
+		A732AE9A226ED0AE00B2256E /* PixelRefScalarCompoundAssignmentOperator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PixelRefScalarCompoundAssignmentOperator.swift; sourceTree = "<group>"; };
 		OBJ_100 /* Im2colTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Im2colTests.swift; sourceTree = "<group>"; };
 		OBJ_101 /* IntegralImageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntegralImageTests.swift; sourceTree = "<group>"; };
 		OBJ_103 /* ImageArithmeticTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageArithmeticTests.swift; sourceTree = "<group>"; };
@@ -418,6 +424,7 @@
 			isa = PBXGroup;
 			children = (
 				OBJ_103 /* ImageArithmeticTests.swift */,
+				A732AE96226ECF3300B2256E /* MutablePixelRefArithmeticTests.swift */,
 			);
 			path = ArithmeticTests;
 			sourceTree = "<group>";
@@ -606,6 +613,8 @@
 				OBJ_25 /* ImageUnaryOperators.swift */,
 				A732AC1F226EAAE800B2256E /* PixelBinaryScalarOperator.swift */,
 				A732AC1C226EA60200B2256E /* PixelCompoundAssignmentOperator.swift */,
+				A732AC2C226EC6BB00B2256E /* PixelRefCompoundAssignmentOperator.swift */,
+				A732AE9A226ED0AE00B2256E /* PixelRefScalarCompoundAssignmentOperator.swift */,
 				A732AC24226EB5D100B2256E /* PixelUnaryOperator.swift */,
 				A732AC19226EA2E100B2256E /* ScalarCompoundAssignmentOperator.swift */,
 			);
@@ -1079,6 +1088,7 @@
 				OBJ_240 /* Resize.swift in Sources */,
 				OBJ_241 /* Rotate.swift in Sources */,
 				OBJ_242 /* Warp.swift in Sources */,
+				A732AE9B226ED0AE00B2256E /* PixelRefScalarCompoundAssignmentOperator.swift in Sources */,
 				OBJ_243 /* ArrayExt.swift in Sources */,
 				OBJ_244 /* Clamp.swift in Sources */,
 				OBJ_245 /* DotProduct.swift in Sources */,
@@ -1088,6 +1098,7 @@
 				A732AC26226EB5D600B2256E /* PixelUnaryOperator.swift in Sources */,
 				OBJ_249 /* Run.swift in Sources */,
 				OBJ_250 /* StrideCopy.swift in Sources */,
+				A732AC2E226EC6D000B2256E /* PixelRefCompoundAssignmentOperator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1122,6 +1133,7 @@
 				OBJ_289 /* BicubicInterpolationTests.swift in Sources */,
 				OBJ_290 /* BilinearInterpolationTests.swift in Sources */,
 				OBJ_291 /* NearestNeighborInterpolatorTests.swift in Sources */,
+				A732AE99226ECF4000B2256E /* MutablePixelRefArithmeticTests.swift in Sources */,
 				OBJ_292 /* ClipTests.swift in Sources */,
 				OBJ_293 /* ConcatenateTests.swift in Sources */,
 				OBJ_294 /* FloatingPointTests.swift in Sources */,

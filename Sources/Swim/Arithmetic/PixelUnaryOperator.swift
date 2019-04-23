@@ -1,9 +1,7 @@
 extension PixelProtocol where T: SignedNumeric {
     @inlinable
     static func negate(arg: Self) -> Pixel<P, T> {
-        var ret = Pixel<P, T>.zero
-        ret -= arg
-        return ret
+        return 0 - arg
     }
     
     @inlinable
