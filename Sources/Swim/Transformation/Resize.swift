@@ -8,7 +8,6 @@ extension Image where T: BinaryFloatingPoint {
     /// Resize image with Area average method.
     @inlinable
     public func resizeAA(width: Int, height: Int) -> Image<P, T> {
-        
         let xScaleImage: Image<P, T>
         if width != self.width {
             let baseImage = self

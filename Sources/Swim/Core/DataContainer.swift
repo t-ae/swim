@@ -1,18 +1,25 @@
 import Foundation
 
 public protocol DataContainer {
-    associatedtype PT: PixelType
-    associatedtype DT: DataType
+    associatedtype P: PixelType
+    associatedtype T: DataType
     
-    var data: [DT] { get set }
+    var data: [T] { get set }
 }
 
 extension Image: DataContainer {
-    public typealias PT = P
-    public typealias DT = T
 }
 
 extension Pixel: DataContainer {
-    public typealias PT = P
-    public typealias DT = T
+}
+
+public protocol MutableDataContainer {
+    associatedtype T
+    mutating func withUnsafeMutableBufferPointer<R>(_ body: (UnsafeMutableBufferPointer<T>)->R) -> R
+}
+
+extension Image: MutableDataContainer {
+    public mutating func withUnsafeMutableBufferPointer<R>(_ body: (UnsafeMutableBufferPointer<T>) -> R) -> R {
+        return data.withUnsafeMutableBufferPointer { bp in body (bp) }
+    }
 }

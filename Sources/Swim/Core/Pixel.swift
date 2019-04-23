@@ -11,13 +11,19 @@ public struct Pixel<P: PixelType, T: DataType> {
     }
     
     @inlinable
-    init() {
-        self.init(data: [T](repeating: T.swimDefaultValue, count: P.channels))
+    public init(value: T) {
+        self.init(data: [T](repeating: value, count: P.channels))
     }
     
     @inlinable
-    public init(value: T) {
-        self.init(data: [T](repeating: value, count: P.channels))
+    init() {
+        self.init(value: T.swimDefaultValue)
+    }
+}
+
+extension Pixel where T: AdditiveArithmetic {
+    public static var zero: Pixel {
+        return Pixel<P, T>(value: .zero)
     }
 }
 

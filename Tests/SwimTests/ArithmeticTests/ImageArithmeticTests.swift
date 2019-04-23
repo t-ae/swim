@@ -1,7 +1,7 @@
 import XCTest
 import Swim
 
-class ArithmeticTests: XCTestCase {
+class ImageArithmeticTests: XCTestCase {
     
     func testNegate() {
         do {

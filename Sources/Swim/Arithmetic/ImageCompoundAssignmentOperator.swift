@@ -1,6 +1,6 @@
-extension DataContainer where DT: Numeric {
+extension Image where T: AdditiveArithmetic {
     @inlinable
-    static func addAssign(lhs: inout Self, rhs: Self) {
+    static func addAssign(lhs: inout Image, rhs: Image) {
         precondition(lhs.data.count == rhs.data.count, "Size mismatch.")
         lhs.data.withUnsafeMutableBufferPointer {
             var lp = $0.baseAddress!
@@ -16,7 +16,7 @@ extension DataContainer where DT: Numeric {
     }
     
     @inlinable
-    static func subtractAssign(lhs: inout Self, rhs: Self) {
+    static func subtractAssign(lhs: inout Image, rhs: Image) {
         precondition(lhs.data.count == rhs.data.count, "Size mismatch.")
         lhs.data.withUnsafeMutableBufferPointer {
             var lp = $0.baseAddress!
@@ -32,7 +32,20 @@ extension DataContainer where DT: Numeric {
     }
     
     @inlinable
-    static func multiplyAssign(lhs: inout Self, rhs: Self) {
+    public static func +=(lhs: inout Image, rhs: Image) {
+        addAssign(lhs: &lhs, rhs: rhs)
+    }
+    
+    
+    @inlinable
+    public static func -=(lhs: inout Image, rhs: Image) {
+        subtractAssign(lhs: &lhs, rhs: rhs)
+    }
+}
+
+extension Image where T: Numeric {
+    @inlinable
+    static func multiplyAssign(lhs: inout Image, rhs: Image) {
         precondition(lhs.data.count == rhs.data.count, "Size mismatch.")
         lhs.data.withUnsafeMutableBufferPointer {
             var lp = $0.baseAddress!
@@ -48,45 +61,14 @@ extension DataContainer where DT: Numeric {
     }
     
     @inlinable
-    public static func +(lhs: Self, rhs: Self) -> Self {
-        var ret = lhs
-        ret += rhs
-        return ret
-    }
-    
-    @inlinable
-    public static func +=(lhs: inout Self, rhs: Self) {
-        addAssign(lhs: &lhs, rhs: rhs)
-    }
-    
-    @inlinable
-    public static func -(lhs: Self, rhs: Self) -> Self {
-        var ret = lhs
-        ret -= rhs
-        return ret
-    }
-    
-    @inlinable
-    public static func -=(lhs: inout Self, rhs: Self) {
-        subtractAssign(lhs: &lhs, rhs: rhs)
-    }
-    
-    @inlinable
-    public static func *(lhs: Self, rhs: Self) -> Self {
-        var ret = lhs
-        ret *= rhs
-        return ret
-    }
-    
-    @inlinable
-    public static func *=(lhs: inout Self, rhs: Self) {
+    public static func *=(lhs: inout Image, rhs: Image) {
         multiplyAssign(lhs: &lhs, rhs: rhs)
     }
 }
 
-extension DataContainer where DT: BinaryInteger {
+extension Image where T: BinaryInteger {
     @inlinable
-    static func divideAssign(lhs: inout Self, rhs: Self) {
+    static func divideAssign(lhs: inout Image<P, T>, rhs: Image<P, T>) {
         precondition(lhs.data.count == rhs.data.count, "Size mismatch.")
         lhs.data.withUnsafeMutableBufferPointer {
             var lp = $0.baseAddress!
@@ -102,21 +84,14 @@ extension DataContainer where DT: BinaryInteger {
     }
     
     @inlinable
-    public static func /(lhs: Self, rhs: Self) -> Self {
-        var ret = lhs
-        ret /= rhs
-        return ret
-    }
-    
-    @inlinable
-    public static func /=(lhs: inout Self, rhs: Self) {
+    public static func /=(lhs: inout Image<P, T>, rhs: Image<P, T>) {
         divideAssign(lhs: &lhs, rhs: rhs)
     }
 }
 
-extension DataContainer where DT: FloatingPoint {
+extension Image where T: FloatingPoint {
     @inlinable
-    static func divideAssign(lhs: inout Self, rhs: Self) {
+    static func divideAssign(lhs: inout Image, rhs: Image) {
         precondition(lhs.data.count == rhs.data.count, "Size mismatch.")
         lhs.data.withUnsafeMutableBufferPointer {
             var lp = $0.baseAddress!
@@ -132,26 +107,18 @@ extension DataContainer where DT: FloatingPoint {
     }
     
     @inlinable
-    public static func /(lhs: Self, rhs: Self) -> Self {
-        var ret = lhs
-        ret /= rhs
-        return ret
-    }
-    
-    @inlinable
-    public static func /=(lhs: inout Self, rhs: Self) {
+    public static func /=(lhs: inout Image, rhs: Image) {
         divideAssign(lhs: &lhs, rhs: rhs)
     }
 }
 
-// MARK: - Accelerate
 #if canImport(Accelerate)
 
 import Accelerate
 
-extension DataContainer where DT == Float {
+extension Image where T == Float {
     @inlinable
-    static func addAssign(lhs: inout Self, rhs: Self) {
+    static func addAssign(lhs: inout Image, rhs: Image) {
         precondition(lhs.data.count == rhs.data.count, "Size mismatch.")
         lhs.data.withUnsafeMutableBufferPointer {
             let lp = $0.baseAddress!
@@ -163,7 +130,7 @@ extension DataContainer where DT == Float {
     }
     
     @inlinable
-    static func subtractAssign(lhs: inout Self, rhs: Self) {
+    static func subtractAssign(lhs: inout Image, rhs: Image) {
         precondition(lhs.data.count == rhs.data.count, "Size mismatch.")
         lhs.data.withUnsafeMutableBufferPointer {
             let lp = $0.baseAddress!
@@ -175,7 +142,7 @@ extension DataContainer where DT == Float {
     }
     
     @inlinable
-    static func multiplyAssign(lhs: inout Self, rhs: Self) {
+    static func multiplyAssign(lhs: inout Image, rhs: Image) {
         precondition(lhs.data.count == rhs.data.count, "Size mismatch.")
         lhs.data.withUnsafeMutableBufferPointer {
             let lp = $0.baseAddress!
@@ -187,7 +154,7 @@ extension DataContainer where DT == Float {
     }
     
     @inlinable
-    static func divideAssign(lhs: inout Self, rhs: Self) {
+    static func divideAssign(lhs: inout Image, rhs: Image) {
         precondition(lhs.data.count == rhs.data.count, "Size mismatch.")
         lhs.data.withUnsafeMutableBufferPointer {
             let lp = $0.baseAddress!
@@ -199,57 +166,29 @@ extension DataContainer where DT == Float {
     }
     
     @inlinable
-    public static func +(lhs: Self, rhs: Self) -> Self {
-        var ret = lhs
-        ret += rhs
-        return ret
-    }
-    
-    @inlinable
-    public static func +=(lhs: inout Self, rhs: Self) {
+    public static func +=(lhs: inout Image, rhs: Image) {
         addAssign(lhs: &lhs, rhs: rhs)
     }
     
     @inlinable
-    public static func -(lhs: Self, rhs: Self) -> Self {
-        var ret = lhs
-        ret -= rhs
-        return ret
-    }
-    
-    @inlinable
-    public static func -=(lhs: inout Self, rhs: Self) {
+    public static func -=(lhs: inout Image, rhs: Image) {
         subtractAssign(lhs: &lhs, rhs: rhs)
     }
     
     @inlinable
-    public static func *(lhs: Self, rhs: Self) -> Self {
-        var ret = lhs
-        ret *= rhs
-        return ret
-    }
-    
-    @inlinable
-    public static func *=(lhs: inout Self, rhs: Self) {
+    public static func *=(lhs: inout Image, rhs: Image) {
         multiplyAssign(lhs: &lhs, rhs: rhs)
     }
     
     @inlinable
-    public static func /(lhs: Self, rhs: Self) -> Self {
-        var ret = lhs
-        ret /= rhs
-        return ret
-    }
-    
-    @inlinable
-    public static func /=(lhs: inout Self, rhs: Self) {
+    public static func /=(lhs: inout Image, rhs: Image) {
         divideAssign(lhs: &lhs, rhs: rhs)
     }
 }
 
-extension DataContainer where DT == Double {
+extension Image where T == Double {
     @inlinable
-    static func addAssign(lhs: inout Self, rhs: Self) {
+    static func addAssign(lhs: inout Image, rhs: Image) {
         precondition(lhs.data.count == rhs.data.count, "Size mismatch.")
         lhs.data.withUnsafeMutableBufferPointer {
             let lp = $0.baseAddress!
@@ -261,7 +200,7 @@ extension DataContainer where DT == Double {
     }
     
     @inlinable
-    static func subtractAssign(lhs: inout Self, rhs: Self) {
+    static func subtractAssign(lhs: inout Image, rhs: Image) {
         precondition(lhs.data.count == rhs.data.count, "Size mismatch.")
         lhs.data.withUnsafeMutableBufferPointer {
             let lp = $0.baseAddress!
@@ -273,7 +212,7 @@ extension DataContainer where DT == Double {
     }
     
     @inlinable
-    static func multiplyAssign(lhs: inout Self, rhs: Self) {
+    static func multiplyAssign(lhs: inout Image, rhs: Image) {
         precondition(lhs.data.count == rhs.data.count, "Size mismatch.")
         lhs.data.withUnsafeMutableBufferPointer {
             let lp = $0.baseAddress!
@@ -285,7 +224,7 @@ extension DataContainer where DT == Double {
     }
     
     @inlinable
-    static func divideAssign(lhs: inout Self, rhs: Self) {
+    static func divideAssign(lhs: inout Image, rhs: Image) {
         precondition(lhs.data.count == rhs.data.count, "Size mismatch.")
         lhs.data.withUnsafeMutableBufferPointer {
             let lp = $0.baseAddress!
@@ -297,50 +236,22 @@ extension DataContainer where DT == Double {
     }
     
     @inlinable
-    public static func +(lhs: Self, rhs: Self) -> Self {
-        var ret = lhs
-        ret += rhs
-        return ret
-    }
-    
-    @inlinable
-    public static func +=(lhs: inout Self, rhs: Self) {
+    public static func +=(lhs: inout Image, rhs: Image) {
         addAssign(lhs: &lhs, rhs: rhs)
     }
     
     @inlinable
-    public static func -(lhs: Self, rhs: Self) -> Self {
-        var ret = lhs
-        ret -= rhs
-        return ret
-    }
-    
-    @inlinable
-    public static func -=(lhs: inout Self, rhs: Self) {
+    public static func -=(lhs: inout Image, rhs: Image) {
         subtractAssign(lhs: &lhs, rhs: rhs)
     }
     
     @inlinable
-    public static func *(lhs: Self, rhs: Self) -> Self {
-        var ret = lhs
-        ret *= rhs
-        return ret
-    }
-    
-    @inlinable
-    public static func *=(lhs: inout Self, rhs: Self) {
+    public static func *=(lhs: inout Image, rhs: Image) {
         multiplyAssign(lhs: &lhs, rhs: rhs)
     }
     
     @inlinable
-    public static func /(lhs: Self, rhs: Self) -> Self {
-        var ret = lhs
-        ret /= rhs
-        return ret
-    }
-    
-    @inlinable
-    public static func /=(lhs: inout Self, rhs: Self) {
+    public static func /=(lhs: inout Image, rhs: Image) {
         divideAssign(lhs: &lhs, rhs: rhs)
     }
 }

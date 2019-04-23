@@ -6,18 +6,14 @@ extension Bool: DataType {
     public static var swimDefaultValue: Bool = true
 }
 
-extension UInt8: DataType {
-    public static var swimDefaultValue: UInt8 = 0
+extension DataType where Self: AdditiveArithmetic {
+    @inlinable
+    public static var swimDefaultValue: Self {
+        return .zero
+    }
 }
 
-extension Int: DataType {
-    public static var swimDefaultValue: Int = 0
-}
-
-extension Float: DataType {
-    public static var swimDefaultValue: Float = 0
-}
-
-extension Double: DataType {
-    public static var swimDefaultValue: Double = 0
-}
+extension UInt8: DataType {}
+extension Int: DataType {}
+extension Float: DataType {}
+extension Double: DataType {}

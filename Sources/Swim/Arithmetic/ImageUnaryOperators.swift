@@ -1,6 +1,6 @@
-extension DataContainer where DT: SignedNumeric {
+extension Image where T: SignedNumeric {
     @inlinable
-    static func negate(arg: Self) -> Self {
+    static func negate(arg: Image) -> Image {
         var ret = arg
         ret.data.withUnsafeMutableBufferPointer {
             var p = $0.baseAddress!
@@ -13,12 +13,12 @@ extension DataContainer where DT: SignedNumeric {
     }
     
     @inlinable
-    public static prefix func -(arg: Self) -> Self {
+    public static prefix func -(arg: Image) -> Image {
         return negate(arg: arg)
     }
     
     @inlinable
-    public static prefix func +(arg: Self) -> Self {
+    public static prefix func +(arg: Image) -> Image {
         return arg
     }
 }
@@ -28,9 +28,9 @@ extension DataContainer where DT: SignedNumeric {
 
 import Accelerate
 
-extension DataContainer where DT == Float {
+extension Image where T == Float {
     @inlinable
-    static func negate(arg: Self) -> Self {
+    static func negate(arg: Image) -> Image {
         var ret = arg
         ret.data.withUnsafeMutableBufferPointer {
             vDSP_vneg($0.baseAddress!, 1, $0.baseAddress!, 1, vDSP_Length($0.count))
@@ -39,14 +39,14 @@ extension DataContainer where DT == Float {
     }
     
     @inlinable
-    public static prefix func -(arg: Self) -> Self {
+    public static prefix func -(arg: Image) -> Image {
         return negate(arg: arg)
     }
 }
 
-extension DataContainer where DT == Double {
+extension Image where T == Double {
     @inlinable
-    static func negate(arg: Self) -> Self {
+    static func negate(arg: Image) -> Image {
         var ret = arg
         ret.data.withUnsafeMutableBufferPointer {
             vDSP_vnegD($0.baseAddress!, 1, $0.baseAddress!, 1, vDSP_Length($0.count))
@@ -55,7 +55,7 @@ extension DataContainer where DT == Double {
     }
     
     @inlinable
-    public static prefix func -(arg: Self) -> Self {
+    public static prefix func -(arg: Image) -> Image {
         return negate(arg: arg)
     }
 }

@@ -25,6 +25,14 @@
 /* Begin PBXBuildFile section */
 		A732ABEE226D6DBB00B2256E /* UIKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A732ABEC226D6A3900B2256E /* UIKitTests.swift */; };
 		A732AC0D226DABBE00B2256E /* HomogeneousTransformationMatrix.swift in Sources */ = {isa = PBXBuildFile; fileRef = A732AC0B226DABB900B2256E /* HomogeneousTransformationMatrix.swift */; };
+		A732AC10226E96B200B2256E /* PixelRef.swift in Sources */ = {isa = PBXBuildFile; fileRef = A732AC0E226E968800B2256E /* PixelRef.swift */; };
+		A732AC13226E9CFD00B2256E /* PixelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = A732AC11226E9BC200B2256E /* PixelProtocol.swift */; };
+		A732AC1B226EA36B00B2256E /* ScalarCompoundAssignmentOperator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A732AC19226EA2E100B2256E /* ScalarCompoundAssignmentOperator.swift */; };
+		A732AC1E226EA61800B2256E /* PixelCompoundAssignmentOperator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A732AC1C226EA60200B2256E /* PixelCompoundAssignmentOperator.swift */; };
+		A732AC21226EAB4600B2256E /* PixelBinaryScalarOperator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A732AC1F226EAAE800B2256E /* PixelBinaryScalarOperator.swift */; };
+		A732AC26226EB5D600B2256E /* PixelUnaryOperator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A732AC24226EB5D100B2256E /* PixelUnaryOperator.swift */; };
+		A732AC28226EB6A200B2256E /* BasicPerformanceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A732AC27226EB6A200B2256E /* BasicPerformanceTests.swift */; };
+		A732AC2B226EBAC100B2256E /* ImageCompoundAssignmentOperator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A732AC29226EBA9900B2256E /* ImageCompoundAssignmentOperator.swift */; };
 		OBJ_167 /* image_io.c in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_9 /* image_io.c */; };
 		OBJ_169 /* stb_image_write.h in Headers */ = {isa = PBXBuildFile; fileRef = OBJ_11 /* stb_image_write.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		OBJ_170 /* stb_image.h in Headers */ = {isa = PBXBuildFile; fileRef = OBJ_12 /* stb_image.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -38,9 +46,9 @@
 		OBJ_192 /* Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_19 /* Filter.swift */; };
 		OBJ_193 /* Im2col.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_20 /* Im2col.swift */; };
 		OBJ_194 /* IntegralImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_21 /* IntegralImage.swift */; };
-		OBJ_195 /* BInaryScalarOperator.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_23 /* BInaryScalarOperator.swift */; };
-		OBJ_196 /* BinaryOperators.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_24 /* BinaryOperators.swift */; };
-		OBJ_197 /* UnaryOperators.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_25 /* UnaryOperators.swift */; };
+		OBJ_195 /* ImageBinaryScalarOperator.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_23 /* ImageBinaryScalarOperator.swift */; };
+		OBJ_196 /* ImageBinaryOperators.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_24 /* ImageBinaryOperators.swift */; };
+		OBJ_197 /* ImageUnaryOperators.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_25 /* ImageUnaryOperators.swift */; };
 		OBJ_198 /* AdditiveBlend.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_27 /* AdditiveBlend.swift */; };
 		OBJ_199 /* AlphaBlend.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_28 /* AlphaBlend.swift */; };
 		OBJ_200 /* Blender.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_29 /* Blender.swift */; };
@@ -102,7 +110,7 @@
 		OBJ_276 /* FilterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_99 /* FilterTests.swift */; };
 		OBJ_277 /* Im2colTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_100 /* Im2colTests.swift */; };
 		OBJ_278 /* IntegralImageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_101 /* IntegralImageTests.swift */; };
-		OBJ_279 /* ArithmeticTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_103 /* ArithmeticTests.swift */; };
+		OBJ_279 /* ImageArithmeticTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_103 /* ImageArithmeticTests.swift */; };
 		OBJ_280 /* AlphaBlendTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_105 /* AlphaBlendTests.swift */; };
 		OBJ_281 /* ChannelCompositionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_107 /* ChannelCompositionTests.swift */; };
 		OBJ_282 /* ChannelwiseConversionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_108 /* ChannelwiseConversionTests.swift */; };
@@ -221,9 +229,17 @@
 /* Begin PBXFileReference section */
 		A732ABEC226D6A3900B2256E /* UIKitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIKitTests.swift; sourceTree = "<group>"; };
 		A732AC0B226DABB900B2256E /* HomogeneousTransformationMatrix.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomogeneousTransformationMatrix.swift; sourceTree = "<group>"; };
+		A732AC0E226E968800B2256E /* PixelRef.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PixelRef.swift; sourceTree = "<group>"; };
+		A732AC11226E9BC200B2256E /* PixelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PixelProtocol.swift; sourceTree = "<group>"; };
+		A732AC19226EA2E100B2256E /* ScalarCompoundAssignmentOperator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScalarCompoundAssignmentOperator.swift; sourceTree = "<group>"; };
+		A732AC1C226EA60200B2256E /* PixelCompoundAssignmentOperator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PixelCompoundAssignmentOperator.swift; sourceTree = "<group>"; };
+		A732AC1F226EAAE800B2256E /* PixelBinaryScalarOperator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PixelBinaryScalarOperator.swift; sourceTree = "<group>"; };
+		A732AC24226EB5D100B2256E /* PixelUnaryOperator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PixelUnaryOperator.swift; sourceTree = "<group>"; };
+		A732AC27226EB6A200B2256E /* BasicPerformanceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicPerformanceTests.swift; sourceTree = "<group>"; };
+		A732AC29226EBA9900B2256E /* ImageCompoundAssignmentOperator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCompoundAssignmentOperator.swift; sourceTree = "<group>"; };
 		OBJ_100 /* Im2colTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Im2colTests.swift; sourceTree = "<group>"; };
 		OBJ_101 /* IntegralImageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntegralImageTests.swift; sourceTree = "<group>"; };
-		OBJ_103 /* ArithmeticTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArithmeticTests.swift; sourceTree = "<group>"; };
+		OBJ_103 /* ImageArithmeticTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageArithmeticTests.swift; sourceTree = "<group>"; };
 		OBJ_105 /* AlphaBlendTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlphaBlendTests.swift; sourceTree = "<group>"; };
 		OBJ_107 /* ChannelCompositionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelCompositionTests.swift; sourceTree = "<group>"; };
 		OBJ_108 /* ChannelwiseConversionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelwiseConversionTests.swift; sourceTree = "<group>"; };
@@ -272,9 +288,9 @@
 		OBJ_19 /* Filter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Filter.swift; sourceTree = "<group>"; };
 		OBJ_20 /* Im2col.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Im2col.swift; sourceTree = "<group>"; };
 		OBJ_21 /* IntegralImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntegralImage.swift; sourceTree = "<group>"; };
-		OBJ_23 /* BInaryScalarOperator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BInaryScalarOperator.swift; sourceTree = "<group>"; };
-		OBJ_24 /* BinaryOperators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BinaryOperators.swift; sourceTree = "<group>"; };
-		OBJ_25 /* UnaryOperators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnaryOperators.swift; sourceTree = "<group>"; };
+		OBJ_23 /* ImageBinaryScalarOperator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageBinaryScalarOperator.swift; sourceTree = "<group>"; };
+		OBJ_24 /* ImageBinaryOperators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageBinaryOperators.swift; sourceTree = "<group>"; };
+		OBJ_25 /* ImageUnaryOperators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageUnaryOperators.swift; sourceTree = "<group>"; };
 		OBJ_27 /* AdditiveBlend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdditiveBlend.swift; sourceTree = "<group>"; };
 		OBJ_28 /* AlphaBlend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlphaBlend.swift; sourceTree = "<group>"; };
 		OBJ_29 /* Blender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Blender.swift; sourceTree = "<group>"; };
@@ -401,7 +417,7 @@
 		OBJ_102 /* ArithmeticTests */ = {
 			isa = PBXGroup;
 			children = (
-				OBJ_103 /* ArithmeticTests.swift */,
+				OBJ_103 /* ImageArithmeticTests.swift */,
 			);
 			path = ArithmeticTests;
 			sourceTree = "<group>";
@@ -584,9 +600,14 @@
 		OBJ_22 /* Arithmetic */ = {
 			isa = PBXGroup;
 			children = (
-				OBJ_23 /* BInaryScalarOperator.swift */,
-				OBJ_24 /* BinaryOperators.swift */,
-				OBJ_25 /* UnaryOperators.swift */,
+				OBJ_24 /* ImageBinaryOperators.swift */,
+				OBJ_23 /* ImageBinaryScalarOperator.swift */,
+				A732AC29226EBA9900B2256E /* ImageCompoundAssignmentOperator.swift */,
+				OBJ_25 /* ImageUnaryOperators.swift */,
+				A732AC1F226EAAE800B2256E /* PixelBinaryScalarOperator.swift */,
+				A732AC1C226EA60200B2256E /* PixelCompoundAssignmentOperator.swift */,
+				A732AC24226EB5D100B2256E /* PixelUnaryOperator.swift */,
+				A732AC19226EA2E100B2256E /* ScalarCompoundAssignmentOperator.swift */,
 			);
 			path = Arithmetic;
 			sourceTree = "<group>";
@@ -621,9 +642,11 @@
 			children = (
 				OBJ_40 /* DataContainer.swift */,
 				OBJ_41 /* DataType.swift */,
+				OBJ_44 /* Pixel.swift */,
+				A732AC0E226E968800B2256E /* PixelRef.swift */,
+				A732AC11226E9BC200B2256E /* PixelProtocol.swift */,
 				OBJ_42 /* Image.swift */,
 				OBJ_43 /* Initializers.swift */,
-				OBJ_44 /* Pixel.swift */,
 				OBJ_45 /* PixelType.swift */,
 				OBJ_46 /* Sequence.swift */,
 			);
@@ -776,6 +799,7 @@
 			isa = PBXGroup;
 			children = (
 				OBJ_93 /* PerformanceTests.swift */,
+				A732AC27226EB6A200B2256E /* BasicPerformanceTests.swift */,
 			);
 			name = PerformanceTests;
 			path = Tests/PerformanceTests;
@@ -986,6 +1010,7 @@
 			buildActionMask = 0;
 			files = (
 				OBJ_178 /* PerformanceTests.swift in Sources */,
+				A732AC28226EB6A200B2256E /* BasicPerformanceTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -999,9 +1024,10 @@
 				OBJ_192 /* Filter.swift in Sources */,
 				OBJ_193 /* Im2col.swift in Sources */,
 				OBJ_194 /* IntegralImage.swift in Sources */,
-				OBJ_195 /* BInaryScalarOperator.swift in Sources */,
-				OBJ_196 /* BinaryOperators.swift in Sources */,
-				OBJ_197 /* UnaryOperators.swift in Sources */,
+				OBJ_195 /* ImageBinaryScalarOperator.swift in Sources */,
+				OBJ_196 /* ImageBinaryOperators.swift in Sources */,
+				A732AC10226E96B200B2256E /* PixelRef.swift in Sources */,
+				OBJ_197 /* ImageUnaryOperators.swift in Sources */,
 				OBJ_198 /* AdditiveBlend.swift in Sources */,
 				OBJ_199 /* AlphaBlend.swift in Sources */,
 				OBJ_200 /* Blender.swift in Sources */,
@@ -1019,6 +1045,7 @@
 				OBJ_212 /* Initializers.swift in Sources */,
 				OBJ_213 /* Pixel.swift in Sources */,
 				OBJ_214 /* PixelType.swift in Sources */,
+				A732AC21226EAB4600B2256E /* PixelBinaryScalarOperator.swift in Sources */,
 				OBJ_215 /* Sequence.swift in Sources */,
 				OBJ_216 /* ImageFileFormat.swift in Sources */,
 				OBJ_217 /* ReadImage.swift in Sources */,
@@ -1036,15 +1063,19 @@
 				OBJ_228 /* CoreGraphics.swift in Sources */,
 				OBJ_229 /* UIKit.swift in Sources */,
 				OBJ_230 /* vImageAlphaBlend.swift in Sources */,
+				A732AC13226E9CFD00B2256E /* PixelProtocol.swift in Sources */,
 				OBJ_231 /* vImageBuffer.swift in Sources */,
 				OBJ_232 /* vImageMorphology.swift in Sources */,
 				OBJ_233 /* vImageUtils.swift in Sources */,
+				A732AC2B226EBAC100B2256E /* ImageCompoundAssignmentOperator.swift in Sources */,
 				OBJ_234 /* Shape.swift in Sources */,
+				A732AC1E226EA61800B2256E /* PixelCompoundAssignmentOperator.swift in Sources */,
 				OBJ_235 /* ChannelSubscript.swift in Sources */,
 				OBJ_236 /* PixelSubscript.swift in Sources */,
 				OBJ_237 /* SubimageSubscript.swift in Sources */,
 				OBJ_238 /* AffineTransformation.swift in Sources */,
 				OBJ_239 /* Flip.swift in Sources */,
+				A732AC1B226EA36B00B2256E /* ScalarCompoundAssignmentOperator.swift in Sources */,
 				OBJ_240 /* Resize.swift in Sources */,
 				OBJ_241 /* Rotate.swift in Sources */,
 				OBJ_242 /* Warp.swift in Sources */,
@@ -1054,6 +1085,7 @@
 				OBJ_246 /* Interleave.swift in Sources */,
 				OBJ_247 /* Matmul.swift in Sources */,
 				OBJ_248 /* Rect.swift in Sources */,
+				A732AC26226EB5D600B2256E /* PixelUnaryOperator.swift in Sources */,
 				OBJ_249 /* Run.swift in Sources */,
 				OBJ_250 /* StrideCopy.swift in Sources */,
 			);
@@ -1077,7 +1109,7 @@
 				OBJ_276 /* FilterTests.swift in Sources */,
 				OBJ_277 /* Im2colTests.swift in Sources */,
 				OBJ_278 /* IntegralImageTests.swift in Sources */,
-				OBJ_279 /* ArithmeticTests.swift in Sources */,
+				OBJ_279 /* ImageArithmeticTests.swift in Sources */,
 				OBJ_280 /* AlphaBlendTests.swift in Sources */,
 				OBJ_281 /* ChannelCompositionTests.swift in Sources */,
 				OBJ_282 /* ChannelwiseConversionTests.swift in Sources */,
