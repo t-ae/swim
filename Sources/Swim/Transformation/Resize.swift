@@ -24,7 +24,11 @@ extension Image where T: BinaryFloatingPoint {
                 guard ceilStartX <= floorEndX else {
                     // refer single pixel
                     for y in 0..<newImage.height {
-                        newImage[unsafe: x, y] = baseImage[unsafe: Int(startX), y]
+                        newImage.withMutablePixelRef(x: x, y: y) { ref in
+                            baseImage.withPixelRef(x: Int(startX), y: y) {
+                                ref += $0
+                            }
+                        }
                     }
                     continue
                 }
@@ -35,18 +39,24 @@ extension Image where T: BinaryFloatingPoint {
                 let endVolume = endX - floorEndX
                 
                 for y in 0..<newImage.height {
-                    // average
-                    var pixel: Pixel<P, T> = Pixel<P, T>(value: 0)
-                    if startVolume > 0 {
-                        pixel += baseImage[unsafe: startX_i, y] * startVolume
+                    newImage.withMutablePixelRef(x: x, y: y) { ref in
+                        if startVolume > 0 {
+                            baseImage.withPixelRef(x: startX_i, y: y) {
+                                ref.add(pixel: $0, with: startVolume )
+                            }
+                        }
+                        for dx in Int(ceilStartX)..<Int(floorEndX) {
+                            baseImage.withPixelRef(x: dx, y: y) {
+                                ref += $0
+                            }
+                        }
+                        if endVolume > 0 {
+                            baseImage.withPixelRef(x: endX_i, y: y) {
+                                ref.add(pixel: $0, with: endVolume)
+                            }
+                        }
+                        ref /= volume
                     }
-                    for dx in Int(ceilStartX)..<Int(floorEndX) {
-                        pixel += baseImage[unsafe: dx, y]
-                    }
-                    if endVolume > 0 {
-                        pixel += baseImage[unsafe: endX_i, y] * endVolume
-                    }
-                    newImage[unsafe: x, y] = pixel / volume
                 }
             }
             xScaleImage = newImage
@@ -69,7 +79,11 @@ extension Image where T: BinaryFloatingPoint {
                 guard ceilStartY <= floorEndY else {
                     // refer single pixel
                     for x in 0..<newImage.width {
-                        newImage[unsafe: x, y] = baseImage[unsafe: x, Int(startY)]
+                        newImage.withMutablePixelRef(x: x, y: y) { ref in
+                            baseImage.withPixelRef(x: x, y: Int(startY)) {
+                                ref += $0
+                            }
+                        }
                     }
                     continue
                 }
@@ -80,18 +94,24 @@ extension Image where T: BinaryFloatingPoint {
                 let endVolume = endY - floorEndY
                 
                 for x in 0..<newImage.width {
-                    // average
-                    var pixel: Pixel<P, T> = Pixel<P, T>(value: 0)
-                    if startVolume > 0 {
-                        pixel += baseImage[unsafe: x, startY_i] * startVolume
+                    newImage.withMutablePixelRef(x: x, y: y) { ref in
+                        if startVolume > 0 {
+                            baseImage.withPixelRef(x: x, y: startY_i) {
+                                ref.add(pixel: $0, with: startVolume )
+                            }
+                        }
+                        for dy in Int(ceilStartY)..<Int(floorEndY) {
+                            baseImage.withPixelRef(x: x, y: dy) {
+                                ref += $0
+                            }
+                        }
+                        if endVolume > 0 {
+                            baseImage.withPixelRef(x: x, y: endY_i) {
+                                ref.add(pixel: $0, with: endVolume)
+                            }
+                        }
+                        ref /= volume
                     }
-                    for dy in Int(ceilStartY)..<Int(floorEndY) {
-                        pixel += baseImage[unsafe: x, dy]
-                    }
-                    if endVolume > 0 {
-                        pixel += baseImage[unsafe: x, endY_i] * endVolume
-                    }
-                    newImage[unsafe: x, y] = pixel / volume
                 }
             }
             yScaleImage = newImage

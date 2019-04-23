@@ -105,3 +105,22 @@ extension MutablePixelRef where T: FloatingPoint {
         divideAssign(lhs: lhs, rhs: rhs)
     }
 }
+
+// MARK: - Utility
+
+extension MutablePixelRef where T: Numeric {
+    @inlinable
+    func add<P2: PixelProtocol>(pixel: P2, with factor: T) where P2.P == P, P2.T == T {
+        var lp = self.pointer.baseAddress!
+        pixel.withUnsafeBufferPointer { rbp in
+            assert(self.pointer.count == rbp.count)
+            
+            var rp = rbp.baseAddress!
+            for _ in 0..<self.pointer.count {
+                lp.pointee += rp.pointee * factor
+                lp += 1
+                rp += 1
+            }
+        }
+    }
+}

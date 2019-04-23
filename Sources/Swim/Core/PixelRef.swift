@@ -1,3 +1,4 @@
+// MARK: - PixelRef
 public struct PixelRef<P: PixelType, T: DataType> {
     @usableFromInline
     var _x: Int
@@ -37,6 +38,7 @@ extension PixelRef {
     }
 }
 
+// MARK: - MutablePixelRef
 public struct MutablePixelRef<P: PixelType, T: DataType> {
     @usableFromInline
     var _x: Int
@@ -77,6 +79,30 @@ extension MutablePixelRef {
         }
         nonmutating set {
             self[channel.rawValue] = newValue
+        }
+    }
+}
+
+// MARK: - Image extension
+extension Image {
+    @inlinable
+    public func withPixelRef<R>(x: Int, y: Int, _ body: (PixelRef<P, T>)->R) -> R {
+        return data.withUnsafeBufferPointer {
+            let start = (y*width + x) * P.channels
+            let bp = UnsafeBufferPointer(rebasing: $0[start..<start+P.channels])
+            let ref = PixelRef<P, T>(_x: x, _y: y, pointer: bp)
+            return body(ref)
+        }
+    }
+    
+    @inlinable
+    public mutating func withMutablePixelRef<R>(x: Int, y: Int, _ body: (MutablePixelRef<P, T>)->R) -> R {
+        let width = self.width
+        return data.withUnsafeMutableBufferPointer {
+            let start = (y*width + x) * P.channels
+            let bp = UnsafeMutableBufferPointer(rebasing: $0[start..<start+P.channels])
+            let ref = MutablePixelRef<P, T>(_x: x, _y: y, pointer: bp)
+            return body(ref)
         }
     }
 }
