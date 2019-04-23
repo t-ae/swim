@@ -24,9 +24,7 @@ extension PixelRef {
     public subscript(channel: Int) -> T {
         get {
             precondition(0 <= channel && channel < P.channels, "Index out of range.")
-            return withUnsafeBufferPointer {
-                return $0[channel]
-            }
+            return pointer[channel]
         }
     }
     

@@ -1,9 +1,5 @@
 import Foundation
 
-extension Image where T: BinaryInteger {
-    
-}
-
 extension Image where T: BinaryFloatingPoint {
     /// Resize image with Area average method.
     @inlinable
