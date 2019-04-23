@@ -127,7 +127,30 @@ extension Image where T: BinaryFloatingPoint {
                        height: Int,
                        method: ResizeMethod = .bilinear,
                        areaAverageResizeBeforeDownSample: Bool = true) -> Image<P, T> {
-        
+        switch method {
+        case .nearestNeighbor:
+            return resize(width: width,
+                          height: height,
+                          interpolator: NearestNeighborInterpolator(edgeMode: .edge),
+                          areaAverageResizeBeforeDownSample: areaAverageResizeBeforeDownSample)
+        case .bilinear:
+            return resize(width: width,
+                          height: height,
+                          interpolator: BilinearInterpolator(edgeMode: .edge),
+                          areaAverageResizeBeforeDownSample: areaAverageResizeBeforeDownSample)
+        case .bicubic:
+            return resize(width: width,
+                          height: height,
+                          interpolator: BicubicInterpolator(edgeMode: .edge),
+                          areaAverageResizeBeforeDownSample: areaAverageResizeBeforeDownSample)
+        }
+    }
+    
+    @inlinable
+    func resize<Intpl: Interpolator>(width: Int,
+                                     height: Int,
+                                     interpolator: Intpl,
+                                     areaAverageResizeBeforeDownSample: Bool = true) -> Image<P, T> where Intpl.P == P, Intpl.T == T {
         let baseImage: Image<P, T>
         if areaAverageResizeBeforeDownSample {
             // downsample for avoiding sparse sampling
@@ -153,21 +176,11 @@ extension Image where T: BinaryFloatingPoint {
         
         var dest = Image<P, T>(width: width, height: height)
         
-        let intpl: (T, T, Image<P, T>) -> Pixel<P, T>
-        switch method {
-        case .nearestNeighbor:
-            intpl = NearestNeighborInterpolator(edgeMode: .edge).interpolate
-        case .bilinear:
-            intpl = BilinearInterpolator(edgeMode: .edge).interpolate
-        case .bicubic:
-            intpl = BicubicInterpolator(edgeMode: .edge).interpolate
-        }
-        
         for y in 0..<height {
             let yp = T(baseImage.height) * T(y) / T(height)
             for x in 0..<width {
                 let xp = T(baseImage.width) * T(x) / T(width)
-                dest[x, y] = intpl(xp-0.5, yp-0.5, baseImage)
+                dest[x, y] = interpolator.interpolate(x: xp-0.5, y: yp-0.5, in: baseImage)
             }
         }
         
