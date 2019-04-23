@@ -15,6 +15,11 @@ public struct PixelRef<P: PixelType, T: DataType> {
         self.pointer = pointer
     }
     
+    @inlinable
+    init(_x: Int, _y: Int, rebasing slice: Slice<UnsafeBufferPointer<T>>) {
+        self.init(_x: _x, _y: _y, pointer: UnsafeBufferPointer(rebasing: slice))
+    }
+    
     public var x: Int { return _x }
     public var y: Int { return _y }
 }
@@ -51,6 +56,11 @@ public struct MutablePixelRef<P: PixelType, T: DataType> {
         self._x = _x
         self._y = _y
         self.pointer = pointer
+    }
+    
+    @inlinable
+    init(_x: Int, _y: Int, rebasing slice: Slice<UnsafeMutableBufferPointer<T>>) {
+        self.init(_x: _x, _y: _y, pointer: UnsafeMutableBufferPointer(rebasing: slice))
     }
     
     public var x: Int { return _x }
