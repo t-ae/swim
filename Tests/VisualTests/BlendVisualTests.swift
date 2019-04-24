@@ -99,8 +99,8 @@ extension BlendVisualTests {
     }
     
     func test4Blends() {
-        let lena = try! Image<RGB, Double>(contentsOf: testResoruceRoot().appendingPathComponent("lena_128.png"))
-        let circle = Shape.circle(size: 128,
+        let lena = try! Image<RGB, Double>(contentsOf: testResoruceRoot().appendingPathComponent("lena_256.png"))
+        let circle = Shape.circle(size: 256,
                                   lineWidth: 10,
                                   lineColor: Pixel(r: 1.0, g: 0.0, b: 0.0, a: 0.6),
                                   fillColor: Pixel(r: 1.0, g: 0.0, b: 0.0, a: 0.3))

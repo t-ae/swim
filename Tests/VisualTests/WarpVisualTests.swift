@@ -142,17 +142,31 @@ extension WarpVisualTests {
         let lena = try! Image<RGB, Double>(contentsOf: path)
         
         let size = Double(lena.width)
-        let scale: Double = 2.3
+        let scale: Double = 1.5
         var affine = AffineTransformation<Double>.identity
         affine = .scale(x: scale, y: scale) * affine
-        affine = .translation(x: scale/2, y: scale/2) * affine
         affine = .translation(x: -size*scale/2, y: -size*scale/2) * affine
-        affine = .rotation(angle: .pi / 4) * affine
+        affine = .rotation(angle: .pi / 6) * affine
         affine = .translation(x: size*scale/2, y: size*scale/2) * affine
         
-        let intpl = NearestNeighborInterpolator<RGB, Double>(edgeMode: .reflect)
-        let result = try! lena.warp(transformation: affine, outputSize: (512, 512), interpolator: intpl)
-        let nsImage = doubleToNSImage(result)
+        var images = [Image<RGB, Double>]()
+        do {
+            let intpl = NearestNeighborInterpolator<RGB, Double>(edgeMode: .wrap)
+            let result = try! lena.warp(transformation: affine, outputSize: (300, 300), interpolator: intpl)
+            images.append(result)
+        }
+        do {
+            let intpl = BilinearInterpolator<RGB, Double>(edgeMode: .constant(value: 0))
+            let result = try! lena.warp(transformation: affine, outputSize: (300, 300), interpolator: intpl)
+            images.append(result)
+        }
+        do {
+            let intpl = BicubicInterpolator<RGB, Double>(edgeMode: .reflect)
+            let result = try! lena.warp(transformation: affine, outputSize: (300, 300), interpolator: intpl)
+            images.append(result)
+        }
+        
+        let nsImage = doubleToNSImage(Image.concatH(images))
         
         XCTAssertTrue(nsImage.isValid, "Break and check nsImages in debugger.")
     }

@@ -81,10 +81,8 @@ let doubleImage1 = Image<RGB, Double>(cast: image)
 let doubleImage2 = Image(cast: image, to: Double.self) // ditto
 
 // pixel conversion
-let red0 = image.pixelwiseConverted { px in 
-    var px = px
-    px[.red] = 0
-    return px
+let redOnlyRGBA = image.pixelwiseConverted { px in 
+    Pixel(r: px[.red], g: 0, b: 0, a: 1)
 }
 ```
 
@@ -95,6 +93,22 @@ let image2 = image.resize(width: 512, height: 512) // default bilinear
 let image3 = image.resize(width: 512, height: 512, method: .nearestNeighbor)
 let image4 = image.resize(width: 512, height: 512, method: .bicubic)
 ```
+
+[Example: NearestNeighbor / Bilinear / Bicubic]()
+
+![resize](https://user-images.githubusercontent.com/12446914/56634980-dbccaa80-669e-11e9-90f7-5046d85e9f29.png)
+
+## Warp
+```swift
+let image = Image<RGBA, Double>(contentsOf: url)!
+let affine = AffineTransformation<Double>(scale: (1, 1.5), rotation: .pi/6. translation: (100, 120))
+let interpolator = BilinearInterpolator<RGBA, Double>(edgeMode: .edge)
+let warpedImage = image.warp(transformation: affine, outputSize: (500, 500), interpolator: interpolator)
+```
+
+[Example: NN+Wrap / BL+Constant / BC+Reflect]()
+
+![warp](https://user-images.githubusercontent.com/12446914/56634776-2a2d7980-669e-11e9-8ff2-179dbdb3dff4.png)
 
 ## Advanced
 
@@ -144,6 +158,22 @@ let image = Image<Intensity, Float>(contentsOf: url)!
 let blur = image.convoluted(Filter.gaussian3x3)
 let maximum = image.maximumFilter(kernelSize: 3)
 ```
+
+[Example: Gaussian x100 / Mean x100 / Sobel(Horizontal) / Laplacian]()
+
+![filter](https://user-images.githubusercontent.com/12446914/56634840-6660da00-669e-11e9-9746-915df9f67f1d.png)
+
+### Bayer filter
+```swift 
+let image = Image<RGB, Float>(contentsOf: url)!
+let converter = BayerConverter(pattern: .bggr)
+let bayer = converter.convert(image: image)
+let reconstruct = converter.demosaic(image: bayer)
+```
+
+[Example: Base / Bayer format / Reconstructed]()
+
+![bayer_bggr](https://user-images.githubusercontent.com/12446914/56634959-cce5f800-669e-11e9-89a2-ce49121a44bc.png)
 
 ---
 

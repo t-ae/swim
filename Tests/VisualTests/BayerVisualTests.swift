@@ -3,7 +3,7 @@ import Swim
 
 class BayerVisualTests: XCTestCase {
     
-    var lena = try! Image<RGB, Double>(contentsOf: testResoruceRoot().appendingPathComponent("lena_128.png"))
+    var lena = try! Image<RGB, Double>(contentsOf: testResoruceRoot().appendingPathComponent("lena_256.png"))
 }
 
 #if canImport(AppKit)

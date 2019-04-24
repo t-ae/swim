@@ -66,21 +66,32 @@ extension FilterVisualTests {
     }
     
     func testLena() {
-        let path = testResoruceRoot().appendingPathComponent("lena_512.png")
+        let path = testResoruceRoot().appendingPathComponent("lena_256.png")
         let image = try! Image<RGB, Double>(contentsOf: path)
         
-        let nsBase = doubleToNSImage(image)
+        var images = [Image<RGB, Double>]()
         
         var gaussian = image
-        for _ in 0..<30 {
+        for _ in 0..<100 {
             gaussian = image.convoluted(Filter.gaussian5x5)
         }
-        let nsGaussian = doubleToNSImage(gaussian)
+        images.append(gaussian)
+        
+        var mean = image
+        for _ in 0..<100 {
+            mean = image.convoluted(Filter.mean3x3)
+        }
+        images.append(mean)
+        
+        let sobelH = image.toLuminance().convoluted(Filter.sobel3x3H)
+        images.append(sobelH.toRGB())
         
         let laplacian = image.toLuminance().convoluted(Filter.laplacian3x3)
-        let nsLaplacian = doubleToNSImage(laplacian)
+        images.append(laplacian.toRGB())
         
-        XCTAssertFalse([nsBase, nsGaussian, nsLaplacian].isEmpty, "Break and check nsImages in debugger")
+        let nsImage = doubleToNSImage(Image.concatH(images))
+        
+        XCTAssertTrue(nsImage.isValid, "Break and check nsImages in debugger")
     }
 }
 
