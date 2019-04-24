@@ -37,6 +37,7 @@
 		A732AE99226ECF4000B2256E /* MutablePixelRefArithmeticTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A732AE96226ECF3300B2256E /* MutablePixelRefArithmeticTests.swift */; };
 		A732AE9B226ED0AE00B2256E /* PixelRefScalarCompoundAssignmentOperator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A732AE9A226ED0AE00B2256E /* PixelRefScalarCompoundAssignmentOperator.swift */; };
 		A732B3932270234800B2256E /* Padding.swift in Sources */ = {isa = PBXBuildFile; fileRef = A732B3912270232E00B2256E /* Padding.swift */; };
+		A732B3962270261D00B2256E /* PaddingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A732B394227025B300B2256E /* PaddingTests.swift */; };
 		OBJ_167 /* image_io.c in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_9 /* image_io.c */; };
 		OBJ_169 /* stb_image_write.h in Headers */ = {isa = PBXBuildFile; fileRef = OBJ_11 /* stb_image_write.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		OBJ_170 /* stb_image.h in Headers */ = {isa = PBXBuildFile; fileRef = OBJ_12 /* stb_image.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -243,6 +244,7 @@
 		A732AE96226ECF3300B2256E /* MutablePixelRefArithmeticTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MutablePixelRefArithmeticTests.swift; sourceTree = "<group>"; };
 		A732AE9A226ED0AE00B2256E /* PixelRefScalarCompoundAssignmentOperator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PixelRefScalarCompoundAssignmentOperator.swift; sourceTree = "<group>"; };
 		A732B3912270232E00B2256E /* Padding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Padding.swift; sourceTree = "<group>"; };
+		A732B394227025B300B2256E /* PaddingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaddingTests.swift; sourceTree = "<group>"; };
 		OBJ_100 /* Im2colTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Im2colTests.swift; sourceTree = "<group>"; };
 		OBJ_101 /* IntegralImageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntegralImageTests.swift; sourceTree = "<group>"; };
 		OBJ_103 /* ImageArithmeticTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageArithmeticTests.swift; sourceTree = "<group>"; };
@@ -479,6 +481,7 @@
 				OBJ_122 /* ClipTests.swift */,
 				OBJ_123 /* ConcatenateTests.swift */,
 				OBJ_124 /* FloatingPointTests.swift */,
+				A732B394227025B300B2256E /* PaddingTests.swift */,
 			);
 			path = ManipulationTests;
 			sourceTree = "<group>";
@@ -1144,6 +1147,7 @@
 				OBJ_303 /* TransformationTests.swift in Sources */,
 				OBJ_304 /* HomogeneousTransformationMatrixTests.swift in Sources */,
 				OBJ_305 /* Random.swift in Sources */,
+				A732B3962270261D00B2256E /* PaddingTests.swift in Sources */,
 				OBJ_306 /* Utils.swift in Sources */,
 				OBJ_307 /* XCTAssertEqualWithAccuracy.swift in Sources */,
 				OBJ_308 /* MatmulTests.swift in Sources */,
