@@ -3,7 +3,7 @@ import Foundation
 public struct NearestNeighborInterpolator<P: PixelType, T: BinaryFloatingPoint&DataType>: Interpolator {
     public var edgeMode: EdgeMode<P, T>
     
-    public init(edgeMode: EdgeMode<P, T> = .constant(value: 0)) {
+    public init(edgeMode: EdgeMode<P, T> = .zero) {
         self.edgeMode = edgeMode
     }
     

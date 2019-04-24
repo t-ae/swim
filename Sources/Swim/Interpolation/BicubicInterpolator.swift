@@ -4,7 +4,7 @@ public struct BicubicInterpolator<P: PixelType, T: BinaryFloatingPoint&DataType>
     public var a: T
     public var edgeMode: EdgeMode<P, T>
     
-    public init(a: T = -1, edgeMode: EdgeMode<P, T> = .constant(value: 0)) {
+    public init(a: T = -1, edgeMode: EdgeMode<P, T> = .zero) {
         self.a = a
         self.edgeMode = edgeMode
     }
@@ -258,7 +258,7 @@ public struct _BicubicInterpolator<P: PixelType, T: BinaryFloatingPoint&DataType
     public var a: T
     public var edgeMode: EdgeMode<P, T>
     
-    public init(a: T = -1, edgeMode: EdgeMode<P, T> = .constant(value: 0)) {
+    public init(a: T = -1, edgeMode: EdgeMode<P, T> = .zero) {
         self.a = a
         self.edgeMode = edgeMode
     }

@@ -3,7 +3,7 @@ import Foundation
 public struct BilinearInterpolator<P:PixelType, T: BinaryFloatingPoint&DataType>: Interpolator {
     public var edgeMode: EdgeMode<P, T>
     
-    public init(edgeMode: EdgeMode<P, T> = .constant(value: 0)) {
+    public init(edgeMode: EdgeMode<P, T> = .zero) {
         self.edgeMode = edgeMode
     }
 
@@ -21,8 +21,8 @@ public struct BilinearInterpolator<P:PixelType, T: BinaryFloatingPoint&DataType>
         
         var constant: Pixel<P, T>?
         switch edgeMode {
-        case let .constant(value):
-            constant = value
+        case let .constant(px):
+            constant = px
         default:
             constant = nil
         }

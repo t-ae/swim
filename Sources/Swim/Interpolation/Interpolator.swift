@@ -91,3 +91,9 @@ public enum EdgeMode<P: PixelType, T: DataType> {
         return .constant(pixel: Pixel(value: value))
     }
 }
+
+extension EdgeMode where T: AdditiveArithmetic {
+    public static var zero: EdgeMode<P, T> {
+        return .constant(value: .zero)
+    }
+}

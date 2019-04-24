@@ -156,7 +156,7 @@ extension WarpVisualTests {
             images.append(result)
         }
         do {
-            let intpl = BilinearInterpolator<RGB, Double>(edgeMode: .constant(value: 0))
+            let intpl = BilinearInterpolator<RGB, Double>(edgeMode: .zero)
             let result = try! lena.warp(transformation: affine, outputSize: (300, 300), interpolator: intpl)
             images.append(result)
         }
