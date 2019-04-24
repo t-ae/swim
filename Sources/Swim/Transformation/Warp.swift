@@ -39,13 +39,10 @@ extension Image where T: BinaryFloatingPoint {
                                value: 0)
 
         let inv = try transformation.inverted()
-
-        for y1 in 0..<outputSize.height {
-            for x1 in 0..<outputSize.width {
-                let (x0, y0) = inv * (T(x1), T(y1))
-
-                dest[unsafe: x1, y1] = interpolator.interpolate(x: x0, y: y0, in: self)
-            }
+        
+        dest.pixelwiseConvert { ref in
+            let (x0, y0) = inv * (T(ref.x), T(ref.y))
+            interpolator.interpolate(x: x0, y: y0, in: self, into: ref)
         }
         
         return dest
