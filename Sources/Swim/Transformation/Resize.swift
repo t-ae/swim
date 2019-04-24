@@ -172,12 +172,10 @@ extension Image where T: BinaryFloatingPoint {
         
         var dest = Image<P, T>(width: width, height: height)
         
-        for y in 0..<height {
-            let yp = T(baseImage.height) * T(y) / T(height)
-            for x in 0..<width {
-                let xp = T(baseImage.width) * T(x) / T(width)
-                dest[x, y] = interpolator.interpolate(x: xp-0.5, y: yp-0.5, in: baseImage)
-            }
+        dest.pixelwiseConvert { ref in
+            let xp = T(baseImage.width) * T(ref.x) / T(width)
+            let yp = T(baseImage.height) * T(ref.y) / T(height)
+            interpolator.interpolate(x: xp-0.5, y: yp-0.5, in: baseImage, into: ref)
         }
         
         return dest
