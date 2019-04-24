@@ -10,7 +10,7 @@ import Accelerate
 
 extension BasicPerformanceTests {
     func testMultiplyImage() {
-        var rgba = [Double](repeating: 1, count: 4000000)
+        var rgba = [Double](repeating: 1, count: 40000000)
         let scalar: Double = 0.99
         measure {
             for _ in 0..<10 {
@@ -26,7 +26,7 @@ extension BasicPerformanceTests {
     }
     
     func testMultiplyImage_accelerate() {
-        var rgba = [Double](repeating: 1, count: 4000000)
+        var rgba = [Double](repeating: 1, count: 40000000)
         var scalar: Double = 0.99
         measure {
             for _ in 0..<10 {
@@ -42,7 +42,7 @@ extension BasicPerformanceTests {
         var rgba = [Double](repeating: 1, count: 4)
         let scalar: Double = 0.99
         measure {
-            for _ in 0..<300000 {
+            for _ in 0..<1000000 {
                 rgba.withUnsafeMutableBufferPointer {
                     var p = $0.baseAddress!
                     for _ in 0..<$0.count {
@@ -58,7 +58,7 @@ extension BasicPerformanceTests {
         var rgba = [Double](repeating: 1, count: 4)
         var scalar: Double = 0.99
         measure {
-            for _ in 0..<300000 {
+            for _ in 0..<1000000 {
                 rgba.withUnsafeMutableBufferPointer {
                     let p = $0.baseAddress!
                     vDSP_vsmulD(p, 1, &scalar, p, 1, vDSP_Length($0.count))
