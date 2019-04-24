@@ -159,9 +159,9 @@ let blur = image.convoluted(Filter.gaussian3x3)
 let maximum = image.maximumFilter(kernelSize: 3)
 ```
 
-[Example: Gaussian x100 / Mean x100 / Sobel(Horizontal) / Laplacian](https://github.com/t-ae/swim/blob/7a055c45e4a1db9755f04a785599e18fde1f86bd/Tests/VisualTests/FilterVisualTests.swift#L68-L95)
+[Example: Gaussian x10 / Mean x10 / Sobel(Horizontal) / Laplacian](https://github.com/t-ae/swim/blob/7a055c45e4a1db9755f04a785599e18fde1f86bd/Tests/VisualTests/FilterVisualTests.swift#L68-L95)
 
-![filter](https://user-images.githubusercontent.com/12446914/56634840-6660da00-669e-11e9-9746-915df9f67f1d.png)
+![filter](https://user-images.githubusercontent.com/12446914/56638545-6b775680-66a9-11e9-9689-a888138dcd0c.png)
 
 ### Bayer filter
 ```swift 

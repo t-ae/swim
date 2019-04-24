@@ -72,14 +72,14 @@ extension FilterVisualTests {
         var images = [Image<RGB, Double>]()
         
         var gaussian = image
-        for _ in 0..<100 {
-            gaussian = image.convoluted(Filter.gaussian5x5)
+        for _ in 0..<10 {
+            gaussian = gaussian.convoluted(Filter.gaussian5x5)
         }
         images.append(gaussian)
         
         var mean = image
-        for _ in 0..<100 {
-            mean = image.convoluted(Filter.mean3x3)
+        for _ in 0..<10 {
+            mean = mean.convoluted(Filter.mean5x5)
         }
         images.append(mean)
         
