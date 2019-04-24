@@ -49,9 +49,9 @@ extension ResizeVisualTests {
         
         var images = [Image<RGB, Double>]()
         
-        images.append(lena.resize(width: 112, height: 112, method: .nearestNeighbor))
-        images.append(lena.resize(width: 112, height: 112, method: .bilinear))
-        images.append(lena.resize(width: 112, height: 112, method: .bicubic))
+        images.append(lena.resize(width: 300, height: 300, method: .nearestNeighbor))
+        images.append(lena.resize(width: 300, height: 300, method: .bilinear))
+        images.append(lena.resize(width: 300, height: 300, method: .bicubic))
         
         let image = Image.concatH(images)
         
