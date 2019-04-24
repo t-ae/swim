@@ -11,6 +11,20 @@ public protocol Interpolator {
 
 extension Interpolator {
     @inlinable
+    public func interpolate(x: T, y: T, in image: Image<P, T>) -> Pixel<P, T> {
+        var pixel = Pixel<P, T>(value: 0)
+        
+        pixel.withUnsafeMutableBufferPointer {
+            let ref = MutablePixelRef<P, T>(x: -1, y: -1, pointer: $0)
+            interpolate(x: x, y: y, in: image, into: ref)
+        }
+        
+        return pixel
+    }
+}
+
+extension Interpolator {
+    @inlinable
     func clampValue(x: Int, max: Int) -> Int? {
         guard x < 0 || x >= max else {
             // Already inside
@@ -62,17 +76,6 @@ extension Interpolator {
             return (x, y)
         } else {
             return nil
-        }
-    }
-    
-    @inlinable
-    func getPixel(x: Int, y: Int, in image: Image<P, T>) -> Pixel<P, T> {
-        if let (x, y) = inImageCoord(x: x, y: y, width: image.width, height: image.height) {
-            return image[unsafe: x, y]
-        } else if case let .constant(pixel) = edgeMode {
-            return pixel
-        } else {
-            preconditionFailure("Never happens")
         }
     }
 }
