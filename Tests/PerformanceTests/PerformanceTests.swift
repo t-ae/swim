@@ -127,6 +127,17 @@ class PerformanceTests: XCTestCase {
         }
     }
     
+    func testBayer() {
+        let data = [Float](repeating: 0, count: 640*480*3)
+        let image = Image(width: 640, height: 480, rgb: data)
+        
+        let conv = BayerConverter(pattern: .bggr)
+        
+        measure {
+            _ = conv.convert(image: image)
+        }
+    }
+    
     func testDemosaic() {
         let data = [Float](repeating: 0, count: 640*480)
         let image = Image(width: 640, height: 480, intensity: data)
