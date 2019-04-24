@@ -18,7 +18,7 @@ public struct NearestNeighborInterpolator<P: PixelType, T: BinaryFloatingPoint&D
         } else if case let .constant(px) = edgeMode {
             pixel.assign(pixel: px)
         } else {
-            preconditionFailure("Never happens")
+            fatalError("Never happens")
         }
     }
 }

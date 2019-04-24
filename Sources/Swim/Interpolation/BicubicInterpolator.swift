@@ -306,7 +306,7 @@ public struct _BicubicInterpolator<P: PixelType, T: BinaryFloatingPoint&DataType
                 } else if case let .constant(px) = edgeMode {
                     pixel.add(pixel: px, with: wx * wy)
                 } else {
-                    preconditionFailure("Never happens")
+                    fatalError("Never happens")
                 }
             }
         }
