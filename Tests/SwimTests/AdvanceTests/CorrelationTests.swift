@@ -39,23 +39,27 @@ class CorrelationTests: XCTestCase {
     
     func testNCC() {
         do {
-            let image1 = Image(width: 3, height: 2, intensity: [0, 1, 2, 3, 4, 5] as [Float])
-            let image2 = Image(width: 3, height: 2, intensity: [2, 4, 6, 2, 4, 6] as [Float])
+            let data1 = [0, 1, 2, 3, 4, 5] as [Float]
+            let data2 = [2, 4, 6, 2, 4, 6] as [Float]
+            let image1 = Image(width: 3, height: 2, intensity: data1)
+            let image2 = Image(width: 3, height: 2, intensity: data2)
             
-            let ip = zip(image1.data, image2.data).map { $0*$1 }.reduce(0, +)
-            let l1 = zip(image1.data, image1.data).map { $0*$1 }.reduce(0, +)
-            let l2 = zip(image2.data, image2.data).map { $0*$1 }.reduce(0, +)
+            let ip = zip(data1, data2).map { $0*$1 }.reduce(0, +)
+            let l1 = zip(data1, data1).map { $0*$1 }.reduce(0, +)
+            let l2 = zip(data2, data2).map { $0*$1 }.reduce(0, +)
             
             XCTAssertEqual(Correlation.ncc(image1, image1), 1)
             XCTAssertEqual(Correlation.ncc(image1, image2), ip / sqrt(l1 * l2))
         }
         do {
-            let image1 = Image(width: 3, height: 2, intensity: [0.0, 1, 2, 3, 4, 5])
-            let image2 = Image(width: 3, height: 2, intensity: [2.0, 4, 6, 2, 4, 6])
+            let data1 = [0.0, 1, 2, 3, 4, 5]
+            let data2 = [2.0, 4, 6, 2, 4, 6]
+            let image1 = Image(width: 3, height: 2, intensity: data1)
+            let image2 = Image(width: 3, height: 2, intensity: data2)
             
-            let ip = zip(image1.data, image2.data).map { $0*$1 }.reduce(0, +)
-            let l1 = zip(image1.data, image1.data).map { $0*$1 }.reduce(0, +)
-            let l2 = zip(image2.data, image2.data).map { $0*$1 }.reduce(0, +)
+            let ip = zip(data1, data2).map { $0*$1 }.reduce(0, +)
+            let l1 = zip(data1, data1).map { $0*$1 }.reduce(0, +)
+            let l2 = zip(data2, data2).map { $0*$1 }.reduce(0, +)
             
             XCTAssertEqual(Correlation.ncc(image1, image1), 1)
             XCTAssertEqual(Correlation.ncc(image1, image2), ip / sqrt(l1 * l2))

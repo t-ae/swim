@@ -3,7 +3,9 @@ import Foundation
 public struct Image<P: PixelType, T: DataType> {
     public let width: Int
     public let height: Int
-    public var data: [T]
+    
+    @usableFromInline
+    var data: [T]
 
     @inlinable
     public init(width: Int, height: Int, data: [T]) {

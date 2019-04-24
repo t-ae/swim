@@ -56,7 +56,7 @@ extension OtherVisualTests {
         let maxIteration = 256
         
         func getJuliaImage(c: (Double, Double), color: Pixel<RGB, Double>) -> Image<RGBA, Double> {
-            let color = Pixel(rgba: color.data + [0])
+            let color = Pixel(r: color[.red], g: color[.green], b: color[.blue], a: 0)
             var image = Image<RGBA, Double>(width: size,
                                             height: size,
                                             pixel: color)
@@ -166,8 +166,8 @@ extension OtherVisualTests {
         image += perlin(width: 512, height: 512, fieldSize: 16)
         
         // normalize
-        image -= image.data.min()!
-        image /= image.data.max()!
+        image -= image.withUnsafeMutableBufferPointer { $0.min()! }
+        image /= image.withUnsafeMutableBufferPointer { $0.max()! }
         
         let nsImage = doubleToNSImage(image)
         XCTAssertTrue(nsImage.isValid, "Break and check nsImage in debugger.")

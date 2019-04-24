@@ -8,7 +8,8 @@ class DataTypeConversionTests: XCTestCase {
             let image = Image(width: 2, height: 5, rgba: data)
             
             let float = Image(cast: image, to: Float.self)
-            XCTAssertEqual(float.data, data.map { Float($0) })
+            XCTAssertEqual(float.withUnsafeBufferPointer { [Float]($0) },
+                           data.map { Float($0) })
             
             let double = Image(cast: image, to: Double.self)
             XCTAssertEqual(double, Image(width: 2, height: 5, data: data.map { Double($0) }))

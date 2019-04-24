@@ -8,19 +8,19 @@ class ImageTests: XCTestCase {
             let data = (0..<100).map { UInt8($0) }
             let image = Image(width: 10, height: 10, intensity: data)
             
-            XCTAssertEqual(image.data, data)
+            XCTAssertEqual(image.withUnsafeBufferPointer { Array($0) }, data)
         }
         do {
             let data = (0..<300).map { Float($0) }
             let image = Image(width: 10, height: 10, rgb: data)
             
-            XCTAssertEqual(image.data, data)
+            XCTAssertEqual(image.withUnsafeBufferPointer { Array($0) }, data)
         }
         do {
             let data = (0..<400).map { Double($0) }
             let image = Image(width: 10, height: 10, rgba: data)
             
-            XCTAssertEqual(image.data, data)
+            XCTAssertEqual(image.withUnsafeBufferPointer { Array($0) }, data)
         }
     }
     

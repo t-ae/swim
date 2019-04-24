@@ -13,9 +13,6 @@ public protocol PixelProtocol {
 }
 
 extension Pixel: PixelProtocol {
-    public func withUnsafeBufferPointer<R>(_ body: (UnsafeBufferPointer<T>)->R) -> R {
-        return data.withUnsafeBufferPointer(body)
-    }
 }
 
 extension PixelRef: PixelProtocol {

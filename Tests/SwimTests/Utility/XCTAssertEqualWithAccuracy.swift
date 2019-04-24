@@ -15,20 +15,14 @@ func XCTAssertEqual<T: FloatingPoint>(_ expression1: [T],
     }
 }
 
-func XCTAssertEqual<P, T: FloatingPoint>(_ expression1: Image<P, T>,
-                                         _ expression2: Image<P, T>,
-                                         accuracy: T,
-                                         file: StaticString = #file,
-                                         line: UInt = #line) {
-    XCTAssertEqual(expression1.width, expression2.width, file: file, line: line)
-    XCTAssertEqual(expression1.height, expression2.height, file: file, line: line)
-    XCTAssertEqual(expression1.data, expression2.data, accuracy: accuracy, file: file, line: line)
-}
-
-func XCTAssertEqual<P, T: FloatingPoint>(_ expression1: Pixel<P, T>,
-                                         _ expression2: Pixel<P, T>,
-                                         accuracy: T,
-                                         file: StaticString = #file,
-                                         line: UInt = #line) {
-    XCTAssertEqual(expression1.data, expression2.data, accuracy: accuracy, file: file, line: line)
+func XCTAssertEqual<C: MutableDataContainer>(_ expression1: C,
+                                             _ expression2: C,
+                                             accuracy: C.T,
+                                             file: StaticString = #file,
+                                             line: UInt = #line) where C.T: FloatingPoint {
+    XCTAssertEqual(expression1.withUnsafeBufferPointer { Array($0) },
+                   expression2.withUnsafeBufferPointer { Array($0) },
+                   accuracy: accuracy,
+                   file: file,
+                   line: line)
 }

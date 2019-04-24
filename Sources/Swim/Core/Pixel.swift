@@ -1,8 +1,8 @@
 import Foundation
 
 public struct Pixel<P: PixelType, T: DataType> {
-
-    public var data: [T]
+    @usableFromInline
+    var data: [T]
     
     @inlinable
     public init(data: [T]) {
