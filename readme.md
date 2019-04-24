@@ -94,7 +94,7 @@ let image3 = image.resize(width: 512, height: 512, method: .nearestNeighbor)
 let image4 = image.resize(width: 512, height: 512, method: .bicubic)
 ```
 
-[Example: NearestNeighbor / Bilinear / Bicubic]()
+[Example: NearestNeighbor / Bilinear / Bicubic](https://github.com/t-ae/swim/blob/7a055c45e4a1db9755f04a785599e18fde1f86bd/Tests/VisualTests/ResizeVisualTests.swift#L29-L44)
 
 ![resize](https://user-images.githubusercontent.com/12446914/56634980-dbccaa80-669e-11e9-90f7-5046d85e9f29.png)
 
@@ -106,7 +106,7 @@ let interpolator = BilinearInterpolator<RGBA, Double>(edgeMode: .edge)
 let warpedImage = image.warp(transformation: affine, outputSize: (500, 500), interpolator: interpolator)
 ```
 
-[Example: NN+Wrap / BL+Constant / BC+Reflect]()
+[Example: NN+Wrap / BL+Constant / BC+Reflect](https://github.com/t-ae/swim/blob/7a055c45e4a1db9755f04a785599e18fde1f86bd/Tests/VisualTests/WarpVisualTests.swift#L140-L172)
 
 ![warp](https://user-images.githubusercontent.com/12446914/56634776-2a2d7980-669e-11e9-8ff2-179dbdb3dff4.png)
 
@@ -159,7 +159,7 @@ let blur = image.convoluted(Filter.gaussian3x3)
 let maximum = image.maximumFilter(kernelSize: 3)
 ```
 
-[Example: Gaussian x100 / Mean x100 / Sobel(Horizontal) / Laplacian]()
+[Example: Gaussian x100 / Mean x100 / Sobel(Horizontal) / Laplacian](https://github.com/t-ae/swim/blob/7a055c45e4a1db9755f04a785599e18fde1f86bd/Tests/VisualTests/FilterVisualTests.swift#L68-L95)
 
 ![filter](https://user-images.githubusercontent.com/12446914/56634840-6660da00-669e-11e9-9746-915df9f67f1d.png)
 
@@ -171,7 +171,7 @@ let bayer = converter.convert(image: image)
 let reconstruct = converter.demosaic(image: bayer)
 ```
 
-[Example: Base / Bayer format / Reconstructed]()
+[Example: Base / Bayer format / Reconstructed](https://github.com/t-ae/swim/blob/7a055c45e4a1db9755f04a785599e18fde1f86bd/Tests/VisualTests/BayerVisualTests.swift#L12-L27)
 
 ![bayer_bggr](https://user-images.githubusercontent.com/12446914/56634959-cce5f800-669e-11e9-89a2-ce49121a44bc.png)
 
