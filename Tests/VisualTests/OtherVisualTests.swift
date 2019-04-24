@@ -116,48 +116,54 @@ extension OtherVisualTests {
     }
     
     public func testPerlinNoise() {
-        var image = Image<Intensity, Double>(width: 512, height: 512, value: 0)
-        
-        let fieldSize = 20
-        
-        var grad = [[(x: Double, y: Double)]](repeating: [], count: fieldSize+1)
-        for i in 0..<fieldSize+1 {
-            for j in 0..<fieldSize + 1 {
-                let angle = Double.random(in: -Double.pi..<Double.pi)
-                grad[i].append((cos(angle), sin(angle)))
-            }
-        }
-        
         func c(_ v: Double) -> Double {
             return (1 - 3*v*v + 2*v*v*abs(v))
         }
         
-        func value(x: Double, y: Double) -> Double {
-            let g00 = grad[Int(y)][Int(x)]
-            let g01 = grad[Int(y)][Int(x)+1]
-            let g10 = grad[Int(y)+1][Int(x)]
-            let g11 = grad[Int(y)+1][Int(x)+1]
+        func perlin(width: Int, height: Int, fieldSize: Int) -> Image<Intensity, Double> {
+            var grad = [[(x: Double, y: Double)]](repeating: [], count: fieldSize+1)
+            for i in 0..<fieldSize+1 {
+                for j in 0..<fieldSize + 1 {
+                    let gx = Double.random(in: -1..<1)
+                    let gy = Double.random(in: -1..<1)
+                    grad[i].append((gx, gy))
+                }
+            }
             
-            let u = x - floor(x)
-            let v = y - floor(y)
+            func value(x: Double, y: Double) -> Double {
+                let g00 = grad[Int(y)][Int(x)]
+                let g01 = grad[Int(y)][Int(x)+1]
+                let g10 = grad[Int(y)+1][Int(x)]
+                let g11 = grad[Int(y)+1][Int(x)+1]
+                
+                let u = x - floor(x)
+                let v = y - floor(y)
+                
+                let w00 = c(u) * c(v) * (g00.x * u + g00.y * v)
+                let w01 = c(u-1) * c(v) * (g01.x * (u-1) + g01.y * v)
+                let w10 = c(u) * c(v-1) * (g10.x * u + g10.y * (v-1))
+                let w11 = c(u-1) * c(v-1) * (g11.x * (u-1) + g11.y * (v-1))
+                
+                let w0 = w00 - u * (w00 - w01)
+                let w1 = w10 - u * (w10 - w11)
+                
+                return w0 - v * (w0 - w1)
+            }
             
-            let w00 = c(u) * c(v) * (g00.x * u + g00.y * v)
-            let w01 = c(u-1) * c(v) * (g01.x * (u-1) + g01.y * v)
-            let w10 = c(u) * c(v-1) * (g10.x * u + g10.y * (v-1))
-            let w11 = c(u-1) * c(v-1) * (g11.x * (u-1) + g11.y * (v-1))
+            var image = Image<Intensity, Double>(width: 512, height: 512, value: 0)
+            image.pixelwiseConvert { ref in
+                let px = Double(fieldSize) * Double(ref.x) / Double(width)
+                let py = Double(fieldSize) * Double(ref.y) / Double(height)
+                ref[0] = value(x: px, y: py)
+            }
             
-            let w0 = w00 - u * (w00 - w01)
-            let w1 = w10 - u * (w10 - w11)
-            
-            return w0 - v * (w0 - w1)
+            return image
         }
         
-        let (width, height) = image.size
-        image.pixelwiseConvert { ref in
-            let px = Double(fieldSize) * Double(ref.x) / Double(width)
-            let py = Double(fieldSize) * Double(ref.y) / Double(height)
-            ref[0] = value(x: px, y: py)
-        }
+        var image = perlin(width: 512, height: 512, fieldSize: 2)
+        image += perlin(width: 512, height: 512, fieldSize: 4)
+        image += perlin(width: 512, height: 512, fieldSize: 8)
+        image += perlin(width: 512, height: 512, fieldSize: 16)
         
         // normalize
         image -= image.data.min()!
