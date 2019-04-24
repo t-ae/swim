@@ -80,7 +80,7 @@ extension Interpolator {
     }
 }
 
-public enum EdgeMode<P: PixelType, T: BinaryFloatingPoint&DataType> {
+public enum EdgeMode<P: PixelType, T: DataType> {
     case constant(pixel: Pixel<P, T>)
     case edge
     case symmetric
