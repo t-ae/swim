@@ -175,6 +175,44 @@ extension WarpVisualTests {
         XCTAssertFalse(nsImages.isEmpty, "Break and check nsImages in debugger.")
     }
     
+    func testWarpLanczos3() {
+        typealias Intpl = Lanczos3Interpolator
+        
+        var nsImages = [String: NSImage]()
+        
+        do {
+            let intpl = Intpl<RGB>()
+            var result = try! src.warp(transformation: affine, outputSize: (512, 512), interpolator: intpl)
+            result.clip(low: 0, high: 1)
+            nsImages["constant0"] = doubleToNSImage(result)
+        }
+        do {
+            let intpl = Intpl<RGB>(edgeMode: .reflect)
+            let result = try! src.warp(transformation: affine, outputSize: (512, 512), interpolator: intpl)
+            nsImages["reflect"] = doubleToNSImage(result)
+        }
+        do {
+            let intpl = Intpl<RGB>(edgeMode: .symmetric)
+            var result = try! src.warp(transformation: affine, outputSize: (512, 512), interpolator: intpl)
+            result.clip(low: 0, high: 1)
+            nsImages["symmetric"] = doubleToNSImage(result)
+        }
+        do {
+            let intpl = Intpl<RGB>(edgeMode: .edge)
+            var result = try! src.warp(transformation: affine, outputSize: (512, 512), interpolator: intpl)
+            result.clip(low: 0, high: 1)
+            nsImages["edge"] = doubleToNSImage(result)
+        }
+        do {
+            let intpl = Intpl<RGB>(edgeMode: .wrap)
+            var result = try! src.warp(transformation: affine, outputSize: (512, 512), interpolator: intpl)
+            result.clip(low: 0, high: 1)
+            nsImages["wrap"] = doubleToNSImage(result)
+        }
+        
+        XCTAssertFalse(nsImages.isEmpty, "Break and check nsImages in debugger.")
+    }
+    
     func testMatrix() {
         let path = testResoruceRoot().appendingPathComponent("lena_128.png")
         let lena = try! Image<RGB, Double>(contentsOf: path)
@@ -200,6 +238,16 @@ extension WarpVisualTests {
         }
         do {
             let intpl = BicubicInterpolator<RGB, Double>(edgeMode: .reflect)
+            let result = try! lena.warp(transformation: affine, outputSize: (300, 300), interpolator: intpl)
+            images.append(result)
+        }
+        do {
+            let intpl = Lanczos2Interpolator<RGB>(edgeMode: .edge)
+            let result = try! lena.warp(transformation: affine, outputSize: (300, 300), interpolator: intpl)
+            images.append(result)
+        }
+        do {
+            let intpl = Lanczos3Interpolator<RGB>(edgeMode: .symmetric)
             let result = try! lena.warp(transformation: affine, outputSize: (300, 300), interpolator: intpl)
             images.append(result)
         }
