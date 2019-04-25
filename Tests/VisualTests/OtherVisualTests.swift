@@ -121,14 +121,16 @@ extension OtherVisualTests {
         }
         
         func perlin(width: Int, height: Int, fieldSize: Int) -> Image<Intensity, Double> {
-            var grad = [[(x: Double, y: Double)]](repeating: [], count: fieldSize+1)
-            for i in 0..<fieldSize+1 {
-                for j in 0..<fieldSize + 1 {
+            var grad = [[(x: Double, y: Double)]](repeating: [], count: fieldSize)
+            for i in 0..<fieldSize {
+                for j in 0..<fieldSize {
                     let gx = Double.random(in: -1..<1)
                     let gy = Double.random(in: -1..<1)
                     grad[i].append((gx, gy))
                 }
+                grad[i].append(grad[i][0])
             }
+            grad.append(grad[0])
             
             func value(x: Double, y: Double) -> Double {
                 let g00 = grad[Int(y)][Int(x)]
@@ -150,7 +152,7 @@ extension OtherVisualTests {
                 return w0 - v * (w0 - w1)
             }
             
-            var image = Image<Intensity, Double>(width: 512, height: 512, value: 0)
+            var image = Image<Intensity, Double>(width: width, height: height, value: 0)
             image.pixelwiseConvert { ref in
                 let px = Double(fieldSize) * Double(ref.x) / Double(width)
                 let py = Double(fieldSize) * Double(ref.y) / Double(height)
@@ -160,14 +162,17 @@ extension OtherVisualTests {
             return image
         }
         
-        var image = perlin(width: 512, height: 512, fieldSize: 2)
-        image += perlin(width: 512, height: 512, fieldSize: 4)
-        image += perlin(width: 512, height: 512, fieldSize: 8)
-        image += perlin(width: 512, height: 512, fieldSize: 16)
+        let size = 256
+        var image = perlin(width: size, height: size, fieldSize: 4)
+        image += perlin(width: size, height: size, fieldSize: 8)
+        image += perlin(width: size, height: size, fieldSize: 16)
         
         // normalize
         image -= image.withUnsafeMutableBufferPointer { $0.min()! }
         image /= image.withUnsafeMutableBufferPointer { $0.max()! }
+        
+        // repeat
+        image = Image.concat([[image, image], [image, image]])
         
         let nsImage = doubleToNSImage(image)
         XCTAssertTrue(nsImage.isValid, "Break and check nsImage in debugger.")
