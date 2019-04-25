@@ -52,36 +52,22 @@ extension Image {
             }
         }
     }
-    
-    @inlinable
-    func getSubimage(xRange: Range<Int>, yRange: Range<Int>) -> Image<P, T> {
-        let x = xRange.lowerBound
-        let y = yRange.lowerBound
-        let width = xRange.upperBound - x
-        let height = yRange.upperBound - y
-        
-        return getSubimage(x: x, y: y, width: width, height: height)
-    }
-    
-    @inlinable
-    mutating func setSubimage(xRange: Range<Int>, yRange: Range<Int>, newValue: Image<P, T>) {
-        let x = xRange.lowerBound
-        let y = yRange.lowerBound
-        let width = xRange.upperBound - x
-        let height = yRange.upperBound - y
-        
-        setSubimage(x: x, y: y, width: width, height: height, newValue: newValue)
-    }
 }
 
 extension Image {
     @inlinable
     public subscript(xRange: Range<Int>, yRange: Range<Int>) -> Image<P, T> {
         get {
-            return getSubimage(xRange: xRange, yRange: yRange)
+            let x = xRange.lowerBound
+            let y = yRange.lowerBound
+            
+            return getSubimage(x: x, y: y, width: xRange.count, height: yRange.count)
         }
         set {
-            setSubimage(xRange: xRange, yRange: yRange, newValue: newValue)
+            let x = xRange.lowerBound
+            let y = yRange.lowerBound
+            
+            setSubimage(x: x, y: y, width: xRange.count, height: yRange.count, newValue: newValue)
         }
     }
     
