@@ -422,6 +422,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A732B3A922719EC500B2256E /* Image */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_42 /* Image.swift */,
+				OBJ_43 /* Initializers.swift */,
+			);
+			path = Image;
+			sourceTree = "<group>";
+		};
+		A732B3AA22719ED000B2256E /* Pixel */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_44 /* Pixel.swift */,
+				A732AC0E226E968800B2256E /* PixelRef.swift */,
+				A732AC11226E9BC200B2256E /* PixelProtocol.swift */,
+			);
+			path = Pixel;
+			sourceTree = "<group>";
+		};
 		OBJ_10 /* include */ = {
 			isa = PBXGroup;
 			children = (
@@ -665,12 +684,9 @@
 			children = (
 				OBJ_40 /* DataContainer.swift */,
 				OBJ_41 /* DataType.swift */,
-				OBJ_44 /* Pixel.swift */,
-				A732AC0E226E968800B2256E /* PixelRef.swift */,
-				A732AC11226E9BC200B2256E /* PixelProtocol.swift */,
-				OBJ_42 /* Image.swift */,
-				OBJ_43 /* Initializers.swift */,
 				OBJ_45 /* PixelType.swift */,
+				A732B3AA22719ED000B2256E /* Pixel */,
+				A732B3A922719EC500B2256E /* Image */,
 			);
 			path = Core;
 			sourceTree = "<group>";
