@@ -5,7 +5,7 @@ extension Image where T: SignedNumeric {
         ret.data.withUnsafeMutableBufferPointer {
             var p = $0.baseAddress!
             for _ in 0..<$0.count {
-                p.pointee = -p.pointee
+                p.pointee.negate()
                 p += 1
             }
         }

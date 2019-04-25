@@ -1,6 +1,6 @@
 extension PixelProtocol where T: SignedNumeric {
     @inlinable
     public static prefix func -(arg: Self) -> Pixel<P, T> {
-        return 0 - arg
+        return Pixel<P, T>(data: arg.withUnsafeBufferPointer { $0.map { -$0 } })
     }
 }
