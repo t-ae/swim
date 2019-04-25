@@ -77,7 +77,7 @@ extension Image where P == Intensity {
                             }
                             
                             // copy
-                            let count = width - abs(dx)
+                            let count = width - Swift.abs(dx)
                             memcpy(dst, sp, count*MemoryLayout<T>.size)
                             dst += count
                             
