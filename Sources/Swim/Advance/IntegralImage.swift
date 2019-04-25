@@ -1,5 +1,5 @@
 public enum IntegralImageConverter {
-    public static func convert<T: Numeric>(image: Image<Intensity, T>) -> Image<Intensity, T> {
+    public static func convert<T: AdditiveArithmetic>(image: Image<Intensity, T>) -> Image<Intensity, T> {
         var newImage = image
         
         newImage.data.withUnsafeMutableBufferPointer {
@@ -14,7 +14,7 @@ public enum IntegralImageConverter {
             // Rest rows
             var p2 = $0.baseAddress!
             for _ in 1..<image.height {
-                var rowsum: T = 0
+                var rowsum = T.zero
                 
                 for _ in 0..<image.width {
                     rowsum += p.pointee
