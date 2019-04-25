@@ -10,7 +10,8 @@ public struct Image<P: PixelType, T: DataType> {
     @inlinable
     public init(width: Int, height: Int, data: [T]) {
         precondition(width >= 0 && height >= 0, "Image can't have negative size.")
-        precondition(data.count == width * height * P.channels, "Size of `data` must be exaclty `width` * `height` * number of channels")
+        precondition(data.count == width * height * P.channels,
+                     "Size of `data` must be equal to `width` * `height` * number of channels")
         self.width = width
         self.height = height
         self.data = data
@@ -72,6 +73,6 @@ extension Image {
         assert(0 <= y && y < height, "Index out of range.")
         assert(0 <= c && c < P.channels, "Index out of range.")
         
-        return ((y * width) + x) * P.channels + c
+        return (y * width + x) * P.channels + c
     }
 }
