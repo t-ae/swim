@@ -5,6 +5,7 @@ public protocol Interpolator {
     associatedtype T: BinaryFloatingPoint & DataType
     
     var edgeMode: EdgeMode<P, T> { get set }
+    
     @inlinable func interpolate(x: T, y: T, in image: Image<P, T>) -> Pixel<P, T>
     @inlinable func interpolate(x: T, y: T, in image: Image<P, T>, into pixel: MutablePixelRef<P, T>)
 }

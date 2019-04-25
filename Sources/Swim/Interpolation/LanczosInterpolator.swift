@@ -5,7 +5,8 @@ func sinc(_ x: Double) -> Double {
     guard x != 0 else {
         return 1
     }
-    return sin(x * .pi) / (x * .pi)
+    let xpi = x * .pi
+    return sin(xpi) / (xpi)
 }
 
 /// Lanczos2 interpolator.
