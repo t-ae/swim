@@ -2,7 +2,8 @@ import Foundation
 
 extension MutablePixelRef where T: AdditiveArithmetic {
     @inlinable
-    static func addAssign<P2: PixelProtocol>(lhs: MutablePixelRef, rhs: P2) where P2.P == P, P2.T == T {
+    public static func +=<P2: PixelProtocol>(lhs: MutablePixelRef,
+                                             rhs: P2) where P2.P == P, P2.T == T {
         var lp = lhs.pointer.baseAddress!
         rhs.withUnsafeBufferPointer { rbp in
             assert(lhs.pointer.count == rbp.count)
@@ -17,7 +18,8 @@ extension MutablePixelRef where T: AdditiveArithmetic {
     }
     
     @inlinable
-    static func subtractAssign<P2: PixelProtocol>(lhs: MutablePixelRef, rhs: P2) where P2.P == P, P2.T == T {
+    public static func -=<P2: PixelProtocol>(lhs: MutablePixelRef,
+                                             rhs: P2) where P2.P == P, P2.T == T {
         var lp = lhs.pointer.baseAddress!
         rhs.withUnsafeBufferPointer { rbp in
             assert(lhs.pointer.count == rbp.count)
@@ -30,21 +32,12 @@ extension MutablePixelRef where T: AdditiveArithmetic {
             }
         }
     }
-    
-    @inlinable
-    public static func +=<P2: PixelProtocol>(lhs: MutablePixelRef, rhs: P2) where P2.P == P, P2.T == T {
-        addAssign(lhs: lhs, rhs: rhs)
-    }
-    
-    @inlinable
-    public static func -=<P2: PixelProtocol>(lhs: MutablePixelRef, rhs: P2) where P2.P == P, P2.T == T {
-        subtractAssign(lhs: lhs, rhs: rhs)
-    }
 }
 
 extension MutablePixelRef where T: Numeric {
     @inlinable
-    static func multiplyAssign<P2: PixelProtocol>(lhs: MutablePixelRef, rhs: P2) where P2.P == P, P2.T == T {
+    public static func *=<P2: PixelProtocol>(lhs: MutablePixelRef,
+                                             rhs: P2) where P2.P == P, P2.T == T {
         var lp = lhs.pointer.baseAddress!
         rhs.withUnsafeBufferPointer { rbp in
             assert(lhs.pointer.count == rbp.count)
@@ -57,16 +50,12 @@ extension MutablePixelRef where T: Numeric {
             }
         }
     }
-    
-    @inlinable
-    public static func *=<P2: PixelProtocol>(lhs: MutablePixelRef, rhs: P2) where P2.P == P, P2.T == T {
-        multiplyAssign(lhs: lhs, rhs: rhs)
-    }
 }
 
 extension MutablePixelRef where T: BinaryInteger {
     @inlinable
-    static func divideAssign<P2: PixelProtocol>(lhs: MutablePixelRef, rhs: P2) where P2.P == P, P2.T == T {
+    public static func /=<P2: PixelProtocol>(lhs: MutablePixelRef,
+                                             rhs: P2) where P2.P == P, P2.T == T {
         var lp = lhs.pointer.baseAddress!
         rhs.withUnsafeBufferPointer { rbp in
             assert(lhs.pointer.count == rbp.count)
@@ -78,17 +67,13 @@ extension MutablePixelRef where T: BinaryInteger {
                 rp += 1
             }
         }
-    }
-    
-    @inlinable
-    public static func /=<P2: PixelProtocol>(lhs: MutablePixelRef, rhs: P2) where P2.P == P, P2.T == T {
-        divideAssign(lhs: lhs, rhs: rhs)
     }
 }
 
 extension MutablePixelRef where T: FloatingPoint {
     @inlinable
-    static func divideAssign<P2: PixelProtocol>(lhs: MutablePixelRef, rhs: P2) where P2.P == P, P2.T == T {
+    public static func /=<P2: PixelProtocol>(lhs: MutablePixelRef,
+                                             rhs: P2) where P2.P == P, P2.T == T {
         var lp = lhs.pointer.baseAddress!
         rhs.withUnsafeBufferPointer { rbp in
             assert(lhs.pointer.count == rbp.count)
@@ -100,11 +85,6 @@ extension MutablePixelRef where T: FloatingPoint {
                 rp += 1
             }
         }
-    }
-    
-    @inlinable
-    public static func /=<P2: PixelProtocol>(lhs: MutablePixelRef, rhs: P2) where P2.P == P, P2.T == T {
-        divideAssign(lhs: lhs, rhs: rhs)
     }
 }
 

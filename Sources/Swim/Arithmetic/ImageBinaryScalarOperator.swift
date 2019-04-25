@@ -1,19 +1,6 @@
 // MARK: - Image
 extension Image where T: AdditiveArithmetic {
     @inlinable
-    static func subtract(lhs: T, rhs: Image) -> Image {
-        var ret = rhs
-        ret.data.withUnsafeMutableBufferPointer {
-            var p = $0.baseAddress!
-            for _ in 0..<$0.count {
-                p.pointee = lhs - p.pointee
-                p += 1
-            }
-        }
-        return ret
-    }
-    
-    @inlinable
     public static func +(lhs: Image, rhs: T) -> Image {
         var ret = lhs
         ret += rhs
@@ -36,7 +23,15 @@ extension Image where T: AdditiveArithmetic {
     
     @inlinable
     public static func -(lhs: T, rhs: Image) -> Image {
-        return subtract(lhs: lhs, rhs: rhs)
+        var ret = rhs
+        ret.data.withUnsafeMutableBufferPointer {
+            var p = $0.baseAddress!
+            for _ in 0..<$0.count {
+                p.pointee = lhs - p.pointee
+                p += 1
+            }
+        }
+        return ret
     }
 }
 
@@ -58,7 +53,14 @@ extension Image where T: Numeric {
 
 extension Image where T: BinaryInteger {
     @inlinable
-    static func divide(lhs: T, rhs: Image) -> Image {
+    public static func /(lhs: Image, rhs: T) -> Image {
+        var ret = lhs
+        ret /= rhs
+        return ret
+    }
+    
+    @inlinable
+    public static func /(lhs: T, rhs: Image) -> Image {
         var ret = rhs
         ret.data.withUnsafeMutableBufferPointer {
             var p = $0.baseAddress!
@@ -68,35 +70,19 @@ extension Image where T: BinaryInteger {
             }
         }
         return ret
-    }
-    
-    @inlinable
-    public static func /(lhs: Image, rhs: T) -> Image {
-        var ret = lhs
-        ret /= rhs
-        return ret
-    }
-    
-    @inlinable
-    public static func /(lhs: T, rhs: Image) -> Image {
-        return divide(lhs: lhs, rhs: rhs)
     }
 }
 
 extension Image where T: FloatingPoint {
     @inlinable
-    static func divideAssign(lhs: inout Image, rhs: T) {
-        lhs.data.withUnsafeMutableBufferPointer {
-            var p = $0.baseAddress!
-            for _ in 0..<$0.count {
-                p.pointee /= rhs
-                p += 1
-            }
-        }
+    public static func /(lhs: Image, rhs: T) -> Image {
+        var ret = lhs
+        ret /= rhs
+        return ret
     }
     
     @inlinable
-    static func divide(lhs: T, rhs: Image) -> Image {
+    public static func /(lhs: T, rhs: Image) -> Image {
         var ret = rhs
         ret.data.withUnsafeMutableBufferPointer {
             var p = $0.baseAddress!
@@ -106,18 +92,6 @@ extension Image where T: FloatingPoint {
             }
         }
         return ret
-    }
-    
-    @inlinable
-    public static func /(lhs: Image, rhs: T) -> Image {
-        var ret = lhs
-        ret /= rhs
-        return ret
-    }
-    
-    @inlinable
-    public static func /(lhs: T, rhs: Image) -> Image {
-        return divide(lhs: lhs, rhs: rhs)
     }
 }
 
@@ -128,7 +102,28 @@ import Accelerate
 
 extension Image where T == Float {
     @inlinable
-    static func subtract(lhs: T, rhs: Image) -> Image {
+    public static func +(lhs: Image, rhs: T) -> Image {
+        var ret = lhs
+        ret += rhs
+        return ret
+    }
+    
+    @inlinable
+    public static func +(lhs: T, rhs: Image) -> Image {
+        var ret = rhs
+        ret += lhs
+        return ret
+    }
+    
+    @inlinable
+    public static func -(lhs: Image, rhs: T) -> Image {
+        var ret = lhs
+        ret -= rhs
+        return ret
+    }
+    
+    @inlinable
+    public static func -(lhs: T, rhs: Image) -> Image {
         var lhs = lhs
         var ret = rhs
         ret.data.withUnsafeMutableBufferPointer {
@@ -138,7 +133,28 @@ extension Image where T == Float {
     }
     
     @inlinable
-    static func divide(lhs: T, rhs: Image) -> Image {
+    public static func *(lhs: Image, rhs: T) -> Image {
+        var ret = lhs
+        ret *= rhs
+        return ret
+    }
+    
+    @inlinable
+    public static func *(lhs: T, rhs: Image) -> Image {
+        var ret = rhs
+        ret *= lhs
+        return ret
+    }
+    
+    @inlinable
+    public static func /(lhs: Image, rhs: T) -> Image {
+        var ret = lhs
+        ret /= rhs
+        return ret
+    }
+    
+    @inlinable
+    public static func /(lhs: T, rhs: Image) -> Image {
         var ret = rhs
         var lhs = lhs
         ret.data.withUnsafeMutableBufferPointer {
@@ -146,7 +162,9 @@ extension Image where T == Float {
         }
         return ret
     }
-    
+}
+
+extension Image where T == Double {
     @inlinable
     public static func +(lhs: Image, rhs: T) -> Image {
         var ret = lhs
@@ -170,39 +188,6 @@ extension Image where T == Float {
     
     @inlinable
     public static func -(lhs: T, rhs: Image) -> Image {
-        return subtract(lhs: lhs, rhs: rhs)
-    }
-    
-    @inlinable
-    public static func *(lhs: Image, rhs: T) -> Image {
-        var ret = lhs
-        ret *= rhs
-        return ret
-    }
-    
-    @inlinable
-    public static func *(lhs: T, rhs: Image) -> Image {
-        var ret = rhs
-        ret *= lhs
-        return ret
-    }
-    
-    @inlinable
-    public static func /(lhs: Image, rhs: T) -> Image {
-        var ret = lhs
-        ret /= rhs
-        return ret
-    }
-    
-    @inlinable
-    public static func /(lhs: T, rhs: Image) -> Image {
-        return divide(lhs: lhs, rhs: rhs)
-    }
-}
-
-extension Image where T == Double {
-    @inlinable
-    static func subtract(lhs: T, rhs: Image) -> Image {
         var lhs = lhs
         var ret = rhs
         ret.data.withUnsafeMutableBufferPointer {
@@ -212,42 +197,6 @@ extension Image where T == Double {
     }
     
     @inlinable
-    static func divide(lhs: T, rhs: Image) -> Image {
-        var ret = rhs
-        var lhs = lhs
-        ret.data.withUnsafeMutableBufferPointer {
-            vDSP_svdivD(&lhs, $0.baseAddress!, 1, $0.baseAddress!, 1, vDSP_Length($0.count))
-        }
-        return ret
-    }
-    
-    @inlinable
-    public static func +(lhs: Image, rhs: T) -> Image {
-        var ret = lhs
-        ret += rhs
-        return ret
-    }
-    
-    @inlinable
-    public static func +(lhs: T, rhs: Image) -> Image {
-        var ret = rhs
-        ret += lhs
-        return ret
-    }
-    
-    @inlinable
-    public static func -(lhs: Image, rhs: T) -> Image {
-        var ret = lhs
-        ret -= rhs
-        return ret
-    }
-    
-    @inlinable
-    public static func -(lhs: T, rhs: Image) -> Image {
-        return subtract(lhs: lhs, rhs: rhs)
-    }
-    
-    @inlinable
     public static func *(lhs: Image, rhs: T) -> Image {
         var ret = lhs
         ret *= rhs
@@ -270,7 +219,12 @@ extension Image where T == Double {
     
     @inlinable
     public static func /(lhs: T, rhs: Image) -> Image {
-        return divide(lhs: lhs, rhs: rhs)
+        var ret = rhs
+        var lhs = lhs
+        ret.data.withUnsafeMutableBufferPointer {
+            vDSP_svdivD(&lhs, $0.baseAddress!, 1, $0.baseAddress!, 1, vDSP_Length($0.count))
+        }
+        return ret
     }
 }
 

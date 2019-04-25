@@ -1,6 +1,6 @@
 extension Image where T: AdditiveArithmetic {
     @inlinable
-    static func addAssign(lhs: inout Image, rhs: Image) {
+    public static func +=(lhs: inout Image, rhs: Image) {
         precondition(lhs.data.count == rhs.data.count, "Size mismatch.")
         lhs.data.withUnsafeMutableBufferPointer {
             var lp = $0.baseAddress!
@@ -15,8 +15,9 @@ extension Image where T: AdditiveArithmetic {
         }
     }
     
+    
     @inlinable
-    static func subtractAssign(lhs: inout Image, rhs: Image) {
+    public static func -=(lhs: inout Image, rhs: Image) {
         precondition(lhs.data.count == rhs.data.count, "Size mismatch.")
         lhs.data.withUnsafeMutableBufferPointer {
             var lp = $0.baseAddress!
@@ -30,22 +31,11 @@ extension Image where T: AdditiveArithmetic {
             }
         }
     }
-    
-    @inlinable
-    public static func +=(lhs: inout Image, rhs: Image) {
-        addAssign(lhs: &lhs, rhs: rhs)
-    }
-    
-    
-    @inlinable
-    public static func -=(lhs: inout Image, rhs: Image) {
-        subtractAssign(lhs: &lhs, rhs: rhs)
-    }
 }
 
 extension Image where T: Numeric {
     @inlinable
-    static func multiplyAssign(lhs: inout Image, rhs: Image) {
+    public static func *=(lhs: inout Image, rhs: Image) {
         precondition(lhs.data.count == rhs.data.count, "Size mismatch.")
         lhs.data.withUnsafeMutableBufferPointer {
             var lp = $0.baseAddress!
@@ -59,16 +49,11 @@ extension Image where T: Numeric {
             }
         }
     }
-    
-    @inlinable
-    public static func *=(lhs: inout Image, rhs: Image) {
-        multiplyAssign(lhs: &lhs, rhs: rhs)
-    }
 }
 
 extension Image where T: BinaryInteger {
     @inlinable
-    static func divideAssign(lhs: inout Image<P, T>, rhs: Image<P, T>) {
+    public static func /=(lhs: inout Image<P, T>, rhs: Image<P, T>) {
         precondition(lhs.data.count == rhs.data.count, "Size mismatch.")
         lhs.data.withUnsafeMutableBufferPointer {
             var lp = $0.baseAddress!
@@ -81,17 +66,12 @@ extension Image where T: BinaryInteger {
                 }
             }
         }
-    }
-    
-    @inlinable
-    public static func /=(lhs: inout Image<P, T>, rhs: Image<P, T>) {
-        divideAssign(lhs: &lhs, rhs: rhs)
     }
 }
 
 extension Image where T: FloatingPoint {
     @inlinable
-    static func divideAssign(lhs: inout Image, rhs: Image) {
+    public static func /=(lhs: inout Image, rhs: Image) {
         precondition(lhs.data.count == rhs.data.count, "Size mismatch.")
         lhs.data.withUnsafeMutableBufferPointer {
             var lp = $0.baseAddress!
@@ -104,11 +84,6 @@ extension Image where T: FloatingPoint {
                 }
             }
         }
-    }
-    
-    @inlinable
-    public static func /=(lhs: inout Image, rhs: Image) {
-        divideAssign(lhs: &lhs, rhs: rhs)
     }
 }
 
@@ -118,7 +93,7 @@ import Accelerate
 
 extension Image where T == Float {
     @inlinable
-    static func addAssign(lhs: inout Image, rhs: Image) {
+    public static func +=(lhs: inout Image, rhs: Image) {
         precondition(lhs.data.count == rhs.data.count, "Size mismatch.")
         lhs.data.withUnsafeMutableBufferPointer {
             let lp = $0.baseAddress!
@@ -130,7 +105,7 @@ extension Image where T == Float {
     }
     
     @inlinable
-    static func subtractAssign(lhs: inout Image, rhs: Image) {
+    public static func -=(lhs: inout Image, rhs: Image) {
         precondition(lhs.data.count == rhs.data.count, "Size mismatch.")
         lhs.data.withUnsafeMutableBufferPointer {
             let lp = $0.baseAddress!
@@ -142,7 +117,7 @@ extension Image where T == Float {
     }
     
     @inlinable
-    static func multiplyAssign(lhs: inout Image, rhs: Image) {
+    public static func *=(lhs: inout Image, rhs: Image) {
         precondition(lhs.data.count == rhs.data.count, "Size mismatch.")
         lhs.data.withUnsafeMutableBufferPointer {
             let lp = $0.baseAddress!
@@ -154,7 +129,7 @@ extension Image where T == Float {
     }
     
     @inlinable
-    static func divideAssign(lhs: inout Image, rhs: Image) {
+    public static func /=(lhs: inout Image, rhs: Image) {
         precondition(lhs.data.count == rhs.data.count, "Size mismatch.")
         lhs.data.withUnsafeMutableBufferPointer {
             let lp = $0.baseAddress!
@@ -164,31 +139,11 @@ extension Image where T == Float {
             }
         }
     }
-    
-    @inlinable
-    public static func +=(lhs: inout Image, rhs: Image) {
-        addAssign(lhs: &lhs, rhs: rhs)
-    }
-    
-    @inlinable
-    public static func -=(lhs: inout Image, rhs: Image) {
-        subtractAssign(lhs: &lhs, rhs: rhs)
-    }
-    
-    @inlinable
-    public static func *=(lhs: inout Image, rhs: Image) {
-        multiplyAssign(lhs: &lhs, rhs: rhs)
-    }
-    
-    @inlinable
-    public static func /=(lhs: inout Image, rhs: Image) {
-        divideAssign(lhs: &lhs, rhs: rhs)
-    }
 }
 
 extension Image where T == Double {
     @inlinable
-    static func addAssign(lhs: inout Image, rhs: Image) {
+    public static func +=(lhs: inout Image, rhs: Image) {
         precondition(lhs.data.count == rhs.data.count, "Size mismatch.")
         lhs.data.withUnsafeMutableBufferPointer {
             let lp = $0.baseAddress!
@@ -200,7 +155,7 @@ extension Image where T == Double {
     }
     
     @inlinable
-    static func subtractAssign(lhs: inout Image, rhs: Image) {
+    public static func -=(lhs: inout Image, rhs: Image) {
         precondition(lhs.data.count == rhs.data.count, "Size mismatch.")
         lhs.data.withUnsafeMutableBufferPointer {
             let lp = $0.baseAddress!
@@ -212,7 +167,7 @@ extension Image where T == Double {
     }
     
     @inlinable
-    static func multiplyAssign(lhs: inout Image, rhs: Image) {
+    public static func *=(lhs: inout Image, rhs: Image) {
         precondition(lhs.data.count == rhs.data.count, "Size mismatch.")
         lhs.data.withUnsafeMutableBufferPointer {
             let lp = $0.baseAddress!
@@ -224,7 +179,7 @@ extension Image where T == Double {
     }
     
     @inlinable
-    static func divideAssign(lhs: inout Image, rhs: Image) {
+    public static func /=(lhs: inout Image, rhs: Image) {
         precondition(lhs.data.count == rhs.data.count, "Size mismatch.")
         lhs.data.withUnsafeMutableBufferPointer {
             let lp = $0.baseAddress!
@@ -233,26 +188,6 @@ extension Image where T == Double {
                 vDSP_vdivD(rp, 1, lp, 1, lp, 1, vDSP_Length($0.count))
             }
         }
-    }
-    
-    @inlinable
-    public static func +=(lhs: inout Image, rhs: Image) {
-        addAssign(lhs: &lhs, rhs: rhs)
-    }
-    
-    @inlinable
-    public static func -=(lhs: inout Image, rhs: Image) {
-        subtractAssign(lhs: &lhs, rhs: rhs)
-    }
-    
-    @inlinable
-    public static func *=(lhs: inout Image, rhs: Image) {
-        multiplyAssign(lhs: &lhs, rhs: rhs)
-    }
-    
-    @inlinable
-    public static func /=(lhs: inout Image, rhs: Image) {
-        divideAssign(lhs: &lhs, rhs: rhs)
     }
 }
 
