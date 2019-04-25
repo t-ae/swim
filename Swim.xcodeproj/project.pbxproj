@@ -47,6 +47,7 @@
 		A732B3AE2271A83600B2256E /* BlendPerformanceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A732B3AD2271A83600B2256E /* BlendPerformanceTests.swift */; };
 		A732B3B02271AACF00B2256E /* DataTypeCOnversionPerformanceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A732B3AF2271AACF00B2256E /* DataTypeCOnversionPerformanceTests.swift */; };
 		A732B3B22271AC6800B2256E /* ClipPerformanceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A732B3B12271AC6800B2256E /* ClipPerformanceTests.swift */; };
+		A732B3B42271AF1800B2256E /* RoundingPerformanceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A732B3B32271AF1800B2256E /* RoundingPerformanceTests.swift */; };
 		OBJ_167 /* image_io.c in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_9 /* image_io.c */; };
 		OBJ_169 /* stb_image_write.h in Headers */ = {isa = PBXBuildFile; fileRef = OBJ_11 /* stb_image_write.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		OBJ_170 /* stb_image.h in Headers */ = {isa = PBXBuildFile; fileRef = OBJ_12 /* stb_image.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -261,6 +262,7 @@
 		A732B3AD2271A83600B2256E /* BlendPerformanceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlendPerformanceTests.swift; sourceTree = "<group>"; };
 		A732B3AF2271AACF00B2256E /* DataTypeCOnversionPerformanceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataTypeCOnversionPerformanceTests.swift; sourceTree = "<group>"; };
 		A732B3B12271AC6800B2256E /* ClipPerformanceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipPerformanceTests.swift; sourceTree = "<group>"; };
+		A732B3B32271AF1800B2256E /* RoundingPerformanceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundingPerformanceTests.swift; sourceTree = "<group>"; };
 		OBJ_100 /* Im2colTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Im2colTests.swift; sourceTree = "<group>"; };
 		OBJ_101 /* IntegralImageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntegralImageTests.swift; sourceTree = "<group>"; };
 		OBJ_103 /* ImageArithmeticTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageArithmeticTests.swift; sourceTree = "<group>"; };
@@ -846,6 +848,7 @@
 				A732B3AD2271A83600B2256E /* BlendPerformanceTests.swift */,
 				A732B3AF2271AACF00B2256E /* DataTypeCOnversionPerformanceTests.swift */,
 				A732B3B12271AC6800B2256E /* ClipPerformanceTests.swift */,
+				A732B3B32271AF1800B2256E /* RoundingPerformanceTests.swift */,
 			);
 			name = PerformanceTests;
 			path = Tests/PerformanceTests;
@@ -1056,6 +1059,7 @@
 			buildActionMask = 0;
 			files = (
 				A732B3B02271AACF00B2256E /* DataTypeCOnversionPerformanceTests.swift in Sources */,
+				A732B3B42271AF1800B2256E /* RoundingPerformanceTests.swift in Sources */,
 				A732B3AE2271A83600B2256E /* BlendPerformanceTests.swift in Sources */,
 				A732B3B22271AC6800B2256E /* ClipPerformanceTests.swift in Sources */,
 				A732B3A322718C1000B2256E /* ArithmeticPerformanceTests.swift in Sources */,

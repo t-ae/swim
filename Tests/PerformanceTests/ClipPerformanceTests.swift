@@ -6,7 +6,9 @@ class ClipPerformanceTests: XCTestCase {
         var image = Image<RGBA, Double>(width: 3840, height: 2160, value: 1)
         
         measure {
-            image.clip(low: 0, high: 1)
+            for _ in 0..<10 {
+                image.clip(low: 0, high: 1)
+            }
         }
     }
 }
