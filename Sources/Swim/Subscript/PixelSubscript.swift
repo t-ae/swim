@@ -1,49 +1,13 @@
 import Foundation
 
-extension Image {
-    @inlinable
-    func getPixel(x: Int, y: Int, c: Int = 0) -> T {
-        precondition(0 <= x && x < width, "Index out of range.")
-        precondition(0 <= y && y < height, "Index out of range.")
-        precondition(0 <= c && c < P.channels, "Index out of range.")
-        
-        return self[unsafe: x, y, c]
-    }
-    
-    @inlinable
-    mutating func setPixel(x: Int, y: Int, c: Int = 0, newValue: T) {
-        precondition(0 <= x && x < width, "Index out of range.")
-        precondition(0 <= y && y < height, "Index out of range.")
-        precondition(0 <= c && c < P.channels, "Index out of range.")
-        
-        self[unsafe: x, y, c] = newValue
-    }
-    
-    @inlinable
-    func getPixel(x: Int, y: Int) -> Pixel<P, T> {
-        precondition(0 <= x && x < width, "Index out of range.")
-        precondition(0 <= y && y < height, "Index out of range.")
-        
-        return self[unsafe: x, y]
-    }
-    
-    @inlinable
-    mutating func setPixel(x: Int, y: Int, newValue: Pixel<P, T>) {
-        precondition(0 <= x && x < width, "Index out of range.")
-        precondition(0 <= y && y < height, "Index out of range.")
-        
-        self[unsafe: x, y] = newValue
-    }
-}
-
 extension Image where P == Intensity {
     @inlinable
     public subscript(x: Int, y: Int) -> T {
         get {
-            return getPixel(x: x, y: y)
+            return self[x, y, 0]
         }
         set {
-            setPixel(x: x, y: y, newValue: newValue)
+            self[x, y, 0] = newValue
         }
     }
 }
@@ -52,30 +16,44 @@ extension Image {
     @inlinable
     public subscript(x: Int, y: Int, c: Int) -> T {
         get {
-            return getPixel(x: x, y: y, c: c)
+            precondition(0 <= x && x < width, "Index out of range.")
+            precondition(0 <= y && y < height, "Index out of range.")
+            precondition(0 <= c && c < P.channels, "Index out of range.")
+            
+            return self[unsafe: x, y, c]
         }
         set {
-            setPixel(x: x, y: y, c: c, newValue: newValue)
+            precondition(0 <= x && x < width, "Index out of range.")
+            precondition(0 <= y && y < height, "Index out of range.")
+            precondition(0 <= c && c < P.channels, "Index out of range.")
+            
+            self[unsafe: x, y, c] = newValue
         }
     }
     
     @inlinable
     public subscript(x: Int, y: Int, c: P) -> T {
         get {
-            return getPixel(x: x, y: y, c: c.rawValue)
+            return self[x, y, c.rawValue]
         }
         set {
-            setPixel(x: x, y: y, c: c.rawValue, newValue: newValue)
+            self[x, y, c.rawValue] = newValue
         }
     }
     
     @inlinable
     public subscript(x: Int, y: Int) -> Pixel<P, T> {
         get {
-            return getPixel(x: x, y: y)
+            precondition(0 <= x && x < width, "Index out of range.")
+            precondition(0 <= y && y < height, "Index out of range.")
+            
+            return self[unsafe: x, y]
         }
         set {
-            setPixel(x: x, y: y, newValue: newValue)
+            precondition(0 <= x && x < width, "Index out of range.")
+            precondition(0 <= y && y < height, "Index out of range.")
+            
+            self[unsafe: x, y] = newValue
         }
     }
 }
