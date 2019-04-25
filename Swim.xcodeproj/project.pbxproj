@@ -40,10 +40,10 @@
 		A732B3962270261D00B2256E /* PaddingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A732B394227025B300B2256E /* PaddingTests.swift */; };
 		A732B39822714E3E00B2256E /* Interpolator4x4.swift in Sources */ = {isa = PBXBuildFile; fileRef = A732B39722714E3E00B2256E /* Interpolator4x4.swift */; };
 		A732B39A22714F0700B2256E /* LanczosInterpolator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A732B39922714F0700B2256E /* LanczosInterpolator.swift */; };
-		A732B39C22716AEF00B2256E /* Abs.swift in Sources */ = {isa = PBXBuildFile; fileRef = A732B39B22716AEF00B2256E /* Abs.swift */; };
-		A732B39E22716CF100B2256E /* AbsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A732B39D22716CF100B2256E /* AbsTests.swift */; };
 		A732B3A1227183F100B2256E /* SubimageVIsualTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A732B39F227183B500B2256E /* SubimageVIsualTests.swift */; };
 		A732B3A322718C1000B2256E /* ArithmeticPerformanceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A732B3A222718C1000B2256E /* ArithmeticPerformanceTests.swift */; };
+		A732B3A72271913600B2256E /* AbsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A732B39D22716CF100B2256E /* AbsTests.swift */; };
+		A732B3A82271913A00B2256E /* Abs.swift in Sources */ = {isa = PBXBuildFile; fileRef = A732B39B22716AEF00B2256E /* Abs.swift */; };
 		OBJ_167 /* image_io.c in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_9 /* image_io.c */; };
 		OBJ_169 /* stb_image_write.h in Headers */ = {isa = PBXBuildFile; fileRef = OBJ_11 /* stb_image_write.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		OBJ_170 /* stb_image.h in Headers */ = {isa = PBXBuildFile; fileRef = OBJ_12 /* stb_image.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -1039,7 +1039,6 @@
 				A732B3A322718C1000B2256E /* ArithmeticPerformanceTests.swift in Sources */,
 				OBJ_178 /* PerformanceTests.swift in Sources */,
 				A732AC28226EB6A200B2256E /* BasicPerformanceTests.swift in Sources */,
-				A732B39E22716CF100B2256E /* AbsTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1080,7 +1079,7 @@
 				OBJ_217 /* ReadImage.swift in Sources */,
 				OBJ_218 /* WriteImage.swift in Sources */,
 				OBJ_219 /* BicubicInterpolator.swift in Sources */,
-				A732B39C22716AEF00B2256E /* Abs.swift in Sources */,
+				A732B3A82271913A00B2256E /* Abs.swift in Sources */,
 				OBJ_220 /* BilinearInterpolator.swift in Sources */,
 				OBJ_221 /* Interpolator.swift in Sources */,
 				OBJ_222 /* NearestNeighborInterpolator.swift in Sources */,
@@ -1146,6 +1145,7 @@
 				OBJ_279 /* ImageArithmeticTests.swift in Sources */,
 				OBJ_280 /* AlphaBlendTests.swift in Sources */,
 				OBJ_281 /* ChannelCompositionTests.swift in Sources */,
+				A732B3A72271913600B2256E /* AbsTests.swift in Sources */,
 				OBJ_282 /* ChannelwiseConversionTests.swift in Sources */,
 				OBJ_283 /* DataTypeConversionTests.swift in Sources */,
 				OBJ_284 /* PixelTypeConversionTests.swift in Sources */,
