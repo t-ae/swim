@@ -53,6 +53,13 @@ extension Image where T == Float {
     }
     
     @inlinable
+    public func rounded() -> Image<P, T> {
+        var newImage = self
+        newImage.round()
+        return newImage
+    }
+    
+    @inlinable
     public mutating func ceil() {
         data.withUnsafeMutableBufferPointer {
             let p = $0.baseAddress!
@@ -62,12 +69,26 @@ extension Image where T == Float {
     }
     
     @inlinable
+    public func ceiled() -> Image<P, T> {
+        var newImage = self
+        newImage.ceil()
+        return newImage
+    }
+    
+    @inlinable
     public mutating func floor() {
         data.withUnsafeMutableBufferPointer {
             let p = $0.baseAddress!
             var count = Int32($0.count)
             vvfloorf(p, p, &count)
         }
+    }
+    
+    @inlinable
+    public func floored() -> Image<P, T> {
+        var newImage = self
+        newImage.floor()
+        return newImage
     }
 }
 
@@ -82,6 +103,13 @@ extension Image where T == Double {
     }
     
     @inlinable
+    public func rounded() -> Image<P, T> {
+        var newImage = self
+        newImage.round()
+        return newImage
+    }
+    
+    @inlinable
     public mutating func ceil() {
         data.withUnsafeMutableBufferPointer {
             let p = $0.baseAddress!
@@ -91,12 +119,26 @@ extension Image where T == Double {
     }
     
     @inlinable
+    public func ceiled() -> Image<P, T> {
+        var newImage = self
+        newImage.ceil()
+        return newImage
+    }
+    
+    @inlinable
     public mutating func floor() {
         data.withUnsafeMutableBufferPointer {
             let p = $0.baseAddress!
             var count = Int32($0.count)
             vvfloor(p, p, &count)
         }
+    }
+    
+    @inlinable
+    public func floored() -> Image<P, T> {
+        var newImage = self
+        newImage.floor()
+        return newImage
     }
 }
 

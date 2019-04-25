@@ -1,7 +1,7 @@
 import XCTest
 import Swim
 
-class FloatingPointTests: XCTestCase {
+class RoundingTests: XCTestCase {
     
     func testRound() {
         do {

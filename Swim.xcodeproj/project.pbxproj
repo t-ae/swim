@@ -83,7 +83,7 @@
 		OBJ_223 /* Clip.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_57 /* Clip.swift */; };
 		OBJ_224 /* Concatenation.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_58 /* Concatenation.swift */; };
 		OBJ_225 /* Fill.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_59 /* Fill.swift */; };
-		OBJ_226 /* FloatingPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_60 /* FloatingPoint.swift */; };
+		OBJ_226 /* Rounding.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_60 /* Rounding.swift */; };
 		OBJ_227 /* AppKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_62 /* AppKit.swift */; };
 		OBJ_228 /* CoreGraphics.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_63 /* CoreGraphics.swift */; };
 		OBJ_229 /* UIKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_64 /* UIKit.swift */; };
@@ -130,7 +130,7 @@
 		OBJ_291 /* NearestNeighborInterpolatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_120 /* NearestNeighborInterpolatorTests.swift */; };
 		OBJ_292 /* ClipTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_122 /* ClipTests.swift */; };
 		OBJ_293 /* ConcatenateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_123 /* ConcatenateTests.swift */; };
-		OBJ_294 /* FloatingPointTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_124 /* FloatingPointTests.swift */; };
+		OBJ_294 /* RoundingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_124 /* RoundingTests.swift */; };
 		OBJ_295 /* AppKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_126 /* AppKitTests.swift */; };
 		OBJ_296 /* vImageUtilsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_127 /* vImageUtilsTests.swift */; };
 		OBJ_297 /* ShapeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_129 /* ShapeTests.swift */; };
@@ -267,7 +267,7 @@
 		OBJ_120 /* NearestNeighborInterpolatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearestNeighborInterpolatorTests.swift; sourceTree = "<group>"; };
 		OBJ_122 /* ClipTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipTests.swift; sourceTree = "<group>"; };
 		OBJ_123 /* ConcatenateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConcatenateTests.swift; sourceTree = "<group>"; };
-		OBJ_124 /* FloatingPointTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingPointTests.swift; sourceTree = "<group>"; };
+		OBJ_124 /* RoundingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundingTests.swift; sourceTree = "<group>"; };
 		OBJ_126 /* AppKitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppKitTests.swift; sourceTree = "<group>"; };
 		OBJ_127 /* vImageUtilsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = vImageUtilsTests.swift; sourceTree = "<group>"; };
 		OBJ_129 /* ShapeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShapeTests.swift; sourceTree = "<group>"; };
@@ -330,7 +330,7 @@
 		OBJ_58 /* Concatenation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Concatenation.swift; sourceTree = "<group>"; };
 		OBJ_59 /* Fill.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fill.swift; sourceTree = "<group>"; };
 		OBJ_6 /* Package.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
-		OBJ_60 /* FloatingPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingPoint.swift; sourceTree = "<group>"; };
+		OBJ_60 /* Rounding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rounding.swift; sourceTree = "<group>"; };
 		OBJ_62 /* AppKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppKit.swift; sourceTree = "<group>"; };
 		OBJ_63 /* CoreGraphics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreGraphics.swift; sourceTree = "<group>"; };
 		OBJ_64 /* UIKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIKit.swift; sourceTree = "<group>"; };
@@ -484,7 +484,7 @@
 			children = (
 				OBJ_122 /* ClipTests.swift */,
 				OBJ_123 /* ConcatenateTests.swift */,
-				OBJ_124 /* FloatingPointTests.swift */,
+				OBJ_124 /* RoundingTests.swift */,
 				A732B394227025B300B2256E /* PaddingTests.swift */,
 			);
 			path = ManipulationTests;
@@ -707,7 +707,7 @@
 				OBJ_57 /* Clip.swift */,
 				OBJ_58 /* Concatenation.swift */,
 				OBJ_59 /* Fill.swift */,
-				OBJ_60 /* FloatingPoint.swift */,
+				OBJ_60 /* Rounding.swift */,
 				A732B3912270232E00B2256E /* Padding.swift */,
 			);
 			path = Manipulation;
@@ -1073,7 +1073,7 @@
 				OBJ_224 /* Concatenation.swift in Sources */,
 				OBJ_225 /* Fill.swift in Sources */,
 				A732AC0D226DABBE00B2256E /* HomogeneousTransformationMatrix.swift in Sources */,
-				OBJ_226 /* FloatingPoint.swift in Sources */,
+				OBJ_226 /* Rounding.swift in Sources */,
 				OBJ_227 /* AppKit.swift in Sources */,
 				OBJ_228 /* CoreGraphics.swift in Sources */,
 				OBJ_229 /* UIKit.swift in Sources */,
@@ -1143,7 +1143,7 @@
 				A732AE99226ECF4000B2256E /* MutablePixelRefArithmeticTests.swift in Sources */,
 				OBJ_292 /* ClipTests.swift in Sources */,
 				OBJ_293 /* ConcatenateTests.swift in Sources */,
-				OBJ_294 /* FloatingPointTests.swift in Sources */,
+				OBJ_294 /* RoundingTests.swift in Sources */,
 				OBJ_295 /* AppKitTests.swift in Sources */,
 				OBJ_296 /* vImageUtilsTests.swift in Sources */,
 				OBJ_297 /* ShapeTests.swift in Sources */,
