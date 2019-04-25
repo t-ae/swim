@@ -1,5 +1,6 @@
 import Foundation
 
+/// Protocol for interpolators which refers 16 pixels.
 public protocol Interpolator4x4: Interpolator {
     func weight(distance: T) -> T
 }
