@@ -55,13 +55,11 @@ extension Filter where T: FloatingPoint {
     }
     
     public static var mean3x3: Image<Intensity, T> {
-        let mean: T = 1 / 9
-        return Image(width: 3, height: 3, data: [T](repeating: mean, count: 9))
+        return Image(width: 3, height: 3, value: 1/9)
     }
     
     public static var mean5x5: Image<Intensity, T> {
-        let mean: T = 1 / 25
-        return Image(width: 5, height: 5, data: [T](repeating: mean, count: 25))
+        return Image(width: 5, height: 5, value: 1/25)
     }
 }
 
