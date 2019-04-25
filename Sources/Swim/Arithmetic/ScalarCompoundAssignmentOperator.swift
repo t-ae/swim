@@ -1,4 +1,4 @@
-extension MutableDataContainer where T: AdditiveArithmetic {
+extension DataContainer where T: AdditiveArithmetic {
     @inlinable
     static func addAssign(lhs: inout Self, rhs: T) {
         lhs.withUnsafeMutableBufferPointer { bp in
@@ -32,7 +32,7 @@ extension MutableDataContainer where T: AdditiveArithmetic {
     }
 }
 
-extension MutableDataContainer where T: Numeric {
+extension DataContainer where T: Numeric {
     @inlinable
     static func multiplyAssign(lhs: inout Self, rhs: T) {
         lhs.withUnsafeMutableBufferPointer { bp in
@@ -50,7 +50,7 @@ extension MutableDataContainer where T: Numeric {
     }
 }
 
-extension MutableDataContainer where T: BinaryInteger {
+extension DataContainer where T: BinaryInteger {
     @inlinable
     static func divideAssign(lhs: inout Self, rhs: T) {
         lhs.withUnsafeMutableBufferPointer { bp in
@@ -68,7 +68,7 @@ extension MutableDataContainer where T: BinaryInteger {
     }
 }
 
-extension MutableDataContainer where T: FloatingPoint {
+extension DataContainer where T: FloatingPoint {
     @inlinable
     static func divideAssign(lhs: inout Self, rhs: T) {
         lhs.withUnsafeMutableBufferPointer { bp in
