@@ -42,6 +42,7 @@
 		A732B39A22714F0700B2256E /* LanczosInterpolator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A732B39922714F0700B2256E /* LanczosInterpolator.swift */; };
 		A732B39C22716AEF00B2256E /* Abs.swift in Sources */ = {isa = PBXBuildFile; fileRef = A732B39B22716AEF00B2256E /* Abs.swift */; };
 		A732B39E22716CF100B2256E /* AbsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A732B39D22716CF100B2256E /* AbsTests.swift */; };
+		A732B3A1227183F100B2256E /* SubimageVIsualTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A732B39F227183B500B2256E /* SubimageVIsualTests.swift */; };
 		OBJ_167 /* image_io.c in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_9 /* image_io.c */; };
 		OBJ_169 /* stb_image_write.h in Headers */ = {isa = PBXBuildFile; fileRef = OBJ_11 /* stb_image_write.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		OBJ_170 /* stb_image.h in Headers */ = {isa = PBXBuildFile; fileRef = OBJ_12 /* stb_image.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -253,6 +254,7 @@
 		A732B39922714F0700B2256E /* LanczosInterpolator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanczosInterpolator.swift; sourceTree = "<group>"; };
 		A732B39B22716AEF00B2256E /* Abs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Abs.swift; sourceTree = "<group>"; };
 		A732B39D22716CF100B2256E /* AbsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbsTests.swift; sourceTree = "<group>"; };
+		A732B39F227183B500B2256E /* SubimageVIsualTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubimageVIsualTests.swift; sourceTree = "<group>"; };
 		OBJ_100 /* Im2colTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Im2colTests.swift; sourceTree = "<group>"; };
 		OBJ_101 /* IntegralImageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntegralImageTests.swift; sourceTree = "<group>"; };
 		OBJ_103 /* ImageArithmeticTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageArithmeticTests.swift; sourceTree = "<group>"; };
@@ -583,6 +585,7 @@
 				OBJ_150 /* ResizeVisualTests.swift */,
 				OBJ_151 /* Utils.swift */,
 				OBJ_152 /* WarpVisualTests.swift */,
+				A732B39F227183B500B2256E /* SubimageVIsualTests.swift */,
 			);
 			name = VisualTests;
 			path = Tests/VisualTests;
@@ -1175,6 +1178,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 0;
 			files = (
+				A732B3A1227183F100B2256E /* SubimageVIsualTests.swift in Sources */,
 				OBJ_318 /* BayerVisualTests.swift in Sources */,
 				OBJ_319 /* BlendVisualTests.swift in Sources */,
 				OBJ_320 /* FilterVisualTests.swift in Sources */,
