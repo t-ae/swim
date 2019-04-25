@@ -74,7 +74,7 @@
 		OBJ_209 /* DataContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_40 /* DataContainer.swift */; };
 		OBJ_210 /* DataType.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_41 /* DataType.swift */; };
 		OBJ_211 /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_42 /* Image.swift */; };
-		OBJ_212 /* Initializers.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_43 /* Initializers.swift */; };
+		OBJ_212 /* ImageInitializers.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_43 /* ImageInitializers.swift */; };
 		OBJ_213 /* Pixel.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_44 /* Pixel.swift */; };
 		OBJ_214 /* PixelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_45 /* PixelType.swift */; };
 		OBJ_216 /* ImageFileFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_48 /* ImageFileFormat.swift */; };
@@ -324,7 +324,7 @@
 		OBJ_40 /* DataContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataContainer.swift; sourceTree = "<group>"; };
 		OBJ_41 /* DataType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataType.swift; sourceTree = "<group>"; };
 		OBJ_42 /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
-		OBJ_43 /* Initializers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Initializers.swift; sourceTree = "<group>"; };
+		OBJ_43 /* ImageInitializers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageInitializers.swift; sourceTree = "<group>"; };
 		OBJ_44 /* Pixel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pixel.swift; sourceTree = "<group>"; };
 		OBJ_45 /* PixelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PixelType.swift; sourceTree = "<group>"; };
 		OBJ_48 /* ImageFileFormat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageFileFormat.swift; sourceTree = "<group>"; };
@@ -426,7 +426,7 @@
 			isa = PBXGroup;
 			children = (
 				OBJ_42 /* Image.swift */,
-				OBJ_43 /* Initializers.swift */,
+				OBJ_43 /* ImageInitializers.swift */,
 			);
 			path = Image;
 			sourceTree = "<group>";
@@ -1087,7 +1087,7 @@
 				OBJ_209 /* DataContainer.swift in Sources */,
 				OBJ_210 /* DataType.swift in Sources */,
 				OBJ_211 /* Image.swift in Sources */,
-				OBJ_212 /* Initializers.swift in Sources */,
+				OBJ_212 /* ImageInitializers.swift in Sources */,
 				OBJ_213 /* Pixel.swift in Sources */,
 				OBJ_214 /* PixelType.swift in Sources */,
 				A732AC21226EAB4600B2256E /* PixelBinaryScalarOperator.swift in Sources */,
