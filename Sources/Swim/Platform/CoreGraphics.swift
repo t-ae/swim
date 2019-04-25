@@ -30,7 +30,7 @@ extension Image where P: ConvertibleToCGImage, T == UInt8 {
     }
 }
 
-extension Image where P: ConvertibleFromCGImage, T == Float {
+extension Image where P: ConvertibleFromCGImage, T: BinaryFloatingPoint {
     /// Create Image from CGImage.
     ///
     /// All pixel values will be in [0, 1] range.
@@ -42,7 +42,7 @@ extension Image where P: ConvertibleFromCGImage, T == Float {
     }
 }
 
-extension Image where P: ConvertibleToCGImage, T == Float {
+extension Image where P: ConvertibleToCGImage, T: BinaryFloatingPoint {
     /// Create CGImage.
     ///
     /// All pixel values will be clipped to [0, 1] range.
@@ -50,31 +50,7 @@ extension Image where P: ConvertibleToCGImage, T == Float {
     public func cgImage() -> CGImage {
         var i255 = clipped(low: 0, high: 1) * 255
         i255.round()
-        let uint8 = Image<P, UInt8>(uncheckedCast: i255)
-        return uint8.cgImage()
-    }
-}
-
-extension Image where P: ConvertibleFromCGImage, T == Double {
-    /// Create Image from CGImage.
-    ///
-    /// All pixel values will be in [0, 1] range.
-    @inlinable
-    public init(cgImage: CGImage) {
-        let uint8 = Image<P, UInt8>(cgImage: cgImage)
-        self.init(cast: uint8)
-        self /= T(UInt8.max)
-    }
-}
-
-extension Image where P: ConvertibleToCGImage, T == Double {
-    /// Create CGImage.
-    ///
-    /// All pixel values will be clipped to [0, 1] range.
-    @inlinable
-    public func cgImage() -> CGImage {
-        let i255 = clipped(low: 0, high: 1) * 255
-        let uint8 = Image<P, UInt8>(uncheckedCast: i255)
+        let uint8 = Image<P, UInt8>(cast: i255)
         return uint8.cgImage()
     }
 }

@@ -80,8 +80,8 @@ extension Image where P: ImageFileFormat, T == UInt8 {
     }
 }
 
-// MARK: - Float
-extension Image where P: ImageFileFormat, T == Float {
+// MARK: - FloatingPoint
+extension Image where P: ImageFileFormat, T: BinaryFloatingPoint {
     /// Save image.
     ///
     /// Pixel values are clipped to [0, 1].
@@ -98,31 +98,7 @@ extension Image where P: ImageFileFormat, T == Float {
     public func write(to url: URL, format: WriteFormat) throws {
         var i255 = self.clipped(low: 0, high: 1) * 255
         i255.round()
-        let uint8 = Image<P, UInt8>(uncheckedCast: i255)
-        try uint8.write(to: url, format: format)
-    }
-}
-
-
-// MARK: - Double
-extension Image where P: ImageFileFormat, T == Double {
-    /// Save image.
-    ///
-    /// Pixel values are clipped to [0, 1].
-    @inlinable
-    public func write(to url: URL) throws {
-        let format = detectFormat(url: url)
-        try write(to: url, format: format)
-    }
-    
-    /// Save image.
-    ///
-    /// Pixel values are clipped to [0, 1].
-    @inlinable
-    public func write(to url: URL, format: WriteFormat) throws {
-        var i255 = self.clipped(low: 0, high: 1) * 255
-        i255.round()
-        let uint8 = Image<P, UInt8>(uncheckedCast: i255)
+        let uint8 = Image<P, UInt8>(cast: i255)
         try uint8.write(to: url, format: format)
     }
 }
