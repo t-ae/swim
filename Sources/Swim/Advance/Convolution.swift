@@ -29,6 +29,12 @@ public enum Filter<T: Numeric&DataType> {
                                                  1, -4, 1,
                                                  0, 1, 0])
     }
+    
+    public static var emboss3x3: Image<Intensity, T> {
+        return Image(width: 3, height: 3, data: [-2, -1, 0,
+                                                 -1,  1, 1,
+                                                  0,  1, 2])
+    }
 }
 
 extension Filter where T: FloatingPoint {

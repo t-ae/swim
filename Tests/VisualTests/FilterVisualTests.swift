@@ -83,6 +83,9 @@ extension FilterVisualTests {
         }
         images.append(mean)
         
+        let emboss = image.toLuminance().convoluted(Filter.emboss3x3)
+        images.append(emboss.toRGB())
+        
         let sobelH = image.toLuminance().convoluted(Filter.sobel3x3H)
         images.append(sobelH.toRGB())
         

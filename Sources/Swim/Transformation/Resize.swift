@@ -38,7 +38,7 @@ extension Image where T: BinaryFloatingPoint {
                     newImage.withMutablePixelRef(x: x, y: y) { ref in
                         if startVolume > 0 {
                             baseImage.withPixelRef(x: startX_i, y: y) {
-                                ref.add(pixel: $0, with: startVolume )
+                                ref.add(pixel: $0, with: startVolume)
                             }
                         }
                         for dx in Int(ceilStartX)..<Int(floorEndX) {
@@ -93,7 +93,7 @@ extension Image where T: BinaryFloatingPoint {
                     newImage.withMutablePixelRef(x: x, y: y) { ref in
                         if startVolume > 0 {
                             baseImage.withPixelRef(x: x, y: startY_i) {
-                                ref.add(pixel: $0, with: startVolume )
+                                ref.add(pixel: $0, with: startVolume)
                             }
                         }
                         for dy in Int(ceilStartY)..<Int(floorEndY) {
