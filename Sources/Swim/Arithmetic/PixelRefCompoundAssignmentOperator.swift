@@ -146,6 +146,20 @@ extension MutablePixelRef where T: Numeric {
     }
     
     @inlinable
+    func assign(x: Int,y: Int, in image: Image<P, T>) {
+        var lp = self.pointer.baseAddress!
+        let start = image.dataIndex(x: x, y: y)
+        image.withUnsafeBufferPointer { rbp in
+            var rp = rbp.baseAddress!.advanced(by: start)
+            for _ in 0..<P.channels {
+                lp.pointee += rp.pointee
+                lp += 1
+                rp += 1
+            }
+        }
+    }
+    
+    @inlinable
     func assign(x: Int,y: Int, in image: Image<P, T>, with factor: T) {
         var lp = self.pointer.baseAddress!
         let start = image.dataIndex(x: x, y: y)
