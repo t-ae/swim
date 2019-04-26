@@ -81,58 +81,58 @@ public struct Lanczos3Interpolator<P: PixelType>: Interpolator {
         let yw5 = weight(distance: ymin + 5 - y)
         
         // Loop unrolling
-        var yp = Int(ymin)
+        let yp = Int(ymin)
+        
+        let xp = Int(xmin)
+        let x0 = clampValue(value: xp+0, max: image.width)
+        let x1 = clampValue(value: xp+1, max: image.width)
+        let x2 = clampValue(value: xp+2, max: image.width)
+        let x3 = clampValue(value: xp+3, max: image.width)
+        let x4 = clampValue(value: xp+4, max: image.width)
+        let x5 = clampValue(value: xp+5, max: image.width)
 
-        // dy = 0
-        if let y = clampValue(value: yp, max: image.height) {
-            var xp = Int(xmin)
-            
-            if let x = clampValue(value: xp, max: image.width) {
+        if let y = clampValue(value: yp+0, max: image.height) {
+            if let x = x0 {
                 pixel.assign(x: x, y: y, in: image, with: xw0 * yw0)
             } else if let constant = constant {
                 pixel.assign(pixel: constant, with: xw0 * yw0)
             } else {
                 fatalError("Never happens")
             }
-            xp += 1
             
-            if let x = clampValue(value: xp, max: image.width) {
+            if let x = x1 {
                 pixel.add(x: x, y: y, in: image, with: xw1 * yw0)
             } else if let constant = constant {
                 pixel.add(pixel: constant, with: xw1 * yw0)
             } else {
                 fatalError("Never happens")
             }
-            xp += 1
             
-            if let x = clampValue(value: xp, max: image.width) {
+            if let x = x2 {
                 pixel.add(x: x, y: y, in: image, with: xw2 * yw0)
             } else if let constant = constant {
                 pixel.add(pixel: constant, with: xw2 * yw0)
             } else {
                 fatalError("Never happens")
             }
-            xp += 1
             
-            if let x = clampValue(value: xp, max: image.width) {
+            if let x = x3 {
                 pixel.add(x: x, y: y, in: image, with: xw3 * yw0)
             } else if let constant = constant {
                 pixel.add(pixel: constant, with: xw3 * yw0)
             } else {
                 fatalError("Never happens")
             }
-            xp += 1
             
-            if let x = clampValue(value: xp, max: image.width) {
+            if let x = x4 {
                 pixel.add(x: x, y: y, in: image, with: xw4 * yw0)
             } else if let constant = constant {
                 pixel.add(pixel: constant, with: xw4 * yw0)
             } else {
                 fatalError("Never happens")
             }
-            xp += 1
             
-            if let x = clampValue(value: xp, max: image.width) {
+            if let x = x5 {
                 pixel.add(x: x, y: y, in: image, with: xw5 * yw0)
             } else if let constant = constant {
                 pixel.add(pixel: constant, with: xw5 * yw0)
@@ -145,58 +145,49 @@ public struct Lanczos3Interpolator<P: PixelType>: Interpolator {
         } else {
             fatalError("Never happens.")
         }
-        yp += 1
         
-        // dy = 1
-        if let y = clampValue(value: yp, max: image.height) {
-            var xp = Int(xmin)
-            
-            if let x = clampValue(value: xp, max: image.width) {
+        if let y = clampValue(value: yp+1, max: image.height) {
+            if let x = x0 {
                 pixel.add(x: x, y: y, in: image, with: xw0 * yw1)
             } else if let constant = constant {
                 pixel.add(pixel: constant, with: xw0 * yw1)
             } else {
                 fatalError("Never happens")
             }
-            xp += 1
             
-            if let x = clampValue(value: xp, max: image.width) {
+            if let x = x1 {
                 pixel.add(x: x, y: y, in: image, with: xw1 * yw1)
             } else if let constant = constant {
                 pixel.add(pixel: constant, with: xw1 * yw1)
             } else {
                 fatalError("Never happens")
             }
-            xp += 1
             
-            if let x = clampValue(value: xp, max: image.width) {
+            if let x = x2 {
                 pixel.add(x: x, y: y, in: image, with: xw2 * yw1)
             } else if let constant = constant {
                 pixel.add(pixel: constant, with: xw2 * yw1)
             } else {
                 fatalError("Never happens")
             }
-            xp += 1
             
-            if let x = clampValue(value: xp, max: image.width) {
+            if let x = x3 {
                 pixel.add(x: x, y: y, in: image, with: xw3 * yw1)
             } else if let constant = constant {
                 pixel.add(pixel: constant, with: xw3 * yw1)
             } else {
                 fatalError("Never happens")
             }
-            xp += 1
             
-            if let x = clampValue(value: xp, max: image.width) {
+            if let x = x4 {
                 pixel.add(x: x, y: y, in: image, with: xw4 * yw1)
             } else if let constant = constant {
                 pixel.add(pixel: constant, with: xw4 * yw1)
             } else {
                 fatalError("Never happens")
             }
-            xp += 1
             
-            if let x = clampValue(value: xp, max: image.width) {
+            if let x = x5 {
                 pixel.add(x: x, y: y, in: image, with: xw5 * yw1)
             } else if let constant = constant {
                 pixel.add(pixel: constant, with: xw5 * yw1)
@@ -209,58 +200,49 @@ public struct Lanczos3Interpolator<P: PixelType>: Interpolator {
         } else {
             fatalError("Never happens.")
         }
-        yp += 1
         
-        // dy = 2
-        if let y = clampValue(value: yp, max: image.height) {
-            var xp = Int(xmin)
-            
-            if let x = clampValue(value: xp, max: image.width) {
+        if let y = clampValue(value: yp+2, max: image.height) {
+            if let x = x0 {
                 pixel.add(x: x, y: y, in: image, with: xw0 * yw2)
             } else if let constant = constant {
                 pixel.add(pixel: constant, with: xw0 * yw2)
             } else {
                 fatalError("Never happens")
             }
-            xp += 1
             
-            if let x = clampValue(value: xp, max: image.width) {
+            if let x = x1 {
                 pixel.add(x: x, y: y, in: image, with: xw1 * yw2)
             } else if let constant = constant {
                 pixel.add(pixel: constant, with: xw1 * yw2)
             } else {
                 fatalError("Never happens")
             }
-            xp += 1
             
-            if let x = clampValue(value: xp, max: image.width) {
+            if let x = x2 {
                 pixel.add(x: x, y: y, in: image, with: xw2 * yw2)
             } else if let constant = constant {
                 pixel.add(pixel: constant, with: xw2 * yw2)
             } else {
                 fatalError("Never happens")
             }
-            xp += 1
             
-            if let x = clampValue(value: xp, max: image.width) {
+            if let x = x3 {
                 pixel.add(x: x, y: y, in: image, with: xw3 * yw2)
             } else if let constant = constant {
                 pixel.add(pixel: constant, with: xw3 * yw2)
             } else {
                 fatalError("Never happens")
             }
-            xp += 1
             
-            if let x = clampValue(value: xp, max: image.width) {
+            if let x = x4 {
                 pixel.add(x: x, y: y, in: image, with: xw4 * yw2)
             } else if let constant = constant {
                 pixel.add(pixel: constant, with: xw4 * yw2)
             } else {
                 fatalError("Never happens")
             }
-            xp += 1
             
-            if let x = clampValue(value: xp, max: image.width) {
+            if let x = x5 {
                 pixel.add(x: x, y: y, in: image, with: xw5 * yw2)
             } else if let constant = constant {
                 pixel.add(pixel: constant, with: xw5 * yw2)
@@ -273,58 +255,49 @@ public struct Lanczos3Interpolator<P: PixelType>: Interpolator {
         } else {
             fatalError("Never happens.")
         }
-        yp += 1
         
-        // dy = 3
-        if let y = clampValue(value: yp, max: image.height) {
-            var xp = Int(xmin)
-            
-            if let x = clampValue(value: xp, max: image.width) {
+        if let y = clampValue(value: yp+3, max: image.height) {
+            if let x = x0 {
                 pixel.add(x: x, y: y, in: image, with: xw0 * yw3)
             } else if let constant = constant {
                 pixel.add(pixel: constant, with: xw0 * yw3)
             } else {
                 fatalError("Never happens")
             }
-            xp += 1
             
-            if let x = clampValue(value: xp, max: image.width) {
+            if let x = x1 {
                 pixel.add(x: x, y: y, in: image, with: xw1 * yw3)
             } else if let constant = constant {
                 pixel.add(pixel: constant, with: xw1 * yw3)
             } else {
                 fatalError("Never happens")
             }
-            xp += 1
             
-            if let x = clampValue(value: xp, max: image.width) {
+            if let x = x2 {
                 pixel.add(x: x, y: y, in: image, with: xw2 * yw3)
             } else if let constant = constant {
                 pixel.add(pixel: constant, with: xw2 * yw3)
             } else {
                 fatalError("Never happens")
             }
-            xp += 1
             
-            if let x = clampValue(value: xp, max: image.width) {
+            if let x = x3 {
                 pixel.add(x: x, y: y, in: image, with: xw3 * yw3)
             } else if let constant = constant {
                 pixel.add(pixel: constant, with: xw3 * yw3)
             } else {
                 fatalError("Never happens")
             }
-            xp += 1
             
-            if let x = clampValue(value: xp, max: image.width) {
+            if let x = x4 {
                 pixel.add(x: x, y: y, in: image, with: xw4 * yw3)
             } else if let constant = constant {
                 pixel.add(pixel: constant, with: xw4 * yw3)
             } else {
                 fatalError("Never happens")
             }
-            xp += 1
             
-            if let x = clampValue(value: xp, max: image.width) {
+            if let x = x5 {
                 pixel.add(x: x, y: y, in: image, with: xw5 * yw3)
             } else if let constant = constant {
                 pixel.add(pixel: constant, with: xw5 * yw3)
@@ -337,58 +310,49 @@ public struct Lanczos3Interpolator<P: PixelType>: Interpolator {
         } else {
             fatalError("Never happens.")
         }
-        yp += 1
         
-        // dy = 4
-        if let y = clampValue(value: yp, max: image.height) {
-            var xp = Int(xmin)
-            
-            if let x = clampValue(value: xp, max: image.width) {
+        if let y = clampValue(value: yp+4, max: image.height) {
+            if let x = x0 {
                 pixel.add(x: x, y: y, in: image, with: xw0 * yw4)
             } else if let constant = constant {
                 pixel.add(pixel: constant, with: xw0 * yw4)
             } else {
                 fatalError("Never happens")
             }
-            xp += 1
             
-            if let x = clampValue(value: xp, max: image.width) {
+            if let x = x1 {
                 pixel.add(x: x, y: y, in: image, with: xw1 * yw4)
             } else if let constant = constant {
                 pixel.add(pixel: constant, with: xw1 * yw4)
             } else {
                 fatalError("Never happens")
             }
-            xp += 1
             
-            if let x = clampValue(value: xp, max: image.width) {
+            if let x = x2 {
                 pixel.add(x: x, y: y, in: image, with: xw2 * yw4)
             } else if let constant = constant {
                 pixel.add(pixel: constant, with: xw2 * yw4)
             } else {
                 fatalError("Never happens")
             }
-            xp += 1
             
-            if let x = clampValue(value: xp, max: image.width) {
+            if let x = x3 {
                 pixel.add(x: x, y: y, in: image, with: xw3 * yw4)
             } else if let constant = constant {
                 pixel.add(pixel: constant, with: xw3 * yw4)
             } else {
                 fatalError("Never happens")
             }
-            xp += 1
             
-            if let x = clampValue(value: xp, max: image.width) {
+            if let x = x4 {
                 pixel.add(x: x, y: y, in: image, with: xw4 * yw4)
             } else if let constant = constant {
                 pixel.add(pixel: constant, with: xw4 * yw4)
             } else {
                 fatalError("Never happens")
             }
-            xp += 1
             
-            if let x = clampValue(value: xp, max: image.width) {
+            if let x = x5 {
                 pixel.add(x: x, y: y, in: image, with: xw5 * yw4)
             } else if let constant = constant {
                 pixel.add(pixel: constant, with: xw5 * yw4)
@@ -401,58 +365,49 @@ public struct Lanczos3Interpolator<P: PixelType>: Interpolator {
         } else {
             fatalError("Never happens.")
         }
-        yp += 1
         
-        // dy = 5
-        if let y = clampValue(value: yp, max: image.height) {
-            var xp = Int(xmin)
-            
-            if let x = clampValue(value: xp, max: image.width) {
+        if let y = clampValue(value: yp+5, max: image.height) {
+            if let x = x0 {
                 pixel.add(x: x, y: y, in: image, with: xw0 * yw5)
             } else if let constant = constant {
                 pixel.add(pixel: constant, with: xw0 * yw5)
             } else {
                 fatalError("Never happens")
             }
-            xp += 1
             
-            if let x = clampValue(value: xp, max: image.width) {
+            if let x = x1 {
                 pixel.add(x: x, y: y, in: image, with: xw1 * yw5)
             } else if let constant = constant {
                 pixel.add(pixel: constant, with: xw1 * yw5)
             } else {
                 fatalError("Never happens")
             }
-            xp += 1
             
-            if let x = clampValue(value: xp, max: image.width) {
+            if let x = x2 {
                 pixel.add(x: x, y: y, in: image, with: xw2 * yw5)
             } else if let constant = constant {
                 pixel.add(pixel: constant, with: xw2 * yw5)
             } else {
                 fatalError("Never happens")
             }
-            xp += 1
             
-            if let x = clampValue(value: xp, max: image.width) {
+            if let x = x3 {
                 pixel.add(x: x, y: y, in: image, with: xw3 * yw5)
             } else if let constant = constant {
                 pixel.add(pixel: constant, with: xw3 * yw5)
             } else {
                 fatalError("Never happens")
             }
-            xp += 1
             
-            if let x = clampValue(value: xp, max: image.width) {
+            if let x = x4 {
                 pixel.add(x: x, y: y, in: image, with: xw4 * yw5)
             } else if let constant = constant {
                 pixel.add(pixel: constant, with: xw4 * yw5)
             } else {
                 fatalError("Never happens")
             }
-            xp += 1
             
-            if let x = clampValue(value: xp, max: image.width) {
+            if let x = x5 {
                 pixel.add(x: x, y: y, in: image, with: xw5 * yw5)
             } else if let constant = constant {
                 pixel.add(pixel: constant, with: xw5 * yw5)

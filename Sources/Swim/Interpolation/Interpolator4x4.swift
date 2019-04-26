@@ -31,40 +31,40 @@ extension Interpolator4x4 {
         let yw3 = weight(distance: ymin + 3 - y)
         
         // Loop unrolling
-        var yp = Int(ymin)
+        let yp = Int(ymin)
         
-        // dy = 0
-        if let y = clampValue(value: yp, max: image.height) {
-            var xp = Int(xmin)
-            
-            if let x = clampValue(value: xp, max: image.width) {
+        let xp = Int(xmin)
+        let x0 = clampValue(value: xp+0, max: image.width)
+        let x1 = clampValue(value: xp+1, max: image.width)
+        let x2 = clampValue(value: xp+2, max: image.width)
+        let x3 = clampValue(value: xp+3, max: image.width)
+        
+        if let y = clampValue(value: yp+0, max: image.height) {
+            if let x = x0 {
                 pixel.assign(x: x, y: y, in: image, with: xw0 * yw0)
             } else if let constant = constant {
                 pixel.assign(pixel: constant, with: xw0 * yw0)
             } else {
                 fatalError("Never happens")
             }
-            xp += 1
             
-            if let x = clampValue(value: xp, max: image.width) {
+            if let x = x1 {
                 pixel.add(x: x, y: y, in: image, with: xw1 * yw0)
             } else if let constant = constant {
                 pixel.add(pixel: constant, with: xw1 * yw0)
             } else {
                 fatalError("Never happens")
             }
-            xp += 1
             
-            if let x = clampValue(value: xp, max: image.width) {
+            if let x = x2 {
                 pixel.add(x: x, y: y, in: image, with: xw2 * yw0)
             } else if let constant = constant {
                 pixel.add(pixel: constant, with: xw2 * yw0)
             } else {
                 fatalError("Never happens")
             }
-            xp += 1
             
-            if let x = clampValue(value: xp, max: image.width) {
+            if let x = x3 {
                 pixel.add(x: x, y: y, in: image, with: xw3 * yw0)
             } else if let constant = constant {
                 pixel.add(pixel: constant, with: xw3 * yw0)
@@ -77,40 +77,33 @@ extension Interpolator4x4 {
         } else {
             fatalError("Never happens.")
         }
-        yp += 1
         
-        // dy = 1
-        if let y = clampValue(value: yp, max: image.height) {
-            var xp = Int(xmin)
-            
-            if let x = clampValue(value: xp, max: image.width) {
+        if let y = clampValue(value: yp+1, max: image.height) {
+            if let x = x0 {
                 pixel.add(x: x, y: y, in: image, with: xw0 * yw1)
             } else if let constant = constant {
                 pixel.add(pixel: constant, with: xw0 * yw1)
             } else {
                 fatalError("Never happens")
             }
-            xp += 1
             
-            if let x = clampValue(value: xp, max: image.width) {
+            if let x = x1 {
                 pixel.add(x: x, y: y, in: image, with: xw1 * yw1)
             } else if let constant = constant {
                 pixel.add(pixel: constant, with: xw1 * yw1)
             } else {
                 fatalError("Never happens")
             }
-            xp += 1
             
-            if let x = clampValue(value: xp, max: image.width) {
+            if let x = x2 {
                 pixel.add(x: x, y: y, in: image, with: xw2 * yw1)
             } else if let constant = constant {
                 pixel.add(pixel: constant, with: xw2 * yw1)
             } else {
                 fatalError("Never happens")
             }
-            xp += 1
             
-            if let x = clampValue(value: xp, max: image.width) {
+            if let x = x3 {
                 pixel.add(x: x, y: y, in: image, with: xw3 * yw1)
             } else if let constant = constant {
                 pixel.add(pixel: constant, with: xw3 * yw1)
@@ -123,40 +116,33 @@ extension Interpolator4x4 {
         } else {
             fatalError("Never happens.")
         }
-        yp += 1
         
-        // dy = 2
-        if let y = clampValue(value: yp, max: image.height) {
-            var xp = Int(xmin)
-            
-            if let x = clampValue(value: xp, max: image.width) {
+        if let y = clampValue(value: yp+2, max: image.height) {
+            if let x = x0 {
                 pixel.add(x: x, y: y, in: image, with: xw0 * yw2)
             } else if let constant = constant {
                 pixel.add(pixel: constant, with: xw0 * yw2)
             } else {
                 fatalError("Never happens")
             }
-            xp += 1
             
-            if let x = clampValue(value: xp, max: image.width) {
+            if let x = x1 {
                 pixel.add(x: x, y: y, in: image, with: xw1 * yw2)
             } else if let constant = constant {
                 pixel.add(pixel: constant, with: xw1 * yw2)
             } else {
                 fatalError("Never happens")
             }
-            xp += 1
             
-            if let x = clampValue(value: xp, max: image.width) {
+            if let x = x2 {
                 pixel.add(x: x, y: y, in: image, with: xw2 * yw2)
             } else if let constant = constant {
                 pixel.add(pixel: constant, with: xw2 * yw2)
             } else {
                 fatalError("Never happens")
             }
-            xp += 1
             
-            if let x = clampValue(value: xp, max: image.width) {
+            if let x = x3 {
                 pixel.add(x: x, y: y, in: image, with: xw3 * yw2)
             } else if let constant = constant {
                 pixel.add(pixel: constant, with: xw3 * yw2)
@@ -169,40 +155,33 @@ extension Interpolator4x4 {
         } else {
             fatalError("Never happens.")
         }
-        yp += 1
         
-        // dy = 3
-        if let y = clampValue(value: yp, max: image.height) {
-            var xp = Int(xmin)
-            
-            if let x = clampValue(value: xp, max: image.width) {
+        if let y = clampValue(value: yp+3, max: image.height) {
+            if let x = x0 {
                 pixel.add(x: x, y: y, in: image, with: xw0 * yw3)
             } else if let constant = constant {
                 pixel.add(pixel: constant, with: xw0 * yw3)
             } else {
                 fatalError("Never happens")
             }
-            xp += 1
             
-            if let x = clampValue(value: xp, max: image.width) {
+            if let x = x1 {
                 pixel.add(x: x, y: y, in: image, with: xw1 * yw3)
             } else if let constant = constant {
                 pixel.add(pixel: constant, with: xw1 * yw3)
             } else {
                 fatalError("Never happens")
             }
-            xp += 1
             
-            if let x = clampValue(value: xp, max: image.width) {
+            if let x = x2 {
                 pixel.add(x: x, y: y, in: image, with: xw2 * yw3)
             } else if let constant = constant {
                 pixel.add(pixel: constant, with: xw2 * yw3)
             } else {
                 fatalError("Never happens")
             }
-            xp += 1
             
-            if let x = clampValue(value: xp, max: image.width) {
+            if let x = x3 {
                 pixel.add(x: x, y: y, in: image, with: xw3 * yw3)
             } else if let constant = constant {
                 pixel.add(pixel: constant, with: xw3 * yw3)
