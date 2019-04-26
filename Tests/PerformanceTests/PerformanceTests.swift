@@ -130,40 +130,4 @@ class PerformanceTests: XCTestCase {
             _ = conv.demosaic(image: image)
         }
     }
-    
-    func testResizeAA() {
-        let data = [Float](repeating: 0, count: 640*480)
-        let image = Image(width: 640, height: 480, intensity: data)
-        
-        measure {
-            _ = image.resizeAA(width: 30, height: 30)
-        }
-    }
-    
-    func testResizeNN() {
-        let data = [Float](repeating: 0, count: 64*48)
-        let image = Image(width: 64, height: 48, intensity: data)
-        
-        measure {
-            _ = image.resize(width: 1920, height: 1080, method: .nearestNeighbor)
-        }
-    }
-    
-    func testResizeBL() {
-        let data = [Float](repeating: 0, count: 64*48)
-        let image = Image(width: 64, height: 48, intensity: data)
-        
-        measure {
-            _ = image.resize(width: 1920, height: 1080, method: .bilinear)
-        }
-    }
-    
-    func testResizeBC() {
-        let data = [Float](repeating: 0, count: 64*48)
-        let image = Image(width: 64, height: 48, intensity: data)
-        
-        measure {
-            _ = image.resize(width: 1920, height: 1080, method: .bicubic)
-        }
-    }
 }
