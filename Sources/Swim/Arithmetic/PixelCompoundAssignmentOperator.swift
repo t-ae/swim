@@ -7,7 +7,7 @@ extension Pixel where T: AdditiveArithmetic {
                 assert(lbp.count == rbp.count)
                 
                 var rp = rbp.baseAddress!
-                for _ in 0..<lbp.count {
+                for _ in 0..<P.channels {
                     lp.pointee += rp.pointee
                     lp += 1
                     rp += 1
@@ -24,7 +24,7 @@ extension Pixel where T: AdditiveArithmetic {
                 assert(lbp.count == rbp.count)
                 
                 var rp = rbp.baseAddress!
-                for _ in 0..<lbp.count {
+                for _ in 0..<P.channels {
                     lp.pointee -= rp.pointee
                     lp += 1
                     rp += 1
@@ -43,7 +43,7 @@ extension Pixel where T: Numeric {
                 assert(lbp.count == rbp.count)
                 
                 var rp = rbp.baseAddress!
-                for _ in 0..<lbp.count {
+                for _ in 0..<P.channels {
                     lp.pointee *= rp.pointee
                     lp += 1
                     rp += 1
@@ -62,7 +62,7 @@ extension Pixel where T: BinaryInteger {
                 assert(lbp.count == rbp.count)
                 
                 var rp = rbp.baseAddress!
-                for _ in 0..<lbp.count {
+                for _ in 0..<P.channels {
                     lp.pointee /= rp.pointee
                     lp += 1
                     rp += 1
@@ -81,7 +81,7 @@ extension Pixel where T: FloatingPoint {
                 assert(lbp.count == rbp.count)
                 
                 var rp = rbp.baseAddress!
-                for _ in 0..<lbp.count {
+                for _ in 0..<P.channels {
                     lp.pointee /= rp.pointee
                     lp += 1
                     rp += 1

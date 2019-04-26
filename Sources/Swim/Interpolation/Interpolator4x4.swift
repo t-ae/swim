@@ -38,9 +38,7 @@ extension Interpolator4x4 {
             var xp = Int(xmin)
             
             if let coord = inImageCoord(x: xp, y: yp, width: image.width, height: image.height) {
-                for c in 0..<P.channels {
-                    pixel[c] = xw0 * yw0 * image[unsafe: coord.x, coord.y, c]
-                }
+                pixel.assign(x: coord.x, y: coord.y, in: image, with: xw0 * yw0)
             } else if let constant = constant {
                 pixel.assign(pixel: constant, with: xw0 * yw0)
             } else {
@@ -49,9 +47,7 @@ extension Interpolator4x4 {
             xp += 1
             
             if let coord = inImageCoord(x: xp, y: yp, width: image.width, height: image.height) {
-                for c in 0..<P.channels {
-                    pixel[c] += xw1 * yw0 * image[unsafe: coord.x, coord.y, c]
-                }
+                pixel.add(x: coord.x, y: coord.y, in: image, with: xw1 * yw0)
             } else if let constant = constant {
                 pixel.add(pixel: constant, with: xw1 * yw0)
             } else {
@@ -60,9 +56,7 @@ extension Interpolator4x4 {
             xp += 1
             
             if let coord = inImageCoord(x: xp, y: yp, width: image.width, height: image.height) {
-                for c in 0..<P.channels {
-                    pixel[c] += xw2 * yw0 * image[unsafe: coord.x, coord.y, c]
-                }
+                pixel.add(x: coord.x, y: coord.y, in: image, with: xw2 * yw0)
             } else if let constant = constant {
                 pixel.add(pixel: constant, with: xw2 * yw0)
             } else {
@@ -71,9 +65,7 @@ extension Interpolator4x4 {
             xp += 1
             
             if let coord = inImageCoord(x: xp, y: yp, width: image.width, height: image.height) {
-                for c in 0..<P.channels {
-                    pixel[c] += xw3 * yw0 * image[unsafe: coord.x, coord.y, c]
-                }
+                pixel.add(x: coord.x, y: coord.y, in: image, with: xw3 * yw0)
             } else if let constant = constant {
                 pixel.add(pixel: constant, with: xw3 * yw0)
             } else {
@@ -87,9 +79,7 @@ extension Interpolator4x4 {
             var xp = Int(xmin)
             
             if let coord = inImageCoord(x: xp, y: yp, width: image.width, height: image.height) {
-                for c in 0..<P.channels {
-                    pixel[c] += xw0 * yw1 * image[unsafe: coord.x, coord.y, c]
-                }
+                pixel.add(x: coord.x, y: coord.y, in: image, with: xw0 * yw1)
             } else if let constant = constant {
                 pixel.add(pixel: constant, with: xw0 * yw1)
             } else {
@@ -98,9 +88,7 @@ extension Interpolator4x4 {
             xp += 1
             
             if let coord = inImageCoord(x: xp, y: yp, width: image.width, height: image.height) {
-                for c in 0..<P.channels {
-                    pixel[c] += xw1 * yw1 * image[unsafe: coord.x, coord.y, c]
-                }
+                pixel.add(x: coord.x, y: coord.y, in: image, with: xw1 * yw1)
             } else if let constant = constant {
                 pixel.add(pixel: constant, with: xw1 * yw1)
             } else {
@@ -109,9 +97,7 @@ extension Interpolator4x4 {
             xp += 1
             
             if let coord = inImageCoord(x: xp, y: yp, width: image.width, height: image.height) {
-                for c in 0..<P.channels {
-                    pixel[c] += xw2 * yw1 * image[unsafe: coord.x, coord.y, c]
-                }
+                pixel.add(x: coord.x, y: coord.y, in: image, with: xw2 * yw1)
             } else if let constant = constant {
                 pixel.add(pixel: constant, with: xw2 * yw1)
             } else {
@@ -120,9 +106,7 @@ extension Interpolator4x4 {
             xp += 1
             
             if let coord = inImageCoord(x: xp, y: yp, width: image.width, height: image.height) {
-                for c in 0..<P.channels {
-                    pixel[c] += xw3 * yw1 * image[unsafe: coord.x, coord.y, c]
-                }
+                pixel.add(x: coord.x, y: coord.y, in: image, with: xw3 * yw1)
             } else if let constant = constant {
                 pixel.add(pixel: constant, with: xw3 * yw1)
             } else {
@@ -136,9 +120,7 @@ extension Interpolator4x4 {
             var xp = Int(xmin)
             
             if let coord = inImageCoord(x: xp, y: yp, width: image.width, height: image.height) {
-                for c in 0..<P.channels {
-                    pixel[c] += xw0 * yw2 * image[unsafe: coord.x, coord.y, c]
-                }
+                pixel.add(x: coord.x, y: coord.y, in: image, with: xw0 * yw2)
             } else if let constant = constant {
                 pixel.add(pixel: constant, with: xw0 * yw2)
             } else {
@@ -147,9 +129,7 @@ extension Interpolator4x4 {
             xp += 1
             
             if let coord = inImageCoord(x: xp, y: yp, width: image.width, height: image.height) {
-                for c in 0..<P.channels {
-                    pixel[c] += xw1 * yw2 * image[unsafe: coord.x, coord.y, c]
-                }
+                pixel.add(x: coord.x, y: coord.y, in: image, with: xw1 * yw2)
             } else if let constant = constant {
                 pixel.add(pixel: constant, with: xw1 * yw2)
             } else {
@@ -158,9 +138,7 @@ extension Interpolator4x4 {
             xp += 1
             
             if let coord = inImageCoord(x: xp, y: yp, width: image.width, height: image.height) {
-                for c in 0..<P.channels {
-                    pixel[c] += xw2 * yw2 * image[unsafe: coord.x, coord.y, c]
-                }
+                pixel.add(x: coord.x, y: coord.y, in: image, with: xw2 * yw2)
             } else if let constant = constant {
                 pixel.add(pixel: constant, with: xw2 * yw2)
             } else {
@@ -169,9 +147,7 @@ extension Interpolator4x4 {
             xp += 1
             
             if let coord = inImageCoord(x: xp, y: yp, width: image.width, height: image.height) {
-                for c in 0..<P.channels {
-                    pixel[c] += xw3 * yw2 * image[unsafe: coord.x, coord.y, c]
-                }
+                pixel.add(x: coord.x, y: coord.y, in: image, with: xw3 * yw2)
             } else if let constant = constant {
                 pixel.add(pixel: constant, with: xw3 * yw2)
             } else {
@@ -185,9 +161,7 @@ extension Interpolator4x4 {
             var xp = Int(xmin)
             
             if let coord = inImageCoord(x: xp, y: yp, width: image.width, height: image.height) {
-                for c in 0..<P.channels {
-                    pixel[c] += xw0 * yw3 * image[unsafe: coord.x, coord.y, c]
-                }
+                pixel.add(x: coord.x, y: coord.y, in: image, with: xw0 * yw3)
             } else if let constant = constant {
                 pixel.add(pixel: constant, with: xw0 * yw3)
             } else {
@@ -196,9 +170,7 @@ extension Interpolator4x4 {
             xp += 1
             
             if let coord = inImageCoord(x: xp, y: yp, width: image.width, height: image.height) {
-                for c in 0..<P.channels {
-                    pixel[c] += xw1 * yw3 * image[unsafe: coord.x, coord.y, c]
-                }
+                pixel.add(x: coord.x, y: coord.y, in: image, with: xw1 * yw3)
             } else if let constant = constant {
                 pixel.add(pixel: constant, with: xw1 * yw3)
             } else {
@@ -207,9 +179,7 @@ extension Interpolator4x4 {
             xp += 1
             
             if let coord = inImageCoord(x: xp, y: yp, width: image.width, height: image.height) {
-                for c in 0..<P.channels {
-                    pixel[c] += xw2 * yw3 * image[unsafe: coord.x, coord.y, c]
-                }
+                pixel.add(x: coord.x, y: coord.y, in: image, with: xw2 * yw3)
             } else if let constant = constant {
                 pixel.add(pixel: constant, with: xw2 * yw3)
             } else {
@@ -218,9 +188,7 @@ extension Interpolator4x4 {
             xp += 1
             
             if let coord = inImageCoord(x: xp, y: yp, width: image.width, height: image.height) {
-                for c in 0..<P.channels {
-                    pixel[c] += xw3 * yw3 * image[unsafe: coord.x, coord.y, c]
-                }
+                pixel.add(x: coord.x, y: coord.y, in: image, with: xw3 * yw3)
             } else if let constant = constant {
                 pixel.add(pixel: constant, with: xw3 * yw3)
             } else {

@@ -9,7 +9,7 @@ extension MutablePixelRef where T: AdditiveArithmetic {
             assert(lhs.pointer.count == rbp.count)
             
             var rp = rbp.baseAddress!
-            for _ in 0..<lhs.pointer.count {
+            for _ in 0..<P.channels {
                 lp.pointee += rp.pointee
                 lp += 1
                 rp += 1
@@ -25,7 +25,7 @@ extension MutablePixelRef where T: AdditiveArithmetic {
             assert(lhs.pointer.count == rbp.count)
             
             var rp = rbp.baseAddress!
-            for _ in 0..<lhs.pointer.count {
+            for _ in 0..<P.channels {
                 lp.pointee -= rp.pointee
                 lp += 1
                 rp += 1
@@ -43,7 +43,7 @@ extension MutablePixelRef where T: Numeric {
             assert(lhs.pointer.count == rbp.count)
             
             var rp = rbp.baseAddress!
-            for _ in 0..<lhs.pointer.count {
+            for _ in 0..<P.channels {
                 lp.pointee *= rp.pointee
                 lp += 1
                 rp += 1
@@ -61,7 +61,7 @@ extension MutablePixelRef where T: BinaryInteger {
             assert(lhs.pointer.count == rbp.count)
             
             var rp = rbp.baseAddress!
-            for _ in 0..<lhs.pointer.count {
+            for _ in 0..<P.channels {
                 lp.pointee /= rp.pointee
                 lp += 1
                 rp += 1
@@ -79,7 +79,7 @@ extension MutablePixelRef where T: FloatingPoint {
             assert(lhs.pointer.count == rbp.count)
             
             var rp = rbp.baseAddress!
-            for _ in 0..<lhs.pointer.count {
+            for _ in 0..<P.channels {
                 lp.pointee /= rp.pointee
                 lp += 1
                 rp += 1
@@ -98,7 +98,21 @@ extension MutablePixelRef where T: Numeric {
             assert(self.pointer.count == rbp.count)
             
             var rp = rbp.baseAddress!
-            for _ in 0..<self.pointer.count {
+            for _ in 0..<P.channels {
+                lp.pointee += rp.pointee * factor
+                lp += 1
+                rp += 1
+            }
+        }
+    }
+    
+    @inlinable
+    func add(x: Int, y: Int, in image: Image<P, T>, with factor: T) {
+        var lp = self.pointer.baseAddress!
+        let start = image.dataIndex(x: x, y: y)
+        image.withUnsafeBufferPointer { rbp in
+            var rp = rbp.baseAddress!.advanced(by: start)
+            for _ in 0..<P.channels {
                 lp.pointee += rp.pointee * factor
                 lp += 1
                 rp += 1
@@ -123,7 +137,21 @@ extension MutablePixelRef where T: Numeric {
             assert(self.pointer.count == rbp.count)
             
             var rp = rbp.baseAddress!
-            for _ in 0..<self.pointer.count {
+            for _ in 0..<P.channels {
+                lp.pointee += rp.pointee * factor
+                lp += 1
+                rp += 1
+            }
+        }
+    }
+    
+    @inlinable
+    func assign(x: Int,y: Int, in image: Image<P, T>, with factor: T) {
+        var lp = self.pointer.baseAddress!
+        let start = image.dataIndex(x: x, y: y)
+        image.withUnsafeBufferPointer { rbp in
+            var rp = rbp.baseAddress!.advanced(by: start)
+            for _ in 0..<P.channels {
                 lp.pointee += rp.pointee * factor
                 lp += 1
                 rp += 1

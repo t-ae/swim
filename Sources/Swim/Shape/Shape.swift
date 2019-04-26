@@ -23,10 +23,10 @@ extension Shape {
                 
                 if d2 <= inner2 {
                     if let fillColor = fillColor {
-                        image[unsafe: x, y] = fillColor
+                        image[x, y] = fillColor
                     }
                 } else if d2 <= outer2 {
-                    image[unsafe: x, y] = lineColor
+                    image[x, y] = lineColor
                 }
             }
         }

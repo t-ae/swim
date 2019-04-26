@@ -40,11 +40,11 @@ extension BayerConverter {
             for x in 0..<image.width {
                 switch (xOdd, yOdd) {
                 case (true, true): // r
-                    newImage[unsafe: x, y, .intensity] = image[unsafe: x, y, .red]
+                    newImage[x, y, .intensity] = image[x, y, .red]
                 case (false, true), (true, false): // g
-                    newImage[unsafe: x, y, .intensity] = image[unsafe: x, y, .green]
+                    newImage[x, y, .intensity] = image[x, y, .green]
                 case (false, false): // b
-                    newImage[unsafe: x, y, .intensity] = image[unsafe: x, y, .blue]
+                    newImage[x, y, .intensity] = image[x, y, .blue]
                 }
                 
                 xOdd.toggle()
@@ -70,7 +70,7 @@ extension BayerConverter {
             var count = 0
             for p in points {
                 if 0 <= p.x && p.x < image.width && 0 <= p.y && p.y < image.height {
-                    sum += image[unsafe: p.x, p.y, .intensity]
+                    sum += image[p.x, p.y, .intensity]
                     count += 1
                 }
             }
@@ -132,7 +132,7 @@ extension BayerConverter {
             var count = 0
             for p in points {
                 if 0 <= p.x && p.x < image.width && 0 <= p.y && p.y < image.height {
-                    sum += image[unsafe: p.x, p.y, .intensity]
+                    sum += image[p.x, p.y, .intensity]
                     count += 1
                 }
             }

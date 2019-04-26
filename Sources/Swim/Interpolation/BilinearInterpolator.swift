@@ -28,9 +28,7 @@ public struct BilinearInterpolator<P:PixelType, T: BinaryFloatingPoint&DataType>
         }
         
         if let lu = inImageCoord(x: Int(x0), y: Int(y0), width: image.width, height: image.height) {
-            for c in 0..<P.channels {
-                pixel[c] = xx1 * yy1 * image[unsafe: lu.x, lu.y, c]
-            }
+            pixel.assign(x: lu.x, y: lu.y, in: image, with: xx1 * yy1)
         } else if let constant = constant {
             pixel.assign(pixel: constant, with: xx1 * yy1)
         } else {
@@ -38,9 +36,7 @@ public struct BilinearInterpolator<P:PixelType, T: BinaryFloatingPoint&DataType>
         }
         
         if let ru = inImageCoord(x: Int(x1), y: Int(y0), width: image.width, height: image.height) {
-            for c in 0..<P.channels {
-                pixel[c] += x0x * yy1 * image[unsafe: ru.x, ru.y, c]
-            }
+            pixel.add(x: ru.x, y: ru.y, in: image, with: x0x * yy1)
         } else if let constant = constant {
             pixel.add(pixel: constant, with: x0x * yy1)
         } else {
@@ -48,9 +44,7 @@ public struct BilinearInterpolator<P:PixelType, T: BinaryFloatingPoint&DataType>
         }
         
         if let ld = inImageCoord(x: Int(x0), y: Int(y1), width: image.width, height: image.height) {
-            for c in 0..<P.channels {
-                pixel[c] += xx1 * y0y * image[unsafe: ld.x, ld.y, c]
-            }
+            pixel.add(x: ld.x, y: ld.y, in: image, with: xx1 * y0y)
         } else if let constant = constant {
             pixel.add(pixel: constant, with: xx1 * y0y)
         } else {
@@ -58,9 +52,7 @@ public struct BilinearInterpolator<P:PixelType, T: BinaryFloatingPoint&DataType>
         }
         
         if let rd = inImageCoord(x: Int(x1), y: Int(y1), width: image.width, height: image.height) {
-            for c in 0..<P.channels {
-                pixel[c] += x0x * y0y * image[unsafe: rd.x, rd.y, c]
-            }
+            pixel.add(x: rd.x, y: rd.y, in: image, with: x0x * y0y)
         } else if let constant = constant {
             pixel.add(pixel: constant, with: x0x * y0y)
         } else {

@@ -78,7 +78,7 @@ public struct _BicubicInterpolator<P: PixelType, T: BinaryFloatingPoint&DataType
                 
                 if let (x, y) = inImageCoord(x: Int(xp), y: Int(yp), width: image.width, height: image.height) {
                     for c in 0..<P.channels {
-                        pixel[c] += image[unsafe: x, y, c]
+                        pixel[c] += image[x, y, c]
                     }
                 } else if case let .constant(px) = edgeMode {
                     pixel.add(pixel: px, with: wx * wy)

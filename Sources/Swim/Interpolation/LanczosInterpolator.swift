@@ -85,9 +85,7 @@ public struct Lanczos3Interpolator<P: PixelType>: Interpolator {
             var xp = Int(xmin)
             
             if let coord = inImageCoord(x: xp, y: yp, width: image.width, height: image.height) {
-                for c in 0..<P.channels {
-                    pixel[c] = xw0 * yw0 * image[unsafe: coord.x, coord.y, c]
-                }
+                pixel.assign(x: coord.x, y: coord.y, in: image, with: xw0 * yw0)
             } else if let constant = constant {
                 pixel.assign(pixel: constant, with: xw0 * yw0)
             } else {
@@ -96,9 +94,7 @@ public struct Lanczos3Interpolator<P: PixelType>: Interpolator {
             xp += 1
             
             if let coord = inImageCoord(x: xp, y: yp, width: image.width, height: image.height) {
-                for c in 0..<P.channels {
-                    pixel[c] += xw1 * yw0 * image[unsafe: coord.x, coord.y, c]
-                }
+                pixel.add(x: coord.x, y: coord.y, in: image, with: xw1 * yw0)
             } else if let constant = constant {
                 pixel.add(pixel: constant, with: xw1 * yw0)
             } else {
@@ -107,9 +103,7 @@ public struct Lanczos3Interpolator<P: PixelType>: Interpolator {
             xp += 1
             
             if let coord = inImageCoord(x: xp, y: yp, width: image.width, height: image.height) {
-                for c in 0..<P.channels {
-                    pixel[c] += xw2 * yw0 * image[unsafe: coord.x, coord.y, c]
-                }
+                pixel.add(x: coord.x, y: coord.y, in: image, with: xw2 * yw0)
             } else if let constant = constant {
                 pixel.add(pixel: constant, with: xw2 * yw0)
             } else {
@@ -118,9 +112,7 @@ public struct Lanczos3Interpolator<P: PixelType>: Interpolator {
             xp += 1
             
             if let coord = inImageCoord(x: xp, y: yp, width: image.width, height: image.height) {
-                for c in 0..<P.channels {
-                    pixel[c] += xw3 * yw0 * image[unsafe: coord.x, coord.y, c]
-                }
+                pixel.add(x: coord.x, y: coord.y, in: image, with: xw3 * yw0)
             } else if let constant = constant {
                 pixel.add(pixel: constant, with: xw3 * yw0)
             } else {
@@ -129,9 +121,7 @@ public struct Lanczos3Interpolator<P: PixelType>: Interpolator {
             xp += 1
             
             if let coord = inImageCoord(x: xp, y: yp, width: image.width, height: image.height) {
-                for c in 0..<P.channels {
-                    pixel[c] += xw4 * yw0 * image[unsafe: coord.x, coord.y, c]
-                }
+                pixel.add(x: coord.x, y: coord.y, in: image, with: xw4 * yw0)
             } else if let constant = constant {
                 pixel.add(pixel: constant, with: xw4 * yw0)
             } else {
@@ -140,9 +130,7 @@ public struct Lanczos3Interpolator<P: PixelType>: Interpolator {
             xp += 1
             
             if let coord = inImageCoord(x: xp, y: yp, width: image.width, height: image.height) {
-                for c in 0..<P.channels {
-                    pixel[c] += xw5 * yw0 * image[unsafe: coord.x, coord.y, c]
-                }
+                pixel.add(x: coord.x, y: coord.y, in: image, with: xw5 * yw0)
             } else if let constant = constant {
                 pixel.add(pixel: constant, with: xw5 * yw0)
             } else {
@@ -156,9 +144,7 @@ public struct Lanczos3Interpolator<P: PixelType>: Interpolator {
             var xp = Int(xmin)
             
             if let coord = inImageCoord(x: xp, y: yp, width: image.width, height: image.height) {
-                for c in 0..<P.channels {
-                    pixel[c] += xw0 * yw1 * image[unsafe: coord.x, coord.y, c]
-                }
+                pixel.add(x: coord.x, y: coord.y, in: image, with: xw0 * yw1)
             } else if let constant = constant {
                 pixel.add(pixel: constant, with: xw0 * yw1)
             } else {
@@ -167,9 +153,7 @@ public struct Lanczos3Interpolator<P: PixelType>: Interpolator {
             xp += 1
             
             if let coord = inImageCoord(x: xp, y: yp, width: image.width, height: image.height) {
-                for c in 0..<P.channels {
-                    pixel[c] += xw1 * yw1 * image[unsafe: coord.x, coord.y, c]
-                }
+                pixel.add(x: coord.x, y: coord.y, in: image, with: xw1 * yw1)
             } else if let constant = constant {
                 pixel.add(pixel: constant, with: xw1 * yw1)
             } else {
@@ -178,9 +162,7 @@ public struct Lanczos3Interpolator<P: PixelType>: Interpolator {
             xp += 1
             
             if let coord = inImageCoord(x: xp, y: yp, width: image.width, height: image.height) {
-                for c in 0..<P.channels {
-                    pixel[c] += xw2 * yw1 * image[unsafe: coord.x, coord.y, c]
-                }
+                pixel.add(x: coord.x, y: coord.y, in: image, with: xw2 * yw1)
             } else if let constant = constant {
                 pixel.add(pixel: constant, with: xw2 * yw1)
             } else {
@@ -189,9 +171,7 @@ public struct Lanczos3Interpolator<P: PixelType>: Interpolator {
             xp += 1
             
             if let coord = inImageCoord(x: xp, y: yp, width: image.width, height: image.height) {
-                for c in 0..<P.channels {
-                    pixel[c] += xw3 * yw1 * image[unsafe: coord.x, coord.y, c]
-                }
+                pixel.add(x: coord.x, y: coord.y, in: image, with: xw3 * yw1)
             } else if let constant = constant {
                 pixel.add(pixel: constant, with: xw3 * yw1)
             } else {
@@ -200,9 +180,7 @@ public struct Lanczos3Interpolator<P: PixelType>: Interpolator {
             xp += 1
             
             if let coord = inImageCoord(x: xp, y: yp, width: image.width, height: image.height) {
-                for c in 0..<P.channels {
-                    pixel[c] += xw4 * yw1 * image[unsafe: coord.x, coord.y, c]
-                }
+                pixel.add(x: coord.x, y: coord.y, in: image, with: xw4 * yw1)
             } else if let constant = constant {
                 pixel.add(pixel: constant, with: xw4 * yw1)
             } else {
@@ -211,9 +189,7 @@ public struct Lanczos3Interpolator<P: PixelType>: Interpolator {
             xp += 1
             
             if let coord = inImageCoord(x: xp, y: yp, width: image.width, height: image.height) {
-                for c in 0..<P.channels {
-                    pixel[c] += xw5 * yw1 * image[unsafe: coord.x, coord.y, c]
-                }
+                pixel.add(x: coord.x, y: coord.y, in: image, with: xw5 * yw1)
             } else if let constant = constant {
                 pixel.add(pixel: constant, with: xw5 * yw1)
             } else {
@@ -227,9 +203,7 @@ public struct Lanczos3Interpolator<P: PixelType>: Interpolator {
             var xp = Int(xmin)
             
             if let coord = inImageCoord(x: xp, y: yp, width: image.width, height: image.height) {
-                for c in 0..<P.channels {
-                    pixel[c] += xw0 * yw2 * image[unsafe: coord.x, coord.y, c]
-                }
+                pixel.add(x: coord.x, y: coord.y, in: image, with: xw0 * yw2)
             } else if let constant = constant {
                 pixel.add(pixel: constant, with: xw0 * yw2)
             } else {
@@ -238,9 +212,7 @@ public struct Lanczos3Interpolator<P: PixelType>: Interpolator {
             xp += 1
             
             if let coord = inImageCoord(x: xp, y: yp, width: image.width, height: image.height) {
-                for c in 0..<P.channels {
-                    pixel[c] += xw1 * yw2 * image[unsafe: coord.x, coord.y, c]
-                }
+                pixel.add(x: coord.x, y: coord.y, in: image, with: xw1 * yw2)
             } else if let constant = constant {
                 pixel.add(pixel: constant, with: xw1 * yw2)
             } else {
@@ -249,9 +221,7 @@ public struct Lanczos3Interpolator<P: PixelType>: Interpolator {
             xp += 1
             
             if let coord = inImageCoord(x: xp, y: yp, width: image.width, height: image.height) {
-                for c in 0..<P.channels {
-                    pixel[c] += xw2 * yw2 * image[unsafe: coord.x, coord.y, c]
-                }
+                pixel.add(x: coord.x, y: coord.y, in: image, with: xw2 * yw2)
             } else if let constant = constant {
                 pixel.add(pixel: constant, with: xw2 * yw2)
             } else {
@@ -260,9 +230,7 @@ public struct Lanczos3Interpolator<P: PixelType>: Interpolator {
             xp += 1
             
             if let coord = inImageCoord(x: xp, y: yp, width: image.width, height: image.height) {
-                for c in 0..<P.channels {
-                    pixel[c] += xw3 * yw2 * image[unsafe: coord.x, coord.y, c]
-                }
+                pixel.add(x: coord.x, y: coord.y, in: image, with: xw3 * yw2)
             } else if let constant = constant {
                 pixel.add(pixel: constant, with: xw3 * yw2)
             } else {
@@ -271,9 +239,7 @@ public struct Lanczos3Interpolator<P: PixelType>: Interpolator {
             xp += 1
             
             if let coord = inImageCoord(x: xp, y: yp, width: image.width, height: image.height) {
-                for c in 0..<P.channels {
-                    pixel[c] += xw4 * yw2 * image[unsafe: coord.x, coord.y, c]
-                }
+                pixel.add(x: coord.x, y: coord.y, in: image, with: xw4 * yw2)
             } else if let constant = constant {
                 pixel.add(pixel: constant, with: xw4 * yw2)
             } else {
@@ -282,9 +248,7 @@ public struct Lanczos3Interpolator<P: PixelType>: Interpolator {
             xp += 1
             
             if let coord = inImageCoord(x: xp, y: yp, width: image.width, height: image.height) {
-                for c in 0..<P.channels {
-                    pixel[c] += xw5 * yw2 * image[unsafe: coord.x, coord.y, c]
-                }
+                pixel.add(x: coord.x, y: coord.y, in: image, with: xw5 * yw2)
             } else if let constant = constant {
                 pixel.add(pixel: constant, with: xw5 * yw2)
             } else {
@@ -298,9 +262,7 @@ public struct Lanczos3Interpolator<P: PixelType>: Interpolator {
             var xp = Int(xmin)
             
             if let coord = inImageCoord(x: xp, y: yp, width: image.width, height: image.height) {
-                for c in 0..<P.channels {
-                    pixel[c] += xw0 * yw3 * image[unsafe: coord.x, coord.y, c]
-                }
+                pixel.add(x: coord.x, y: coord.y, in: image, with: xw0 * yw3)
             } else if let constant = constant {
                 pixel.add(pixel: constant, with: xw0 * yw3)
             } else {
@@ -309,9 +271,7 @@ public struct Lanczos3Interpolator<P: PixelType>: Interpolator {
             xp += 1
             
             if let coord = inImageCoord(x: xp, y: yp, width: image.width, height: image.height) {
-                for c in 0..<P.channels {
-                    pixel[c] += xw1 * yw3 * image[unsafe: coord.x, coord.y, c]
-                }
+                pixel.add(x: coord.x, y: coord.y, in: image, with: xw1 * yw3)
             } else if let constant = constant {
                 pixel.add(pixel: constant, with: xw1 * yw3)
             } else {
@@ -320,9 +280,7 @@ public struct Lanczos3Interpolator<P: PixelType>: Interpolator {
             xp += 1
             
             if let coord = inImageCoord(x: xp, y: yp, width: image.width, height: image.height) {
-                for c in 0..<P.channels {
-                    pixel[c] += xw2 * yw3 * image[unsafe: coord.x, coord.y, c]
-                }
+                pixel.add(x: coord.x, y: coord.y, in: image, with: xw2 * yw3)
             } else if let constant = constant {
                 pixel.add(pixel: constant, with: xw2 * yw3)
             } else {
@@ -331,9 +289,7 @@ public struct Lanczos3Interpolator<P: PixelType>: Interpolator {
             xp += 1
             
             if let coord = inImageCoord(x: xp, y: yp, width: image.width, height: image.height) {
-                for c in 0..<P.channels {
-                    pixel[c] += xw3 * yw3 * image[unsafe: coord.x, coord.y, c]
-                }
+                pixel.add(x: coord.x, y: coord.y, in: image, with: xw3 * yw3)
             } else if let constant = constant {
                 pixel.add(pixel: constant, with: xw3 * yw3)
             } else {
@@ -342,9 +298,7 @@ public struct Lanczos3Interpolator<P: PixelType>: Interpolator {
             xp += 1
             
             if let coord = inImageCoord(x: xp, y: yp, width: image.width, height: image.height) {
-                for c in 0..<P.channels {
-                    pixel[c] += xw4 * yw3 * image[unsafe: coord.x, coord.y, c]
-                }
+                pixel.add(x: coord.x, y: coord.y, in: image, with: xw4 * yw3)
             } else if let constant = constant {
                 pixel.add(pixel: constant, with: xw4 * yw3)
             } else {
@@ -353,9 +307,7 @@ public struct Lanczos3Interpolator<P: PixelType>: Interpolator {
             xp += 1
             
             if let coord = inImageCoord(x: xp, y: yp, width: image.width, height: image.height) {
-                for c in 0..<P.channels {
-                    pixel[c] += xw5 * yw3 * image[unsafe: coord.x, coord.y, c]
-                }
+                pixel.add(x: coord.x, y: coord.y, in: image, with: xw5 * yw3)
             } else if let constant = constant {
                 pixel.add(pixel: constant, with: xw5 * yw3)
             } else {
@@ -369,9 +321,7 @@ public struct Lanczos3Interpolator<P: PixelType>: Interpolator {
             var xp = Int(xmin)
             
             if let coord = inImageCoord(x: xp, y: yp, width: image.width, height: image.height) {
-                for c in 0..<P.channels {
-                    pixel[c] += xw0 * yw4 * image[unsafe: coord.x, coord.y, c]
-                }
+                pixel.add(x: coord.x, y: coord.y, in: image, with: xw0 * yw4)
             } else if let constant = constant {
                 pixel.add(pixel: constant, with: xw0 * yw4)
             } else {
@@ -380,9 +330,7 @@ public struct Lanczos3Interpolator<P: PixelType>: Interpolator {
             xp += 1
             
             if let coord = inImageCoord(x: xp, y: yp, width: image.width, height: image.height) {
-                for c in 0..<P.channels {
-                    pixel[c] += xw1 * yw4 * image[unsafe: coord.x, coord.y, c]
-                }
+                pixel.add(x: coord.x, y: coord.y, in: image, with: xw1 * yw4)
             } else if let constant = constant {
                 pixel.add(pixel: constant, with: xw1 * yw4)
             } else {
@@ -391,9 +339,7 @@ public struct Lanczos3Interpolator<P: PixelType>: Interpolator {
             xp += 1
             
             if let coord = inImageCoord(x: xp, y: yp, width: image.width, height: image.height) {
-                for c in 0..<P.channels {
-                    pixel[c] += xw2 * yw4 * image[unsafe: coord.x, coord.y, c]
-                }
+                pixel.add(x: coord.x, y: coord.y, in: image, with: xw2 * yw4)
             } else if let constant = constant {
                 pixel.add(pixel: constant, with: xw2 * yw4)
             } else {
@@ -402,9 +348,7 @@ public struct Lanczos3Interpolator<P: PixelType>: Interpolator {
             xp += 1
             
             if let coord = inImageCoord(x: xp, y: yp, width: image.width, height: image.height) {
-                for c in 0..<P.channels {
-                    pixel[c] += xw3 * yw4 * image[unsafe: coord.x, coord.y, c]
-                }
+                pixel.add(x: coord.x, y: coord.y, in: image, with: xw3 * yw4)
             } else if let constant = constant {
                 pixel.add(pixel: constant, with: xw3 * yw4)
             } else {
@@ -413,9 +357,7 @@ public struct Lanczos3Interpolator<P: PixelType>: Interpolator {
             xp += 1
             
             if let coord = inImageCoord(x: xp, y: yp, width: image.width, height: image.height) {
-                for c in 0..<P.channels {
-                    pixel[c] += xw4 * yw4 * image[unsafe: coord.x, coord.y, c]
-                }
+                pixel.add(x: coord.x, y: coord.y, in: image, with: xw4 * yw4)
             } else if let constant = constant {
                 pixel.add(pixel: constant, with: xw4 * yw4)
             } else {
@@ -424,9 +366,7 @@ public struct Lanczos3Interpolator<P: PixelType>: Interpolator {
             xp += 1
             
             if let coord = inImageCoord(x: xp, y: yp, width: image.width, height: image.height) {
-                for c in 0..<P.channels {
-                    pixel[c] += xw5 * yw4 * image[unsafe: coord.x, coord.y, c]
-                }
+                pixel.add(x: coord.x, y: coord.y, in: image, with: xw5 * yw4)
             } else if let constant = constant {
                 pixel.add(pixel: constant, with: xw5 * yw4)
             } else {
@@ -440,9 +380,7 @@ public struct Lanczos3Interpolator<P: PixelType>: Interpolator {
             var xp = Int(xmin)
             
             if let coord = inImageCoord(x: xp, y: yp, width: image.width, height: image.height) {
-                for c in 0..<P.channels {
-                    pixel[c] += xw0 * yw5 * image[unsafe: coord.x, coord.y, c]
-                }
+                pixel.add(x: coord.x, y: coord.y, in: image, with: xw0 * yw5)
             } else if let constant = constant {
                 pixel.add(pixel: constant, with: xw0 * yw5)
             } else {
@@ -451,9 +389,7 @@ public struct Lanczos3Interpolator<P: PixelType>: Interpolator {
             xp += 1
             
             if let coord = inImageCoord(x: xp, y: yp, width: image.width, height: image.height) {
-                for c in 0..<P.channels {
-                    pixel[c] += xw1 * yw5 * image[unsafe: coord.x, coord.y, c]
-                }
+                pixel.add(x: coord.x, y: coord.y, in: image, with: xw1 * yw5)
             } else if let constant = constant {
                 pixel.add(pixel: constant, with: xw1 * yw5)
             } else {
@@ -462,9 +398,7 @@ public struct Lanczos3Interpolator<P: PixelType>: Interpolator {
             xp += 1
             
             if let coord = inImageCoord(x: xp, y: yp, width: image.width, height: image.height) {
-                for c in 0..<P.channels {
-                    pixel[c] += xw2 * yw5 * image[unsafe: coord.x, coord.y, c]
-                }
+                pixel.add(x: coord.x, y: coord.y, in: image, with: xw2 * yw5)
             } else if let constant = constant {
                 pixel.add(pixel: constant, with: xw2 * yw5)
             } else {
@@ -473,9 +407,7 @@ public struct Lanczos3Interpolator<P: PixelType>: Interpolator {
             xp += 1
             
             if let coord = inImageCoord(x: xp, y: yp, width: image.width, height: image.height) {
-                for c in 0..<P.channels {
-                    pixel[c] += xw3 * yw5 * image[unsafe: coord.x, coord.y, c]
-                }
+                pixel.add(x: coord.x, y: coord.y, in: image, with: xw3 * yw5)
             } else if let constant = constant {
                 pixel.add(pixel: constant, with: xw3 * yw5)
             } else {
@@ -484,9 +416,7 @@ public struct Lanczos3Interpolator<P: PixelType>: Interpolator {
             xp += 1
             
             if let coord = inImageCoord(x: xp, y: yp, width: image.width, height: image.height) {
-                for c in 0..<P.channels {
-                    pixel[c] += xw4 * yw5 * image[unsafe: coord.x, coord.y, c]
-                }
+                pixel.add(x: coord.x, y: coord.y, in: image, with: xw4 * yw5)
             } else if let constant = constant {
                 pixel.add(pixel: constant, with: xw4 * yw5)
             } else {
@@ -495,9 +425,7 @@ public struct Lanczos3Interpolator<P: PixelType>: Interpolator {
             xp += 1
             
             if let coord = inImageCoord(x: xp, y: yp, width: image.width, height: image.height) {
-                for c in 0..<P.channels {
-                    pixel[c] += xw5 * yw5 * image[unsafe: coord.x, coord.y, c]
-                }
+                pixel.add(x: coord.x, y: coord.y, in: image, with: xw5 * yw5)
             } else if let constant = constant {
                 pixel.add(pixel: constant, with: xw5 * yw5)
             } else {

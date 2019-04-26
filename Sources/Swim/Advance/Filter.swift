@@ -28,7 +28,7 @@ extension Image where P == Intensity, T: Comparable {
                         patch.append(self[xx, yy, .intensity])
                     }
                 }
-                newImage[unsafe: x, y, .intensity] = kernelFunc(patch)
+                newImage[x, y, .intensity] = kernelFunc(patch)
             }
         }
         

@@ -13,7 +13,7 @@ public struct NearestNeighborInterpolator<P: PixelType, T: BinaryFloatingPoint&D
         
         if let (x, y) = inImageCoord(x: x, y: y, width: image.width, height: image.height) {
             for c in 0..<P.channels {
-                pixel[c] = image[unsafe: x, y, c]
+                pixel[c] = image[x, y, c]
             }
         } else if case let .constant(px) = edgeMode {
             pixel.assign(pixel: px)
