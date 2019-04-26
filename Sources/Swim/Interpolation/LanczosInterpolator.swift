@@ -79,358 +79,388 @@ public struct Lanczos3Interpolator<P: PixelType>: Interpolator {
         
         // Loop unrolling
         var yp = Int(ymin)
-        
+
         // dy = 0
-        do {
+        if let y = clampValue(value: yp, max: image.height) {
             var xp = Int(xmin)
             
-            if let coord = inImageCoord(x: xp, y: yp, width: image.width, height: image.height) {
-                pixel.assign(x: coord.x, y: coord.y, in: image, with: xw0 * yw0)
+            if let x = clampValue(value: xp, max: image.width) {
+                pixel.assign(x: x, y: y, in: image, with: xw0 * yw0)
             } else if let constant = constant {
                 pixel.assign(pixel: constant, with: xw0 * yw0)
             } else {
-                fatalError("Never happens.")
+                fatalError("Never happens")
             }
             xp += 1
             
-            if let coord = inImageCoord(x: xp, y: yp, width: image.width, height: image.height) {
-                pixel.add(x: coord.x, y: coord.y, in: image, with: xw1 * yw0)
+            if let x = clampValue(value: xp, max: image.width) {
+                pixel.add(x: x, y: y, in: image, with: xw1 * yw0)
             } else if let constant = constant {
                 pixel.add(pixel: constant, with: xw1 * yw0)
             } else {
-                fatalError("Never happens.")
+                fatalError("Never happens")
             }
             xp += 1
             
-            if let coord = inImageCoord(x: xp, y: yp, width: image.width, height: image.height) {
-                pixel.add(x: coord.x, y: coord.y, in: image, with: xw2 * yw0)
+            if let x = clampValue(value: xp, max: image.width) {
+                pixel.add(x: x, y: y, in: image, with: xw2 * yw0)
             } else if let constant = constant {
                 pixel.add(pixel: constant, with: xw2 * yw0)
             } else {
-                fatalError("Never happens.")
+                fatalError("Never happens")
             }
             xp += 1
             
-            if let coord = inImageCoord(x: xp, y: yp, width: image.width, height: image.height) {
-                pixel.add(x: coord.x, y: coord.y, in: image, with: xw3 * yw0)
+            if let x = clampValue(value: xp, max: image.width) {
+                pixel.add(x: x, y: y, in: image, with: xw3 * yw0)
             } else if let constant = constant {
                 pixel.add(pixel: constant, with: xw3 * yw0)
             } else {
-                fatalError("Never happens.")
+                fatalError("Never happens")
             }
             xp += 1
             
-            if let coord = inImageCoord(x: xp, y: yp, width: image.width, height: image.height) {
-                pixel.add(x: coord.x, y: coord.y, in: image, with: xw4 * yw0)
+            if let x = clampValue(value: xp, max: image.width) {
+                pixel.add(x: x, y: y, in: image, with: xw4 * yw0)
             } else if let constant = constant {
                 pixel.add(pixel: constant, with: xw4 * yw0)
             } else {
-                fatalError("Never happens.")
+                fatalError("Never happens")
             }
             xp += 1
             
-            if let coord = inImageCoord(x: xp, y: yp, width: image.width, height: image.height) {
-                pixel.add(x: coord.x, y: coord.y, in: image, with: xw5 * yw0)
+            if let x = clampValue(value: xp, max: image.width) {
+                pixel.add(x: x, y: y, in: image, with: xw5 * yw0)
             } else if let constant = constant {
                 pixel.add(pixel: constant, with: xw5 * yw0)
             } else {
-                fatalError("Never happens.")
+                fatalError("Never happens")
             }
+        } else if let constant = constant {
+            // all pixels are constant
+            pixel.assign(pixel: constant, with: yw0)
+        } else {
+            fatalError("Never happens.")
         }
         yp += 1
         
         // dy = 1
-        do {
+        if let y = clampValue(value: yp, max: image.height) {
             var xp = Int(xmin)
             
-            if let coord = inImageCoord(x: xp, y: yp, width: image.width, height: image.height) {
-                pixel.add(x: coord.x, y: coord.y, in: image, with: xw0 * yw1)
+            if let x = clampValue(value: xp, max: image.width) {
+                pixel.add(x: x, y: y, in: image, with: xw0 * yw1)
             } else if let constant = constant {
                 pixel.add(pixel: constant, with: xw0 * yw1)
             } else {
-                fatalError("Never happens.")
+                fatalError("Never happens")
             }
             xp += 1
             
-            if let coord = inImageCoord(x: xp, y: yp, width: image.width, height: image.height) {
-                pixel.add(x: coord.x, y: coord.y, in: image, with: xw1 * yw1)
+            if let x = clampValue(value: xp, max: image.width) {
+                pixel.add(x: x, y: y, in: image, with: xw1 * yw1)
             } else if let constant = constant {
                 pixel.add(pixel: constant, with: xw1 * yw1)
             } else {
-                fatalError("Never happens.")
+                fatalError("Never happens")
             }
             xp += 1
             
-            if let coord = inImageCoord(x: xp, y: yp, width: image.width, height: image.height) {
-                pixel.add(x: coord.x, y: coord.y, in: image, with: xw2 * yw1)
+            if let x = clampValue(value: xp, max: image.width) {
+                pixel.add(x: x, y: y, in: image, with: xw2 * yw1)
             } else if let constant = constant {
                 pixel.add(pixel: constant, with: xw2 * yw1)
             } else {
-                fatalError("Never happens.")
+                fatalError("Never happens")
             }
             xp += 1
             
-            if let coord = inImageCoord(x: xp, y: yp, width: image.width, height: image.height) {
-                pixel.add(x: coord.x, y: coord.y, in: image, with: xw3 * yw1)
+            if let x = clampValue(value: xp, max: image.width) {
+                pixel.add(x: x, y: y, in: image, with: xw3 * yw1)
             } else if let constant = constant {
                 pixel.add(pixel: constant, with: xw3 * yw1)
             } else {
-                fatalError("Never happens.")
+                fatalError("Never happens")
             }
             xp += 1
             
-            if let coord = inImageCoord(x: xp, y: yp, width: image.width, height: image.height) {
-                pixel.add(x: coord.x, y: coord.y, in: image, with: xw4 * yw1)
+            if let x = clampValue(value: xp, max: image.width) {
+                pixel.add(x: x, y: y, in: image, with: xw4 * yw1)
             } else if let constant = constant {
                 pixel.add(pixel: constant, with: xw4 * yw1)
             } else {
-                fatalError("Never happens.")
+                fatalError("Never happens")
             }
             xp += 1
             
-            if let coord = inImageCoord(x: xp, y: yp, width: image.width, height: image.height) {
-                pixel.add(x: coord.x, y: coord.y, in: image, with: xw5 * yw1)
+            if let x = clampValue(value: xp, max: image.width) {
+                pixel.add(x: x, y: y, in: image, with: xw5 * yw1)
             } else if let constant = constant {
                 pixel.add(pixel: constant, with: xw5 * yw1)
             } else {
-                fatalError("Never happens.")
+                fatalError("Never happens")
             }
+        } else if let constant = constant {
+            // all pixels are constant
+            pixel.add(pixel: constant, with: yw1)
+        } else {
+            fatalError("Never happens.")
         }
         yp += 1
         
         // dy = 2
-        do {
+        if let y = clampValue(value: yp, max: image.height) {
             var xp = Int(xmin)
             
-            if let coord = inImageCoord(x: xp, y: yp, width: image.width, height: image.height) {
-                pixel.add(x: coord.x, y: coord.y, in: image, with: xw0 * yw2)
+            if let x = clampValue(value: xp, max: image.width) {
+                pixel.add(x: x, y: y, in: image, with: xw0 * yw2)
             } else if let constant = constant {
                 pixel.add(pixel: constant, with: xw0 * yw2)
             } else {
-                fatalError("Never happens.")
+                fatalError("Never happens")
             }
             xp += 1
             
-            if let coord = inImageCoord(x: xp, y: yp, width: image.width, height: image.height) {
-                pixel.add(x: coord.x, y: coord.y, in: image, with: xw1 * yw2)
+            if let x = clampValue(value: xp, max: image.width) {
+                pixel.add(x: x, y: y, in: image, with: xw1 * yw2)
             } else if let constant = constant {
                 pixel.add(pixel: constant, with: xw1 * yw2)
             } else {
-                fatalError("Never happens.")
+                fatalError("Never happens")
             }
             xp += 1
             
-            if let coord = inImageCoord(x: xp, y: yp, width: image.width, height: image.height) {
-                pixel.add(x: coord.x, y: coord.y, in: image, with: xw2 * yw2)
+            if let x = clampValue(value: xp, max: image.width) {
+                pixel.add(x: x, y: y, in: image, with: xw2 * yw2)
             } else if let constant = constant {
                 pixel.add(pixel: constant, with: xw2 * yw2)
             } else {
-                fatalError("Never happens.")
+                fatalError("Never happens")
             }
             xp += 1
             
-            if let coord = inImageCoord(x: xp, y: yp, width: image.width, height: image.height) {
-                pixel.add(x: coord.x, y: coord.y, in: image, with: xw3 * yw2)
+            if let x = clampValue(value: xp, max: image.width) {
+                pixel.add(x: x, y: y, in: image, with: xw3 * yw2)
             } else if let constant = constant {
                 pixel.add(pixel: constant, with: xw3 * yw2)
             } else {
-                fatalError("Never happens.")
+                fatalError("Never happens")
             }
             xp += 1
             
-            if let coord = inImageCoord(x: xp, y: yp, width: image.width, height: image.height) {
-                pixel.add(x: coord.x, y: coord.y, in: image, with: xw4 * yw2)
+            if let x = clampValue(value: xp, max: image.width) {
+                pixel.add(x: x, y: y, in: image, with: xw4 * yw2)
             } else if let constant = constant {
                 pixel.add(pixel: constant, with: xw4 * yw2)
             } else {
-                fatalError("Never happens.")
+                fatalError("Never happens")
             }
             xp += 1
             
-            if let coord = inImageCoord(x: xp, y: yp, width: image.width, height: image.height) {
-                pixel.add(x: coord.x, y: coord.y, in: image, with: xw5 * yw2)
+            if let x = clampValue(value: xp, max: image.width) {
+                pixel.add(x: x, y: y, in: image, with: xw5 * yw2)
             } else if let constant = constant {
                 pixel.add(pixel: constant, with: xw5 * yw2)
             } else {
-                fatalError("Never happens.")
+                fatalError("Never happens")
             }
+        } else if let constant = constant {
+            // all pixels are constant
+            pixel.add(pixel: constant, with: yw2)
+        } else {
+            fatalError("Never happens.")
         }
         yp += 1
         
         // dy = 3
-        do {
+        if let y = clampValue(value: yp, max: image.height) {
             var xp = Int(xmin)
             
-            if let coord = inImageCoord(x: xp, y: yp, width: image.width, height: image.height) {
-                pixel.add(x: coord.x, y: coord.y, in: image, with: xw0 * yw3)
+            if let x = clampValue(value: xp, max: image.width) {
+                pixel.add(x: x, y: y, in: image, with: xw0 * yw3)
             } else if let constant = constant {
                 pixel.add(pixel: constant, with: xw0 * yw3)
             } else {
-                fatalError("Never happens.")
+                fatalError("Never happens")
             }
             xp += 1
             
-            if let coord = inImageCoord(x: xp, y: yp, width: image.width, height: image.height) {
-                pixel.add(x: coord.x, y: coord.y, in: image, with: xw1 * yw3)
+            if let x = clampValue(value: xp, max: image.width) {
+                pixel.add(x: x, y: y, in: image, with: xw1 * yw3)
             } else if let constant = constant {
                 pixel.add(pixel: constant, with: xw1 * yw3)
             } else {
-                fatalError("Never happens.")
+                fatalError("Never happens")
             }
             xp += 1
             
-            if let coord = inImageCoord(x: xp, y: yp, width: image.width, height: image.height) {
-                pixel.add(x: coord.x, y: coord.y, in: image, with: xw2 * yw3)
+            if let x = clampValue(value: xp, max: image.width) {
+                pixel.add(x: x, y: y, in: image, with: xw2 * yw3)
             } else if let constant = constant {
                 pixel.add(pixel: constant, with: xw2 * yw3)
             } else {
-                fatalError("Never happens.")
+                fatalError("Never happens")
             }
             xp += 1
             
-            if let coord = inImageCoord(x: xp, y: yp, width: image.width, height: image.height) {
-                pixel.add(x: coord.x, y: coord.y, in: image, with: xw3 * yw3)
+            if let x = clampValue(value: xp, max: image.width) {
+                pixel.add(x: x, y: y, in: image, with: xw3 * yw3)
             } else if let constant = constant {
                 pixel.add(pixel: constant, with: xw3 * yw3)
             } else {
-                fatalError("Never happens.")
+                fatalError("Never happens")
             }
             xp += 1
             
-            if let coord = inImageCoord(x: xp, y: yp, width: image.width, height: image.height) {
-                pixel.add(x: coord.x, y: coord.y, in: image, with: xw4 * yw3)
+            if let x = clampValue(value: xp, max: image.width) {
+                pixel.add(x: x, y: y, in: image, with: xw4 * yw3)
             } else if let constant = constant {
                 pixel.add(pixel: constant, with: xw4 * yw3)
             } else {
-                fatalError("Never happens.")
+                fatalError("Never happens")
             }
             xp += 1
             
-            if let coord = inImageCoord(x: xp, y: yp, width: image.width, height: image.height) {
-                pixel.add(x: coord.x, y: coord.y, in: image, with: xw5 * yw3)
+            if let x = clampValue(value: xp, max: image.width) {
+                pixel.add(x: x, y: y, in: image, with: xw5 * yw3)
             } else if let constant = constant {
                 pixel.add(pixel: constant, with: xw5 * yw3)
             } else {
-                fatalError("Never happens.")
+                fatalError("Never happens")
             }
+        } else if let constant = constant {
+            // all pixels are constant
+            pixel.add(pixel: constant, with: yw3)
+        } else {
+            fatalError("Never happens.")
         }
         yp += 1
         
         // dy = 4
-        do {
+        if let y = clampValue(value: yp, max: image.height) {
             var xp = Int(xmin)
             
-            if let coord = inImageCoord(x: xp, y: yp, width: image.width, height: image.height) {
-                pixel.add(x: coord.x, y: coord.y, in: image, with: xw0 * yw4)
+            if let x = clampValue(value: xp, max: image.width) {
+                pixel.add(x: x, y: y, in: image, with: xw0 * yw4)
             } else if let constant = constant {
                 pixel.add(pixel: constant, with: xw0 * yw4)
             } else {
-                fatalError("Never happens.")
+                fatalError("Never happens")
             }
             xp += 1
             
-            if let coord = inImageCoord(x: xp, y: yp, width: image.width, height: image.height) {
-                pixel.add(x: coord.x, y: coord.y, in: image, with: xw1 * yw4)
+            if let x = clampValue(value: xp, max: image.width) {
+                pixel.add(x: x, y: y, in: image, with: xw1 * yw4)
             } else if let constant = constant {
                 pixel.add(pixel: constant, with: xw1 * yw4)
             } else {
-                fatalError("Never happens.")
+                fatalError("Never happens")
             }
             xp += 1
             
-            if let coord = inImageCoord(x: xp, y: yp, width: image.width, height: image.height) {
-                pixel.add(x: coord.x, y: coord.y, in: image, with: xw2 * yw4)
+            if let x = clampValue(value: xp, max: image.width) {
+                pixel.add(x: x, y: y, in: image, with: xw2 * yw4)
             } else if let constant = constant {
                 pixel.add(pixel: constant, with: xw2 * yw4)
             } else {
-                fatalError("Never happens.")
+                fatalError("Never happens")
             }
             xp += 1
             
-            if let coord = inImageCoord(x: xp, y: yp, width: image.width, height: image.height) {
-                pixel.add(x: coord.x, y: coord.y, in: image, with: xw3 * yw4)
+            if let x = clampValue(value: xp, max: image.width) {
+                pixel.add(x: x, y: y, in: image, with: xw3 * yw4)
             } else if let constant = constant {
                 pixel.add(pixel: constant, with: xw3 * yw4)
             } else {
-                fatalError("Never happens.")
+                fatalError("Never happens")
             }
             xp += 1
             
-            if let coord = inImageCoord(x: xp, y: yp, width: image.width, height: image.height) {
-                pixel.add(x: coord.x, y: coord.y, in: image, with: xw4 * yw4)
+            if let x = clampValue(value: xp, max: image.width) {
+                pixel.add(x: x, y: y, in: image, with: xw4 * yw4)
             } else if let constant = constant {
                 pixel.add(pixel: constant, with: xw4 * yw4)
             } else {
-                fatalError("Never happens.")
+                fatalError("Never happens")
             }
             xp += 1
             
-            if let coord = inImageCoord(x: xp, y: yp, width: image.width, height: image.height) {
-                pixel.add(x: coord.x, y: coord.y, in: image, with: xw5 * yw4)
+            if let x = clampValue(value: xp, max: image.width) {
+                pixel.add(x: x, y: y, in: image, with: xw5 * yw4)
             } else if let constant = constant {
                 pixel.add(pixel: constant, with: xw5 * yw4)
             } else {
-                fatalError("Never happens.")
+                fatalError("Never happens")
             }
+        } else if let constant = constant {
+            // all pixels are constant
+            pixel.add(pixel: constant, with: yw4)
+        } else {
+            fatalError("Never happens.")
         }
         yp += 1
         
         // dy = 5
-        do {
+        if let y = clampValue(value: yp, max: image.height) {
             var xp = Int(xmin)
             
-            if let coord = inImageCoord(x: xp, y: yp, width: image.width, height: image.height) {
-                pixel.add(x: coord.x, y: coord.y, in: image, with: xw0 * yw5)
+            if let x = clampValue(value: xp, max: image.width) {
+                pixel.add(x: x, y: y, in: image, with: xw0 * yw5)
             } else if let constant = constant {
                 pixel.add(pixel: constant, with: xw0 * yw5)
             } else {
-                fatalError("Never happens.")
+                fatalError("Never happens")
             }
             xp += 1
             
-            if let coord = inImageCoord(x: xp, y: yp, width: image.width, height: image.height) {
-                pixel.add(x: coord.x, y: coord.y, in: image, with: xw1 * yw5)
+            if let x = clampValue(value: xp, max: image.width) {
+                pixel.add(x: x, y: y, in: image, with: xw1 * yw5)
             } else if let constant = constant {
                 pixel.add(pixel: constant, with: xw1 * yw5)
             } else {
-                fatalError("Never happens.")
+                fatalError("Never happens")
             }
             xp += 1
             
-            if let coord = inImageCoord(x: xp, y: yp, width: image.width, height: image.height) {
-                pixel.add(x: coord.x, y: coord.y, in: image, with: xw2 * yw5)
+            if let x = clampValue(value: xp, max: image.width) {
+                pixel.add(x: x, y: y, in: image, with: xw2 * yw5)
             } else if let constant = constant {
                 pixel.add(pixel: constant, with: xw2 * yw5)
             } else {
-                fatalError("Never happens.")
+                fatalError("Never happens")
             }
             xp += 1
             
-            if let coord = inImageCoord(x: xp, y: yp, width: image.width, height: image.height) {
-                pixel.add(x: coord.x, y: coord.y, in: image, with: xw3 * yw5)
+            if let x = clampValue(value: xp, max: image.width) {
+                pixel.add(x: x, y: y, in: image, with: xw3 * yw5)
             } else if let constant = constant {
                 pixel.add(pixel: constant, with: xw3 * yw5)
             } else {
-                fatalError("Never happens.")
+                fatalError("Never happens")
             }
             xp += 1
             
-            if let coord = inImageCoord(x: xp, y: yp, width: image.width, height: image.height) {
-                pixel.add(x: coord.x, y: coord.y, in: image, with: xw4 * yw5)
+            if let x = clampValue(value: xp, max: image.width) {
+                pixel.add(x: x, y: y, in: image, with: xw4 * yw5)
             } else if let constant = constant {
                 pixel.add(pixel: constant, with: xw4 * yw5)
             } else {
-                fatalError("Never happens.")
+                fatalError("Never happens")
             }
             xp += 1
             
-            if let coord = inImageCoord(x: xp, y: yp, width: image.width, height: image.height) {
-                pixel.add(x: coord.x, y: coord.y, in: image, with: xw5 * yw5)
+            if let x = clampValue(value: xp, max: image.width) {
+                pixel.add(x: x, y: y, in: image, with: xw5 * yw5)
             } else if let constant = constant {
                 pixel.add(pixel: constant, with: xw5 * yw5)
             } else {
-                fatalError("Never happens.")
+                fatalError("Never happens")
             }
+        } else if let constant = constant {
+            // all pixels are constant
+            pixel.add(pixel: constant, with: yw5)
+        } else {
+            fatalError("Never happens.")
         }
     }
 }
