@@ -66,7 +66,7 @@ public struct BilinearInterpolator<P:PixelType, T: BinaryFloatingPoint&DataType>
                 fatalError("Never happens.")
             }
         } else if let constant = constant {
-            pixel.assign(pixel: constant, with: y0y)
+            pixel.add(pixel: constant, with: y0y)
         } else {
             fatalError("Never happens.")
         }
