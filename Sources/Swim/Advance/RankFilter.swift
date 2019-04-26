@@ -7,16 +7,16 @@ extension Image where P == Intensity, T: Comparable {
     public func rankFilter(_ mode: RankFilterMode, kernelSize: Int) -> Image<P, T> {
         switch mode {
         case .minimum:
-            return filter(kernelSize: kernelSize) { $0.min()! }
+            return rankFilter(kernelSize: kernelSize) { $0.min()! }
         case .maximum:
-            return filter(kernelSize: kernelSize) { $0.max()! }
+            return rankFilter(kernelSize: kernelSize) { $0.max()! }
         case .median:
-            return filter(kernelSize: kernelSize) { $0.median()! }
+            return rankFilter(kernelSize: kernelSize) { $0.median()! }
         }
     }
     
     @inlinable
-    func filter(kernelSize: Int, kernelFunc: ([T])->T) -> Image<P, T> {
+    func rankFilter(kernelSize: Int, kernelFunc: ([T])->T) -> Image<P, T> {
         precondition(kernelSize > 0)
         var newImage = self
         
