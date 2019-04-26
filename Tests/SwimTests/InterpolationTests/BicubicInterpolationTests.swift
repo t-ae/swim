@@ -9,9 +9,9 @@ class BicubicInterpolationTests: XCTestCase {
                                              height: 4,
                                              data: (0..<4*4).map { Double($0+1) })
         
-        XCTAssertEqual(intpl.interpolate(x: 0, y: 0, in: image), Pixel(1))
-        XCTAssertEqual(intpl.interpolate(x: 1, y: 1, in: image), Pixel(6))
-        XCTAssertEqual(intpl.interpolate(x: 1, y: 2, in: image), Pixel(10))
-        XCTAssertEqual(intpl.interpolate(x: 3, y: 3, in: image), Pixel(16))
+        XCTAssertEqual(intpl.interpolate(x: 0, y: 0, in: image), Pixel(intensity: 1))
+        XCTAssertEqual(intpl.interpolate(x: 1, y: 1, in: image), Pixel(intensity: 6))
+        XCTAssertEqual(intpl.interpolate(x: 1, y: 2, in: image), Pixel(intensity: 10))
+        XCTAssertEqual(intpl.interpolate(x: 3, y: 3, in: image), Pixel(intensity: 16))
     }
 }

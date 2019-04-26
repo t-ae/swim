@@ -15,10 +15,10 @@ class PixelSubscriptTests: XCTestCase {
             XCTAssertEqual(image[1, 1, 0], 5)
             
             // pixel
-            XCTAssertEqual(image[0, 0], Pixel(0))
-            XCTAssertEqual(image[1, 0], Pixel(1))
-            XCTAssertEqual(image[0, 1], Pixel(4))
-            XCTAssertEqual(image[1, 1], Pixel(5))
+            XCTAssertEqual(image[0, 0], Pixel(intensity: 0))
+            XCTAssertEqual(image[1, 0], Pixel(intensity: 1))
+            XCTAssertEqual(image[0, 1], Pixel(intensity: 4))
+            XCTAssertEqual(image[1, 1], Pixel(intensity: 5))
             // value
             XCTAssertEqual(image[0, 0], 0)
             XCTAssertEqual(image[1, 0], 1)
@@ -60,7 +60,7 @@ class PixelSubscriptTests: XCTestCase {
             image[0, 0] = 100
             XCTAssertEqual(image, Image(width: 2, height: 2, data: [100, 1, 2, 3]))
             
-            image[1, 0] = Pixel(5)
+            image[1, 0] = Pixel(intensity: 5)
             XCTAssertEqual(image, Image(width: 2, height: 2, data: [100, 5, 2, 3]))
             
             image[0, 1][0] = 6

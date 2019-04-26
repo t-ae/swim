@@ -56,29 +56,6 @@ extension Pixel {
 // MARK: Intensity
 extension Pixel where P == Intensity {
     @inlinable
-    public init(_ intensity: T) {
-        self.init(data: [intensity])
-    }
-}
-
-// Disabled
-// These are useful but bring ambiguity for such expression: _ = pixel + 1
-//
-//extension Pixel: ExpressibleByIntegerLiteral where P == Intensity, T: ExpressibleByIntegerLiteral {
-//    public init(integerLiteral value: T.IntegerLiteralType) {
-//        self.init(T.init(integerLiteral: value))
-//    }
-//}
-//
-//extension Pixel: ExpressibleByFloatLiteral where P == Intensity, T: ExpressibleByFloatLiteral {
-//    public init(floatLiteral value: T.FloatLiteralType) {
-//        self.init(T.init(floatLiteral: value))
-//    }
-//}
-
-// MARK: Intensity
-extension Pixel where P == Intensity {
-    @inlinable
     public init(intensity: T) {
         self.init(data: [intensity])
     }
