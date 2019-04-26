@@ -7,7 +7,7 @@ class ResizePerformanceTests: XCTestCase {
         let image = Image(width: 1920, height: 1080, intensity: data)
         
         measure {
-            _ = image.resizeAA(width: 30, height: 30)
+            _ = image.resize(width: 30, height: 30, method: .areaAverage)
         }
     }
     

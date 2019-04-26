@@ -18,8 +18,9 @@ extension ResizeVisualTests {
         let resizedBL = image.resize(width: 128, height: 192, method: .bilinear)
         let resizedBC = image.resize(width: 128, height: 192, method: .bicubic)
             .clipped(low: 0, high: 1)
+        let resizedAA = image.resize(width: 128, height: 192, method: .areaAverage)
         
-        let concat = Image.concatH([resizedNN, resizedBL, resizedBC])
+        let concat = Image.concatH([resizedNN, resizedBL, resizedBC, resizedAA])
         
         let nsImage = doubleToNSImage(concat)
         
@@ -32,9 +33,11 @@ extension ResizeVisualTests {
         
         var images = [Image<RGB, Double>]()
         
-        images.append(lena.resize(width: 300, height: 300, method: .nearestNeighbor))
-        images.append(lena.resize(width: 300, height: 300, method: .bilinear))
-        images.append(lena.resize(width: 300, height: 300, method: .bicubic))
+        let size = 300
+        images.append(lena.resize(width: size, height: size, method: .nearestNeighbor))
+        images.append(lena.resize(width: size, height: size, method: .bilinear))
+        images.append(lena.resize(width: size, height: size, method: .bicubic))
+        images.append(lena.resize(width: size, height: size, method: .areaAverage))
         
         let image = Image.concatH(images)
         
@@ -49,9 +52,11 @@ extension ResizeVisualTests {
         
         var images = [Image<RGB, Double>]()
         
-        images.append(lena.resize(width: 300, height: 300, method: .nearestNeighbor))
-        images.append(lena.resize(width: 300, height: 300, method: .bilinear))
-        images.append(lena.resize(width: 300, height: 300, method: .bicubic))
+        let size = 100
+        images.append(lena.resize(width: size, height: size, method: .nearestNeighbor))
+        images.append(lena.resize(width: size, height: size, method: .bilinear))
+        images.append(lena.resize(width: size, height: size, method: .bicubic))
+        images.append(lena.resize(width: size, height: size, method: .areaAverage))
         
         let image = Image.concatH(images)
         

@@ -3,7 +3,7 @@ import Foundation
 extension Image where T: BinaryFloatingPoint {
     /// Resize image with Area average method.
     @inlinable
-    public func resizeAA(width: Int, height: Int) -> Image<P, T> {
+    func resizeAA(width: Int, height: Int) -> Image<P, T> {
         let xScaleImage: Image<P, T>
         if width != self.width {
             let baseImage = self
@@ -123,6 +123,8 @@ extension Image where T: BinaryFloatingPoint {
                           height: height,
                           interpolator: BicubicInterpolator(edgeMode: .edge),
                           areaAverageResizeBeforeDownSample: areaAverageResizeBeforeDownSample)
+        case .areaAverage:
+            return resizeAA(width: width, height: height)
         }
     }
     
@@ -170,4 +172,5 @@ public enum ResizeMethod {
     case nearestNeighbor
     case bilinear
     case bicubic
+    case areaAverage
 }
