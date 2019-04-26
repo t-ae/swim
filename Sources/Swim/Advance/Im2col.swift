@@ -1,7 +1,7 @@
 import Foundation
 
 public enum Im2ColPadding<T: DataType> {
-    case nearest
+    case edge
     case constant(T)
 }
 
@@ -19,7 +19,7 @@ extension Image where P == Intensity {
     @inlinable
     public func im2col(patchWidth: Int,
                        patchHeight: Int,
-                       padding: Im2ColPadding<T> = .nearest) -> (m: Int, n: Int, matrix: [T]) {
+                       padding: Im2ColPadding<T> = .edge) -> (m: Int, n: Int, matrix: [T]) {
         
         let m = patchWidth*patchHeight
         let n = width*height
@@ -46,7 +46,7 @@ extension Image where P == Intensity {
                             var yy = y + dy
                             if !(0..<height ~= yy) {
                                 switch padding {
-                                case .nearest:
+                                case .edge:
                                     yy = min(max(yy, 0), height-1)
                                 case .constant:
                                     dst += width
@@ -60,7 +60,7 @@ extension Image where P == Intensity {
                             
                             // left padding
                             switch padding {
-                            case .nearest:
+                            case .edge:
                                 let padLeftValue = sp.pointee
                                 for _ in 0..<max(-dx, 0) {
                                     dst.pointee = padLeftValue
@@ -77,7 +77,7 @@ extension Image where P == Intensity {
                             
                             // right padding
                             switch padding {
-                            case .nearest:
+                            case .edge:
                                 sp += count - 1 // point rightest pixel
                                 let padRightValue = sp.pointee
                                 for _ in 0..<max(dx, 0) {

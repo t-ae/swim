@@ -26,7 +26,7 @@ class Im2colTests: XCTestCase {
                                     5, 9, 9, 9, 9, 9])
         }
         do {
-            let (m, n, matrix) = image.im2col(patchWidth: 4, patchHeight: 3, padding: .nearest)
+            let (m, n, matrix) = image.im2col(patchWidth: 4, patchHeight: 3, padding: .edge)
             XCTAssertEqual(m, 4*3)
             XCTAssertEqual(n, 3*2)
             XCTAssertEqual(matrix, [0, 0, 1, 0, 0, 1,
