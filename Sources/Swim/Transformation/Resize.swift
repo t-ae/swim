@@ -27,21 +27,19 @@ extension Image where T: BinaryFloatingPoint {
                     continue
                 }
                 
-                let startX_i = Int(startX) // floor
                 let startVolume = ceilStartX - startX
-                let endX_i = Int(endX) // floor
                 let endVolume = endX - floorEndX
                 
                 for y in 0..<newImage.height {
                     newImage.withMutablePixelRef(x: x, y: y) { ref in
                         if startVolume > 0 {
-                            ref.add(x: startX_i, y: y, in: baseImage, with: startVolume)
+                            ref.add(x: Int(startX), y: y, in: baseImage, with: startVolume)
                         }
                         for dx in Int(ceilStartX)..<Int(floorEndX) {
                             ref.add(x: dx, y: y, in: baseImage)
                         }
                         if endVolume > 0 {
-                            ref.add(x: endX_i, y: y, in: baseImage, with: endVolume)
+                            ref.add(x: Int(endX), y: y, in: baseImage, with: endVolume)
                         }
                         ref /= volume
                     }
@@ -74,21 +72,19 @@ extension Image where T: BinaryFloatingPoint {
                     continue
                 }
                 
-                let startY_i = Int(startY) // floor
                 let startVolume = ceilStartY - startY
-                let endY_i = Int(endY)
                 let endVolume = endY - floorEndY
                 
                 for x in 0..<newImage.width {
                     newImage.withMutablePixelRef(x: x, y: y) { ref in
                         if startVolume > 0 {
-                            ref.add(x: x, y: startY_i, in: baseImage, with: startVolume)
+                            ref.add(x: x, y: Int(startY), in: baseImage, with: startVolume)
                         }
                         for dy in Int(ceilStartY)..<Int(floorEndY) {
                             ref.add(x: x, y: dy, in: baseImage)
                         }
                         if endVolume > 0 {
-                            ref.add(x: x, y: endY_i, in: baseImage, with: endVolume)
+                            ref.add(x: x, y: Int(endY), in: baseImage, with: endVolume)
                         }
                         ref /= volume
                     }
