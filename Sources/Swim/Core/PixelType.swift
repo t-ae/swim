@@ -7,20 +7,20 @@ public protocol PixelType {
 }
 
 public enum Intensity: Int, PixelType, CaseIterable {
-    public static var channels: Int = 1
+    public static let channels: Int = 1
     
     case intensity = 0
 }
 
 public enum IntensityAlpha: Int, PixelType, HasAlpha, CaseIterable {
-    public static var channels: Int = 2
+    public static let channels: Int = 2
     
     case intensity = 0
     case alpha = 1
 }
 
 public enum RGB: Int, PixelType, CaseIterable {
-    public static var channels: Int = 3
+    public static let channels: Int = 3
     
     case red = 0
     case green = 1
@@ -28,7 +28,7 @@ public enum RGB: Int, PixelType, CaseIterable {
 }
 
 public enum RGBA: Int, PixelType, CaseIterable {
-    public static var channels: Int = 4
+    public static let channels: Int = 4
     
     case red = 0
     case green = 1
@@ -37,7 +37,7 @@ public enum RGBA: Int, PixelType, CaseIterable {
 }
 
 public enum ARGB: Int, PixelType, CaseIterable {
-    public static var channels: Int = 4
+    public static let channels: Int = 4
     
     case alpha = 0
     case red = 1
