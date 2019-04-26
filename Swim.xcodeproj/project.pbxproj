@@ -61,7 +61,7 @@
 		OBJ_189 /* Bayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_16 /* Bayer.swift */; };
 		OBJ_190 /* Convolution.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_17 /* Convolution.swift */; };
 		OBJ_191 /* Correlation.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_18 /* Correlation.swift */; };
-		OBJ_192 /* Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_19 /* Filter.swift */; };
+		OBJ_192 /* RankFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_19 /* RankFilter.swift */; };
 		OBJ_193 /* Im2col.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_20 /* Im2col.swift */; };
 		OBJ_194 /* IntegralImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_21 /* IntegralImage.swift */; };
 		OBJ_195 /* ImageBinaryScalarOperator.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_23 /* ImageBinaryScalarOperator.swift */; };
@@ -316,7 +316,7 @@
 		OBJ_161 /* readme.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = readme.md; sourceTree = "<group>"; };
 		OBJ_17 /* Convolution.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Convolution.swift; sourceTree = "<group>"; };
 		OBJ_18 /* Correlation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Correlation.swift; sourceTree = "<group>"; };
-		OBJ_19 /* Filter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Filter.swift; sourceTree = "<group>"; };
+		OBJ_19 /* RankFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankFilter.swift; sourceTree = "<group>"; };
 		OBJ_20 /* Im2col.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Im2col.swift; sourceTree = "<group>"; };
 		OBJ_21 /* IntegralImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntegralImage.swift; sourceTree = "<group>"; };
 		OBJ_23 /* ImageBinaryScalarOperator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageBinaryScalarOperator.swift; sourceTree = "<group>"; };
@@ -628,7 +628,7 @@
 				OBJ_16 /* Bayer.swift */,
 				OBJ_17 /* Convolution.swift */,
 				OBJ_18 /* Correlation.swift */,
-				OBJ_19 /* Filter.swift */,
+				OBJ_19 /* RankFilter.swift */,
 				OBJ_20 /* Im2col.swift */,
 				OBJ_21 /* IntegralImage.swift */,
 			);
@@ -1088,7 +1088,7 @@
 				OBJ_189 /* Bayer.swift in Sources */,
 				OBJ_190 /* Convolution.swift in Sources */,
 				OBJ_191 /* Correlation.swift in Sources */,
-				OBJ_192 /* Filter.swift in Sources */,
+				OBJ_192 /* RankFilter.swift in Sources */,
 				OBJ_193 /* Im2col.swift in Sources */,
 				OBJ_194 /* IntegralImage.swift in Sources */,
 				OBJ_195 /* ImageBinaryScalarOperator.swift in Sources */,

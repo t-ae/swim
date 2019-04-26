@@ -92,8 +92,8 @@ class PerformanceTests: XCTestCase {
     }
     
     func testConvolution() {
-        let data = [Float](repeating: 0, count: 640*480)
-        let image = Image(width: 640, height: 480, intensity: data)
+        let data = [Float](repeating: 0, count: 1920*1080)
+        let image = Image(width: 1920, height: 1080, intensity: data)
         
         measure {
             _ = image.convoluted(Filter.gaussian3x3)

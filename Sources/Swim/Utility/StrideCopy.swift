@@ -1,7 +1,7 @@
 @inlinable
 func strideCopy<T>(src: [T], srcOffset: Int, srcStride: Int,
-                    dst: inout [T], dstOffset: Int, dstStride: Int,
-                    count: Int) {
+                   dst: inout [T], dstOffset: Int, dstStride: Int,
+                   count: Int) {
     src.withUnsafeBufferPointer {
         var src = $0.baseAddress! + srcOffset
         dst.withUnsafeMutableBufferPointer {
