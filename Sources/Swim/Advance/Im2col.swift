@@ -15,12 +15,6 @@ extension Im2ColPadding where T: ExpressibleByIntegerLiteral {
     }
 }
 
-extension Im2ColPadding where T: FloatingPoint {
-    public static var nan: Im2ColPadding {
-        return constant(.nan)
-    }
-}
-
 extension Image where P == Intensity {
     @inlinable
     public func im2col(patchWidth: Int,
