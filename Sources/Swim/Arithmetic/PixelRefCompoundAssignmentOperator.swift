@@ -92,7 +92,7 @@ extension MutablePixelRef where T: FloatingPoint {
 
 extension MutablePixelRef where T: Numeric {
     @inlinable
-    func add<P2: PixelProtocol>(pixel: P2, with factor: T) where P2.P == P, P2.T == T {
+    func add<P2: PixelProtocol>(pixel: P2, with factor: T = 1) where P2.P == P, P2.T == T {
         var lp = self.pointer.baseAddress!
         pixel.withUnsafeBufferPointer { rbp in
             assert(self.pointer.count == rbp.count)
@@ -107,7 +107,7 @@ extension MutablePixelRef where T: Numeric {
     }
     
     @inlinable
-    func add(x: Int, y: Int, in image: Image<P, T>, with factor: T) {
+    func add(x: Int, y: Int, in image: Image<P, T>, with factor: T = 1) {
         var lp = self.pointer.baseAddress!
         let start = image.dataIndex(x: x, y: y)
         image.withUnsafeBufferPointer { rbp in
@@ -121,17 +121,7 @@ extension MutablePixelRef where T: Numeric {
     }
     
     @inlinable
-    func assign<P2: PixelProtocol>(pixel: P2) where P2.P == P, P2.T == T {
-        let lp = self.pointer.baseAddress!
-        pixel.withUnsafeBufferPointer { rbp in
-            assert(self.pointer.count == rbp.count)
-            let rp = rbp.baseAddress!
-            memcpy(lp, rp, MemoryLayout<T>.size*self.pointer.count)
-        }
-    }
-    
-    @inlinable
-    func assign<P2: PixelProtocol>(pixel: P2, with factor: T) where P2.P == P, P2.T == T {
+    func assign<P2: PixelProtocol>(pixel: P2, with factor: T = 1) where P2.P == P, P2.T == T {
         var lp = self.pointer.baseAddress!
         pixel.withUnsafeBufferPointer { rbp in
             assert(self.pointer.count == rbp.count)
@@ -144,23 +134,9 @@ extension MutablePixelRef where T: Numeric {
             }
         }
     }
-    
+
     @inlinable
-    func assign(x: Int,y: Int, in image: Image<P, T>) {
-        var lp = self.pointer.baseAddress!
-        let start = image.dataIndex(x: x, y: y)
-        image.withUnsafeBufferPointer { rbp in
-            var rp = rbp.baseAddress!.advanced(by: start)
-            for _ in 0..<P.channels {
-                lp.pointee += rp.pointee
-                lp += 1
-                rp += 1
-            }
-        }
-    }
-    
-    @inlinable
-    func assign(x: Int,y: Int, in image: Image<P, T>, with factor: T) {
+    func assign(x: Int,y: Int, in image: Image<P, T>, with factor: T = 1) {
         var lp = self.pointer.baseAddress!
         let start = image.dataIndex(x: x, y: y)
         image.withUnsafeBufferPointer { rbp in
