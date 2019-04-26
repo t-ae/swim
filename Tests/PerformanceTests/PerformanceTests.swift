@@ -54,7 +54,7 @@ class PerformanceTests: XCTestCase {
     }
     
     func testChannelSubscript() {
-        let data = [Float](repeating: 0, count: 1920*1080*3)
+        let data = [Double](repeating: 0, count: 1920*1080*3)
         var image = Image(width: 1920, height: 1080, rgb: data)
         
         measure {
@@ -106,28 +106,6 @@ class PerformanceTests: XCTestCase {
         
         measure {
             _ = image.maximumFilter(kernelSize: 3)
-        }
-    }
-    
-    func testBayer() {
-        let data = [Float](repeating: 0, count: 640*480*3)
-        let image = Image(width: 640, height: 480, rgb: data)
-        
-        let conv = BayerConverter(pattern: .bggr)
-        
-        measure {
-            _ = conv.convert(image: image)
-        }
-    }
-    
-    func testDemosaic() {
-        let data = [Float](repeating: 0, count: 640*480)
-        let image = Image(width: 640, height: 480, intensity: data)
-        
-        let conv = BayerConverter(pattern: .bggr)
-        
-        measure {
-            _ = conv.demosaic(image: image)
         }
     }
 }
