@@ -1,22 +1,22 @@
 import Foundation
 
-public enum Padding<T: DataType> {
+public enum Im2ColPadding<T: DataType> {
     case nearest
     case constant(T)
 }
 
-extension Padding where T: ExpressibleByIntegerLiteral {
-    public static var zero: Padding {
+extension Im2ColPadding where T: ExpressibleByIntegerLiteral {
+    public static var zero: Im2ColPadding {
         return constant(0)
     }
     
-    public static var one: Padding {
+    public static var one: Im2ColPadding {
         return constant(1)
     }
 }
 
-extension Padding where T: FloatingPoint {
-    public static var nan: Padding {
+extension Im2ColPadding where T: FloatingPoint {
+    public static var nan: Im2ColPadding {
         return constant(.nan)
     }
 }
@@ -25,7 +25,7 @@ extension Image where P == Intensity {
     @inlinable
     public func im2col(patchWidth: Int,
                        patchHeight: Int,
-                       padding: Padding<T> = .nearest) -> (m: Int, n: Int, matrix: [T]) {
+                       padding: Im2ColPadding<T> = .nearest) -> (m: Int, n: Int, matrix: [T]) {
         
         let m = patchWidth*patchHeight
         let n = width*height
