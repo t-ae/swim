@@ -27,34 +27,46 @@ public struct BilinearInterpolator<P:PixelType, T: BinaryFloatingPoint&DataType>
             constant = nil
         }
         
-        if let lu = inImageCoord(x: Int(x0), y: Int(y0), width: image.width, height: image.height) {
-            pixel.assign(x: lu.x, y: lu.y, in: image, with: xx1 * yy1)
+        if let y = clampValue(value: Int(y0), max: image.height) {
+            if let x = clampValue(value: Int(x0), max: image.width) {
+                pixel.assign(x: x, y: y, in: image, with: xx1 * yy1)
+            } else if let constant = constant {
+                pixel.assign(pixel: constant, with: xx1 * yy1)
+            } else {
+                fatalError("Never happens.")
+            }
+            
+            if let x = clampValue(value: Int(x1), max: image.width) {
+                pixel.add(x: x, y: y, in: image, with: x0x * yy1)
+            } else if let constant = constant {
+                pixel.add(pixel: constant, with: x0x * yy1)
+            } else {
+                fatalError("Never happens.")
+            }
         } else if let constant = constant {
-            pixel.assign(pixel: constant, with: xx1 * yy1)
+            pixel.assign(pixel: constant, with: yy1)
         } else {
             fatalError("Never happens.")
         }
         
-        if let ru = inImageCoord(x: Int(x1), y: Int(y0), width: image.width, height: image.height) {
-            pixel.add(x: ru.x, y: ru.y, in: image, with: x0x * yy1)
+        if let y = clampValue(value: Int(y1), max: image.height) {
+            if let x = clampValue(value: Int(x0), max: image.width) {
+                pixel.add(x: x, y: y, in: image, with: xx1 * y0y)
+            } else if let constant = constant {
+                pixel.add(pixel: constant, with: xx1 * y0y)
+            } else {
+                fatalError("Never happens.")
+            }
+            
+            if let x = clampValue(value: Int(x1), max: image.width) {
+                pixel.add(x: x, y: y, in: image, with: x0x * y0y)
+            } else if let constant = constant {
+                pixel.add(pixel: constant, with: x0x * y0y)
+            } else {
+                fatalError("Never happens.")
+            }
         } else if let constant = constant {
-            pixel.add(pixel: constant, with: x0x * yy1)
-        } else {
-            fatalError("Never happens.")
-        }
-        
-        if let ld = inImageCoord(x: Int(x0), y: Int(y1), width: image.width, height: image.height) {
-            pixel.add(x: ld.x, y: ld.y, in: image, with: xx1 * y0y)
-        } else if let constant = constant {
-            pixel.add(pixel: constant, with: xx1 * y0y)
-        } else {
-            fatalError("Never happens.")
-        }
-        
-        if let rd = inImageCoord(x: Int(x1), y: Int(y1), width: image.width, height: image.height) {
-            pixel.add(x: rd.x, y: rd.y, in: image, with: x0x * y0y)
-        } else if let constant = constant {
-            pixel.add(pixel: constant, with: x0x * y0y)
+            pixel.assign(pixel: constant, with: y0y)
         } else {
             fatalError("Never happens.")
         }
