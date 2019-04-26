@@ -26,19 +26,19 @@ extension Interpolator {
 
 extension Interpolator {
     @inlinable
-    func clampValue(x: Int, max: Int) -> Int? {
-        guard x < 0 || x >= max else {
+    func clampValue(value: Int, max: Int) -> Int? {
+        guard value < 0 || value >= max else {
             // Already inside
-            return x
+            return value
         }
         
         switch edgeMode {
         case .constant:
             return nil
         case .edge:
-            return clamp(x, min: 0, max: max-1)
+            return clamp(value, min: 0, max: max-1)
         case .symmetric:
-            var x = x
+            var x = value
             while x < 0 || x >= max {
                 if x < 0 {
                     x = -x - 1
@@ -49,7 +49,7 @@ extension Interpolator {
             }
             return x
         case .reflect:
-            var x = x
+            var x = value
             while x < 0 || x >= max {
                 if x < 0 {
                     x = -x
@@ -60,7 +60,7 @@ extension Interpolator {
             }
             return x
         case .wrap:
-            var x = x
+            var x = value
             while x < 0 {
                 x += max
             }
@@ -73,7 +73,7 @@ extension Interpolator {
     
     @inlinable
     func inImageCoord(x: Int, y: Int, width: Int, height: Int) -> (x: Int, y: Int)? {
-        if let x = clampValue(x: x, max: width), let y = clampValue(x: y, max: height) {
+        if let x = clampValue(value: x, max: width), let y = clampValue(value: y, max: height) {
             return (x, y)
         } else {
             return nil
