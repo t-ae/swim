@@ -1,5 +1,5 @@
 // MARK: - Filter
-public enum Filter<T: Numeric&DataType> {
+public enum Filter<T: SignedNumeric&DataType> {
     public static var sobel3x3H: Image<Intensity, T> {
         return Image(width: 3, height: 3, data: [-1, 0, 1,
                                                  -2, 0, 2,
