@@ -102,27 +102,33 @@ extension Image where T: BinaryFloatingPoint {
         return yScaleImage
     }
     
+    /// Resize image.
+    /// - Parameters:
+    ///   - width: width of output image
+    ///   - height: height of output image
+    ///   - method: resize method to use
+    ///   - avoidSparseSampling: Resize with area average method before down sampling. It doesn't effect if output size is larger than self or `method` is `.areaAverage`.
     @inlinable
     public func resize(width: Int,
                        height: Int,
                        method: ResizeMethod = .bilinear,
-                       areaAverageResizeBeforeDownSample: Bool = true) -> Image<P, T> {
+                       avoidSparseSampling: Bool = true) -> Image<P, T> {
         switch method {
         case .nearestNeighbor:
             return resize(width: width,
                           height: height,
                           interpolator: NearestNeighborInterpolator(edgeMode: .edge),
-                          areaAverageResizeBeforeDownSample: areaAverageResizeBeforeDownSample)
+                          avoidSparseSampling: avoidSparseSampling)
         case .bilinear:
             return resize(width: width,
                           height: height,
                           interpolator: BilinearInterpolator(edgeMode: .edge),
-                          areaAverageResizeBeforeDownSample: areaAverageResizeBeforeDownSample)
+                          avoidSparseSampling: avoidSparseSampling)
         case .bicubic:
             return resize(width: width,
                           height: height,
                           interpolator: BicubicInterpolator(edgeMode: .edge),
-                          areaAverageResizeBeforeDownSample: areaAverageResizeBeforeDownSample)
+                          avoidSparseSampling: avoidSparseSampling)
         case .areaAverage:
             return resizeAA(width: width, height: height)
         }
@@ -132,9 +138,9 @@ extension Image where T: BinaryFloatingPoint {
     func resize<Intpl: Interpolator>(width: Int,
                                      height: Int,
                                      interpolator: Intpl,
-                                     areaAverageResizeBeforeDownSample: Bool = true) -> Image<P, T> where Intpl.P == P, Intpl.T == T {
+                                     avoidSparseSampling: Bool = true) -> Image<P, T> where Intpl.P == P, Intpl.T == T {
         let baseImage: Image<P, T>
-        if areaAverageResizeBeforeDownSample {
+        if avoidSparseSampling {
             // downsample for avoiding sparse sampling
             var image = self
             if width*4 < self.width {
