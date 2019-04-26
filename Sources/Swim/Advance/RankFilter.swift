@@ -1,4 +1,20 @@
+public enum RankFilterMode {
+    case minimum, maximum, median
+}
+
 extension Image where P == Intensity, T: Comparable {
+    @inlinable
+    public func rankFilter(_ mode: RankFilterMode, kernelSize: Int) -> Image<P, T> {
+        switch mode {
+        case .minimum:
+            return filter(kernelSize: kernelSize) { $0.min()! }
+        case .maximum:
+            return filter(kernelSize: kernelSize) { $0.max()! }
+        case .median:
+            return filter(kernelSize: kernelSize) { $0.median()! }
+        }
+    }
+    
     @inlinable
     func filter(kernelSize: Int, kernelFunc: ([T])->T) -> Image<P, T> {
         precondition(kernelSize > 0)
@@ -34,136 +50,4 @@ extension Image where P == Intensity, T: Comparable {
         
         return newImage
     }
-    
-    @inlinable
-    public func minimumFilter(kernelSize: Int) -> Image<P, T> {
-        return filter(kernelSize: kernelSize) { $0.min()! }
-    }
-    
-    @inlinable
-    public func maximumFilter(kernelSize: Int) -> Image<P, T> {
-        return filter(kernelSize: kernelSize) { $0.max()! }
-    }
-    
-    @inlinable
-    public func medianFilter(kernelSize: Int) -> Image<P, T> {
-        return filter(kernelSize: kernelSize) { $0.median()! }
-    }
 }
-
-#if canImport(Accelerate) && !DISABLE_ACCELERATE
-
-import Accelerate
-
-extension Image where P == Intensity, T == Float {
-    @inlinable
-    public func minimumFilter(kernelSize: Int) -> Image<P, T> {
-        let (m, n, matrix) = im2col(patchWidth: kernelSize,
-                                    patchHeight: kernelSize,
-                                    padding: .constant(T.infinity))
-        
-        var data = [T](matrix[0..<n])
-        matrix.withUnsafeBufferPointer {
-            var p = $0.baseAddress! + n
-            for _ in 1..<m {
-                vDSP_vmin(data, 1, p, 1, &data, 1, vDSP_Length(n))
-                p += n
-            }
-        }
-        
-        return Image(width: width, height: height, data: data)
-    }
-    
-    @inlinable
-    public func maximumFilter(kernelSize: Int) -> Image<P, T> {
-        let (m, n, matrix) = im2col(patchWidth: kernelSize,
-                                    patchHeight: kernelSize,
-                                    padding: .constant(-T.infinity))
-        
-        var data = [T](matrix[0..<n])
-        matrix.withUnsafeBufferPointer {
-            var p = $0.baseAddress! + n
-            for _ in 1..<m {
-                vDSP_vmax(data, 1, p, 1, &data, 1, vDSP_Length(n))
-                p += n
-            }
-        }
-        
-        return Image(width: width, height: height, data: data)
-    }
-    
-    @inlinable
-    public func medianFilter(kernelSize: Int) -> Image<P, T> {
-        let (m, n, matrix) = im2col(patchWidth: kernelSize,
-                                    patchHeight: kernelSize,
-                                    padding: .constant(T.nan))
-        
-        var data = [T](repeating: 0, count: n)
-        var values = [T](repeating: 0, count: m)
-        for i in 0..<n {
-            strideCopy(src: matrix, srcOffset: i, srcStride: n,
-                       dst: &values, dstOffset: 0, dstStride: 1,
-                       count: m)
-            data[i] = values.filter { !$0.isNaN }.median()!
-        }
-        return Image(width: width, height: height, data: data)
-    }
-}
-
-extension Image where P == Intensity, T == Double {
-    @inlinable
-    public func minimumFilter(kernelSize: Int) -> Image<P, T> {
-        let (m, n, matrix) = im2col(patchWidth: kernelSize,
-                                    patchHeight: kernelSize,
-                                    padding: .constant(T.infinity))
-        
-        var data = [T](matrix[0..<n])
-        matrix.withUnsafeBufferPointer {
-            var p = $0.baseAddress! + n
-            for _ in 1..<m {
-                vDSP_vminD(data, 1, p, 1, &data, 1, vDSP_Length(n))
-                p += n
-            }
-        }
-        
-        return Image(width: width, height: height, data: data)
-    }
-    
-    @inlinable
-    public func maximumFilter(kernelSize: Int) -> Image<P, T> {
-        let (m, n, matrix) = im2col(patchWidth: kernelSize,
-                                    patchHeight: kernelSize,
-                                    padding: .constant(-T.infinity))
-        
-        var data = [T](matrix[0..<n])
-        matrix.withUnsafeBufferPointer {
-            var p = $0.baseAddress! + n
-            for _ in 1..<m {
-                vDSP_vmaxD(data, 1, p, 1, &data, 1, vDSP_Length(n))
-                p += n
-            }
-        }
-        
-        return Image(width: width, height: height, data: data)
-    }
-    
-    @inlinable
-    public func medianFilter(kernelSize: Int) -> Image<P, T> {
-        let (m, n, matrix) = im2col(patchWidth: kernelSize,
-                                    patchHeight: kernelSize,
-                                    padding: .constant(T.nan))
-        
-        var data = [T](repeating: 0, count: n)
-        var values = [T](repeating: 0, count: m)
-        for i in 0..<n {
-            strideCopy(src: matrix, srcOffset: i, srcStride: n,
-                       dst: &values, dstOffset: 0, dstStride: 1,
-                       count: m)
-            data[i] = values.filter { !$0.isNaN }.median()!
-        }
-        return Image(width: width, height: height, data: data)
-    }
-}
-
-#endif
-

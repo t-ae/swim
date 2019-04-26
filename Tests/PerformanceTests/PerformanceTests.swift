@@ -105,7 +105,7 @@ class PerformanceTests: XCTestCase {
         let image = Image(width: 640, height: 480, intensity: data)
         
         measure {
-            _ = image.maximumFilter(kernelSize: 3)
+            _ = image.rankFilter(.maximum, kernelSize: 3)
         }
     }
 }

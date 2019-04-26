@@ -58,9 +58,9 @@ extension FilterVisualTests {
     }
     
     func testMinMaxMedian() {
-        let maximum = doubleToNSImage(imageBase.maximumFilter(kernelSize: 5))
-        let minimum = doubleToNSImage(imageBase.minimumFilter(kernelSize: 5))
-        let median = doubleToNSImage(imageBase.medianFilter(kernelSize: 5))
+        let maximum = doubleToNSImage(imageBase.rankFilter(.maximum, kernelSize: 5))
+        let minimum = doubleToNSImage(imageBase.rankFilter(.minimum, kernelSize: 5))
+        let median = doubleToNSImage(imageBase.rankFilter(.median, kernelSize: 5))
         
         XCTAssertFalse([maximum, minimum, median].isEmpty, "Break and check nsImages in debugger")
     }

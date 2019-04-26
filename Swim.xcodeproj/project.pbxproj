@@ -51,6 +51,7 @@
 		A732B3B62271B14400B2256E /* SubscriptPerformanceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A732B3B52271B14400B2256E /* SubscriptPerformanceTests.swift */; };
 		A732B3B82272A7CB00B2256E /* ResizePerformanceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A732B3B72272A7CB00B2256E /* ResizePerformanceTests.swift */; };
 		A732B3BA2272DFC500B2256E /* BayerPerformanceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A732B3B92272DFC500B2256E /* BayerPerformanceTests.swift */; };
+		A732B3BC2272E4EA00B2256E /* OtherVisualTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_149 /* OtherVisualTests.swift */; };
 		OBJ_167 /* image_io.c in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_9 /* image_io.c */; };
 		OBJ_169 /* stb_image_write.h in Headers */ = {isa = PBXBuildFile; fileRef = OBJ_11 /* stb_image_write.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		OBJ_170 /* stb_image.h in Headers */ = {isa = PBXBuildFile; fileRef = OBJ_12 /* stb_image.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -159,7 +160,6 @@
 		OBJ_318 /* BayerVisualTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_146 /* BayerVisualTests.swift */; };
 		OBJ_319 /* BlendVisualTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_147 /* BlendVisualTests.swift */; };
 		OBJ_320 /* FilterVisualTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_148 /* FilterVisualTests.swift */; };
-		OBJ_321 /* OtherVisualTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_149 /* OtherVisualTests.swift */; };
 		OBJ_322 /* ResizeVisualTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_150 /* ResizeVisualTests.swift */; };
 		OBJ_323 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_151 /* Utils.swift */; };
 		OBJ_324 /* WarpVisualTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_152 /* WarpVisualTests.swift */; };
@@ -1220,9 +1220,9 @@
 			files = (
 				A732B3A1227183F100B2256E /* SubimageVIsualTests.swift in Sources */,
 				OBJ_318 /* BayerVisualTests.swift in Sources */,
+				A732B3BC2272E4EA00B2256E /* OtherVisualTests.swift in Sources */,
 				OBJ_319 /* BlendVisualTests.swift in Sources */,
 				OBJ_320 /* FilterVisualTests.swift in Sources */,
-				OBJ_321 /* OtherVisualTests.swift in Sources */,
 				OBJ_322 /* ResizeVisualTests.swift in Sources */,
 				OBJ_323 /* Utils.swift in Sources */,
 				OBJ_324 /* WarpVisualTests.swift in Sources */,
