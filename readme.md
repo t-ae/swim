@@ -156,7 +156,7 @@ let integral = IntegralImageConverter.convert(image: image)
 ```swift 
 let image = Image<Intensity, Float>(contentsOf: url)!
 let blur = image.convoluted(Filter.gaussian3x3)
-let maximum = image.maximumFilter(kernelSize: 3)
+let maximum = image.rankFilter(.maximum, kernelSize: 3)
 ```
 
 [Example: Gaussian x10 / Mean x10 / Emboss / Sobel(Horizontal) / Laplacian](https://github.com/t-ae/swim/blob/af1fa115cffe7c20513cb37e91e1549790fb2a5c/Tests/VisualTests/FilterVisualTests.swift#L68-L98)
