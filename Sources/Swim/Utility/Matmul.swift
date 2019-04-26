@@ -28,33 +28,3 @@ func matmul<T: Numeric>(lhs: [T], rhs: [T], m: Int, n: Int, p: Int) -> [T] {
     
     return ret
 }
-
-#if canImport(Accelerate) && !DISABLE_ACCELERATE
-
-import Accelerate
-
-@inlinable
-func matmul(lhs: [Float], rhs: [Float], m: Int, n: Int, p: Int) -> [Float] {
-    assert(lhs.count == m*p)
-    assert(rhs.count == p*n)
-    
-    var ret = [Float](repeating: 0, count: m*n)
-    
-    vDSP_mmul(lhs, 1, rhs, 1, &ret, 1, vDSP_Length(m), vDSP_Length(n), vDSP_Length(p))
-    
-    return ret
-}
-
-@inlinable
-func matmul(lhs: [Double], rhs: [Double], m: Int, n: Int, p: Int) -> [Double] {
-    assert(lhs.count == m*p)
-    assert(rhs.count == p*n)
-    
-    var ret = [Double](repeating: 0, count: m*n)
-    
-    vDSP_mmulD(lhs, 1, rhs, 1, &ret, 1, vDSP_Length(m), vDSP_Length(n), vDSP_Length(p))
-    
-    return ret
-}
-
-#endif
