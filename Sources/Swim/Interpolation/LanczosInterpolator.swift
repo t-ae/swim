@@ -1,14 +1,5 @@
 import Foundation
 
-@inlinable
-func sinc(_ x: Double) -> Double {
-    guard x != 0 else {
-        return 1
-    }
-    let xpi = x * .pi
-    return sin(xpi) / (xpi)
-}
-
 /// Lanczos2 interpolator.
 ///
 /// Note: Currently its only for Double since it requires `sin`, which is not generic now.
@@ -24,7 +15,13 @@ public struct Lanczos2Interpolator<P: PixelType>: Interpolator4x4 {
         guard -2 < distance && distance < 2 else {
             return 0
         }
-        return sinc(distance) * sinc(distance/2)
+        // sinc(distance) * sinc(distance/2)
+        guard distance != 0 else {
+            return 1
+        }
+        let xpi = distance * .pi
+        
+        return 2 * sin(xpi) * sin(xpi/2) / (xpi*xpi)
     }
 }
 
@@ -44,7 +41,13 @@ public struct Lanczos3Interpolator<P: PixelType>: Interpolator {
         guard -3 < distance && distance < 3 else {
             return 0
         }
-        return sinc(distance) * sinc(distance/3)
+        // sinc(distance) * sinc(distance/3)
+        guard distance != 0 else {
+            return 1
+        }
+        let xpi = distance * .pi
+        
+        return 3 * sin(xpi) * sin(xpi/3) / (xpi*xpi)
     }
     
     public func interpolate(x: Double,
