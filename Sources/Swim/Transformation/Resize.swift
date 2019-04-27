@@ -138,22 +138,15 @@ extension Image where T: BinaryFloatingPoint {
         let baseImage: Image<P, T>
         if avoidSparseSampling {
             // downsample for avoiding sparse sampling
-            var image = self
-            if width*4 < self.width {
-                var newWidth = self.width >> 1
-                while width*4 < newWidth {
-                    newWidth >>= 1
-                }
-                image = image.resizeAA(width: newWidth, height: image.height)
+            var tmpWidth = self.width
+            while width*4 < tmpWidth {
+                tmpWidth >>= 1
             }
-            if height*4 < self.height {
-                var newHeight = self.height >> 1
-                while height*4 < newHeight {
-                    newHeight >>= 1
-                }
-                image = image.resizeAA(width: image.width, height: newHeight)
+            var tmpHeight = self.height
+            while height*4 < tmpHeight {
+                tmpHeight >>= 1
             }
-            baseImage = image
+            baseImage = self.resizeAA(width: tmpWidth, height: tmpHeight)
         } else {
             baseImage = self
         }
