@@ -67,11 +67,12 @@ extension Image: Equatable {
 }
 
 extension Image {
+    /// Get the index of specified pixel/channel in buffer.
     @inlinable
-    func dataIndex(x: Int, y: Int, c: Int = 0) -> Int {
-        assert(0 <= x && x < width, "Index out of range.")
-        assert(0 <= y && y < height, "Index out of range.")
-        assert(0 <= c && c < P.channels, "Index out of range.")
+    public func dataIndex(x: Int, y: Int, c: Int = 0) -> Int {
+        precondition(0 <= x && x < width, "Index out of range.")
+        precondition(0 <= y && y < height, "Index out of range.")
+        precondition(0 <= c && c < P.channels, "Index out of range.")
         
         return (y * width + x) * P.channels + c
     }
