@@ -6,8 +6,6 @@ extension MutablePixelRef where T: AdditiveArithmetic {
                                              rhs: P2) where P2.P == P, P2.T == T {
         var lp = lhs.pointer.baseAddress!
         rhs.withUnsafeBufferPointer { rbp in
-            assert(lhs.pointer.count == rbp.count)
-            
             var rp = rbp.baseAddress!
             for _ in 0..<P.channels {
                 lp.pointee += rp.pointee
@@ -22,8 +20,6 @@ extension MutablePixelRef where T: AdditiveArithmetic {
                                              rhs: P2) where P2.P == P, P2.T == T {
         var lp = lhs.pointer.baseAddress!
         rhs.withUnsafeBufferPointer { rbp in
-            assert(lhs.pointer.count == rbp.count)
-            
             var rp = rbp.baseAddress!
             for _ in 0..<P.channels {
                 lp.pointee -= rp.pointee
@@ -40,8 +36,6 @@ extension MutablePixelRef where T: Numeric {
                                              rhs: P2) where P2.P == P, P2.T == T {
         var lp = lhs.pointer.baseAddress!
         rhs.withUnsafeBufferPointer { rbp in
-            assert(lhs.pointer.count == rbp.count)
-            
             var rp = rbp.baseAddress!
             for _ in 0..<P.channels {
                 lp.pointee *= rp.pointee
@@ -58,8 +52,6 @@ extension MutablePixelRef where T: BinaryInteger {
                                              rhs: P2) where P2.P == P, P2.T == T {
         var lp = lhs.pointer.baseAddress!
         rhs.withUnsafeBufferPointer { rbp in
-            assert(lhs.pointer.count == rbp.count)
-            
             var rp = rbp.baseAddress!
             for _ in 0..<P.channels {
                 lp.pointee /= rp.pointee
@@ -76,8 +68,6 @@ extension MutablePixelRef where T: FloatingPoint {
                                              rhs: P2) where P2.P == P, P2.T == T {
         var lp = lhs.pointer.baseAddress!
         rhs.withUnsafeBufferPointer { rbp in
-            assert(lhs.pointer.count == rbp.count)
-            
             var rp = rbp.baseAddress!
             for _ in 0..<P.channels {
                 lp.pointee /= rp.pointee
@@ -95,8 +85,6 @@ extension MutablePixelRef where T: Numeric {
     func add<P2: PixelProtocol>(pixel: P2, with factor: T = 1) where P2.P == P, P2.T == T {
         var lp = self.pointer.baseAddress!
         pixel.withUnsafeBufferPointer { rbp in
-            assert(self.pointer.count == rbp.count)
-            
             var rp = rbp.baseAddress!
             for _ in 0..<P.channels {
                 lp.pointee += rp.pointee * factor
@@ -124,8 +112,6 @@ extension MutablePixelRef where T: Numeric {
     func assign<P2: PixelProtocol>(pixel: P2, with factor: T = 1) where P2.P == P, P2.T == T {
         var lp = self.pointer.baseAddress!
         pixel.withUnsafeBufferPointer { rbp in
-            assert(self.pointer.count == rbp.count)
-            
             var rp = rbp.baseAddress!
             for _ in 0..<P.channels {
                 lp.pointee += rp.pointee * factor

@@ -4,8 +4,6 @@ extension Pixel where T: AdditiveArithmetic {
         lhs.data.withUnsafeMutableBufferPointer { lbp in
             var lp = lbp.baseAddress!
             rhs.withUnsafeBufferPointer { rbp in
-                assert(lbp.count == rbp.count)
-                
                 var rp = rbp.baseAddress!
                 for _ in 0..<P.channels {
                     lp.pointee += rp.pointee
@@ -21,8 +19,6 @@ extension Pixel where T: AdditiveArithmetic {
         lhs.data.withUnsafeMutableBufferPointer { lbp in
             var lp = lbp.baseAddress!
             rhs.withUnsafeBufferPointer { rbp in
-                assert(lbp.count == rbp.count)
-                
                 var rp = rbp.baseAddress!
                 for _ in 0..<P.channels {
                     lp.pointee -= rp.pointee
@@ -40,8 +36,6 @@ extension Pixel where T: Numeric {
         lhs.data.withUnsafeMutableBufferPointer { lbp in
             var lp = lbp.baseAddress!
             rhs.withUnsafeBufferPointer { rbp in
-                assert(lbp.count == rbp.count)
-                
                 var rp = rbp.baseAddress!
                 for _ in 0..<P.channels {
                     lp.pointee *= rp.pointee
@@ -59,8 +53,6 @@ extension Pixel where T: BinaryInteger {
         lhs.data.withUnsafeMutableBufferPointer { lbp in
             var lp = lbp.baseAddress!
             rhs.withUnsafeBufferPointer { rbp in
-                assert(lbp.count == rbp.count)
-                
                 var rp = rbp.baseAddress!
                 for _ in 0..<P.channels {
                     lp.pointee /= rp.pointee
@@ -78,8 +70,6 @@ extension Pixel where T: FloatingPoint {
         lhs.data.withUnsafeMutableBufferPointer { lbp in
             var lp = lbp.baseAddress!
             rhs.withUnsafeBufferPointer { rbp in
-                assert(lbp.count == rbp.count)
-                
                 var rp = rbp.baseAddress!
                 for _ in 0..<P.channels {
                     lp.pointee /= rp.pointee
