@@ -51,13 +51,14 @@ extension Interpolator {
             return x
         case .reflect:
             var x = value
-            while x < 0 || x >= max {
-                if x < 0 {
-                    x = -x
-                }
-                if x >= max {
-                    x = 2*max - x - 2
-                }
+            if x < 0 {
+                x.negate()
+            }
+            if x >= 2*max - 2 { // Make x in [0, 2*max-3]
+                x %= 2*max - 2
+            }
+            if x >= max {
+                x = 2*max - x - 2
             }
             return x
         case .wrap:
