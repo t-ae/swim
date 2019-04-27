@@ -42,9 +42,7 @@ extension Interpolator {
             if x < 0 {
                 x = -x - 1
             }
-            if x >= 2*max { // Make x in [0, 2*max-1]
-                x %= 2*max
-            }
+            x %= 2*max // Make x in [0, 2*max-1]
             if x >= max {
                 x = 2*max - x - 1
             }
@@ -54,22 +52,18 @@ extension Interpolator {
             if x < 0 {
                 x.negate()
             }
-            if x >= 2*max - 2 { // Make x in [0, 2*max-3]
-                x %= 2*max - 2
-            }
+            x %= 2*max - 2 // Make x in [0, 2*max-3]
             if x >= max {
                 x = 2*max - x - 2
             }
             return x
         case .wrap:
-            var x = value
-            while x < 0 {
-                x += max
+            let x = value % max
+            if x < 0 {
+                return x + max
+            } else {
+                return x
             }
-            while x >= max {
-                x -= max
-            }
-            return x
         }
     }
     
