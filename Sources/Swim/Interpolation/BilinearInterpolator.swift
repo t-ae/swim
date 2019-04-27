@@ -27,8 +27,8 @@ public struct BilinearInterpolator<P:PixelType, T: BinaryFloatingPoint&DataType>
             constant = nil
         }
         
-        if let y = clampValue(value: Int(y0), max: image.height) {
-            if let x = clampValue(value: Int(x0), max: image.width) {
+        if let y = edgeMode.clampValue(value: Int(y0), max: image.height) {
+            if let x = edgeMode.clampValue(value: Int(x0), max: image.width) {
                 pixel.assign(x: x, y: y, in: image, with: xx1 * yy1)
             } else if let constant = constant {
                 pixel.assign(pixel: constant, with: xx1 * yy1)
@@ -36,7 +36,7 @@ public struct BilinearInterpolator<P:PixelType, T: BinaryFloatingPoint&DataType>
                 fatalError("Never happens.")
             }
             
-            if let x = clampValue(value: Int(x1), max: image.width) {
+            if let x = edgeMode.clampValue(value: Int(x1), max: image.width) {
                 pixel.add(x: x, y: y, in: image, with: x0x * yy1)
             } else if let constant = constant {
                 pixel.add(pixel: constant, with: x0x * yy1)
@@ -49,8 +49,8 @@ public struct BilinearInterpolator<P:PixelType, T: BinaryFloatingPoint&DataType>
             fatalError("Never happens.")
         }
         
-        if let y = clampValue(value: Int(y1), max: image.height) {
-            if let x = clampValue(value: Int(x0), max: image.width) {
+        if let y = edgeMode.clampValue(value: Int(y1), max: image.height) {
+            if let x = edgeMode.clampValue(value: Int(x0), max: image.width) {
                 pixel.add(x: x, y: y, in: image, with: xx1 * y0y)
             } else if let constant = constant {
                 pixel.add(pixel: constant, with: xx1 * y0y)
@@ -58,7 +58,7 @@ public struct BilinearInterpolator<P:PixelType, T: BinaryFloatingPoint&DataType>
                 fatalError("Never happens.")
             }
             
-            if let x = clampValue(value: Int(x1), max: image.width) {
+            if let x = edgeMode.clampValue(value: Int(x1), max: image.width) {
                 pixel.add(x: x, y: y, in: image, with: x0x * y0y)
             } else if let constant = constant {
                 pixel.add(pixel: constant, with: x0x * y0y)

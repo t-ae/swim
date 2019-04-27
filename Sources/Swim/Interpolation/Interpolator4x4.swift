@@ -34,12 +34,12 @@ extension Interpolator4x4 {
         let yp = Int(ymin)
         
         let xp = Int(xmin)
-        let x0 = clampValue(value: xp+0, max: image.width)
-        let x1 = clampValue(value: xp+1, max: image.width)
-        let x2 = clampValue(value: xp+2, max: image.width)
-        let x3 = clampValue(value: xp+3, max: image.width)
+        let x0 = edgeMode.clampValue(value: xp+0, max: image.width)
+        let x1 = edgeMode.clampValue(value: xp+1, max: image.width)
+        let x2 = edgeMode.clampValue(value: xp+2, max: image.width)
+        let x3 = edgeMode.clampValue(value: xp+3, max: image.width)
         
-        if let y = clampValue(value: yp+0, max: image.height) {
+        if let y = edgeMode.clampValue(value: yp+0, max: image.height) {
             if let x = x0 {
                 pixel.assign(x: x, y: y, in: image, with: xw0 * yw0)
             } else if let constant = constant {
@@ -78,7 +78,7 @@ extension Interpolator4x4 {
             fatalError("Never happens.")
         }
         
-        if let y = clampValue(value: yp+1, max: image.height) {
+        if let y = edgeMode.clampValue(value: yp+1, max: image.height) {
             if let x = x0 {
                 pixel.add(x: x, y: y, in: image, with: xw0 * yw1)
             } else if let constant = constant {
@@ -117,7 +117,7 @@ extension Interpolator4x4 {
             fatalError("Never happens.")
         }
         
-        if let y = clampValue(value: yp+2, max: image.height) {
+        if let y = edgeMode.clampValue(value: yp+2, max: image.height) {
             if let x = x0 {
                 pixel.add(x: x, y: y, in: image, with: xw0 * yw2)
             } else if let constant = constant {
@@ -156,7 +156,7 @@ extension Interpolator4x4 {
             fatalError("Never happens.")
         }
         
-        if let y = clampValue(value: yp+3, max: image.height) {
+        if let y = edgeMode.clampValue(value: yp+3, max: image.height) {
             if let x = x0 {
                 pixel.add(x: x, y: y, in: image, with: xw0 * yw3)
             } else if let constant = constant {

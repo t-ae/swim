@@ -24,7 +24,25 @@ extension Interpolator {
     }
 }
 
-extension Interpolator {
+public enum EdgeMode<P: PixelType, T: DataType> {
+    case constant(pixel: Pixel<P, T>)
+    case edge
+    case symmetric
+    case reflect
+    case wrap
+    
+    public static func constant(value: T) -> EdgeMode<P, T> {
+        return .constant(pixel: Pixel(value: value))
+    }
+}
+
+extension EdgeMode where T: AdditiveArithmetic {
+    public static var zero: EdgeMode<P, T> {
+        return .constant(value: .zero)
+    }
+}
+
+extension EdgeMode {
     @inlinable
     func clampValue(value: Int, max: Int) -> Int? {
         guard value < 0 || value >= max else {
@@ -32,7 +50,7 @@ extension Interpolator {
             return value
         }
         
-        switch edgeMode {
+        switch self {
         case .constant:
             return nil
         case .edge:
@@ -65,32 +83,5 @@ extension Interpolator {
                 return x
             }
         }
-    }
-    
-    @inlinable
-    func inImageCoord(x: Int, y: Int, width: Int, height: Int) -> (x: Int, y: Int)? {
-        if let x = clampValue(value: x, max: width), let y = clampValue(value: y, max: height) {
-            return (x, y)
-        } else {
-            return nil
-        }
-    }
-}
-
-public enum EdgeMode<P: PixelType, T: DataType> {
-    case constant(pixel: Pixel<P, T>)
-    case edge
-    case symmetric
-    case reflect
-    case wrap
-    
-    public static func constant(value: T) -> EdgeMode<P, T> {
-        return .constant(pixel: Pixel(value: value))
-    }
-}
-
-extension EdgeMode where T: AdditiveArithmetic {
-    public static var zero: EdgeMode<P, T> {
-        return .constant(value: .zero)
     }
 }
