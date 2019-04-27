@@ -14,7 +14,7 @@ class WarpVisualTests: XCTestCase {
                                         0.5, 0.5, 0.5,
                                         0.3, 0.3, 0.3])
     
-    let affine = AffineTransformation(scale: (50, 50), rotation: Double.pi/6, translation: (150, 0))
+    let affine = AffineTransformation(scale: (30, 30), rotation: Double.pi/6, translation: (200, 200))
 }
 
 #if canImport(AppKit)

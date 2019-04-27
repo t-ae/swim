@@ -39,13 +39,14 @@ extension Interpolator {
             return clamp(value, min: 0, max: max-1)
         case .symmetric:
             var x = value
-            while x < 0 || x >= max {
-                if x < 0 {
-                    x = -x - 1
-                }
-                if x >= max {
-                    x = 2*max - x - 1
-                }
+            if x < 0 {
+                x = -x - 1
+            }
+            if x >= 2*max { // Make x in [0, 2*max-1]
+                x %= 2*max
+            }
+            if x >= max {
+                x = 2*max - x - 1
             }
             return x
         case .reflect:
