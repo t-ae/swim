@@ -6,7 +6,7 @@ public protocol DataType: Equatable {
 }
 
 extension Bool: DataType {
-    public static var swimDefaultValue: Bool = true
+    public static let swimDefaultValue: Bool = true
 }
 
 extension DataType where Self: AdditiveArithmetic {

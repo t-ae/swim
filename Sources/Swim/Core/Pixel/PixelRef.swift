@@ -43,7 +43,7 @@ public struct MutablePixelRef<P: PixelType, T: DataType> {
     public let y: Int
     
     @usableFromInline
-    var pointer: UnsafeMutableBufferPointer<T>
+    let pointer: UnsafeMutableBufferPointer<T>
     
     @inlinable
     init(x: Int, y: Int, pointer: UnsafeMutableBufferPointer<T>) {
