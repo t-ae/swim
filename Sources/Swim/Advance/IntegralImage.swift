@@ -1,4 +1,5 @@
 public enum IntegralImageConverter {
+    /// Create integral image from input image.
     public static func convert<T: AdditiveArithmetic>(image: Image<Intensity, T>) -> Image<Intensity, T> {
         var newImage = image
         

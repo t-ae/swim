@@ -15,6 +15,7 @@ extension Image where P == Intensity, T: Comparable {
         }
     }
     
+    /// Apply non-linear local filter.
     @inlinable
     func rankFilter(kernelSize: Int, kernelFunc: ([T])->T) -> Image<P, T> {
         precondition(kernelSize > 0)

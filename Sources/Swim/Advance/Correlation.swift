@@ -1,6 +1,7 @@
 import Foundation
 
 public enum Correlation<T: FloatingPoint&DataType> {
+    /// Compute sum of square difference.
     @inlinable
     public static func ssd(_ a: Image<Intensity, T>, _ b: Image<Intensity, T>) -> T {
         precondition(a.size == b.size, "Images must have same size.")
@@ -22,6 +23,7 @@ public enum Correlation<T: FloatingPoint&DataType> {
         return sum
     }
     
+    /// Compute sum of square difference.
     @inlinable
     public static func sad(_ a: Image<Intensity, T>, _ b: Image<Intensity, T>) -> T {
         precondition(a.size == b.size, "Images must have same size.")
@@ -42,6 +44,7 @@ public enum Correlation<T: FloatingPoint&DataType> {
         return sum
     }
     
+    /// Compute normalized cross correlation.
     @inlinable
     public static func ncc(_ a: Image<Intensity, T>, _ b: Image<Intensity, T>) -> T {
         precondition(a.size == b.size, "Images must have same size.")
@@ -67,6 +70,7 @@ public enum Correlation<T: FloatingPoint&DataType> {
         return sumCross / sqrt(sum2a * sum2b)
     }
     
+    /// Compute zero means normalized cross correlation.
     @inlinable
     public static func zncc(_ a: Image<Intensity, T>, _ b: Image<Intensity, T>) -> T {
         precondition(a.size == b.size, "Images must have same size.")
