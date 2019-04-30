@@ -24,7 +24,8 @@ extension Image where P: ConvertibleToCGImage, T == UInt8 {
 extension Image where P: ConvertibleFromCGImage, T == Float {
     /// Create Image from NSImage.
     ///
-    /// All pixel values will be in [0, 1] range.
+    /// All pixel values are assumed to be in [0, 1] range.
+    /// Values outside the range will be clipped.
     @inlinable
     public init?(nsImage: NSImage) {
         guard let cgImage = nsImage.cgImage(forProposedRect: nil, context: nil,hints: nil) else {
@@ -37,7 +38,8 @@ extension Image where P: ConvertibleFromCGImage, T == Float {
 extension Image where P: ConvertibleToCGImage, T == Float {
     /// Create NSImage.
     ///
-    /// All pixel values will be clipped to [0, 1] range.
+    /// All pixel values are assumed to be in [0, 1] range.
+    /// Values outside the range will be clipped.
     @inlinable
     public func nsImage() -> NSImage {
         return NSImage(cgImage: cgImage(), size: .zero)
@@ -47,7 +49,8 @@ extension Image where P: ConvertibleToCGImage, T == Float {
 extension Image where P: ConvertibleFromCGImage, T == Double {
     /// Create Image from NSImage.
     ///
-    /// All pixel values will be in [0, 1] range.
+    /// All pixel values are assumed to be in [0, 1] range.
+    /// Values outside the range will be clipped.
     @inlinable
     public init?(nsImage: NSImage) {
         guard let cgImage = nsImage.cgImage(forProposedRect: nil, context: nil,hints: nil) else {
@@ -60,7 +63,8 @@ extension Image where P: ConvertibleFromCGImage, T == Double {
 extension Image where P: ConvertibleToCGImage, T == Double {
     /// Create NSImage.
     ///
-    /// All pixel values will be clipped to [0, 1] range.
+    /// All pixel values are assumed to be in [0, 1] range.
+    /// Values outside the range will be clipped.
     @inlinable
     public func nsImage() -> NSImage {
         return NSImage(cgImage: cgImage(), size: .zero)

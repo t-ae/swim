@@ -24,7 +24,8 @@ extension Image where P: ConvertibleToCGImage, T == UInt8 {
 extension Image where P: ConvertibleFromCGImage, T: BinaryFloatingPoint {
     /// Create Image from UIImage.
     ///
-    /// All pixel values will be in [0, 1] range.
+    /// All pixel values are assumed to be in [0, 1] range.
+    /// Values outside the range will be clipped.
     @inlinable
     public init?(uiImage: UIImage) {
         guard let cgImage = uiImage.cgImage else {
@@ -37,7 +38,8 @@ extension Image where P: ConvertibleFromCGImage, T: BinaryFloatingPoint {
 extension Image where P: ConvertibleToCGImage, T: BinaryFloatingPoint {
     /// Create UIImage.
     ///
-    /// All pixel values will be clipped to [0, 1] range.
+    /// All pixel values are assumed to be in [0, 1] range.
+    /// Values outside the range will be clipped.
     @inlinable
     public func uiImage() -> UIImage {
         return UIImage(cgImage: cgImage())

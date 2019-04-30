@@ -84,7 +84,8 @@ extension Image where P: ImageFileFormat, T == UInt8 {
 extension Image where P: ImageFileFormat, T: BinaryFloatingPoint {
     /// Save image.
     ///
-    /// Pixel values are clipped to [0, 1].
+    /// All pixel values are assumed to be in [0, 1] range.
+    /// Values outside the range will be clipped.
     @inlinable
     public func write(to url: URL) throws {
         let format = detectFormat(url: url)
@@ -93,7 +94,8 @@ extension Image where P: ImageFileFormat, T: BinaryFloatingPoint {
     
     /// Save image.
     ///
-    /// Pixel values are clipped to [0, 1].
+    /// All pixel values are assumed to be in [0, 1] range.
+    /// Values outside the range will be clipped.
     @inlinable
     public func write(to url: URL, format: WriteFormat) throws {
         var i255 = self.clipped(low: 0, high: 1) * 255

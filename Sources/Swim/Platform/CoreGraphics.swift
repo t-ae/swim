@@ -33,7 +33,8 @@ extension Image where P: ConvertibleToCGImage, T == UInt8 {
 extension Image where P: ConvertibleFromCGImage, T: BinaryFloatingPoint {
     /// Create Image from CGImage.
     ///
-    /// All pixel values will be in [0, 1] range.
+    /// All pixel values are assumed to be in [0, 1] range.
+    /// Values outside the range will be clipped.
     @inlinable
     public init(cgImage: CGImage) {
         let uint8 = Image<P, UInt8>(cgImage: cgImage)
@@ -45,7 +46,8 @@ extension Image where P: ConvertibleFromCGImage, T: BinaryFloatingPoint {
 extension Image where P: ConvertibleToCGImage, T: BinaryFloatingPoint {
     /// Create CGImage.
     ///
-    /// All pixel values will be clipped to [0, 1] range.
+    /// All pixel values are assumed to be in [0, 1] range.
+    /// Values outside the range will be clipped.
     @inlinable
     public func cgImage() -> CGImage {
         var i255 = clipped(low: 0, high: 1) * 255

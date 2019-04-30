@@ -3,6 +3,12 @@ import Foundation
 // MARK: - Warp
 
 extension Image where T: BinaryFloatingPoint {
+    /// Warp input image with specified transformation matrix.
+    /// Use bilinear interpolation. Pixels outside the original image are filled with 0.
+    /// Output image will preserve size of `self`.
+    ///
+    /// - Parameters:
+    ///   - transformation: Homogeneous transformation matrix.
     @inlinable
     public func warp<M: HomogeneousTransformationMatrixProtocol>(transformation: M) throws -> Image<P, T> where M.T == T {
         
@@ -10,6 +16,12 @@ extension Image where T: BinaryFloatingPoint {
                         outputSize: (width, height))
     }
     
+    /// Warp input image with specified transformation matrix.
+    /// Output image will preserve size of `self`.
+    ///
+    /// - Parameters:
+    ///   - transformation: Homogeneous transformation matrix.
+    ///   - interpolator: Specify what interpolation method to calculate pixel values.
     @inlinable
     public func warp<M: HomogeneousTransformationMatrixProtocol, Intpl: Interpolator>(
         transformation: M,
@@ -19,6 +31,12 @@ extension Image where T: BinaryFloatingPoint {
                         interpolator: interpolator)
     }
     
+    /// Warp input image with specified transformation matrix.
+    /// Use bilinear interpolation. Pixels outside the original image are filled with 0.
+    ///
+    /// - Parameters:
+    ///   - transformation: Homogeneous transformation matrix.
+    ///   - outputSize: Output image size.
     @inlinable
     public func warp<M: HomogeneousTransformationMatrixProtocol>(
         transformation: M,
@@ -28,6 +46,12 @@ extension Image where T: BinaryFloatingPoint {
                         interpolator: BilinearInterpolator<P, T>())
     }
     
+    /// Warp input image with specified transformation matrix.
+    ///
+    /// - Parameters:
+    ///   - transformation: Homogeneous transformation matrix.
+    ///   - outputSize: Output image size.
+    ///   - interpolator: Specify what interpolation method to calculate pixel values.
     @inlinable
     public func warp<M: HomogeneousTransformationMatrixProtocol, Intpl: Interpolator>(
         transformation: M,
