@@ -256,6 +256,19 @@ extension WarpVisualTests {
         
         XCTAssertTrue(nsImage.isValid, "Break and check nsImages in debugger.")
     }
+    func testProjectiveTransformation() {
+        let path = testResoruceRoot().appendingPathComponent("lena_128.png")
+        let lena = try! Image<RGB, Double>(contentsOf: path)
+        
+        let proj = try! ProjectiveTransformation(from: ((0.0, 0), (128, 0), (0, 128), (128, 128)),
+                                                to: ((10, 200), (30, -50), (200, 200), (300, 100)))
+        
+        let intpl = BilinearInterpolator<RGB, Double>(edgeMode: .zero)
+        let image = try! lena.warp(transformation: proj, outputSize: (300, 300), interpolator: intpl)
+        let nsImage = doubleToNSImage(image)
+        
+        XCTAssertTrue(nsImage.isValid, "Break and check nsImages in debugger.")
+    }
 }
 
 #endif

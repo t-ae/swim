@@ -23,6 +23,7 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		A70DA65D227864B70051AA54 /* ProjectiveTransformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A70DA65B2278648A0051AA54 /* ProjectiveTransformation.swift */; };
 		A732ABEE226D6DBB00B2256E /* UIKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A732ABEC226D6A3900B2256E /* UIKitTests.swift */; };
 		A732AC0D226DABBE00B2256E /* HomogeneousTransformationMatrix.swift in Sources */ = {isa = PBXBuildFile; fileRef = A732AC0B226DABB900B2256E /* HomogeneousTransformationMatrix.swift */; };
 		A732AC10226E96B200B2256E /* PixelRef.swift in Sources */ = {isa = PBXBuildFile; fileRef = A732AC0E226E968800B2256E /* PixelRef.swift */; };
@@ -241,6 +242,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A70DA65B2278648A0051AA54 /* ProjectiveTransformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectiveTransformation.swift; sourceTree = "<group>"; };
 		A732ABEC226D6A3900B2256E /* UIKitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIKitTests.swift; sourceTree = "<group>"; };
 		A732AC0B226DABB900B2256E /* HomogeneousTransformationMatrix.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomogeneousTransformationMatrix.swift; sourceTree = "<group>"; };
 		A732AC0E226E968800B2256E /* PixelRef.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PixelRef.swift; sourceTree = "<group>"; };
@@ -808,6 +810,7 @@
 				OBJ_80 /* Rotate.swift */,
 				OBJ_81 /* Warp.swift */,
 				A732AC0B226DABB900B2256E /* HomogeneousTransformationMatrix.swift */,
+				A70DA65B2278648A0051AA54 /* ProjectiveTransformation.swift */,
 			);
 			path = Transformation;
 			sourceTree = "<group>";
@@ -1087,6 +1090,7 @@
 				A732B39822714E3E00B2256E /* Interpolator4x4.swift in Sources */,
 				OBJ_189 /* Bayer.swift in Sources */,
 				OBJ_190 /* Convolution.swift in Sources */,
+				A70DA65D227864B70051AA54 /* ProjectiveTransformation.swift in Sources */,
 				OBJ_191 /* Correlation.swift in Sources */,
 				OBJ_192 /* RankFilter.swift in Sources */,
 				OBJ_193 /* Im2col.swift in Sources */,
