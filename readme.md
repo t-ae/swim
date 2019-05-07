@@ -1,7 +1,7 @@
 # Swim
 Image library for Swift.
 
-## Generics
+## Generic `Image` type
 ```swift
 struct Image<P: PixelType, T: DataType>
 ```
