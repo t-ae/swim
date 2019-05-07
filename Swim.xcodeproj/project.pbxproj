@@ -41,7 +41,7 @@
 		A732B3962270261D00B2256E /* PaddingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A732B394227025B300B2256E /* PaddingTests.swift */; };
 		A732B39822714E3E00B2256E /* Interpolator4x4.swift in Sources */ = {isa = PBXBuildFile; fileRef = A732B39722714E3E00B2256E /* Interpolator4x4.swift */; };
 		A732B39A22714F0700B2256E /* LanczosInterpolator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A732B39922714F0700B2256E /* LanczosInterpolator.swift */; };
-		A732B3A1227183F100B2256E /* SubimageVIsualTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A732B39F227183B500B2256E /* SubimageVIsualTests.swift */; };
+		A732B3A1227183F100B2256E /* SubimageVisualTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A732B39F227183B500B2256E /* SubimageVisualTests.swift */; };
 		A732B3A322718C1000B2256E /* ArithmeticPerformanceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A732B3A222718C1000B2256E /* ArithmeticPerformanceTests.swift */; };
 		A732B3A72271913600B2256E /* AbsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A732B39D22716CF100B2256E /* AbsTests.swift */; };
 		A732B3A82271913A00B2256E /* Abs.swift in Sources */ = {isa = PBXBuildFile; fileRef = A732B39B22716AEF00B2256E /* Abs.swift */; };
@@ -262,7 +262,7 @@
 		A732B39922714F0700B2256E /* LanczosInterpolator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanczosInterpolator.swift; sourceTree = "<group>"; };
 		A732B39B22716AEF00B2256E /* Abs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Abs.swift; sourceTree = "<group>"; };
 		A732B39D22716CF100B2256E /* AbsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbsTests.swift; sourceTree = "<group>"; };
-		A732B39F227183B500B2256E /* SubimageVIsualTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubimageVIsualTests.swift; sourceTree = "<group>"; };
+		A732B39F227183B500B2256E /* SubimageVisualTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubimageVisualTests.swift; sourceTree = "<group>"; };
 		A732B3A222718C1000B2256E /* ArithmeticPerformanceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArithmeticPerformanceTests.swift; sourceTree = "<group>"; };
 		A732B3AD2271A83600B2256E /* BlendPerformanceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlendPerformanceTests.swift; sourceTree = "<group>"; };
 		A732B3AF2271AACF00B2256E /* DataTypeConversionPerformanceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataTypeConversionPerformanceTests.swift; sourceTree = "<group>"; };
@@ -618,7 +618,7 @@
 				OBJ_150 /* ResizeVisualTests.swift */,
 				OBJ_151 /* Utils.swift */,
 				OBJ_152 /* WarpVisualTests.swift */,
-				A732B39F227183B500B2256E /* SubimageVIsualTests.swift */,
+				A732B39F227183B500B2256E /* SubimageVisualTests.swift */,
 			);
 			name = VisualTests;
 			path = Tests/VisualTests;
@@ -1222,7 +1222,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 0;
 			files = (
-				A732B3A1227183F100B2256E /* SubimageVIsualTests.swift in Sources */,
+				A732B3A1227183F100B2256E /* SubimageVisualTests.swift in Sources */,
 				OBJ_318 /* BayerVisualTests.swift in Sources */,
 				A732B3BC2272E4EA00B2256E /* OtherVisualTests.swift in Sources */,
 				OBJ_319 /* BlendVisualTests.swift in Sources */,

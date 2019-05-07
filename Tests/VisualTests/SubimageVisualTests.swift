@@ -1,7 +1,7 @@
 import XCTest
 import Swim
 
-class SubimageVIsualTests: XCTestCase {
+class SubimageVisualTests: XCTestCase {
     func testSubimage() {
         let path = testResoruceRoot().appendingPathComponent("lena_256.png")
         let lena = try! Image<RGB, Double>(contentsOf: path)
