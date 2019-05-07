@@ -44,6 +44,12 @@ class ImageIOTests: XCTestCase {
             let image = try? Image<IntensityAlpha, UInt8>(contentsOf: srcPath)
             
             XCTAssertEqual(image?[channel: .intensity], baseLuminance)
+            
+            try? image?.write(to: dstPath)
+            
+            let image2 = try? Image<IntensityAlpha, UInt8>(contentsOf: dstPath)
+            
+            XCTAssertEqual(image, image2)
         }
         do { // read Intensity as RGB
             try! self.baseLuminance.write(to: srcPath, format: .png)
@@ -51,6 +57,12 @@ class ImageIOTests: XCTestCase {
             let image = try? Image<RGB, UInt8>(contentsOf: srcPath)
             
             XCTAssertEqual(image?[channel: .red], baseLuminance)
+            
+            try? image?.write(to: dstPath)
+            
+            let image2 = try? Image<RGB, UInt8>(contentsOf: dstPath)
+            
+            XCTAssertEqual(image, image2)
         }
         do { // read Intensity as RGBA
             try! self.baseLuminance.write(to: srcPath, format: .png)
@@ -58,6 +70,12 @@ class ImageIOTests: XCTestCase {
             let image = try? Image<RGBA, UInt8>(contentsOf: srcPath)
             
             XCTAssertEqual(image?[channel: .red], baseLuminance)
+            
+            try? image?.write(to: dstPath)
+            
+            let image2 = try? Image<RGBA, UInt8>(contentsOf: dstPath)
+            
+            XCTAssertEqual(image, image2)
         }
         do { // read RGBA as Intensity
             try! self.baseImage.write(to: srcPath, format: .png)
