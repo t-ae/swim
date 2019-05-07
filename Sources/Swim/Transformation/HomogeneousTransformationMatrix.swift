@@ -55,6 +55,12 @@ public struct HomogeneousTransformationMatrix<T: BinaryFloatingPoint>: Homogeneo
     }
 }
 
+extension HomogeneousTransformationMatrix {
+    public var identity: HomogeneousTransformationMatrix<T> {
+        return .init(elements: [1, 0, 0, 0, 1, 0, 0, 0, 1])
+    }
+}
+
 public func *<T: BinaryFloatingPoint>(lhs: HomogeneousTransformationMatrix<T>,
                                       rhs: HomogeneousTransformationMatrix<T>) -> HomogeneousTransformationMatrix<T> {
     let elements = matmul(lhs: lhs.elements, rhs: rhs.elements, m: 3, n: 3, p: 3)

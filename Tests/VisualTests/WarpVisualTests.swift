@@ -256,6 +256,7 @@ extension WarpVisualTests {
         
         XCTAssertTrue(nsImage.isValid, "Break and check nsImages in debugger.")
     }
+    
     func testProjectiveTransformation() {
         let path = testResoruceRoot().appendingPathComponent("lena_128.png")
         let lena = try! Image<RGB, Double>(contentsOf: path)
