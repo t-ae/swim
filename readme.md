@@ -12,13 +12,13 @@ DataType: `Bool`, `UInt8`, `Int`, `Float`, `Double`
 
 ## Creation
 ```swift
-let image = Image<RGBA, UInt8>(width: 3, height: 5, data: [...]])
+let image = Image<RGBA, UInt8>(width: 3, height: 5, data: uint8Array])
 
 // Can use type inference
-let intensity = Image(width: 3, height: 20, intensity: [...])
-let rgb = Image(width: 4, height: 5, rgb: [...])
-let rgba = Image(width: 3, height: 5, rgba: [...])
-let argb = Image(width: 5, height: 3, argb: [...])
+let intensity = Image(width: 3, height: 20, intensity: intArray)
+let rgb = Image(width: 4, height: 5, rgb: floatArray)
+let rgba = Image(width: 3, height: 5, rgba: doubleArray)
+let argb = Image(width: 5, height: 3, argb: uint8Array)
 ```
 
 ## Save/Load image
@@ -49,7 +49,8 @@ let red: UInt8 = image[0, 0, 0] // red channel of (x: 0, y: 0)
 let red2: UInt8 = image[0, 0, .red] // ditto
 let red3: UInt8 = image[0, 0][.red] // ditto
 
-image[1, 0, 1] += 1
+image[1, 0] += 1 // Add 1 for R,G,B,A respectively
+image[1, 0, .green] += 1 // Add 1 for Green channel
 ```
 
 ### Subimage
@@ -89,9 +90,10 @@ let redOnlyRGBA = image.pixelwiseConverted { px in
 ## Resize
 ```swift 
 let image = Image<RGB, Float>(contentsOf: url)!
-let image2 = image.resize(width: 512, height: 512) // default bilinear
-let image3 = image.resize(width: 512, height: 512, method: .nearestNeighbor)
-let image4 = image.resize(width: 512, height: 512, method: .bicubic)
+let resizedBL = image.resize(width: 512, height: 512) // default bilinear
+let resizedNN = image.resize(width: 512, height: 512, method: .nearestNeighbor)
+let resizedBC = image.resize(width: 512, height: 512, method: .bicubic)
+let resizedAA = image.resize(width: 512, height: 512, method: .areaAverage)
 ```
 
 [Example: NearestNeighbor / Bilinear / Bicubic](https://github.com/t-ae/swim/blob/7a055c45e4a1db9755f04a785599e18fde1f86bd/Tests/VisualTests/ResizeVisualTests.swift#L29-L44)
@@ -102,6 +104,7 @@ let image4 = image.resize(width: 512, height: 512, method: .bicubic)
 ```swift
 let image = Image<RGBA, Double>(contentsOf: url)!
 let affine = AffineTransformation<Double>(scale: (1, 1.5), rotation: .pi/6. translation: (100, 120))
+// `edgeMode` specifies how to fill pixels outside the base image.
 let interpolator = BilinearInterpolator<RGBA, Double>(edgeMode: .edge)
 let warpedImage = image.warp(transformation: affine, outputSize: (500, 500), interpolator: interpolator)
 ```
