@@ -50,6 +50,7 @@ public struct Lanczos3Interpolator<P: PixelType>: Interpolator {
         return 3 * sin(xpi) * sin(xpi/3) / (xpi*xpi)
     }
     
+    @inlinable
     public func interpolate(x: Double,
                             y: Double,
                             in image: Image<P, Double>,
