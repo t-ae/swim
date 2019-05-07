@@ -5,35 +5,47 @@ class ConcatenateTests: XCTestCase {
     
     func testConcatH() {
         do {
-            let image = Image(width: 2, height: 3, rgba: (0..<6*4).map { UInt8($0) })
-            let concat = Image.concatH([image, image, image])
-            XCTAssertEqual(concat[cols: 0..<2], image)
-            XCTAssertEqual(concat[cols: 2..<4], image)
-            XCTAssertEqual(concat[cols: 4..<6], image)
+            let image1 = Image(width: 2, height: 3, rgba: (0..<6*4).map { UInt8($0) })
+            let image2 = Image(width: 3, height: 3, rgba: (0..<9*4).map { UInt8($0) })
+            let concat = Image.concatH([image1, image2, image1, image2])
+            
+            XCTAssertEqual(concat[cols: 0..<2], image1)
+            XCTAssertEqual(concat[cols: 2..<5], image2)
+            XCTAssertEqual(concat[cols: 5..<7], image1)
+            XCTAssertEqual(concat[cols: 7..<10], image2)
         }
         do {
-            let image = Image(width: 2, height: 3, rgb: (0..<6*3).map { Double($0) })
-            let concat = Image.concatH([image, image, image])
-            XCTAssertEqual(concat[cols: 0..<2], image)
-            XCTAssertEqual(concat[cols: 2..<4], image)
-            XCTAssertEqual(concat[cols: 4..<6], image)
+            let image1 = Image(width: 2, height: 3, rgba: (0..<6*4).map { Double($0) })
+            let image2 = Image(width: 3, height: 3, rgba: (0..<9*4).map { Double($0) })
+            let concat = Image.concatH([image1, image2, image1, image2])
+            
+            XCTAssertEqual(concat[cols: 0..<2], image1)
+            XCTAssertEqual(concat[cols: 2..<5], image2)
+            XCTAssertEqual(concat[cols: 5..<7], image1)
+            XCTAssertEqual(concat[cols: 7..<10], image2)
         }
     }
     
     func testConcatV() {
         do {
-            let image = Image(width: 2, height: 3, rgb: (0..<6*3).map { Int($0) })
-            let concat = Image.concatV([image, image, image])
-            XCTAssertEqual(concat[rows: 0..<3], image)
-            XCTAssertEqual(concat[rows: 3..<6], image)
-            XCTAssertEqual(concat[rows: 6..<9], image)
+            let image1 = Image(width: 2, height: 3, rgb: (0..<6*3).map { Int($0) })
+            let image2 = Image(width: 2, height: 2, rgb: (0..<4*3).map { Int($0) })
+            let concat = Image.concatV([image1, image2, image1, image2])
+            
+            XCTAssertEqual(concat[rows: 0..<3], image1)
+            XCTAssertEqual(concat[rows: 3..<5], image2)
+            XCTAssertEqual(concat[rows: 5..<8], image1)
+            XCTAssertEqual(concat[rows: 8..<10], image2)
         }
         do {
-            let image = Image(width: 2, height: 3, intensity: (0..<6).map { Double($0) })
-            let concat = Image.concatV([image, image, image])
-            XCTAssertEqual(concat[rows: 0..<3], image)
-            XCTAssertEqual(concat[rows: 3..<6], image)
-            XCTAssertEqual(concat[rows: 6..<9], image)
+            let image1 = Image(width: 2, height: 3, rgb: (0..<6*3).map { Double($0) })
+            let image2 = Image(width: 2, height: 2, rgb: (0..<4*3).map { Double($0) })
+            let concat = Image.concatV([image1, image2, image1, image2])
+            
+            XCTAssertEqual(concat[rows: 0..<3], image1)
+            XCTAssertEqual(concat[rows: 3..<5], image2)
+            XCTAssertEqual(concat[rows: 5..<8], image1)
+            XCTAssertEqual(concat[rows: 8..<10], image2)
         }
     }
 }
