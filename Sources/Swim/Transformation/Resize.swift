@@ -125,6 +125,16 @@ extension Image where T: BinaryFloatingPoint {
                           height: height,
                           interpolator: BicubicInterpolator(edgeMode: .edge),
                           avoidSparseSampling: avoidSparseSampling)
+        case .lanczos2:
+            return resize(width: width,
+                          height: height,
+                          interpolator: Lanczos2Interpolator(edgeMode: .edge),
+                          avoidSparseSampling: avoidSparseSampling)
+        case .lanczos3:
+            return resize(width: width,
+                          height: height,
+                          interpolator: Lanczos3Interpolator(edgeMode: .edge),
+                          avoidSparseSampling: avoidSparseSampling)
         case .areaAverage:
             return resizeAA(width: width, height: height)
         }
@@ -167,5 +177,7 @@ public enum ResizeMethod {
     case nearestNeighbor
     case bilinear
     case bicubic
+    case lanczos2
+    case lanczos3
     case areaAverage
 }
