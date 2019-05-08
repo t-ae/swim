@@ -116,8 +116,8 @@ public func *(lhs: AffineTransformation, rhs: (x: Double, y: Double)) -> (x: Dou
 
 extension HomogeneousTransformationMatrix {
     public init(from affineTransformation: AffineTransformation) {
-        self.init(elements: [affineTransformation.a, affineTransformation.b, affineTransformation.tx,
-                             affineTransformation.c, affineTransformation.d, affineTransformation.ty,
-                             0, 0, 1])
+        self.init(affineTransformation.a, affineTransformation.b, affineTransformation.tx,
+                  affineTransformation.c, affineTransformation.d, affineTransformation.ty,
+                  0, 0, 1)
     }
 }
