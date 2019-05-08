@@ -1,5 +1,29 @@
 import Foundation
 
+extension Image where T == UInt8 {
+    /// Resize image with nearest neighbor method.
+    /// If you need more sophisticated methods, see `Image<P, BinaryFloatingPoint>.resize`.
+    /// - Parameters:
+    ///   - width: width of output image
+    ///   - height: height of output image
+    @inlinable
+    public func resizeNN(width: Int,
+                         height: Int) -> Image<P, T> {
+        var dest = Image<P, T>(width: width, height: height)
+        
+        let intpl = NearestNeighborInterpolator<P, T>(edgeMode: .edge)
+        
+        // range: -0.5 ... baseImage.width+0.5
+        dest.pixelwiseConvert { ref in
+            let xp = Double(self.width) * Double(ref.x) / Double(width)
+            let yp = Double(self.height) * Double(ref.y) / Double(height)
+            intpl.interpolate(x: xp-0.5, y: yp-0.5, in: self, into: ref)
+        }
+        
+        return dest
+    }
+}
+
 extension Image where T: BinaryFloatingPoint {
     /// Resize image with Area average method.
     @inlinable
@@ -163,6 +187,7 @@ extension Image where T: BinaryFloatingPoint {
         
         var dest = Image<P, T>(width: width, height: height)
         
+        // range: -0.5 ... baseImage.width+0.5
         dest.pixelwiseConvert { ref in
             let xp = Double(baseImage.width) * Double(ref.x) / Double(width)
             let yp = Double(baseImage.height) * Double(ref.y) / Double(height)

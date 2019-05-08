@@ -180,7 +180,6 @@ extension OtherVisualTests {
     }
     
     public func testLifeGame() {
-        
         func next(_ image: Image<Intensity, UInt8>) -> Image<Intensity, UInt8> {
             let (m, n, matrix) = image.im2col(patchWidth: 3, patchHeight: 3, padding: Im2ColPadding.zero)
             // m == 9
@@ -211,9 +210,10 @@ extension OtherVisualTests {
         
         var steps: [NSImage] = []
         for _ in 0..<20 {
-            var bd = Image(cast: b, to: Double.self)
-            bd = bd.resize(width: 128, height: 128, method: .nearestNeighbor)
-            let ns = doubleToNSImage(bd)
+//            var bd = Image(cast: b, to: Double.self)
+//            bd = bd.resize(width: 128, height: 128, method: .nearestNeighbor)
+//            let ns = doubleToNSImage(bd)
+            let ns = (b*UInt8.max).resizeNN(width: 256, height: 256).nsImage()
             steps.append(ns)
             b = next(b)
         }
