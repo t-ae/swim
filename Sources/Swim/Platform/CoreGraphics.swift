@@ -4,12 +4,10 @@ import CoreGraphics
 
 // MARK: - Protocol
 public protocol ConvertibleToCGImage: PixelType {
-    @inlinable
     static func toCGImage(image: Image<Self, UInt8>) -> CGImage
 }
 
 public protocol ConvertibleFromCGImage: PixelType {
-    @inlinable
     static func fromCGImage(cgImage: CGImage) -> Image<Self, UInt8>
 }
 
