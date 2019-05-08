@@ -10,7 +10,8 @@ public struct Lanczos2Interpolator<P: PixelType, T: BinaryFloatingPoint&DataType
     
     @inlinable
     public func weight(distance: Double) -> Double {
-        guard -2 < distance && distance < 2 else {
+        assert(distance >= 0)
+        guard distance < 2 else {
             return 0
         }
         // sinc(distance) * sinc(distance/2)
@@ -34,7 +35,8 @@ public struct Lanczos3Interpolator<P: PixelType, T: BinaryFloatingPoint&DataType
     
     @inlinable
     public func weight(distance: Double) -> Double {
-        guard -3 < distance && distance < 3 else {
+        assert(distance >= 0)
+        guard distance < 3 else {
             return 0
         }
         // sinc(distance) * sinc(distance/3)

@@ -11,6 +11,7 @@ public struct BicubicInterpolator<P: PixelType, T: BinaryFloatingPoint&DataType>
     
     @inlinable
     public func weight(distance: Double) -> Double {
+        assert(distance >= 0)
         guard distance < 2 else {
             return 0
         }

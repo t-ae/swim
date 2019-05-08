@@ -124,9 +124,9 @@ extension Image where T: BinaryFloatingPoint {
     
     /// Resize image.
     /// - Parameters:
-    ///   - width: width of output image
-    ///   - height: height of output image
-    ///   - method: resize method to use
+    ///   - width: width of output image.
+    ///   - height: height of output image.
+    ///   - method: resize method to use. Default: .bilinear
     ///   - avoidSparseSampling: Resize with area average method before down sampling. It doesn't effect if output size is larger than self or `method` is `.areaAverage`.
     @inlinable
     public func resize(width: Int,
