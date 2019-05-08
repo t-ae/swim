@@ -60,42 +60,42 @@ extension HomogeneousTransformationMatrix {
 }
 
 extension HomogeneousTransformationMatrix {
-    public static func project(from: ((Double, Double), (Double, Double), (Double, Double), (Double, Double)),
-                               to: ((Double, Double), (Double, Double), (Double, Double), (Double, Double))) throws -> HomogeneousTransformationMatrix {
-        // a: (1, 0, 0), (0, 1, 0), (0, 0, 1), (1, 1, 1) to `from`
+    public static func project(source: ((x: Double, y: Double), (x: Double, y: Double), (x: Double, y: Double), (x: Double, y: Double)),
+                               target: ((x: Double, y: Double), (x: Double, y: Double), (x: Double, y: Double), (x: Double, y: Double))) throws -> HomogeneousTransformationMatrix {
+        // a: (1, 0, 0), (0, 1, 0), (0, 0, 1), (1, 1, 1) to `source`
         let a: HomogeneousTransformationMatrix
         do {
-            let mat = HomogeneousTransformationMatrix(elements: [from.0.0, from.1.0, from.2.0,
-                                                                 from.0.1, from.1.1, from.2.1,
+            let mat = HomogeneousTransformationMatrix(elements: [source.0.x, source.1.x, source.2.x,
+                                                                 source.0.y, source.1.y, source.2.y,
                                                                  1, 1, 1])
             let inv = try mat.inverted().elements
-            let coef0 = inv[0]*from.3.0 + inv[1]*from.3.1 + inv[2]
-            let coef1 = inv[3]*from.3.0 + inv[4]*from.3.1 + inv[5]
-            let coef2 = inv[6]*from.3.0 + inv[7]*from.3.1 + inv[8]
+            let coef0 = inv[0]*source.3.x + inv[1]*source.3.y + inv[2]
+            let coef1 = inv[3]*source.3.x + inv[4]*source.3.y + inv[5]
+            let coef2 = inv[6]*source.3.x + inv[7]*source.3.y + inv[8]
             
             a = HomogeneousTransformationMatrix(elements: [
-                coef0*from.0.0, coef1*from.1.0, coef2*from.2.0,
-                coef0*from.0.1, coef1*from.1.1, coef2*from.2.1,
+                coef0*source.0.x, coef1*source.1.x, coef2*source.2.x,
+                coef0*source.0.y, coef1*source.1.y, coef2*source.2.y,
                 coef0, coef1, coef2])
         }
-        // b: (1, 0, 0), (0, 1, 0), (0, 0, 1), (1, 1, 1) to `to`
+        // b: (1, 0, 0), (0, 1, 0), (0, 0, 1), (1, 1, 1) to `target`
         let b: HomogeneousTransformationMatrix
         do {
-            let mat = HomogeneousTransformationMatrix(elements: [to.0.0, to.1.0, to.2.0,
-                                                                 to.0.1, to.1.1, to.2.1,
+            let mat = HomogeneousTransformationMatrix(elements: [target.0.x, target.1.x, target.2.x,
+                                                                 target.0.y, target.1.y, target.2.y,
                                                                  1, 1, 1])
             let inv = try mat.inverted().elements
-            let coef0 = inv[0]*to.3.0 + inv[1]*to.3.1 + inv[2]
-            let coef1 = inv[3]*to.3.0 + inv[4]*to.3.1 + inv[5]
-            let coef2 = inv[6]*to.3.0 + inv[7]*to.3.1 + inv[8]
+            let coef0 = inv[0]*target.3.x + inv[1]*target.3.y + inv[2]
+            let coef1 = inv[3]*target.3.x + inv[4]*target.3.y + inv[5]
+            let coef2 = inv[6]*target.3.x + inv[7]*target.3.y + inv[8]
             
             b = HomogeneousTransformationMatrix(elements: [
-                coef0*to.0.0, coef1*to.1.0, coef2*to.2.0,
-                coef0*to.0.1, coef1*to.1.1, coef2*to.2.1,
+                coef0*target.0.x, coef1*target.1.x, coef2*target.2.x,
+                coef0*target.0.y, coef1*target.1.y, coef2*target.2.y,
                 coef0, coef1, coef2])
         }
         
-        // a.inverted: `from` to (1, 0, 0), (0, 1, 0), (0, 0, 1), (1, 1, 1)
+        // a.inverted: `source` to (1, 0, 0), (0, 1, 0), (0, 0, 1), (1, 1, 1)
         return try b * a.inverted()
     }
 }
@@ -109,9 +109,9 @@ public func *(lhs: HomogeneousTransformationMatrix,
 public func *(lhs: HomogeneousTransformationMatrix,
               rhs: (x: Double, y: Double)) -> (x: Double, y: Double) {
     let e = lhs.elements
-    let x = e[0]*rhs.0 + e[1]*rhs.1 + e[2]
-    let y = e[3]*rhs.0 + e[4]*rhs.1 + e[5]
-    let w = e[6]*rhs.0 + e[7]*rhs.1 + e[8]
+    let x = e[0]*rhs.x + e[1]*rhs.y + e[2]
+    let y = e[3]*rhs.x + e[4]*rhs.y + e[5]
+    let w = e[6]*rhs.x + e[7]*rhs.y + e[8]
     return (x / w, y / w)
 }
 
