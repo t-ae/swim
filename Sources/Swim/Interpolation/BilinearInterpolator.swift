@@ -8,16 +8,16 @@ public struct BilinearInterpolator<P:PixelType, T: BinaryFloatingPoint&DataType>
     }
 
     @inlinable
-    public func interpolate(x: T, y: T, in image: Image<P, T>, into pixel: MutablePixelRef<P, T>) {
+    public func interpolate(x: Double, y: Double, in image: Image<P, T>, into pixel: MutablePixelRef<P, T>) {
         let x0 = floor(x)
         let x1 = x0 + 1
         let y0 = floor(y)
         let y1 = y0 + 1
         
-        let x0x = x - x0
-        let xx1 = x1 - x
-        let y0y = y - y0
-        let yy1 = y1 - y
+        let x0x = T(x - x0)
+        let xx1 = T(x1 - x)
+        let y0y = T(y - y0)
+        let yy1 = T(y1 - y)
         
         var constant: Pixel<P, T>?
         switch edgeMode {

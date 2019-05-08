@@ -36,11 +36,11 @@ class AffineTransformationTests: XCTestCase {
     }
 }
 
-private func XCTAssertEqual<T: BinaryFloatingPoint>(_ expression1: AffineTransformation<T>,
-                                                    _ expression2: AffineTransformation<T>,
-                                                    accuracy: T,
-                                                    file: StaticString = #file,
-                                                    line: UInt = #line) {
+private func XCTAssertEqual(_ expression1: AffineTransformation,
+                            _ expression2: AffineTransformation,
+                            accuracy: Double,
+                            file: StaticString = #file,
+                            line: UInt = #line) {
     XCTAssertEqual(expression1.a, expression2.a, accuracy: accuracy, file: file, line: line)
     XCTAssertEqual(expression1.b, expression2.b, accuracy: accuracy, file: file, line: line)
     XCTAssertEqual(expression1.tx, expression2.tx, accuracy: accuracy, file: file, line: line)

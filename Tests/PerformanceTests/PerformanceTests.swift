@@ -75,7 +75,7 @@ class PerformanceTests: XCTestCase {
         let data = [Float](repeating: 0, count: 640*480*3)
         let image = Image(width: 640, height: 480, rgb: data)
         
-        let affine = AffineTransformation<Float>(scale: (-1, 1), translation: (640, 0))
+        let affine = AffineTransformation(scale: (-1, 1), translation: (640, 0))
         
         measure {
             _ = try? image.warp(transformation: affine)

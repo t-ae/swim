@@ -1,13 +1,13 @@
 import Foundation
 
 /// Protocol for interpolators which refers neighbor 16 pixels.
-public protocol Interpolator4x4: Interpolator {
-    func weight(distance: T) -> T
+public protocol Interpolator4x4: Interpolator where T: BinaryFloatingPoint {
+    func weight(distance: Double) -> Double
 }
 
 extension Interpolator4x4 {
     @inlinable
-    public func interpolate(x: T, y: T, in image: Image<P, T>, into pixel: MutablePixelRef<P, T>) {
+    public func interpolate(x: Double, y: Double, in image: Image<P, T>, into pixel: MutablePixelRef<P, T>) {
         let xmin = floor(x) - 1
         let ymin = floor(y) - 1
         
@@ -20,15 +20,15 @@ extension Interpolator4x4 {
         }
         
         // weights
-        let xw0 = weight(distance: x - xmin)
-        let xw1 = weight(distance: x - xmin - 1)
-        let xw2 = weight(distance: xmin + 2 - x)
-        let xw3 = weight(distance: xmin + 3 - x)
+        let xw0 = T(weight(distance: x - xmin))
+        let xw1 = T(weight(distance: x - xmin - 1))
+        let xw2 = T(weight(distance: xmin + 2 - x))
+        let xw3 = T(weight(distance: xmin + 3 - x))
         
-        let yw0 = weight(distance: y - ymin)
-        let yw1 = weight(distance: y - ymin - 1)
-        let yw2 = weight(distance: ymin + 2 - y)
-        let yw3 = weight(distance: ymin + 3 - y)
+        let yw0 = T(weight(distance: y - ymin))
+        let yw1 = T(weight(distance: y - ymin - 1))
+        let yw2 = T(weight(distance: ymin + 2 - y))
+        let yw3 = T(weight(distance: ymin + 3 - y))
         
         // Loop unrolling
         let yp = Int(ymin)

@@ -21,37 +21,37 @@ class WarpVisualTests: XCTestCase {
 
 extension WarpVisualTests {
     func testWarpNN() {
-        typealias Intpl = NearestNeighborInterpolator
+        typealias Intpl = NearestNeighborInterpolator<RGB, Double>
         
         var nsImages = [String: NSImage]()
         
         do {
-            let intpl = Intpl<RGB, Double>()
+            let intpl = Intpl()
             let result = try! src.warp(transformation: affine, outputSize: (512, 512), interpolator: intpl)
             nsImages["constant0"] = doubleToNSImage(result)
         }
         do {
-            let intpl = Intpl<RGB, Double>(edgeMode: .constant(pixel: Pixel(r: 1, g: 0, b: 0)))
+            let intpl = Intpl(edgeMode: .constant(pixel: Pixel(r: 1, g: 0, b: 0)))
             let result = try! src.warp(transformation: affine, outputSize: (512, 512), interpolator: intpl)
             nsImages["constant-red"] = doubleToNSImage(result)
         }
         do {
-            let intpl = Intpl<RGB, Double>(edgeMode: .reflect)
+            let intpl = Intpl(edgeMode: .reflect)
             let result = try! src.warp(transformation: affine, outputSize: (512, 512), interpolator: intpl)
             nsImages["reflect"] = doubleToNSImage(result)
         }
         do {
-            let intpl = Intpl<RGB, Double>(edgeMode: .symmetric)
+            let intpl = Intpl(edgeMode: .symmetric)
             let result = try! src.warp(transformation: affine, outputSize: (512, 512), interpolator: intpl)
             nsImages["symmetric"] = doubleToNSImage(result)
         }
         do {
-            let intpl = Intpl<RGB, Double>(edgeMode: .edge)
+            let intpl = Intpl(edgeMode: .edge)
             let result = try! src.warp(transformation: affine, outputSize: (512, 512), interpolator: intpl)
             nsImages["edge"] = doubleToNSImage(result)
         }
         do {
-            let intpl = Intpl<RGB, Double>(edgeMode: .wrap)
+            let intpl = Intpl(edgeMode: .wrap)
             let result = try! src.warp(transformation: affine, outputSize: (512, 512), interpolator: intpl)
             nsImages["wrap"] = doubleToNSImage(result)
         }
@@ -60,32 +60,32 @@ extension WarpVisualTests {
     }
     
     func testWarpBL() {
-        typealias Intpl = BilinearInterpolator
+        typealias Intpl = BilinearInterpolator<RGB, Double>
         
         var nsImages = [String: NSImage]()
         
         do {
-            let intpl = Intpl<RGB, Double>()
+            let intpl = Intpl()
             let result = try! src.warp(transformation: affine, outputSize: (512, 512), interpolator: intpl)
             nsImages["constant0"] = doubleToNSImage(result)
         }
         do {
-            let intpl = Intpl<RGB, Double>(edgeMode: .reflect)
+            let intpl = Intpl(edgeMode: .reflect)
             let result = try! src.warp(transformation: affine, outputSize: (512, 512), interpolator: intpl)
             nsImages["reflect"] = doubleToNSImage(result)
         }
         do {
-            let intpl = Intpl<RGB, Double>(edgeMode: .symmetric)
+            let intpl = Intpl(edgeMode: .symmetric)
             let result = try! src.warp(transformation: affine, outputSize: (512, 512), interpolator: intpl)
             nsImages["symmetric"] = doubleToNSImage(result)
         }
         do {
-            let intpl = Intpl<RGB, Double>(edgeMode: .edge)
+            let intpl = Intpl(edgeMode: .edge)
             let result = try! src.warp(transformation: affine, outputSize: (512, 512), interpolator: intpl)
             nsImages["edge"] = doubleToNSImage(result)
         }
         do {
-            let intpl = Intpl<RGB, Double>(edgeMode: .wrap)
+            let intpl = Intpl(edgeMode: .wrap)
             let result = try! src.warp(transformation: affine, outputSize: (512, 512), interpolator: intpl)
             nsImages["wrap"] = doubleToNSImage(result)
         }
@@ -94,41 +94,41 @@ extension WarpVisualTests {
     }
     
     func testWarpBC() {
-        typealias Intpl = BicubicInterpolator
+        typealias Intpl = BicubicInterpolator<RGB, Double>
         
         var nsImages = [String: NSImage]()
         
         do {
-            let intpl = Intpl<RGB, Double>()
+            let intpl = Intpl()
             var result = try! src.warp(transformation: affine, outputSize: (512, 512), interpolator: intpl)
             result.clip(low: 0, high: 1)
             nsImages["constant0"] = doubleToNSImage(result)
         }
         do {
-            let intpl = Intpl<RGB, Double>(a: -0.2)
+            let intpl = Intpl(a: -0.2)
             var result = try! src.warp(transformation: affine, outputSize: (512, 512), interpolator: intpl)
             result.clip(low: 0, high: 1)
             nsImages["constant0 a-0.2"] = doubleToNSImage(result)
         }
         do {
-            let intpl = Intpl<RGB, Double>(edgeMode: .reflect)
+            let intpl = Intpl(edgeMode: .reflect)
             let result = try! src.warp(transformation: affine, outputSize: (512, 512), interpolator: intpl)
             nsImages["reflect"] = doubleToNSImage(result)
         }
         do {
-            let intpl = Intpl<RGB, Double>(edgeMode: .symmetric)
+            let intpl = Intpl(edgeMode: .symmetric)
             var result = try! src.warp(transformation: affine, outputSize: (512, 512), interpolator: intpl)
             result.clip(low: 0, high: 1)
             nsImages["symmetric"] = doubleToNSImage(result)
         }
         do {
-            let intpl = Intpl<RGB, Double>(edgeMode: .edge)
+            let intpl = Intpl(edgeMode: .edge)
             var result = try! src.warp(transformation: affine, outputSize: (512, 512), interpolator: intpl)
             result.clip(low: 0, high: 1)
             nsImages["edge"] = doubleToNSImage(result)
         }
         do {
-            let intpl = Intpl<RGB, Double>(edgeMode: .wrap)
+            let intpl = Intpl(edgeMode: .wrap)
             var result = try! src.warp(transformation: affine, outputSize: (512, 512), interpolator: intpl)
             result.clip(low: 0, high: 1)
             nsImages["wrap"] = doubleToNSImage(result)
@@ -138,35 +138,35 @@ extension WarpVisualTests {
     }
     
     func testWarpLanczos2() {
-        typealias Intpl = Lanczos2Interpolator
+        typealias Intpl = Lanczos2Interpolator<RGB, Double>
         
         var nsImages = [String: NSImage]()
         
         do {
-            let intpl = Intpl<RGB>()
+            let intpl = Intpl()
             var result = try! src.warp(transformation: affine, outputSize: (512, 512), interpolator: intpl)
             result.clip(low: 0, high: 1)
             nsImages["constant0"] = doubleToNSImage(result)
         }
         do {
-            let intpl = Intpl<RGB>(edgeMode: .reflect)
+            let intpl = Intpl(edgeMode: .reflect)
             let result = try! src.warp(transformation: affine, outputSize: (512, 512), interpolator: intpl)
             nsImages["reflect"] = doubleToNSImage(result)
         }
         do {
-            let intpl = Intpl<RGB>(edgeMode: .symmetric)
+            let intpl = Intpl(edgeMode: .symmetric)
             var result = try! src.warp(transformation: affine, outputSize: (512, 512), interpolator: intpl)
             result.clip(low: 0, high: 1)
             nsImages["symmetric"] = doubleToNSImage(result)
         }
         do {
-            let intpl = Intpl<RGB>(edgeMode: .edge)
+            let intpl = Intpl(edgeMode: .edge)
             var result = try! src.warp(transformation: affine, outputSize: (512, 512), interpolator: intpl)
             result.clip(low: 0, high: 1)
             nsImages["edge"] = doubleToNSImage(result)
         }
         do {
-            let intpl = Intpl<RGB>(edgeMode: .wrap)
+            let intpl = Intpl(edgeMode: .wrap)
             var result = try! src.warp(transformation: affine, outputSize: (512, 512), interpolator: intpl)
             result.clip(low: 0, high: 1)
             nsImages["wrap"] = doubleToNSImage(result)
@@ -176,35 +176,35 @@ extension WarpVisualTests {
     }
     
     func testWarpLanczos3() {
-        typealias Intpl = Lanczos3Interpolator
+        typealias Intpl = Lanczos3Interpolator<RGB, Double>
         
         var nsImages = [String: NSImage]()
         
         do {
-            let intpl = Intpl<RGB>()
+            let intpl = Intpl()
             var result = try! src.warp(transformation: affine, outputSize: (512, 512), interpolator: intpl)
             result.clip(low: 0, high: 1)
             nsImages["constant0"] = doubleToNSImage(result)
         }
         do {
-            let intpl = Intpl<RGB>(edgeMode: .reflect)
+            let intpl = Intpl(edgeMode: .reflect)
             let result = try! src.warp(transformation: affine, outputSize: (512, 512), interpolator: intpl)
             nsImages["reflect"] = doubleToNSImage(result)
         }
         do {
-            let intpl = Intpl<RGB>(edgeMode: .symmetric)
+            let intpl = Intpl(edgeMode: .symmetric)
             var result = try! src.warp(transformation: affine, outputSize: (512, 512), interpolator: intpl)
             result.clip(low: 0, high: 1)
             nsImages["symmetric"] = doubleToNSImage(result)
         }
         do {
-            let intpl = Intpl<RGB>(edgeMode: .edge)
+            let intpl = Intpl(edgeMode: .edge)
             var result = try! src.warp(transformation: affine, outputSize: (512, 512), interpolator: intpl)
             result.clip(low: 0, high: 1)
             nsImages["edge"] = doubleToNSImage(result)
         }
         do {
-            let intpl = Intpl<RGB>(edgeMode: .wrap)
+            let intpl = Intpl(edgeMode: .wrap)
             var result = try! src.warp(transformation: affine, outputSize: (512, 512), interpolator: intpl)
             result.clip(low: 0, high: 1)
             nsImages["wrap"] = doubleToNSImage(result)
@@ -219,7 +219,7 @@ extension WarpVisualTests {
         
         let size = Double(lena.width)
         let scale: Double = 1.5
-        var affine = AffineTransformation<Double>.identity
+        var affine = AffineTransformation.identity
         affine = .scale(x: scale, y: scale) * affine
         affine = .translation(x: -size*scale/2, y: -size*scale/2) * affine
         affine = .rotation(angle: .pi / 6) * affine
@@ -242,12 +242,12 @@ extension WarpVisualTests {
             images.append(result)
         }
         do {
-            let intpl = Lanczos2Interpolator<RGB>(edgeMode: .edge)
+            let intpl = Lanczos2Interpolator<RGB, Double>(edgeMode: .edge)
             let result = try! lena.warp(transformation: affine, outputSize: (300, 300), interpolator: intpl)
             images.append(result)
         }
         do {
-            let intpl = Lanczos3Interpolator<RGB>(edgeMode: .symmetric)
+            let intpl = Lanczos3Interpolator<RGB, Double>(edgeMode: .symmetric)
             let result = try! lena.warp(transformation: affine, outputSize: (300, 300), interpolator: intpl)
             images.append(result)
         }

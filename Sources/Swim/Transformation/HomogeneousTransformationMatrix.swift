@@ -1,26 +1,25 @@
 // MARK: - HomogeneousTransformationMatrixProtocol
 
 public protocol HomogeneousTransformationMatrixProtocol {
-    associatedtype T: BinaryFloatingPoint
-    associatedtype InvertedMatrix: HomogeneousTransformationMatrixProtocol where InvertedMatrix.T == T
+    associatedtype InvertedMatrix: HomogeneousTransformationMatrixProtocol
     @inlinable func inverted() throws -> InvertedMatrix
-    @inlinable static func *(lhs: Self, rhs: (x: T, y: T)) -> (x: T, y: T)
+    @inlinable static func *(lhs: Self, rhs: (x: Double, y: Double)) -> (x: Double, y: Double)
 }
 
 // MARK: - HomogeneousTransformationMatrix
 
-public struct HomogeneousTransformationMatrix<T: BinaryFloatingPoint>: HomogeneousTransformationMatrixProtocol {
-    public var elements: [T]
+public struct HomogeneousTransformationMatrix: HomogeneousTransformationMatrixProtocol {
+    public var elements: [Double]
     
-    public init(elements: [T]) {
+    public init(elements: [Double]) {
         precondition(elements.count == 9, "HomogeneousTransformationMatrix must have 9 elements.")
         self.elements = elements
     }
     
     @inlinable
-    public var determinant: T {
+    public var determinant: Double {
         let e = elements
-        var det: T = 0
+        var det: Double = 0
         det += e[0]*e[4]*e[8]
         det += e[1]*e[5]*e[6]
         det += e[2]*e[3]*e[7]
@@ -39,15 +38,15 @@ public struct HomogeneousTransformationMatrix<T: BinaryFloatingPoint>: Homogeneo
             throw MatrixInversionError.singularMatrix
         }
         
-        let e00: T = e[4]*e[8] - e[5]*e[7]
-        let e01: T = e[2]*e[7] - e[1]*e[8]
-        let e02: T = e[1]*e[5] - e[2]*e[4]
-        let e10: T = e[5]*e[6] - e[3]*e[8]
-        let e11: T = e[0]*e[8] - e[2]*e[6]
-        let e12: T = e[2]*e[3] - e[0]*e[5]
-        let e20: T = e[3]*e[7] - e[4]*e[6]
-        let e21: T = e[1]*e[6] - e[0]*e[7]
-        let e22: T = e[0]*e[4] - e[1]*e[3]
+        let e00: Double = e[4]*e[8] - e[5]*e[7]
+        let e01: Double = e[2]*e[7] - e[1]*e[8]
+        let e02: Double = e[1]*e[5] - e[2]*e[4]
+        let e10: Double = e[5]*e[6] - e[3]*e[8]
+        let e11: Double = e[0]*e[8] - e[2]*e[6]
+        let e12: Double = e[2]*e[3] - e[0]*e[5]
+        let e20: Double = e[3]*e[7] - e[4]*e[6]
+        let e21: Double = e[1]*e[6] - e[0]*e[7]
+        let e22: Double = e[0]*e[4] - e[1]*e[3]
         
         return HomogeneousTransformationMatrix(elements: [e00 / det, e01 / det, e02 / det,
                                                           e10 / det, e11 / det, e12 / det,
@@ -56,19 +55,19 @@ public struct HomogeneousTransformationMatrix<T: BinaryFloatingPoint>: Homogeneo
 }
 
 extension HomogeneousTransformationMatrix {
-    public var identity: HomogeneousTransformationMatrix<T> {
+    public var identity: HomogeneousTransformationMatrix {
         return .init(elements: [1, 0, 0, 0, 1, 0, 0, 0, 1])
     }
 }
 
-public func *<T: BinaryFloatingPoint>(lhs: HomogeneousTransformationMatrix<T>,
-                                      rhs: HomogeneousTransformationMatrix<T>) -> HomogeneousTransformationMatrix<T> {
+public func *(lhs: HomogeneousTransformationMatrix,
+              rhs: HomogeneousTransformationMatrix) -> HomogeneousTransformationMatrix {
     let elements = matmul(lhs: lhs.elements, rhs: rhs.elements, m: 3, n: 3, p: 3)
     return HomogeneousTransformationMatrix(elements: elements)
 }
 
-public func *<T: BinaryFloatingPoint>(lhs: HomogeneousTransformationMatrix<T>,
-                                      rhs: (x: T, y: T)) -> (x: T, y: T) {
+public func *(lhs: HomogeneousTransformationMatrix,
+              rhs: (x: Double, y: Double)) -> (x: Double, y: Double) {
     let e = lhs.elements
     let x = e[0]*rhs.0 + e[1]*rhs.1 + e[2]
     let y = e[3]*rhs.0 + e[4]*rhs.1 + e[5]

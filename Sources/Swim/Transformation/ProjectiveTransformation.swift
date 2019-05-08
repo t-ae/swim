@@ -1,13 +1,13 @@
 import Foundation
 
-public struct ProjectiveTransformation<T: BinaryFloatingPoint>: HomogeneousTransformationMatrixProtocol {
+public struct ProjectiveTransformation: HomogeneousTransformationMatrixProtocol {
     @usableFromInline
-    let matrix: HomogeneousTransformationMatrix<T>
+    let matrix: HomogeneousTransformationMatrix
     
-    public init(from: ((T, T), (T, T), (T, T), (T, T)),
-                to: ((T, T), (T, T), (T, T), (T, T))) throws {
+    public init(from: ((Double, Double), (Double, Double), (Double, Double), (Double, Double)),
+                to: ((Double, Double), (Double, Double), (Double, Double), (Double, Double))) throws {
         // a: (1, 0, 0), (0, 1, 0), (0, 0, 1), (1, 1, 1) to `from`
-        let a: HomogeneousTransformationMatrix<T>
+        let a: HomogeneousTransformationMatrix
         do {
             let mat = HomogeneousTransformationMatrix(elements: [from.0.0, from.1.0, from.2.0,
                                                                   from.0.1, from.1.1, from.2.1,
@@ -23,7 +23,7 @@ public struct ProjectiveTransformation<T: BinaryFloatingPoint>: HomogeneousTrans
                 coef0, coef1, coef2])
         }
         // b: (1, 0, 0), (0, 1, 0), (0, 0, 1), (1, 1, 1) to `to`
-        let b: HomogeneousTransformationMatrix<T>
+        let b: HomogeneousTransformationMatrix
         do {
             let mat = HomogeneousTransformationMatrix(elements: [to.0.0, to.1.0, to.2.0,
                                                                  to.0.1, to.1.1, to.2.1,
@@ -43,12 +43,12 @@ public struct ProjectiveTransformation<T: BinaryFloatingPoint>: HomogeneousTrans
         self.matrix = try b * a.inverted()
     }
     
-    public func inverted() throws -> HomogeneousTransformationMatrix<T> {
+    public func inverted() throws -> HomogeneousTransformationMatrix {
         return try matrix.inverted()
     }
 }
 
 @inlinable
-public func *<T>(lhs: ProjectiveTransformation<T>, rhs: (x: T, y: T)) -> (x: T, y: T) {
+public func *(lhs: ProjectiveTransformation, rhs: (x: Double, y: Double)) -> (x: Double, y: Double) {
     return lhs.matrix * rhs
 }

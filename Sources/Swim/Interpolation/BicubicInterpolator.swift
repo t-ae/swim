@@ -1,16 +1,16 @@
 import Foundation
 
 public struct BicubicInterpolator<P: PixelType, T: BinaryFloatingPoint&DataType>: Interpolator4x4 {
-    public var a: T
+    public var a: Double
     public var edgeMode: EdgeMode<P, T>
     
-    public init(a: T = -1, edgeMode: EdgeMode<P, T> = .zero) {
+    public init(a: Double = -1, edgeMode: EdgeMode<P, T> = .zero) {
         self.a = a
         self.edgeMode = edgeMode
     }
     
     @inlinable
-    public func weight(distance: T) -> T {
+    public func weight(distance: Double) -> Double {
         guard distance < 2 else {
             return 0
         }

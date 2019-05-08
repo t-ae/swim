@@ -10,7 +10,7 @@ extension Image where T: BinaryFloatingPoint {
     /// - Parameters:
     ///   - transformation: Homogeneous transformation matrix.
     @inlinable
-    public func warp<M: HomogeneousTransformationMatrixProtocol>(transformation: M) throws -> Image<P, T> where M.T == T {
+    public func warp<M: HomogeneousTransformationMatrixProtocol>(transformation: M) throws -> Image<P, T> {
         
         return try warp(transformation: transformation,
                         outputSize: (width, height))
@@ -25,7 +25,7 @@ extension Image where T: BinaryFloatingPoint {
     @inlinable
     public func warp<M: HomogeneousTransformationMatrixProtocol, Intpl: Interpolator>(
         transformation: M,
-        interpolator: Intpl) throws -> Image<P, T> where M.T == T, Intpl.P == P, Intpl.T == T {
+        interpolator: Intpl) throws -> Image<P, T> where Intpl.P == P, Intpl.T == T {
         return try warp(transformation: transformation,
                         outputSize: (width, height),
                         interpolator: interpolator)
@@ -40,7 +40,7 @@ extension Image where T: BinaryFloatingPoint {
     @inlinable
     public func warp<M: HomogeneousTransformationMatrixProtocol>(
         transformation: M,
-        outputSize: (width: Int, height: Int)) throws -> Image<P, T> where M.T == T {
+        outputSize: (width: Int, height: Int)) throws -> Image<P, T> {
         return try warp(transformation: transformation,
                         outputSize: outputSize,
                         interpolator: BilinearInterpolator<P, T>())
@@ -56,7 +56,7 @@ extension Image where T: BinaryFloatingPoint {
     public func warp<M: HomogeneousTransformationMatrixProtocol, Intpl: Interpolator>(
         transformation: M,
         outputSize: (width: Int, height: Int),
-        interpolator: Intpl) throws -> Image<P, T> where M.T == T, Intpl.P == P, Intpl.T == T {
+        interpolator: Intpl) throws -> Image<P, T> where Intpl.P == P, Intpl.T == T {
         
         var dest = Image<P, T>(width: outputSize.width,
                                height: outputSize.height,
@@ -65,7 +65,7 @@ extension Image where T: BinaryFloatingPoint {
         let inv = try transformation.inverted()
         
         dest.pixelwiseConvert { ref in
-            let (x0, y0) = inv * (T(ref.x), T(ref.y))
+            let (x0, y0) = inv * (Double(ref.x), Double(ref.y))
             interpolator.interpolate(x: x0, y: y0, in: self, into: ref)
         }
         

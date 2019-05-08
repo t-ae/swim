@@ -1,15 +1,15 @@
 import Foundation
 
-public struct AffineTransformation<T: BinaryFloatingPoint> {
-    public var a: T
-    public var b: T
-    public var tx: T
-    public var c: T
-    public var d: T
-    public var ty: T
+public struct AffineTransformation {
+    public var a: Double
+    public var b: Double
+    public var tx: Double
+    public var c: Double
+    public var d: Double
+    public var ty: Double
     
     @inlinable
-    public init(a: T, b: T, tx: T, c: T, d: T, ty: T) {
+    public init(a: Double, b: Double, tx: Double, c: Double, d: Double, ty: Double) {
         self.a = a
         self.b = b
         self.tx = tx
@@ -21,27 +21,25 @@ public struct AffineTransformation<T: BinaryFloatingPoint> {
 
 extension AffineTransformation {
     @inlinable
-    public static var identity: AffineTransformation<T> {
+    public static var identity: AffineTransformation {
         return AffineTransformation(a: 1, b: 0, tx: 0,
                                     c: 0, d: 1, ty: 0)
     }
     
     @inlinable
-    public static func translation(x: T, y: T) -> AffineTransformation<T> {
+    public static func translation(x: Double, y: Double) -> AffineTransformation {
         return AffineTransformation(a: 1, b: 0, tx: x,
                                     c: 0, d: 1, ty: y)
     }
     
     @inlinable
-    public static func scale(x: T, y: T) -> AffineTransformation<T> {
+    public static func scale(x: Double, y: Double) -> AffineTransformation {
         return AffineTransformation(a: x, b: 0, tx: 0,
                                     c: 0, d: y, ty: 0)
     }
-}
-
-extension AffineTransformation where T == Float {
+    
     @inlinable
-    public static func rotation(angle: T) -> AffineTransformation<T> {
+    public static func rotation(angle: Double) -> AffineTransformation {
         let sinx = sin(angle)
         let cosx = cos(angle)
         return AffineTransformation(a: cosx, b: -sinx, tx: 0,
@@ -49,28 +47,9 @@ extension AffineTransformation where T == Float {
     }
     
     @inlinable
-    public init(scale: (x: T, y: T) = (0, 0),
-                rotation: T = 0,
-                translation: (x: T, y: T) = (0, 0)) {
-        self = AffineTransformation.translation(x: translation.x, y: translation.y)
-            * AffineTransformation.rotation(angle: rotation)
-            * AffineTransformation.scale(x: scale.x, y: scale.y)
-    }
-}
-
-extension AffineTransformation where T == Double {
-    @inlinable
-    public static func rotation(angle: T) -> AffineTransformation<T> {
-        let sinx = sin(angle)
-        let cosx = cos(angle)
-        return AffineTransformation(a: cosx, b: -sinx, tx: 0,
-                                    c: sinx, d: cosx, ty: 0)
-    }
-    
-    @inlinable
-    public init(scale: (x: T, y: T) = (1, 1),
-                rotation: T = 0,
-                translation: (x: T, y: T) = (0, 0)) {
+    public init(scale: (x: Double, y: Double) = (1, 1),
+                rotation: Double = 0,
+                translation: (x: Double, y: Double) = (0, 0)) {
         self = AffineTransformation.translation(x: translation.x, y: translation.y)
             * AffineTransformation.rotation(angle: rotation)
             * AffineTransformation.scale(x: scale.x, y: scale.y)
@@ -79,7 +58,7 @@ extension AffineTransformation where T == Double {
 
 extension AffineTransformation: HomogeneousTransformationMatrixProtocol {
     @inlinable
-    public func inverted() throws -> AffineTransformation<T> {
+    public func inverted() throws -> AffineTransformation {
         var inv = self
         let det = a*d - b*c
         
@@ -105,8 +84,8 @@ extension AffineTransformation: HomogeneousTransformationMatrixProtocol {
 }
 
 @inlinable
-public func *<T>(lhs: AffineTransformation<T>, rhs: AffineTransformation<T>) -> AffineTransformation<T> {
-    var tr = AffineTransformation<T>.identity
+public func *(lhs: AffineTransformation, rhs: AffineTransformation) -> AffineTransformation {
+    var tr = AffineTransformation.identity
     tr.a = lhs.a * rhs.a
     tr.a += lhs.b * rhs.c
     tr.b = lhs.a * rhs.b
@@ -125,18 +104,18 @@ public func *<T>(lhs: AffineTransformation<T>, rhs: AffineTransformation<T>) -> 
 }
 
 @inlinable
-public func *<T>(lhs: AffineTransformation<T>, rhs: (x: T, y: T)) -> (x: T, y: T) {
-    var x: T = lhs.a * rhs.x
+public func *(lhs: AffineTransformation, rhs: (x: Double, y: Double)) -> (x: Double, y: Double) {
+    var x: Double = lhs.a * rhs.x
     x += lhs.b * rhs.y
     x += lhs.tx
-    var y: T = lhs.c * rhs.x
+    var y: Double = lhs.c * rhs.x
     y += lhs.d * rhs.y
     y += lhs.ty
     return (x, y)
 }
 
 extension HomogeneousTransformationMatrix {
-    public init(from affineTransformation: AffineTransformation<T>) {
+    public init(from affineTransformation: AffineTransformation) {
         self.init(elements: [affineTransformation.a, affineTransformation.b, affineTransformation.tx,
                              affineTransformation.c, affineTransformation.d, affineTransformation.ty,
                              0, 0, 1])
