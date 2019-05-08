@@ -59,13 +59,13 @@ extension AffineTransformation {
 extension AffineTransformation: HomogeneousTransformationMatrixProtocol {
     @inlinable
     public func inverted() throws -> AffineTransformation {
-        var inv = self
         let det = a*d - b*c
         
         guard det != 0 else {
             throw MatrixInversionError.singularMatrix
         }
         
+        var inv = self
         inv.a = d / det
         inv.b /= -det
         inv.c /= -det
@@ -85,22 +85,13 @@ extension AffineTransformation: HomogeneousTransformationMatrixProtocol {
 
 @inlinable
 public func *(lhs: AffineTransformation, rhs: AffineTransformation) -> AffineTransformation {
-    var tr = AffineTransformation.identity
-    tr.a = lhs.a * rhs.a
-    tr.a += lhs.b * rhs.c
-    tr.b = lhs.a * rhs.b
-    tr.b += lhs.b * rhs.d
-    tr.c = lhs.c * rhs.a
-    tr.c += lhs.d * rhs.c
-    tr.d = lhs.c * rhs.b
-    tr.d += lhs.d * rhs.d
-    tr.tx = lhs.a * rhs.tx
-    tr.tx += lhs.b * rhs.ty
-    tr.tx += lhs.tx
-    tr.ty = lhs.c * rhs.tx
-    tr.ty += lhs.d * rhs.ty
-    tr.ty += lhs.ty
-    return tr
+    let a = lhs.a * rhs.a + lhs.b * rhs.c
+    let b = lhs.a * rhs.b + lhs.b * rhs.d
+    let tx = lhs.a * rhs.tx + lhs.b * rhs.ty + lhs.tx
+    let c = lhs.c * rhs.a + lhs.d * rhs.c
+    let d = lhs.c * rhs.b + lhs.d * rhs.d
+    let ty = lhs.c * rhs.tx + lhs.d * rhs.ty + lhs.ty
+    return .init(a: a, b: b, tx: tx, c: c, d: d, ty: ty)
 }
 
 @inlinable
