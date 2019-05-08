@@ -163,9 +163,10 @@ extension OtherVisualTests {
         }
         
         let size = 256
-        var image = perlin(width: size, height: size, fieldSize: 4)
-        image += perlin(width: size, height: size, fieldSize: 8)
-        image += perlin(width: size, height: size, fieldSize: 16)
+        var image = perlin(width: size, height: size, fieldSize: 2)
+        image += perlin(width: size, height: size, fieldSize: 4) / 2
+        image += perlin(width: size, height: size, fieldSize: 8) / 4
+        image += perlin(width: size, height: size, fieldSize: 16) / 8
         
         // normalize
         image -= image.withUnsafeMutableBufferPointer { $0.min()! }
