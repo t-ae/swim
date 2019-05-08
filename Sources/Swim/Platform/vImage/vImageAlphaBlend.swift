@@ -1,4 +1,4 @@
-#if canImport(Accelerate) && !DISABLE_ACCELERATE
+#if canImport(Accelerate) 
 
 import Accelerate
 

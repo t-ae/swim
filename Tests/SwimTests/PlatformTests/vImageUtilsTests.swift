@@ -4,7 +4,7 @@ import Swim
 class vImageUtilsTests: XCTestCase {
     
 }
-#if canImport(Accelerate) && !DISABLE_ACCELERATE
+#if canImport(Accelerate)
 
 import Accelerate
 
