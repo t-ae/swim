@@ -1,7 +1,9 @@
 import Foundation
 
-public enum HistogramEqualizer {
-    public static func equalize(image: Image<Intensity, UInt8>) -> Image<Intensity, UInt8> {
+public enum HistogramEqualizer<T: BinaryInteger&DataType> {
+    /// Create histogram equalized image.
+    /// This function assumes pixel value range is [0, 255].
+    public static func equalize(image: Image<Intensity, T>) -> Image<Intensity, T> {
         var bins = [Int](repeating: 0, count: Int(UInt8.max))
         for px in image.data {
             bins[Int(px)] += 1
@@ -17,7 +19,7 @@ public enum HistogramEqualizer {
         var newImage = image
         
         newImage.channelwiseConvert { px in
-            UInt8(Int(UInt8.max) * cumsum[Int(px)] / scale)
+            T(Int(UInt8.max) * cumsum[Int(px)] / scale)
         }
         
         return newImage
