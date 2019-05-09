@@ -56,6 +56,8 @@
 		A732C2912283B13500C96067 /* HistogramEqualizerVisualTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A732C28F2283B13100C96067 /* HistogramEqualizerVisualTests.swift */; };
 		A732C2942283B68C00C96067 /* LikeInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A732C2922283B68A00C96067 /* LikeInitializer.swift */; };
 		A732C2972283C7EB00C96067 /* LikeInitializerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A732C2952283C7E800C96067 /* LikeInitializerTests.swift */; };
+		A732C29A2283D33900C96067 /* EdgeMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = A732C2982283D33600C96067 /* EdgeMode.swift */; };
+		A732C29D2283D37600C96067 /* PaddingVisualTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A732C29B2283D36D00C96067 /* PaddingVisualTests.swift */; };
 		OBJ_167 /* image_io.c in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_9 /* image_io.c */; };
 		OBJ_169 /* stb_image_write.h in Headers */ = {isa = PBXBuildFile; fileRef = OBJ_11 /* stb_image_write.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		OBJ_170 /* stb_image.h in Headers */ = {isa = PBXBuildFile; fileRef = OBJ_12 /* stb_image.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -277,6 +279,8 @@
 		A732C28F2283B13100C96067 /* HistogramEqualizerVisualTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistogramEqualizerVisualTests.swift; sourceTree = "<group>"; };
 		A732C2922283B68A00C96067 /* LikeInitializer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeInitializer.swift; sourceTree = "<group>"; };
 		A732C2952283C7E800C96067 /* LikeInitializerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeInitializerTests.swift; sourceTree = "<group>"; };
+		A732C2982283D33600C96067 /* EdgeMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EdgeMode.swift; sourceTree = "<group>"; };
+		A732C29B2283D36D00C96067 /* PaddingVisualTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaddingVisualTests.swift; sourceTree = "<group>"; };
 		OBJ_100 /* Im2colTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Im2colTests.swift; sourceTree = "<group>"; };
 		OBJ_101 /* IntegralImageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntegralImageTests.swift; sourceTree = "<group>"; };
 		OBJ_103 /* ImageArithmeticTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageArithmeticTests.swift; sourceTree = "<group>"; };
@@ -628,6 +632,7 @@
 				OBJ_152 /* WarpVisualTests.swift */,
 				A732B39F227183B500B2256E /* SubimageVisualTests.swift */,
 				A732C28F2283B13100C96067 /* HistogramEqualizerVisualTests.swift */,
+				A732C29B2283D36D00C96067 /* PaddingVisualTests.swift */,
 			);
 			name = VisualTests;
 			path = Tests/VisualTests;
@@ -758,6 +763,7 @@
 				OBJ_60 /* Rounding.swift */,
 				A732B3912270232E00B2256E /* Padding.swift */,
 				A732B39B22716AEF00B2256E /* Abs.swift */,
+				A732C2982283D33600C96067 /* EdgeMode.swift */,
 			);
 			path = Manipulation;
 			sourceTree = "<group>";
@@ -1107,6 +1113,7 @@
 				OBJ_196 /* ImageBinaryOperators.swift in Sources */,
 				A732AC10226E96B200B2256E /* PixelRef.swift in Sources */,
 				OBJ_197 /* ImageUnaryOperators.swift in Sources */,
+				A732C29A2283D33900C96067 /* EdgeMode.swift in Sources */,
 				OBJ_198 /* AdditiveBlend.swift in Sources */,
 				OBJ_199 /* AlphaBlend.swift in Sources */,
 				OBJ_200 /* Blender.swift in Sources */,
@@ -1234,6 +1241,7 @@
 			buildActionMask = 0;
 			files = (
 				A732C2912283B13500C96067 /* HistogramEqualizerVisualTests.swift in Sources */,
+				A732C29D2283D37600C96067 /* PaddingVisualTests.swift in Sources */,
 				A732B3A1227183F100B2256E /* SubimageVisualTests.swift in Sources */,
 				OBJ_318 /* BayerVisualTests.swift in Sources */,
 				A732B3BC2272E4EA00B2256E /* OtherVisualTests.swift in Sources */,
