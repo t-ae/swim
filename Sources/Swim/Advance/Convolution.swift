@@ -65,14 +65,29 @@ extension Filter where T: FloatingPoint {
 
 // MARK: - convoluted
 extension Image where T: Numeric {
+    /// Convolve image with specified `filter`.
+    /// `filter` will be applied to each channel respectively.
     @inlinable
     public func convoluted(_ filter: Image<Intensity, T>) -> Image<P, T> {
-        var newImage = Image<P, T>(width: width, height: height)
+        var newImage = Image<P, T>(width: width, height: height, value: 0)
         
-        for c in 0..<P.channels {
-            let (m, n, matrix) = self[channel: c].im2col(patchWidth: filter.width, patchHeight: filter.height)
-            let result = matmul(lhs: filter.data, rhs: matrix, m: 1, n: n, p: m)
-            newImage[channel: c] = Image<Intensity, T>(width: width, height: height, data: result)
+        let padLeft = (filter.width-1)/2
+        let padTop = (filter.height-1)/2
+        
+        for py in 0..<filter.height {
+            for y in 0..<height {
+                let yy = clamp(y+py-padTop, min: 0, max: height-1)
+                
+                for px in 0..<filter.width {
+                    for x in 0..<width {
+                        let xx = clamp(x+px-padLeft, min: 0, max: width-1)
+                        
+                        for c in 0..<P.channels {
+                            newImage[x, y, c] += self[xx, yy, c] * filter[px, py, 0]
+                        }
+                    }
+                }
+            }
         }
         
         return newImage
