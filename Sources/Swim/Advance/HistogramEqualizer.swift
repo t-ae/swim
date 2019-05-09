@@ -4,7 +4,7 @@ public enum HistogramEqualizer<T: BinaryInteger&DataType> {
     /// Create histogram equalized image.
     /// This function assumes pixel value range is [0, 255].
     public static func equalize(image: Image<Intensity, T>) -> Image<Intensity, T> {
-        var bins = [Int](repeating: 0, count: Int(UInt8.max))
+        var bins = [Int](repeating: 0, count: Int(UInt8.max)+1)
         for px in image.data {
             bins[Int(px)] += 1
         }
