@@ -237,8 +237,8 @@ extension OtherVisualTests {
         images.append(gradV)
         images.append(gradH)
         
-        var grad = Image.zerosLike(image: lena)
-        var dir = Image.zerosLike(image: lena) // 0, 1, 2, 3
+        var grad = Image.zeros(like: lena)
+        var dir = Image.zeros(like: lena) // 0, 1, 2, 3
         
         for y in 0..<lena.width {
             for x in 0..<lena.height {
@@ -300,7 +300,7 @@ extension OtherVisualTests {
         images.append(low)
         
         // Edge Tracking
-        var edge = Image.zerosLike(image: lena)
+        var edge = Image.zeros(like: lena)
         func track(x: Int, y: Int) {
             guard 0 <= x && x < edge.width && 0 <= y && y < edge.height else {
                 return
@@ -328,7 +328,7 @@ extension OtherVisualTests {
         images.append(edge)
         
         // result
-        let ns = doubleToNSImage(Image.concatH(images))
+        let ns = doubleToNSImage(Image.concat([Array(images[..<5]), Array(images[5...])]))
         
         XCTAssertTrue(ns.isValid, "break")
     }
