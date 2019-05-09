@@ -29,7 +29,7 @@ extension Image where P == Intensity {
 extension Image where P == IntensityAlpha {
     @inlinable
     public init(image: Image<Intensity, T>, alpha: T) {
-        self = Image<P, T>(width: image.width, height: image.height, value: alpha)
+        self = Image<P, T>.full(value: alpha, like: image)
         
         strideCopy(src: image.data, srcOffset: 0, srcStride: 1,
                    dst: &data, dstOffset: 0, dstStride: 2, count: pixelCount)
@@ -40,7 +40,7 @@ extension Image where P == IntensityAlpha {
 extension Image where P == RGB, T: BinaryInteger {
     @inlinable
     public func toBrightness() -> Image<Intensity, T> {
-        var newImage = Image<Intensity, T>(width: width, height: height, value: 0)
+        var newImage = Image<Intensity, T>.zeros(like: self)
         self.data.withUnsafeBufferPointer {
             var src = $0.baseAddress!
             newImage.data.withUnsafeMutableBufferPointer {
@@ -62,7 +62,7 @@ extension Image where P == RGB, T: BinaryInteger {
     
     @inlinable
     public func toLuminance() -> Image<Intensity, T> {
-        var newImage = Image<Intensity, T>(width: width, height: height, value: 0)
+        var newImage = Image<Intensity, T>.zeros(like: self)
         self.data.withUnsafeBufferPointer {
             var src = $0.baseAddress!
             newImage.data.withUnsafeMutableBufferPointer {
@@ -86,7 +86,7 @@ extension Image where P == RGB, T: BinaryInteger {
 extension Image where P == RGB, T: FloatingPoint {
     @inlinable
     public func toBrightness() -> Image<Intensity, T> {
-        var newImage = Image<Intensity, T>(width: width, height: height, value: 0)
+        var newImage = Image<Intensity, T>.zeros(like: self)
         self.data.withUnsafeBufferPointer {
             var src = $0.baseAddress!
             newImage.data.withUnsafeMutableBufferPointer {
@@ -110,7 +110,7 @@ extension Image where P == RGB, T: FloatingPoint {
 extension Image where P == RGB, T: BinaryFloatingPoint {
     @inlinable
     public func toLuminance() -> Image<Intensity, T> {
-        var newImage = Image<Intensity, T>(width: width, height: height, value: 0)
+        var newImage = Image<Intensity, T>.zeros(like: self)
         self.data.withUnsafeBufferPointer {
             var src = $0.baseAddress!
             newImage.data.withUnsafeMutableBufferPointer {
@@ -134,7 +134,7 @@ extension Image where P == RGB, T: BinaryFloatingPoint {
 extension Image where P: RGBWithAlpha {
     @inlinable
     public init(image: Image<RGB, T>, alpha: T) {
-        self = Image<P, T>(width: image.width, height: image.height, value: alpha)
+        self = Image<P, T>.full(value: alpha, like: image)
         image.data.withUnsafeBufferPointer {
             var src = $0.baseAddress!
             data.withUnsafeMutableBufferPointer {
