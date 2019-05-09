@@ -181,8 +181,9 @@ extension OtherVisualTests {
     
     public func testLifeGame() {
         func next(_ image: Image<Intensity, UInt8>) -> Image<Intensity, UInt8> {
-            let (m, n, matrix) = image.im2col(patchWidth: 3, patchHeight: 3, padding: Im2ColPadding.zero)
-            // m == 9
+            let padded = image.withPadding(1, edgeMode: .zero)
+            let (m, n, matrix) = padded.im2col(patchWidth: 3, patchHeight: 3)
+            
             var sums = [UInt8](repeating: 0, count: n)
             
             for i in 0..<m {

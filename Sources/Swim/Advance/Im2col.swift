@@ -1,99 +1,38 @@
-import Foundation
-
-public enum Im2ColPadding<T: DataType> {
-    case edge
-    case constant(T)
-}
-
-extension Im2ColPadding where T: ExpressibleByIntegerLiteral {
-    public static var zero: Im2ColPadding {
-        return constant(0)
-    }
-    
-    public static var one: Im2ColPadding {
-        return constant(1)
-    }
-}
-
 extension Image where P == Intensity {
+    /// im2col
+    ///
+    /// - Returns:
+    ///   - m: patchWidth*patchHeight.
+    ///   - n: number of patches.
+    ///   - matrix: m x n matrix.
+    ///
+    /// - Note: This method doesn't support padding.
+    /// If you need padding, use `withPadding` beforehand.
     @inlinable
     public func im2col(patchWidth: Int,
-                       patchHeight: Int,
-                       padding: Im2ColPadding<T> = .edge) -> (m: Int, n: Int, matrix: [T]) {
+                       patchHeight: Int) -> (m: Int, n: Int, matrix: [T]) {
+        
+        let numPatchX = width-patchWidth+1
+        let numPatchY = height-patchHeight+1
         
         let m = patchWidth*patchHeight
-        let n = width*height
+        let n = numPatchX * numPatchY
         
-        var ret: [T]
-        switch padding {
-        case .constant(let v):
-            ret = [T](repeating: v, count: m*n)
-        default:
-            ret = [T](repeating: T.swimDefaultValue, count: m*n)
-        }
+        var matrix = [T](repeating: T.swimDefaultValue, count: m*n)
         
-        let padTop = (patchHeight-1) / 2
-        let padLeft = (patchWidth-1) / 2
-        
-        data.withUnsafeBufferPointer {
-            let src = $0.baseAddress!
-            ret.withUnsafeMutableBufferPointer {
-                var dst = $0.baseAddress!
+        for patchY in 0..<numPatchY {
+            for patchX in 0..<numPatchX {
+                let patchIndex = patchY*numPatchX + patchX
                 
-                for dy in -padTop..<patchHeight-padTop {
-                    for dx in -padLeft..<patchWidth-padLeft {
-                        for y in 0..<height {
-                            var yy = y + dy
-                            if !(0..<height ~= yy) {
-                                switch padding {
-                                case .edge:
-                                    yy = min(max(yy, 0), height-1)
-                                case .constant:
-                                    dst += width
-                                    continue
-                                }
-                            }
-
-                            // point leftest pixel
-                            let x = min(max(dx, 0), width-1)
-                            var sp = src + (yy * width + x)
-                            
-                            // left padding
-                            switch padding {
-                            case .edge:
-                                let padLeftValue = sp.pointee
-                                for _ in 0..<max(-dx, 0) {
-                                    dst.pointee = padLeftValue
-                                    dst += 1
-                                }
-                            case .constant:
-                                dst += max(-dx, 0)
-                            }
-                            
-                            // copy
-                            let count = width - Swift.abs(dx)
-                            memcpy(dst, sp, count*MemoryLayout<T>.size)
-                            dst += count
-                            
-                            // right padding
-                            switch padding {
-                            case .edge:
-                                sp += count - 1 // point rightest pixel
-                                let padRightValue = sp.pointee
-                                for _ in 0..<max(dx, 0) {
-                                    dst.pointee = padRightValue
-                                    dst += 1
-                                }
-                            case .constant:
-                                dst += max(dx, 0)
-                            }
-                            
-                        }
+                for y in 0..<patchHeight {
+                    for x in 0..<patchWidth {
+                        let valueIndex = y * patchWidth + x
+                        matrix[valueIndex*n + patchIndex] = self[x+patchX, y+patchY, 0]
                     }
                 }
             }
         }
         
-        return (m, n, ret)
+        return (m, n, matrix)
     }
 }
