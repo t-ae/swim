@@ -8,25 +8,3 @@ extension Array where Element: Comparable {
         return s[(count-1)/2]
     }
 }
-
-extension Array {
-    @inlinable
-    func all(_ condition: (Element)->Bool) -> Bool {
-        for e in self {
-            guard condition(e) else {
-                return false
-            }
-        }
-        return true
-    }
-    
-    @inlinable
-    func some(_ condition: (Element)->Bool) -> Bool {
-        for e in self {
-            guard !condition(e) else {
-                return true
-            }
-        }
-        return false
-    }
-}
