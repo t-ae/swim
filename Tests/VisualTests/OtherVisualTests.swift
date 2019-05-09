@@ -220,6 +220,118 @@ extension OtherVisualTests {
         
         XCTAssertFalse(steps.isEmpty, "Break and check nsImage in debugger.")
     }
+    
+    func testCannyEdgeDetection() {
+        let path = testResoruceRoot().appendingPathComponent("lena_512_gray.png")
+        let lena = try! Image<Intensity, Double>(contentsOf: path)
+        
+        var images: [Image<Intensity, Double>] = [lena]
+        
+        // Gaussian Blur
+        let smooth = lena.convoluted(Filter.gaussian5x5)
+        images.append(smooth)
+        
+        // Determine the Intensity Gradients
+        let gradV = smooth.convoluted(Filter.sobel3x3V)
+        let gradH = smooth.convoluted(Filter.sobel3x3H)
+        images.append(gradV)
+        images.append(gradH)
+        
+        var grad = Image.zerosLike(image: lena)
+        var dir = Image.zerosLike(image: lena) // 0, 1, 2, 3
+        
+        for y in 0..<lena.width {
+            for x in 0..<lena.height {
+                grad[x, y, 0] = hypot(gradV[x, y, 0], gradH[x, y, 0])
+                let angle = atan2(gradH[x, y, 0], gradV[x, y, 0]) // -pi ... pi
+                
+                if -3*Double.pi/4 <= angle && angle < -Double.pi/4 {
+                    dir[x, y, 0] = 1
+                } else if -Double.pi/4 <= angle && angle < Double.pi/4 {
+                    dir[x, y, 0] = 2
+                } else if Double.pi/4 <= angle && angle < 3*Double.pi/4{
+                    dir[x, y, 0] = 3
+                } else {
+                    dir[x, y, 0] = 0
+                }
+            }
+        }
+        images.append(grad)
+        images.append(dir / 3)
+        
+        // Non Maximum Suppression
+        var sharpen = grad
+        for y in 1..<lena.width-1 {
+            for x in 1..<lena.height-1 {
+                switch dir[x, y, 0] {
+                case 0:
+                    if grad[x, y, 0] < grad[x-1, y, 0] || grad[x, y, 0] < grad[x+1, y, 0] {
+                        sharpen[x, y, 0] = 0
+                    }
+                case 1:
+                    if grad[x, y, 0] < grad[x-1, y, 0] || grad[x, y, 0] < grad[x+1, y, 0] {
+                        sharpen[x, y, 0] = 0
+                    }
+                case 2:
+                    if grad[x, y, 0] < grad[x-1, y, 0] || grad[x, y, 0] < grad[x+1, y, 0] {
+                        sharpen[x, y, 0] = 0
+                    }
+                case 3:
+                    if grad[x, y, 0] < grad[x-1, y, 0] || grad[x, y, 0] < grad[x+1, y, 0] {
+                        sharpen[x, y, 0] = 0
+                    }
+                default:
+                    fatalError()
+                }
+            }
+        }
+        sharpen[row: 0].fill(0)
+        sharpen[col: 0].fill(0)
+        sharpen[row: sharpen.height-1].fill(0)
+        sharpen[col: sharpen.width-1].fill(0)
+        images.append(sharpen)
+        
+        // Double Thresholding
+        let ht = 0.3
+        let lt = 0.2
+        let high: Image<Intensity, Double> = sharpen.channelwiseConverted { $0 < ht ? 0 : 1 }
+        let low: Image<Intensity, Double> = sharpen.channelwiseConverted { $0 < lt ? 0 : 1 }
+        images.append(high)
+        images.append(low)
+        
+        // Edge Tracking
+        var edge = Image.zerosLike(image: lena)
+        func track(x: Int, y: Int) {
+            guard 0 <= x && x < edge.width && 0 <= y && y < edge.height else {
+                return
+            }
+            guard low[x, y, 0] == 1 && edge[x, y, 0] == 0 else {
+                return
+            }
+            edge[x, y, 0] = 1
+            track(x: x-1, y: y-1)
+            track(x: x+0, y: y-1)
+            track(x: x+1, y: y-1)
+            track(x: x-1, y: y+0)
+            track(x: x+1, y: y+0)
+            track(x: x-1, y: y+1)
+            track(x: x+0, y: y+1)
+            track(x: x+1, y: y+1)
+        }
+        for y in 1..<lena.width-1 {
+            for x in 1..<lena.height-1 {
+                if high[x, y, 0] == 1 {
+                    track(x: x, y: y)
+                }
+            }
+        }
+        images.append(edge)
+        
+        // result
+        let ns = doubleToNSImage(Image.concatH(images))
+        
+        XCTAssertTrue(ns.isValid, "break")
+    }
 }
 
 #endif
