@@ -111,9 +111,9 @@ extension BayerConverter {
         
         for y in 0..<image.height {
             for x in 0..<image.width {
-                for c in RGB.allCases {
-                    newImage[x, y, c] = getPixelValue(x: x, y: y, channel: c)
-                }
+                newImage[x, y, .red] = getPixelValue(x: x, y: y, channel: .red)
+                newImage[x, y, .green] = getPixelValue(x: x, y: y, channel: .green)
+                newImage[x, y, .blue] = getPixelValue(x: x, y: y, channel: .blue)
             }
         }
         
@@ -173,9 +173,9 @@ extension BayerConverter {
         
         for y in 0..<image.height {
             for x in 0..<image.width {
-                for c in RGB.allCases {
-                    newImage[x, y, c] = getPixelValue(x: x, y: y, channel: c)
-                }
+                newImage[x, y, .red] = getPixelValue(x: x, y: y, channel: .red)
+                newImage[x, y, .green] = getPixelValue(x: x, y: y, channel: .green)
+                newImage[x, y, .blue] = getPixelValue(x: x, y: y, channel: .blue)
             }
         }
         
