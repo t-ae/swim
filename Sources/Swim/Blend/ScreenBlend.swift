@@ -7,34 +7,32 @@ extension Blender {
         
         for i in 0..<bottom.data.count {
             // 1 - (1-a)(1-b)
-            bottom.data[i] = (1-bottom.data[i]) * (1-top.data[i])
+            bottom.data[i] = 1 - (1-bottom.data[i]) * (1-top.data[i])
         }
     }
     
     @inlinable
-    public static func screenBlend<P: RGBWithAlpha, T: FloatingPoint>(top: Image<P, T>,
-                                                                      bottom: inout Image<RGB, T>) {
+    public static func screenBlend<P: RGBWithAlpha, T: FloatingPoint>(
+        top: Image<P, T>, bottom: inout Image<RGB, T>) {
         precondition(top.size == bottom.size, "Images must have same size.")
-        let (width, height) = top.size
         
-        top.data.withUnsafeBufferPointer {
-            var srcColor = $0.baseAddress! + P.redIndex
-            var srcAlpha = $0.baseAddress! + P.alphaIndex
-            bottom.data.withUnsafeMutableBufferPointer {
-                var dst = $0.baseAddress!
-                
-                for _ in 0..<width*height {
-                    for _ in 0..<RGB.channels {
-                        // dst * (1 - srcAlpha) * (1 - (1 - srcColor)*(1 - dst))*srcAlpha
-                        dst.pointee *= 1 - srcColor.pointee * srcAlpha.pointee
-                        dst.pointee += srcColor.pointee * srcAlpha.pointee
-                        srcColor += 1
-                        dst += 1
-                    }
-                    srcColor += P.channels - RGB.channels
-                    srcAlpha += P.channels
+        var redIndex = P.redIndex
+        var alphaIndex = P.alphaIndex
+        var bottomIndex = 0
+        for _ in 0..<bottom.width*bottom.height {
+            let topAlpha = top.data[alphaIndex]
+            
+            if topAlpha > 0 {
+                for i in 0..<RGB.channels {
+                    // dst * (1 - srcAlpha) + (1 - (1 - srcColor)*(1 - dst))*srcAlpha
+                    bottom.data[bottomIndex+i] *= 1 - top.data[redIndex+i] * topAlpha
+                    bottom.data[bottomIndex+i] += top.data[redIndex+i] * topAlpha
                 }
             }
+            
+            redIndex += P.channels
+            alphaIndex += P.channels
+            bottomIndex += RGB.channels
         }
     }
 }

@@ -9,28 +9,25 @@ extension Blender {
     }
     
     @inlinable
-    public static func multiplyBlend<P: RGBWithAlpha, T: FloatingPoint>(top: Image<P, T>,
-                                                                        bottom: inout Image<RGB, T>) {
+    public static func multiplyBlend<P: RGBWithAlpha, T: FloatingPoint>(
+        top: Image<P, T>, bottom: inout Image<RGB, T>) {
         precondition(top.size == bottom.size, "Images must have same size.")
-        let (width, height) = top.size
         
-        top.data.withUnsafeBufferPointer {
-            var srcColor = $0.baseAddress! + P.redIndex
-            var srcAlpha = $0.baseAddress! + P.alphaIndex
-            bottom.data.withUnsafeMutableBufferPointer {
-                var dst = $0.baseAddress!
-                
-                for _ in 0..<width*height {
-                    for _ in 0..<RGB.channels {
-                        // dst * (1 - srcAlpha) + dst * src * srcAlpha
-                        dst.pointee *= 1 - srcAlpha.pointee + srcColor.pointee * srcAlpha.pointee
-                        srcColor += 1
-                        dst += 1
-                    }
-                    srcColor += P.channels - RGB.channels
-                    srcAlpha += P.channels
+        var redIndex = P.redIndex
+        var alphaIndex = P.alphaIndex
+        var bottomIndex = 0
+        for _ in 0..<bottom.width*bottom.height {
+            let topAlpha = top.data[alphaIndex]
+            
+            if topAlpha > 0 {
+                for i in 0..<RGB.channels {
+                    bottom.data[bottomIndex+i] *= 1 - topAlpha + top.data[redIndex+i] * topAlpha
                 }
             }
+            
+            redIndex += P.channels
+            alphaIndex += P.channels
+            bottomIndex += RGB.channels
         }
     }
 }

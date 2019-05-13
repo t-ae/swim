@@ -64,14 +64,10 @@ extension Blender {
             let topAlpha = top.data[alphaIndex]
             
             if topAlpha > 0 {
-                bottom.data[bottomIndex+0] *= 1 - topAlpha
-                bottom.data[bottomIndex+0] += topAlpha * top.data[redIndex+0]
-                
-                bottom.data[bottomIndex+1] *= 1 - topAlpha
-                bottom.data[bottomIndex+1] += topAlpha * top.data[redIndex+1]
-                
-                bottom.data[bottomIndex+2] *= 1 - topAlpha
-                bottom.data[bottomIndex+2] += topAlpha * top.data[redIndex+2]
+                for i in 0..<RGB.channels {
+                    bottom.data[bottomIndex+i] *= 1 - topAlpha
+                    bottom.data[bottomIndex+i] += topAlpha * top.data[redIndex+i]
+                }
             }
             
             redIndex += P.channels
