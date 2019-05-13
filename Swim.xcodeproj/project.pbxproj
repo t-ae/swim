@@ -635,13 +635,13 @@
 				OBJ_146 /* BayerVisualTests.swift */,
 				OBJ_147 /* BlendVisualTests.swift */,
 				OBJ_148 /* FilterVisualTests.swift */,
+				A732C28F2283B13100C96067 /* HistogramEqualizerVisualTests.swift */,
 				OBJ_149 /* OtherVisualTests.swift */,
+				A732C29B2283D36D00C96067 /* PaddingVisualTests.swift */,
 				OBJ_150 /* ResizeVisualTests.swift */,
+				A732B39F227183B500B2256E /* SubimageVisualTests.swift */,
 				OBJ_151 /* Utils.swift */,
 				OBJ_152 /* WarpVisualTests.swift */,
-				A732B39F227183B500B2256E /* SubimageVisualTests.swift */,
-				A732C28F2283B13100C96067 /* HistogramEqualizerVisualTests.swift */,
-				A732C29B2283D36D00C96067 /* PaddingVisualTests.swift */,
 			);
 			name = VisualTests;
 			path = Tests/VisualTests;
@@ -876,18 +876,18 @@
 		OBJ_92 /* PerformanceTests */ = {
 			isa = PBXGroup;
 			children = (
-				OBJ_93 /* PerformanceTests.swift */,
-				A732AC27226EB6A200B2256E /* BasicPerformanceTests.swift */,
 				A732B3A222718C1000B2256E /* ArithmeticPerformanceTests.swift */,
+				A732AC27226EB6A200B2256E /* BasicPerformanceTests.swift */,
+				A732B3B92272DFC500B2256E /* BayerPerformanceTests.swift */,
 				A732B3AD2271A83600B2256E /* BlendPerformanceTests.swift */,
-				A732B3AF2271AACF00B2256E /* DataTypeConversionPerformanceTests.swift */,
 				A732B3B12271AC6800B2256E /* ClipPerformanceTests.swift */,
+				A73827112289430B00412CA8 /* ConversionPerformanceTests.swift */,
+				A738270B22891A1A00412CA8 /* CorrelationPerformanceTests.swift */,
+				A732B3AF2271AACF00B2256E /* DataTypeConversionPerformanceTests.swift */,
+				OBJ_93 /* PerformanceTests.swift */,
+				A732B3B72272A7CB00B2256E /* ResizePerformanceTests.swift */,
 				A732B3B32271AF1800B2256E /* RoundingPerformanceTests.swift */,
 				A732B3B52271B14400B2256E /* SubscriptPerformanceTests.swift */,
-				A732B3B72272A7CB00B2256E /* ResizePerformanceTests.swift */,
-				A732B3B92272DFC500B2256E /* BayerPerformanceTests.swift */,
-				A738270B22891A1A00412CA8 /* CorrelationPerformanceTests.swift */,
-				A73827112289430B00412CA8 /* ConversionPerformanceTests.swift */,
 			);
 			name = PerformanceTests;
 			path = Tests/PerformanceTests;

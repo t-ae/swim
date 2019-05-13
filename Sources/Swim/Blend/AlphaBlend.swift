@@ -45,29 +45,25 @@ extension Blender {
     public static func alphaBlend<P: RGBWithAlpha, T: FloatingPoint>(
         top: Image<P, T>, bottom: inout Image<RGB, T>) {
         precondition(top.size == bottom.size, "Images must have same size.")
-        let (width, height) = top.size
-        top.data.withUnsafeBufferPointer {
-            var srcColor = $0.baseAddress! + P.redIndex
-            var srcAlpha = $0.baseAddress! + P.alphaIndex
-            bottom.data.withUnsafeMutableBufferPointer {
-                var dst = $0.baseAddress!
-                
-                for _ in 0..<width*height {
-                    if srcAlpha.pointee != 0 {
-                        for _ in 0..<RGB.channels {
-                            dst.pointee *= 1-srcAlpha.pointee
-                            dst.pointee += srcColor.pointee * srcAlpha.pointee
-                            srcColor += 1
-                            dst += 1
-                        }
-                        srcColor += P.channels - RGB.channels
-                    } else {
-                        dst += RGB.channels
-                        srcColor += P.channels
-                    }
-                    srcAlpha += P.channels
-                }
-            }
+        
+        var redIndex = P.redIndex
+        var alphaIndex = P.alphaIndex
+        var bottomIndex = 0
+        for _ in 0..<bottom.width*bottom.height {
+            let topAlpha = top.data[alphaIndex]
+            
+            bottom.data[bottomIndex+0] *= 1 - topAlpha
+            bottom.data[bottomIndex+0] += topAlpha * top.data[redIndex+0]
+            
+            bottom.data[bottomIndex+1] *= 1 - topAlpha
+            bottom.data[bottomIndex+1] += topAlpha * top.data[redIndex+1]
+            
+            bottom.data[bottomIndex+2] *= 1 - topAlpha
+            bottom.data[bottomIndex+2] += topAlpha * top.data[redIndex+2]
+            
+            redIndex += P.channels
+            alphaIndex += P.channels
+            bottomIndex += RGB.channels
         }
     }
 }
