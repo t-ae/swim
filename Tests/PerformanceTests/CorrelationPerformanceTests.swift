@@ -9,8 +9,10 @@ class CorrelationPerformanceTests: XCTestCase {
         let image2 = Image(width: 1920, height: 1080, intensity: data)
         
         measure {
-            let d = Correlation.ssd(image1, image2)
-            XCTAssertEqual(d, 0)
+            for _ in 0..<100 {
+                let d = Correlation.ssd(image1, image2)
+                XCTAssertEqual(d, 0)
+            }
         }
     }
 
@@ -20,8 +22,10 @@ class CorrelationPerformanceTests: XCTestCase {
         let image2 = Image(width: 1920, height: 1080, intensity: data)
         
         measure {
-            let d = Correlation.sad(image1, image2)
-            XCTAssertEqual(d, 0)
+            for _ in 0..<100 {
+                let d = Correlation.sad(image1, image2)
+                XCTAssertEqual(d, 0)
+            }
         }
     }
     
@@ -31,8 +35,10 @@ class CorrelationPerformanceTests: XCTestCase {
         let image2 = Image(width: 1920, height: 1080, intensity: data)
         
         measure {
-            let d = Correlation.ncc(image1, image2)
-            XCTAssertEqual(d, 1)
+            for _ in 0..<100 {
+                let d = Correlation.ncc(image1, image2)
+                XCTAssertEqual(d, 1)
+            }
         }
     }
     
@@ -42,8 +48,10 @@ class CorrelationPerformanceTests: XCTestCase {
         let image2 = Image(width: 1920, height: 1080, intensity: data.map { $0 + 0.01 })
         
         measure {
-            let d = Correlation.zncc(image1, image2)
-            XCTAssertEqual(d, 1, accuracy: 1e-3)
+            for _ in 0..<100 {
+                let d = Correlation.zncc(image1, image2)
+                XCTAssertEqual(d, 1, accuracy: 1e-3)
+            }
         }
     }
 }

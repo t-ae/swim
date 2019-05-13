@@ -7,18 +7,9 @@ public enum Correlation<T: FloatingPoint&DataType> {
         precondition(a.size == b.size, "Images must have same size.")
         
         var sum: T = 0
-        a.data.withUnsafeBufferPointer {
-            var ap = $0.baseAddress!
-            b.data.withUnsafeBufferPointer {
-                var bp = $0.baseAddress!
-                
-                for _ in 0..<$0.count {
-                    let tmp  = ap.pointee - bp.pointee
-                    sum += tmp*tmp
-                    ap += 1
-                    bp += 1
-                }
-            }
+        for i in 0..<a.data.count {
+            let tmp = a.data[i] - b.data[i]
+            sum += tmp*tmp
         }
         return sum
     }
@@ -29,17 +20,8 @@ public enum Correlation<T: FloatingPoint&DataType> {
         precondition(a.size == b.size, "Images must have same size.")
         
         var sum: T = 0
-        a.data.withUnsafeBufferPointer {
-            var ap = $0.baseAddress!
-            b.data.withUnsafeBufferPointer {
-                var bp = $0.baseAddress!
-                
-                for _ in 0..<$0.count {
-                    sum += abs(ap.pointee - bp.pointee)
-                    ap += 1
-                    bp += 1
-                }
-            }
+        for i in 0..<a.data.count {
+            sum += abs(a.data[i] - b.data[i])
         }
         return sum
     }
@@ -54,19 +36,10 @@ public enum Correlation<T: FloatingPoint&DataType> {
         var sum2b: T = 0
         var sumCross: T = 0
         
-        a.data.withUnsafeBufferPointer {
-            var ap = $0.baseAddress!
-            b.data.withUnsafeBufferPointer {
-                var bp = $0.baseAddress!
-                
-                for _ in 0..<$0.count {
-                    sum2a += ap.pointee*ap.pointee
-                    sum2b += bp.pointee*bp.pointee
-                    sumCross += ap.pointee*bp.pointee
-                    ap += 1
-                    bp += 1
-                }
-            }
+        for i in 0..<a.data.count {
+            sum2a += a.data[i]*a.data[i]
+            sum2b += b.data[i]*b.data[i]
+            sumCross += a.data[i]*b.data[i]
         }
         
         return sumCross / sqrt(sum2a * sum2b)
@@ -84,21 +57,12 @@ public enum Correlation<T: FloatingPoint&DataType> {
         var sum2b: T = 0
         var sumCross: T = 0
         
-        a.data.withUnsafeBufferPointer {
-            var ap = $0.baseAddress!
-            b.data.withUnsafeBufferPointer {
-                var bp = $0.baseAddress!
-                
-                for _ in 0..<$0.count {
-                    suma += ap.pointee
-                    sumb += bp.pointee
-                    sum2a += ap.pointee*ap.pointee
-                    sum2b += bp.pointee*bp.pointee
-                    sumCross += ap.pointee*bp.pointee
-                    ap += 1
-                    bp += 1
-                }
-            }
+        for i in 0..<a.data.count {
+            suma += a.data[i]
+            sumb += b.data[i]
+            sum2a += a.data[i]*a.data[i]
+            sum2b += b.data[i]*b.data[i]
+            sumCross += a.data[i]*b.data[i]
         }
         
         let c: T = T(a.width * a.height)
