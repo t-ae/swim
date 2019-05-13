@@ -1,30 +1,18 @@
 extension Pixel where T: AdditiveArithmetic {
     @inlinable
     public static func +=<P2: PixelProtocol>(lhs: inout Pixel, rhs: P2) where P2.P == P, P2.T == T {
-        lhs.data.withUnsafeMutableBufferPointer { lbp in
-            var lp = lbp.baseAddress!
-            rhs.withUnsafeBufferPointer { rbp in
-                var rp = rbp.baseAddress!
-                for _ in 0..<P.channels {
-                    lp.pointee += rp.pointee
-                    lp += 1
-                    rp += 1
-                }
+        rhs.withUnsafeBufferPointer { rbp in
+            for i in 0..<lhs.data.count {
+                lhs.data[i] += rbp[i]
             }
         }
     }
     
     @inlinable
     public static func -=<P2: PixelProtocol>(lhs: inout Pixel, rhs: P2) where P2.P == P, P2.T == T {
-        lhs.data.withUnsafeMutableBufferPointer { lbp in
-            var lp = lbp.baseAddress!
-            rhs.withUnsafeBufferPointer { rbp in
-                var rp = rbp.baseAddress!
-                for _ in 0..<P.channels {
-                    lp.pointee -= rp.pointee
-                    lp += 1
-                    rp += 1
-                }
+        rhs.withUnsafeBufferPointer { rbp in
+            for i in 0..<lhs.data.count {
+                lhs.data[i] -= rbp[i]
             }
         }
     }
@@ -33,15 +21,9 @@ extension Pixel where T: AdditiveArithmetic {
 extension Pixel where T: Numeric {
     @inlinable
     public static func *=<P2: PixelProtocol>(lhs: inout Pixel, rhs: P2) where P2.P == P, P2.T == T {
-        lhs.data.withUnsafeMutableBufferPointer { lbp in
-            var lp = lbp.baseAddress!
-            rhs.withUnsafeBufferPointer { rbp in
-                var rp = rbp.baseAddress!
-                for _ in 0..<P.channels {
-                    lp.pointee *= rp.pointee
-                    lp += 1
-                    rp += 1
-                }
+        rhs.withUnsafeBufferPointer { rbp in
+            for i in 0..<lhs.data.count {
+                lhs.data[i] *= rbp[i]
             }
         }
     }
@@ -50,15 +32,9 @@ extension Pixel where T: Numeric {
 extension Pixel where T: BinaryInteger {
     @inlinable
     public static func /=<P2: PixelProtocol>(lhs: inout Pixel, rhs: P2) where P2.P == P, P2.T == T {
-        lhs.data.withUnsafeMutableBufferPointer { lbp in
-            var lp = lbp.baseAddress!
-            rhs.withUnsafeBufferPointer { rbp in
-                var rp = rbp.baseAddress!
-                for _ in 0..<P.channels {
-                    lp.pointee /= rp.pointee
-                    lp += 1
-                    rp += 1
-                }
+        rhs.withUnsafeBufferPointer { rbp in
+            for i in 0..<lhs.data.count {
+                lhs.data[i] /= rbp[i]
             }
         }
     }
@@ -67,15 +43,9 @@ extension Pixel where T: BinaryInteger {
 extension Pixel where T: FloatingPoint {
     @inlinable
     public static func /=<P2: PixelProtocol>(lhs: inout Pixel, rhs: P2) where P2.P == P, P2.T == T {
-        lhs.data.withUnsafeMutableBufferPointer { lbp in
-            var lp = lbp.baseAddress!
-            rhs.withUnsafeBufferPointer { rbp in
-                var rp = rbp.baseAddress!
-                for _ in 0..<P.channels {
-                    lp.pointee /= rp.pointee
-                    lp += 1
-                    rp += 1
-                }
+        rhs.withUnsafeBufferPointer { rbp in
+            for i in 0..<lhs.data.count {
+                lhs.data[i] /= rbp[i]
             }
         }
     }

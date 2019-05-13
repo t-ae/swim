@@ -9,6 +9,10 @@ public protocol PixelProtocol {
 }
 
 extension Pixel: PixelProtocol {
+    @inlinable
+    public init<Px: PixelProtocol>(from pixel: Px) where Px.P == P, Px.T == T {
+        self.init(data: pixel.withUnsafeBufferPointer(Array.init))
+    }
 }
 
 extension PixelRef: PixelProtocol {

@@ -3,11 +3,11 @@ func matmul<T: Numeric>(lhs: [T], rhs: [T], m: Int, n: Int, p: Int) -> [T] {
     assert(lhs.count == m*p)
     assert(rhs.count == p*n)
     
-    var ret = [T](repeating: 0, count: m*n)
+    var matrix = [T](repeating: 0, count: m*n)
     
     lhs.withUnsafeBufferPointer { lbp in
         rhs.withUnsafeBufferPointer { rbp in
-            ret.withUnsafeMutableBufferPointer { bp in
+            matrix.withUnsafeMutableBufferPointer { bp in
                 var lp = lbp.baseAddress!
                 for i in 0..<m {
                     var rp = rbp.baseAddress!
@@ -26,5 +26,5 @@ func matmul<T: Numeric>(lhs: [T], rhs: [T], m: Int, n: Int, p: Int) -> [T] {
         }
     }
     
-    return ret
+    return matrix
 }

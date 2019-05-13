@@ -178,12 +178,12 @@ extension Image where P: RGBWithAlpha {
 @inlinable
 func permuteChannels<T>(data: [T], permutation: [Int]) -> [T] {
     assert(Set(permutation) == Set(0..<permutation.count))
-    var ret = data
+    var newData = data
     let numChannels = permutation.count
     
     data.withUnsafeBufferPointer {
         var src = $0.baseAddress!
-        ret.withUnsafeMutableBufferPointer {
+        newData.withUnsafeMutableBufferPointer {
             var dst = $0.baseAddress!
             
             for _ in 0..<data.count/permutation.count {
@@ -196,7 +196,7 @@ func permuteChannels<T>(data: [T], permutation: [Int]) -> [T] {
         }
     }
     
-    return ret
+    return newData
 }
 
 extension Image where P == RGBA {

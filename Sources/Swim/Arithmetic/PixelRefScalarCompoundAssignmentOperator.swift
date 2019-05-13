@@ -1,21 +1,15 @@
 extension MutablePixelRef where T: AdditiveArithmetic {
     @inlinable
     public static func +=(lhs: MutablePixelRef, rhs: T) {
-        var lp = lhs.pointer.baseAddress!
-        
-        for _ in 0..<P.channels {
-            lp.pointee += rhs
-            lp += 1
+        for i in 0..<P.channels {
+            lhs.pointer[i] += rhs
         }
     }
     
     @inlinable
     public static func -=(lhs: MutablePixelRef, rhs: T) {
-        var lp = lhs.pointer.baseAddress!
-        
-        for _ in 0..<P.channels {
-            lp.pointee -= rhs
-            lp += 1
+        for i in 0..<P.channels {
+            lhs.pointer[i] -= rhs
         }
     }
 }
@@ -23,11 +17,8 @@ extension MutablePixelRef where T: AdditiveArithmetic {
 extension MutablePixelRef where T: Numeric {
     @inlinable
     public static func *=(lhs: MutablePixelRef, rhs: T) {
-        var lp = lhs.pointer.baseAddress!
-        
-        for _ in 0..<P.channels {
-            lp.pointee *= rhs
-            lp += 1
+        for i in 0..<P.channels {
+            lhs.pointer[i] *= rhs
         }
     }
 }
@@ -35,11 +26,8 @@ extension MutablePixelRef where T: Numeric {
 extension MutablePixelRef where T: BinaryInteger {
     @inlinable
     public static func /=(lhs: MutablePixelRef, rhs: T) {
-        var lp = lhs.pointer.baseAddress!
-        
-        for _ in 0..<P.channels {
-            lp.pointee /= rhs
-            lp += 1
+        for i in 0..<P.channels {
+            lhs.pointer[i] /= rhs
         }
     }
 }
@@ -47,11 +35,8 @@ extension MutablePixelRef where T: BinaryInteger {
 extension MutablePixelRef where T: FloatingPoint {
     @inlinable
     public static func /=(lhs: MutablePixelRef, rhs: T) {
-        var lp = lhs.pointer.baseAddress!
-        
-        for _ in 0..<P.channels {
-            lp.pointee /= rhs
-            lp += 1
+        for i in 0..<P.channels {
+            lhs.pointer[i] /= rhs
         }
     }
 }
