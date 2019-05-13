@@ -59,6 +59,8 @@
 		A732C29A2283D33900C96067 /* EdgeMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = A732C2982283D33600C96067 /* EdgeMode.swift */; };
 		A732C29D2283D37600C96067 /* PaddingVisualTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A732C29B2283D36D00C96067 /* PaddingVisualTests.swift */; };
 		A732C5072284247C00C96067 /* IteratePixels.swift in Sources */ = {isa = PBXBuildFile; fileRef = A732C5052284247800C96067 /* IteratePixels.swift */; };
+		A738270C22891A1A00412CA8 /* CorrelationPerformanceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A738270B22891A1A00412CA8 /* CorrelationPerformanceTests.swift */; };
+		A7382710228922F300412CA8 /* ClampTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A738270D228922EE00412CA8 /* ClampTests.swift */; };
 		OBJ_167 /* image_io.c in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_9 /* image_io.c */; };
 		OBJ_169 /* stb_image_write.h in Headers */ = {isa = PBXBuildFile; fileRef = OBJ_11 /* stb_image_write.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		OBJ_170 /* stb_image.h in Headers */ = {isa = PBXBuildFile; fileRef = OBJ_12 /* stb_image.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -283,6 +285,8 @@
 		A732C2982283D33600C96067 /* EdgeMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EdgeMode.swift; sourceTree = "<group>"; };
 		A732C29B2283D36D00C96067 /* PaddingVisualTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaddingVisualTests.swift; sourceTree = "<group>"; };
 		A732C5052284247800C96067 /* IteratePixels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IteratePixels.swift; sourceTree = "<group>"; };
+		A738270B22891A1A00412CA8 /* CorrelationPerformanceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CorrelationPerformanceTests.swift; sourceTree = "<group>"; };
+		A738270D228922EE00412CA8 /* ClampTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClampTests.swift; sourceTree = "<group>"; };
 		OBJ_100 /* Im2colTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Im2colTests.swift; sourceTree = "<group>"; };
 		OBJ_101 /* IntegralImageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntegralImageTests.swift; sourceTree = "<group>"; };
 		OBJ_103 /* ImageArithmeticTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageArithmeticTests.swift; sourceTree = "<group>"; };
@@ -618,6 +622,7 @@
 			isa = PBXGroup;
 			children = (
 				OBJ_144 /* MatmulTests.swift */,
+				A738270D228922EE00412CA8 /* ClampTests.swift */,
 			);
 			path = UtilityTests;
 			sourceTree = "<group>";
@@ -879,6 +884,7 @@
 				A732B3B52271B14400B2256E /* SubscriptPerformanceTests.swift */,
 				A732B3B72272A7CB00B2256E /* ResizePerformanceTests.swift */,
 				A732B3B92272DFC500B2256E /* BayerPerformanceTests.swift */,
+				A738270B22891A1A00412CA8 /* CorrelationPerformanceTests.swift */,
 			);
 			name = PerformanceTests;
 			path = Tests/PerformanceTests;
@@ -1088,6 +1094,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 0;
 			files = (
+				A738270C22891A1A00412CA8 /* CorrelationPerformanceTests.swift in Sources */,
 				A732B3B02271AACF00B2256E /* DataTypeConversionPerformanceTests.swift in Sources */,
 				A732B3B42271AF1800B2256E /* RoundingPerformanceTests.swift in Sources */,
 				A732B3AE2271A83600B2256E /* BlendPerformanceTests.swift in Sources */,
@@ -1211,6 +1218,7 @@
 				OBJ_283 /* DataTypeConversionTests.swift in Sources */,
 				OBJ_284 /* PixelTypeConversionTests.swift in Sources */,
 				OBJ_285 /* PixelwiseConversionTests.swift in Sources */,
+				A7382710228922F300412CA8 /* ClampTests.swift in Sources */,
 				OBJ_286 /* ImageTests.swift in Sources */,
 				OBJ_288 /* ImageIOTests.swift in Sources */,
 				OBJ_289 /* BicubicInterpolationTests.swift in Sources */,

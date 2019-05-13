@@ -45,6 +45,7 @@ public enum Correlation<T: FloatingPoint&DataType> {
     }
     
     /// Compute normalized cross correlation.
+    /// - Note: This function returns nan if `a` or `b` is all zero.
     @inlinable
     public static func ncc(_ a: Image<Intensity, T>, _ b: Image<Intensity, T>) -> T {
         precondition(a.size == b.size, "Images must have same size.")
@@ -67,10 +68,12 @@ public enum Correlation<T: FloatingPoint&DataType> {
                 }
             }
         }
+        
         return sumCross / sqrt(sum2a * sum2b)
     }
     
     /// Compute zero means normalized cross correlation.
+    /// - Note: This function returns invalid value or nan if `a` or `b` has same value in all pixels.
     @inlinable
     public static func zncc(_ a: Image<Intensity, T>, _ b: Image<Intensity, T>) -> T {
         precondition(a.size == b.size, "Images must have same size.")
@@ -107,7 +110,7 @@ public enum Correlation<T: FloatingPoint&DataType> {
         let da: T = c*sum2a - suma2
         let db: T = c*sum2b - sumb2
         
-        return up / sqrt(da*db)
+        return clamp(up / sqrt(da*db), min: -1, max: 1)
     }
 }
 
