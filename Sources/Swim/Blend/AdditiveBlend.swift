@@ -33,7 +33,7 @@ extension Blender {
                 
                 for _ in 0..<width*height {
                     for _ in 0..<RGB.channels {
-                        dst.pointee = min(dst.pointee + srcColor.pointee * srcAlpha.pointee, 1)
+                        dst.pointee = dst.pointee * (1 - srcAlpha.pointee) + min(dst.pointee + srcColor.pointee, 1) * srcAlpha.pointee
                         srcColor += 1
                         dst += 1
                     }

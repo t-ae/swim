@@ -61,6 +61,7 @@
 		A732C5072284247C00C96067 /* IteratePixels.swift in Sources */ = {isa = PBXBuildFile; fileRef = A732C5052284247800C96067 /* IteratePixels.swift */; };
 		A738270C22891A1A00412CA8 /* CorrelationPerformanceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A738270B22891A1A00412CA8 /* CorrelationPerformanceTests.swift */; };
 		A7382710228922F300412CA8 /* ClampTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A738270D228922EE00412CA8 /* ClampTests.swift */; };
+		A73827122289430B00412CA8 /* ConversionPerformanceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A73827112289430B00412CA8 /* ConversionPerformanceTests.swift */; };
 		OBJ_167 /* image_io.c in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_9 /* image_io.c */; };
 		OBJ_169 /* stb_image_write.h in Headers */ = {isa = PBXBuildFile; fileRef = OBJ_11 /* stb_image_write.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		OBJ_170 /* stb_image.h in Headers */ = {isa = PBXBuildFile; fileRef = OBJ_12 /* stb_image.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -287,6 +288,7 @@
 		A732C5052284247800C96067 /* IteratePixels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IteratePixels.swift; sourceTree = "<group>"; };
 		A738270B22891A1A00412CA8 /* CorrelationPerformanceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CorrelationPerformanceTests.swift; sourceTree = "<group>"; };
 		A738270D228922EE00412CA8 /* ClampTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClampTests.swift; sourceTree = "<group>"; };
+		A73827112289430B00412CA8 /* ConversionPerformanceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversionPerformanceTests.swift; sourceTree = "<group>"; };
 		OBJ_100 /* Im2colTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Im2colTests.swift; sourceTree = "<group>"; };
 		OBJ_101 /* IntegralImageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntegralImageTests.swift; sourceTree = "<group>"; };
 		OBJ_103 /* ImageArithmeticTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageArithmeticTests.swift; sourceTree = "<group>"; };
@@ -885,6 +887,7 @@
 				A732B3B72272A7CB00B2256E /* ResizePerformanceTests.swift */,
 				A732B3B92272DFC500B2256E /* BayerPerformanceTests.swift */,
 				A738270B22891A1A00412CA8 /* CorrelationPerformanceTests.swift */,
+				A73827112289430B00412CA8 /* ConversionPerformanceTests.swift */,
 			);
 			name = PerformanceTests;
 			path = Tests/PerformanceTests;
@@ -1094,6 +1097,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 0;
 			files = (
+				A73827122289430B00412CA8 /* ConversionPerformanceTests.swift in Sources */,
 				A738270C22891A1A00412CA8 /* CorrelationPerformanceTests.swift in Sources */,
 				A732B3B02271AACF00B2256E /* DataTypeConversionPerformanceTests.swift in Sources */,
 				A732B3B42271AF1800B2256E /* RoundingPerformanceTests.swift in Sources */,
