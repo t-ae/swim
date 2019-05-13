@@ -2,36 +2,83 @@ import XCTest
 import Swim
 
 class BlendPerformanceTests: XCTestCase {
-    
-    func testAlphaBlend() {
-        let rgba = Image<RGBA, Double>(width: 3840, height: 2160, value: 0)
-        var rgb = Image<RGBA, Double>(width: 3840, height: 2160, value: 0)
+    func testAlphaBlendRGB() {
+        let top = Image<RGBA, Double>(width: 3840, height: 2160, value: 0)
+        var bottom = Image<RGB, Double>(width: 3840, height: 2160, value: 0)
         measure{
-            Blender.alphaBlend(top: rgba, bottom: &rgb)
-        }
-    }
-
-    func testMultiplyBlend() {
-        let rgba = Image<RGBA, Double>(width: 3840, height: 2160, value: 0)
-        var rgb = Image<RGB, Double>(width: 3840, height: 2160, value: 0)
-        measure{
-            Blender.multiplyBlend(top: rgba, bottom: &rgb)
+            Blender.alphaBlend(top: top, bottom: &bottom)
         }
     }
     
-    func testScreenBlend() {
-        let rgba = Image<RGBA, Double>(width: 3840, height: 2160, value: 0)
-        var rgb = Image<RGB, Double>(width: 3840, height: 2160, value: 0)
+    func testAlphaBlendRGBA() {
+        let top = Image<RGBA, Double>(width: 3840, height: 2160, value: 0)
+        var bottom = Image<RGBA, Double>(width: 3840, height: 2160, value: 0)
         measure{
-            Blender.screenBlend(top: rgba, bottom: &rgb)
+            Blender.alphaBlend(top: top, bottom: &bottom)
         }
     }
     
-    func testOverlayBlend() {
-        let rgba = Image<RGBA, Double>(width: 3840, height: 2160, value: 1)
-        var rgb = Image<RGB, Double>(width: 3840, height: 2160, value: 0)
+    func testAdditiveBlendRGB() {
+        let top = Image<RGB, Double>(width: 3840, height: 2160, value: 0)
+        var bottom = Image<RGB, Double>(width: 3840, height: 2160, value: 0)
         measure{
-            Blender.overlayBlend(top: rgba, bottom: &rgb)
+            Blender.additiveBlend(top: top, bottom: &bottom)
+        }
+    }
+    
+    func testAdditiveBlendRGBA() {
+        let top = Image<RGBA, Double>(width: 3840, height: 2160, value: 0)
+        var bottom = Image<RGB, Double>(width: 3840, height: 2160, value: 0)
+        measure{
+            Blender.additiveBlend(top: top, bottom: &bottom)
+        }
+    }
+    
+    func testMultiplyBlendRGB() {
+        let top = Image<RGB, Double>(width: 3840, height: 2160, value: 0)
+        var bottom = Image<RGB, Double>(width: 3840, height: 2160, value: 0)
+        measure{
+            Blender.multiplyBlend(top: top, bottom: &bottom)
+        }
+    }
+    
+    func testMultiplyBlendRGBA() {
+        let top = Image<RGBA, Double>(width: 3840, height: 2160, value: 0)
+        var bottom = Image<RGB, Double>(width: 3840, height: 2160, value: 0)
+        measure{
+            Blender.multiplyBlend(top: top, bottom: &bottom)
+        }
+    }
+    
+    func testScreenBlendRGB() {
+        let top = Image<RGB, Double>(width: 3840, height: 2160, value: 0)
+        var bottom = Image<RGB, Double>(width: 3840, height: 2160, value: 0)
+        measure{
+            Blender.screenBlend(top: top, bottom: &bottom)
+        }
+    }
+    
+    func testScreenBlendRGBA() {
+        let top = Image<RGBA, Double>(width: 3840, height: 2160, value: 0)
+        var bottom = Image<RGB, Double>(width: 3840, height: 2160, value: 0)
+        measure{
+            Blender.screenBlend(top: top, bottom: &bottom)
+        }
+    }
+    
+    func testOverlayBlendRGB() {
+        let top = Image<RGB, Double>(width: 3840, height: 2160, value: 0)
+        var bottom = Image<RGB, Double>(width: 3840, height: 2160, value: 0)
+        measure{
+            Blender.overlayBlend(top: top, bottom: &bottom)
+        }
+    }
+    
+    func testOverlayBlendRGBA() {
+        let top = Image<RGBA, Double>(width: 3840, height: 2160, value: 0)
+        var bottom = Image<RGB, Double>(width: 3840, height: 2160, value: 0)
+        measure{
+            Blender.overlayBlend(top: top, bottom: &bottom)
         }
     }
 }
