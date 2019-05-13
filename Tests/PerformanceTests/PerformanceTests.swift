@@ -2,6 +2,17 @@ import XCTest
 import Swim
 
 class PerformanceTests: XCTestCase {
+    func testEqual() {
+        let data = [Float](repeating: 0, count: 1920*1080*4)
+        let image1 = Image(width: 1920, height: 1080, rgba: data)
+        var image2 = Image(width: 1920, height: 1080, rgba: data)
+        image2[1919, 1079, 3] = 1
+        
+        measure {
+            XCTAssertFalse(image1 == image2)
+        }
+    }
+    
     func testConvert() {
         let data = [UInt8](repeating: 0, count: 1920*1080*4)
         var image = Image(width: 1920, height: 1080, rgba: data)

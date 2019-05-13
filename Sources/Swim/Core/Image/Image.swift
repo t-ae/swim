@@ -62,7 +62,7 @@ extension Image: Equatable {
         guard lhs.size == rhs.size else {
             return false
         }
-        return memcmp(lhs.data, rhs.data, lhs.width*lhs.height*P.channels*MemoryLayout<T>.size) == 0
+        return lhs.data == rhs.data
     }
 }
 
