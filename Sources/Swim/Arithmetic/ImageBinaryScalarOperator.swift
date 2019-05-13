@@ -2,95 +2,89 @@
 extension Image where T: AdditiveArithmetic {
     @inlinable
     public static func +(lhs: Image, rhs: T) -> Image {
-        var ret = lhs
-        ret += rhs
-        return ret
+        var newImage = lhs
+        newImage += rhs
+        return newImage
     }
     
     @inlinable
     public static func +(lhs: T, rhs: Image) -> Image {
-        var ret = rhs
-        ret += lhs
-        return ret
+        var newImage = rhs
+        newImage += lhs
+        return newImage
     }
     
     @inlinable
     public static func -(lhs: Image, rhs: T) -> Image {
-        var ret = lhs
-        ret -= rhs
-        return ret
+        var newImage = lhs
+        newImage -= rhs
+        return newImage
     }
     
     @inlinable
     public static func -(lhs: T, rhs: Image) -> Image {
-        var ret = rhs
-        ret.data.withUnsafeMutableBufferPointer {
-            var p = $0.baseAddress!
-            for _ in 0..<$0.count {
-                p.pointee = lhs - p.pointee
-                p += 1
-            }
+        var newImage = rhs
+        
+        for i in 0..<newImage.data.count {
+            newImage.data[i] = lhs - newImage.data[i]
         }
-        return ret
+        
+        return newImage
     }
 }
 
 extension Image where T: Numeric {
     @inlinable
     public static func *(lhs: Image, rhs: T) -> Image {
-        var ret = lhs
-        ret *= rhs
-        return ret
+        var newImage = lhs
+        newImage *= rhs
+        return newImage
     }
     
     @inlinable
     public static func *(lhs: T, rhs: Image) -> Image {
-        var ret = rhs
-        ret *= lhs
-        return ret
+        var newImage = rhs
+        newImage *= lhs
+        return newImage
     }
 }
 
 extension Image where T: BinaryInteger {
     @inlinable
     public static func /(lhs: Image, rhs: T) -> Image {
-        var ret = lhs
-        ret /= rhs
-        return ret
+        var newImage = lhs
+        newImage /= rhs
+        return newImage
     }
     
     @inlinable
     public static func /(lhs: T, rhs: Image) -> Image {
-        var ret = rhs
-        ret.data.withUnsafeMutableBufferPointer {
-            var p = $0.baseAddress!
-            for _ in 0..<$0.count {
-                p.pointee = lhs / p.pointee
-                p += 1
-            }
+        var newImage = rhs
+        
+        for i in 0..<newImage.data.count {
+            newImage.data[i] = lhs / newImage.data[i]
         }
-        return ret
+        
+        return newImage
     }
 }
 
 extension Image where T: FloatingPoint {
     @inlinable
     public static func /(lhs: Image, rhs: T) -> Image {
-        var ret = lhs
-        ret /= rhs
-        return ret
+        var newImage = lhs
+        newImage /= rhs
+        return newImage
     }
     
     @inlinable
     public static func /(lhs: T, rhs: Image) -> Image {
-        var ret = rhs
-        ret.data.withUnsafeMutableBufferPointer {
-            var p = $0.baseAddress!
-            for _ in 0..<$0.count {
-                p.pointee = lhs / p.pointee
-                p += 1
-            }
+        var newImage = rhs
+        
+        for i in 0..<newImage.data.count {
+            newImage.data[i] = lhs / newImage.data[i]
         }
-        return ret
+        
+        return newImage
     }
 }
