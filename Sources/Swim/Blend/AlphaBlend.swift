@@ -4,38 +4,49 @@ extension Blender {
     @inlinable
     public static func alphaBlend<P1: RGBWithAlpha, P2: RGBWithAlpha, T: FloatingPoint>(
         top: Image<P1, T>, bottom: inout Image<P2, T>) {
-        
         precondition(top.size == bottom.size, "Images must have same size.")
-        let (width, height) = top.size
         
-        top.data.withUnsafeBufferPointer {
-            var srcColor = $0.baseAddress! + P1.redIndex
-            var srcAlpha = $0.baseAddress! + P1.alphaIndex
-            bottom.data.withUnsafeMutableBufferPointer {
-                var dstColor = $0.baseAddress! + P2.redIndex
-                var dstAlpha = $0.baseAddress! + P2.alphaIndex
-                
-                for _ in 0..<width*height {
-                    if srcAlpha.pointee != 0 {
-                        let blendAlpha = srcAlpha.pointee + (1-srcAlpha.pointee)*dstAlpha.pointee
-                        for _ in 0..<P1.channels-1 {
-                            dstColor.pointee *= (1-srcAlpha.pointee)*dstAlpha.pointee
-                            dstColor.pointee += srcColor.pointee * srcAlpha.pointee
-                            dstColor.pointee /= blendAlpha
-                            srcColor += 1
-                            dstColor += 1
-                        }
-                        dstAlpha.pointee = blendAlpha
-                        srcColor += 1
-                        dstColor += 1
-                    } else {
-                        srcColor += P1.channels
-                        dstColor += P2.channels
-                    }
-                    srcAlpha += P1.channels
-                    dstAlpha += P2.channels
+        var topRedIndex = P1.redIndex
+        var topAlphaIndex = P1.alphaIndex
+        var bottomRedIndex = P2.redIndex
+        var bottomAlphaIndex = P2.alphaIndex
+        
+        for _ in 0..<bottom.width*bottom.height {
+            let topAlpha = top.data[topAlphaIndex]
+            let bottomAlpha = bottom.data[bottomAlphaIndex]
+            
+             if topAlpha == 0 {
+                if bottomAlpha == 0 {
+                    // set all zero
+                    bottom.data[bottomRedIndex+0] = 0
+                    bottom.data[bottomRedIndex+1] = 0
+                    bottom.data[bottomRedIndex+2] = 0
+                } else {
+                    // keep bottom
                 }
+            } else {
+                let factor = (1-topAlpha)*bottomAlpha
+                let blendAlpha = topAlpha + factor
+                
+                bottom.data[bottomRedIndex+0] *= factor
+                bottom.data[bottomRedIndex+0] += topAlpha * top.data[topRedIndex+0]
+                bottom.data[bottomRedIndex+0] /= blendAlpha
+                
+                bottom.data[bottomRedIndex+1] *= factor
+                bottom.data[bottomRedIndex+1] += topAlpha * top.data[topRedIndex+1]
+                bottom.data[bottomRedIndex+1] /= blendAlpha
+                
+                bottom.data[bottomRedIndex+2] *= factor
+                bottom.data[bottomRedIndex+2] += topAlpha * top.data[topRedIndex+2]
+                bottom.data[bottomRedIndex+2] /= blendAlpha
+                
+                bottom.data[bottomAlphaIndex] = blendAlpha
             }
+            
+            topRedIndex += P1.channels
+            topAlphaIndex += P1.channels
+            bottomRedIndex += P2.channels
+            bottomAlphaIndex += P2.channels
         }
     }
 }
@@ -52,14 +63,16 @@ extension Blender {
         for _ in 0..<bottom.width*bottom.height {
             let topAlpha = top.data[alphaIndex]
             
-            bottom.data[bottomIndex+0] *= 1 - topAlpha
-            bottom.data[bottomIndex+0] += topAlpha * top.data[redIndex+0]
-            
-            bottom.data[bottomIndex+1] *= 1 - topAlpha
-            bottom.data[bottomIndex+1] += topAlpha * top.data[redIndex+1]
-            
-            bottom.data[bottomIndex+2] *= 1 - topAlpha
-            bottom.data[bottomIndex+2] += topAlpha * top.data[redIndex+2]
+            if topAlpha > 0 {
+                bottom.data[bottomIndex+0] *= 1 - topAlpha
+                bottom.data[bottomIndex+0] += topAlpha * top.data[redIndex+0]
+                
+                bottom.data[bottomIndex+1] *= 1 - topAlpha
+                bottom.data[bottomIndex+1] += topAlpha * top.data[redIndex+1]
+                
+                bottom.data[bottomIndex+2] *= 1 - topAlpha
+                bottom.data[bottomIndex+2] += topAlpha * top.data[redIndex+2]
+            }
             
             redIndex += P.channels
             alphaIndex += P.channels

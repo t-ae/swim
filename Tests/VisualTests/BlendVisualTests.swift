@@ -8,9 +8,9 @@ class BlendVisualTests: XCTestCase {
 
 extension BlendVisualTests {
     func testAlphaBlend() {
-        var imageBase = Image<RGB, Double>(width: 500,
+        var imageBase = Image<RGBA, Double>(width: 500,
                                            height: 500,
-                                           value: 1)
+                                           value: 0.9)
         
         let red = Shape.circle(size: 200,
                                lineWidth: 3,
