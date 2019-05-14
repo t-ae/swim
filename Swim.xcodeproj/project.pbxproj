@@ -126,7 +126,6 @@
 		OBJ_243 /* ArrayExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_83 /* ArrayExt.swift */; };
 		OBJ_244 /* Clamp.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_84 /* Clamp.swift */; };
 		OBJ_246 /* Interleave.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_86 /* Interleave.swift */; };
-		OBJ_247 /* Matmul.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_87 /* Matmul.swift */; };
 		OBJ_248 /* Rect.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_88 /* Rect.swift */; };
 		OBJ_250 /* StrideCopy.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_90 /* StrideCopy.swift */; };
 		OBJ_252 /* CStbImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Swim::CStbImage::Product" /* CStbImage.framework */; };
@@ -165,7 +164,6 @@
 		OBJ_305 /* Random.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_140 /* Random.swift */; };
 		OBJ_306 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_141 /* Utils.swift */; };
 		OBJ_307 /* XCTAssertEqualWithAccuracy.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_142 /* XCTAssertEqualWithAccuracy.swift */; };
-		OBJ_308 /* MatmulTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_144 /* MatmulTests.swift */; };
 		OBJ_310 /* Swim.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Swim::Swim::Product" /* Swim.framework */; };
 		OBJ_311 /* CStbImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Swim::CStbImage::Product" /* CStbImage.framework */; };
 		OBJ_318 /* BayerVisualTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_146 /* BayerVisualTests.swift */; };
@@ -324,7 +322,6 @@
 		OBJ_140 /* Random.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Random.swift; sourceTree = "<group>"; };
 		OBJ_141 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		OBJ_142 /* XCTAssertEqualWithAccuracy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XCTAssertEqualWithAccuracy.swift; sourceTree = "<group>"; };
-		OBJ_144 /* MatmulTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatmulTests.swift; sourceTree = "<group>"; };
 		OBJ_146 /* BayerVisualTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BayerVisualTests.swift; sourceTree = "<group>"; };
 		OBJ_147 /* BlendVisualTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlendVisualTests.swift; sourceTree = "<group>"; };
 		OBJ_148 /* FilterVisualTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterVisualTests.swift; sourceTree = "<group>"; };
@@ -392,7 +389,6 @@
 		OBJ_83 /* ArrayExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayExt.swift; sourceTree = "<group>"; };
 		OBJ_84 /* Clamp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Clamp.swift; sourceTree = "<group>"; };
 		OBJ_86 /* Interleave.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Interleave.swift; sourceTree = "<group>"; };
-		OBJ_87 /* Matmul.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Matmul.swift; sourceTree = "<group>"; };
 		OBJ_88 /* Rect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rect.swift; sourceTree = "<group>"; };
 		OBJ_9 /* image_io.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = image_io.c; sourceTree = "<group>"; };
 		OBJ_90 /* StrideCopy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StrideCopy.swift; sourceTree = "<group>"; };
@@ -626,7 +622,6 @@
 		OBJ_143 /* UtilityTests */ = {
 			isa = PBXGroup;
 			children = (
-				OBJ_144 /* MatmulTests.swift */,
 				A738270D228922EE00412CA8 /* ClampTests.swift */,
 			);
 			path = UtilityTests;
@@ -859,7 +854,6 @@
 				OBJ_83 /* ArrayExt.swift */,
 				OBJ_84 /* Clamp.swift */,
 				OBJ_86 /* Interleave.swift */,
-				OBJ_87 /* Matmul.swift */,
 				OBJ_88 /* Rect.swift */,
 				OBJ_90 /* StrideCopy.swift */,
 			);
@@ -1190,7 +1184,6 @@
 				OBJ_243 /* ArrayExt.swift in Sources */,
 				OBJ_244 /* Clamp.swift in Sources */,
 				OBJ_246 /* Interleave.swift in Sources */,
-				OBJ_247 /* Matmul.swift in Sources */,
 				A732B39A22714F0700B2256E /* LanczosInterpolator.swift in Sources */,
 				OBJ_248 /* Rect.swift in Sources */,
 				A732AC26226EB5D600B2256E /* PixelUnaryOperator.swift in Sources */,
@@ -1251,7 +1244,6 @@
 				A732B3962270261D00B2256E /* PaddingTests.swift in Sources */,
 				OBJ_306 /* Utils.swift in Sources */,
 				OBJ_307 /* XCTAssertEqualWithAccuracy.swift in Sources */,
-				OBJ_308 /* MatmulTests.swift in Sources */,
 				A732ABEE226D6DBB00B2256E /* UIKitTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
