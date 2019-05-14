@@ -15,22 +15,8 @@ func testResoruceRoot() -> URL {
 
 import AppKit
 
-func doubleToNSImage(_ image: Image<Intensity, Double>) -> NSImage {
-    var image = image.clipped(low: 0, high: 1)
-    image *= 255
-    return image.cast(to: UInt8.self).nsImage()
-}
-
-func doubleToNSImage(_ image: Image<RGB, Double>) -> NSImage {
-    var image = image.clipped(low: 0, high: 1)
-    image *= 255
-    return image.cast(to: UInt8.self).nsImage()
-}
-
-func doubleToNSImage(_ image: Image<RGBA, Double>) -> NSImage {
-    var image = image.clipped(low: 0, high: 1)
-    image *= 255
-    return image.cast(to: UInt8.self).nsImage()
+func doubleToNSImage<P: ConvertibleToCGImage>(_ image: Image<P, Double>) -> NSImage {
+    return image.channelwiseConverted { UInt8(min(max($0, 0), 1)*255) }.nsImage()
 }
 
 #endif
