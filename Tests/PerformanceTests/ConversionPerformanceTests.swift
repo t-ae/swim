@@ -7,8 +7,10 @@ class ConversionPerformanceTests: XCTestCase {
         var image = Image(width: 1920, height: 1080, rgba: data)
         
         measure {
-            image.pixelwiseConvert { src in
-                src += 1
+            for _ in 0..<10 {
+                image.pixelwiseConvert { src in
+                    src += 1
+                }
             }
         }
     }
@@ -29,8 +31,10 @@ class ConversionPerformanceTests: XCTestCase {
         var image = Image(width: 1920, height: 1080, rgba: data)
         
         measure {
-            image.channelwiseConvert { src in
-                src + 1
+            for _ in 0..<100 {
+                image.channelwiseConvert { src in
+                    src &+ 1
+                }
             }
         }
     }
@@ -40,7 +44,9 @@ class ConversionPerformanceTests: XCTestCase {
         let image = Image(width: 1920, height: 1080, rgba: data)
         
         measure {
-            _ = image.channelwiseConverted { $0 + 1 }
+            for _ in 0..<100 {
+                _ = image.channelwiseConverted { $0 + 1 }
+            }
         }
     }
     
