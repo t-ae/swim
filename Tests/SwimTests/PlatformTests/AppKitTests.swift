@@ -81,6 +81,24 @@ extension AppKitTests {
         XCTAssertFalse([nsImage1, nsImage2].isEmpty,
                        "Break and check image")
     }
+    
+    func testColorToGray() {
+        let nsColor = rgba.nsImage()
+        let gray = Image<Intensity, Double>(nsImage: nsColor)!
+        let nsGray = gray.nsImage()
+        
+        XCTAssertTrue(nsGray.isValid,
+                       "Break and check image")
+    }
+    
+    func testGrayToColor() {
+        let nsGray = gray.nsImage()
+        let color = Image<RGBA, Double>(nsImage: nsGray)!
+        let nsColor = color.nsImage()
+        
+        XCTAssertTrue(nsColor.isValid,
+                      "Break and check image")
+    }
 }
 
 #endif

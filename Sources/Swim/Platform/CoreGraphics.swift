@@ -60,7 +60,7 @@ extension Intensity: ConvertibleFromCGImage, ConvertibleToCGImage {
         let width = cgImage.width
         let height = cgImage.height
         
-        var data = [UInt8](repeating: 0, count: cgImage.bytesPerRow*height)
+        var data = [UInt8](repeating: 0, count: width*height)
         let context = CGContext(data: &data,
                                 width: width,
                                 height: height,
@@ -116,7 +116,7 @@ extension RGBA: ConvertibleFromCGImage, ConvertibleToCGImage {
         let width = cgImage.width
         let height = cgImage.height
         
-        var data = [UInt8](repeating: 0, count: cgImage.bytesPerRow*height)
+        var data = [UInt8](repeating: 0, count: width*height*RGBA.channels)
         let context = CGContext(data: &data,
                                 width: width,
                                 height: height,
