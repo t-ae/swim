@@ -177,27 +177,26 @@ extension Image where P == RGB {
 }
 
 // MARK: - RGBWithAlpha -> RGB
-@inlinable
-func removeAlpha<P: RGBWithAlpha, T>(image: Image<P, T>) -> Image<RGB, T> {
-    var newImage = Image<RGB, T>(width: image.width, height: image.height)
-    image.data.withUnsafeBufferPointer {
-        var src = $0.baseAddress! + P.redIndex
-        newImage.data.withUnsafeMutableBufferPointer {
-            var dst = $0.baseAddress!
-            for _ in 0..<image.width*image.height {
-                memcpy(dst, src, RGB.channels * MemoryLayout<T>.size)
-                dst += RGB.channels
-                src += P.channels
-            }
-        }
-    }
-    return newImage
-}
-
 extension Image where P: RGBWithAlpha {
+    /// Extract RGB image.
+    /// This method simply ignores alpha channel.
     @inlinable
     public func toRGB() -> Image<RGB, T> {
-        return removeAlpha(image: self)
+        var newImage = Image<RGB, T>(width: width, height: height)
+
+        var srcColor = P.redIndex
+        var dstColor = RGB.red.rawValue
+
+        for _ in 0..<width*height {
+            newImage.data[dstColor+0] = data[srcColor+0]
+            newImage.data[dstColor+1] = data[srcColor+1]
+            newImage.data[dstColor+2] = data[srcColor+2]
+
+            srcColor += P.channels
+            dstColor += RGB.channels
+        }
+
+        return newImage
     }
 }
 

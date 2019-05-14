@@ -2,8 +2,8 @@
 func strideCopy<T>(src: [T], srcOffset: Int, srcStride: Int,
                    dst: inout [T], dstOffset: Int, dstStride: Int,
                    count: Int) {
-    assert((src.count - srcOffset) / srcStride >= count)
-    assert((dst.count - dstOffset) / dstStride >= count)
+    assert(srcStride*(count-1) + srcOffset < src.count)
+    assert(dstStride*(count-1) + dstOffset < dst.count)
     
     var si = srcOffset
     var di = dstOffset
