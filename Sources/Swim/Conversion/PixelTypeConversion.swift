@@ -53,44 +53,26 @@ extension Image where P == RGB, T: BinaryInteger {
     @inlinable
     public func toBrightness() -> Image<Intensity, T> {
         var newImage = Image<Intensity, T>.zeros(like: self)
-        self.data.withUnsafeBufferPointer {
-            var src = $0.baseAddress!
-            newImage.data.withUnsafeMutableBufferPointer {
-                var dst = $0.baseAddress!
-                for _ in 0..<width*height {
-                    var sum = Int(src.pointee)
-                    src += 1
-                    sum += Int(src.pointee)
-                    src += 1
-                    sum += Int(src.pointee)
-                    src += 1
-                    dst.pointee = T(sum / 3)
-                    dst += 1
-                }
-            }
+        
+        for i in 0..<width*height {
+            let sum = Int(data[3*i+0]) + Int(data[3*i+1]) + Int(data[3*i+2])
+            newImage.data[i] = T(sum / 3)
         }
+        
         return newImage
     }
     
     @inlinable
     public func toLuminance() -> Image<Intensity, T> {
         var newImage = Image<Intensity, T>.zeros(like: self)
-        self.data.withUnsafeBufferPointer {
-            var src = $0.baseAddress!
-            newImage.data.withUnsafeMutableBufferPointer {
-                var dst = $0.baseAddress!
-                for _ in 0..<width*height {
-                    var sum = 2126 * Int(src.pointee)
-                    src += 1
-                    sum += 7152 * Int(src.pointee)
-                    src += 1
-                    sum += 0722 * Int(src.pointee)
-                    src += 1
-                    dst.pointee = T(sum / 10000)
-                    dst += 1
-                }
-            }
+        
+        for i in 0..<width*height {
+            var sum = 2126 * Int(data[3*i+0])
+            sum += 7152 * Int(data[3*i+1])
+            sum += 0722 * Int(data[3*i+2])
+            newImage.data[i] = T(sum / 10000)
         }
+        
         return newImage
     }
 }
@@ -99,21 +81,9 @@ extension Image where P == RGB, T: FloatingPoint {
     @inlinable
     public func toBrightness() -> Image<Intensity, T> {
         var newImage = Image<Intensity, T>.zeros(like: self)
-        self.data.withUnsafeBufferPointer {
-            var src = $0.baseAddress!
-            newImage.data.withUnsafeMutableBufferPointer {
-                var dst = $0.baseAddress!
-                for _ in 0..<width*height {
-                    dst.pointee = src.pointee
-                    src += 1
-                    dst.pointee += src.pointee
-                    src += 1
-                    dst.pointee += src.pointee
-                    src += 1
-                    dst.pointee /= 3
-                    dst += 1
-                }
-            }
+        
+        for i in 0..<width*height {
+            newImage.data[i] = (data[3*i+0] + data[3*i+1] + data[3*i+2]) / 3
         }
         
         return newImage
@@ -124,21 +94,14 @@ extension Image where P == RGB, T: BinaryFloatingPoint {
     @inlinable
     public func toLuminance() -> Image<Intensity, T> {
         var newImage = Image<Intensity, T>.zeros(like: self)
-        self.data.withUnsafeBufferPointer {
-            var src = $0.baseAddress!
-            newImage.data.withUnsafeMutableBufferPointer {
-                var dst = $0.baseAddress!
-                for _ in 0..<width*height {
-                    dst.pointee = 0.2126 * src.pointee
-                    src += 1
-                    dst.pointee += 0.7152 * src.pointee
-                    src += 1
-                    dst.pointee += 0.0722 * src.pointee
-                    src += 1
-                    dst += 1
-                }
-            }
+        
+        for i in 0..<width*height {
+            newImage.data[i] = 0.2126 * data[3*i+0]
+            newImage.data[i] += 0.7152 * data[3*i+1]
+            newImage.data[i] += 0.0722 * data[3*i+2]
         }
+        
+        
         return newImage
     }
 }

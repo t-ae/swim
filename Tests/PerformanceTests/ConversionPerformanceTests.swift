@@ -49,6 +49,7 @@ class ConversionPerformanceTests: XCTestCase {
             }
         }
     }
+    
     func testBrightnessInt() {
         let data = [Int](repeating: 0, count: 1920*1080*3)
         let image = Image(width: 1920, height: 1080, rgb: data)
