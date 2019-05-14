@@ -78,8 +78,8 @@ let brightness: Image<Intensity, Float> = image.toBrightness()
 let luminance: Image<Intensity, Float> = image.toLuminance()
 
 // type conversion
-let doubleImage1 = Image<RGB, Double>(cast: image)
-let doubleImage2 = Image(cast: image, to: Double.self) // ditto
+let doubleImage1: Image<RGB, Double> = image.cast()
+let doubleImage2 = image.cast(to: Double.self) // ditto
 
 // pixel conversion
 let redOnlyRGBA = image.pixelwiseConverted { px in 

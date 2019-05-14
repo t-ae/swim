@@ -31,7 +31,7 @@ class IntegralImageTests: XCTestCase {
             let image = Image<Intensity, UInt8>(width: 128, height: 128, value: 255)
             
             XCTAssertEqual(IntegralImageConverter.convert(image: image),
-                           IntegralImageConverter.convert(image: Image(cast: image, to: Int.self)))
+                           IntegralImageConverter.convert(image: image.cast(to: Int.self)))
         }
     }
     

@@ -19,13 +19,13 @@ class HistogramEqualizerVisualTests: XCTestCase {
         let path = testResoruceRoot().appendingPathComponent("lena_512_gray.png")
         var lena_uint8 = try! Image<RGB, UInt8>(contentsOf: path)
         lena_uint8.channelwiseConvert { UInt8(255 * pow(Double($0), 2) / pow(255, 2)) }
-        let lena = Image(cast: lena_uint8, to: Int.self)
+        let lena = lena_uint8.cast(to: Int.self)
         
         
         let eq = HistogramEqualizer.equalize(image: lena)
         
         let image = Image.concatH([lena, eq])
-        let ns = Image(cast: image, to: UInt8.self).nsImage()
+        let ns = image.cast(to: UInt8.self).nsImage()
         
         XCTAssertTrue(ns.isValid, "break")
     }

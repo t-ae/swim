@@ -138,8 +138,7 @@ extension Image where P == Intensity, T == Float {
     @inlinable
     public init(contentsOf url: URL) throws {
         let uint8 = try Image<P, UInt8>(contentsOf: url)
-        self.init(cast: uint8)
-        self /= T(UInt8.max)
+        self = uint8.cast() / T(UInt8.max)
     }
 }
 
@@ -150,8 +149,7 @@ extension Image where P == IntensityAlpha, T == Float {
     @inlinable
     public init(contentsOf url: URL) throws {
         let uint8 = try Image<P, UInt8>(contentsOf: url)
-        self.init(cast: uint8)
-        self /= T(UInt8.max)
+        self = uint8.cast() / T(UInt8.max)
     }
 }
 
@@ -162,8 +160,7 @@ extension Image where P == RGB, T == Float {
     @inlinable
     public init(contentsOf url: URL) throws {
         let uint8 = try Image<P, UInt8>(contentsOf: url)
-        self.init(cast: uint8)
-        self /= T(UInt8.max)
+        self = uint8.cast() / T(UInt8.max)
     }
 }
 
@@ -174,8 +171,7 @@ extension Image where P == RGBA, T == Float {
     @inlinable
     public init(contentsOf url: URL) throws {
         let uint8 = try Image<P, UInt8>(contentsOf: url)
-        self.init(cast: uint8)
-        self /= T(UInt8.max)
+        self = uint8.cast() / T(UInt8.max)
     }
 }
 
@@ -187,8 +183,7 @@ extension Image where P == Intensity, T == Double {
     @inlinable
     public init(contentsOf url: URL) throws {
         let uint8 = try Image<P, UInt8>(contentsOf: url)
-        self.init(cast: uint8)
-        self /= T(UInt8.max)
+        self = uint8.cast() / T(UInt8.max)
     }
 }
 
@@ -199,8 +194,7 @@ extension Image where P == IntensityAlpha, T == Double {
     @inlinable
     public init(contentsOf url: URL) throws {
         let uint8 = try Image<P, UInt8>(contentsOf: url)
-        self.init(cast: uint8)
-        self /= T(UInt8.max)
+        self = uint8.cast() / T(UInt8.max)
     }
 }
 
@@ -211,8 +205,7 @@ extension Image where P == RGB, T == Double {
     @inlinable
     public init(contentsOf url: URL) throws {
         let uint8 = try Image<P, UInt8>(contentsOf: url)
-        self.init(cast: uint8)
-        self /= T(UInt8.max)
+        self = uint8.cast() / T(UInt8.max)
     }
 }
 
@@ -223,8 +216,7 @@ extension Image where P == RGBA, T == Double {
     @inlinable
     public init(contentsOf url: URL) throws {
         let uint8 = try Image<P, UInt8>(contentsOf: url)
-        self.init(cast: uint8)
-        self /= T(UInt8.max)
+        self = uint8.cast() / T(UInt8.max)
     }
 }
 

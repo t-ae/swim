@@ -100,8 +100,7 @@ extension Image where P: ImageFileFormat, T: BinaryFloatingPoint {
     public func write(to url: URL, format: WriteFormat) throws {
         var i255 = self.clipped(low: 0, high: 1) * 255
         i255.round()
-        let uint8 = Image<P, UInt8>(cast: i255)
-        try uint8.write(to: url, format: format)
+        try i255.cast(to: UInt8.self).write(to: url, format: format)
     }
 }
 
