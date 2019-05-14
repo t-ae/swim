@@ -46,7 +46,7 @@ extension Image where P == RGB, T: BinaryInteger {
             newImage.data.withUnsafeMutableBufferPointer {
                 var dst = $0.baseAddress!
                 for _ in 0..<width*height {
-                    dst.pointee += src.pointee
+                    dst.pointee = src.pointee
                     src += 1
                     dst.pointee += src.pointee
                     src += 1
@@ -68,7 +68,7 @@ extension Image where P == RGB, T: BinaryInteger {
             newImage.data.withUnsafeMutableBufferPointer {
                 var dst = $0.baseAddress!
                 for _ in 0..<width*height {
-                    dst.pointee += 2126 * src.pointee
+                    dst.pointee = 2126 * src.pointee
                     src += 1
                     dst.pointee += 7152 * src.pointee
                     src += 1
@@ -92,7 +92,7 @@ extension Image where P == RGB, T: FloatingPoint {
             newImage.data.withUnsafeMutableBufferPointer {
                 var dst = $0.baseAddress!
                 for _ in 0..<width*height {
-                    dst.pointee += src.pointee
+                    dst.pointee = src.pointee
                     src += 1
                     dst.pointee += src.pointee
                     src += 1
@@ -103,6 +103,7 @@ extension Image where P == RGB, T: FloatingPoint {
                 }
             }
         }
+        
         return newImage
     }
 }
@@ -116,7 +117,7 @@ extension Image where P == RGB, T: BinaryFloatingPoint {
             newImage.data.withUnsafeMutableBufferPointer {
                 var dst = $0.baseAddress!
                 for _ in 0..<width*height {
-                    dst.pointee += 0.2126 * src.pointee
+                    dst.pointee = 0.2126 * src.pointee
                     src += 1
                     dst.pointee += 0.7152 * src.pointee
                     src += 1

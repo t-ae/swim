@@ -35,15 +35,6 @@ class PerformanceTests: XCTestCase {
         }
     }
     
-    func testBrightness() {
-        let data = [Float](repeating: 0, count: 1920*1080*3)
-        let image = Image(width: 1920, height: 1080, rgb: data)
-        
-        measure {
-            _ = image.toBrightness()
-        }
-    }
-    
     func testSubimageSubscript() {
         let data = [Float](repeating: 0, count: 1920*1080*3)
         var image = Image(width: 1920, height: 1080, rgb: data)

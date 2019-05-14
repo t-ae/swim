@@ -43,4 +43,26 @@ class ConversionPerformanceTests: XCTestCase {
             _ = image.channelwiseConverted { $0 + 1 }
         }
     }
+    
+    func testBrightness() {
+        let data = [Double](repeating: 0, count: 1920*1080*3)
+        let image = Image(width: 1920, height: 1080, rgb: data)
+        
+        measure {
+            for _ in 0..<100 {
+                _ = image.toBrightness()
+            }
+        }
+    }
+    
+    func testLuminance() {
+        let data = [Double](repeating: 0, count: 1920*1080*3)
+        let image = Image(width: 1920, height: 1080, rgb: data)
+        
+        measure {
+            for _ in 0..<100 {
+                _ = image.toLuminance()
+            }
+        }
+    }
 }
