@@ -80,7 +80,9 @@ class PerformanceTests: XCTestCase {
         let image = Image(width: 1920, height: 1080, intensity: data)
         
         measure {
-            _ = IntegralImageConverter.convert(image: image)
+            for _ in 0..<100 {
+                _ = IntegralImageConverter.convert(image: image)
+            }
         }
     }
     
