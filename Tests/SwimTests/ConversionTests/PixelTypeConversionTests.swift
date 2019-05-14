@@ -70,6 +70,31 @@ class PixelTypeConversionTests: XCTestCase {
         }
     }
     
+    func testIntensityToRGBA() {
+        do {
+            let data = (0..<9).map { UInt8($0) }
+            let intensity = Image(width: 3, height: 3, intensity: data)
+            
+            XCTAssertEqual(intensity.toRGBA(with: 9),
+                           Image(width: 3,
+                                 height: 3,
+                                 data: [0, 0, 0, 9, 1, 1, 1, 9, 2, 2, 2, 9,
+                                        3, 3, 3, 9, 4, 4, 4, 9, 5, 5, 5, 9,
+                                        6, 6, 6, 9, 7, 7, 7, 9, 8, 8, 8, 9]))
+        }
+        do {
+            let data = (0..<9).map { Double($0) }
+            let intensity = Image(width: 3, height: 3, intensity: data)
+            
+            XCTAssertEqual(intensity.toRGBA(with: 9),
+                           Image(width: 3,
+                                 height: 3,
+                                 data: [0, 0, 0, 9, 1, 1, 1, 9, 2, 2, 2, 9,
+                                        3, 3, 3, 9, 4, 4, 4, 9, 5, 5, 5, 9,
+                                        6, 6, 6, 9, 7, 7, 7, 9, 8, 8, 8, 9]))
+        }
+    }
+    
     func testRGBtoRGBA() {
         do {
             let data = (0..<27).map { Int($0) }

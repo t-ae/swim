@@ -24,6 +24,28 @@ extension Image where P == Intensity {
         
         return newImage
     }
+    
+    @inlinable
+    func toRGBWithAlpha<P2: RGBWithAlpha>(with alphaValue: T) -> Image<P2, T> {
+        var newImage = Image<P2, T>.full(value: alphaValue, like: self)
+        
+        for i in 0..<data.count {
+            newImage.data[4*i+P2.redIndex+0] = data[i]
+            newImage.data[4*i+P2.redIndex+1] = data[i]
+            newImage.data[4*i+P2.redIndex+2] = data[i]
+        }
+        
+        return newImage
+    }
+    
+    @inlinable
+    public func toRGBA(with alphaValue: T) -> Image<RGBA, T> {
+        return toRGBWithAlpha(with: alphaValue)
+    }
+    @inlinable
+    public func toARGB(with alphaValue: T) -> Image<ARGB, T> {
+        return toRGBWithAlpha(with: alphaValue)
+    }
 }
 
 // MARK: - RGB -> Intensity

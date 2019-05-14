@@ -108,7 +108,7 @@ extension Image where P == RGBA, T == UInt8 {
             let intensity = Image<Intensity, UInt8>(width: imageData.width,
                                                     height: imageData.height,
                                                     data: imageData.data)
-            self = intensity.toRGB().toRGBA(with: UInt8.max)
+            self = intensity.toRGBA(with: UInt8.max)
         case 2:
             let ia = Image<IntensityAlpha, UInt8>(width: imageData.width,
                                                   height: imageData.height,
