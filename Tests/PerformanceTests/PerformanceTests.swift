@@ -66,7 +66,7 @@ class PerformanceTests: XCTestCase {
         let data = [Float](repeating: 0, count: 640*480*3)
         let image = Image(width: 640, height: 480, rgb: data)
         
-        let affine = AffineTransformation(scale: (-1, 1), translation: (640, 0))
+        let affine = AffineTransformation(scale: (2, 1), translation: (640, 0))
         
         measure {
             _ = try? image.warp(transformation: affine)
@@ -91,7 +91,7 @@ class PerformanceTests: XCTestCase {
         }
     }
     
-    func testFilter() {
+    func testRankFilter() {
         let data = [Float](repeating: 0, count: 640*480)
         let image = Image(width: 640, height: 480, intensity: data)
         
