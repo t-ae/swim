@@ -49,9 +49,8 @@ class ConversionPerformanceTests: XCTestCase {
             }
         }
     }
-    
-    func testBrightness() {
-        let data = [Double](repeating: 0, count: 1920*1080*3)
+    func testBrightnessInt() {
+        let data = [Int](repeating: 0, count: 1920*1080*3)
         let image = Image(width: 1920, height: 1080, rgb: data)
         
         measure {
@@ -61,7 +60,28 @@ class ConversionPerformanceTests: XCTestCase {
         }
     }
     
-    func testLuminance() {
+    func testBrightnessDouble() {
+        let data = [Double](repeating: 0, count: 1920*1080*3)
+        let image = Image(width: 1920, height: 1080, rgb: data)
+        
+        measure {
+            for _ in 0..<100 {
+                _ = image.toBrightness()
+            }
+        }
+    }
+    func testLuminanceInt() {
+        let data = [Int](repeating: 0, count: 1920*1080*3)
+        let image = Image(width: 1920, height: 1080, rgb: data)
+        
+        measure {
+            for _ in 0..<100 {
+                _ = image.toLuminance()
+            }
+        }
+    }
+    
+    func testLuminanceDouble() {
         let data = [Double](repeating: 0, count: 1920*1080*3)
         let image = Image(width: 1920, height: 1080, rgb: data)
         

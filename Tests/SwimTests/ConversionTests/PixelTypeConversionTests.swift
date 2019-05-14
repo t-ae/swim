@@ -5,6 +5,13 @@ class PixelTypeConversionTests: XCTestCase {
     
     func testToBrightness() {
         do {
+            let data = (0..<27).map { UInt8($0) }
+            let rgb = Image(width: 3, height: 3, rgb: data)
+            
+            let brightness = rgb.toBrightness()
+            XCTAssertEqual(brightness, Image(width: 3, height: 3, data: [1, 4, 7, 10, 13, 16, 19, 22, 25]))
+        }
+        do {
             let data = (0..<27).map { Int($0) }
             let rgb = Image(width: 3, height: 3, rgb: data)
             

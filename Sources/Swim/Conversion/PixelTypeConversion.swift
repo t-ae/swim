@@ -58,13 +58,13 @@ extension Image where P == RGB, T: BinaryInteger {
             newImage.data.withUnsafeMutableBufferPointer {
                 var dst = $0.baseAddress!
                 for _ in 0..<width*height {
-                    dst.pointee = src.pointee
+                    var sum = Int(src.pointee)
                     src += 1
-                    dst.pointee += src.pointee
+                    sum += Int(src.pointee)
                     src += 1
-                    dst.pointee += src.pointee
+                    sum += Int(src.pointee)
                     src += 1
-                    dst.pointee /= 3
+                    dst.pointee = T(sum / 3)
                     dst += 1
                 }
             }
@@ -80,13 +80,13 @@ extension Image where P == RGB, T: BinaryInteger {
             newImage.data.withUnsafeMutableBufferPointer {
                 var dst = $0.baseAddress!
                 for _ in 0..<width*height {
-                    dst.pointee = 2126 * src.pointee
+                    var sum = 2126 * Int(src.pointee)
                     src += 1
-                    dst.pointee += 7152 * src.pointee
+                    sum += 7152 * Int(src.pointee)
                     src += 1
-                    dst.pointee += 0722 * src.pointee
+                    sum += 0722 * Int(src.pointee)
                     src += 1
-                    dst.pointee /= 10000
+                    dst.pointee = T(sum / 10000)
                     dst += 1
                 }
             }
