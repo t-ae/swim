@@ -27,6 +27,12 @@ class IntegralImageTests: XCTestCase {
                                         5.0, 11.0, 16.0,
                                         7.0, 14.0, 20.0]))
         }
+        do {
+            let image = Image<Intensity, UInt8>(width: 128, height: 128, value: 255)
+            
+            XCTAssertEqual(IntegralImageConverter.convert(image: image),
+                           IntegralImageConverter.convert(image: Image(cast: image, to: Int.self)))
+        }
     }
     
 }
