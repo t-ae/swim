@@ -2,8 +2,8 @@
 func interleave<T: DataType>(data1: [T], data2: [T]) -> [T] {
     assert(data1.count == data2.count)
     
-    let pixelCount = data1.count
-    var newData = [T](repeating: T.swimDefaultValue, count: pixelCount * 2)
+    let count = data1.count
+    var newData = [T](repeating: T.swimDefaultValue, count: count * 2)
     
     data1.withUnsafeBufferPointer {
         var src1 = $0.baseAddress!
@@ -11,7 +11,7 @@ func interleave<T: DataType>(data1: [T], data2: [T]) -> [T] {
             var src2 = $0.baseAddress!
             newData.withUnsafeMutableBufferPointer {
                 var dst = $0.baseAddress!
-                for _ in 0..<pixelCount {
+                for _ in 0..<count {
                     dst.pointee = src1.pointee
                     dst += 1
                     src1 += 1
@@ -30,8 +30,8 @@ func interleave<T: DataType>(data1: [T], data2: [T]) -> [T] {
 func interleave<T: DataType>(data1: [T], data2: [T], data3: [T]) -> [T] {
     assert(data1.count == data2.count && data2.count == data3.count)
     
-    let pixelCount = data1.count
-    var newData = [T](repeating: T.swimDefaultValue, count: pixelCount * 3)
+    let count = data1.count
+    var newData = [T](repeating: T.swimDefaultValue, count: count * 3)
     
     data1.withUnsafeBufferPointer {
         var src1 = $0.baseAddress!
@@ -41,7 +41,7 @@ func interleave<T: DataType>(data1: [T], data2: [T], data3: [T]) -> [T] {
                 var src3 = $0.baseAddress!
                 newData.withUnsafeMutableBufferPointer {
                     var dst = $0.baseAddress!
-                    for _ in 0..<pixelCount {
+                    for _ in 0..<count {
                         dst.pointee = src1.pointee
                         dst += 1
                         src1 += 1
@@ -64,8 +64,8 @@ func interleave<T: DataType>(data1: [T], data2: [T], data3: [T]) -> [T] {
 func interleave<T: DataType>(data1: [T], data2: [T], data3: [T], data4: [T]) -> [T] {
     assert(data1.count == data2.count && data2.count == data3.count && data3.count == data4.count)
     
-    let pixelCount = data1.count
-    var newData = [T](repeating: T.swimDefaultValue, count: pixelCount * 4)
+    let count = data1.count
+    var newData = [T](repeating: T.swimDefaultValue, count: count * 4)
     
     data1.withUnsafeBufferPointer {
         var src1 = $0.baseAddress!
@@ -77,7 +77,7 @@ func interleave<T: DataType>(data1: [T], data2: [T], data3: [T], data4: [T]) -> 
                     var src4 = $0.baseAddress!
                     newData.withUnsafeMutableBufferPointer {
                         var dst = $0.baseAddress!
-                        for _ in 0..<pixelCount {
+                        for _ in 0..<count {
                             dst.pointee = src1.pointee
                             dst += 1
                             src1 += 1

@@ -62,6 +62,7 @@
 		A738270C22891A1A00412CA8 /* CorrelationPerformanceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A738270B22891A1A00412CA8 /* CorrelationPerformanceTests.swift */; };
 		A7382710228922F300412CA8 /* ClampTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A738270D228922EE00412CA8 /* ClampTests.swift */; };
 		A73827122289430B00412CA8 /* ConversionPerformanceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A73827112289430B00412CA8 /* ConversionPerformanceTests.swift */; };
+		A7382714228A4B2500412CA8 /* FillTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7382713228A4B2500412CA8 /* FillTests.swift */; };
 		OBJ_167 /* image_io.c in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_9 /* image_io.c */; };
 		OBJ_169 /* stb_image_write.h in Headers */ = {isa = PBXBuildFile; fileRef = OBJ_11 /* stb_image_write.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		OBJ_170 /* stb_image.h in Headers */ = {isa = PBXBuildFile; fileRef = OBJ_12 /* stb_image.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -289,6 +290,7 @@
 		A738270B22891A1A00412CA8 /* CorrelationPerformanceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CorrelationPerformanceTests.swift; sourceTree = "<group>"; };
 		A738270D228922EE00412CA8 /* ClampTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClampTests.swift; sourceTree = "<group>"; };
 		A73827112289430B00412CA8 /* ConversionPerformanceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversionPerformanceTests.swift; sourceTree = "<group>"; };
+		A7382713228A4B2500412CA8 /* FillTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FillTests.swift; sourceTree = "<group>"; };
 		OBJ_100 /* Im2colTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Im2colTests.swift; sourceTree = "<group>"; };
 		OBJ_101 /* IntegralImageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntegralImageTests.swift; sourceTree = "<group>"; };
 		OBJ_103 /* ImageArithmeticTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageArithmeticTests.swift; sourceTree = "<group>"; };
@@ -546,6 +548,7 @@
 				OBJ_124 /* RoundingTests.swift */,
 				A732B394227025B300B2256E /* PaddingTests.swift */,
 				A732B39D22716CF100B2256E /* AbsTests.swift */,
+				A7382713228A4B2500412CA8 /* FillTests.swift */,
 			);
 			path = ManipulationTests;
 			sourceTree = "<group>";
@@ -1226,6 +1229,7 @@
 				OBJ_286 /* ImageTests.swift in Sources */,
 				OBJ_288 /* ImageIOTests.swift in Sources */,
 				OBJ_289 /* BicubicInterpolationTests.swift in Sources */,
+				A7382714228A4B2500412CA8 /* FillTests.swift in Sources */,
 				A732C2972283C7EB00C96067 /* LikeInitializerTests.swift in Sources */,
 				OBJ_290 /* BilinearInterpolationTests.swift in Sources */,
 				OBJ_291 /* NearestNeighborInterpolatorTests.swift in Sources */,
