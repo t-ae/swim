@@ -107,7 +107,7 @@ extension Intensity: ConvertibleFromCGImage, ConvertibleToCGImage {
 extension RGB: ConvertibleToCGImage {
     @inlinable
     public static func toCGImage(image: Image<RGB, UInt8>) -> CGImage {
-        return Image<RGBA, UInt8>(image: image, alpha: UInt8.max).cgImage()
+        return image.toRGBA(with: UInt8.max).cgImage()
     }
 }
 

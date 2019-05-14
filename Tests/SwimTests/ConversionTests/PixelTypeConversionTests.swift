@@ -20,6 +20,31 @@ class PixelTypeConversionTests: XCTestCase {
         }
     }
     
+    func testIntensityToIntensityAlpha() {
+        do {
+            let data = (0..<9).map { UInt8($0) }
+            let intensity = Image(width: 3, height: 3, intensity: data)
+            
+            XCTAssertEqual(intensity.toIntensityAlpha(with: 9),
+                           Image(width: 3,
+                                 height: 3,
+                                 data: [0, 9, 1, 9, 2, 9,
+                                        3, 9, 4, 9, 5, 9,
+                                        6, 9, 7, 9, 8, 9]))
+        }
+        do {
+            let data = (0..<9).map { Double($0) }
+            let intensity = Image(width: 3, height: 3, intensity: data)
+            
+            XCTAssertEqual(intensity.toIntensityAlpha(with: 9),
+                           Image(width: 3,
+                                 height: 3,
+                                 data: [0, 9, 1, 9, 2, 9,
+                                        3, 9, 4, 9, 5, 9,
+                                        6, 9, 7, 9, 8, 9]))
+        }
+    }
+    
     func testIntensityToRGB() {
         do {
             let data = (0..<9).map { UInt8($0) }
@@ -49,7 +74,7 @@ class PixelTypeConversionTests: XCTestCase {
         do {
             let data = (0..<27).map { Int($0) }
             let rgb = Image(width: 3, height: 3, rgb: data)
-            let rgba = Image<RGBA, Int>(image: rgb, alpha: 5)
+            let rgba = rgb.toRGBA(with: 5)
             
             XCTAssertEqual(rgba[channel: .red], rgb[channel: .red])
             XCTAssertEqual(rgba[channel: .green], rgb[channel: .green])
@@ -59,7 +84,7 @@ class PixelTypeConversionTests: XCTestCase {
         do {
             let data = (0..<27).map { Double($0) }
             let rgb = Image(width: 3, height: 3, rgb: data)
-            let rgba = Image<RGBA, Double>(image: rgb, alpha: 0.5)
+            let rgba = rgb.toRGBA(with: 0.5)
             
             XCTAssertEqual(rgba[channel: .red], rgb[channel: .red])
             XCTAssertEqual(rgba[channel: .green], rgb[channel: .green])

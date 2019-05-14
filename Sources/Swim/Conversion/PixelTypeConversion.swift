@@ -3,6 +3,16 @@ import Foundation
 // MARK: - Intensity -> RGB
 extension Image where P == Intensity {
     @inlinable
+    public func toIntensityAlpha(with alphaValue: T) -> Image<IntensityAlpha, T> {
+        var newImage = Image<IntensityAlpha, T>.full(value: alphaValue, like: self)
+        
+        strideCopy(src: data, srcOffset: 0, srcStride: 1,
+                   dst: &newImage.data, dstOffset: 0, dstStride: 2, count: pixelCount)
+        
+        return newImage
+    }
+    
+    @inlinable
     public func toRGB() -> Image<RGB, T> {
         var newImage = Image<RGB, T>(width: width, height: height)
 
@@ -13,17 +23,6 @@ extension Image where P == Intensity {
         }
         
         return newImage
-    }
-}
-
-// MARK: - Intensity -> IntensityAlpha
-extension Image where P == IntensityAlpha {
-    @inlinable
-    public init(image: Image<Intensity, T>, alpha: T) {
-        self = Image<P, T>.full(value: alpha, like: image)
-        
-        strideCopy(src: image.data, srcOffset: 0, srcStride: 1,
-                   dst: &data, dstOffset: 0, dstStride: 2, count: pixelCount)
     }
 }
 
@@ -122,22 +121,36 @@ extension Image where P == RGB, T: BinaryFloatingPoint {
     }
 }
 
-// MARK: - RGB -> RGBWithAlpha
-extension Image where P: RGBWithAlpha {
+
+extension Image where P == RGB {
     @inlinable
-    public init(image: Image<RGB, T>, alpha: T) {
-        self = Image<P, T>.full(value: alpha, like: image)
-        image.data.withUnsafeBufferPointer {
+    func toRGBWithAlpha<P2: RGBWithAlpha>(with alphaValue: T) -> Image<P2, T> {
+        var newImage = Image<P2, T>.full(value: alphaValue, like: self)
+        let (width, height) = size
+        
+        data.withUnsafeBufferPointer {
             var src = $0.baseAddress!
-            data.withUnsafeMutableBufferPointer {
-                var dst = $0.baseAddress! + P.redIndex
-                for _ in 0..<image.width*image.height {
+            newImage.data.withUnsafeMutableBufferPointer {
+                var dst = $0.baseAddress! + P2.redIndex
+                for _ in 0..<width*height {
                     memcpy(dst, src, RGB.channels * MemoryLayout<T>.size)
                     src += RGB.channels
-                    dst += P.channels
+                    dst += P2.channels
                 }
             }
         }
+        
+        return newImage
+    }
+    
+    @inlinable
+    public func toRGBA(with alphaValue: T) -> Image<RGBA, T> {
+        return toRGBWithAlpha(with: alphaValue)
+    }
+    
+    @inlinable
+    public func toARGB(with alphaValue: T) -> Image<ARGB, T> {
+        return toRGBWithAlpha(with: alphaValue)
     }
 }
 

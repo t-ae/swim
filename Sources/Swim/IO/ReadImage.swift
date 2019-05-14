@@ -68,7 +68,7 @@ extension Image where P == IntensityAlpha, T == UInt8 {
             let intensity = Image<Intensity, UInt8>(width: imageData.width,
                                                     height: imageData.height,
                                                     data: imageData.data)
-            self.init(image: intensity, alpha: UInt8.max)
+            self = intensity.toIntensityAlpha(with: UInt8.max)
         case 2:
             self.init(width: imageData.width, height: imageData.height, data: imageData.data)
         default:
@@ -108,7 +108,7 @@ extension Image where P == RGBA, T == UInt8 {
             let intensity = Image<Intensity, UInt8>(width: imageData.width,
                                                     height: imageData.height,
                                                     data: imageData.data)
-            self.init(image: intensity.toRGB(), alpha: UInt8.max)
+            self = intensity.toRGB().toRGBA(with: UInt8.max)
         case 2:
             let ia = Image<IntensityAlpha, UInt8>(width: imageData.width,
                                                   height: imageData.height,
@@ -121,7 +121,7 @@ extension Image where P == RGBA, T == UInt8 {
             let rgb = Image<RGB, UInt8>(width: imageData.width,
                                         height: imageData.height,
                                         data: imageData.data)
-            self.init(image: rgb, alpha: UInt8.max)
+            self = rgb.toRGBA(with: UInt8.max)
         case 4:
             self.init(width: imageData.width, height: imageData.height, data: imageData.data)
         default:

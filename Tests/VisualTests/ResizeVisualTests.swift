@@ -42,7 +42,8 @@ extension ResizeVisualTests {
         
         let image = Image.concatH(images)
         
-        let nsImage = doubleToNSImage(Image<RGBA, Double>(image: image, alpha: 1))
+        let nsImage = doubleToNSImage(image.toRGBA(with: 1))
+        
         
         XCTAssertTrue(nsImage.isValid, "Break and check nsImage in debugger.")
     }
@@ -63,7 +64,7 @@ extension ResizeVisualTests {
         
         let image = Image.concatH(images)
         
-        let nsImage = doubleToNSImage(Image<RGBA, Double>(image: image, alpha: 1))
+        let nsImage = doubleToNSImage(image.toRGBA(with: 1))
         
         XCTAssertTrue(nsImage.isValid, "Break and check nsImage in debugger.")
     }
