@@ -66,15 +66,15 @@ extension BayerConverter {
         var newImage = Image<RGB, T>(width: image.width, height: image.height)
         
         func mean(_ points: [(x: Int, y: Int)]) -> T {
-            var sum: T = 0
+            var sum = 0
             var count = 0
             for p in points {
                 if 0 <= p.x && p.x < image.width && 0 <= p.y && p.y < image.height {
-                    sum += image[p.x, p.y, .intensity]
+                    sum += Int(image[p.x, p.y, .intensity])
                     count += 1
                 }
             }
-            return sum / T(count)
+            return T(sum / count)
         }
         
         func getPixelValue(x: Int, y: Int, channel: RGB) -> T {
