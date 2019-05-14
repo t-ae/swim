@@ -202,43 +202,43 @@ extension Image where P: RGBWithAlpha {
 }
 
 // MARK: - RGBA <-> ARGB
-@inlinable
-func permuteChannels<T>(data: [T], permutation: [Int]) -> [T] {
-    assert(Set(permutation) == Set(0..<permutation.count))
-    var newData = data
-    let numChannels = permutation.count
-    
-    data.withUnsafeBufferPointer {
-        var src = $0.baseAddress!
-        newData.withUnsafeMutableBufferPointer {
-            var dst = $0.baseAddress!
+extension Image where P: RGBWithAlpha {
+    @inlinable
+    func permuteAlpha<P2: RGBWithAlpha>() -> Image<P2, T> {
+        var newImage = Image<P2, T>(width: width, height: height)
+        
+        var srcAlpha = P.alphaIndex
+        var srcColor = P.redIndex
+        var dstAlpha = P2.alphaIndex
+        var dstColor = P2.redIndex
+        
+        for _ in 0..<width*height {
+            newImage.data[dstAlpha] = data[srcAlpha]
+            newImage.data[dstColor+0] = data[srcColor+0]
+            newImage.data[dstColor+1] = data[srcColor+1]
+            newImage.data[dstColor+2] = data[srcColor+2]
             
-            for _ in 0..<data.count/permutation.count {
-                for c in 0..<numChannels {
-                    dst[c] = src[permutation[c]]
-                }
-                src += numChannels
-                dst += numChannels
-            }
+            srcAlpha += P.channels
+            srcColor += P.channels
+            dstAlpha += P2.channels
+            dstColor += P2.channels
         }
+        
+        return newImage
     }
-    
-    return newData
 }
 
 extension Image where P == RGBA {
     @inlinable
     public func toARGB() -> Image<ARGB, T> {
-        let data = permuteChannels(data: self.data, permutation: [3, 0, 1, 2])
-        return Image<ARGB, T>(width: width, height: height, argb: data)
+        return permuteAlpha()
     }
 }
 
 extension Image where P == ARGB {
     @inlinable
     public func toRGBA() -> Image<RGBA, T> {
-        let data = permuteChannels(data: self.data, permutation: [1, 2, 3, 0])
-        return Image<RGBA, T>(width: width, height: height, rgba: data)
+        return permuteAlpha()
     }
 }
 
