@@ -12,10 +12,10 @@ class UIKitTests: XCTestCase {
         
         var start = 0
         gray[cols: start..<start+32].fill(0)
-        rgba[cols: start..<start+32].fill(Pixel(r: 0, g: 0, b: 0, a: 255))
+        rgba[cols: start..<start+32].fill(Pixel(r: 0, g: 0, b: 0, a: 128))
         start += 32
         gray[cols: start..<start+32].fill(UInt8(start))
-        rgba[cols: start..<start+32].fill(Pixel(r: 255, g: 0, b: 0, a: 255))
+        rgba[cols: start..<start+32].fill(Pixel(r: 255, g: 0, b: 0, a: 128))
         start += 32
         gray[cols: start..<start+32].fill(UInt8(start))
         rgba[cols: start..<start+32].fill(Pixel(r: 0, g: 255, b: 0, a: 255))

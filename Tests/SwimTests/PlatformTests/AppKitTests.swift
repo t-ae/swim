@@ -2,8 +2,39 @@ import XCTest
 import Swim
 
 class AppKitTests: XCTestCase {
-    let rgbaPath = testResoruceRoot().appendingPathComponent("lena_512.png")
-    let grayPath = testResoruceRoot().appendingPathComponent("lena_512_gray.png")
+    var gray: Image<Intensity, UInt8>!
+    var rgba: Image<RGBA, UInt8>!
+    
+    override func setUp() {
+        gray = Image(width: 256, height: 256, value: 255)
+        rgba = Image(width: 256, height: 256, value: 255)
+        
+        var start = 0
+        gray[cols: start..<start+32].fill(0)
+        rgba[cols: start..<start+32].fill(Pixel(r: 0, g: 0, b: 0, a: 128))
+        start += 32
+        gray[cols: start..<start+32].fill(UInt8(start))
+        rgba[cols: start..<start+32].fill(Pixel(r: 255, g: 0, b: 0, a: 128))
+        start += 32
+        gray[cols: start..<start+32].fill(UInt8(start))
+        rgba[cols: start..<start+32].fill(Pixel(r: 0, g: 255, b: 0, a: 255))
+        start += 32
+        gray[cols: start..<start+32].fill(UInt8(start))
+        rgba[cols: start..<start+32].fill(Pixel(r: 0, g: 0, b: 255, a: 255))
+        start += 32
+        gray[cols: start..<start+32].fill(UInt8(start))
+        rgba[cols: start..<start+32].fill(Pixel(r: 255, g: 255, b: 0, a: 255))
+        start += 32
+        gray[cols: start..<start+32].fill(UInt8(start))
+        rgba[cols: start..<start+32].fill(Pixel(r: 0, g: 255, b: 255, a: 255))
+        start += 32
+        gray[cols: start..<start+32].fill(UInt8(start))
+        rgba[cols: start..<start+32].fill(Pixel(r: 255, g: 0, b: 255, a: 255))
+        start += 32
+        gray[cols: start..<start+32].fill(255)
+        rgba[cols: start..<start+32].fill(Pixel(r: 255, g: 255, b: 255, a: 255))
+        start += 32
+    }
 }
 
 #if canImport(AppKit)
@@ -12,55 +43,43 @@ import AppKit
 
 extension AppKitTests {
     func testGray() {
-        let image = try! Image<Intensity, UInt8>(contentsOf: grayPath)
+        let nsImage1 = gray.nsImage()
+        let tmp = Image<Intensity, UInt8>(nsImage: nsImage1)!
+        let nsImage2 = tmp.nsImage()
         
-        let nsImage1 = image.nsImage()
+        XCTAssertEqual(gray, tmp)
         
-        let image2 = Image<Intensity, UInt8>(nsImage: nsImage1)!
-        let nsImage2 = image2.nsImage()
-        
-        XCTAssertTrue(nsImage1.isValid && nsImage2.isValid,
-                      "Break and check image")
+        XCTAssertFalse([nsImage1, nsImage2].isEmpty,
+                       "Break and check image")
     }
     
     func testRGBA() {
-        let baseImage = NSImage(contentsOf: rgbaPath)!
+        let nsImage1 = rgba.nsImage()
+        let tmp = Image<RGBA, UInt8>(nsImage: nsImage1)!
+        let nsImage2 = tmp.nsImage()
         
-        let image = Image<RGBA, UInt8>(nsImage: baseImage)!
+        XCTAssertEqual(rgba, tmp)
         
-        let nsImage1 = image.nsImage()
-        
-        let image2 = Image<RGBA, UInt8>(nsImage: nsImage1)!
-        let nsImage2 = image2.nsImage()
-        
-        XCTAssertTrue(nsImage1.isValid && nsImage2.isValid,
-                      "Break and check image")
+        XCTAssertFalse([nsImage1, nsImage2].isEmpty,
+                       "Break and check image")
     }
     
     func testGrayDouble() {
-        let image = try! Image<Intensity, Double>(contentsOf: grayPath)
+        let nsImage1 = gray.nsImage()
+        let tmp = Image<Intensity, Double>(nsImage: nsImage1)!
+        let nsImage2 = tmp.nsImage()
         
-        let nsImage1 = image.nsImage()
-        
-        let image2 = Image<Intensity, Double>(nsImage: nsImage1)!
-        let nsImage2 = image2.nsImage()
-        
-        XCTAssertTrue(nsImage1.isValid && nsImage2.isValid,
-                      "Break and check image")
+        XCTAssertFalse([nsImage1, nsImage2].isEmpty,
+                       "Break and check image")
     }
     
     func testRGBADouble() {
-        let baseImage = NSImage(contentsOf: rgbaPath)!
+        let nsImage1 = rgba.nsImage()
+        let tmp = Image<RGBA, Double>(nsImage: nsImage1)!
+        let nsImage2 = tmp.nsImage()
         
-        let image = Image<RGBA, Double>(nsImage: baseImage)!
-        
-        let nsImage1 = image.nsImage()
-        
-        let image2 = Image<RGBA, Double>(nsImage: nsImage1)!
-        let nsImage2 = image2.nsImage()
-        
-        XCTAssertTrue(nsImage1.isValid && nsImage2.isValid,
-                      "Break and check image")
+        XCTAssertFalse([nsImage1, nsImage2].isEmpty,
+                       "Break and check image")
     }
 }
 
