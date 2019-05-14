@@ -75,4 +75,14 @@ class ConversionPerformanceTests: XCTestCase {
             }
         }
     }
+    
+    func testIntensityToRGB() {
+        let g = Image<Intensity, Double>(width: 1920, height: 1080, value: 0.3)
+        
+        measure {
+            for _ in 0..<10 {
+                _ = g.toRGB()
+            }
+        }
+    }
 }

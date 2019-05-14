@@ -5,22 +5,13 @@ extension Image where P == Intensity {
     @inlinable
     public func toRGB() -> Image<RGB, T> {
         var newImage = Image<RGB, T>(width: width, height: height)
-        data.withUnsafeBufferPointer {
-            var src = $0.baseAddress!
-            newImage.data.withUnsafeMutableBufferPointer {
-                var dst = $0.baseAddress!
-                for _ in 0..<width*height {
-                    dst.pointee = src.pointee
-                    dst += 1
-                    dst.pointee = src.pointee
-                    dst += 1
-                    dst.pointee = src.pointee
-                    dst += 1
-                    
-                    src += 1
-                }
-            }
+
+        for i in 0..<data.count {
+            newImage.data[3*i+0] = data[i]
+            newImage.data[3*i+1] = data[i]
+            newImage.data[3*i+2] = data[i]
         }
+        
         return newImage
     }
 }
