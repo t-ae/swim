@@ -5,22 +5,9 @@ func interleave<T: DataType>(data1: [T], data2: [T]) -> [T] {
     let count = data1.count
     var newData = [T](repeating: T.swimDefaultValue, count: count * 2)
     
-    data1.withUnsafeBufferPointer {
-        var src1 = $0.baseAddress!
-        data2.withUnsafeBufferPointer {
-            var src2 = $0.baseAddress!
-            newData.withUnsafeMutableBufferPointer {
-                var dst = $0.baseAddress!
-                for _ in 0..<count {
-                    dst.pointee = src1.pointee
-                    dst += 1
-                    src1 += 1
-                    dst.pointee = src2.pointee
-                    dst += 1
-                    src2 += 1
-                }
-            }
-        }
+    for i in 0..<count {
+        newData[2*i+0] = data1[i]
+        newData[2*i+1] = data2[i]
     }
     
     return newData
@@ -33,28 +20,10 @@ func interleave<T: DataType>(data1: [T], data2: [T], data3: [T]) -> [T] {
     let count = data1.count
     var newData = [T](repeating: T.swimDefaultValue, count: count * 3)
     
-    data1.withUnsafeBufferPointer {
-        var src1 = $0.baseAddress!
-        data2.withUnsafeBufferPointer {
-            var src2 = $0.baseAddress!
-            data3.withUnsafeBufferPointer {
-                var src3 = $0.baseAddress!
-                newData.withUnsafeMutableBufferPointer {
-                    var dst = $0.baseAddress!
-                    for _ in 0..<count {
-                        dst.pointee = src1.pointee
-                        dst += 1
-                        src1 += 1
-                        dst.pointee = src2.pointee
-                        dst += 1
-                        src2 += 1
-                        dst.pointee = src3.pointee
-                        dst += 1
-                        src3 += 1
-                    }
-                }
-            }
-        }
+    for i in 0..<count {
+        newData[3*i+0] = data1[i]
+        newData[3*i+1] = data2[i]
+        newData[3*i+2] = data3[i]
     }
     
     return newData
@@ -67,34 +36,11 @@ func interleave<T: DataType>(data1: [T], data2: [T], data3: [T], data4: [T]) -> 
     let count = data1.count
     var newData = [T](repeating: T.swimDefaultValue, count: count * 4)
     
-    data1.withUnsafeBufferPointer {
-        var src1 = $0.baseAddress!
-        data2.withUnsafeBufferPointer {
-            var src2 = $0.baseAddress!
-            data3.withUnsafeBufferPointer {
-                var src3 = $0.baseAddress!
-                data4.withUnsafeBufferPointer {
-                    var src4 = $0.baseAddress!
-                    newData.withUnsafeMutableBufferPointer {
-                        var dst = $0.baseAddress!
-                        for _ in 0..<count {
-                            dst.pointee = src1.pointee
-                            dst += 1
-                            src1 += 1
-                            dst.pointee = src2.pointee
-                            dst += 1
-                            src2 += 1
-                            dst.pointee = src3.pointee
-                            dst += 1
-                            src3 += 1
-                            dst.pointee = src4.pointee
-                            dst += 1
-                            src4 += 1
-                        }
-                    }
-                }
-            }
-        }
+    for i in 0..<count {
+        newData[4*i+0] = data1[i]
+        newData[4*i+1] = data2[i]
+        newData[4*i+2] = data3[i]
+        newData[4*i+3] = data4[i]
     }
     
     return newData
