@@ -50,5 +50,22 @@ class ChannelCompositionTests: XCTestCase {
             XCTAssertEqual(image[channel: .blue], blue)
             XCTAssertEqual(image[channel: .alpha], alpha)
         }
+        
+        do {
+            let rgb = Image<RGB, UInt8>(width: 2, height: 2, data: (0..<12).map { UInt8($0) })
+            let a = Image<Intensity, UInt8>(width: 2, height: 2, data: (13..<17).map { UInt8($0) })
+            
+            let rgba = Image(rgb: rgb, a: a)
+            XCTAssertEqual(rgba[channel: .red], rgb[channel: .red])
+            XCTAssertEqual(rgba[channel: .green], rgb[channel: .green])
+            XCTAssertEqual(rgba[channel: .blue], rgb[channel: .blue])
+            XCTAssertEqual(rgba[channel: .alpha], a)
+            
+            let argb = Image(a: a, rgb: rgb)
+            XCTAssertEqual(argb[channel: .red], rgb[channel: .red])
+            XCTAssertEqual(argb[channel: .green], rgb[channel: .green])
+            XCTAssertEqual(argb[channel: .blue], rgb[channel: .blue])
+            XCTAssertEqual(argb[channel: .alpha], a)
+        }
     }
 }
