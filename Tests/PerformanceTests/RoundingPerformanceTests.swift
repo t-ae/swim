@@ -6,7 +6,7 @@ class RoundingPerformanceTests: XCTestCase {
         var image = Image<RGBA, Double>(width: 3840, height: 2160, value: 1)
         
         measure {
-            image.round()
+            image.floor()
         }
     }
     
@@ -14,7 +14,7 @@ class RoundingPerformanceTests: XCTestCase {
         var image = Image<RGBA, Double>(width: 3840, height: 2160, value: 1)
         
         measure {
-            image.round()
+            image.ceil()
         }
     }
     
