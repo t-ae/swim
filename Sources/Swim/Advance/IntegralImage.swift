@@ -1,28 +1,24 @@
 public enum IntegralImageConverter {
     /// Create integral image from input image.
+    @inlinable
     public static func convert<T: AdditiveArithmetic>(image: Image<Intensity, T>) -> Image<Intensity, T> {
         var newImage = image
         
-        newImage.data.withUnsafeMutableBufferPointer {
-            var p = $0.baseAddress! + 1
-            
-            // First row
-            for _ in 1..<image.width {
-                p.pointee += (p-1).pointee
-                p += 1
+        // First row
+        do {
+            var rowsum = newImage.data[0]
+            for i in 1..<newImage.width {
+                rowsum += newImage.data[i]
+                newImage.data[i] = rowsum
             }
-            
-            // Rest rows
-            var p2 = $0.baseAddress!
-            for _ in 1..<image.height {
-                var rowsum = T.zero
-                
-                for _ in 0..<image.width {
-                    rowsum += p.pointee
-                    p.pointee = p2.pointee + rowsum
-                    p += 1
-                    p2 += 1
-                }
+        }
+        
+        // Rest rows
+        for i in stride(from: newImage.width, to: newImage.data.count, by: newImage.width) {
+            var rowsum = T.zero
+            for x in 0..<image.width {
+                rowsum += newImage.data[i+x]
+                newImage.data[i+x] = rowsum + newImage.data[i+x-newImage.width]
             }
         }
         
