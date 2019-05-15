@@ -339,13 +339,15 @@ extension OtherVisualTests {
         let lena = try! Image<Intensity, Double>(contentsOf: path)
         
         let size = 64
-        let templatePosition = (x: 128, y: 128)
-        let template = lena[Rect(x: templatePosition.x, y: templatePosition.y, width: size, height: size)]
+        let templatePosition = (x: 127, y: 127)
+        var template = lena[Rect(x: templatePosition.x, y: templatePosition.y, width: size, height: size)]
+        
+        template.channelwiseConvert { pow($0, 2) }
         
         var maxc = -Double.infinity
         var maxPosition = (x: -1, y: -1)
-        for y in 0..<lena.height-size {
-            for x in 0..<lena.width-size {
+        for y in stride(from: 0, to: lena.height-size, by: 2) {
+            for x in stride(from: 0, to: lena.width-size, by: 2) {
                 let patch = lena[Rect(x: x, y: y, width: size, height: size)]
                 let c = Correlation.zncc(patch, template)
                 if c > maxc {
@@ -355,8 +357,8 @@ extension OtherVisualTests {
             }
         }
         
-        XCTAssertEqual(maxPosition.x, templatePosition.x)
-        XCTAssertEqual(maxPosition.y, templatePosition.y)
+        XCTAssertTrue([-1, 1].contains { maxPosition.x == $0 + templatePosition.x })
+        XCTAssertTrue([-1, 1].contains { maxPosition.y == $0 + templatePosition.y })
     }
 }
 

@@ -10,7 +10,7 @@ extension HistogramEqualizerVisualTests {
     func testHistogramEqualizer() {
         let path = testResoruceRoot().appendingPathComponent("lena_512_gray.png")
         var lena = try! Image<RGB, UInt8>(contentsOf: path)
-        lena.channelwiseConvert { UInt8(255 * pow(Double($0), 2) / pow(255, 2)) }
+        lena.channelwiseConvert { UInt8(pow(Double($0), 2) / 255) }
         
         let eq = HistogramEqualizer.equalize(image: lena)
         
@@ -23,7 +23,7 @@ extension HistogramEqualizerVisualTests {
     func testHistogramEqualizerInt() {
         let path = testResoruceRoot().appendingPathComponent("lena_512_gray.png")
         var lena_uint8 = try! Image<RGB, UInt8>(contentsOf: path)
-        lena_uint8.channelwiseConvert { UInt8(255 * pow(Double($0), 2) / pow(255, 2)) }
+        lena_uint8.channelwiseConvert { UInt8(pow(Double($0), 2) / 255) }
         let lena = lena_uint8.cast(to: Int.self)
         
         
@@ -38,7 +38,7 @@ extension HistogramEqualizerVisualTests {
     func testHistogramEqualizerColor() {
         let path = testResoruceRoot().appendingPathComponent("lena_512.png")
         var lena = try! Image<RGB, UInt8>(contentsOf: path)
-        lena.channelwiseConvert { UInt8(255 * pow(Double($0), 2) / pow(255, 2)) }
+        lena.channelwiseConvert { UInt8(pow(Double($0), 2) / 255) }
         
         // each channel respectively
         var eq1 = lena
