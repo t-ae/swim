@@ -87,21 +87,21 @@ extension BayerConverter {
             case (false, false, .green):
                 return mean([(x-1, y), (x+1, y), (x, y-1), (x, y+1)])
             case (false, false, .blue):
-                return image[x, y]
+                return image[x, y, .intensity]
             case (true, false, .red):
                 return mean([(x, y-1), (x, y+1)])
             case (true, false, .green):
-                return image[x, y]
+                return image[x, y, .intensity]
             case (true, false, .blue):
                 return mean([(x-1, y), (x+1, y)])
             case (false, true, .red):
                 return mean([(x-1, y), (x+1, y)])
             case (false, true, .green):
-                return image[x, y]
+                return image[x, y, .intensity]
             case (false, true, .blue):
                 return mean([(x, y-1), (x, y+1)])
             case (true, true, .red):
-                return image[x, y]
+                return image[x, y, .intensity]
             case (true, true, .green):
                 return mean([(x-1, y), (x+1, y), (x, y-1), (x, y+1)])
             case (true, true, .blue):
@@ -149,21 +149,21 @@ extension BayerConverter {
             case (false, false, .green):
                 return mean([(x-1, y), (x+1, y), (x, y-1), (x, y+1)])
             case (false, false, .blue):
-                return image[x, y]
+                return image[x, y, .intensity]
             case (true, false, .red):
                 return mean([(x, y-1), (x, y+1)])
             case (true, false, .green):
-                return image[x, y]
+                return image[x, y, .intensity]
             case (true, false, .blue):
                 return mean([(x-1, y), (x+1, y)])
             case (false, true, .red):
                 return mean([(x-1, y), (x+1, y)])
             case (false, true, .green):
-                return image[x, y]
+                return image[x, y, .intensity]
             case (false, true, .blue):
                 return mean([(x, y-1), (x, y+1)])
             case (true, true, .red):
-                return image[x, y]
+                return image[x, y, .intensity]
             case (true, true, .green):
                 return mean([(x-1, y), (x+1, y), (x, y-1), (x, y+1)])
             case (true, true, .blue):

@@ -1,17 +1,5 @@
 import Foundation
 
-extension Image where P == Intensity {
-    @inlinable
-    public subscript(x: Int, y: Int) -> T {
-        get {
-            return self[x, y, 0]
-        }
-        set {
-            self[x, y, 0] = newValue
-        }
-    }
-}
-
 extension Image {
     @inlinable
     public subscript(x: Int, y: Int, c: Int) -> T {

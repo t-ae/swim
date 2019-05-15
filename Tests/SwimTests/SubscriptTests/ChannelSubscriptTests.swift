@@ -87,7 +87,7 @@ class ChannelSubscriptTests: XCTestCase {
                                                              254, 254, 254, 254,
                                                              255, 255, 255, 255]))
             
-            image[channel: .red][0, 0] = 0
+            image[channel: .red][0, 0, 0] = 0
             XCTAssertEqual(image,
                            Image(width: 2, height: 2, data: [0, 252, 252, 252,
                                                              253, 253, 253, 253,
@@ -127,7 +127,7 @@ class ChannelSubscriptTests: XCTestCase {
                                                              254, 254, 254, 254,
                                                              255, 255, 255, 255]))
             
-            image[channel: .red][0, 0] = 0
+            image[channel: .red][0, 0, 0] = 0
             XCTAssertEqual(image,
                            Image(width: 2, height: 2, data: [0, 252, 252, 252,
                                                              253, 253, 253, 253,
@@ -167,7 +167,7 @@ class ChannelSubscriptTests: XCTestCase {
                                                              254, 254, 254, 254,
                                                              255, 255, 255, 255]))
             
-            image[channel: .red][0, 0] = 0
+            image[channel: .red][0, 0, 0] = 0
             XCTAssertEqual(image,
                            Image(width: 2, height: 2, data: [0, 252, 252, 252,
                                                              253, 253, 253, 253,
