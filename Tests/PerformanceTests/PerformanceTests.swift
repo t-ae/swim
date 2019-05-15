@@ -13,17 +13,6 @@ class PerformanceTests: XCTestCase {
         }
     }
     
-    func testConvert() {
-        let data = [UInt8](repeating: 0, count: 1920*1080*4)
-        var image = Image(width: 1920, height: 1080, rgba: data)
-        
-        measure {
-            image.pixelwiseConvert { px in
-                px += 1
-            }
-        }
-    }
-    
     func testFill() {
         let data = [Double](repeating: 0, count: 3840*2160*4)
         var image = Image(width: 3840, height: 2160, rgba: data)
@@ -32,26 +21,6 @@ class PerformanceTests: XCTestCase {
             for _ in 0..<10 {
                 image.fill(Pixel(r: 1, g: 1, b: 0, a: 1))
             }
-        }
-    }
-    
-    func testSubimageSubscript() {
-        let data = [Float](repeating: 0, count: 1920*1080*3)
-        var image = Image(width: 1920, height: 1080, rgb: data)
-        
-        measure {
-            for _ in 0..<100_000 {
-                image[0..<16, 0..<16] += 0.01
-            }
-        }
-    }
-    
-    func testChannelSubscript() {
-        let data = [Double](repeating: 0, count: 1920*1080*3)
-        var image = Image(width: 1920, height: 1080, rgb: data)
-        
-        measure {
-            image[channel: .red] += 0.01
         }
     }
     
