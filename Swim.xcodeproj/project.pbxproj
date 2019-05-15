@@ -51,7 +51,7 @@
 		A732B3B62271B14400B2256E /* SubscriptPerformanceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A732B3B52271B14400B2256E /* SubscriptPerformanceTests.swift */; };
 		A732B3B82272A7CB00B2256E /* ResizePerformanceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A732B3B72272A7CB00B2256E /* ResizePerformanceTests.swift */; };
 		A732B3BA2272DFC500B2256E /* BayerPerformanceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A732B3B92272DFC500B2256E /* BayerPerformanceTests.swift */; };
-		A732B3BC2272E4EA00B2256E /* OtherVisualTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_149 /* OtherVisualTests.swift */; };
+		A732B3BC2272E4EA00B2256E /* ApplicationVisualTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_149 /* ApplicationVisualTests.swift */; };
 		A732C28E2283AFEB00C96067 /* HistogramEqualizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A732C28C2283AFC000C96067 /* HistogramEqualizer.swift */; };
 		A732C2912283B13500C96067 /* HistogramEqualizerVisualTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A732C28F2283B13100C96067 /* HistogramEqualizerVisualTests.swift */; };
 		A732C2942283B68C00C96067 /* LikeInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A732C2922283B68A00C96067 /* LikeInitializer.swift */; };
@@ -325,7 +325,7 @@
 		OBJ_146 /* BayerVisualTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BayerVisualTests.swift; sourceTree = "<group>"; };
 		OBJ_147 /* BlendVisualTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlendVisualTests.swift; sourceTree = "<group>"; };
 		OBJ_148 /* FilterVisualTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterVisualTests.swift; sourceTree = "<group>"; };
-		OBJ_149 /* OtherVisualTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherVisualTests.swift; sourceTree = "<group>"; };
+		OBJ_149 /* ApplicationVisualTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationVisualTests.swift; sourceTree = "<group>"; };
 		OBJ_150 /* ResizeVisualTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResizeVisualTests.swift; sourceTree = "<group>"; };
 		OBJ_151 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		OBJ_152 /* WarpVisualTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WarpVisualTests.swift; sourceTree = "<group>"; };
@@ -630,11 +630,11 @@
 		OBJ_145 /* VisualTests */ = {
 			isa = PBXGroup;
 			children = (
+				OBJ_149 /* ApplicationVisualTests.swift */,
 				OBJ_146 /* BayerVisualTests.swift */,
 				OBJ_147 /* BlendVisualTests.swift */,
 				OBJ_148 /* FilterVisualTests.swift */,
 				A732C28F2283B13100C96067 /* HistogramEqualizerVisualTests.swift */,
-				OBJ_149 /* OtherVisualTests.swift */,
 				A732C29B2283D36D00C96067 /* PaddingVisualTests.swift */,
 				OBJ_150 /* ResizeVisualTests.swift */,
 				A732B39F227183B500B2256E /* SubimageVisualTests.swift */,
@@ -1256,7 +1256,7 @@
 				A732C29D2283D37600C96067 /* PaddingVisualTests.swift in Sources */,
 				A732B3A1227183F100B2256E /* SubimageVisualTests.swift in Sources */,
 				OBJ_318 /* BayerVisualTests.swift in Sources */,
-				A732B3BC2272E4EA00B2256E /* OtherVisualTests.swift in Sources */,
+				A732B3BC2272E4EA00B2256E /* ApplicationVisualTests.swift in Sources */,
 				OBJ_319 /* BlendVisualTests.swift in Sources */,
 				OBJ_320 /* FilterVisualTests.swift in Sources */,
 				OBJ_322 /* ResizeVisualTests.swift in Sources */,

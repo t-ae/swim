@@ -1,12 +1,12 @@
 import XCTest
 import Swim
 
-class OtherVisualTests: XCTestCase {
+class ApplicationVisualTests: XCTestCase {
 }
 
 #if canImport(AppKit)
 
-extension OtherVisualTests {
+extension ApplicationVisualTests {
     func testOpenClose() {
         let size = 100
         var image = Image<Intensity, Double>(width: size, height: size, value: 0)
