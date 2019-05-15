@@ -244,21 +244,24 @@ extension ApplicationVisualTests {
         images.append(gradH)
         
         var grad = Image.zeros(like: lena)
-        var dir = Image.zeros(like: lena) // 0, 1, 2, 3
+        var dir = Image.zeros(like: lena) // 0, 1, 2, 3 for -pi/2, -pi4, 0, pi/4
         
         for y in 0..<lena.width {
             for x in 0..<lena.height {
                 grad[x, y, 0] = hypot(gradV[x, y, 0], gradH[x, y, 0])
-                let angle = atan2(gradH[x, y, 0], gradV[x, y, 0]) // -pi ... pi
+                var angle = atan2(gradH[x, y, 0], gradV[x, y, 0]) // -pi ... pi
+                if angle < 0 { angle += .pi } // 0...pi
                 
-                if -3*Double.pi/4 <= angle && angle < -Double.pi/4 {
-                    dir[x, y, 0] = 1
-                } else if -Double.pi/4 <= angle && angle < Double.pi/4 {
+                if angle < Double.pi/8 {
                     dir[x, y, 0] = 2
-                } else if Double.pi/4 <= angle && angle < 3*Double.pi/4{
+                } else if angle < 3 * Double.pi / 8 {
                     dir[x, y, 0] = 3
-                } else {
+                } else if angle < 5 * Double.pi / 8 {
                     dir[x, y, 0] = 0
+                } else if angle < 7 * Double.pi / 8 {
+                    dir[x, y, 0] = 1
+                } else {
+                    dir[x, y, 0] = 2
                 }
             }
         }
@@ -270,20 +273,20 @@ extension ApplicationVisualTests {
         for y in 1..<lena.width-1 {
             for x in 1..<lena.height-1 {
                 switch dir[x, y, 0] {
-                case 0:
+                case 0: // -pi/2
                     if grad[x, y, 0] < grad[x-1, y, 0] || grad[x, y, 0] < grad[x+1, y, 0] {
                         sharpen[x, y, 0] = 0
                     }
-                case 1:
-                    if grad[x, y, 0] < grad[x-1, y, 0] || grad[x, y, 0] < grad[x+1, y, 0] {
+                case 1: // -pi/4
+                    if grad[x, y, 0] < grad[x-1, y-1, 0] || grad[x, y, 0] < grad[x+1, y+1, 0] {
                         sharpen[x, y, 0] = 0
                     }
-                case 2:
-                    if grad[x, y, 0] < grad[x-1, y, 0] || grad[x, y, 0] < grad[x+1, y, 0] {
+                case 2: // 0
+                    if grad[x, y, 0] < grad[x, y-1, 0] || grad[x, y, 0] < grad[x, y+1, 0] {
                         sharpen[x, y, 0] = 0
                     }
-                case 3:
-                    if grad[x, y, 0] < grad[x-1, y, 0] || grad[x, y, 0] < grad[x+1, y, 0] {
+                case 3: // pi/4
+                    if grad[x, y, 0] < grad[x-1, y+1, 0] || grad[x, y, 0] < grad[x+1, y-1, 0] {
                         sharpen[x, y, 0] = 0
                     }
                 default:
