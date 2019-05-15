@@ -34,11 +34,11 @@ extension BayerConverter {
         
         let (offsetX, offsetY) = pattern.offsetToBGGR
         
-        var yOdd = offsetY % 2 != 0
+        var redRow = offsetY % 2 != 0 // or blue row
         for y in 0..<image.height {
-            var xOdd = offsetX % 2 != 0
+            var oddCol = offsetX % 2 != 0
             for x in 0..<image.width {
-                switch (xOdd, yOdd) {
+                switch (oddCol, redRow) {
                 case (true, true): // r
                     newImage[x, y, .intensity] = image[x, y, .red]
                 case (false, true), (true, false): // g
@@ -47,10 +47,10 @@ extension BayerConverter {
                     newImage[x, y, .intensity] = image[x, y, .blue]
                 }
                 
-                xOdd.toggle()
+                oddCol.toggle()
             }
             
-            yOdd.toggle()
+            redRow.toggle()
         }
         
         return newImage
