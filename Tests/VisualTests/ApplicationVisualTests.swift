@@ -121,42 +121,47 @@ extension ApplicationVisualTests {
         }
         
         func perlin(width: Int, height: Int, fieldSize: Int) -> Image<Intensity, Double> {
-            var grad = [[(x: Double, y: Double)]](repeating: [], count: fieldSize)
-            for i in 0..<fieldSize {
-                for j in 0..<fieldSize {
-                    let gx = Double.random(in: -1..<1)
-                    let gy = Double.random(in: -1..<1)
-                    grad[i].append((gx, gy))
+            var gradX = Image<Intensity, Double>(width: fieldSize+1, height: fieldSize+1, value: 0)
+            var gradY = Image<Intensity, Double>(width: fieldSize+1, height: fieldSize+1, value: 0)
+            for y in 0..<fieldSize {
+                for x in 0..<fieldSize {
+                    gradX[x, y, .intensity] = Double.random(in: -1..<1)
+                    gradY[x, y, .intensity] = Double.random(in: -1..<1)
                 }
-                grad[i].append(grad[i][0])
             }
-            grad.append(grad[0])
+            gradX[row: gradX.height-1] = gradX[row: 0]
+            gradY[row: gradX.height-1] = gradY[row: 0]
+            gradX[col: gradX.height-1] = gradX[col: 0]
+            gradY[col: gradX.height-1] = gradY[col: 0]
             
             func value(x: Double, y: Double) -> Double {
-                let g00 = grad[Int(y)][Int(x)]
-                let g01 = grad[Int(y)][Int(x)+1]
-                let g10 = grad[Int(y)+1][Int(x)]
-                let g11 = grad[Int(y)+1][Int(x)+1]
+                let gx = gradX[Rect(x: Int(x), y: Int(y), width: 2, height: 2)]
+                let gy = gradY[Rect(x: Int(x), y: Int(y), width: 2, height: 2)]
                 
                 let u = x - floor(x)
                 let v = y - floor(y)
                 
-                let w00 = c(u) * c(v) * (g00.x * u + g00.y * v)
-                let w01 = c(u-1) * c(v) * (g01.x * (u-1) + g01.y * v)
-                let w10 = c(u) * c(v-1) * (g10.x * u + g10.y * (v-1))
-                let w11 = c(u-1) * c(v-1) * (g11.x * (u-1) + g11.y * (v-1))
+                let ui = Image(width: 2, height: 2, intensity: [u, u-1,
+                                                                u, u-1])
+                let vi = Image(width: 2, height: 2, intensity: [v, v,
+                                                                v-1, v-1])
+                let cui = ui.channelwiseConverted(c)
+                let cvi = vi.channelwiseConverted(c)
                 
-                let w0 = w00 - u * (w00 - w01)
-                let w1 = w10 - u * (w10 - w11)
+                // wavelet values
+                let w = cui * cvi * (gx * ui + gy * vi)
                 
-                return w0 - v * (w0 - w1)
+                // weight sum
+                let coef = Image(width: 2, height: 2, intensity: [(1-u)*(1-v), u*(1-v),
+                                                                  (1-u)*v, u*v])
+                return (w * coef).withUnsafeBufferPointer { $0.reduce(0, +) }
             }
             
             var image = Image<Intensity, Double>(width: width, height: height, value: 0)
             image.pixelwiseConvert { ref in
                 let px = Double(fieldSize) * Double(ref.x) / Double(width)
                 let py = Double(fieldSize) * Double(ref.y) / Double(height)
-                ref[0] = value(x: px, y: py)
+                ref[.intensity] = value(x: px, y: py)
             }
             
             return image
