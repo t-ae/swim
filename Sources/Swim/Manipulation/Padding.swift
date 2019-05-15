@@ -2,15 +2,18 @@ import Foundation
 
 extension Image {
     @inlinable
-    public func withPadding(_ padding: ((left: Int, right: Int), (top: Int, bottom: Int)),
+    public func withPadding(left: Int,
+                            right: Int,
+                            top: Int,
+                            bottom: Int,
                             edgeMode: EdgeMode<P, T>) -> Image<P, T> {
-        let width = self.width + padding.0.left + padding.0.right
-        let height = self.height + padding.1.top + padding.1.bottom
+        let width = self.width + left + right
+        let height = self.height + top + bottom
         var newImage = Image(width: width, height: height)
         
         newImage.pixelwiseConvert { ref in
-            let originalX = ref.x - padding.0.left
-            let originalY = ref.y - padding.1.top
+            let originalX = ref.x - left
+            let originalY = ref.y - top
             
             if let x = edgeMode.clampValue(value: originalX, max: self.width),
                 let y = edgeMode.clampValue(value: originalY, max: self.height) {
@@ -26,14 +29,23 @@ extension Image {
     }
     
     @inlinable
-    public func withPadding(_ padding: (x: Int, y: Int),
-                            edgeMode: EdgeMode<P, T>) -> Image<P, T> {
-        return withPadding(((padding.x, padding.x), (padding.y, padding.y)), edgeMode: edgeMode)
+    public func withPadding(x: Int, y: Int, edgeMode: EdgeMode<P, T>) -> Image<P, T> {
+        return withPadding(left: x, right: x, top: y, bottom: y, edgeMode: edgeMode)
     }
     
     @inlinable
-    public func withPadding(_ padding: Int,
+    public func withPadding(x: Int, edgeMode: EdgeMode<P, T>) -> Image<P, T> {
+        return withPadding(left: x, right: x, top: 0, bottom: 0, edgeMode: edgeMode)
+    }
+    
+    @inlinable
+    public func withPadding(y: Int, edgeMode: EdgeMode<P, T>) -> Image<P, T> {
+        return withPadding(left: 0, right: 0, top: y, bottom: y, edgeMode: edgeMode)
+    }
+    
+    @inlinable
+    public func withPadding(_ paddingSize: Int,
                             edgeMode: EdgeMode<P, T>) -> Image<P, T> {
-        return withPadding((padding, padding), edgeMode: edgeMode)
+        return withPadding(x: paddingSize, y: paddingSize, edgeMode: edgeMode)
     }
 }

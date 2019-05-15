@@ -5,7 +5,7 @@ class PaddingTests: XCTestCase {
     func testConstantPadding() {
         let image = Image(width: 2, height: 2, rgb: [0, 0, 0, 1, 1, 1, 2, 2, 2, 3, 3, 3])
         let pixel = Pixel(rgb: [4, 5, 6])
-        let padded = image.withPadding(((1, 2), (3, 4)), edgeMode: .constant(pixel: pixel))
+        let padded = image.withPadding(left: 1, right: 2, top: 3, bottom: 4, edgeMode: .constant(pixel: pixel))
         
         XCTAssertEqual(padded[1..<3, 3..<5], image)
         
