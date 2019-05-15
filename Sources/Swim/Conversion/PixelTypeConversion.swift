@@ -101,7 +101,6 @@ extension Image where P == RGB, T: BinaryFloatingPoint {
             newImage.data[i] += 0.0722 * data[3*i+2]
         }
         
-        
         return newImage
     }
 }
