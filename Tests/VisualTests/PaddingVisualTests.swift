@@ -2,7 +2,11 @@ import XCTest
 import Swim
 
 class PaddingVisualTests: XCTestCase {
+}
 
+#if canImport(AppKit)
+
+extension PaddingVisualTests {
     func testPadding() {
         let path = testResoruceRoot().appendingPathComponent("lena_128.png")
         let lena = try! Image<RGBA, UInt8>(contentsOf: path)
@@ -20,5 +24,6 @@ class PaddingVisualTests: XCTestCase {
         
         XCTAssertTrue(ns.isValid, "break")
     }
-
 }
+
+#endif

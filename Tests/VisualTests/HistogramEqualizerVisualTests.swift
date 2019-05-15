@@ -2,6 +2,11 @@ import XCTest
 import Swim
 
 class HistogramEqualizerVisualTests: XCTestCase {
+}
+
+#if canImport(AppKit)
+
+extension HistogramEqualizerVisualTests {
     func testHistogramEqualizer() {
         let path = testResoruceRoot().appendingPathComponent("lena_512_gray.png")
         var lena = try! Image<RGB, UInt8>(contentsOf: path)
@@ -50,3 +55,5 @@ class HistogramEqualizerVisualTests: XCTestCase {
         XCTAssertTrue(ns.isValid, "break")
     }
 }
+
+#endif

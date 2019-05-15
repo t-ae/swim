@@ -2,6 +2,11 @@ import XCTest
 import Swim
 
 class SubimageVisualTests: XCTestCase {
+}
+
+#if canImport(AppKit)
+
+extension SubimageVisualTests {
     func testSubimage() {
         let path = testResoruceRoot().appendingPathComponent("lena_256.png")
         let lena = try! Image<RGB, Double>(contentsOf: path)
@@ -23,3 +28,5 @@ class SubimageVisualTests: XCTestCase {
         XCTAssertTrue(nsImage.isValid, "Break and check nsImages in debugger.")
     }
 }
+
+#endif
