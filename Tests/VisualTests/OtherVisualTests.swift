@@ -333,6 +333,31 @@ extension OtherVisualTests {
         
         XCTAssertTrue(ns.isValid, "break")
     }
+    
+    func testTemplateMatching() {
+        let path = testResoruceRoot().appendingPathComponent("lena_512_gray.png")
+        let lena = try! Image<Intensity, Double>(contentsOf: path)
+        
+        let size = 64
+        let templatePosition = (x: 128, y: 128)
+        let template = lena[Rect(x: templatePosition.x, y: templatePosition.y, width: size, height: size)]
+        
+        var maxc = -Double.infinity
+        var maxPosition = (x: -1, y: -1)
+        for y in 0..<lena.height-size {
+            for x in 0..<lena.width-size {
+                let patch = lena[Rect(x: x, y: y, width: size, height: size)]
+                let c = Correlation.zncc(patch, template)
+                if c > maxc {
+                    maxc = c
+                    maxPosition = (x, y)
+                }
+            }
+        }
+        
+        XCTAssertEqual(maxPosition.x, templatePosition.x)
+        XCTAssertEqual(maxPosition.y, templatePosition.y)
+    }
 }
 
 #endif

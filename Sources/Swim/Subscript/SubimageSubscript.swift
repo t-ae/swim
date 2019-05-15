@@ -56,6 +56,17 @@ extension Image {
 
 extension Image {
     @inlinable
+    public subscript(rect: Rect) -> Image<P, T> {
+        get {
+            return getSubimage(x: rect.x, y: rect.y, width: rect.width, height: rect.height)
+        }
+        set {
+            setSubimage(x: rect.x, y: rect.y, width: rect.width, height: rect.height, newValue: newValue)
+        }
+    }
+    
+    
+    @inlinable
     public subscript(xRange: Range<Int>, yRange: Range<Int>) -> Image<P, T> {
         get {
             let x = xRange.lowerBound
