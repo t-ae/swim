@@ -143,7 +143,9 @@ extension RGBA: ConvertibleFromCGImage, ConvertibleToCGImage {
         let bitmapInfo = CGBitmapInfo(rawValue: CGImageAlphaInfo.premultipliedLast.rawValue)
             .union(CGBitmapInfo.byteOrder32Big)
         
-        let data = image.premultipliedImage().data
+        var image = image
+        image.applyPremultiplication()
+        let data = image.data
         let cfData = CFDataCreate(nil, data, data.count)!
         let dataProvider = CGDataProvider(data: cfData)!
         
@@ -163,21 +165,19 @@ extension RGBA: ConvertibleFromCGImage, ConvertibleToCGImage {
 
 extension Image where P == RGBA, T == UInt8 {
     @inlinable
-    func premultipliedImage() -> Image<P, T> {
-        var newImage = self
-        newImage.pixelwiseConvert { px in
+    mutating func applyPremultiplication() {
+        pixelwiseConvert { px in
             let alpha = Int(px[P.alpha])
             for c in [P.red, P.green, P.blue] {
                 px[c] = UInt8(Int(px[c]) * alpha / 255)
             }
         }
-        return newImage
     }
     
     @inlinable
     mutating func cancelPremultiplication() {
         pixelwiseConvert { px in
-            let alpha = Int(px[RGBA.alpha.rawValue])
+            let alpha = Int(px[RGBA.alpha])
             if alpha == 0 { return }
             for c in [RGBA.red, .green, .blue] {
                 px[c] = UInt8(255*Int(px[c]) / alpha)
