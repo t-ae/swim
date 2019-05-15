@@ -63,20 +63,17 @@ extension ApplicationVisualTests {
             
             var iterationMax = 0
             
-            for y in 0..<size {
-                for x in 0..<size {
-                    var z: (Double, Double) = ((Double(x)/Double(size) - 0.5)*range,
-                                               (Double(y)/Double(size) - 0.5)*range)
-                    
-                    for n in 0..<maxIteration*2 {
-                        let zr = z.0*z.0 - z.1*z.1 + c.0
-                        let zi = 2*z.0*z.1 + c.1
-                        z = (zr, zi)
-                        if z.0*z.0 + z.1*z.1 > 2*2 {
-                            image[x, y, 3] = Double(n)
-                            iterationMax = max(iterationMax, n)
-                            break
-                        }
+            image.pixelwiseConvert { ref in
+                var z: (Double, Double) = ((Double(ref.x)/Double(size) - 0.5)*range,
+                                           (Double(ref.y)/Double(size) - 0.5)*range)
+                for n in 0..<maxIteration*2 {
+                    let zr = z.0*z.0 - z.1*z.1 + c.0
+                    let zi = 2*z.0*z.1 + c.1
+                    z = (zr, zi)
+                    if z.0*z.0 + z.1*z.1 > 2*2 {
+                        ref[.alpha] = Double(n)
+                        iterationMax = max(iterationMax, n)
+                        break
                     }
                 }
             }
