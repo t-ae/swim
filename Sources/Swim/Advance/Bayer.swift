@@ -58,23 +58,86 @@ extension BayerConverter {
 }
 
 extension BayerConverter {
-    /// Reconstruct color image from bayer format image.
+    /// Convert color image to bayer format.
     @inlinable
     public func demosaic<T: BinaryInteger>(image: Image<Intensity, T>) -> Image<RGB, T> {
         let (offsetX, offsetY) = pattern.offsetToBGGR
         
         var newImage = Image<RGB, T>(width: image.width, height: image.height)
         
-        func mean(_ points: [(x: Int, y: Int)]) -> T {
+        func crossMean(x: Int, y: Int) -> T {
+            let index = image.dataIndex(x: x, y: y)
             var sum = 0
             var count = 0
-            for p in points {
-                if 0 <= p.x && p.x < image.width && 0 <= p.y && p.y < image.height {
-                    sum += Int(image[p.x, p.y, .intensity])
+            if x-1 >= 0 {
+                sum += Int(image.data[index - 1])
+                count += 1
+            }
+            if x+1 < image.width {
+                sum += Int(image.data[index + 1])
+                count += 1
+            }
+            if y-1 >= 0 {
+                sum += Int(image.data[index - image.width])
+                count += 1
+            }
+            if y+1 < image.height {
+                sum += Int(image.data[index + image.width])
+                count += 1
+            }
+            return T(sum / count)
+        }
+        
+        func diagMean(x: Int, y: Int) -> T {
+            let index = image.dataIndex(x: x, y: y)
+            var sum = 0
+            var count = 0
+            
+            if y-1 >= 0 {
+                if x-1 >= 0 {
+                    sum += Int(image.data[index - image.width - 1])
+                    count += 1
+                }
+                if x+1 < image.width {
+                    sum += Int(image.data[index - image.width + 1])
                     count += 1
                 }
             }
+            
+            if y+1 < image.height {
+                if x-1 >= 0 {
+                    sum += Int(image.data[index + image.width - 1])
+                    count += 1
+                }
+                if x+1 < image.width {
+                    sum += Int(image.data[index + image.width + 1])
+                    count += 1
+                }
+            }
+            
             return T(sum / count)
+        }
+        
+        func horizontalMean(x: Int, y: Int) -> T {
+            let index = image.dataIndex(x: x, y: y)
+            guard x-1 >= 0 else {
+                return image.data[index + 1]
+            }
+            guard x+1 < image.width else {
+                return image.data[index - 1]
+            }
+            return T((Int(image.data[index - 1]) + Int(image.data[index + 1])) / 2)
+        }
+        
+        func verticalMean(x: Int, y: Int) -> T {
+            let index = image.dataIndex(x: x, y: y)
+            guard y-1 >= 0 else {
+                return image.data[index + image.width]
+            }
+            guard y+1 < image.height else {
+                return image.data[index - image.width]
+            }
+            return T((Int(image.data[index - image.width]) + Int(image.data[index + image.width])) / 2)
         }
         
         func getPixelValue(x: Int, y: Int, channel: RGB) -> T {
@@ -83,29 +146,29 @@ extension BayerConverter {
             
             switch (xOdd, yOdd, channel) {
             case (false, false, .red):
-                return mean([(x-1, y-1), (x+1, y-1), (x-1, y+1), (x+1, y+1)])
+                return diagMean(x: x, y: y)
             case (false, false, .green):
-                return mean([(x-1, y), (x+1, y), (x, y-1), (x, y+1)])
+                return crossMean(x: x, y: y)
             case (false, false, .blue):
                 return image[x, y, .intensity]
             case (true, false, .red):
-                return mean([(x, y-1), (x, y+1)])
+                return verticalMean(x: x, y: y)
             case (true, false, .green):
                 return image[x, y, .intensity]
             case (true, false, .blue):
-                return mean([(x-1, y), (x+1, y)])
+                return horizontalMean(x: x, y: y)
             case (false, true, .red):
-                return mean([(x-1, y), (x+1, y)])
+                return horizontalMean(x: x, y: y)
             case (false, true, .green):
                 return image[x, y, .intensity]
             case (false, true, .blue):
-                return mean([(x, y-1), (x, y+1)])
+                return verticalMean(x: x, y: y)
             case (true, true, .red):
                 return image[x, y, .intensity]
             case (true, true, .green):
-                return mean([(x-1, y), (x+1, y), (x, y-1), (x, y+1)])
+                return crossMean(x: x, y: y)
             case (true, true, .blue):
-                return mean([(x-1, y-1), (x+1, y-1), (x-1, y+1), (x+1, y+1)])
+                return diagMean(x: x, y: y)
             }
         }
         
@@ -127,16 +190,79 @@ extension BayerConverter {
         
         var newImage = Image<RGB, T>(width: image.width, height: image.height)
         
-        func mean(_ points: [(x: Int, y: Int)]) -> T {
+        func crossMean(x: Int, y: Int) -> T {
+            let index = image.dataIndex(x: x, y: y)
             var sum: T = 0
             var count = 0
-            for p in points {
-                if 0 <= p.x && p.x < image.width && 0 <= p.y && p.y < image.height {
-                    sum += image[p.x, p.y, .intensity]
+            if x-1 >= 0 {
+                sum += image.data[index - 1]
+                count += 1
+            }
+            if x+1 < image.width {
+                sum += image.data[index + 1]
+                count += 1
+            }
+            if y-1 >= 0 {
+                sum += image.data[index - image.width]
+                count += 1
+            }
+            if y+1 < image.height {
+                sum += image.data[index + image.width]
+                count += 1
+            }
+            return sum / T(count)
+        }
+        
+        func diagMean(x: Int, y: Int) -> T {
+            let index = image.dataIndex(x: x, y: y)
+            var sum: T = 0
+            var count = 0
+            
+            if y-1 >= 0 {
+                if x-1 >= 0 {
+                    sum += image.data[index - image.width - 1]
+                    count += 1
+                }
+                if x+1 < image.width {
+                    sum += image.data[index - image.width + 1]
                     count += 1
                 }
             }
+            
+            if y+1 < image.height {
+                if x-1 >= 0 {
+                    sum += image.data[index + image.width - 1]
+                    count += 1
+                }
+                if x+1 < image.width {
+                    sum += image.data[index + image.width + 1]
+                    count += 1
+                }
+            }
+            
             return sum / T(count)
+        }
+        
+        func horizontalMean(x: Int, y: Int) -> T {
+            let index = image.dataIndex(x: x, y: y)
+            guard x-1 >= 0 else {
+                return image.data[index + 1]
+            }
+            guard x+1 < image.width else {
+                return image.data[index - 1]
+            }
+            return (image.data[index - 1] + image.data[index + 1]) / 2
+        }
+        
+        func verticalMean(x: Int, y: Int) -> T {
+            let index = image.dataIndex(x: x, y: y)
+            guard y-1 >= 0 else {
+                return image.data[index + image.width]
+            }
+            guard y+1 < image.height else {
+                return image.data[index - image.width]
+            }
+            return (image.data[index - image.width] + image.data[index + image.width]) / 2
         }
         
         func getPixelValue(x: Int, y: Int, channel: RGB) -> T {
@@ -145,29 +271,29 @@ extension BayerConverter {
             
             switch (xOdd, yOdd, channel) {
             case (false, false, .red):
-                return mean([(x-1, y-1), (x+1, y-1), (x-1, y+1), (x+1, y+1)])
+                return diagMean(x: x, y: y)
             case (false, false, .green):
-                return mean([(x-1, y), (x+1, y), (x, y-1), (x, y+1)])
+                return crossMean(x: x, y: y)
             case (false, false, .blue):
                 return image[x, y, .intensity]
             case (true, false, .red):
-                return mean([(x, y-1), (x, y+1)])
+                return verticalMean(x: x, y: y)
             case (true, false, .green):
                 return image[x, y, .intensity]
             case (true, false, .blue):
-                return mean([(x-1, y), (x+1, y)])
+                return horizontalMean(x: x, y: y)
             case (false, true, .red):
-                return mean([(x-1, y), (x+1, y)])
+                return horizontalMean(x: x, y: y)
             case (false, true, .green):
                 return image[x, y, .intensity]
             case (false, true, .blue):
-                return mean([(x, y-1), (x, y+1)])
+                return verticalMean(x: x, y: y)
             case (true, true, .red):
                 return image[x, y, .intensity]
             case (true, true, .green):
-                return mean([(x-1, y), (x+1, y), (x, y-1), (x, y+1)])
+                return crossMean(x: x, y: y)
             case (true, true, .blue):
-                return mean([(x-1, y-1), (x+1, y-1), (x-1, y+1), (x+1, y+1)])
+                return diagMean(x: x, y: y)
             }
         }
         
