@@ -347,7 +347,7 @@ extension ApplicationVisualTests {
         let templatePosition = (x: 127, y: 127)
         var template = lena[Rect(x: templatePosition.x, y: templatePosition.y, width: size, height: size)]
         
-        template.channelwiseConvert { pow($0, 2) }
+        template.power(2)
         
         var maxc = -Double.infinity
         var maxPosition = (x: -1, y: -1)
@@ -464,8 +464,8 @@ extension ApplicationVisualTests {
         im = im.transpose()
         
         // show spectrum
-        var spectrum = re.channelwiseConverted { pow($0, 2) }
-        spectrum += im.channelwiseConverted { pow($0, 2) }
+        var spectrum = re.powered(2)
+        spectrum += im.powered(2)
         spectrum.channelwiseConvert { log(sqrt($0)) }
         
         let w1 = 0..<spectrum.width/2
