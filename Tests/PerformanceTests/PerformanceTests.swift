@@ -50,6 +50,14 @@ class PerformanceTests: XCTestCase {
         }
     }
     
+    func testIm2col() {
+        let image = Image<Intensity, Double>(width: 1920, height: 1080, value: 0)
+        
+        measure {
+            _ = image.im2col(patchWidth: 3, patchHeight: 3)
+        }
+    }
+    
     func testConvolution() {
         let image = Image<RGBA, Double>(width: 1920, height: 1080, value: 0)
         
