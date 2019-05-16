@@ -365,6 +365,48 @@ extension ApplicationVisualTests {
         XCTAssertTrue([-1, 1].contains { maxPosition.x == $0 + templatePosition.x })
         XCTAssertTrue([-1, 1].contains { maxPosition.y == $0 + templatePosition.y })
     }
+    
+    func testDither() {
+        let path = testResoruceRoot().appendingPathComponent("lena_512_gray.png")
+        let lena = try! Image<Intensity, Double>(contentsOf: path)
+        var images: [Image<Intensity, Double>] = [lena]
+        
+        let randDither = lena.channelwiseConverted { px -> Double in
+            (px < .random(in: 0..<1)) ? 0 : 1
+        }
+        
+        images.append(randDither)
+        
+        var floydSteinbergDither = lena
+        for y in 0..<floydSteinbergDither.height {
+            for x in 0..<floydSteinbergDither.width {
+                let v = floydSteinbergDither[x, y, .intensity]
+                let nearest = round(v)
+                let diff = v - nearest
+                
+                floydSteinbergDither[x, y, .intensity] = nearest
+                
+                if x+1 < floydSteinbergDither.width {
+                    floydSteinbergDither[x+1, y, .intensity] += 7/16 * diff
+                }
+                if y+1 < floydSteinbergDither.height {
+                    if x-1 >= 0 {
+                        floydSteinbergDither[x-1, y+1, .intensity] += 3/16 * diff
+                    }
+                    floydSteinbergDither[x+0, y+1, .intensity] += 5/16 * diff
+                    if x+1 < floydSteinbergDither.width {
+                        floydSteinbergDither[x+1, y+1, .intensity] += 1/16 * diff
+                    }
+                }
+            }
+        }
+        images.append(floydSteinbergDither)
+        
+        // result
+        let ns = doubleToNSImage(Image.concatH(images))
+        
+        XCTAssertTrue(ns.isValid, "break")
+    }
 }
 
 #endif
