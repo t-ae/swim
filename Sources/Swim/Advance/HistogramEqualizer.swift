@@ -32,10 +32,9 @@ public enum HistogramEqualizer<T: BinaryInteger&DataType> {
     public static func equalize(image: Image<RGB, T>) -> Image<RGB, T> {
         var bins = [Int](repeating: 0, count: Int(UInt8.max)+1)
         
-        image.iteratePixels { ref in
-            bins[Int(ref[.red])] += 1
-            bins[Int(ref[.green])] += 1
-            bins[Int(ref[.blue])] += 1
+        // Histgram over all channels
+        for e in image.data {
+            bins[Int(e)] += 1
         }
         
         var cumsum = bins
