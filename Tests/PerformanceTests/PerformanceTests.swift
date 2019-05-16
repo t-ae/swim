@@ -97,4 +97,31 @@ class PerformanceTests: XCTestCase {
             _ = image.transpose()
         }
     }
+    
+    func testCombinationA() {
+        let image1 = Image<RGBA, Double>(width: 1920, height: 1080, value: 1)
+        let image2 = Image<RGBA, Double>(width: 1920, height: 1080, value: 2)
+        
+        measure {
+            _ = image1.powered(2) + image2.powered(2)
+        }
+    }
+    
+    func testCombinationB() {
+        let image1 = Image<RGBA, Double>(width: 1920, height: 1080, value: 1)
+        let image2 = Image<RGBA, Double>(width: 1920, height: 1080, value: 2)
+        
+        measure {
+            var newImage = Image.zeros(like: image1)
+            image1.withUnsafeBufferPointer { p1 in
+                image2.withUnsafeBufferPointer { p2 in
+                    newImage.withUnsafeMutableBufferPointer { p3 in
+                        for i in 0..<p3.count {
+                            p3[i] = pow(p1[i], 2) + pow(p2[i], 2)
+                        }
+                    }
+                }
+            }
+        }
+    }
 }

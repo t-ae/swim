@@ -464,8 +464,7 @@ extension ApplicationVisualTests {
         im = im.transpose()
         
         // show spectrum
-        var spectrum = re.powered(2)
-        spectrum += im.powered(2)
+        var spectrum = re.powered(2) + im.powered(2)
         spectrum.channelwiseConvert { log(sqrt($0)) }
         
         let w1 = 0..<spectrum.width/2

@@ -67,7 +67,7 @@
 		A7383806228D3CA400412CA8 /* TransposeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7383805228D3CA400412CA8 /* TransposeTests.swift */; };
 		A7383808228D438500412CA8 /* TransformationVisualTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7383807228D438500412CA8 /* TransformationVisualTests.swift */; };
 		A738380B228D993100412CA8 /* Power.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7383809228D992E00412CA8 /* Power.swift */; };
-		A738380D228D9B2700412CA8 /* PowerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A738380C228D9B2700412CA8 /* PowerTests.swift */; };
+		A738380E228DA05F00412CA8 /* PowerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A738380C228D9B2700412CA8 /* PowerTests.swift */; };
 		OBJ_167 /* image_io.c in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_9 /* image_io.c */; };
 		OBJ_169 /* stb_image_write.h in Headers */ = {isa = PBXBuildFile; fileRef = OBJ_11 /* stb_image_write.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		OBJ_170 /* stb_image.h in Headers */ = {isa = PBXBuildFile; fileRef = OBJ_12 /* stb_image.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -1253,6 +1253,7 @@
 				OBJ_297 /* ShapeTests.swift in Sources */,
 				OBJ_298 /* ChannelSubscriptTests.swift in Sources */,
 				OBJ_299 /* PixelSubscriptTests.swift in Sources */,
+				A738380E228DA05F00412CA8 /* PowerTests.swift in Sources */,
 				OBJ_300 /* SubimageSubscriptTests.swift in Sources */,
 				OBJ_301 /* AffineTransformationTests.swift in Sources */,
 				OBJ_302 /* ResizeTests.swift in Sources */,
@@ -1281,7 +1282,6 @@
 				OBJ_322 /* ResizeVisualTests.swift in Sources */,
 				OBJ_323 /* Utils.swift in Sources */,
 				OBJ_324 /* WarpVisualTests.swift in Sources */,
-				A738380D228D9B2700412CA8 /* PowerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
