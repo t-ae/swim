@@ -36,4 +36,11 @@ class PaddingTests: XCTestCase {
         
         XCTAssertEqual(padded, answer)
     }
+    
+    func testZeroPadding() {
+        let image = Image(width: 2, height: 2, rgb: [0, 0, 0, 1, 1, 1, 2, 2, 2, 3, 3, 3])
+        let padded = image.withPadding(0, edgeMode: .symmetric)
+        
+        XCTAssertEqual(padded, image)
+    }
 }

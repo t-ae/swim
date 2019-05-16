@@ -7,6 +7,11 @@ extension Image {
                             top: Int,
                             bottom: Int,
                             edgeMode: EdgeMode<P, T>) -> Image<P, T> {
+        precondition(left >= 0, "Padding size can't be negative.")
+        precondition(right >= 0, "Padding size can't be negative.")
+        precondition(top >= 0, "Padding size can't be negative.")
+        precondition(bottom >= 0, "Padding size can't be negative.")
+        
         let width = self.width + left + right
         let height = self.height + top + bottom
         var newImage = Image(width: width, height: height)
