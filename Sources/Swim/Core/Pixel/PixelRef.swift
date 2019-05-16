@@ -87,8 +87,8 @@ extension MutablePixelRef {
 extension Image {
     @inlinable
     public func withPixelRef<R>(x: Int, y: Int, _ body: (PixelRef<P, T>)->R) -> R {
+        let start = dataIndex(x: x, y: y)
         return data.withUnsafeBufferPointer {
-            let start = (y*width + x) * P.channels
             let bp = UnsafeBufferPointer(rebasing: $0[start..<start+P.channels])
             let ref = PixelRef<P, T>(x: x, y: y, pointer: bp)
             return body(ref)
@@ -97,9 +97,8 @@ extension Image {
     
     @inlinable
     public mutating func withMutablePixelRef<R>(x: Int, y: Int, _ body: (MutablePixelRef<P, T>)->R) -> R {
-        let width = self.width
+        let start = dataIndex(x: x, y: y)
         return data.withUnsafeMutableBufferPointer {
-            let start = (y*width + x) * P.channels
             let bp = UnsafeMutableBufferPointer(rebasing: $0[start..<start+P.channels])
             let ref = MutablePixelRef<P, T>(x: x, y: y, pointer: bp)
             return body(ref)
