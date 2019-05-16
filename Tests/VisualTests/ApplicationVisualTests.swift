@@ -407,6 +407,88 @@ extension ApplicationVisualTests {
         
         XCTAssertTrue(ns.isValid, "break")
     }
+    
+    func testFourierTransform() {
+        let path = testResoruceRoot().appendingPathComponent("lena_512_gray.png")
+        let lena = try! Image<Intensity, Double>(contentsOf: path).resize(width: 128, height: 128)
+        var images: [Image<Intensity, Double>] = [lena]
+        
+        func dft(re: Image<Intensity, Double>, im: Image<Intensity, Double>) -> (re: Image<Intensity, Double>, im: Image<Intensity, Double>) {
+            assert(re.size == im.size)
+            
+            var newRe = Image.zeros(like: re)
+            var newIm = Image.zeros(like: im)
+            
+            let width = re.width
+            
+            for y in 0..<re.height {
+                for x in 0..<width {
+                    for i in 0..<width {
+                        let c = cos(2 * Double.pi * Double(i) * Double(x) / Double(width))
+                        let s = sin(2 * Double.pi * Double(i) * Double(x) / Double(width))
+                        newRe[x, y, 0] += re[i, y, 0] * c + im[i, y, 0] * s
+                        newIm[x, y, 0] += -re[i, y, 0] * s + im[i, y, 0] * c
+                    }
+                }
+            }
+            
+            return (newRe, newIm)
+        }
+        func idft(re: Image<Intensity, Double>, im: Image<Intensity, Double>) -> (re: Image<Intensity, Double>, im: Image<Intensity, Double>) {
+            assert(re.size == im.size)
+            
+            var newRe = Image.zeros(like: re)
+            var newIm = Image.zeros(like: im)
+            
+            let width = re.width
+            
+            for y in 0..<re.height {
+                for x in 0..<width {
+                    for i in 0..<width {
+                        let c = cos(2 * Double.pi * Double(i) * Double(x) / Double(width))
+                        let s = sin(2 * Double.pi * Double(i) * Double(x) / Double(width))
+                        newRe[x, y, 0] += re[i, y, 0] * c - im[i, y, 0] * s
+                        newIm[x, y, 0] += re[i, y, 0] * s + im[i, y, 0] * c
+                    }
+                }
+            }
+            
+            return (newRe / Double(width), newIm / Double(width))
+        }
+        
+        // transform
+        let (hRe, hIm) = dft(re: lena, im: Image.zeros(like: lena))
+        
+        var (re, im) = dft(re: hRe.transpose(), im: hIm.transpose())
+        re = re.transpose()
+        im = im.transpose()
+        
+        // show spectorum
+        var spectorum = re.channelwiseConverted { pow($0, 2) }
+        spectorum += im.channelwiseConverted { pow($0, 2) }
+        spectorum.channelwiseConvert { log(sqrt($0)) }
+        
+        let w1 = 0..<spectorum.width/2
+        let w2 = spectorum.width/2..<spectorum.width
+        let h1 = 0..<spectorum.height/2
+        let h2 = spectorum.height/2..<spectorum.height
+        spectorum = Image.concat([[spectorum[w2, h2], spectorum[w1, h2]],
+                                [spectorum[w2, h1], spectorum[w1, h1]]])
+        
+        let (minSpectorum, maxSpectorum) = spectorum.withUnsafeBufferPointer { ($0.min()!, $0.max()!) }
+        images.append((spectorum - minSpectorum) / (maxSpectorum - minSpectorum))
+        
+        // inverse transform
+        let (hRe2, hIm2) = idft(re: re, im: im)
+        let (re2, _) = idft(re: hRe2.transpose(), im: hIm2.transpose())
+        
+        images.append(re2.transpose())
+        
+        // result
+        let ns = doubleToNSImage(Image.concatH(images))
+        
+        XCTAssertTrue(ns.isValid, "break")
+    }
 }
 
 #endif
