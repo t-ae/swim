@@ -1,5 +1,5 @@
 // MARK: - PixelType
-public protocol PixelType {
+public protocol PixelType: RawRepresentable {
     static var channels: Int { get }
     
     init?(rawValue: Int)

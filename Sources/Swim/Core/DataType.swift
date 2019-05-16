@@ -1,4 +1,4 @@
-public protocol DataType: Equatable {
+public protocol DataType {
     // TODO: We need it because currently there's no way to create Array with uninitialized buffer.
     // That feature will be introduced in Swift5.1. Then this propery will be removed.
     // https://github.com/apple/swift-evolution/blob/master/proposals/0245-array-uninitialized-initializer.md

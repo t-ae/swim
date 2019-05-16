@@ -56,7 +56,7 @@ extension Image {
     }
 }
 
-extension Image: Equatable {
+extension Image: Equatable where T: Equatable {
     @inlinable
     public static func ==(lhs: Image, rhs: Image) -> Bool {
         guard lhs.size == rhs.size else {

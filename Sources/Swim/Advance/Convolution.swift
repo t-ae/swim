@@ -83,7 +83,7 @@ extension Image where T: Numeric {
                         let xx = clamp(x+px-padLeft, min: 0, max: width-1)
                         
                         for c in 0..<P.channels {
-                            newImage[x, y, c] += self[xx, yy, c] * filter[px, py, 0]
+                            newImage[x, y, c] += self[xx, yy, c] * filter[px, py, .intensity]
                         }
                     }
                 }
