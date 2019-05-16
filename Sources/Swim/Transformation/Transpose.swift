@@ -1,8 +1,12 @@
-//
-//  Transpose.swift
-//  CStbImage
-//
-//  Created by Araki Takehiro on 2019/05/16.
-//
-
-import Foundation
+extension Image {
+    @inlinable
+    public func transpose() -> Image<P, T> {
+        var newImage = Image<P, T>(width: height, height: width)
+        
+        newImage.pixelwiseConvert { ref in
+            ref.assign(x: ref.y, y: ref.x, in: self)
+        }
+        
+        return newImage
+    }
+}

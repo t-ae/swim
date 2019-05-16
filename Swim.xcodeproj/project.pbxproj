@@ -63,6 +63,8 @@
 		A7382710228922F300412CA8 /* ClampTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A738270D228922EE00412CA8 /* ClampTests.swift */; };
 		A73827122289430B00412CA8 /* ConversionPerformanceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A73827112289430B00412CA8 /* ConversionPerformanceTests.swift */; };
 		A7382714228A4B2500412CA8 /* FillTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7382713228A4B2500412CA8 /* FillTests.swift */; };
+		A7383804228D3B9D00412CA8 /* Transpose.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7383802228D3B9900412CA8 /* Transpose.swift */; };
+		A7383806228D3CA400412CA8 /* TransposeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7383805228D3CA400412CA8 /* TransposeTests.swift */; };
 		OBJ_167 /* image_io.c in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_9 /* image_io.c */; };
 		OBJ_169 /* stb_image_write.h in Headers */ = {isa = PBXBuildFile; fileRef = OBJ_11 /* stb_image_write.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		OBJ_170 /* stb_image.h in Headers */ = {isa = PBXBuildFile; fileRef = OBJ_12 /* stb_image.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -289,6 +291,8 @@
 		A738270D228922EE00412CA8 /* ClampTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClampTests.swift; sourceTree = "<group>"; };
 		A73827112289430B00412CA8 /* ConversionPerformanceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversionPerformanceTests.swift; sourceTree = "<group>"; };
 		A7382713228A4B2500412CA8 /* FillTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FillTests.swift; sourceTree = "<group>"; };
+		A7383802228D3B9900412CA8 /* Transpose.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transpose.swift; sourceTree = "<group>"; };
+		A7383805228D3CA400412CA8 /* TransposeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransposeTests.swift; sourceTree = "<group>"; };
 		OBJ_100 /* Im2colTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Im2colTests.swift; sourceTree = "<group>"; };
 		OBJ_101 /* IntegralImageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntegralImageTests.swift; sourceTree = "<group>"; };
 		OBJ_103 /* ImageArithmeticTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageArithmeticTests.swift; sourceTree = "<group>"; };
@@ -584,6 +588,7 @@
 				OBJ_136 /* ResizeTests.swift */,
 				OBJ_137 /* TransformationTests.swift */,
 				OBJ_138 /* HomogeneousTransformationMatrixTests.swift */,
+				A7383805228D3CA400412CA8 /* TransposeTests.swift */,
 			);
 			path = TransformationTests;
 			sourceTree = "<group>";
@@ -834,6 +839,7 @@
 				OBJ_80 /* Rotate.swift */,
 				OBJ_81 /* Warp.swift */,
 				A732AC0B226DABB900B2256E /* HomogeneousTransformationMatrix.swift */,
+				A7383802228D3B9900412CA8 /* Transpose.swift */,
 			);
 			path = Transformation;
 			sourceTree = "<group>";
@@ -1175,6 +1181,7 @@
 				A732C2942283B68C00C96067 /* LikeInitializer.swift in Sources */,
 				OBJ_239 /* Flip.swift in Sources */,
 				A732C28E2283AFEB00C96067 /* HistogramEqualizer.swift in Sources */,
+				A7383804228D3B9D00412CA8 /* Transpose.swift in Sources */,
 				A732AC1B226EA36B00B2256E /* ScalarCompoundAssignmentOperator.swift in Sources */,
 				OBJ_240 /* Resize.swift in Sources */,
 				A732C5072284247C00C96067 /* IteratePixels.swift in Sources */,
@@ -1207,6 +1214,7 @@
 				OBJ_273 /* BayerTests.swift in Sources */,
 				OBJ_274 /* ConvolutionTests.swift in Sources */,
 				OBJ_275 /* CorrelationTests.swift in Sources */,
+				A7383806228D3CA400412CA8 /* TransposeTests.swift in Sources */,
 				OBJ_276 /* FilterTests.swift in Sources */,
 				OBJ_277 /* Im2colTests.swift in Sources */,
 				OBJ_278 /* IntegralImageTests.swift in Sources */,
