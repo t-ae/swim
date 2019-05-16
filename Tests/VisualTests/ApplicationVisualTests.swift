@@ -413,58 +413,53 @@ extension ApplicationVisualTests {
         let lena = try! Image<Intensity, Double>(contentsOf: path).resize(width: 128, height: 128)
         var images: [Image<Intensity, Double>] = [lena]
         
-        func dftx(re: Image<Intensity, Double>, im: Image<Intensity, Double>) -> (re: Image<Intensity, Double>, im: Image<Intensity, Double>) {
-            assert(re.size == im.size)
+        // User IntensityAlpha as Real/Imag respectively
+        
+        func dftx(image: Image<IntensityAlpha, Double>) -> Image<IntensityAlpha, Double> {
+            var newImage = Image.zeros(like: image)
             
-            var newRe = Image.zeros(like: re)
-            var newIm = Image.zeros(like: im)
+            let (width, height) = image.size
             
-            let width = re.width
-            
-            for y in 0..<re.height {
+            for y in 0..<height {
                 for x in 0..<width {
                     for i in 0..<width {
                         let c = cos(2 * Double.pi * Double(i) * Double(x) / Double(width))
                         let s = sin(2 * Double.pi * Double(i) * Double(x) / Double(width))
-                        newRe[x, y, 0] += re[i, y, 0] * c + im[i, y, 0] * s
-                        newIm[x, y, 0] += -re[i, y, 0] * s + im[i, y, 0] * c
+                        newImage[x, y, 0] += image[i, y, 0] * c + image[i, y, 1] * s
+                        newImage[x, y, 1] += -image[i, y, 0] * s + image[i, y, 1] * c
                     }
                 }
             }
             
-            return (newRe, newIm)
+            return newImage
         }
-        func idftx(re: Image<Intensity, Double>, im: Image<Intensity, Double>) -> (re: Image<Intensity, Double>, im: Image<Intensity, Double>) {
-            assert(re.size == im.size)
+        func idftx(image: Image<IntensityAlpha, Double>) -> Image<IntensityAlpha, Double> {
+            var newImage = Image.zeros(like: image)
             
-            var newRe = Image.zeros(like: re)
-            var newIm = Image.zeros(like: im)
+            let (width, height) = image.size
             
-            let width = re.width
-            
-            for y in 0..<re.height {
+            for y in 0..<height {
                 for x in 0..<width {
                     for i in 0..<width {
                         let c = cos(2 * Double.pi * Double(i) * Double(x) / Double(width))
                         let s = sin(2 * Double.pi * Double(i) * Double(x) / Double(width))
-                        newRe[x, y, 0] += re[i, y, 0] * c - im[i, y, 0] * s
-                        newIm[x, y, 0] += re[i, y, 0] * s + im[i, y, 0] * c
+                        newImage[x, y, 0] += image[i, y, 0] * c - image[i, y, 1] * s
+                        newImage[x, y, 1] += image[i, y, 0] * s + image[i, y, 1] * c
                     }
                 }
             }
             
-            return (newRe / Double(width), newIm / Double(width))
+            return newImage / Double(width)
         }
+        
+        let lenai = lena.toIntensityAlpha(with: 0)
         
         // transform
-        let (hRe, hIm) = dftx(re: lena, im: Image.zeros(like: lena))
-        
-        var (re, im) = dftx(re: hRe.transpose(), im: hIm.transpose())
-        re = re.transpose()
-        im = im.transpose()
+        let hdft = dftx(image: lenai)
+        let dft = dftx(image: hdft.transpose()).transpose()
         
         // show spectrum
-        var spectrum = re.powered(2) + im.powered(2)
+        var spectrum = dft[channel: 0].powered(2) + dft[channel: 1].powered(2)
         spectrum.channelwiseConvert { log(sqrt($0)) }
         
         let w1 = 0..<spectrum.width/2
@@ -478,10 +473,10 @@ extension ApplicationVisualTests {
         images.append((spectrum - minSpectrum) / (maxSpectrum - minSpectrum))
         
         // inverse transform
-        let (hRe2, hIm2) = idftx(re: re, im: im)
-        let (re2, _) = idftx(re: hRe2.transpose(), im: hIm2.transpose())
+        let hidft = idftx(image: dft)
+        let idft = idftx(image: hidft.transpose()).transpose()
         
-        images.append(re2.transpose())
+        images.append(idft[channel: 0])
         
         // result
         let ns = doubleToNSImage(Image.concatH(images))
