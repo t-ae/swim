@@ -20,6 +20,7 @@ extension Image {
                 }
             }
         }
+        
         return newImage
     }
     

@@ -81,4 +81,20 @@ class PerformanceTests: XCTestCase {
             _ = HistogramEqualizer.equalize(image: image)
         }
     }
+    
+    func testRot90() {
+        let image = Image<RGBA, Int>(width: 1920, height: 1080, value: 1)
+        
+        measure {
+            _ = image.rot90()
+        }
+    }
+    
+    func testTranspose() {
+        let image = Image<RGBA, Int>(width: 1920, height: 1080, value: 1)
+        
+        measure {
+            _ = image.transpose()
+        }
+    }
 }
