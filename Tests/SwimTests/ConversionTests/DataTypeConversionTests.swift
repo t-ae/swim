@@ -35,4 +35,10 @@ class DataTypeConversionTests: XCTestCase {
             XCTAssertEqual(float, Image(width: 2, height: 5, data: data.map { Float($0) }))
         }
     }
+    
+    func testRounding() {
+        let image = Image<Intensity, Double>(width: 4, height: 1, data: [-1, -1.3, -1.6, -1.9])
+        
+        XCTAssertEqual(image.cast(to: Int.self), Image.full(value: -1, like: image))
+    }
 }
