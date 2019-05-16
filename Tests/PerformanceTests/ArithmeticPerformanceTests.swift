@@ -3,8 +3,7 @@ import Swim
 
 class ArithmeticPerformanceTests: XCTestCase {
     func testAddScalarUInt8() {
-        let data = [UInt8](repeating: 0, count: 3840*2160*4)
-        let image = Image(width: 3840, height: 2160, rgba: data)
+        let image = Image<RGBA, UInt8>(width: 3840, height: 2160, value: 0)
         
         measure {
             _ = image + 1
@@ -12,8 +11,7 @@ class ArithmeticPerformanceTests: XCTestCase {
     }
     
     func testAddScalarFloat() {
-        let data = [Float](repeating: 0, count: 3840*2160*4)
-        let image = Image(width: 3840, height: 2160, rgba: data)
+        let image = Image<RGBA, Float>(width: 3840, height: 2160, value: 0)
         
         measure {
             _ = image + 1
@@ -21,8 +19,7 @@ class ArithmeticPerformanceTests: XCTestCase {
     }
     
     func testAddScalarDouble() {
-        let data = [Double](repeating: 0, count: 3840*2160*4)
-        let image = Image(width: 3840, height: 2160, rgba: data)
+        let image = Image<RGBA, Double>(width: 3840, height: 2160, value: 0)
         
         measure {
             _ = image + 1
@@ -30,16 +27,14 @@ class ArithmeticPerformanceTests: XCTestCase {
     }
     
     func testScalarMinusUInt8() {
-        let data = [UInt8](repeating: 0, count: 3840*2160*4)
-        let image = Image(width: 3840, height: 2160, rgba: data)
+        let image = Image<RGBA, UInt8>(width: 3840, height: 2160, value: 0)
         
         measure {
             _ = 255 - image
         }
     }
     func testScalarMinusFloat() {
-        let data = [Float](repeating: 0, count: 3840*2160*4)
-        let image = Image(width: 3840, height: 2160, rgba: data)
+        let image = Image<RGBA, Float>(width: 3840, height: 2160, value: 0)
         
         measure {
             _ = 1 - image
@@ -47,8 +42,7 @@ class ArithmeticPerformanceTests: XCTestCase {
     }
     
     func testScalarMinusDouble() {
-        let data = [Double](repeating: 0, count: 3840*2160*4)
-        let image = Image(width: 3840, height: 2160, rgba: data)
+        let image = Image<RGBA, Double>(width: 3840, height: 2160, value: 0)
         
         measure {
             _ = 1 - image
@@ -56,9 +50,8 @@ class ArithmeticPerformanceTests: XCTestCase {
     }
     
     func testAddImageUInt8() {
-        let data = [UInt8](repeating: 0, count: 3840*2160*4)
-        let image1 = Image(width: 3840, height: 2160, rgba: data)
-        let image2 = Image(width: 3840, height: 2160, rgba: data)
+        let image1 = Image<RGBA, UInt8>(width: 3840, height: 2160, value: 0)
+        let image2 = Image<RGBA, UInt8>(width: 3840, height: 2160, value: 0)
         
         measure {
             _ = image1 + image2
@@ -66,9 +59,8 @@ class ArithmeticPerformanceTests: XCTestCase {
     }
     
     func testAddImageFloat() {
-        let data = [Float](repeating: 0, count: 3840*2160*4)
-        let image1 = Image(width: 3840, height: 2160, rgba: data)
-        let image2 = Image(width: 3840, height: 2160, rgba: data)
+        let image1 = Image<RGBA, Float>(width: 3840, height: 2160, value: 0)
+        let image2 = Image<RGBA, Float>(width: 3840, height: 2160, value: 0)
         
         measure {
             _ = image1 + image2
@@ -76,9 +68,8 @@ class ArithmeticPerformanceTests: XCTestCase {
     }
     
     func testAddImageDouble() {
-        let data = [Double](repeating: 0, count: 3840*2160*4)
-        let image1 = Image(width: 3840, height: 2160, rgba: data)
-        let image2 = Image(width: 3840, height: 2160, rgba: data)
+        let image1 = Image<RGBA, Double>(width: 3840, height: 2160, value: 0)
+        let image2 = Image<RGBA, Double>(width: 3840, height: 2160, value: 0)
         
         measure {
             _ = image1 + image2

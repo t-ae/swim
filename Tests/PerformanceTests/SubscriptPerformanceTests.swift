@@ -14,7 +14,7 @@ class SubscriptPerformanceTests: XCTestCase {
     }
 
     func testSubimageSubscript() {
-        let data = [Float](repeating: 0, count: 1920*1080*3)
+        let data = [Double](repeating: 0, count: 1920*1080*3)
         var image = Image(width: 1920, height: 1080, rgb: data)
         
         measure {

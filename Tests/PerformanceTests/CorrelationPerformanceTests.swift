@@ -4,9 +4,8 @@ import Swim
 class CorrelationPerformanceTests: XCTestCase {
 
     func testSSD() {
-        let data = [Float](repeating: 0, count: 1920*1080)
-        let image1 = Image(width: 1920, height: 1080, intensity: data)
-        let image2 = Image(width: 1920, height: 1080, intensity: data)
+        let image1 = Image<Intensity, Double>(width: 1920, height: 1080, value: 0)
+        let image2 = Image<Intensity, Double>(width: 1920, height: 1080, value: 0)
         
         measure {
             for _ in 0..<100 {
@@ -17,9 +16,8 @@ class CorrelationPerformanceTests: XCTestCase {
     }
 
     func testSAD() {
-        let data = [Float](repeating: 0, count: 1920*1080)
-        let image1 = Image(width: 1920, height: 1080, intensity: data)
-        let image2 = Image(width: 1920, height: 1080, intensity: data)
+        let image1 = Image<Intensity, Double>(width: 1920, height: 1080, value: 0)
+        let image2 = Image<Intensity, Double>(width: 1920, height: 1080, value: 0)
         
         measure {
             for _ in 0..<100 {
@@ -30,9 +28,8 @@ class CorrelationPerformanceTests: XCTestCase {
     }
     
     func testNCC() {
-        let data = [Float](repeating: 0.3, count: 1920*1080)
-        let image1 = Image(width: 1920, height: 1080, intensity: data)
-        let image2 = Image(width: 1920, height: 1080, intensity: data)
+        let image1 = Image<Intensity, Double>(width: 1920, height: 1080, value: 0.01)
+        let image2 = Image<Intensity, Double>(width: 1920, height: 1080, value: 0.01)
         
         measure {
             for _ in 0..<100 {
@@ -43,9 +40,8 @@ class CorrelationPerformanceTests: XCTestCase {
     }
     
     func testZNCC() {
-        let data = (0..<1920*1080).map { (sin(Float($0)) + 1) / 2 }
-        let image1 = Image(width: 1920, height: 1080, intensity: data)
-        let image2 = Image(width: 1920, height: 1080, intensity: data.map { $0 + 0.01 })
+        let image1 = Image<Intensity, Double>(width: 1920, height: 1080, value: 0.01)
+        let image2 = Image<Intensity, Double>(width: 1920, height: 1080, value: 0.02)
         
         measure {
             for _ in 0..<100 {

@@ -3,8 +3,7 @@ import Swim
 
 class ConversionPerformanceTests: XCTestCase {
     func testPixelwiseConvert() {
-        let data = [UInt8](repeating: 0, count: 1920*1080*4)
-        var image = Image(width: 1920, height: 1080, rgba: data)
+        var image = Image<RGBA, UInt8>(width: 1920, height: 1080, value: 0)
         
         measure {
             for _ in 0..<10 {
@@ -16,8 +15,7 @@ class ConversionPerformanceTests: XCTestCase {
     }
     
     func testPixelwiseConverted() {
-        let data = [UInt8](repeating: 0, count: 1920*1080*4)
-        let image = Image(width: 1920, height: 1080, rgba: data)
+        let image = Image<RGBA, UInt8>(width: 1920, height: 1080, value: 0)
         
         measure {
             _ = image.pixelwiseConverted { src in
@@ -27,8 +25,7 @@ class ConversionPerformanceTests: XCTestCase {
     }
     
     func testChannelwiseConvert() {
-        let data = [UInt8](repeating: 0, count: 1920*1080*4)
-        var image = Image(width: 1920, height: 1080, rgba: data)
+        var image = Image<RGBA, UInt8>(width: 1920, height: 1080, value: 0)
         
         measure {
             for _ in 0..<100 {
@@ -40,8 +37,7 @@ class ConversionPerformanceTests: XCTestCase {
     }
     
     func testChannelwiseConverted() {
-        let data = [UInt8](repeating: 0, count: 1920*1080*4)
-        let image = Image(width: 1920, height: 1080, rgba: data)
+        let image = Image<RGBA, UInt8>(width: 1920, height: 1080, value: 0)
         
         measure {
             for _ in 0..<100 {
@@ -51,8 +47,7 @@ class ConversionPerformanceTests: XCTestCase {
     }
     
     func testBrightnessInt() {
-        let data = [Int](repeating: 0, count: 1920*1080*3)
-        let image = Image(width: 1920, height: 1080, rgb: data)
+        let image = Image<RGB, UInt8>(width: 1920, height: 1080, value: 0)
         
         measure {
             for _ in 0..<100 {
@@ -62,8 +57,7 @@ class ConversionPerformanceTests: XCTestCase {
     }
     
     func testBrightnessDouble() {
-        let data = [Double](repeating: 0, count: 1920*1080*3)
-        let image = Image(width: 1920, height: 1080, rgb: data)
+        let image = Image<RGB, UInt8>(width: 1920, height: 1080, value: 0)
         
         measure {
             for _ in 0..<100 {
@@ -72,8 +66,7 @@ class ConversionPerformanceTests: XCTestCase {
         }
     }
     func testLuminanceInt() {
-        let data = [Int](repeating: 0, count: 1920*1080*3)
-        let image = Image(width: 1920, height: 1080, rgb: data)
+        let image = Image<RGB, UInt8>(width: 1920, height: 1080, value: 0)
         
         measure {
             for _ in 0..<100 {
@@ -83,8 +76,7 @@ class ConversionPerformanceTests: XCTestCase {
     }
     
     func testLuminanceDouble() {
-        let data = [Double](repeating: 0, count: 1920*1080*3)
-        let image = Image(width: 1920, height: 1080, rgb: data)
+        let image = Image<RGB, Double>(width: 1920, height: 1080, value: 0)
         
         measure {
             for _ in 0..<100 {
@@ -99,6 +91,17 @@ class ConversionPerformanceTests: XCTestCase {
         measure {
             for _ in 0..<10 {
                 _ = Image(r: g, g: g, b: g, a: g)
+            }
+        }
+    }
+    
+    func testCompundRGBA2() {
+        let rgb = Image<RGB, Double>(width: 1920, height: 1080, value: 0.3)
+        let a = Image<Intensity, Double>(width: 1920, height: 1080, value: 0.3)
+        
+        measure {
+            for _ in 0..<10 {
+                _ = Image(rgb: rgb, a: a)
             }
         }
     }

@@ -3,8 +3,7 @@ import Swim
 
 class ResizePerformanceTests: XCTestCase {
     func testResizeNN_UInt8() {
-        let data = [UInt8](repeating: 0, count: 64*48)
-        let image = Image(width: 64, height: 48, intensity: data)
+        let image = Image<Intensity, UInt8>(width: 64, height: 48, value: 0)
         
         measure {
             _ = image.resizeNN(width: 1920, height: 1080)
@@ -12,8 +11,7 @@ class ResizePerformanceTests: XCTestCase {
     }
     
     func testResizeAA() {
-        let data = [Float](repeating: 0, count: 1920*1080)
-        let image = Image(width: 1920, height: 1080, intensity: data)
+        let image = Image<Intensity, Double>(width: 1920, height: 1080, value: 0)
         
         measure {
             _ = image.resize(width: 30, height: 30, method: .areaAverage)
@@ -21,8 +19,7 @@ class ResizePerformanceTests: XCTestCase {
     }
     
     func testResizeNN() {
-        let data = [Float](repeating: 0, count: 64*48)
-        let image = Image(width: 64, height: 48, intensity: data)
+        let image = Image<Intensity, Double>(width: 64, height: 48, value: 0)
         
         measure {
             _ = image.resize(width: 1920, height: 1080, method: .nearestNeighbor)
@@ -30,8 +27,7 @@ class ResizePerformanceTests: XCTestCase {
     }
     
     func testResizeBL() {
-        let data = [Float](repeating: 0, count: 64*48)
-        let image = Image(width: 64, height: 48, intensity: data)
+        let image = Image<Intensity, Double>(width: 64, height: 48, value: 0)
         
         measure {
             _ = image.resize(width: 1920, height: 1080, method: .bilinear)
@@ -39,8 +35,7 @@ class ResizePerformanceTests: XCTestCase {
     }
     
     func testResizeBC() {
-        let data = [Float](repeating: 0, count: 64*48)
-        let image = Image(width: 64, height: 48, intensity: data)
+        let image = Image<Intensity, Double>(width: 64, height: 48, value: 0)
         
         measure {
             _ = image.resize(width: 1920, height: 1080, method: .bicubic)
@@ -48,8 +43,7 @@ class ResizePerformanceTests: XCTestCase {
     }
     
     func testResizeLanczos2() {
-        let data = [Float](repeating: 0, count: 64*48)
-        let image = Image(width: 64, height: 48, intensity: data)
+        let image = Image<Intensity, Double>(width: 64, height: 48, value: 0)
         
         measure {
             _ = image.resize(width: 1920, height: 1080, method: .lanczos2)
@@ -57,8 +51,7 @@ class ResizePerformanceTests: XCTestCase {
     }
     
     func testResizeLanczos3() {
-        let data = [Float](repeating: 0, count: 64*48)
-        let image = Image(width: 64, height: 48, intensity: data)
+        let image = Image<Intensity, Double>(width: 64, height: 48, value: 0)
         
         measure {
             _ = image.resize(width: 1920, height: 1080, method: .lanczos3)
