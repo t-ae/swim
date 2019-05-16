@@ -36,4 +36,16 @@ extension Image where T: FloatingPoint {
         newImage.floor()
         return newImage
     }
+    
+    @inlinable
+    public mutating func trunc() {
+        channelwiseConvert(Foundation.trunc)
+    }
+    
+    @inlinable
+    public func trunced() -> Image<P, T> {
+        var newImage = self
+        newImage.trunc()
+        return newImage
+    }
 }
