@@ -1,31 +1,37 @@
 import Foundation
 
-public enum Correlation<T: FloatingPoint&DataType> {
+public enum Correlation<T: DataType> {
+    
+}
+
+extension Correlation where T: Strideable {
     /// Compute sum of square difference.
     @inlinable
-    public static func ssd(_ a: Image<Intensity, T>, _ b: Image<Intensity, T>) -> T {
+    public static func ssd(_ a: Image<Intensity, T>, _ b: Image<Intensity, T>) -> T.Stride {
         precondition(a.size == b.size, "Images must have same size.")
         
-        var sum: T = 0
+        var sum: T.Stride = 0
         for i in 0..<a.data.count {
-            let tmp = a.data[i] - b.data[i]
-            sum += tmp*tmp
+            let distance = a.data[i].distance(to: b.data[i])
+            sum += distance*distance
         }
         return sum
     }
     
     /// Compute sum of square difference.
     @inlinable
-    public static func sad(_ a: Image<Intensity, T>, _ b: Image<Intensity, T>) -> T {
+    public static func sad(_ a: Image<Intensity, T>, _ b: Image<Intensity, T>) -> T.Stride {
         precondition(a.size == b.size, "Images must have same size.")
         
-        var sum: T = 0
+        var sum: T.Stride = 0
         for i in 0..<a.data.count {
-            sum += abs(a.data[i] - b.data[i])
+            sum += abs(a.data[i].distance(to: b.data[i]))
         }
         return sum
     }
-    
+}
+
+extension Correlation where T: FloatingPoint {
     /// Compute normalized cross correlation.
     /// - Note: This function returns nan if `a` or `b` is all zero.
     @inlinable
