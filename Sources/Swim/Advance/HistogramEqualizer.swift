@@ -3,6 +3,7 @@ import Foundation
 public enum HistogramEqualizer<T: BinaryInteger&DataType> {
     /// Create histogram equalized image.
     /// This function assumes pixel value range is [0, 255].
+    @inlinable
     public static func equalize(image: Image<Intensity, T>) -> Image<Intensity, T> {
         var bins = [Int](repeating: 0, count: Int(UInt8.max)+1)
         for px in image.data {
@@ -27,6 +28,7 @@ public enum HistogramEqualizer<T: BinaryInteger&DataType> {
     
     /// Create histogram equalized image.
     /// This function assumes pixel value range is [0, 255].
+    @inlinable
     public static func equalize(image: Image<RGB, T>) -> Image<RGB, T> {
         var bins = [Int](repeating: 0, count: Int(UInt8.max)+1)
         
