@@ -49,7 +49,7 @@ let red: UInt8 = image[0, 0, 0] // red channel of (x: 0, y: 0)
 let red2: UInt8 = image[0, 0, .red] // ditto
 let red3: UInt8 = image[0, 0][.red] // ditto
 
-image[1, 0] += 1 // Add 1 for R,G,B,A respectively
+image[1, 0] += 1 // Add 1 for each R,G,B,A
 image[1, 0, .green] += 1 // Add 1 for Green channel
 ```
 

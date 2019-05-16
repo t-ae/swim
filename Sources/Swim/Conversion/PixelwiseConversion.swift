@@ -2,7 +2,7 @@ import Foundation
 
 // MARK: - Same Pixel/Data type conversion
 extension Image {
-    /// Convert each pixels.
+    /// Convert pixels.
     /// - Note: `MutablePixelRef` contains `UnsafeMutableBufferPointer`. So it's unsafe to bring it outside closure.
     @inlinable
     public mutating func pixelwiseConvert(_ f: (MutablePixelRef<P, T>)->Void) {
@@ -22,7 +22,7 @@ extension Image {
 
 // MARK: - Different type conversion
 extension Image {
-    /// Convert each pixels.
+    /// Create new image from `self` by applying `f` for each pixel.
     /// - Note: `PixelRef` contains `UnsafeBufferPointer`. So it's unsafe to bring it outside closure.
     @inlinable
     public func pixelwiseConverted<P2, T2>(_ f: (PixelRef<P, T>)->Pixel<P2, T2>) -> Image<P2, T2> {

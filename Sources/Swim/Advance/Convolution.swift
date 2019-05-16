@@ -66,7 +66,7 @@ extension Filter where T: FloatingPoint {
 // MARK: - convoluted
 extension Image where T: Numeric {
     /// Convolve image with specified `filter`.
-    /// `filter` will be applied to each channel respectively.
+    /// `filter` will be applied to each channel.
     @inlinable
     public func convoluted(_ filter: Image<Intensity, T>) -> Image<P, T> {
         var newImage = Image<P, T>(width: width, height: height, value: 0)

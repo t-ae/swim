@@ -40,7 +40,7 @@ extension HistogramEqualizerVisualTests {
         var lena = try! Image<RGB, UInt8>(contentsOf: path)
         lena.channelwiseConvert { UInt8(pow(Double($0), 2) / 255) }
         
-        // each channel respectively
+        // each channel
         var eq1 = lena
         eq1[channel: .red] = HistogramEqualizer.equalize(image: eq1[channel: .red])
         eq1[channel: .green] = HistogramEqualizer.equalize(image: eq1[channel: .green])

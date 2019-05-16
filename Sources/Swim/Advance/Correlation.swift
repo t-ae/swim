@@ -33,7 +33,7 @@ extension Correlation where T: Strideable {
 
 extension Correlation where T: FloatingPoint {
     /// Compute normalized cross correlation.
-    /// - Note: This function returns nan if `a` or `b` is all zero.
+    /// - Precondition: Each of `a` and `b` have at least one non-zero value.
     @inlinable
     public static func ncc(_ a: Image<Intensity, T>, _ b: Image<Intensity, T>) -> T {
         precondition(a.size == b.size, "Images must have same size.")
@@ -48,11 +48,14 @@ extension Correlation where T: FloatingPoint {
             sumCross += a.data[i]*b.data[i]
         }
         
+        precondition(sum2a > 0, "`a` is all zero.")
+        precondition(sum2b > 0, "`b` is all zero.")
+        
         return sumCross / sqrt(sum2a * sum2b)
     }
     
     /// Compute zero means normalized cross correlation.
-    /// - Note: This function returns invalid value or nan if `a` or `b` has same value in all pixels.
+    /// - Precondition: Each of `a` and `b` can't have same value in all pixels.
     @inlinable
     public static func zncc(_ a: Image<Intensity, T>, _ b: Image<Intensity, T>) -> T {
         precondition(a.size == b.size, "Images must have same size.")
@@ -79,6 +82,9 @@ extension Correlation where T: FloatingPoint {
         
         let da: T = c*sum2a - suma2
         let db: T = c*sum2b - sumb2
+        
+        precondition(da > 0, "All pixels in `a` have same value.")
+        precondition(db > 0, "All pixels in `b` have same value.")
         
         return clamp(up / sqrt(da*db), min: -1, max: 1)
     }

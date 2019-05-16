@@ -64,13 +64,6 @@ class CorrelationTests: XCTestCase {
             XCTAssertEqual(Correlation.ncc(image1, image1), 1)
             XCTAssertEqual(Correlation.ncc(image1, image2), ip / sqrt(l1 * l2))
         }
-        do {
-            let data = [Double](repeating: 0, count: 6)
-            let image1 = Image(width: 3, height: 2, intensity: data)
-            let image2 = Image(width: 3, height: 2, intensity: data)
-            
-            XCTAssertTrue(Correlation.ncc(image1, image2).isNaN)
-        }
     }
     
     func testZNCC() {
@@ -93,14 +86,6 @@ class CorrelationTests: XCTestCase {
             let i2 = Image(width: 3, height: 1, intensity: [1.0, 0, 1])
             
             XCTAssertEqual(Correlation.zncc(i1, i2), -1)
-        }
-        do {
-            let data = [Double](repeating: 0, count: 6)
-            let image1 = Image(width: 3, height: 2, intensity: data)
-            let image2 = Image(width: 3, height: 2, intensity: data)
-            
-            let result = Correlation.zncc(image1, image2)
-            XCTAssertTrue(result.isNaN)
         }
     }
     
