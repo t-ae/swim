@@ -86,11 +86,14 @@ class ConversionPerformanceTests: XCTestCase {
     }
     
     func testCompundRGBA() {
+        let r = Image<Intensity, Double>(width: 1920, height: 1080, value: 0.3)
         let g = Image<Intensity, Double>(width: 1920, height: 1080, value: 0.3)
+        let b = Image<Intensity, Double>(width: 1920, height: 1080, value: 0.3)
+        let a = Image<Intensity, Double>(width: 1920, height: 1080, value: 0.3)
         
         measure {
             for _ in 0..<10 {
-                _ = Image(r: g, g: g, b: g, a: g)
+                _ = Image(r: r, g: g, b: b, a: a)
             }
         }
     }
