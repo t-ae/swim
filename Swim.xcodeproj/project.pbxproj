@@ -66,6 +66,8 @@
 		A7383804228D3B9D00412CA8 /* Transpose.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7383802228D3B9900412CA8 /* Transpose.swift */; };
 		A7383806228D3CA400412CA8 /* TransposeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7383805228D3CA400412CA8 /* TransposeTests.swift */; };
 		A7383808228D438500412CA8 /* TransformationVisualTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7383807228D438500412CA8 /* TransformationVisualTests.swift */; };
+		A738380B228D993100412CA8 /* Power.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7383809228D992E00412CA8 /* Power.swift */; };
+		A738380D228D9B2700412CA8 /* PowerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A738380C228D9B2700412CA8 /* PowerTests.swift */; };
 		OBJ_167 /* image_io.c in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_9 /* image_io.c */; };
 		OBJ_169 /* stb_image_write.h in Headers */ = {isa = PBXBuildFile; fileRef = OBJ_11 /* stb_image_write.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		OBJ_170 /* stb_image.h in Headers */ = {isa = PBXBuildFile; fileRef = OBJ_12 /* stb_image.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -295,6 +297,8 @@
 		A7383802228D3B9900412CA8 /* Transpose.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transpose.swift; sourceTree = "<group>"; };
 		A7383805228D3CA400412CA8 /* TransposeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransposeTests.swift; sourceTree = "<group>"; };
 		A7383807228D438500412CA8 /* TransformationVisualTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransformationVisualTests.swift; sourceTree = "<group>"; };
+		A7383809228D992E00412CA8 /* Power.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Power.swift; sourceTree = "<group>"; };
+		A738380C228D9B2700412CA8 /* PowerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerTests.swift; sourceTree = "<group>"; };
 		OBJ_100 /* Im2colTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Im2colTests.swift; sourceTree = "<group>"; };
 		OBJ_101 /* IntegralImageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntegralImageTests.swift; sourceTree = "<group>"; };
 		OBJ_103 /* ImageArithmeticTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageArithmeticTests.swift; sourceTree = "<group>"; };
@@ -551,6 +555,7 @@
 				A732B394227025B300B2256E /* PaddingTests.swift */,
 				A732B39D22716CF100B2256E /* AbsTests.swift */,
 				A7382713228A4B2500412CA8 /* FillTests.swift */,
+				A738380C228D9B2700412CA8 /* PowerTests.swift */,
 			);
 			path = ManipulationTests;
 			sourceTree = "<group>";
@@ -780,6 +785,7 @@
 				A732B39B22716AEF00B2256E /* Abs.swift */,
 				A732C2982283D33600C96067 /* EdgeMode.swift */,
 				A732C5052284247800C96067 /* IteratePixels.swift */,
+				A7383809228D992E00412CA8 /* Power.swift */,
 			);
 			path = Manipulation;
 			sourceTree = "<group>";
@@ -1165,6 +1171,7 @@
 				OBJ_225 /* Fill.swift in Sources */,
 				A732AC0D226DABBE00B2256E /* HomogeneousTransformationMatrix.swift in Sources */,
 				OBJ_226 /* Rounding.swift in Sources */,
+				A738380B228D993100412CA8 /* Power.swift in Sources */,
 				OBJ_227 /* AppKit.swift in Sources */,
 				OBJ_228 /* CoreGraphics.swift in Sources */,
 				OBJ_229 /* UIKit.swift in Sources */,
@@ -1274,6 +1281,7 @@
 				OBJ_322 /* ResizeVisualTests.swift in Sources */,
 				OBJ_323 /* Utils.swift in Sources */,
 				OBJ_324 /* WarpVisualTests.swift in Sources */,
+				A738380D228D9B2700412CA8 /* PowerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

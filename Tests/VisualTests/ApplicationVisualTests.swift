@@ -413,7 +413,7 @@ extension ApplicationVisualTests {
         let lena = try! Image<Intensity, Double>(contentsOf: path).resize(width: 128, height: 128)
         var images: [Image<Intensity, Double>] = [lena]
         
-        func dft(re: Image<Intensity, Double>, im: Image<Intensity, Double>) -> (re: Image<Intensity, Double>, im: Image<Intensity, Double>) {
+        func dftx(re: Image<Intensity, Double>, im: Image<Intensity, Double>) -> (re: Image<Intensity, Double>, im: Image<Intensity, Double>) {
             assert(re.size == im.size)
             
             var newRe = Image.zeros(like: re)
@@ -434,7 +434,7 @@ extension ApplicationVisualTests {
             
             return (newRe, newIm)
         }
-        func idft(re: Image<Intensity, Double>, im: Image<Intensity, Double>) -> (re: Image<Intensity, Double>, im: Image<Intensity, Double>) {
+        func idftx(re: Image<Intensity, Double>, im: Image<Intensity, Double>) -> (re: Image<Intensity, Double>, im: Image<Intensity, Double>) {
             assert(re.size == im.size)
             
             var newRe = Image.zeros(like: re)
@@ -457,30 +457,30 @@ extension ApplicationVisualTests {
         }
         
         // transform
-        let (hRe, hIm) = dft(re: lena, im: Image.zeros(like: lena))
+        let (hRe, hIm) = dftx(re: lena, im: Image.zeros(like: lena))
         
-        var (re, im) = dft(re: hRe.transpose(), im: hIm.transpose())
+        var (re, im) = dftx(re: hRe.transpose(), im: hIm.transpose())
         re = re.transpose()
         im = im.transpose()
         
-        // show spectorum
-        var spectorum = re.channelwiseConverted { pow($0, 2) }
-        spectorum += im.channelwiseConverted { pow($0, 2) }
-        spectorum.channelwiseConvert { log(sqrt($0)) }
+        // show spectrum
+        var spectrum = re.channelwiseConverted { pow($0, 2) }
+        spectrum += im.channelwiseConverted { pow($0, 2) }
+        spectrum.channelwiseConvert { log(sqrt($0)) }
         
-        let w1 = 0..<spectorum.width/2
-        let w2 = spectorum.width/2..<spectorum.width
-        let h1 = 0..<spectorum.height/2
-        let h2 = spectorum.height/2..<spectorum.height
-        spectorum = Image.concat([[spectorum[w2, h2], spectorum[w1, h2]],
-                                [spectorum[w2, h1], spectorum[w1, h1]]])
+        let w1 = 0..<spectrum.width/2
+        let w2 = spectrum.width/2..<spectrum.width
+        let h1 = 0..<spectrum.height/2
+        let h2 = spectrum.height/2..<spectrum.height
+        spectrum = Image.concat([[spectrum[w2, h2], spectrum[w1, h2]],
+                                 [spectrum[w2, h1], spectrum[w1, h1]]])
         
-        let (minSpectorum, maxSpectorum) = spectorum.withUnsafeBufferPointer { ($0.min()!, $0.max()!) }
-        images.append((spectorum - minSpectorum) / (maxSpectorum - minSpectorum))
+        let (minSpectrum, maxSpectrum) = spectrum.withUnsafeBufferPointer { ($0.min()!, $0.max()!) }
+        images.append((spectrum - minSpectrum) / (maxSpectrum - minSpectrum))
         
         // inverse transform
-        let (hRe2, hIm2) = idft(re: re, im: im)
-        let (re2, _) = idft(re: hRe2.transpose(), im: hIm2.transpose())
+        let (hRe2, hIm2) = idftx(re: re, im: im)
+        let (re2, _) = idftx(re: hRe2.transpose(), im: hIm2.transpose())
         
         images.append(re2.transpose())
         
