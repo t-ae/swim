@@ -56,7 +56,7 @@ extension AffineTransformation {
     }
 }
 
-extension AffineTransformation: HomogeneousTransformationMatrixProtocol {
+extension AffineTransformation: HomogeneousTransformationMatrix {
     @inlinable
     public func inverted() throws -> AffineTransformation {
         let det = a*d - b*c
@@ -105,7 +105,7 @@ public func *(lhs: AffineTransformation, rhs: (x: Double, y: Double)) -> (x: Dou
     return (x, y)
 }
 
-extension HomogeneousTransformationMatrix {
+extension ProjectiveTransformation {
     public init(from affineTransformation: AffineTransformation) {
         self.init(affineTransformation.a, affineTransformation.b, affineTransformation.tx,
                   affineTransformation.c, affineTransformation.d, affineTransformation.ty,

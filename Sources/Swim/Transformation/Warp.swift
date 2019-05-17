@@ -10,7 +10,7 @@ extension Image where T: BinaryFloatingPoint {
     /// - Parameters:
     ///   - transformation: Homogeneous transformation matrix.
     @inlinable
-    public func warp<M: HomogeneousTransformationMatrixProtocol>(transformation: M) throws -> Image<P, T> {
+    public func warp<M: HomogeneousTransformationMatrix>(transformation: M) throws -> Image<P, T> {
         
         return try warp(transformation: transformation,
                         outputSize: (width, height))
@@ -23,7 +23,7 @@ extension Image where T: BinaryFloatingPoint {
     ///   - transformation: Homogeneous transformation matrix.
     ///   - interpolator: Specify what interpolation method to calculate pixel values.
     @inlinable
-    public func warp<M: HomogeneousTransformationMatrixProtocol, Intpl: Interpolator>(
+    public func warp<M: HomogeneousTransformationMatrix, Intpl: Interpolator>(
         transformation: M,
         interpolator: Intpl) throws -> Image<P, T> where Intpl.P == P, Intpl.T == T {
         return try warp(transformation: transformation,
@@ -38,7 +38,7 @@ extension Image where T: BinaryFloatingPoint {
     ///   - transformation: Homogeneous transformation matrix.
     ///   - outputSize: Output image size.
     @inlinable
-    public func warp<M: HomogeneousTransformationMatrixProtocol>(
+    public func warp<M: HomogeneousTransformationMatrix>(
         transformation: M,
         outputSize: (width: Int, height: Int)) throws -> Image<P, T> {
         return try warp(transformation: transformation,
@@ -53,7 +53,7 @@ extension Image where T: BinaryFloatingPoint {
     ///   - outputSize: Output image size.
     ///   - interpolator: Specify what interpolation method to calculate pixel values.
     @inlinable
-    public func warp<M: HomogeneousTransformationMatrixProtocol, Intpl: Interpolator>(
+    public func warp<M: HomogeneousTransformationMatrix, Intpl: Interpolator>(
         transformation: M,
         outputSize: (width: Int, height: Int),
         interpolator: Intpl) throws -> Image<P, T> where Intpl.P == P, Intpl.T == T {

@@ -4,7 +4,7 @@ import Swim
 class HomogeneousTransformationMatrixTests: XCTestCase {
     func testHomogeneousTransform() {
         do {
-            let a = HomogeneousTransformationMatrix(1, -1, 1,
+            let a = ProjectiveTransformation(1, -1, 1,
                                                     1, 1, 0,
                                                     0, 3, 1)
             let inv = try! a.inverted()
