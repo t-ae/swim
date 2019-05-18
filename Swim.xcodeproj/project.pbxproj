@@ -69,6 +69,8 @@
 		A738380B228D993100412CA8 /* Power.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7383809228D992E00412CA8 /* Power.swift */; };
 		A738380E228DA05F00412CA8 /* PowerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A738380C228D9B2700412CA8 /* PowerTests.swift */; };
 		A7383813228F089900412CA8 /* HomogeneousTransformationMatrix.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7383811228F089300412CA8 /* HomogeneousTransformationMatrix.swift */; };
+		A7383816228F0D7E00412CA8 /* FourierTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7383814228F0D7C00412CA8 /* FourierTransformer.swift */; };
+		A7383818228F100F00412CA8 /* FourierTransformerVisualTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7383817228F100F00412CA8 /* FourierTransformerVisualTests.swift */; };
 		OBJ_167 /* image_io.c in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_9 /* image_io.c */; };
 		OBJ_169 /* stb_image_write.h in Headers */ = {isa = PBXBuildFile; fileRef = OBJ_11 /* stb_image_write.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		OBJ_170 /* stb_image.h in Headers */ = {isa = PBXBuildFile; fileRef = OBJ_12 /* stb_image.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -301,6 +303,8 @@
 		A7383809228D992E00412CA8 /* Power.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Power.swift; sourceTree = "<group>"; };
 		A738380C228D9B2700412CA8 /* PowerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerTests.swift; sourceTree = "<group>"; };
 		A7383811228F089300412CA8 /* HomogeneousTransformationMatrix.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomogeneousTransformationMatrix.swift; sourceTree = "<group>"; };
+		A7383814228F0D7C00412CA8 /* FourierTransformer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FourierTransformer.swift; sourceTree = "<group>"; };
+		A7383817228F100F00412CA8 /* FourierTransformerVisualTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FourierTransformerVisualTests.swift; sourceTree = "<group>"; };
 		OBJ_100 /* Im2colTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Im2colTests.swift; sourceTree = "<group>"; };
 		OBJ_101 /* IntegralImageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntegralImageTests.swift; sourceTree = "<group>"; };
 		OBJ_103 /* ImageArithmeticTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageArithmeticTests.swift; sourceTree = "<group>"; };
@@ -665,6 +669,7 @@
 				OBJ_151 /* Utils.swift */,
 				OBJ_152 /* WarpVisualTests.swift */,
 				A7383807228D438500412CA8 /* TransformationVisualTests.swift */,
+				A7383817228F100F00412CA8 /* FourierTransformerVisualTests.swift */,
 			);
 			name = VisualTests;
 			path = Tests/VisualTests;
@@ -680,6 +685,7 @@
 				OBJ_20 /* Im2col.swift */,
 				OBJ_21 /* IntegralImage.swift */,
 				A732C28C2283AFC000C96067 /* HistogramEqualizer.swift */,
+				A7383814228F0D7C00412CA8 /* FourierTransformer.swift */,
 			);
 			path = Advance;
 			sourceTree = "<group>";
@@ -1173,6 +1179,7 @@
 				OBJ_217 /* ReadImage.swift in Sources */,
 				OBJ_218 /* WriteImage.swift in Sources */,
 				OBJ_219 /* BicubicInterpolator.swift in Sources */,
+				A7383816228F0D7E00412CA8 /* FourierTransformer.swift in Sources */,
 				A732B3A82271913A00B2256E /* Abs.swift in Sources */,
 				OBJ_220 /* BilinearInterpolator.swift in Sources */,
 				OBJ_221 /* Interpolator.swift in Sources */,
@@ -1283,6 +1290,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 0;
 			files = (
+				A7383818228F100F00412CA8 /* FourierTransformerVisualTests.swift in Sources */,
 				A732C2912283B13500C96067 /* HistogramEqualizerVisualTests.swift in Sources */,
 				A732C29D2283D37600C96067 /* PaddingVisualTests.swift in Sources */,
 				A732B3A1227183F100B2256E /* SubimageVisualTests.swift in Sources */,
