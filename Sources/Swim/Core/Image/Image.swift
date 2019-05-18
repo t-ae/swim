@@ -67,6 +67,17 @@ extension Image: Equatable where T: Equatable {
 }
 
 extension Image {
+    /// Read/write pixel value.
+    @inlinable
+    public subscript(data index: Int) -> T {
+        get {
+            return data[index]
+        }
+        set {
+            data[index] = newValue
+        }
+    }
+    
     /// Get the index of specified pixel/channel in buffer.
     @inlinable
     public func dataIndex(x: Int, y: Int, c: Int = 0) -> Int {
