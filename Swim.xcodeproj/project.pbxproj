@@ -71,6 +71,8 @@
 		A7383813228F089900412CA8 /* HomogeneousTransformationMatrix.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7383811228F089300412CA8 /* HomogeneousTransformationMatrix.swift */; };
 		A7383816228F0D7E00412CA8 /* FourierTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7383814228F0D7C00412CA8 /* FourierTransformer.swift */; };
 		A7383818228F100F00412CA8 /* FourierTransformerVisualTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7383817228F100F00412CA8 /* FourierTransformerVisualTests.swift */; };
+		A738381B22906EFA00412CA8 /* BitOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = A738381A22906EFA00412CA8 /* BitOperations.swift */; };
+		A738381F2290714F00412CA8 /* BitOperationsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A738381D2290713F00412CA8 /* BitOperationsTests.swift */; };
 		OBJ_167 /* image_io.c in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_9 /* image_io.c */; };
 		OBJ_169 /* stb_image_write.h in Headers */ = {isa = PBXBuildFile; fileRef = OBJ_11 /* stb_image_write.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		OBJ_170 /* stb_image.h in Headers */ = {isa = PBXBuildFile; fileRef = OBJ_12 /* stb_image.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -305,6 +307,8 @@
 		A7383811228F089300412CA8 /* HomogeneousTransformationMatrix.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomogeneousTransformationMatrix.swift; sourceTree = "<group>"; };
 		A7383814228F0D7C00412CA8 /* FourierTransformer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FourierTransformer.swift; sourceTree = "<group>"; };
 		A7383817228F100F00412CA8 /* FourierTransformerVisualTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FourierTransformerVisualTests.swift; sourceTree = "<group>"; };
+		A738381A22906EFA00412CA8 /* BitOperations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BitOperations.swift; sourceTree = "<group>"; };
+		A738381D2290713F00412CA8 /* BitOperationsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BitOperationsTests.swift; sourceTree = "<group>"; };
 		OBJ_100 /* Im2colTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Im2colTests.swift; sourceTree = "<group>"; };
 		OBJ_101 /* IntegralImageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntegralImageTests.swift; sourceTree = "<group>"; };
 		OBJ_103 /* ImageArithmeticTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageArithmeticTests.swift; sourceTree = "<group>"; };
@@ -496,6 +500,22 @@
 			path = Matrix;
 			sourceTree = "<group>";
 		};
+		A738381922906EE100412CA8 /* Boolean */ = {
+			isa = PBXGroup;
+			children = (
+				A738381A22906EFA00412CA8 /* BitOperations.swift */,
+			);
+			path = Boolean;
+			sourceTree = "<group>";
+		};
+		A738381C2290712E00412CA8 /* BooleanTests */ = {
+			isa = PBXGroup;
+			children = (
+				A738381D2290713F00412CA8 /* BitOperationsTests.swift */,
+			);
+			path = BooleanTests;
+			sourceTree = "<group>";
+		};
 		OBJ_10 /* include */ = {
 			isa = PBXGroup;
 			children = (
@@ -631,6 +651,7 @@
 			children = (
 				OBJ_15 /* Advance */,
 				OBJ_22 /* Arithmetic */,
+				A738381922906EE100412CA8 /* Boolean */,
 				OBJ_26 /* Blend */,
 				OBJ_33 /* Conversion */,
 				OBJ_39 /* Core */,
@@ -925,6 +946,7 @@
 		OBJ_94 /* SwimTests */ = {
 			isa = PBXGroup;
 			children = (
+				A738381C2290712E00412CA8 /* BooleanTests */,
 				OBJ_95 /* AdvanceTests */,
 				OBJ_102 /* ArithmeticTests */,
 				OBJ_104 /* BlendTests */,
@@ -1179,6 +1201,7 @@
 				OBJ_217 /* ReadImage.swift in Sources */,
 				OBJ_218 /* WriteImage.swift in Sources */,
 				OBJ_219 /* BicubicInterpolator.swift in Sources */,
+				A738381B22906EFA00412CA8 /* BitOperations.swift in Sources */,
 				A7383816228F0D7E00412CA8 /* FourierTransformer.swift in Sources */,
 				A732B3A82271913A00B2256E /* Abs.swift in Sources */,
 				OBJ_220 /* BilinearInterpolator.swift in Sources */,
@@ -1257,6 +1280,7 @@
 				OBJ_285 /* PixelwiseConversionTests.swift in Sources */,
 				A7382710228922F300412CA8 /* ClampTests.swift in Sources */,
 				OBJ_286 /* ImageTests.swift in Sources */,
+				A738381F2290714F00412CA8 /* BitOperationsTests.swift in Sources */,
 				OBJ_288 /* ImageIOTests.swift in Sources */,
 				OBJ_289 /* BicubicInterpolationTests.swift in Sources */,
 				A7382714228A4B2500412CA8 /* FillTests.swift in Sources */,
