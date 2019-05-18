@@ -1,7 +1,7 @@
 import Foundation
 
 public enum FourierTransformer {
-    /// Fast fourier transform.
+    /// Fast fourier transformation.
     @inlinable
     public static func fft(image: Image<Intensity, Double>) -> Image<IntensityAlpha, Double> {
         precondition(Int(exactly: log2(Double(image.width))) != nil, "image width must be power of 2.")
@@ -16,7 +16,7 @@ public enum FourierTransformer {
         return image
     }
     
-    /// Inverse fast fourier transform.
+    /// Inverse fast fourier transformation.
     @inlinable
     public static func ifft(image: Image<IntensityAlpha, Double>) -> Image<Intensity, Double> {
         precondition(Int(exactly: log2(Double(image.width))) != nil, "image width must be power of 2.")
@@ -44,7 +44,7 @@ public enum FourierTransformer {
                              [image[w2, h1], image[w1, h1]]])
     }
     
-    /// Fast fourier transform horizontally.
+    /// Fast fourier transformation horizontally.
     @inlinable
     static func fftx(image: inout Image<IntensityAlpha, Double>, inverse: Bool) {
         assert(Int(exactly: log2(Double(image.width))) != nil)
