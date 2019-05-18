@@ -2,6 +2,9 @@ import Foundation
 
 public enum FourierTransformer {
     /// Fast fourier transformation.
+    ///
+    /// - Returns: Complex image which contains real part as .intensity and imaginary part as .alpha.
+    /// - Precondition: width/height of image are power of 2.
     @inlinable
     public static func fft(image: Image<Intensity, Double>) -> Image<IntensityAlpha, Double> {
         precondition(Int(exactly: log2(Double(image.width))) != nil, "image width must be power of 2.")
@@ -17,6 +20,10 @@ public enum FourierTransformer {
     }
     
     /// Inverse fast fourier transformation.
+    ///
+    /// - Parameter image: Complex image which contains real part as .intensity and imaginary part as .alpha.
+    ///
+    /// - Precondition: width/height of image are power of 2.
     @inlinable
     public static func ifft(image: Image<IntensityAlpha, Double>) -> Image<Intensity, Double> {
         precondition(Int(exactly: log2(Double(image.width))) != nil, "image width must be power of 2.")
@@ -62,7 +69,7 @@ public enum FourierTransformer {
     /// http://www.kurims.kyoto-u.ac.jp/~ooura/fftman/ftmn1_2.html
     @inlinable
     static func inplaceFFT(data: UnsafeMutableBufferPointer<Double>, inverse: Bool) {
-        assert(data.count % 2 == 0)
+        assert(Int(exactly: log2(Double(data.count))) != nil)
         let n = data.count / 2
         let theta = 2 * Double.pi / Double(n) * (inverse ? 1 : -1)
         
