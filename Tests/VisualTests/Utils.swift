@@ -11,6 +11,14 @@ func testResoruceRoot() -> URL {
         .appendingPathComponent("TestResources")
 }
 
+func time(f: ()->Void) {
+    let start = Date()
+    
+    f()
+    
+    print("Elapsed time: ", Date().timeIntervalSince(start), "sec")
+}
+
 #if canImport(AppKit)
 
 import AppKit

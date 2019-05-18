@@ -343,27 +343,76 @@ extension ApplicationVisualTests {
         let path = testResoruceRoot().appendingPathComponent("lena_512_gray.png")
         let lena = try! Image<Intensity, Double>(contentsOf: path)
         
-        let size = 64
-        let templatePosition = (x: 127, y: 127)
+        let size = 32
+        let templatePosition = (x: 127, y: 135)
         var template = lena[Rect(x: templatePosition.x, y: templatePosition.y, width: size, height: size)]
         
         template.power(2)
         
-        var maxc = -Double.infinity
-        var maxPosition = (x: -1, y: -1)
-        for y in stride(from: 0, to: lena.height-size, by: 2) {
-            for x in stride(from: 0, to: lena.width-size, by: 2) {
-                let patch = lena[Rect(x: x, y: y, width: size, height: size)]
-                let c = Correlation.zncc(patch, template)
-                if c > maxc {
-                    maxc = c
-                    maxPosition = (x, y)
+        print("Full search")
+        time {
+            var maxc = -Double.infinity
+            var maxPosition = (x: -1, y: -1)
+            for y in 0..<lena.height-size {
+                for x in 0..<lena.width-size {
+                    let patch = lena[Rect(x: x, y: y, width: size, height: size)]
+                    let c = Correlation.zncc(patch, template)
+                    if c > maxc {
+                        maxc = c
+                        maxPosition = (x, y)
+                    }
                 }
             }
+            
+            XCTAssertEqual(maxPosition.x, templatePosition.x)
+            XCTAssertEqual(maxPosition.y, templatePosition.y)
         }
         
-        XCTAssertTrue([-1, 1].contains { maxPosition.x == $0 + templatePosition.x })
-        XCTAssertTrue([-1, 1].contains { maxPosition.y == $0 + templatePosition.y })
+        print("Coarse-to-fine search")
+        time {
+            let minTemplateSize = 8
+            func search(image: Image<Intensity, Double>,
+                        template: Image<Intensity, Double>) -> (x: Int, y: Int) {
+                let imagePOT = image.width % 2 == 0 && image.height % 2 == 0
+                let templatePOT = template.width % 2 == 0 && template.height % 2 == 0
+                let shouldDownscale = template.width > minTemplateSize && template.height > minTemplateSize
+                
+                let searchRangeX: Range<Int>
+                let searchRangeY: Range<Int>
+                if imagePOT && templatePOT && shouldDownscale {
+                    let imageHalf = image.resize(width: image.width/2, height: image.height/2, method: .areaAverage)
+                    let templateHalf = template.resize(width: template.width/2, height: template.height/2, method: .areaAverage)
+                    
+                    let (x, y) = search(image: imageHalf, template: templateHalf)
+                    searchRangeX = 2*x-1..<2*x+2
+                    searchRangeY = 2*y-1..<2*y+2
+                } else {
+                    // Full search
+                    searchRangeX = 0..<image.width - template.width
+                    searchRangeY = 0..<image.height - template.height
+                }
+                
+                var maxc = -Double.infinity
+                var maxPosition = (x: -1, y: -1)
+                for y in searchRangeY {
+                    for x in searchRangeX {
+                        let patch = image[Rect(x: x, y: y, width: template.width, height: template.height)]
+                        let c = Correlation.zncc(patch, template)
+                        if c > maxc {
+                            maxc = c
+                            maxPosition = (x, y)
+                        }
+                    }
+                }
+                
+                return maxPosition
+            }
+            
+            let maxPosition = search(image: lena, template: template)
+            
+            XCTAssertEqual(maxPosition.x, templatePosition.x)
+            XCTAssertEqual(maxPosition.y, templatePosition.y)
+        }
     }
     
     func testDither() {
