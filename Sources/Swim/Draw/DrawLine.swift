@@ -1,5 +1,3 @@
-import Foundation
-
 extension Image {
     @inlinable
     public mutating func drawLine(p1: (x: Int, y: Int),

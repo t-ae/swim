@@ -36,4 +36,17 @@ class DrawVisualTests: XCTestCase {
         
         XCTAssertTrue(ns.isValid, "break here")
     }
+    
+    func testDrawRect() {
+        var image = Image<Gray, UInt8>(width: 201, height: 201, value: 0)
+        
+        image.drawRect(origin: (0, 0), size: (100, 100), pixel: Pixel(gray: 128))
+        image.drawRect(origin: (30, 30), size: (200, 200), pixel: Pixel(gray: 192))
+        
+        image.drawRect(origin: (-30, -30), size: (200, 200), pixel: Pixel(gray: 255))
+        
+        let ns = image.nsImage()
+        
+        XCTAssertTrue(ns.isValid, "break here")
+    }
 }
