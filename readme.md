@@ -198,8 +198,6 @@ let reconstruct = converter.demosaic(image: bayer)
 - [Canny edge detection](https://github.com/t-ae/swim/blob/4128d352443da43027f95ce784d03b5c6e4e33f1/Tests/VisualTests/ApplicationVisualTests.swift#L227-L340)
 - [Dithering](https://github.com/t-ae/swim/blob/4128d352443da43027f95ce784d03b5c6e4e33f1/Tests/VisualTests/ApplicationVisualTests.swift#L418-L458)
 
----
-
 [VisualTests](https://github.com/t-ae/swim/blob/master/Tests/VisualTests) contains more examples (works only on macOS).
 
 ## License
