@@ -166,6 +166,20 @@ let maximum = image.rankFilter(.maximum, kernelSize: 3)
 
 ![filter](https://user-images.githubusercontent.com/12446914/56787940-00f52080-6839-11e9-8171-22d8dab37910.png)
 
+### Fast Fourier transformation
+
+```swift
+let image = Image<Gray, Double>(contentsOf: url)!
+// image size must be power of 2
+let transformed: Image<GrayAlpha, Double> = FourierTransformer.fft(image: image)
+let inverted: Image<Gray, Double> = FourierTransformer.ifft(image: transformed)
+```
+
+[Example: Spectrum and inverted image / Low-pass filtered / High-pass filtered](https://github.com/t-ae/swim/blob/2f23f39702d77545b04b5fb995851adf31fcce12/Tests/VisualTests/FourierTransformerVisualTests.swift#L5-L74)
+
+![fft](https://user-images.githubusercontent.com/12446914/57998357-109c1800-7b0c-11e9-818b-600f75485794.png)
+
+
 ### Bayer filter
 ```swift 
 let image = Image<RGB, Float>(contentsOf: url)!
