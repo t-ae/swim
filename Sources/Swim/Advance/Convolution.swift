@@ -1,3 +1,5 @@
+import Foundation
+
 // MARK: - Filter
 public enum Filter<T: SignedNumeric&DataType> {
     public static var sobel3x3H: Image<Gray, T> {
@@ -60,6 +62,39 @@ extension Filter where T: FloatingPoint {
     
     public static var mean5x5: Image<Gray, T> {
         return Image(width: 5, height: 5, value: 1/25)
+    }
+}
+
+extension Filter where T == Double {
+    /// 2D Gaussian.
+    ///
+    /// - Parameters:
+    ///   - size: Width/height of imege.
+    ///   - sigma2: Variance of Gaussian.
+    ///   - scaleTo1: If true, output pixel valuues are scaled so that these sum is 1.
+    @inlinable
+    public static func gaussian(size: Int, sigma2: T, scaleTo1: Bool = false) -> Image<Gray, T> {
+        precondition(sigma2 > 0, "sigma2 must be greater than 0.")
+        var image = Image<Gray, T>(width: size, height: size, value: 0)
+        
+        let c: T = 1 / (2 * T.pi * sigma2)
+        
+        var sum: T = 0
+        image.pixelwiseConvert { ref in
+            let dx = T(ref.x) - T(size-1)/2
+            let dy = T(ref.y) - T(size-1)/2
+            
+            let norm = dx*dx + dy*dy
+            
+            ref[0] = c * exp(-norm / (2*sigma2))
+            sum += ref[0]
+        }
+        
+        if scaleTo1 {
+            image /= sum
+        }
+        
+        return image
     }
 }
 
