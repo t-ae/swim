@@ -73,6 +73,10 @@
 		A7383818228F100F00412CA8 /* FourierTransformerVisualTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7383817228F100F00412CA8 /* FourierTransformerVisualTests.swift */; };
 		A738381B22906EFA00412CA8 /* BitOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = A738381A22906EFA00412CA8 /* BitOperations.swift */; };
 		A738381F2290714F00412CA8 /* BitOperationsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A738381D2290713F00412CA8 /* BitOperationsTests.swift */; };
+		A7FC411122928570008A90D2 /* DrawCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7FC411022928570008A90D2 /* DrawCircle.swift */; };
+		A7FC411322928744008A90D2 /* DrawLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7FC411222928744008A90D2 /* DrawLine.swift */; };
+		A7FC411622928D1D008A90D2 /* DrawVisualTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7FC411422928D1B008A90D2 /* DrawVisualTests.swift */; };
+		A7FC41182292994B008A90D2 /* DrawUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7FC41172292994B008A90D2 /* DrawUtil.swift */; };
 		OBJ_167 /* image_io.c in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_9 /* image_io.c */; };
 		OBJ_169 /* stb_image_write.h in Headers */ = {isa = PBXBuildFile; fileRef = OBJ_11 /* stb_image_write.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		OBJ_170 /* stb_image.h in Headers */ = {isa = PBXBuildFile; fileRef = OBJ_12 /* stb_image.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -309,6 +313,10 @@
 		A7383817228F100F00412CA8 /* FourierTransformerVisualTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FourierTransformerVisualTests.swift; sourceTree = "<group>"; };
 		A738381A22906EFA00412CA8 /* BitOperations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BitOperations.swift; sourceTree = "<group>"; };
 		A738381D2290713F00412CA8 /* BitOperationsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BitOperationsTests.swift; sourceTree = "<group>"; };
+		A7FC411022928570008A90D2 /* DrawCircle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawCircle.swift; sourceTree = "<group>"; };
+		A7FC411222928744008A90D2 /* DrawLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawLine.swift; sourceTree = "<group>"; };
+		A7FC411422928D1B008A90D2 /* DrawVisualTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawVisualTests.swift; sourceTree = "<group>"; };
+		A7FC41172292994B008A90D2 /* DrawUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawUtil.swift; sourceTree = "<group>"; };
 		OBJ_100 /* Im2colTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Im2colTests.swift; sourceTree = "<group>"; };
 		OBJ_101 /* IntegralImageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntegralImageTests.swift; sourceTree = "<group>"; };
 		OBJ_103 /* ImageArithmeticTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageArithmeticTests.swift; sourceTree = "<group>"; };
@@ -516,6 +524,16 @@
 			path = BooleanTests;
 			sourceTree = "<group>";
 		};
+		A7FC410F2292855F008A90D2 /* Draw */ = {
+			isa = PBXGroup;
+			children = (
+				A7FC411022928570008A90D2 /* DrawCircle.swift */,
+				A7FC411222928744008A90D2 /* DrawLine.swift */,
+				A7FC41172292994B008A90D2 /* DrawUtil.swift */,
+			);
+			path = Draw;
+			sourceTree = "<group>";
+		};
 		OBJ_10 /* include */ = {
 			isa = PBXGroup;
 			children = (
@@ -655,6 +673,7 @@
 				OBJ_26 /* Blend */,
 				OBJ_33 /* Conversion */,
 				OBJ_39 /* Core */,
+				A7FC410F2292855F008A90D2 /* Draw */,
 				OBJ_47 /* IO */,
 				OBJ_51 /* Interpolation */,
 				OBJ_56 /* Manipulation */,
@@ -691,6 +710,7 @@
 				OBJ_152 /* WarpVisualTests.swift */,
 				A7383807228D438500412CA8 /* TransformationVisualTests.swift */,
 				A7383817228F100F00412CA8 /* FourierTransformerVisualTests.swift */,
+				A7FC411422928D1B008A90D2 /* DrawVisualTests.swift */,
 			);
 			name = VisualTests;
 			path = Tests/VisualTests;
@@ -1201,12 +1221,14 @@
 				OBJ_217 /* ReadImage.swift in Sources */,
 				OBJ_218 /* WriteImage.swift in Sources */,
 				OBJ_219 /* BicubicInterpolator.swift in Sources */,
+				A7FC411322928744008A90D2 /* DrawLine.swift in Sources */,
 				A738381B22906EFA00412CA8 /* BitOperations.swift in Sources */,
 				A7383816228F0D7E00412CA8 /* FourierTransformer.swift in Sources */,
 				A732B3A82271913A00B2256E /* Abs.swift in Sources */,
 				OBJ_220 /* BilinearInterpolator.swift in Sources */,
 				OBJ_221 /* Interpolator.swift in Sources */,
 				OBJ_222 /* NearestNeighborInterpolator.swift in Sources */,
+				A7FC41182292994B008A90D2 /* DrawUtil.swift in Sources */,
 				OBJ_223 /* Clip.swift in Sources */,
 				OBJ_224 /* Concatenation.swift in Sources */,
 				OBJ_225 /* Fill.swift in Sources */,
@@ -1238,6 +1260,7 @@
 				A732C5072284247C00C96067 /* IteratePixels.swift in Sources */,
 				A7383813228F089900412CA8 /* HomogeneousTransformationMatrix.swift in Sources */,
 				OBJ_241 /* Rotate.swift in Sources */,
+				A7FC411122928570008A90D2 /* DrawCircle.swift in Sources */,
 				OBJ_242 /* Warp.swift in Sources */,
 				A732AE9B226ED0AE00B2256E /* PixelRefScalarCompoundAssignmentOperator.swift in Sources */,
 				OBJ_243 /* ArrayExt.swift in Sources */,
@@ -1316,6 +1339,7 @@
 			files = (
 				A7383818228F100F00412CA8 /* FourierTransformerVisualTests.swift in Sources */,
 				A732C2912283B13500C96067 /* HistogramEqualizerVisualTests.swift in Sources */,
+				A7FC411622928D1D008A90D2 /* DrawVisualTests.swift in Sources */,
 				A732C29D2283D37600C96067 /* PaddingVisualTests.swift in Sources */,
 				A732B3A1227183F100B2256E /* SubimageVisualTests.swift in Sources */,
 				OBJ_318 /* BayerVisualTests.swift in Sources */,
