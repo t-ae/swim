@@ -12,9 +12,9 @@ public enum FourierTransformer {
         var image = image.toGrayAlpha(with: 0)
         
         fftx(image: &image, inverse: false)
-        image = image.transpose()
+        image = image.transposed()
         fftx(image: &image, inverse: false)
-        image = image.transpose()
+        image = image.transposed()
         
         return image
     }
@@ -30,9 +30,9 @@ public enum FourierTransformer {
         precondition(Int(exactly: log2(Double(image.height))) != nil, "image height must be power of 2.")
         var image = image
         fftx(image: &image, inverse: true)
-        image = image.transpose()
+        image = image.transposed()
         fftx(image: &image, inverse: true)
-        image = image.transpose()
+        image = image.transposed()
         
         return image[channel: .gray]
     }

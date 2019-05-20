@@ -11,6 +11,6 @@ class TransposeTests: XCTestCase {
                                                     4, 5, 6, 7, 16, 17, 18, 19,
                                                     8, 9, 10, 11, 20, 21, 22, 23])
         
-        XCTAssertEqual(image.transpose(), transposed)
+        XCTAssertEqual(image.transposed(), transposed)
     }
 }

@@ -9,8 +9,8 @@ class ConvolutionTests: XCTestCase {
             
             XCTAssertEqual(f[row: 0], f[row: 2])
             XCTAssertEqual(f[col: 0], f[col: 2])
-            XCTAssertEqual(f[row: 0], f[col: 0].transpose())
-            XCTAssertEqual(f[row: 1], f[col: 1].transpose())
+            XCTAssertEqual(f[row: 0], f[col: 0].transposed())
+            XCTAssertEqual(f[row: 1], f[col: 1].transposed())
         }
         do {
             let f = Filter.gaussian(size: 3, sigma2: 2 / Double.pi, scaleTo1: true)

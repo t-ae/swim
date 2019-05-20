@@ -12,7 +12,7 @@ class TransformationVisualTests: XCTestCase {
         images.append(lena.rot90())
         images.append(lena.rot180())
         images.append(lena.rot90())
-        images.append(lena.transpose())
+        images.append(lena.transposed())
         
         // result
         let ns = doubleToNSImage(Image.concatH(images))

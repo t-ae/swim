@@ -94,7 +94,7 @@ class PerformanceTests: XCTestCase {
         let image = Image<RGBA, Int>(width: 1920, height: 1080, value: 1)
         
         measure {
-            _ = image.transpose()
+            _ = image.transposed()
         }
     }
     

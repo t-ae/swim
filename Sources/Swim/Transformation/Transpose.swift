@@ -1,8 +1,11 @@
 import Foundation
 
 extension Image {
+    
+    // TODO: Add transpose when width/height become var.
+    
     @inlinable
-    public func transpose() -> Image<P, T> {
+    public func transposed() -> Image<P, T> {
         var newImage = Image<P, T>(width: height, height: width)
         
         data.withUnsafeBufferPointer {
