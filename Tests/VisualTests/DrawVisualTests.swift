@@ -17,6 +17,9 @@ class DrawVisualTests: XCTestCase {
         
         image.drawLines(points: [(10, 10), (190, 190), (190, 10), (10, 190)], pixel: Pixel(gray: 128))
         
+        image.drawX(center: (60, 10), size: 5, pixel: Pixel(gray: 192))
+        image.drawX(center: (70, 10), size: 6, pixel: Pixel(gray: 192))
+        
         let ns = image.nsImage()
         
         XCTAssertTrue(ns.isValid, "break here")

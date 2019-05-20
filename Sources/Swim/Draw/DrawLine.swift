@@ -45,4 +45,18 @@ extension Image {
             drawLine(p1: points[0], p2: points.last!, pixel: pixel)
         }
     }
+    
+    // Draw cross mark at the specified point.
+    @inlinable
+    public mutating func drawX(center: (x: Int, y: Int), size: Int, pixel: Pixel<P, T>) {
+        let length = size / 2
+        
+        let left = center.x - length
+        let right = center.x + length
+        let top = center.y - length
+        let bottom = center.y + length
+        
+        drawLine(p1: (left, top), p2: (right, bottom), pixel: pixel)
+        drawLine(p1: (left, bottom), p2: (right, top), pixel: pixel)
+    }
 }
