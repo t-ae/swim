@@ -8,10 +8,10 @@ class RoundingTests: XCTestCase {
         
         let rounded = Image(width: 2, height: 2, rgba: data.map { round($0) })
         
-        XCTAssertEqual(image.rounded(), rounded)
+        XCTAssertEqual(image.round(), rounded)
         
         var image2 = image
-        image2.round()
+        image2.applyRound()
         XCTAssertEqual(image2, rounded)
     }
     
@@ -21,10 +21,10 @@ class RoundingTests: XCTestCase {
         
         let rounded = Image(width: 2, height: 2, rgba: data.map { ceil($0) })
         
-        XCTAssertEqual(image.ceiled(), rounded)
+        XCTAssertEqual(image.ceil(), rounded)
         
         var image2 = image
-        image2.ceil()
+        image2.applyCeil()
         XCTAssertEqual(image2, rounded)
     }
     
@@ -34,10 +34,10 @@ class RoundingTests: XCTestCase {
         
         let rounded = Image(width: 2, height: 2, rgba: data.map { floor($0) })
         
-        XCTAssertEqual(image.floored(), rounded)
+        XCTAssertEqual(image.floor(), rounded)
         
         var image2 = image
-        image2.floor()
+        image2.applyFloor()
         XCTAssertEqual(image2, rounded)
     }
     
@@ -47,10 +47,10 @@ class RoundingTests: XCTestCase {
         
         let rounded = Image(width: 2, height: 2, rgba: data.map { trunc($0) })
         
-        XCTAssertEqual(image.trunced(), rounded)
+        XCTAssertEqual(image.trunc(), rounded)
         
         var image2 = image
-        image2.trunc()
+        image2.applyTrunc()
         XCTAssertEqual(image2, rounded)
     }
 }

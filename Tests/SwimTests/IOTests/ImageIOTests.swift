@@ -91,7 +91,7 @@ class ImageIOTests: XCTestCase {
             try! self.baseImage.write(to: srcPath, format: .png)
             let image = try! Image<RGBA, Float>(contentsOf: srcPath)
             
-            XCTAssertEqual((image*255).rounded().cast(), baseImage)
+            XCTAssertEqual((image*255).round().cast(), baseImage)
             
             try! image.write(to: dstPath, format: .png)
             
@@ -103,7 +103,7 @@ class ImageIOTests: XCTestCase {
             try! self.baseLuminance.write(to: srcPath, format: .png)
             let image = try! Image<Gray, Float>(contentsOf: srcPath)
             
-            XCTAssertEqual((image*255).rounded().cast(), baseLuminance)
+            XCTAssertEqual((image*255).round().cast(), baseLuminance)
             
             try! image.write(to: dstPath, format: .png)
             
@@ -119,7 +119,7 @@ class ImageIOTests: XCTestCase {
             
             let image = try! Image<RGBA, Double>(contentsOf: srcPath)
             
-            XCTAssertEqual((image*255).rounded().cast(), baseImage)
+            XCTAssertEqual((image*255).round().cast(), baseImage)
             
             try! image.write(to: dstPath, format: .png)
             
@@ -132,7 +132,7 @@ class ImageIOTests: XCTestCase {
             
             let image = try! Image<Gray, Double>(contentsOf: srcPath)
             
-            XCTAssertEqual((image*255).rounded().cast(), baseLuminance)
+            XCTAssertEqual((image*255).round().cast(), baseLuminance)
             
             try! image.write(to: dstPath, format: .png)
             

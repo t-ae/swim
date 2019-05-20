@@ -2,14 +2,14 @@ import Foundation
 
 extension Image where T: Comparable&SignedNumeric {
     @inlinable
-    public mutating func abs() {
+    public mutating func applyAbs() {
         channelwiseConvert(Swift.abs)
     }
     
     @inlinable
-    public func formAbs() -> Image {
+    public func abs() -> Image {
         var newImage = self
-        newImage.abs()
+        newImage.applyAbs()
         return newImage
     }
 }

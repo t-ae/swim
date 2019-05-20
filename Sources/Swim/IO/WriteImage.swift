@@ -99,7 +99,7 @@ extension Image where P: ImageFileFormat, T: BinaryFloatingPoint {
     @inlinable
     public func write(to url: URL, format: WriteFormat) throws {
         var i255 = self.clipped(low: 0, high: 1) * 255
-        i255.round()
+        i255.applyRound()
         try i255.cast(to: UInt8.self).write(to: url, format: format)
     }
 }

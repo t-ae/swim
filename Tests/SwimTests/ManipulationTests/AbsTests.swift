@@ -9,9 +9,9 @@ class AbsTests: XCTestCase {
         
         let answer = Image(width: 2, height: 2, rgba: data.map(abs))
         
-        XCTAssertEqual(image.formAbs(), answer)
+        XCTAssertEqual(image.abs(), answer)
         
-        image.abs()
+        image.applyAbs()
         XCTAssertEqual(image, answer)
     }
     
@@ -21,9 +21,9 @@ class AbsTests: XCTestCase {
         
         let answer = Image(width: 2, height: 2, rgba: data.map(abs))
         
-        XCTAssertEqual(image.formAbs(), answer)
+        XCTAssertEqual(image.abs(), answer)
         
-        image.abs()
+        image.applyAbs()
         XCTAssertEqual(image, answer)
     }
     
@@ -33,9 +33,9 @@ class AbsTests: XCTestCase {
         
         let answer = Image(width: 2, height: 2, rgba: data.map(abs))
         
-        XCTAssertEqual(image.formAbs(), answer)
+        XCTAssertEqual(image.abs(), answer)
         
-        image.abs()
+        image.applyAbs()
         XCTAssertEqual(image, answer)
     }
 }

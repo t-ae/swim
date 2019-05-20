@@ -48,7 +48,7 @@ extension Image where P: ConvertibleToCGImage, T: BinaryFloatingPoint {
     @inlinable
     public func cgImage() -> CGImage {
         var i255 = clipped(low: 0, high: 1) * 255
-        i255.round()
+        i255.applyRound()
         return i255.cast(to: UInt8.self).cgImage()
     }
 }

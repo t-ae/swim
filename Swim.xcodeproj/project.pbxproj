@@ -586,9 +586,7 @@
 			isa = PBXGroup;
 			children = (
 				OBJ_122 /* ClipTests.swift */,
-				OBJ_123 /* ConcatenateTests.swift */,
 				OBJ_124 /* RoundingTests.swift */,
-				A732B394227025B300B2256E /* PaddingTests.swift */,
 				A732B39D22716CF100B2256E /* AbsTests.swift */,
 				A7382713228A4B2500412CA8 /* FillTests.swift */,
 				A738380C228D9B2700412CA8 /* PowerTests.swift */,
@@ -628,9 +626,11 @@
 			isa = PBXGroup;
 			children = (
 				OBJ_135 /* AffineTransformationTests.swift */,
+				OBJ_123 /* ConcatenateTests.swift */,
+				OBJ_138 /* HomogeneousTransformationMatrixTests.swift */,
+				A732B394227025B300B2256E /* PaddingTests.swift */,
 				OBJ_136 /* ResizeTests.swift */,
 				OBJ_137 /* TransformationTests.swift */,
-				OBJ_138 /* HomogeneousTransformationMatrixTests.swift */,
 				A7383805228D3CA400412CA8 /* TransposeTests.swift */,
 			);
 			path = TransformationTests;
@@ -817,12 +817,9 @@
 			isa = PBXGroup;
 			children = (
 				OBJ_57 /* Clip.swift */,
-				OBJ_58 /* Concatenation.swift */,
 				OBJ_59 /* Fill.swift */,
 				OBJ_60 /* Rounding.swift */,
-				A732B3912270232E00B2256E /* Padding.swift */,
 				A732B39B22716AEF00B2256E /* Abs.swift */,
-				A732C2982283D33600C96067 /* EdgeMode.swift */,
 				A732C5052284247800C96067 /* IteratePixels.swift */,
 				A7383809228D992E00412CA8 /* Power.swift */,
 			);
@@ -882,11 +879,14 @@
 			isa = PBXGroup;
 			children = (
 				A7383810228F085B00412CA8 /* Matrix */,
+				OBJ_58 /* Concatenation.swift */,
+				A732C2982283D33600C96067 /* EdgeMode.swift */,
 				OBJ_78 /* Flip.swift */,
+				A732B3912270232E00B2256E /* Padding.swift */,
 				OBJ_79 /* Resize.swift */,
 				OBJ_80 /* Rotate.swift */,
-				OBJ_81 /* Warp.swift */,
 				A7383802228D3B9900412CA8 /* Transpose.swift */,
+				OBJ_81 /* Warp.swift */,
 			);
 			path = Transformation;
 			sourceTree = "<group>";

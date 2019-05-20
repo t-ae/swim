@@ -2,50 +2,50 @@ import Foundation
 
 extension Image where T: FloatingPoint {
     @inlinable
-    public mutating func round() {
+    public mutating func applyRound() {
         channelwiseConvert(Foundation.round)
     }
     
     @inlinable
-    public func rounded() -> Image<P, T> {
+    public func round() -> Image<P, T> {
         var newImage = self
-        newImage.round()
+        newImage.applyRound()
         return newImage
     }
     
     @inlinable
-    public mutating func ceil() {
+    public mutating func applyCeil() {
         channelwiseConvert(Foundation.ceil)
     }
 
     @inlinable
-    public func ceiled() -> Image<P, T> {
+    public func ceil() -> Image<P, T> {
         var newImage = self
-        newImage.ceil()
+        newImage.applyCeil()
         return newImage
     }
     
     @inlinable
-    public mutating func floor() {
+    public mutating func applyFloor() {
         channelwiseConvert(Foundation.floor)
     }
     
     @inlinable
-    public func floored() -> Image<P, T> {
+    public func floor() -> Image<P, T> {
         var newImage = self
-        newImage.floor()
+        newImage.applyFloor()
         return newImage
     }
     
     @inlinable
-    public mutating func trunc() {
+    public mutating func applyTrunc() {
         channelwiseConvert(Foundation.trunc)
     }
     
     @inlinable
-    public func trunced() -> Image<P, T> {
+    public func trunc() -> Image<P, T> {
         var newImage = self
-        newImage.trunc()
+        newImage.applyTrunc()
         return newImage
     }
 }
