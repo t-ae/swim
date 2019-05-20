@@ -1,4 +1,5 @@
 extension Image {
+    /// Draw line between specified points.
     @inlinable
     public mutating func drawLine(p1: (x: Int, y: Int),
                                   p2: (x: Int, y: Int),
@@ -29,7 +30,9 @@ extension Image {
         self[x, y] = pixel
     }
     
-    
+    /// Draw line between specified points.
+    /// - Parameters:
+    ///   - close: It true, draw line between first and last points. Default: true.
     @inlinable
     public mutating func drawLines(points: [(x: Int, y: Int)],
                                    pixel: Pixel<P, T>,
@@ -46,7 +49,7 @@ extension Image {
         }
     }
     
-    // Draw cross mark at the specified point.
+    /// Draw cross mark at the specified point.
     @inlinable
     public mutating func drawX(center: (x: Int, y: Int), size: Int, pixel: Pixel<P, T>) {
         let length = size / 2

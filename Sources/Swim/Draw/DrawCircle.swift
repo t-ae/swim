@@ -1,6 +1,7 @@
 import Foundation
 
 extension Image {
+    /// Draw circle.
     @inlinable
     public mutating func drawCircle(center: (x: Int, y: Int),
                                     radius: Int,
@@ -15,6 +16,7 @@ extension Image {
         }
     }
     
+    /// Draw circle pelimeter.
     @inlinable
     public mutating func drawCirclePelimeter(center: (x: Int, y: Int),
                                              radius: Int,

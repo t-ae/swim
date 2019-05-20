@@ -76,7 +76,7 @@
 		A7FC411122928570008A90D2 /* DrawCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7FC411022928570008A90D2 /* DrawCircle.swift */; };
 		A7FC411322928744008A90D2 /* DrawLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7FC411222928744008A90D2 /* DrawLine.swift */; };
 		A7FC411622928D1D008A90D2 /* DrawVisualTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7FC411422928D1B008A90D2 /* DrawVisualTests.swift */; };
-		A7FC41182292994B008A90D2 /* DrawUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7FC41172292994B008A90D2 /* DrawUtil.swift */; };
+		A7FC41182292994B008A90D2 /* DrawPixel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7FC41172292994B008A90D2 /* DrawPixel.swift */; };
 		A7FC411A22929ACB008A90D2 /* DrawRect.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7FC411922929ACB008A90D2 /* DrawRect.swift */; };
 		OBJ_167 /* image_io.c in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_9 /* image_io.c */; };
 		OBJ_169 /* stb_image_write.h in Headers */ = {isa = PBXBuildFile; fileRef = OBJ_11 /* stb_image_write.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -317,7 +317,7 @@
 		A7FC411022928570008A90D2 /* DrawCircle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawCircle.swift; sourceTree = "<group>"; };
 		A7FC411222928744008A90D2 /* DrawLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawLine.swift; sourceTree = "<group>"; };
 		A7FC411422928D1B008A90D2 /* DrawVisualTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawVisualTests.swift; sourceTree = "<group>"; };
-		A7FC41172292994B008A90D2 /* DrawUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawUtil.swift; sourceTree = "<group>"; };
+		A7FC41172292994B008A90D2 /* DrawPixel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawPixel.swift; sourceTree = "<group>"; };
 		A7FC411922929ACB008A90D2 /* DrawRect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawRect.swift; sourceTree = "<group>"; };
 		OBJ_100 /* Im2colTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Im2colTests.swift; sourceTree = "<group>"; };
 		OBJ_101 /* IntegralImageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntegralImageTests.swift; sourceTree = "<group>"; };
@@ -532,7 +532,7 @@
 				A7FC411022928570008A90D2 /* DrawCircle.swift */,
 				A7FC411222928744008A90D2 /* DrawLine.swift */,
 				A7FC411922929ACB008A90D2 /* DrawRect.swift */,
-				A7FC41172292994B008A90D2 /* DrawUtil.swift */,
+				A7FC41172292994B008A90D2 /* DrawPixel.swift */,
 			);
 			path = Draw;
 			sourceTree = "<group>";
@@ -1231,7 +1231,7 @@
 				OBJ_220 /* BilinearInterpolator.swift in Sources */,
 				OBJ_221 /* Interpolator.swift in Sources */,
 				OBJ_222 /* NearestNeighborInterpolator.swift in Sources */,
-				A7FC41182292994B008A90D2 /* DrawUtil.swift in Sources */,
+				A7FC41182292994B008A90D2 /* DrawPixel.swift in Sources */,
 				OBJ_223 /* Clip.swift in Sources */,
 				OBJ_224 /* Concatenation.swift in Sources */,
 				OBJ_225 /* Fill.swift in Sources */,

@@ -1,5 +1,5 @@
 extension Image {
-    /// Draw pixel.
+    /// Draw single pixel.
     ///
     /// If specified point is outside of image, this method does nothing.
     @inlinable

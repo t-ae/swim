@@ -1,4 +1,5 @@
 extension Image {
+    /// Draw Rectangle.
     @inlinable
     public mutating func drawRect(origin: (x: Int, y: Int),
                                   size: (width: Int, height: Int),
