@@ -50,6 +50,8 @@ extension Image where P == Intensity {
 
 // MARK: - RGB -> Intensity
 extension Image where P == RGB, T: BinaryInteger {
+    /// Create grayscale image.
+    /// Output = (R + G + B) / 3.
     @inlinable
     public func toBrightness() -> Image<Intensity, T> {
         var newImage = Image<Intensity, T>.zeros(like: self)
@@ -62,6 +64,8 @@ extension Image where P == RGB, T: BinaryInteger {
         return newImage
     }
     
+    /// Create grayscale image.
+    /// Output = 0.2126*R + 0.7152*G + 0.0722*B.
     @inlinable
     public func toLuminance() -> Image<Intensity, T> {
         var newImage = Image<Intensity, T>.zeros(like: self)
@@ -78,6 +82,8 @@ extension Image where P == RGB, T: BinaryInteger {
 }
 
 extension Image where P == RGB, T: FloatingPoint {
+    /// Create grayscale image.
+    /// Output = (R + G + B) / 3.
     @inlinable
     public func toBrightness() -> Image<Intensity, T> {
         var newImage = Image<Intensity, T>.zeros(like: self)
@@ -91,6 +97,8 @@ extension Image where P == RGB, T: FloatingPoint {
 }
 
 extension Image where P == RGB, T: BinaryFloatingPoint {
+    /// Create grayscale image.
+    /// Output = 0.2126*R + 0.7152*G + 0.0722*B.
     @inlinable
     public func toLuminance() -> Image<Intensity, T> {
         var newImage = Image<Intensity, T>.zeros(like: self)
