@@ -57,7 +57,7 @@ class ChannelSubscriptTests: XCTestCase {
         do {
             let data = (0..<16).map { UInt8($0) }
             var image = Image(width: 2, height: 2, rgba: data)
-            let newValue = Image(width: 2, height: 2, intensity: [252, 253, 254, 255] as [UInt8])
+            let newValue = Image(width: 2, height: 2, gray: [252, 253, 254, 255] as [UInt8])
             
             image[channel: 0] = newValue
             XCTAssertEqual(image,
@@ -97,7 +97,7 @@ class ChannelSubscriptTests: XCTestCase {
         do {
             let data = (0..<16).map { Float($0) }
             var image = Image(width: 2, height: 2, rgba: data)
-            let newValue = Image(width: 2, height: 2, intensity: [252, 253, 254, 255] as [Float])
+            let newValue = Image(width: 2, height: 2, gray: [252, 253, 254, 255] as [Float])
             
             image[channel: 0] = newValue
             XCTAssertEqual(image,
@@ -137,7 +137,7 @@ class ChannelSubscriptTests: XCTestCase {
         do {
             let data = (0..<16).map { Double($0) }
             var image = Image(width: 2, height: 2, rgba: data)
-            let newValue = Image(width: 2, height: 2, intensity: [252.0, 253, 254, 255])
+            let newValue = Image(width: 2, height: 2, gray: [252.0, 253, 254, 255])
             
             image[channel: 0] = newValue
             XCTAssertEqual(image,

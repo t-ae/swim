@@ -5,7 +5,7 @@ class Im2colTests: XCTestCase {
     
     func testIm2Col() {
         do {
-            let image = Image(width: 3, height: 2, intensity: (0..<6).map { Float($0) })
+            let image = Image(width: 3, height: 2, gray: (0..<6).map { Float($0) })
             let (m, n, matrix) = image.im2col(patchWidth: 2, patchHeight: 2)
             XCTAssertEqual(m, 4)
             XCTAssertEqual(n, 2)
@@ -15,7 +15,7 @@ class Im2colTests: XCTestCase {
                                     4, 5])
         }
         do {
-            let image = Image(width: 3, height: 4, intensity: (0..<12).map { Float($0) })
+            let image = Image(width: 3, height: 4, gray: (0..<12).map { Float($0) })
             let (m, n, matrix) = image.im2col(patchWidth: 3, patchHeight: 2)
             XCTAssertEqual(m, 6)
             XCTAssertEqual(n, 3)
@@ -27,7 +27,7 @@ class Im2colTests: XCTestCase {
                                     5, 8, 11])
         }
         do {
-            let image = Image(width: 4, height: 4, intensity: (0..<16).map { Float($0) })
+            let image = Image(width: 4, height: 4, gray: (0..<16).map { Float($0) })
             let (m, n, matrix) = image.im2col(patchWidth: 3, patchHeight: 2)
             XCTAssertEqual(m, 6)
             XCTAssertEqual(n, 6)

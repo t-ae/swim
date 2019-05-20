@@ -4,7 +4,7 @@ public protocol ImageFileFormat {
     
 }
 
-extension Intensity: ImageFileFormat {}
-extension IntensityAlpha: ImageFileFormat {}
+extension Gray: ImageFileFormat {}
+extension GrayAlpha: ImageFileFormat {}
 extension RGB: ImageFileFormat {}
 extension RGBA: ImageFileFormat {}

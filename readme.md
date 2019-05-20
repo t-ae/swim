@@ -7,7 +7,7 @@ struct Image<P: PixelType, T: DataType>
 ```
 
 Supported types  
-PixelType: `Intensity`, `IntensityAlpha`, `RGB`, `RGBA`, `ARGB`  
+PixelType: `Gray`, `GrayAlpha`, `RGB`, `RGBA`, `ARGB`  
 DataType: `Bool`, `UInt8`, `Int`, `Float`, `Double`  
 
 ## Creation
@@ -15,7 +15,7 @@ DataType: `Bool`, `UInt8`, `Int`, `Float`, `Double`
 let image = Image<RGBA, UInt8>(width: 3, height: 5, data: uint8Array])
 
 // Can use type inference
-let intensity = Image(width: 3, height: 20, intensity: intArray)
+let gray = Image(width: 3, height: 20, gray: intArray)
 let rgb = Image(width: 4, height: 5, rgb: floatArray)
 let rgba = Image(width: 3, height: 5, rgba: doubleArray)
 let argb = Image(width: 5, height: 3, argb: uint8Array)
@@ -64,7 +64,7 @@ image[col: 2] += 1
 ### Channel extraction
 ```swift
 let image = Image<RGBA, UInt8>(contentsOf: url)!
-let red: Image<Intensity, UInt8> = image[channel: 0]
+let red: Image<Gray, UInt8> = image[channel: 0]
 image[channel: .blue] += 1
 ```
 
@@ -74,8 +74,8 @@ image[channel: .blue] += 1
 let image = Image<RGB, Float>(contentsOf: url)!
 
 // to gray scale
-let brightness: Image<Intensity, Float> = image.toBrightness()
-let luminance: Image<Intensity, Float> = image.toLuminance()
+let brightness: Image<Gray, Float> = image.toBrightness()
+let luminance: Image<Gray, Float> = image.toLuminance()
 
 // type conversion
 let doubleImage1: Image<RGB, Double> = image.cast()
@@ -117,8 +117,8 @@ let warpedImage = image.warp(transformation: affine, outputSize: (500, 500), int
 
 ### Correlation
 ```swift
-let image1 = Image<Intensity, Float>(contentsOf: url1)!
-let image2 = Image<Intensity, Float>(contentsOf: url2)!
+let image1 = Image<Gray, Float>(contentsOf: url1)!
+let image2 = Image<Gray, Float>(contentsOf: url2)!
 
 let ssd = Correlation.ssd(image1, image2)
 let sad = Correlation.sad(image1, image2)
@@ -150,14 +150,14 @@ Blender.overlayBlend(top: imageGreen, bottom: &imageBase)
 
 ### Integral image
 ```swift 
-let image = Image<Intensity, Float>(contentsOf: url)!
+let image = Image<Gray, Float>(contentsOf: url)!
 let integral = IntegralImageConverter.convert(image: image)
 ```
 
 ### Convolution/Filter
 
 ```swift 
-let image = Image<Intensity, Float>(contentsOf: url)!
+let image = Image<Gray, Float>(contentsOf: url)!
 let blur = image.convoluted(Filter.gaussian3x3)
 let maximum = image.rankFilter(.maximum, kernelSize: 3)
 ```

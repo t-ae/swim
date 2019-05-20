@@ -53,10 +53,10 @@ extension Image where P: ConvertibleToCGImage, T: BinaryFloatingPoint {
     }
 }
 
-// MARK: - Intensity
-extension Intensity: ConvertibleFromCGImage, ConvertibleToCGImage {
+// MARK: - Gray
+extension Gray: ConvertibleFromCGImage, ConvertibleToCGImage {
     @inlinable
-    public static func fromCGImage(cgImage: CGImage) -> Image<Intensity, UInt8> {
+    public static func fromCGImage(cgImage: CGImage) -> Image<Gray, UInt8> {
         let width = cgImage.width
         let height = cgImage.height
         
@@ -75,7 +75,7 @@ extension Intensity: ConvertibleFromCGImage, ConvertibleToCGImage {
     }
     
     @inlinable
-    public static func toCGImage(image: Image<Intensity, UInt8>) -> CGImage {
+    public static func toCGImage(image: Image<Gray, UInt8>) -> CGImage {
         let bitsPerComponent = MemoryLayout<UInt8>.size * 8
         let bitsPerPixel = bitsPerComponent
         let bytesPerRow = image.width * bitsPerPixel / 8

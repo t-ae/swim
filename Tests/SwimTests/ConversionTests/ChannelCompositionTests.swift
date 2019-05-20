@@ -5,18 +5,18 @@ class ChannelCompositionTests: XCTestCase {
     
     func testCompound() {
         do {
-            let intensity = Image(width: 2, height: 2, intensity: [0, 1, 2, 3])
-            let alpha = Image(width: 2, height: 2, intensity: [4, 5, 6, 7])
+            let gray = Image(width: 2, height: 2, gray: [0, 1, 2, 3])
+            let alpha = Image(width: 2, height: 2, gray: [4, 5, 6, 7])
             
-            let image = Image(intensity: intensity, alpha: alpha)
+            let image = Image(gray: gray, alpha: alpha)
             
-            XCTAssertEqual(image[channel: .intensity], intensity)
+            XCTAssertEqual(image[channel: .gray], gray)
             XCTAssertEqual(image[channel: .alpha], alpha)
         }
         do {
-            let red = Image(width: 2, height: 2, intensity: [0, 1, 2, 3])
-            let green = Image(width: 2, height: 2, intensity: [4, 5, 6, 7])
-            let blue = Image(width: 2, height: 2, intensity: [8, 9, 10, 11])
+            let red = Image(width: 2, height: 2, gray: [0, 1, 2, 3])
+            let green = Image(width: 2, height: 2, gray: [4, 5, 6, 7])
+            let blue = Image(width: 2, height: 2, gray: [8, 9, 10, 11])
             
             let image = Image(r: red, g: green, b: blue)
             
@@ -25,10 +25,10 @@ class ChannelCompositionTests: XCTestCase {
             XCTAssertEqual(image[channel: .blue], blue)
         }
         do {
-            let red = Image(width: 2, height: 2, intensity: [0, 1, 2, 3])
-            let green = Image(width: 2, height: 2, intensity: [4, 5, 6, 7])
-            let blue = Image(width: 2, height: 2, intensity: [8, 9, 10, 11])
-            let alpha = Image(width: 2, height: 2, intensity: [12, 13, 14, 15])
+            let red = Image(width: 2, height: 2, gray: [0, 1, 2, 3])
+            let green = Image(width: 2, height: 2, gray: [4, 5, 6, 7])
+            let blue = Image(width: 2, height: 2, gray: [8, 9, 10, 11])
+            let alpha = Image(width: 2, height: 2, gray: [12, 13, 14, 15])
             
             let image = Image(r: red, g: green, b: blue, a: alpha)
             
@@ -38,10 +38,10 @@ class ChannelCompositionTests: XCTestCase {
             XCTAssertEqual(image[channel: .alpha], alpha)
         }
         do {
-            let red = Image(width: 2, height: 2, intensity: [0, 1, 2, 3])
-            let green = Image(width: 2, height: 2, intensity: [4, 5, 6, 7])
-            let blue = Image(width: 2, height: 2, intensity: [8, 9, 10, 11])
-            let alpha = Image(width: 2, height: 2, intensity: [12, 13, 14, 15])
+            let red = Image(width: 2, height: 2, gray: [0, 1, 2, 3])
+            let green = Image(width: 2, height: 2, gray: [4, 5, 6, 7])
+            let blue = Image(width: 2, height: 2, gray: [8, 9, 10, 11])
+            let alpha = Image(width: 2, height: 2, gray: [12, 13, 14, 15])
             
             let image = Image(a: alpha, r: red, g: green, b: blue)
             
@@ -53,7 +53,7 @@ class ChannelCompositionTests: XCTestCase {
         
         do {
             let rgb = Image<RGB, UInt8>(width: 2, height: 2, data: (0..<12).map { UInt8($0) })
-            let a = Image<Intensity, UInt8>(width: 2, height: 2, data: (13..<17).map { UInt8($0) })
+            let a = Image<Gray, UInt8>(width: 2, height: 2, data: (13..<17).map { UInt8($0) })
             
             let rgba = Image(rgb: rgb, a: a)
             XCTAssertEqual(rgba[channel: .red], rgb[channel: .red])

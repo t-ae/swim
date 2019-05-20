@@ -1,14 +1,14 @@
-extension Image where P == Intensity {
+extension Image where P == Gray {
     @inlinable
-    public init(width: Int, height: Int, intensity: [T]) {
-        self.init(width: width, height: height, data: intensity)
+    public init(width: Int, height: Int, gray: [T]) {
+        self.init(width: width, height: height, data: gray)
     }
 }
 
-extension Image where P == IntensityAlpha {
+extension Image where P == GrayAlpha {
     @inlinable
-    public init(width: Int, height: Int, intensityAlpha: [T]) {
-        self.init(width: width, height: height, data: intensityAlpha)
+    public init(width: Int, height: Int, grayAlpha: [T]) {
+        self.init(width: width, height: height, data: grayAlpha)
     }
 }
 

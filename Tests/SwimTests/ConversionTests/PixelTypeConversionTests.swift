@@ -27,12 +27,12 @@ class PixelTypeConversionTests: XCTestCase {
         }
     }
     
-    func testIntensityToIntensityAlpha() {
+    func testGrayToGrayAlpha() {
         do {
             let data = (0..<9).map { UInt8($0) }
-            let intensity = Image(width: 3, height: 3, intensity: data)
+            let gray = Image(width: 3, height: 3, gray: data)
             
-            XCTAssertEqual(intensity.toIntensityAlpha(with: 9),
+            XCTAssertEqual(gray.toGrayAlpha(with: 9),
                            Image(width: 3,
                                  height: 3,
                                  data: [0, 9, 1, 9, 2, 9,
@@ -41,9 +41,9 @@ class PixelTypeConversionTests: XCTestCase {
         }
         do {
             let data = (0..<9).map { Double($0) }
-            let intensity = Image(width: 3, height: 3, intensity: data)
+            let gray = Image(width: 3, height: 3, gray: data)
             
-            XCTAssertEqual(intensity.toIntensityAlpha(with: 9),
+            XCTAssertEqual(gray.toGrayAlpha(with: 9),
                            Image(width: 3,
                                  height: 3,
                                  data: [0, 9, 1, 9, 2, 9,
@@ -52,12 +52,12 @@ class PixelTypeConversionTests: XCTestCase {
         }
     }
     
-    func testIntensityToRGB() {
+    func testGrayToRGB() {
         do {
             let data = (0..<9).map { UInt8($0) }
-            let intensity = Image(width: 3, height: 3, intensity: data)
+            let gray = Image(width: 3, height: 3, gray: data)
             
-            XCTAssertEqual(intensity.toRGB(),
+            XCTAssertEqual(gray.toRGB(),
                            Image(width: 3,
                                  height: 3,
                                  data: [0, 0, 0, 1, 1, 1, 2, 2, 2,
@@ -66,9 +66,9 @@ class PixelTypeConversionTests: XCTestCase {
         }
         do {
             let data = (0..<9).map { Double($0) }
-            let intensity = Image(width: 3, height: 3, intensity: data)
+            let gray = Image(width: 3, height: 3, gray: data)
             
-            XCTAssertEqual(intensity.toRGB(),
+            XCTAssertEqual(gray.toRGB(),
                            Image(width: 3,
                                  height: 3,
                                  data: [0, 0, 0, 1, 1, 1, 2, 2, 2,
@@ -77,12 +77,12 @@ class PixelTypeConversionTests: XCTestCase {
         }
     }
     
-    func testIntensityToRGBA() {
+    func testGrayToRGBA() {
         do {
             let data = (0..<9).map { UInt8($0) }
-            let intensity = Image(width: 3, height: 3, intensity: data)
+            let gray = Image(width: 3, height: 3, gray: data)
             
-            XCTAssertEqual(intensity.toRGBA(with: 9),
+            XCTAssertEqual(gray.toRGBA(with: 9),
                            Image(width: 3,
                                  height: 3,
                                  data: [0, 0, 0, 9, 1, 1, 1, 9, 2, 2, 2, 9,
@@ -91,9 +91,9 @@ class PixelTypeConversionTests: XCTestCase {
         }
         do {
             let data = (0..<9).map { Double($0) }
-            let intensity = Image(width: 3, height: 3, intensity: data)
+            let gray = Image(width: 3, height: 3, gray: data)
             
-            XCTAssertEqual(intensity.toRGBA(with: 9),
+            XCTAssertEqual(gray.toRGBA(with: 9),
                            Image(width: 3,
                                  height: 3,
                                  data: [0, 0, 0, 9, 1, 1, 1, 9, 2, 2, 2, 9,

@@ -1,10 +1,10 @@
 import Foundation
 
-// MARK: - Intensity -> RGB
-extension Image where P == Intensity {
+// MARK: - Gray -> RGB
+extension Image where P == Gray {
     @inlinable
-    public func toIntensityAlpha(with alphaValue: T) -> Image<IntensityAlpha, T> {
-        var newImage = Image<IntensityAlpha, T>.full(value: alphaValue, like: self)
+    public func toGrayAlpha(with alphaValue: T) -> Image<GrayAlpha, T> {
+        var newImage = Image<GrayAlpha, T>.full(value: alphaValue, like: self)
         
         strideCopy(src: data, srcOffset: 0, srcStride: 1,
                    dst: &newImage.data, dstOffset: 0, dstStride: 2, count: pixelCount)
@@ -48,13 +48,13 @@ extension Image where P == Intensity {
     }
 }
 
-// MARK: - RGB -> Intensity
+// MARK: - RGB -> Gray
 extension Image where P == RGB, T: BinaryInteger {
     /// Create grayscale image.
     /// Output = (R + G + B) / 3.
     @inlinable
-    public func toBrightness() -> Image<Intensity, T> {
-        var newImage = Image<Intensity, T>.zeros(like: self)
+    public func toBrightness() -> Image<Gray, T> {
+        var newImage = Image<Gray, T>.zeros(like: self)
         
         for i in 0..<width*height {
             let sum = Int(data[3*i+0]) + Int(data[3*i+1]) + Int(data[3*i+2])
@@ -67,8 +67,8 @@ extension Image where P == RGB, T: BinaryInteger {
     /// Create grayscale image.
     /// Output = 0.2126*R + 0.7152*G + 0.0722*B.
     @inlinable
-    public func toLuminance() -> Image<Intensity, T> {
-        var newImage = Image<Intensity, T>.zeros(like: self)
+    public func toLuminance() -> Image<Gray, T> {
+        var newImage = Image<Gray, T>.zeros(like: self)
         
         for i in 0..<width*height {
             var sum = 2126 * Int(data[3*i+0])
@@ -85,8 +85,8 @@ extension Image where P == RGB, T: FloatingPoint {
     /// Create grayscale image.
     /// Output = (R + G + B) / 3.
     @inlinable
-    public func toBrightness() -> Image<Intensity, T> {
-        var newImage = Image<Intensity, T>.zeros(like: self)
+    public func toBrightness() -> Image<Gray, T> {
+        var newImage = Image<Gray, T>.zeros(like: self)
         
         for i in 0..<width*height {
             newImage.data[i] = (data[3*i+0] + data[3*i+1] + data[3*i+2]) / 3
@@ -100,8 +100,8 @@ extension Image where P == RGB, T: BinaryFloatingPoint {
     /// Create grayscale image.
     /// Output = 0.2126*R + 0.7152*G + 0.0722*B.
     @inlinable
-    public func toLuminance() -> Image<Intensity, T> {
-        var newImage = Image<Intensity, T>.zeros(like: self)
+    public func toLuminance() -> Image<Gray, T> {
+        var newImage = Image<Gray, T>.zeros(like: self)
         
         for i in 0..<width*height {
             newImage.data[i] = 0.2126 * data[3*i+0]

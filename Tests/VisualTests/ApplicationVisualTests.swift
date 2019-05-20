@@ -9,7 +9,7 @@ class ApplicationVisualTests: XCTestCase {
 extension ApplicationVisualTests {
     func testOpenClose() {
         let size = 100
-        var image = Image<Intensity, Double>(width: size, height: size, value: 0)
+        var image = Image<Gray, Double>(width: size, height: size, value: 0)
         
         // base
         image[30..<70, 30..<70].fill(1)
@@ -117,13 +117,13 @@ extension ApplicationVisualTests {
             return (1 - 3*v*v + 2*v*v*abs(v))
         }
         
-        func perlin(width: Int, height: Int, fieldSize: Int) -> Image<Intensity, Double> {
-            var gradX = Image<Intensity, Double>(width: fieldSize+1, height: fieldSize+1, value: 0)
-            var gradY = Image<Intensity, Double>(width: fieldSize+1, height: fieldSize+1, value: 0)
+        func perlin(width: Int, height: Int, fieldSize: Int) -> Image<Gray, Double> {
+            var gradX = Image<Gray, Double>(width: fieldSize+1, height: fieldSize+1, value: 0)
+            var gradY = Image<Gray, Double>(width: fieldSize+1, height: fieldSize+1, value: 0)
             for y in 0..<fieldSize {
                 for x in 0..<fieldSize {
-                    gradX[x, y, .intensity] = Double.random(in: -1..<1)
-                    gradY[x, y, .intensity] = Double.random(in: -1..<1)
+                    gradX[x, y, .gray] = Double.random(in: -1..<1)
+                    gradY[x, y, .gray] = Double.random(in: -1..<1)
                 }
             }
             gradX[row: gradX.height-1] = gradX[row: 0]
@@ -138,10 +138,10 @@ extension ApplicationVisualTests {
                 let u = x - floor(x)
                 let v = y - floor(y)
                 
-                let ui = Image(width: 2, height: 2, intensity: [u, u-1,
-                                                                u, u-1])
-                let vi = Image(width: 2, height: 2, intensity: [v, v,
-                                                                v-1, v-1])
+                let ui = Image(width: 2, height: 2, gray: [u, u-1,
+                                                           u, u-1])
+                let vi = Image(width: 2, height: 2, gray: [v, v,
+                                                           v-1, v-1])
                 let cui = ui.channelwiseConverted(c)
                 let cvi = vi.channelwiseConverted(c)
                 
@@ -149,16 +149,16 @@ extension ApplicationVisualTests {
                 let w = cui * cvi * (gx * ui + gy * vi)
                 
                 // weight sum
-                let coef = Image(width: 2, height: 2, intensity: [(1-u)*(1-v), u*(1-v),
-                                                                  (1-u)*v, u*v])
+                let coef = Image(width: 2, height: 2, gray: [(1-u)*(1-v), u*(1-v),
+                                                             (1-u)*v, u*v])
                 return (w * coef).withUnsafeBufferPointer { $0.reduce(0, +) }
             }
             
-            var image = Image<Intensity, Double>(width: width, height: height, value: 0)
+            var image = Image<Gray, Double>(width: width, height: height, value: 0)
             image.pixelwiseConvert { ref in
                 let px = Double(fieldSize) * Double(ref.x) / Double(width)
                 let py = Double(fieldSize) * Double(ref.y) / Double(height)
-                ref[.intensity] = value(x: px, y: py)
+                ref[.gray] = value(x: px, y: py)
             }
             
             return image
@@ -182,7 +182,7 @@ extension ApplicationVisualTests {
     }
     
     public func testLifeGame() {
-        func next(_ image: Image<Intensity, UInt8>) -> Image<Intensity, UInt8> {
+        func next(_ image: Image<Gray, UInt8>) -> Image<Gray, UInt8> {
             let padded = image.withPadding(1, edgeMode: .zero)
             let (m, n, matrix) = padded.im2col(patchWidth: 3, patchHeight: 3)
             
@@ -206,7 +206,7 @@ extension ApplicationVisualTests {
         }
         
         // pentadecathlon
-        var b0 = Image<Intensity, UInt8>(width: 16, height: 16, value: 0)
+        var b0 = Image<Gray, UInt8>(width: 16, height: 16, value: 0)
         b0[3..<13, 8..<9].fill(1)
         
         var b = b0
@@ -226,15 +226,15 @@ extension ApplicationVisualTests {
     
     func testCannyEdgeDetection() {
         let path = testResoruceRoot().appendingPathComponent("lena_512_gray.png")
-        let lena = try! Image<Intensity, Double>(contentsOf: path)
+        let lena = try! Image<Gray, Double>(contentsOf: path)
         
-        var images: [Image<Intensity, Double>] = [lena]
+        var images: [Image<Gray, Double>] = [lena]
         
         // Gaussian Blur
         let smooth = lena.convoluted(Filter.gaussian5x5)
         images.append(smooth)
         
-        // Determine the Intensity Gradients
+        // Determine the Gray Gradients
         let gradV = smooth.convoluted(Filter.sobel3x3V)
         let gradH = smooth.convoluted(Filter.sobel3x3H)
         images.append(gradV)
@@ -300,8 +300,8 @@ extension ApplicationVisualTests {
         // Double Thresholding
         let ht = 0.3
         let lt = 0.2
-        let high: Image<Intensity, Double> = sharpen.channelwiseConverted { $0 < ht ? 0 : 1 }
-        let low: Image<Intensity, Double> = sharpen.channelwiseConverted { $0 < lt ? 0 : 1 }
+        let high: Image<Gray, Double> = sharpen.channelwiseConverted { $0 < ht ? 0 : 1 }
+        let low: Image<Gray, Double> = sharpen.channelwiseConverted { $0 < lt ? 0 : 1 }
         images.append(high)
         images.append(low)
         
@@ -341,7 +341,7 @@ extension ApplicationVisualTests {
     
     func testTemplateMatching() {
         let path = testResoruceRoot().appendingPathComponent("lena_512_gray.png")
-        let lena = try! Image<Intensity, Double>(contentsOf: path)
+        let lena = try! Image<Gray, Double>(contentsOf: path)
         
         let size = 32
         let templatePosition = (x: 127, y: 135)
@@ -371,8 +371,8 @@ extension ApplicationVisualTests {
         print("Coarse-to-fine search")
         time {
             let minTemplateSize = 8
-            func search(image: Image<Intensity, Double>,
-                        template: Image<Intensity, Double>) -> (x: Int, y: Int) {
+            func search(image: Image<Gray, Double>,
+                        template: Image<Gray, Double>) -> (x: Int, y: Int) {
                 let imagePOT = image.width % 2 == 0 && image.height % 2 == 0
                 let templatePOT = template.width % 2 == 0 && template.height % 2 == 0
                 let shouldDownscale = template.width > minTemplateSize && template.height > minTemplateSize
@@ -417,8 +417,8 @@ extension ApplicationVisualTests {
     
     func testDither() {
         let path = testResoruceRoot().appendingPathComponent("lena_512_gray.png")
-        let lena = try! Image<Intensity, Double>(contentsOf: path)
-        var images: [Image<Intensity, Double>] = [lena]
+        let lena = try! Image<Gray, Double>(contentsOf: path)
+        var images: [Image<Gray, Double>] = [lena]
         
         let randDither = lena.channelwiseConverted { px -> Double in
             (px < .random(in: 0..<1)) ? 0 : 1
@@ -429,22 +429,22 @@ extension ApplicationVisualTests {
         var floydSteinbergDither = lena
         for y in 0..<floydSteinbergDither.height {
             for x in 0..<floydSteinbergDither.width {
-                let v = floydSteinbergDither[x, y, .intensity]
+                let v = floydSteinbergDither[x, y, .gray]
                 let nearest = round(v)
                 let diff = v - nearest
                 
-                floydSteinbergDither[x, y, .intensity] = nearest
+                floydSteinbergDither[x, y, .gray] = nearest
                 
                 if x+1 < floydSteinbergDither.width {
-                    floydSteinbergDither[x+1, y, .intensity] += 7/16 * diff
+                    floydSteinbergDither[x+1, y, .gray] += 7/16 * diff
                 }
                 if y+1 < floydSteinbergDither.height {
                     if x-1 >= 0 {
-                        floydSteinbergDither[x-1, y+1, .intensity] += 3/16 * diff
+                        floydSteinbergDither[x-1, y+1, .gray] += 3/16 * diff
                     }
-                    floydSteinbergDither[x+0, y+1, .intensity] += 5/16 * diff
+                    floydSteinbergDither[x+0, y+1, .gray] += 5/16 * diff
                     if x+1 < floydSteinbergDither.width {
-                        floydSteinbergDither[x+1, y+1, .intensity] += 1/16 * diff
+                        floydSteinbergDither[x+1, y+1, .gray] += 1/16 * diff
                     }
                 }
             }

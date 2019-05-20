@@ -6,16 +6,16 @@ import Accelerate
 extension vImageUtils {
     // MARK: UInt8
     @inlinable
-    public static func dilate(src: inout Image<Intensity, UInt8>,
-                              kernel: Image<Intensity, UInt8>) throws -> Image<Intensity, UInt8> {
+    public static func dilate(src: inout Image<Gray, UInt8>,
+                              kernel: Image<Gray, UInt8>) throws -> Image<Gray, UInt8> {
         let roi = Rect(x: 0, y: 0, width: src.width, height: src.height)
         return try dilate(src: &src, roi: roi, kernel: kernel)
     }
     
     @inlinable
-    public static func dilate(src: inout Image<Intensity, UInt8>,
+    public static func dilate(src: inout Image<Gray, UInt8>,
                               roi: Rect,
-                              kernel: Image<Intensity, UInt8>) throws -> Image<Intensity, UInt8> {
+                              kernel: Image<Gray, UInt8>) throws -> Image<Gray, UInt8> {
         
         var memory = [UInt8](repeating: 0, count: roi.width * roi.height)
         var dest = vImage_Buffer(data: &memory,
@@ -38,16 +38,16 @@ extension vImageUtils {
     
     // MARK: Float
     @inlinable
-    public static func dilate(src: inout Image<Intensity, Float>,
-                              kernel: Image<Intensity, Float>) throws -> Image<Intensity, Float> {
+    public static func dilate(src: inout Image<Gray, Float>,
+                              kernel: Image<Gray, Float>) throws -> Image<Gray, Float> {
         let roi = Rect(x: 0, y: 0, width: src.width, height: src.height)
         return try dilate(src: &src, roi: roi, kernel: kernel)
     }
     
     @inlinable
-    public static func dilate(src: inout Image<Intensity, Float>,
+    public static func dilate(src: inout Image<Gray, Float>,
                               roi: Rect,
-                              kernel: Image<Intensity, Float>) throws -> Image<Intensity, Float> {
+                              kernel: Image<Gray, Float>) throws -> Image<Gray, Float> {
         
         var memory = [Float](repeating: 0, count: roi.width * roi.height)
         var dest = vImage_Buffer(data: &memory,
@@ -73,16 +73,16 @@ extension vImageUtils {
 extension vImageUtils {
     // MARK: UInt8
     @inlinable
-    public static func erode(src: inout Image<Intensity, UInt8>,
-                             kernel: Image<Intensity, UInt8>) throws -> Image<Intensity, UInt8> {
+    public static func erode(src: inout Image<Gray, UInt8>,
+                             kernel: Image<Gray, UInt8>) throws -> Image<Gray, UInt8> {
         let roi = Rect(x: 0, y: 0, width: src.width, height: src.height)
         return try erode(src: &src, roi: roi, kernel: kernel)
     }
     
     @inlinable
-    public static func erode(src: inout Image<Intensity, UInt8>,
+    public static func erode(src: inout Image<Gray, UInt8>,
                              roi: Rect,
-                             kernel: Image<Intensity, UInt8>) throws -> Image<Intensity, UInt8> {
+                             kernel: Image<Gray, UInt8>) throws -> Image<Gray, UInt8> {
         
         var memory = [UInt8](repeating: 0, count: roi.width * roi.height)
         var dest = vImage_Buffer(data: &memory,
@@ -105,16 +105,16 @@ extension vImageUtils {
     
     // MARK: Float
     @inlinable
-    public static func erode(src: inout Image<Intensity, Float>,
-                             kernel: Image<Intensity, Float>) throws -> Image<Intensity, Float> {
+    public static func erode(src: inout Image<Gray, Float>,
+                             kernel: Image<Gray, Float>) throws -> Image<Gray, Float> {
         let roi = Rect(x: 0, y: 0, width: src.width, height: src.height)
         return try erode(src: &src, roi: roi, kernel: kernel)
     }
     
     @inlinable
-    public static func erode(src: inout Image<Intensity, Float>,
+    public static func erode(src: inout Image<Gray, Float>,
                              roi: Rect,
-                             kernel: Image<Intensity, Float>) throws -> Image<Intensity, Float> {
+                             kernel: Image<Gray, Float>) throws -> Image<Gray, Float> {
         
         var memory = [Float](repeating: 0, count: roi.width * roi.height)
         var dest = vImage_Buffer(data: &memory,
@@ -140,18 +140,18 @@ extension vImageUtils {
 extension vImageUtils {
     // MARK: UInt8
     @inlinable
-    public static func max(src: inout Image<Intensity, UInt8>,
+    public static func max(src: inout Image<Gray, UInt8>,
                            kernelWidth: Int,
-                           kernelHeight: Int) throws -> Image<Intensity, UInt8> {
+                           kernelHeight: Int) throws -> Image<Gray, UInt8> {
         let roi = Rect(x: 0, y: 0, width: src.width, height: src.height)
         return try max(src: &src, roi: roi, kernelWidth: kernelWidth, kernelHeight: kernelHeight)
     }
     
     @inlinable
-    public static func max(src: inout Image<Intensity, UInt8>,
+    public static func max(src: inout Image<Gray, UInt8>,
                            roi: Rect,
                            kernelWidth: Int,
-                           kernelHeight: Int) throws -> Image<Intensity, UInt8> {
+                           kernelHeight: Int) throws -> Image<Gray, UInt8> {
         
         var memory = [UInt8](repeating: 0, count: roi.width * roi.height)
         var dest = vImage_Buffer(data: &memory,
@@ -174,18 +174,18 @@ extension vImageUtils {
     
     // MARK: Float
     @inlinable
-    public static func max(src: inout Image<Intensity, Float>,
+    public static func max(src: inout Image<Gray, Float>,
                            kernelWidth: Int,
-                           kernelHeight: Int) throws -> Image<Intensity, Float> {
+                           kernelHeight: Int) throws -> Image<Gray, Float> {
         let roi = Rect(x: 0, y: 0, width: src.width, height: src.height)
         return try max(src: &src, roi: roi, kernelWidth: kernelWidth, kernelHeight: kernelHeight)
     }
     
     @inlinable
-    public static func max(src: inout Image<Intensity, Float>,
+    public static func max(src: inout Image<Gray, Float>,
                            roi: Rect,
                            kernelWidth: Int,
-                           kernelHeight: Int) throws -> Image<Intensity, Float> {
+                           kernelHeight: Int) throws -> Image<Gray, Float> {
         
         var memory = [Float](repeating: 0, count: roi.width * roi.height)
         var dest = vImage_Buffer(data: &memory,
@@ -211,18 +211,18 @@ extension vImageUtils {
 extension vImageUtils {
     // MARK: UInt8
     @inlinable
-    public static func min(src: inout Image<Intensity, UInt8>,
+    public static func min(src: inout Image<Gray, UInt8>,
                            kernelWidth: Int,
-                           kernelHeight: Int) throws -> Image<Intensity, UInt8> {
+                           kernelHeight: Int) throws -> Image<Gray, UInt8> {
         let roi = Rect(x: 0, y: 0, width: src.width, height: src.height)
         return try min(src: &src, roi: roi, kernelWidth: kernelWidth, kernelHeight: kernelHeight)
     }
     
     @inlinable
-    public static func min(src: inout Image<Intensity, UInt8>,
+    public static func min(src: inout Image<Gray, UInt8>,
                            roi: Rect,
                            kernelWidth: Int,
-                           kernelHeight: Int) throws -> Image<Intensity, UInt8> {
+                           kernelHeight: Int) throws -> Image<Gray, UInt8> {
         
         var memory = [UInt8](repeating: 0, count: roi.width * roi.height)
         var dest = vImage_Buffer(data: &memory,
@@ -245,18 +245,18 @@ extension vImageUtils {
     
     // MARK: Float
     @inlinable
-    public static func min(src: inout Image<Intensity, Float>,
+    public static func min(src: inout Image<Gray, Float>,
                            kernelWidth: Int,
-                           kernelHeight: Int) throws -> Image<Intensity, Float> {
+                           kernelHeight: Int) throws -> Image<Gray, Float> {
         let roi = Rect(x: 0, y: 0, width: src.width, height: src.height)
         return try min(src: &src, roi: roi, kernelWidth: kernelWidth, kernelHeight: kernelHeight)
     }
     
     @inlinable
-    public static func min(src: inout Image<Intensity, Float>,
+    public static func min(src: inout Image<Gray, Float>,
                            roi: Rect,
                            kernelWidth: Int,
-                           kernelHeight: Int) throws -> Image<Intensity, Float> {
+                           kernelHeight: Int) throws -> Image<Gray, Float> {
         
         var memory = [Float](repeating: 0, count: roi.width * roi.height)
         var dest = vImage_Buffer(data: &memory,

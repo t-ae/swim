@@ -5,7 +5,7 @@ import Accelerate
 extension vImageUtils {
     // MARK: UInt8
     @inlinable
-    public static func withBuffer<R>(_ image: inout Image<Intensity, UInt8>,
+    public static func withBuffer<R>(_ image: inout Image<Gray, UInt8>,
                                      closure: (inout vImage_Buffer)->R) -> R {
         let height = image.height
         let width = image.width
@@ -13,7 +13,7 @@ extension vImageUtils {
             var buffer = vImage_Buffer(data: $0.baseAddress!,
                                        height: UInt(height),
                                        width: UInt(width),
-                                       rowBytes: MemoryLayout<UInt8>.size * width * Intensity.channels)
+                                       rowBytes: MemoryLayout<UInt8>.size * width * Gray.channels)
             return closure(&buffer)
         }
     }
@@ -48,7 +48,7 @@ extension vImageUtils {
     
     // MARK: Float
     @inlinable
-    public static func withBuffer<R>(_ image: inout Image<Intensity, Float>,
+    public static func withBuffer<R>(_ image: inout Image<Gray, Float>,
                                      closure: (inout vImage_Buffer)->R) -> R {
         let height = image.height
         let width = image.width
@@ -56,7 +56,7 @@ extension vImageUtils {
             var buffer = vImage_Buffer(data: $0.baseAddress!,
                                        height: UInt(height),
                                        width: UInt(width),
-                                       rowBytes: MemoryLayout<Float>.size * width * Intensity.channels)
+                                       rowBytes: MemoryLayout<Float>.size * width * Gray.channels)
             return closure(&buffer)
         }
     }

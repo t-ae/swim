@@ -53,24 +53,24 @@ extension Pixel {
     }
 }
 
-// MARK: Intensity
-extension Pixel where P == Intensity {
+// MARK: Gray
+extension Pixel where P == Gray {
     @inlinable
-    public init(intensity: T) {
-        self.init(data: [intensity])
+    public init(gray: T) {
+        self.init(data: [gray])
     }
 }
 
-// MARK: IntensityAlpha
-extension Pixel where P == IntensityAlpha {
+// MARK: GrayAlpha
+extension Pixel where P == GrayAlpha {
     @inlinable
-    public init(intensity: T, alpha: T) {
-        self.init(data: [intensity, alpha])
+    public init(gray: T, alpha: T) {
+        self.init(data: [gray, alpha])
     }
     
     @inlinable
-    public init(intensityAlpha: [T]) {
-        self.init(data: intensityAlpha)
+    public init(grayAlpha: [T]) {
+        self.init(data: grayAlpha)
     }
 }
 

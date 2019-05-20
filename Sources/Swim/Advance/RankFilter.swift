@@ -2,7 +2,7 @@ public enum RankFilterMode {
     case minimum, maximum, median
 }
 
-extension Image where P == Intensity, T: Comparable {
+extension Image where P == Gray, T: Comparable {
     @inlinable
     public func rankFilter(_ mode: RankFilterMode, kernelSize: Int) -> Image<P, T> {
         switch mode {
@@ -42,10 +42,10 @@ extension Image where P == Intensity, T: Comparable {
                         guard 0 <= xx && xx < width else {
                             continue
                         }
-                        patch.append(self[xx, yy, .intensity])
+                        patch.append(self[xx, yy, .gray])
                     }
                 }
-                newImage[x, y, .intensity] = kernelFunc(patch)
+                newImage[x, y, .gray] = kernelFunc(patch)
             }
         }
         

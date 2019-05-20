@@ -6,7 +6,7 @@ class TransformationTests: XCTestCase {
     func testFlipLR() {
         do {
             let data = (0..<10).map { UInt8($0) }
-            let image = Image(width: 2, height: 5, intensity: data)
+            let image = Image(width: 2, height: 5, gray: data)
             
             let flipped = image.flipLR()
             XCTAssertEqual(flipped,
@@ -32,7 +32,7 @@ class TransformationTests: XCTestCase {
     func testFlipUD() {
         do {
             let data = (0..<10).map { UInt8($0) }
-            let image = Image(width: 2, height: 5, intensity: data)
+            let image = Image(width: 2, height: 5, gray: data)
             
             let flipped = image.flipUD()
             XCTAssertEqual(flipped,

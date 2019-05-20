@@ -10,7 +10,7 @@ extension SubimageVisualTests {
     func testSubimage() {
         let path = testResoruceRoot().appendingPathComponent("lena_256.png")
         let lena = try! Image<RGB, Double>(contentsOf: path)
-        let zero = Image<Intensity, Double>(width: lena.width, height: lena.height, value: 0)
+        let zero = Image<Gray, Double>(width: lena.width, height: lena.height, value: 0)
         
         var images: [Image<RGB, Double>] = []
         

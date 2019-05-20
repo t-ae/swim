@@ -6,7 +6,7 @@ class PixelSubscriptTests: XCTestCase {
     func testSubscriptGet() {
         do {
             let data = (0..<16).map { UInt8($0) }
-            let image = Image(width: 4, height: 4, intensity: data)
+            let image = Image(width: 4, height: 4, gray: data)
             
             // channel
             XCTAssertEqual(image[0, 0, 0], 0)
@@ -15,10 +15,10 @@ class PixelSubscriptTests: XCTestCase {
             XCTAssertEqual(image[1, 1, 0], 5)
             
             // pixel
-            XCTAssertEqual(image[0, 0], Pixel(intensity: 0))
-            XCTAssertEqual(image[1, 0], Pixel(intensity: 1))
-            XCTAssertEqual(image[0, 1], Pixel(intensity: 4))
-            XCTAssertEqual(image[1, 1], Pixel(intensity: 5))
+            XCTAssertEqual(image[0, 0], Pixel(gray: 0))
+            XCTAssertEqual(image[1, 0], Pixel(gray: 1))
+            XCTAssertEqual(image[0, 1], Pixel(gray: 4))
+            XCTAssertEqual(image[1, 1], Pixel(gray: 5))
             
             // mix
             XCTAssertEqual(image[0, 0][0], 0)
@@ -49,19 +49,19 @@ class PixelSubscriptTests: XCTestCase {
     func testSubscriptSet() {
         do {
             let data = (0..<4).map { Double($0) }
-            var image = Image(width: 2, height: 2, intensity: data)
+            var image = Image(width: 2, height: 2, gray: data)
             XCTAssertEqual(image, Image(width: 2, height: 2, data: [0, 1, 2, 3]))
             
             image[0, 0, 0] = 100
             XCTAssertEqual(image, Image(width: 2, height: 2, data: [100, 1, 2, 3]))
             
-            image[1, 0] = Pixel(intensity: 5)
+            image[1, 0] = Pixel(gray: 5)
             XCTAssertEqual(image, Image(width: 2, height: 2, data: [100, 5, 2, 3]))
             
             image[0, 1][0] = 6
             XCTAssertEqual(image, Image(width: 2, height: 2, data: [100, 5, 6, 3]))
             
-            image[1, 1][.intensity] = 7
+            image[1, 1][.gray] = 7
             XCTAssertEqual(image, Image(width: 2, height: 2, data: [100, 5, 6, 7]))
         }
         do {

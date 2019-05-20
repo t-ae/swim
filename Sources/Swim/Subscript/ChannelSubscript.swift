@@ -1,9 +1,9 @@
 extension Image {
     @inlinable
-    public subscript(channel channel: Int) -> Image<Intensity, T> {
+    public subscript(channel channel: Int) -> Image<Gray, T> {
         get{
             precondition(0 <= channel && channel < P.channels, "Index out of range.")
-            var newImage = Image<Intensity, T>(width: width, height: height)
+            var newImage = Image<Gray, T>(width: width, height: height)
             strideCopy(src: data, srcOffset: channel, srcStride: P.channels,
                        dst: &newImage.data, dstOffset: 0, dstStride: 1,
                        count: newImage.data.count)
@@ -19,7 +19,7 @@ extension Image {
     }
     
     @inlinable
-    public subscript(channel channel: P) -> Image<Intensity, T> {
+    public subscript(channel channel: P) -> Image<Gray, T> {
         get {
             return self[channel: channel.rawValue]
         }

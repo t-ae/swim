@@ -29,8 +29,8 @@ extension BayerConverter.Pattern {
 extension BayerConverter {
     /// Convert color image to bayer format.
     @inlinable
-    public func convert<T>(image: Image<RGB, T>) -> Image<Intensity, T> {
-        var newImage = Image<Intensity, T>(width: image.width, height: image.height)
+    public func convert<T>(image: Image<RGB, T>) -> Image<Gray, T> {
+        var newImage = Image<Gray, T>(width: image.width, height: image.height)
         
         let (offsetX, offsetY) = pattern.offsetToBGGR
         
@@ -40,11 +40,11 @@ extension BayerConverter {
             for x in 0..<image.width {
                 switch (oddCol, redRow) {
                 case (true, true): // r
-                    newImage[x, y, .intensity] = image[x, y, .red]
+                    newImage[x, y, .gray] = image[x, y, .red]
                 case (false, true), (true, false): // g
-                    newImage[x, y, .intensity] = image[x, y, .green]
+                    newImage[x, y, .gray] = image[x, y, .green]
                 case (false, false): // b
-                    newImage[x, y, .intensity] = image[x, y, .blue]
+                    newImage[x, y, .gray] = image[x, y, .blue]
                 }
                 
                 oddCol.toggle()
@@ -60,7 +60,7 @@ extension BayerConverter {
 extension BayerConverter {
     /// Convert color image to bayer format.
     @inlinable
-    public func demosaic<T: BinaryInteger>(image: Image<Intensity, T>) -> Image<RGB, T> {
+    public func demosaic<T: BinaryInteger>(image: Image<Gray, T>) -> Image<RGB, T> {
         let (offsetX, offsetY) = pattern.offsetToBGGR
         
         var newImage = Image<RGB, T>(width: image.width, height: image.height)
@@ -150,21 +150,21 @@ extension BayerConverter {
             case (false, false, .green):
                 return crossMean(x: x, y: y)
             case (false, false, .blue):
-                return image[x, y, .intensity]
+                return image[x, y, .gray]
             case (true, false, .red):
                 return verticalMean(x: x, y: y)
             case (true, false, .green):
-                return image[x, y, .intensity]
+                return image[x, y, .gray]
             case (true, false, .blue):
                 return horizontalMean(x: x, y: y)
             case (false, true, .red):
                 return horizontalMean(x: x, y: y)
             case (false, true, .green):
-                return image[x, y, .intensity]
+                return image[x, y, .gray]
             case (false, true, .blue):
                 return verticalMean(x: x, y: y)
             case (true, true, .red):
-                return image[x, y, .intensity]
+                return image[x, y, .gray]
             case (true, true, .green):
                 return crossMean(x: x, y: y)
             case (true, true, .blue):
@@ -183,7 +183,7 @@ extension BayerConverter {
     
     /// Reconstruct color image from bayer format image.
     @inlinable
-    public func demosaic<T: BinaryFloatingPoint>(image: Image<Intensity, T>) -> Image<RGB, T> {
+    public func demosaic<T: BinaryFloatingPoint>(image: Image<Gray, T>) -> Image<RGB, T> {
         let (offsetX, offsetY) = pattern.offsetToBGGR
         
         var newImage = Image<RGB, T>(width: image.width, height: image.height)
@@ -273,21 +273,21 @@ extension BayerConverter {
             case (false, false, .green):
                 return crossMean(x: x, y: y)
             case (false, false, .blue):
-                return image[x, y, .intensity]
+                return image[x, y, .gray]
             case (true, false, .red):
                 return verticalMean(x: x, y: y)
             case (true, false, .green):
-                return image[x, y, .intensity]
+                return image[x, y, .gray]
             case (true, false, .blue):
                 return horizontalMean(x: x, y: y)
             case (false, true, .red):
                 return horizontalMean(x: x, y: y)
             case (false, true, .green):
-                return image[x, y, .intensity]
+                return image[x, y, .gray]
             case (false, true, .blue):
                 return verticalMean(x: x, y: y)
             case (true, true, .red):
-                return image[x, y, .intensity]
+                return image[x, y, .gray]
             case (true, true, .green):
                 return crossMean(x: x, y: y)
             case (true, true, .blue):

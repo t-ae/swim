@@ -50,7 +50,7 @@ class BayerTests: XCTestCase {
     
     func testDebayered() {
         do {
-            let image = Image(width: 4, height: 4, intensity: (0..<16).map { $0 })
+            let image = Image(width: 4, height: 4, gray: (0..<16).map { $0 })
             let conv = BayerConverter(pattern: .bggr)
             let rgb = conv.demosaic(image: image)
             XCTAssertEqual(rgb, Image(width: 4,

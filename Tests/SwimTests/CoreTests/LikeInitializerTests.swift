@@ -14,7 +14,7 @@ class LikeInitializerTests: XCTestCase {
                 .allSatisfy { $0 == 0 })
         }
         do {
-            let trues = Image<Intensity, Bool>.full(value: true, like: baseImage)
+            let trues = Image<Gray, Bool>.full(value: true, like: baseImage)
             XCTAssertEqual(trues.width, baseImage.width)
             XCTAssertEqual(trues.height, baseImage.height)
             XCTAssertTrue(trues

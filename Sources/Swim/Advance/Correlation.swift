@@ -7,7 +7,7 @@ public enum Correlation<T: DataType> {
 extension Correlation where T: Strideable {
     /// Compute sum of square difference.
     @inlinable
-    public static func ssd(_ a: Image<Intensity, T>, _ b: Image<Intensity, T>) -> T.Stride {
+    public static func ssd(_ a: Image<Gray, T>, _ b: Image<Gray, T>) -> T.Stride {
         precondition(a.size == b.size, "Images must have same size.")
         
         var sum: T.Stride = 0
@@ -20,7 +20,7 @@ extension Correlation where T: Strideable {
     
     /// Compute sum of square difference.
     @inlinable
-    public static func sad(_ a: Image<Intensity, T>, _ b: Image<Intensity, T>) -> T.Stride {
+    public static func sad(_ a: Image<Gray, T>, _ b: Image<Gray, T>) -> T.Stride {
         precondition(a.size == b.size, "Images must have same size.")
         
         var sum: T.Stride = 0
@@ -35,7 +35,7 @@ extension Correlation where T: FloatingPoint {
     /// Compute normalized cross correlation.
     /// - Precondition: Each of `a` and `b` have at least one non-zero value.
     @inlinable
-    public static func ncc(_ a: Image<Intensity, T>, _ b: Image<Intensity, T>) -> T {
+    public static func ncc(_ a: Image<Gray, T>, _ b: Image<Gray, T>) -> T {
         precondition(a.size == b.size, "Images must have same size.")
         
         var sum2a: T = 0
@@ -57,7 +57,7 @@ extension Correlation where T: FloatingPoint {
     /// Compute zero means normalized cross correlation.
     /// - Precondition: Each of `a` and `b` can't have same value in all pixels.
     @inlinable
-    public static func zncc(_ a: Image<Intensity, T>, _ b: Image<Intensity, T>) -> T {
+    public static func zncc(_ a: Image<Gray, T>, _ b: Image<Gray, T>) -> T {
         precondition(a.size == b.size, "Images must have same size.")
         
         var suma: T = 0

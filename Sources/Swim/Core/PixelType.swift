@@ -6,16 +6,16 @@ public protocol PixelType: RawRepresentable {
     var rawValue: Int { get }
 }
 
-public enum Intensity: Int, PixelType, CaseIterable {
+public enum Gray: Int, PixelType, CaseIterable {
     public static let channels: Int = 1
     
-    case intensity = 0
+    case gray = 0
 }
 
-public enum IntensityAlpha: Int, PixelType, HasAlpha, CaseIterable {
+public enum GrayAlpha: Int, PixelType, HasAlpha, CaseIterable {
     public static let channels: Int = 2
     
-    case intensity = 0
+    case gray = 0
     case alpha = 1
 }
 

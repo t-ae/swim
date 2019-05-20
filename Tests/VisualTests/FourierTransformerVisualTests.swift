@@ -5,8 +5,8 @@ class FourierTransformerVisualTests: XCTestCase {
 
     func testFFT() {
         let path = testResoruceRoot().appendingPathComponent("lena_512_gray.png")
-        let lena = try! Image<Intensity, Double>(contentsOf: path).resize(width: 256, height: 256)
-        var images: [Image<Intensity, Double>] = [lena]
+        let lena = try! Image<Gray, Double>(contentsOf: path).resize(width: 256, height: 256)
+        var images: [Image<Gray, Double>] = [lena]
         
         let fft = FourierTransformer.fft(image: lena)
         

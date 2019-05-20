@@ -3,13 +3,13 @@ import Foundation
 public enum FourierTransformer {
     /// Fast fourier transformation.
     ///
-    /// - Returns: Complex image which contains real part as .intensity and imaginary part as .alpha.
+    /// - Returns: Complex image which contains real part as .gray and imaginary part as .alpha.
     /// - Precondition: width/height of image are power of 2.
     @inlinable
-    public static func fft(image: Image<Intensity, Double>) -> Image<IntensityAlpha, Double> {
+    public static func fft(image: Image<Gray, Double>) -> Image<GrayAlpha, Double> {
         precondition(Int(exactly: log2(Double(image.width))) != nil, "image width must be power of 2.")
         precondition(Int(exactly: log2(Double(image.height))) != nil, "image height must be power of 2.")
-        var image = image.toIntensityAlpha(with: 0)
+        var image = image.toGrayAlpha(with: 0)
         
         fftx(image: &image, inverse: false)
         image = image.transpose()
@@ -21,11 +21,11 @@ public enum FourierTransformer {
     
     /// Inverse fast fourier transformation.
     ///
-    /// - Parameter image: Complex image which contains real part as .intensity and imaginary part as .alpha.
+    /// - Parameter image: Complex image which contains real part as .gray and imaginary part as .alpha.
     ///
     /// - Precondition: width/height of image are power of 2.
     @inlinable
-    public static func ifft(image: Image<IntensityAlpha, Double>) -> Image<Intensity, Double> {
+    public static func ifft(image: Image<GrayAlpha, Double>) -> Image<Gray, Double> {
         precondition(Int(exactly: log2(Double(image.width))) != nil, "image width must be power of 2.")
         precondition(Int(exactly: log2(Double(image.height))) != nil, "image height must be power of 2.")
         var image = image
@@ -34,11 +34,11 @@ public enum FourierTransformer {
         fftx(image: &image, inverse: true)
         image = image.transpose()
         
-        return image[channel: .intensity]
+        return image[channel: .gray]
     }
     
     @inlinable
-    public static func shift(image: Image<IntensityAlpha, Double>) -> Image<IntensityAlpha, Double> {
+    public static func shift(image: Image<GrayAlpha, Double>) -> Image<GrayAlpha, Double> {
         precondition(image.width % 2 == 0)
         precondition(image.height % 2 == 0)
         
@@ -53,10 +53,10 @@ public enum FourierTransformer {
     
     /// Fast fourier transformation horizontally.
     @inlinable
-    static func fftx(image: inout Image<IntensityAlpha, Double>, inverse: Bool) {
+    static func fftx(image: inout Image<GrayAlpha, Double>, inverse: Bool) {
         assert(Int(exactly: log2(Double(image.width))) != nil)
         
-        let countInRow = image.width * IntensityAlpha.channels
+        let countInRow = image.width * GrayAlpha.channels
         for y in 0..<image.height {
             let start = image.dataIndex(x: 0, y: y)
             image.data[start..<start+countInRow].withUnsafeMutableBufferPointer {

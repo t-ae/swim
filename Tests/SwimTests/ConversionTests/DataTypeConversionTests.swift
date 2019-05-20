@@ -37,7 +37,7 @@ class DataTypeConversionTests: XCTestCase {
     }
     
     func testRounding() {
-        let image = Image<Intensity, Double>(width: 4, height: 1, data: [-1, -1.3, -1.6, -1.9])
+        let image = Image<Gray, Double>(width: 4, height: 1, data: [-1, -1.3, -1.6, -1.9])
         
         XCTAssertEqual(image.cast(to: Int.self), Image.full(value: -1, like: image))
     }

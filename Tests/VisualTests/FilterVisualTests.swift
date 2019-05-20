@@ -3,11 +3,11 @@ import Swim
 
 class FilterVisualTests: XCTestCase {
     
-    var imageBase: Image<Intensity, Double>!
+    var imageBase: Image<Gray, Double>!
     
     override func setUp() {
         let size = 128
-        imageBase = Image<Intensity, Double>(width: size, height: size, value: 1)
+        imageBase = Image<Gray, Double>(width: size, height: size, value: 1)
         for y in 0..<8 {
             for x in 0..<8 {
                 guard (x+y) % 2 == 0 else { continue }

@@ -1,8 +1,8 @@
 public enum IntegralImageConverter {
     /// Create integral image from input image.
     @inlinable
-    public static func convert<T: BinaryInteger>(image: Image<Intensity, T>) -> Image<Intensity, Int> {
-        var newImage = Image<Intensity, Int>.zeros(like: image)
+    public static func convert<T: BinaryInteger>(image: Image<Gray, T>) -> Image<Gray, Int> {
+        var newImage = Image<Gray, Int>.zeros(like: image)
         
         // First row
         do {
@@ -27,7 +27,7 @@ public enum IntegralImageConverter {
     
     /// Create integral image from input image.
     @inlinable
-    public static func convert<T: FloatingPoint>(image: Image<Intensity, T>) -> Image<Intensity, T> {
+    public static func convert<T: FloatingPoint>(image: Image<Gray, T>) -> Image<Gray, T> {
         var newImage = Image.zeros(like: image)
         
         // First row

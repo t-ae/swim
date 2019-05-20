@@ -6,7 +6,7 @@ class ImageTests: XCTestCase {
     func testInitialize() {
         do {
             let data = (0..<100).map { UInt8($0) }
-            let image = Image(width: 10, height: 10, intensity: data)
+            let image = Image(width: 10, height: 10, gray: data)
             
             XCTAssertEqual(image.withUnsafeBufferPointer { Array($0) }, data)
         }
@@ -26,14 +26,14 @@ class ImageTests: XCTestCase {
     
     func testEquality() {
         do {
-            let image1 = Image(width: 2, height: 2, intensity: [true, false, false, true])
-            let image2 = Image(width: 2, height: 2, intensity: [true, false, true, true])
+            let image1 = Image(width: 2, height: 2, gray: [true, false, false, true])
+            let image2 = Image(width: 2, height: 2, gray: [true, false, true, true])
             XCTAssertTrue(image1 == image1)
             XCTAssertFalse(image1 == image2)
         }
         do {
             let data = (0..<100).map { UInt8($0) }
-            let image = Image(width: 10, height: 10, intensity: data)
+            let image = Image(width: 10, height: 10, gray: data)
             
             XCTAssertTrue(image == image)
         }
@@ -47,7 +47,7 @@ class ImageTests: XCTestCase {
     
     func testCoW() {
         do {
-            let image1 = Image(width: 2, height: 2, intensity: [true, false, false, true])
+            let image1 = Image(width: 2, height: 2, gray: [true, false, false, true])
             var image2 = image1
             
             image2[0, 0, 0] = false

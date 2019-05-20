@@ -43,7 +43,7 @@ func readImage(url: URL) throws -> STBImageData {
 
 // MARK: - UInt8
 
-extension Image where P == Intensity, T == UInt8 {
+extension Image where P == Gray, T == UInt8 {
     /// Read image from file.
     @inlinable
     public init(contentsOf url: URL) throws {
@@ -57,7 +57,7 @@ extension Image where P == Intensity, T == UInt8 {
     }
 }
 
-extension Image where P == IntensityAlpha, T == UInt8 {
+extension Image where P == GrayAlpha, T == UInt8 {
     /// Read image from file.
     @inlinable
     public init(contentsOf url: URL) throws {
@@ -65,10 +65,10 @@ extension Image where P == IntensityAlpha, T == UInt8 {
         
         switch imageData.bpp {
         case 1:
-            let intensity = Image<Intensity, UInt8>(width: imageData.width,
-                                                    height: imageData.height,
-                                                    data: imageData.data)
-            self = intensity.toIntensityAlpha(with: UInt8.max)
+            let gray = Image<Gray, UInt8>(width: imageData.width,
+                                          height: imageData.height,
+                                          data: imageData.data)
+            self = gray.toGrayAlpha(with: UInt8.max)
         case 2:
             self.init(width: imageData.width, height: imageData.height, data: imageData.data)
         default:
@@ -85,10 +85,10 @@ extension Image where P == RGB, T == UInt8 {
         
         switch imageData.bpp {
         case 1:
-            let intensity = Image<Intensity, UInt8>(width: imageData.width,
-                                                    height: imageData.height,
-                                                    data: imageData.data)
-            self = intensity.toRGB()
+            let gray = Image<Gray, UInt8>(width: imageData.width,
+                                          height: imageData.height,
+                                          data: imageData.data)
+            self = gray.toRGB()
         case 3:
             self.init(width: imageData.width, height: imageData.height, data: imageData.data)
         default:
@@ -105,17 +105,17 @@ extension Image where P == RGBA, T == UInt8 {
         
         switch imageData.bpp {
         case 1:
-            let intensity = Image<Intensity, UInt8>(width: imageData.width,
-                                                    height: imageData.height,
-                                                    data: imageData.data)
-            self = intensity.toRGBA(with: UInt8.max)
+            let gray = Image<Gray, UInt8>(width: imageData.width,
+                                          height: imageData.height,
+                                          data: imageData.data)
+            self = gray.toRGBA(with: UInt8.max)
         case 2:
-            let ia = Image<IntensityAlpha, UInt8>(width: imageData.width,
+            let ia = Image<GrayAlpha, UInt8>(width: imageData.width,
                                                   height: imageData.height,
                                                   data: imageData.data)
-            self.init(r: ia[channel: .intensity],
-                      g: ia[channel: .intensity],
-                      b: ia[channel: .intensity],
+            self.init(r: ia[channel: .gray],
+                      g: ia[channel: .gray],
+                      b: ia[channel: .gray],
                       a: ia[channel: .alpha])
         case 3:
             let rgb = Image<RGB, UInt8>(width: imageData.width,
@@ -131,7 +131,7 @@ extension Image where P == RGBA, T == UInt8 {
 }
 
 // MARK: - Float
-extension Image where P == Intensity, T == Float {
+extension Image where P == Gray, T == Float {
     /// Read image from file.
     ///
     /// All pixel values will be in [0, 1] range.
@@ -142,7 +142,7 @@ extension Image where P == Intensity, T == Float {
     }
 }
 
-extension Image where P == IntensityAlpha, T == Float {
+extension Image where P == GrayAlpha, T == Float {
     /// Read image from file.
     ///
     /// All pixel values will be in [0, 1] range.
@@ -176,7 +176,7 @@ extension Image where P == RGBA, T == Float {
 }
 
 // MARK: - Double
-extension Image where P == Intensity, T == Double {
+extension Image where P == Gray, T == Double {
     /// Read image from file.
     ///
     /// All pixel values will be in [0, 1] range.
@@ -187,7 +187,7 @@ extension Image where P == Intensity, T == Double {
     }
 }
 
-extension Image where P == IntensityAlpha, T == Double {
+extension Image where P == GrayAlpha, T == Double {
     /// Read image from file.
     ///
     /// All pixel values will be in [0, 1] range.

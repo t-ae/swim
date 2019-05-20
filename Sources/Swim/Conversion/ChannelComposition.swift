@@ -1,12 +1,12 @@
 import Foundation
 
-extension Image where P == IntensityAlpha {
+extension Image where P == GrayAlpha {
     @inlinable
-    public init(intensity: Image<Intensity, T>, alpha: Image<Intensity, T>) {
-        precondition(intensity.size == alpha.size, "Images must have same size.")
+    public init(gray: Image<Gray, T>, alpha: Image<Gray, T>) {
+        precondition(gray.size == alpha.size, "Images must have same size.")
         
-        let (width, height) = intensity.size
-        let data = interleave(data1: intensity.data, data2: alpha.data)
+        let (width, height) = gray.size
+        let data = interleave(data1: gray.data, data2: alpha.data)
         
         self.init(width: width, height: height, data: data)
     }
@@ -14,7 +14,7 @@ extension Image where P == IntensityAlpha {
 
 extension Image where P == RGB {
     @inlinable
-    public init(r: Image<Intensity, T>, g: Image<Intensity, T>, b: Image<Intensity, T>) {
+    public init(r: Image<Gray, T>, g: Image<Gray, T>, b: Image<Gray, T>) {
         precondition(r.size == g.size && g.size == b.size, "Images must have same size.")
         
         let (width, height) = r.size
@@ -26,7 +26,7 @@ extension Image where P == RGB {
 
 extension Image where P == RGBA {
     @inlinable
-    public init(r: Image<Intensity, T>, g: Image<Intensity, T>, b: Image<Intensity, T>, a: Image<Intensity, T>) {
+    public init(r: Image<Gray, T>, g: Image<Gray, T>, b: Image<Gray, T>, a: Image<Gray, T>) {
         precondition(r.size == g.size && g.size == b.size && b.size == a.size, "Images must have same size.")
         
         let (width, height) = r.size
@@ -36,7 +36,7 @@ extension Image where P == RGBA {
     }
     
     @inlinable
-    public init(rgb: Image<RGB, T>,  a: Image<Intensity, T>) {
+    public init(rgb: Image<RGB, T>,  a: Image<Gray, T>) {
         precondition(rgb.size == a.size, "Images must have same size.")
         var data = [T](repeating: T.swimDefaultValue, count: a.pixelCount * 4)
         
@@ -53,7 +53,7 @@ extension Image where P == RGBA {
 
 extension Image where P == ARGB {
     @inlinable
-    public init(a: Image<Intensity, T>, r: Image<Intensity, T>, g: Image<Intensity, T>, b: Image<Intensity, T>) {
+    public init(a: Image<Gray, T>, r: Image<Gray, T>, g: Image<Gray, T>, b: Image<Gray, T>) {
         precondition(a.size == r.size && r.size == g.size && g.size == b.size, "Images must have same size.")
         
         let (width, height) = r.size
@@ -63,7 +63,7 @@ extension Image where P == ARGB {
     }
     
     @inlinable
-    public init(a: Image<Intensity, T>, rgb: Image<RGB, T>) {
+    public init(a: Image<Gray, T>, rgb: Image<RGB, T>) {
         precondition(rgb.size == a.size, "Images must have same size.")
         var data = [T](repeating: T.swimDefaultValue, count: a.pixelCount * 4)
         

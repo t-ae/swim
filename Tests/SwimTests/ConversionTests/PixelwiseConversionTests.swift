@@ -5,8 +5,8 @@ class PixelwiseConversion: XCTestCase {
     func testConvert() {
         do {
             let data = (0..<6).map { UInt8($0) }
-            var image = Image(width: 2, height: 3, intensity: data)
-            let after = Image(width: 2, height: 3, intensity: data.map { $0 + 1 })
+            var image = Image(width: 2, height: 3, gray: data)
+            let after = Image(width: 2, height: 3, gray: data.map { $0 + 1 })
 
             image.pixelwiseConvert { px in
                 px += 1
@@ -30,12 +30,12 @@ class PixelwiseConversion: XCTestCase {
             let image = Image(width: 2, height: 3, rgba: data)
 
             let red = image.pixelwiseConverted { px in
-                Pixel(intensity: px[.red])
+                Pixel(gray: px[.red])
             }
             XCTAssertEqual(red, Image(width: 2, height: 3, data: [0, 4, 8, 12, 16, 20]))
             
             let redDouble = image.pixelwiseConverted { px in
-                Pixel(intensity: Double(px[.red]))
+                Pixel(gray: Double(px[.red]))
             }
             XCTAssertEqual(redDouble, Image(width: 2, height: 3, data: [0, 4, 8, 12, 16, 20]))
         }

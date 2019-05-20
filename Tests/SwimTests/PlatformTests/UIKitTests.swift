@@ -3,7 +3,7 @@ import Swim
 
 class UIKitTests: XCTestCase {
     
-    var gray: Image<Intensity, UInt8>!
+    var gray: Image<Gray, UInt8>!
     var rgba: Image<RGBA, UInt8>!
     
     override func setUp() {
@@ -36,7 +36,7 @@ class UIKitTests: XCTestCase {
         rgba[cols: start..<start+32].fill(Pixel(r: 255, g: 255, b: 255, a: 255))
         start += 32
         
-        rgba[rows: 128..<256][channel: .alpha].fill(Pixel(intensity: 128))
+        rgba[rows: 128..<256][channel: .alpha].fill(Pixel(gray: 128))
     }
 }
 
@@ -45,7 +45,7 @@ class UIKitTests: XCTestCase {
 extension UIKitTests {
     func testGray() {
         let uiImage1 = gray.uiImage()
-        let tmp = Image<Intensity, UInt8>(uiImage: uiImage1)!
+        let tmp = Image<Gray, UInt8>(uiImage: uiImage1)!
         let uiImage2 = tmp.uiImage()
         
         XCTAssertFalse([uiImage1, uiImage2].isEmpty,
@@ -63,7 +63,7 @@ extension UIKitTests {
     
     func testGrayDouble() {
         let uiImage1 = gray.uiImage()
-        let tmp = Image<Intensity, Double>(uiImage: uiImage1)!
+        let tmp = Image<Gray, Double>(uiImage: uiImage1)!
         let uiImage2 = tmp.uiImage()
         
         XCTAssertFalse([uiImage1, uiImage2].isEmpty,

@@ -41,7 +41,7 @@ class PerformanceTests: XCTestCase {
     }
     
     func testIntegralImage() {
-        let image = Image<Intensity, Double>(width: 1920, height: 1080, value: 0)
+        let image = Image<Gray, Double>(width: 1920, height: 1080, value: 0)
         
         measure {
             for _ in 0..<100 {
@@ -51,7 +51,7 @@ class PerformanceTests: XCTestCase {
     }
     
     func testIm2col() {
-        let image = Image<Intensity, Double>(width: 1920, height: 1080, value: 0)
+        let image = Image<Gray, Double>(width: 1920, height: 1080, value: 0)
         
         measure {
             _ = image.im2col(patchWidth: 3, patchHeight: 3)
@@ -67,7 +67,7 @@ class PerformanceTests: XCTestCase {
     }
     
     func testRankFilter() {
-        let image = Image<Intensity, Double>(width: 1920, height: 1080, value: 0)
+        let image = Image<Gray, Double>(width: 1920, height: 1080, value: 0)
         
         measure {
             _ = image.rankFilter(.maximum, kernelSize: 3)
@@ -126,7 +126,7 @@ class PerformanceTests: XCTestCase {
     }
     
     func testFFT() {
-        let image = Image<Intensity, Double>(width: 1024, height: 1024, value: 1)
+        let image = Image<Gray, Double>(width: 1024, height: 1024, value: 1)
         
         measure {
             _ = FourierTransformer.fft(image: image)

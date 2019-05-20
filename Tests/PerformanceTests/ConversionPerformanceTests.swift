@@ -101,10 +101,10 @@ class ConversionPerformanceTests: XCTestCase {
     }
     
     func testCompundRGBA() {
-        let r = Image<Intensity, Double>(width: 1920, height: 1080, value: 0.3)
-        let g = Image<Intensity, Double>(width: 1920, height: 1080, value: 0.3)
-        let b = Image<Intensity, Double>(width: 1920, height: 1080, value: 0.3)
-        let a = Image<Intensity, Double>(width: 1920, height: 1080, value: 0.3)
+        let r = Image<Gray, Double>(width: 1920, height: 1080, value: 0.3)
+        let g = Image<Gray, Double>(width: 1920, height: 1080, value: 0.3)
+        let b = Image<Gray, Double>(width: 1920, height: 1080, value: 0.3)
+        let a = Image<Gray, Double>(width: 1920, height: 1080, value: 0.3)
         
         measure {
             for _ in 0..<10 {
@@ -115,7 +115,7 @@ class ConversionPerformanceTests: XCTestCase {
     
     func testCompundRGBA2() {
         let rgb = Image<RGB, Double>(width: 1920, height: 1080, value: 0.3)
-        let a = Image<Intensity, Double>(width: 1920, height: 1080, value: 0.3)
+        let a = Image<Gray, Double>(width: 1920, height: 1080, value: 0.3)
         
         measure {
             for _ in 0..<10 {
@@ -124,8 +124,8 @@ class ConversionPerformanceTests: XCTestCase {
         }
     }
     
-    func testIntensityToRGB() {
-        let g = Image<Intensity, Double>(width: 1920, height: 1080, value: 0.3)
+    func testGrayToRGB() {
+        let g = Image<Gray, Double>(width: 1920, height: 1080, value: 0.3)
         
         measure {
             for _ in 0..<10 {

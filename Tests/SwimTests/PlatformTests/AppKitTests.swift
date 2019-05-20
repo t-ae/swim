@@ -2,7 +2,7 @@ import XCTest
 import Swim
 
 class AppKitTests: XCTestCase {
-    var gray: Image<Intensity, UInt8>!
+    var gray: Image<Gray, UInt8>!
     var rgba: Image<RGBA, UInt8>!
     
     override func setUp() {
@@ -35,7 +35,7 @@ class AppKitTests: XCTestCase {
         rgba[cols: start..<start+32].fill(Pixel(r: 255, g: 255, b: 255, a: 255))
         start += 32
         
-        rgba[rows: 128..<256][channel: .alpha].fill(Pixel(intensity: 128))
+        rgba[rows: 128..<256][channel: .alpha].fill(Pixel(gray: 128))
     }
 }
 
@@ -46,7 +46,7 @@ import AppKit
 extension AppKitTests {
     func testGray() {
         let nsImage1 = gray.nsImage()
-        let tmp = Image<Intensity, UInt8>(nsImage: nsImage1)!
+        let tmp = Image<Gray, UInt8>(nsImage: nsImage1)!
         let nsImage2 = tmp.nsImage()
         
         XCTAssertEqual(gray, tmp)
@@ -68,7 +68,7 @@ extension AppKitTests {
     
     func testGrayDouble() {
         let nsImage1 = gray.nsImage()
-        let tmp = Image<Intensity, Double>(nsImage: nsImage1)!
+        let tmp = Image<Gray, Double>(nsImage: nsImage1)!
         let nsImage2 = tmp.nsImage()
         
         XCTAssertFalse([nsImage1, nsImage2].isEmpty,
@@ -86,7 +86,7 @@ extension AppKitTests {
     
     func testColorToGray() {
         let nsColor = rgba.nsImage()
-        let gray = Image<Intensity, Double>(nsImage: nsColor)!
+        let gray = Image<Gray, Double>(nsImage: nsColor)!
         let nsGray = gray.nsImage()
         
         XCTAssertTrue(nsGray.isValid,
