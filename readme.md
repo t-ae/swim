@@ -192,10 +192,6 @@ let reconstruct = converter.demosaic(image: bayer)
 
 ![bayer_bggr](https://user-images.githubusercontent.com/12446914/56634959-cce5f800-669e-11e9-89a2-ce49121a44bc.png)
 
----
-
-
-
 ## Application exapmles
 
 - [Template matching](https://github.com/t-ae/swim/blob/4128d352443da43027f95ce784d03b5c6e4e33f1/Tests/VisualTests/ApplicationVisualTests.swift#L342-L416)
