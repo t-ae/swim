@@ -27,7 +27,7 @@ extension Image {
         }
         
         // draw p2
-        self[x, y] = pixel
+        self.drawPixel(x: x, y: y, pixel: pixel)
     }
     
     /// Draw line between specified points.
