@@ -27,7 +27,7 @@ let image = Image<RGBA, UInt8>(contentsOf: url)!
 try? image.write(path: dstPath)
 ```
 
-## Associate with CoreGraphics
+## Convertible from/to CoreGraphics image types
 ```swift
 let image = Image<RGBA, UInt8>(contentsOf: url)!
 
@@ -194,7 +194,17 @@ let reconstruct = converter.demosaic(image: bayer)
 
 ---
 
-[VisualTests](https://github.com/t-ae/swim/blob/master/Tests/VisualTests) contains examples (works only on macOS).
+
+
+## Application exapmles
+
+- [Template matching](https://github.com/t-ae/swim/blob/4128d352443da43027f95ce784d03b5c6e4e33f1/Tests/VisualTests/ApplicationVisualTests.swift#L342-L416)
+- [Canny edge detection](https://github.com/t-ae/swim/blob/4128d352443da43027f95ce784d03b5c6e4e33f1/Tests/VisualTests/ApplicationVisualTests.swift#L227-L340)
+- [Dithering](https://github.com/t-ae/swim/blob/4128d352443da43027f95ce784d03b5c6e4e33f1/Tests/VisualTests/ApplicationVisualTests.swift#L418-L458)
+
+---
+
+[VisualTests](https://github.com/t-ae/swim/blob/master/Tests/VisualTests) contains more examples (works only on macOS).
 
 ## License
 
