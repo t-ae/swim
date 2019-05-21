@@ -150,6 +150,10 @@ bottomImage(image: topImage, mode: .screen)
 bottomImage(image: topImage, mode: .overlay)
 ```
 
+[Example: Multiply / Additive / Screen / Overlay](https://github.com/t-ae/swim/blob/08e0d74381ad8be7086ce084c894f7f086b92d33/Tests/VisualTests/BlendVisualTests.swift#L10-L25)
+
+![blend](https://user-images.githubusercontent.com/12446914/58079157-54198380-7beb-11e9-93dd-ac5dac2b12d3.png)
+
 ### Integral image
 ```swift 
 let image = Image<Gray, Float>(contentsOf: url)!
