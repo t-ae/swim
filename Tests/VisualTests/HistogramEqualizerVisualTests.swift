@@ -17,7 +17,7 @@ extension HistogramEqualizerVisualTests {
         let image = Image.concatH([lena, eq])
         let ns = image.nsImage()
         
-        XCTAssertTrue(ns.isValid, "break")
+        XCTAssertTrue(ns.isValid, "break here")
     }
     
     func testHistogramEqualizerInt() {
@@ -32,7 +32,7 @@ extension HistogramEqualizerVisualTests {
         let image = Image.concatH([lena, eq])
         let ns = image.cast(to: UInt8.self).nsImage()
         
-        XCTAssertTrue(ns.isValid, "break")
+        XCTAssertTrue(ns.isValid, "break here")
     }
     
     func testHistogramEqualizerColor() {
@@ -52,7 +52,7 @@ extension HistogramEqualizerVisualTests {
         let image = Image.concatH([lena, eq1, eq2])
         let ns = image.nsImage()
         
-        XCTAssertTrue(ns.isValid, "break")
+        XCTAssertTrue(ns.isValid, "break here")
     }
 }
 

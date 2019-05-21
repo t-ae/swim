@@ -7,48 +7,21 @@ class BlendVisualTests: XCTestCase {
 #if canImport(AppKit)
 
 extension BlendVisualTests {
-    func testMultiplyBlend() {
-        var lena512 = try! Image<RGB, Double>(contentsOf: testResoruceRoot().appendingPathComponent("lena_512.png"))
+    func testBlends() {
+        let lena512 = try! Image<RGB, Double>(contentsOf: testResoruceRoot().appendingPathComponent("lena_512.png"))
         let lena256 = try! Image<RGB, Double>(contentsOf: testResoruceRoot().appendingPathComponent("lena_256.png"))
+        var images: [Image<RGB, Double>] = []
         
-        lena512[128..<128+256, 128..<128+256].blend(image: lena256, mode: .multiply)
+        for mode in [BlendMode.multiply, .additive, .screen, .overlay] {
+            var target = lena512
+            target[128..<128+256, 128..<128+256].blend(image: lena256, mode: mode)
+            images.append(target)
+        }
         
-        let nsImage = doubleToNSImage(lena512)
+        // result
+        let ns = doubleToNSImage(Image.concatH(images))
         
-        XCTAssertTrue(nsImage.isValid, "Break and check nsImage in debugger.")
-    }
-    
-    func testAdditiveBlend() {
-        var lena512 = try! Image<RGB, Double>(contentsOf: testResoruceRoot().appendingPathComponent("lena_512.png"))
-        let lena256 = try! Image<RGB, Double>(contentsOf: testResoruceRoot().appendingPathComponent("lena_256.png"))
-        
-        lena512[128..<128+256, 128..<128+256].blend(image: lena256, mode: .additive)
-        
-        let nsImage = doubleToNSImage(lena512)
-        
-        XCTAssertTrue(nsImage.isValid, "Break and check nsImage in debugger.")
-    }
-    
-    func testScreenBlend() {
-        var lena512 = try! Image<RGB, Double>(contentsOf: testResoruceRoot().appendingPathComponent("lena_512.png"))
-        let lena256 = try! Image<RGB, Double>(contentsOf: testResoruceRoot().appendingPathComponent("lena_256.png"))
-        
-        lena512[128..<128+256, 128..<128+256].blend(image: lena256, mode: .screen)
-        
-        let nsImage = doubleToNSImage(lena512)
-        
-        XCTAssertTrue(nsImage.isValid, "Break and check nsImage in debugger.")
-    }
-    
-    func testOverlayBlend() {
-        var lena512 = try! Image<RGB, Double>(contentsOf: testResoruceRoot().appendingPathComponent("lena_512.png"))
-        let lena256 = try! Image<RGB, Double>(contentsOf: testResoruceRoot().appendingPathComponent("lena_256.png"))
-        
-        lena512[128..<128+256, 128..<128+256].blend(image: lena256, mode: .overlay)
-        
-        let nsImage = doubleToNSImage(lena512)
-        
-        XCTAssertTrue(nsImage.isValid, "Break and check nsImage in debugger.")
+        XCTAssertTrue(ns.isValid, "break here")
     }
 }
 

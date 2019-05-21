@@ -22,7 +22,7 @@ extension PaddingVisualTests {
         let image = Image.concatH(images)
         let ns = image.nsImage()
         
-        XCTAssertTrue(ns.isValid, "break")
+        XCTAssertTrue(ns.isValid, "break here")
     }
 }
 

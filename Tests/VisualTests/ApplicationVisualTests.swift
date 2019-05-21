@@ -336,7 +336,7 @@ extension ApplicationVisualTests {
         // result
         let ns = doubleToNSImage(Image.concat([Array(images[..<5]), Array(images[5...])]))
         
-        XCTAssertTrue(ns.isValid, "break")
+        XCTAssertTrue(ns.isValid, "break here")
     }
     
     func testTemplateMatching() {
@@ -454,7 +454,7 @@ extension ApplicationVisualTests {
         // result
         let ns = doubleToNSImage(Image.concatH(images))
         
-        XCTAssertTrue(ns.isValid, "break")
+        XCTAssertTrue(ns.isValid, "break here")
     }
 }
 

@@ -75,6 +75,6 @@ class FourierTransformerVisualTests: XCTestCase {
         // result
         let ns = doubleToNSImage(Image.concatH(images))
         
-        XCTAssertTrue(ns.isValid, "break")
+        XCTAssertTrue(ns.isValid, "break here")
     }
 }
