@@ -141,20 +141,13 @@ let zncc = Correlation.zncc(image1, image2)
 
 ### Blending
 ```swift
-var imageBase = Image<RGB, Float>(width: 100,
-                                  height: 100,
-                                  data: [Float](repeating: 1, count: 100*100*3))
-imageBase.drawRect(30..<70, 20..<60, pixel: Pixel(r: 1, g: 0, b: 0))
+var bottomImage = Image<RGB, Float>(contentsOf: url1)!
+let topimage = Image<RGB, Float>(contentsOf: url2)!
 
-var imageGreen = Image<RGBA, Float>(width: 100,
-                                    height: 100,
-                                    data: [Float](repeating: 0, count: 100*100*4))
-imageGreen.drawRect(20..<60, 40..<80, pixel: Pixel(r: 0, g: 1, b: 0, a: 0.5))
-
-imageBase.blend(image: imageGreen, mode: .multiply)
-imageBase.blend(image: imageGreen, mode: .additive)
-imageBase.blend(image: imageGreen, mode: .screen)
-imageBase.blend(image: imageGreen, mode: .overlay)
+bottomImage(image: topImage, mode: .multiply)
+bottomImage(image: topImage, mode: .additive)
+bottomImage(image: topImage, mode: .screen)
+bottomImage(image: topImage, mode: .overlay)
 ```
 
 ### Integral image
