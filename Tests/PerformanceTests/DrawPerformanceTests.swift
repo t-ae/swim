@@ -60,6 +60,18 @@ class DrawPerformanceTests: XCTestCase {
         }
     }
     
+    func testDrawPolygon() {
+        var image = Image<RGBA, Double>(width: 1920, height: 1080, value: 0)
+        let pixel = Pixel<RGBA, Double>(r: 1, g: 1, b: 1, a: 1)
+        
+        measure {
+            image.drawPolygon(points: [(0, 0), (960, 10),
+                                       (1919, 0), (1900, 540),
+                                       (1919, 1079), (960, 1000),
+                                       (0, 1079), (30, 540)], pixel: pixel)
+        }
+    }
+    
     func testDrawImage() {
         var image = Image<RGB, Double>(width: 1920, height: 1080, value: 0)
         let draw = Image<RGB, Double>(width: 1000, height: 70, value: 1)

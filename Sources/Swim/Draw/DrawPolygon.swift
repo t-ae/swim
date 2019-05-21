@@ -29,6 +29,9 @@ extension Image {
                 let pi = points[j]
                 let pj = points[i]
                 
+                // Project line from (ref.x, ref.y) to left.
+                // If the line is crossed with polygon edge, invert `inside`.
+                // Cross conut is odd iff (ref.x, ref.y) is inside polygon(excluding edges).
                 if pi.y <= ref.y && ref.y < pj.y
                     && (ref.x - pi.x) * (pj.y - pi.y) < (pj.x - pi.x) * (ref.y - pi.y) {
                     inside.toggle()
