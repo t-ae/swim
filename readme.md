@@ -87,6 +87,19 @@ let redOnlyRGBA = image.pixelwiseConverted { px in
 }
 ```
 
+## Drawing
+
+```swift
+var image = Image<RGB, Float>(contentsOf: url)!
+
+image.drawLine((0, 0), (100, 120), pixel: Pixel(r: 1, g: 0, b: 0))
+image.drawRect(10..<20, 30..<50, pixel: Pixel(r: 0, g: 1, b: 0))
+image.drawCircle(center: (50, 50), radius: 30, pixel: Pixel(r: 0, g: 0, b: 1))
+
+image.drawImage(origin: (80, 80), rgbImage) // simply overwrites
+image.drawImage(origin: (200, 200), rgbaImage) // with alpha blending
+```
+
 ## Resize
 ```swift 
 let image = Image<RGB, Float>(contentsOf: url)!
@@ -138,14 +151,10 @@ var imageGreen = Image<RGBA, Float>(width: 100,
                                     data: [Float](repeating: 0, count: 100*100*4))
 imageGreen.drawRect(20..<60, 40..<80, pixel: Pixel(r: 0, g: 1, b: 0, a: 0.5))
 
-// Alpha blending
-Blender.alphaBlend(top: imageGreen, bottom: &imageBase)
-
-// or other blend modes
-Blender.multiplyBlend(top: imageGreen, bottom: &imageBase)
-Blender.additiveBlend(top: imageGreen, bottom: &imageBase)
-Blender.screenBlend(top: imageGreen, bottom: &imageBase)
-Blender.overlayBlend(top: imageGreen, bottom: &imageBase)
+imageBase.blend(image: imageGreen, mode: .multiply)
+imageBase.blend(image: imageGreen, mode: .additive)
+imageBase.blend(image: imageGreen, mode: .screen)
+imageBase.blend(image: imageGreen, mode: .overlay)
 ```
 
 ### Integral image
