@@ -12,16 +12,6 @@ class PerformanceTests: XCTestCase {
         }
     }
     
-    func testFill() {
-        var image = Image<RGBA, Double>(width: 1920, height: 1080, value: 0)
-        
-        measure {
-            for _ in 0..<10 {
-                image.fill(Pixel(r: 1, g: 1, b: 0, a: 1))
-            }
-        }
-    }
-    
     func testFlipLR() {
         let image = Image<RGBA, Double>(width: 1920, height: 1080, value: 0)
         

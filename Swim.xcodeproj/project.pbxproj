@@ -62,7 +62,6 @@
 		A738270C22891A1A00412CA8 /* CorrelationPerformanceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A738270B22891A1A00412CA8 /* CorrelationPerformanceTests.swift */; };
 		A7382710228922F300412CA8 /* ClampTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A738270D228922EE00412CA8 /* ClampTests.swift */; };
 		A73827122289430B00412CA8 /* ConversionPerformanceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A73827112289430B00412CA8 /* ConversionPerformanceTests.swift */; };
-		A7382714228A4B2500412CA8 /* FillTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7382713228A4B2500412CA8 /* FillTests.swift */; };
 		A7383804228D3B9D00412CA8 /* Transpose.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7383802228D3B9900412CA8 /* Transpose.swift */; };
 		A7383806228D3CA400412CA8 /* TransposeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7383805228D3CA400412CA8 /* TransposeTests.swift */; };
 		A7383808228D438500412CA8 /* TransformationVisualTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7383807228D438500412CA8 /* TransformationVisualTests.swift */; };
@@ -122,7 +121,6 @@
 		OBJ_222 /* NearestNeighborInterpolator.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_55 /* NearestNeighborInterpolator.swift */; };
 		OBJ_223 /* Clip.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_57 /* Clip.swift */; };
 		OBJ_224 /* Concatenation.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_58 /* Concatenation.swift */; };
-		OBJ_225 /* Fill.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_59 /* Fill.swift */; };
 		OBJ_226 /* Rounding.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_60 /* Rounding.swift */; };
 		OBJ_227 /* AppKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_62 /* AppKit.swift */; };
 		OBJ_228 /* CoreGraphics.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_63 /* CoreGraphics.swift */; };
@@ -303,7 +301,6 @@
 		A738270B22891A1A00412CA8 /* CorrelationPerformanceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CorrelationPerformanceTests.swift; sourceTree = "<group>"; };
 		A738270D228922EE00412CA8 /* ClampTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClampTests.swift; sourceTree = "<group>"; };
 		A73827112289430B00412CA8 /* ConversionPerformanceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversionPerformanceTests.swift; sourceTree = "<group>"; };
-		A7382713228A4B2500412CA8 /* FillTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FillTests.swift; sourceTree = "<group>"; };
 		A7383802228D3B9900412CA8 /* Transpose.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transpose.swift; sourceTree = "<group>"; };
 		A7383805228D3CA400412CA8 /* TransposeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransposeTests.swift; sourceTree = "<group>"; };
 		A7383807228D438500412CA8 /* TransformationVisualTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransformationVisualTests.swift; sourceTree = "<group>"; };
@@ -398,7 +395,6 @@
 		OBJ_55 /* NearestNeighborInterpolator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearestNeighborInterpolator.swift; sourceTree = "<group>"; };
 		OBJ_57 /* Clip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Clip.swift; sourceTree = "<group>"; };
 		OBJ_58 /* Concatenation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Concatenation.swift; sourceTree = "<group>"; };
-		OBJ_59 /* Fill.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fill.swift; sourceTree = "<group>"; };
 		OBJ_6 /* Package.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
 		OBJ_60 /* Rounding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rounding.swift; sourceTree = "<group>"; };
 		OBJ_62 /* AppKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppKit.swift; sourceTree = "<group>"; };
@@ -610,7 +606,6 @@
 				OBJ_122 /* ClipTests.swift */,
 				OBJ_124 /* RoundingTests.swift */,
 				A732B39D22716CF100B2256E /* AbsTests.swift */,
-				A7382713228A4B2500412CA8 /* FillTests.swift */,
 				A738380C228D9B2700412CA8 /* PowerTests.swift */,
 			);
 			path = ManipulationTests;
@@ -832,7 +827,6 @@
 			isa = PBXGroup;
 			children = (
 				OBJ_57 /* Clip.swift */,
-				OBJ_59 /* Fill.swift */,
 				OBJ_60 /* Rounding.swift */,
 				A732B39B22716AEF00B2256E /* Abs.swift */,
 				A732C5052284247800C96067 /* IteratePixels.swift */,
@@ -1220,7 +1214,6 @@
 				A7FC41182292994B008A90D2 /* DrawPixel.swift in Sources */,
 				OBJ_223 /* Clip.swift in Sources */,
 				OBJ_224 /* Concatenation.swift in Sources */,
-				OBJ_225 /* Fill.swift in Sources */,
 				A7FC411A22929ACB008A90D2 /* DrawRect.swift in Sources */,
 				A732AC0D226DABBE00B2256E /* ProjectiveTransformation.swift in Sources */,
 				OBJ_226 /* Rounding.swift in Sources */,
@@ -1295,7 +1288,6 @@
 				A738381F2290714F00412CA8 /* BitOperationsTests.swift in Sources */,
 				OBJ_288 /* ImageIOTests.swift in Sources */,
 				OBJ_289 /* BicubicInterpolationTests.swift in Sources */,
-				A7382714228A4B2500412CA8 /* FillTests.swift in Sources */,
 				A732C2972283C7EB00C96067 /* LikeInitializerTests.swift in Sources */,
 				OBJ_290 /* BilinearInterpolationTests.swift in Sources */,
 				OBJ_291 /* NearestNeighborInterpolatorTests.swift in Sources */,
