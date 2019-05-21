@@ -95,11 +95,7 @@
 		OBJ_195 /* ImageBinaryScalarOperator.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_23 /* ImageBinaryScalarOperator.swift */; };
 		OBJ_196 /* ImageBinaryOperators.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_24 /* ImageBinaryOperators.swift */; };
 		OBJ_197 /* ImageUnaryOperators.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_25 /* ImageUnaryOperators.swift */; };
-		OBJ_198 /* AdditiveBlend.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_27 /* AdditiveBlend.swift */; };
 		OBJ_200 /* Blender.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_29 /* Blender.swift */; };
-		OBJ_201 /* MultiplyBlend.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_30 /* MultiplyBlend.swift */; };
-		OBJ_202 /* OverlayBlend.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_31 /* OverlayBlend.swift */; };
-		OBJ_203 /* ScreenBlend.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_32 /* ScreenBlend.swift */; };
 		OBJ_204 /* ChannelComposition.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_34 /* ChannelComposition.swift */; };
 		OBJ_205 /* ChannelwiseConversion.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_35 /* ChannelwiseConversion.swift */; };
 		OBJ_206 /* DataTypeConversion.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_36 /* DataTypeConversion.swift */; };
@@ -366,11 +362,7 @@
 		OBJ_23 /* ImageBinaryScalarOperator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageBinaryScalarOperator.swift; sourceTree = "<group>"; };
 		OBJ_24 /* ImageBinaryOperators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageBinaryOperators.swift; sourceTree = "<group>"; };
 		OBJ_25 /* ImageUnaryOperators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageUnaryOperators.swift; sourceTree = "<group>"; };
-		OBJ_27 /* AdditiveBlend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdditiveBlend.swift; sourceTree = "<group>"; };
 		OBJ_29 /* Blender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Blender.swift; sourceTree = "<group>"; };
-		OBJ_30 /* MultiplyBlend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiplyBlend.swift; sourceTree = "<group>"; };
-		OBJ_31 /* OverlayBlend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverlayBlend.swift; sourceTree = "<group>"; };
-		OBJ_32 /* ScreenBlend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenBlend.swift; sourceTree = "<group>"; };
 		OBJ_34 /* ChannelComposition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelComposition.swift; sourceTree = "<group>"; };
 		OBJ_35 /* ChannelwiseConversion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelwiseConversion.swift; sourceTree = "<group>"; };
 		OBJ_36 /* DataTypeConversion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataTypeConversion.swift; sourceTree = "<group>"; };
@@ -748,11 +740,7 @@
 		OBJ_26 /* Blend */ = {
 			isa = PBXGroup;
 			children = (
-				OBJ_27 /* AdditiveBlend.swift */,
 				OBJ_29 /* Blender.swift */,
-				OBJ_30 /* MultiplyBlend.swift */,
-				OBJ_31 /* OverlayBlend.swift */,
-				OBJ_32 /* ScreenBlend.swift */,
 			);
 			path = Blend;
 			sourceTree = "<group>";
@@ -1175,12 +1163,8 @@
 				A732AC10226E96B200B2256E /* PixelRef.swift in Sources */,
 				OBJ_197 /* ImageUnaryOperators.swift in Sources */,
 				A732C29A2283D33900C96067 /* EdgeMode.swift in Sources */,
-				OBJ_198 /* AdditiveBlend.swift in Sources */,
 				OBJ_200 /* Blender.swift in Sources */,
-				OBJ_201 /* MultiplyBlend.swift in Sources */,
-				OBJ_202 /* OverlayBlend.swift in Sources */,
 				A7FC411E22938EA1008A90D2 /* DrawImage.swift in Sources */,
-				OBJ_203 /* ScreenBlend.swift in Sources */,
 				OBJ_204 /* ChannelComposition.swift in Sources */,
 				OBJ_205 /* ChannelwiseConversion.swift in Sources */,
 				OBJ_206 /* DataTypeConversion.swift in Sources */,

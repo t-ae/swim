@@ -9,13 +9,9 @@ class BlendVisualTests: XCTestCase {
 extension BlendVisualTests {
     func testMultiplyBlend() {
         var lena512 = try! Image<RGB, Double>(contentsOf: testResoruceRoot().appendingPathComponent("lena_512.png"))
-        let lena128 = try! Image<RGB, Double>(contentsOf: testResoruceRoot().appendingPathComponent("lena_128.png"))
-        var circle = Image<RGBA, Double>.full(value: 0, like: lena128)
-        circle.drawCircle(center: (64, 64), radius: 63, pixel: Pixel(r: 1, g: 0, b: 0, a: 0.6))
-        circle.drawCircle(center: (64, 64), radius: 55, pixel: Pixel(r: 1, g: 0, b: 0, a: 0.3))
+        let lena256 = try! Image<RGB, Double>(contentsOf: testResoruceRoot().appendingPathComponent("lena_256.png"))
         
-        Blender.multiplyBlend(top: lena128, bottom: &lena512[128..<256, 128..<256])
-        Blender.multiplyBlend(top: circle, bottom: &lena512[256..<384, 256..<384])
+        lena512[128..<128+256, 128..<128+256].blend(image: lena256, mode: .multiply)
         
         let nsImage = doubleToNSImage(lena512)
         
@@ -24,13 +20,9 @@ extension BlendVisualTests {
     
     func testAdditiveBlend() {
         var lena512 = try! Image<RGB, Double>(contentsOf: testResoruceRoot().appendingPathComponent("lena_512.png"))
-        let lena128 = try! Image<RGB, Double>(contentsOf: testResoruceRoot().appendingPathComponent("lena_128.png"))
-        var circle = Image<RGBA, Double>.full(value: 0, like: lena128)
-        circle.drawCircle(center: (64, 64), radius: 63, pixel: Pixel(r: 1, g: 0, b: 0, a: 0.6))
-        circle.drawCircle(center: (64, 64), radius: 55, pixel: Pixel(r: 1, g: 0, b: 0, a: 0.3))
+        let lena256 = try! Image<RGB, Double>(contentsOf: testResoruceRoot().appendingPathComponent("lena_256.png"))
         
-        Blender.additiveBlend(top: lena128, bottom: &lena512[128..<256, 128..<256])
-        Blender.additiveBlend(top: circle, bottom: &lena512[256..<384, 256..<384])
+        lena512[128..<128+256, 128..<128+256].blend(image: lena256, mode: .additive)
         
         let nsImage = doubleToNSImage(lena512)
         
@@ -39,13 +31,9 @@ extension BlendVisualTests {
     
     func testScreenBlend() {
         var lena512 = try! Image<RGB, Double>(contentsOf: testResoruceRoot().appendingPathComponent("lena_512.png"))
-        let lena128 = try! Image<RGB, Double>(contentsOf: testResoruceRoot().appendingPathComponent("lena_128.png"))
-        var circle = Image<RGBA, Double>.full(value: 0, like: lena128)
-        circle.drawCircle(center: (64, 64), radius: 63, pixel: Pixel(r: 1, g: 0, b: 0, a: 0.6))
-        circle.drawCircle(center: (64, 64), radius: 55, pixel: Pixel(r: 1, g: 0, b: 0, a: 0.3))
+        let lena256 = try! Image<RGB, Double>(contentsOf: testResoruceRoot().appendingPathComponent("lena_256.png"))
         
-        Blender.screenBlend(top: lena128, bottom: &lena512[128..<256, 128..<256])
-        Blender.screenBlend(top: circle, bottom: &lena512[256..<384, 256..<384])
+        lena512[128..<128+256, 128..<128+256].blend(image: lena256, mode: .screen)
         
         let nsImage = doubleToNSImage(lena512)
         
@@ -54,33 +42,11 @@ extension BlendVisualTests {
     
     func testOverlayBlend() {
         var lena512 = try! Image<RGB, Double>(contentsOf: testResoruceRoot().appendingPathComponent("lena_512.png"))
-        let lena128 = try! Image<RGB, Double>(contentsOf: testResoruceRoot().appendingPathComponent("lena_128.png"))
-        var circle = Image<RGBA, Double>.full(value: 0, like: lena128)
-        circle.drawCircle(center: (64, 64), radius: 63, pixel: Pixel(r: 1, g: 0, b: 0, a: 0.6))
-        circle.drawCircle(center: (64, 64), radius: 55, pixel: Pixel(r: 1, g: 0, b: 0, a: 0.3))
+        let lena256 = try! Image<RGB, Double>(contentsOf: testResoruceRoot().appendingPathComponent("lena_256.png"))
         
-        Blender.overlayBlend(top: lena128, bottom: &lena512[128..<256, 128..<256])
-        Blender.overlayBlend(top: circle, bottom: &lena512[256..<384, 256..<384])
+        lena512[128..<128+256, 128..<128+256].blend(image: lena256, mode: .overlay)
         
         let nsImage = doubleToNSImage(lena512)
-        
-        XCTAssertTrue(nsImage.isValid, "Break and check nsImage in debugger.")
-    }
-    
-    func test4Blends() {
-        let lena = try! Image<RGB, Double>(contentsOf: testResoruceRoot().appendingPathComponent("lena_256.png"))
-        var circle = Image<RGBA, Double>.full(value: 0, like: lena)
-        circle.drawCircle(center: (128, 128), radius: 127, pixel: Pixel(r: 1, g: 0, b: 0, a: 0.6))
-        circle.drawCircle(center: (128, 128), radius: 120, pixel: Pixel(r: 1, g: 0, b: 0, a: 0.3))
-        var images: [[Image<RGB, Double>]] = [[lena, lena], [lena, lena]]
-        
-        Blender.additiveBlend(top: circle, bottom: &images[0][0])
-        Blender.multiplyBlend(top: circle, bottom: &images[0][1])
-        Blender.screenBlend(top: circle, bottom: &images[1][0])
-        Blender.overlayBlend(top: circle, bottom: &images[1][1])
-        
-        let lena4 = Image.concat(images)
-        let nsImage = doubleToNSImage(lena4)
         
         XCTAssertTrue(nsImage.isValid, "Break and check nsImage in debugger.")
     }
