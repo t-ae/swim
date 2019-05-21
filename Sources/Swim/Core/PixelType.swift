@@ -12,7 +12,7 @@ public enum Gray: Int, PixelType, CaseIterable {
     case gray = 0
 }
 
-public enum GrayAlpha: Int, PixelType, HasAlpha, CaseIterable {
+public enum GrayAlpha: Int, PixelType, CaseIterable {
     public static let channels: Int = 2
     
     case gray = 0
@@ -46,28 +46,41 @@ public enum ARGB: Int, PixelType, CaseIterable {
 }
 
 // MARK: - HasAlpha
-public protocol HasAlpha {}
+public protocol HasAlpha {
+    associatedtype BaseType: PixelType
+    static var colorStartIndex: Int { get }
+    static var alphaIndex: Int { get }
+}
+
+extension GrayAlpha: HasAlpha {
+    public typealias BaseType = Gray
+    public static let colorStartIndex: Int = 0
+    public static let alphaIndex: Int = 1
+}
 
 // MARK: - RGBWithAlpha
 public protocol RGBWithAlpha: PixelType, HasAlpha {
     static var redIndex: Int { get }
     static var greenIndex: Int { get }
     static var blueIndex: Int { get }
-    static var alphaIndex: Int { get }
 }
-extension RGBWithAlpha {
-    @inlinable
-    public static var greenIndex: Int { return Self.redIndex + 1 }
-    
-    @inlinable
-    public static var blueIndex: Int { return Self.redIndex + 2 }
-    
-    @inlinable
-    public static var alphaIndex: Int { return (Self.redIndex + 3) % 4 }
-}
+
 extension RGBA: RGBWithAlpha {
+    public typealias BaseType = RGB
     public static let redIndex: Int = RGBA.red.rawValue
+    public static let greenIndex: Int = RGBA.green.rawValue
+    public static let blueIndex: Int = RGBA.blue.rawValue
+    
+    public static let colorStartIndex: Int = RGBA.red.rawValue
+    public static let alphaIndex: Int = RGBA.alpha.rawValue
 }
+
 extension ARGB: RGBWithAlpha {
+    public typealias BaseType = RGB
     public static let redIndex: Int = ARGB.red.rawValue
+    public static let greenIndex: Int = ARGB.green.rawValue
+    public static let blueIndex: Int = ARGB.blue.rawValue
+    
+    public static let colorStartIndex: Int = ARGB.red.rawValue
+    public static let alphaIndex: Int = ARGB.alpha.rawValue
 }

@@ -25,7 +25,7 @@ class ImageIOTests: XCTestCase {
     
     func testSaveLoadUInt8() {
         do { // RGBA
-            try! self.baseImage.write(to: srcPath, format: .png)
+            try! self.baseImage.write(to: srcPath)
             
             let image = try? Image<RGBA, UInt8>(contentsOf: srcPath)
             
@@ -78,7 +78,7 @@ class ImageIOTests: XCTestCase {
             XCTAssertEqual(image, image2)
         }
         do { // read RGBA as Gray
-            try! self.baseImage.write(to: srcPath, format: .png)
+            try! self.baseImage.write(to: srcPath)
             
             let image = try? Image<Gray, UInt8>(contentsOf: srcPath)
             
@@ -88,12 +88,12 @@ class ImageIOTests: XCTestCase {
     
     func testSaveLoadFloat() {
         do {
-            try! self.baseImage.write(to: srcPath, format: .png)
+            try! self.baseImage.write(to: srcPath)
             let image = try! Image<RGBA, Float>(contentsOf: srcPath)
             
             XCTAssertEqual((image*255).round().cast(), baseImage)
             
-            try! image.write(to: dstPath, format: .png)
+            try! image.write(to: dstPath)
             
             let reloaded = try! Image<RGBA, Float>(contentsOf: dstPath)
             
@@ -115,13 +115,13 @@ class ImageIOTests: XCTestCase {
     
     func testSaveLoadDouble() {
         do {
-            try! self.baseImage.write(to: srcPath, format: .png)
+            try! self.baseImage.write(to: srcPath)
             
             let image = try! Image<RGBA, Double>(contentsOf: srcPath)
             
             XCTAssertEqual((image*255).round().cast(), baseImage)
             
-            try! image.write(to: dstPath, format: .png)
+            try! image.write(to: dstPath)
             
             let reloaded = try! Image<RGBA, Double>(contentsOf: dstPath)
             
