@@ -12,22 +12,21 @@ extension BlendVisualTests {
                                            height: 500,
                                            value: 0.9)
         
-        let red = Shape.circle(size: 200,
-                               lineWidth: 3,
-                               lineColor: Pixel(r: 1.0, g: 0.0, b: 0.0, a: 1.0),
-                               fillColor: Pixel(r: 1.0, g: 0.0, b: 0.0, a: 0.5))
-        let green = Shape.circle(size: 200,
-                                 lineWidth: 3,
-                                 lineColor: Pixel(r: 0.0, g: 1.0, b: 0.0, a: 1.0),
-                                 fillColor: Pixel(r: 0.0, g: 1.0, b: 0.0, a: 0.5))
-        let blue = Shape.circle(size: 200,
-                                lineWidth: 3,
-                                lineColor: Pixel(r: 0.0, g: 0.0, b: 1.0, a: 1.0),
-                                fillColor: Pixel(r: 0.0, g: 0.0, b: 1.0, a: 0.5))
+        var red = Image.full(value: 0, like: imageBase)
+        red.drawCircle(center: (250, 200), radius: 100, pixel: Pixel(r: 1, g: 0, b: 0, a: 1))
+        red.drawCircle(center: (250, 200), radius: 95, pixel: Pixel(r: 1, g: 0, b: 0, a: 0.5))
         
-        Blender.alphaBlend(top: red, bottom: &imageBase[150..<350, 100..<300])
-        Blender.alphaBlend(top: green, bottom: &imageBase[100..<300, 200..<400])
-        Blender.alphaBlend(top: blue, bottom: &imageBase[200..<400, 200..<400])
+        var green = Image.full(value: 0, like: imageBase)
+        green.drawCircle(center: (200, 300), radius: 100, pixel: Pixel(r: 0, g: 1, b: 0, a: 1))
+        green.drawCircle(center: (200, 300), radius: 95, pixel: Pixel(r: 0, g: 1, b: 0, a: 0.5))
+        
+        var blue = Image.full(value: 0, like: imageBase)
+        blue.drawCircle(center: (300, 300), radius: 100, pixel: Pixel(r: 0, g: 0, b: 1, a: 1))
+        blue.drawCircle(center: (300, 300), radius: 95, pixel: Pixel(r: 0, g: 0, b: 1, a: 0.5))
+        
+        Blender.alphaBlend(top: red, bottom: &imageBase)
+        Blender.alphaBlend(top: green, bottom: &imageBase)
+        Blender.alphaBlend(top: blue, bottom: &imageBase)
         
         let nsImage = doubleToNSImage(imageBase)
         
@@ -37,10 +36,9 @@ extension BlendVisualTests {
     func testMultiplyBlend() {
         var lena512 = try! Image<RGB, Double>(contentsOf: testResoruceRoot().appendingPathComponent("lena_512.png"))
         let lena128 = try! Image<RGB, Double>(contentsOf: testResoruceRoot().appendingPathComponent("lena_128.png"))
-        let circle = Shape.circle(size: 128,
-                                  lineWidth: 10,
-                                  lineColor: Pixel(r: 1.0, g: 0.0, b: 0.0, a: 0.6),
-                                  fillColor: Pixel(r: 1.0, g: 0.0, b: 0.0, a: 0.3))
+        var circle = Image<RGBA, Double>.full(value: 0, like: lena128)
+        circle.drawCircle(center: (64, 64), radius: 63, pixel: Pixel(r: 1, g: 0, b: 0, a: 0.6))
+        circle.drawCircle(center: (64, 64), radius: 55, pixel: Pixel(r: 1, g: 0, b: 0, a: 0.3))
         
         Blender.multiplyBlend(top: lena128, bottom: &lena512[128..<256, 128..<256])
         Blender.multiplyBlend(top: circle, bottom: &lena512[256..<384, 256..<384])
@@ -53,10 +51,9 @@ extension BlendVisualTests {
     func testAdditiveBlend() {
         var lena512 = try! Image<RGB, Double>(contentsOf: testResoruceRoot().appendingPathComponent("lena_512.png"))
         let lena128 = try! Image<RGB, Double>(contentsOf: testResoruceRoot().appendingPathComponent("lena_128.png"))
-        let circle = Shape.circle(size: 128,
-                                  lineWidth: 10,
-                                  lineColor: Pixel(r: 1.0, g: 0.0, b: 0.0, a: 0.6),
-                                  fillColor: Pixel(r: 1.0, g: 0.0, b: 0.0, a: 0.3))
+        var circle = Image<RGBA, Double>.full(value: 0, like: lena128)
+        circle.drawCircle(center: (64, 64), radius: 63, pixel: Pixel(r: 1, g: 0, b: 0, a: 0.6))
+        circle.drawCircle(center: (64, 64), radius: 55, pixel: Pixel(r: 1, g: 0, b: 0, a: 0.3))
         
         Blender.additiveBlend(top: lena128, bottom: &lena512[128..<256, 128..<256])
         Blender.additiveBlend(top: circle, bottom: &lena512[256..<384, 256..<384])
@@ -69,10 +66,9 @@ extension BlendVisualTests {
     func testScreenBlend() {
         var lena512 = try! Image<RGB, Double>(contentsOf: testResoruceRoot().appendingPathComponent("lena_512.png"))
         let lena128 = try! Image<RGB, Double>(contentsOf: testResoruceRoot().appendingPathComponent("lena_128.png"))
-        let circle = Shape.circle(size: 128,
-                                  lineWidth: 10,
-                                  lineColor: Pixel(r: 1.0, g: 0.0, b: 0.0, a: 0.6),
-                                  fillColor: Pixel(r: 1.0, g: 0.0, b: 0.0, a: 0.3))
+        var circle = Image<RGBA, Double>.full(value: 0, like: lena128)
+        circle.drawCircle(center: (64, 64), radius: 63, pixel: Pixel(r: 1, g: 0, b: 0, a: 0.6))
+        circle.drawCircle(center: (64, 64), radius: 55, pixel: Pixel(r: 1, g: 0, b: 0, a: 0.3))
         
         Blender.screenBlend(top: lena128, bottom: &lena512[128..<256, 128..<256])
         Blender.screenBlend(top: circle, bottom: &lena512[256..<384, 256..<384])
@@ -85,10 +81,9 @@ extension BlendVisualTests {
     func testOverlayBlend() {
         var lena512 = try! Image<RGB, Double>(contentsOf: testResoruceRoot().appendingPathComponent("lena_512.png"))
         let lena128 = try! Image<RGB, Double>(contentsOf: testResoruceRoot().appendingPathComponent("lena_128.png"))
-        let circle = Shape.circle(size: 128,
-                                  lineWidth: 10,
-                                  lineColor: Pixel(r: 1.0, g: 0.0, b: 0.0, a: 0.6),
-                                  fillColor: Pixel(r: 1.0, g: 0.0, b: 0.0, a: 0.3))
+        var circle = Image<RGBA, Double>.full(value: 0, like: lena128)
+        circle.drawCircle(center: (64, 64), radius: 63, pixel: Pixel(r: 1, g: 0, b: 0, a: 0.6))
+        circle.drawCircle(center: (64, 64), radius: 55, pixel: Pixel(r: 1, g: 0, b: 0, a: 0.3))
         
         Blender.overlayBlend(top: lena128, bottom: &lena512[128..<256, 128..<256])
         Blender.overlayBlend(top: circle, bottom: &lena512[256..<384, 256..<384])
@@ -100,10 +95,9 @@ extension BlendVisualTests {
     
     func test4Blends() {
         let lena = try! Image<RGB, Double>(contentsOf: testResoruceRoot().appendingPathComponent("lena_256.png"))
-        let circle = Shape.circle(size: 256,
-                                  lineWidth: 10,
-                                  lineColor: Pixel(r: 1.0, g: 0.0, b: 0.0, a: 0.6),
-                                  fillColor: Pixel(r: 1.0, g: 0.0, b: 0.0, a: 0.3))
+        var circle = Image<RGBA, Double>.full(value: 0, like: lena)
+        circle.drawCircle(center: (128, 128), radius: 127, pixel: Pixel(r: 1, g: 0, b: 0, a: 0.6))
+        circle.drawCircle(center: (128, 128), radius: 120, pixel: Pixel(r: 1, g: 0, b: 0, a: 0.3))
         var images: [[Image<RGB, Double>]] = [[lena, lena], [lena, lena]]
         
         Blender.additiveBlend(top: circle, bottom: &images[0][0])

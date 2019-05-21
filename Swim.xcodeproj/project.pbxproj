@@ -131,7 +131,6 @@
 		OBJ_231 /* vImageBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_67 /* vImageBuffer.swift */; };
 		OBJ_232 /* vImageMorphology.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_68 /* vImageMorphology.swift */; };
 		OBJ_233 /* vImageUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_69 /* vImageUtils.swift */; };
-		OBJ_234 /* Shape.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_71 /* Shape.swift */; };
 		OBJ_235 /* ChannelSubscript.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_73 /* ChannelSubscript.swift */; };
 		OBJ_236 /* PixelSubscript.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_74 /* PixelSubscript.swift */; };
 		OBJ_237 /* SubimageSubscript.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_75 /* SubimageSubscript.swift */; };
@@ -170,7 +169,6 @@
 		OBJ_294 /* RoundingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_124 /* RoundingTests.swift */; };
 		OBJ_295 /* AppKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_126 /* AppKitTests.swift */; };
 		OBJ_296 /* vImageUtilsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_127 /* vImageUtilsTests.swift */; };
-		OBJ_297 /* ShapeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_129 /* ShapeTests.swift */; };
 		OBJ_298 /* ChannelSubscriptTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_131 /* ChannelSubscriptTests.swift */; };
 		OBJ_299 /* PixelSubscriptTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_132 /* PixelSubscriptTests.swift */; };
 		OBJ_300 /* SubimageSubscriptTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_133 /* SubimageSubscriptTests.swift */; };
@@ -344,7 +342,6 @@
 		OBJ_124 /* RoundingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundingTests.swift; sourceTree = "<group>"; };
 		OBJ_126 /* AppKitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppKitTests.swift; sourceTree = "<group>"; };
 		OBJ_127 /* vImageUtilsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = vImageUtilsTests.swift; sourceTree = "<group>"; };
-		OBJ_129 /* ShapeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShapeTests.swift; sourceTree = "<group>"; };
 		OBJ_13 /* CStbImage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CStbImage.h; sourceTree = "<group>"; };
 		OBJ_131 /* ChannelSubscriptTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelSubscriptTests.swift; sourceTree = "<group>"; };
 		OBJ_132 /* PixelSubscriptTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PixelSubscriptTests.swift; sourceTree = "<group>"; };
@@ -411,7 +408,6 @@
 		OBJ_67 /* vImageBuffer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = vImageBuffer.swift; sourceTree = "<group>"; };
 		OBJ_68 /* vImageMorphology.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = vImageMorphology.swift; sourceTree = "<group>"; };
 		OBJ_69 /* vImageUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = vImageUtils.swift; sourceTree = "<group>"; };
-		OBJ_71 /* Shape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shape.swift; sourceTree = "<group>"; };
 		OBJ_73 /* ChannelSubscript.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelSubscript.swift; sourceTree = "<group>"; };
 		OBJ_74 /* PixelSubscript.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PixelSubscript.swift; sourceTree = "<group>"; };
 		OBJ_75 /* SubimageSubscript.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubimageSubscript.swift; sourceTree = "<group>"; };
@@ -630,14 +626,6 @@
 			path = PlatformTests;
 			sourceTree = "<group>";
 		};
-		OBJ_128 /* ShapeTests */ = {
-			isa = PBXGroup;
-			children = (
-				OBJ_129 /* ShapeTests.swift */,
-			);
-			path = ShapeTests;
-			sourceTree = "<group>";
-		};
 		OBJ_130 /* SubscriptTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -686,7 +674,6 @@
 				OBJ_51 /* Interpolation */,
 				OBJ_56 /* Manipulation */,
 				OBJ_61 /* Platform */,
-				OBJ_70 /* Shape */,
 				OBJ_72 /* Subscript */,
 				OBJ_76 /* Transformation */,
 				OBJ_82 /* Utility */,
@@ -885,14 +872,6 @@
 			name = Sources;
 			sourceTree = SOURCE_ROOT;
 		};
-		OBJ_70 /* Shape */ = {
-			isa = PBXGroup;
-			children = (
-				OBJ_71 /* Shape.swift */,
-			);
-			path = Shape;
-			sourceTree = "<group>";
-		};
 		OBJ_72 /* Subscript */ = {
 			isa = PBXGroup;
 			children = (
@@ -985,7 +964,6 @@
 				OBJ_117 /* InterpolationTests */,
 				OBJ_121 /* ManipulationTests */,
 				OBJ_125 /* PlatformTests */,
-				OBJ_128 /* ShapeTests */,
 				OBJ_130 /* SubscriptTests */,
 				OBJ_134 /* TransformationTests */,
 				OBJ_139 /* Utility */,
@@ -1257,7 +1235,6 @@
 				A732B3932270234800B2256E /* Padding.swift in Sources */,
 				OBJ_233 /* vImageUtils.swift in Sources */,
 				A732AC2B226EBAC100B2256E /* ImageCompoundAssignmentOperator.swift in Sources */,
-				OBJ_234 /* Shape.swift in Sources */,
 				A732AC1E226EA61800B2256E /* PixelCompoundAssignmentOperator.swift in Sources */,
 				OBJ_235 /* ChannelSubscript.swift in Sources */,
 				OBJ_236 /* PixelSubscript.swift in Sources */,
@@ -1328,7 +1305,6 @@
 				OBJ_294 /* RoundingTests.swift in Sources */,
 				OBJ_295 /* AppKitTests.swift in Sources */,
 				OBJ_296 /* vImageUtilsTests.swift in Sources */,
-				OBJ_297 /* ShapeTests.swift in Sources */,
 				OBJ_298 /* ChannelSubscriptTests.swift in Sources */,
 				OBJ_299 /* PixelSubscriptTests.swift in Sources */,
 				A738380E228DA05F00412CA8 /* PowerTests.swift in Sources */,

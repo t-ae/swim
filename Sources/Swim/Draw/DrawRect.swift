@@ -1,6 +1,16 @@
 extension Image {
     /// Draw rectangle.
     @inlinable
+    public mutating func drawRect(_ xRange: Range<Int>,
+                                  _ yRange: Range<Int>,
+                                  pixel: Pixel<P, T>) {
+        drawRect(origin: (xRange.startIndex, yRange.startIndex),
+                 size: (xRange.count, yRange.count),
+                 pixel: pixel)
+    }
+    
+    /// Draw rectangle.
+    @inlinable
     public mutating func drawRect(origin: (x: Int, y: Int),
                                   size: (width: Int, height: Int),
                                   pixel: Pixel<P, T>) {

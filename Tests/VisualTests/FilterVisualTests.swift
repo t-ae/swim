@@ -16,7 +16,7 @@ class FilterVisualTests: XCTestCase {
                 let startY = y*size/8
                 let endY = startY + size/8
                 let value = Double(y*8+x) / 64
-                imageBase[startX..<endX, startY..<endY].fill(value)
+                imageBase.drawRect(startX..<endX, startY..<endY, pixel: Pixel(gray: value))
             }
         }
     }
