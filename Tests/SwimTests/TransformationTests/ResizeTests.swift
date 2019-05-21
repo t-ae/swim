@@ -6,7 +6,7 @@ class ResizeTests: XCTestCase {
     func testResizeNN_UInt8() {
         let image = Image<RGBA, UInt8>(width: 2, height: 2, data: (0..<16).map { UInt8($0) })
         
-        let resized = image.resizeNN(width: 4, height: 4)
+        let resized = image.resize(width: 4, height: 4)
         
         XCTAssertEqual(resized,
                        Image(width: 4, height: 4, data: [

@@ -6,7 +6,7 @@ class ResizePerformanceTests: XCTestCase {
         let image = Image<Gray, UInt8>(width: 64, height: 48, value: 0)
         
         measure {
-            _ = image.resizeNN(width: 1920, height: 1080)
+            _ = image.resize(width: 1920, height: 1080)
         }
     }
     

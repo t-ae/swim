@@ -1,14 +1,16 @@
 import Foundation
 
+/// It's for all `DataType`s. But if T: BinaryFloatingPoint, this method is overloaded and invisible.
 extension Image {
     /// Resize image with nearest neighbor method.
     /// If you need more sophisticated methods, see `Image<P, BinaryFloatingPoint>.resize`.
+    ///
     /// - Parameters:
     ///   - width: width of output image
     ///   - height: height of output image
     @inlinable
-    public func resizeNN(width: Int,
-                         height: Int) -> Image<P, T> {
+    public func resize(width: Int,
+                       height: Int) -> Image<P, T> {
         var dest = Image<P, T>(width: width, height: height)
         
         let intpl = NearestNeighborInterpolator<P, T>(edgeMode: .edge)

@@ -36,7 +36,6 @@ class DrawVisualTests: XCTestCase {
         image.drawCirclePelimeter(center: (150, 150), radius: 70, pixel: Pixel(value: 255))
         
         let ns = image.nsImage()
-        
         XCTAssertTrue(ns.isValid, "break here")
     }
     
@@ -64,7 +63,7 @@ class DrawVisualTests: XCTestCase {
                                             true, true, true, true, true,
                                             false, false, false, false, true,
                                             true, true, true, true, true])
-            .resizeNN(width: draw.width, height: draw.height)
+            .resize(width: draw.width, height: draw.height)
         
         image.drawImage(origin: (50, 50), image: draw)
         image.drawImage(origin: (130, 130), image: draw, mask: mask)
