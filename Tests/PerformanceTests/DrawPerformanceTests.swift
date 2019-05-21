@@ -1,5 +1,5 @@
 import XCTest
-import Swim
+@testable import Swim
 
 class DrawPerformanceTests: XCTestCase {
     func testDrawLine() {
@@ -7,7 +7,20 @@ class DrawPerformanceTests: XCTestCase {
         let pixel = Pixel<RGBA, Double>(r: 1, g: 1, b: 1, a: 1)
         
         measure {
-            image.drawLine(p1: (0, 0), p2: (1919, 1079), pixel: pixel)
+            for y in 0..<1080 {
+                image.drawLine(p1: (0, y), p2: (1919, y), pixel: pixel)
+            }
+        }
+    }
+    
+    func testDrawHorizontalLine() {
+        var image = Image<RGBA, Double>(width: 1920, height: 1080, value: 0)
+        let pixel = Pixel<RGBA, Double>(r: 1, g: 1, b: 1, a: 1)
+        
+        measure {
+            for y in 0..<1080 {
+                image.drawHorizontalLine(x1: 0, x2: 1019, y: y, pixel: pixel)
+            }
         }
     }
     
