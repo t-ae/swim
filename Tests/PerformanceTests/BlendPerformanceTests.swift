@@ -2,22 +2,6 @@ import XCTest
 import Swim
 
 class BlendPerformanceTests: XCTestCase {
-    func testAlphaBlendRGB() {
-        let top = Image<RGBA, Double>(width: 3840, height: 2160, value: 0.1)
-        var bottom = Image<RGB, Double>(width: 3840, height: 2160, value: 0.1)
-        measure{
-            Blender.alphaBlend(top: top, bottom: &bottom)
-        }
-    }
-    
-    func testAlphaBlendRGBA() {
-        let top = Image<RGBA, Double>(width: 3840, height: 2160, value: 0.1)
-        var bottom = Image<RGBA, Double>(width: 3840, height: 2160, value: 0.1)
-        measure{
-            Blender.alphaBlend(top: top, bottom: &bottom)
-        }
-    }
-    
     func testAdditiveBlendRGB() {
         let top = Image<RGB, Double>(width: 3840, height: 2160, value: 0.1)
         var bottom = Image<RGB, Double>(width: 3840, height: 2160, value: 0.1)

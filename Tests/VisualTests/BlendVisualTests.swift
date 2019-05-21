@@ -7,32 +7,6 @@ class BlendVisualTests: XCTestCase {
 #if canImport(AppKit)
 
 extension BlendVisualTests {
-    func testAlphaBlend() {
-        var imageBase = Image<RGBA, Double>(width: 500,
-                                           height: 500,
-                                           value: 0.9)
-        
-        var red = Image.full(value: 0, like: imageBase)
-        red.drawCircle(center: (250, 200), radius: 100, pixel: Pixel(r: 1, g: 0, b: 0, a: 1))
-        red.drawCircle(center: (250, 200), radius: 95, pixel: Pixel(r: 1, g: 0, b: 0, a: 0.5))
-        
-        var green = Image.full(value: 0, like: imageBase)
-        green.drawCircle(center: (200, 300), radius: 100, pixel: Pixel(r: 0, g: 1, b: 0, a: 1))
-        green.drawCircle(center: (200, 300), radius: 95, pixel: Pixel(r: 0, g: 1, b: 0, a: 0.5))
-        
-        var blue = Image.full(value: 0, like: imageBase)
-        blue.drawCircle(center: (300, 300), radius: 100, pixel: Pixel(r: 0, g: 0, b: 1, a: 1))
-        blue.drawCircle(center: (300, 300), radius: 95, pixel: Pixel(r: 0, g: 0, b: 1, a: 0.5))
-        
-        Blender.alphaBlend(top: red, bottom: &imageBase)
-        Blender.alphaBlend(top: green, bottom: &imageBase)
-        Blender.alphaBlend(top: blue, bottom: &imageBase)
-        
-        let nsImage = doubleToNSImage(imageBase)
-        
-        XCTAssertTrue(nsImage.isValid, "Break and check nsImage in debugger.")
-    }
-    
     func testMultiplyBlend() {
         var lena512 = try! Image<RGB, Double>(contentsOf: testResoruceRoot().appendingPathComponent("lena_512.png"))
         let lena128 = try! Image<RGB, Double>(contentsOf: testResoruceRoot().appendingPathComponent("lena_128.png"))

@@ -96,7 +96,6 @@
 		OBJ_196 /* ImageBinaryOperators.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_24 /* ImageBinaryOperators.swift */; };
 		OBJ_197 /* ImageUnaryOperators.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_25 /* ImageUnaryOperators.swift */; };
 		OBJ_198 /* AdditiveBlend.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_27 /* AdditiveBlend.swift */; };
-		OBJ_199 /* AlphaBlend.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_28 /* AlphaBlend.swift */; };
 		OBJ_200 /* Blender.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_29 /* Blender.swift */; };
 		OBJ_201 /* MultiplyBlend.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_30 /* MultiplyBlend.swift */; };
 		OBJ_202 /* OverlayBlend.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_31 /* OverlayBlend.swift */; };
@@ -151,7 +150,6 @@
 		OBJ_277 /* Im2colTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_100 /* Im2colTests.swift */; };
 		OBJ_278 /* IntegralImageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_101 /* IntegralImageTests.swift */; };
 		OBJ_279 /* ImageArithmeticTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_103 /* ImageArithmeticTests.swift */; };
-		OBJ_280 /* AlphaBlendTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_105 /* AlphaBlendTests.swift */; };
 		OBJ_281 /* ChannelCompositionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_107 /* ChannelCompositionTests.swift */; };
 		OBJ_282 /* ChannelwiseConversionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_108 /* ChannelwiseConversionTests.swift */; };
 		OBJ_283 /* DataTypeConversionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_109 /* DataTypeConversionTests.swift */; };
@@ -321,7 +319,6 @@
 		OBJ_100 /* Im2colTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Im2colTests.swift; sourceTree = "<group>"; };
 		OBJ_101 /* IntegralImageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntegralImageTests.swift; sourceTree = "<group>"; };
 		OBJ_103 /* ImageArithmeticTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageArithmeticTests.swift; sourceTree = "<group>"; };
-		OBJ_105 /* AlphaBlendTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlphaBlendTests.swift; sourceTree = "<group>"; };
 		OBJ_107 /* ChannelCompositionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelCompositionTests.swift; sourceTree = "<group>"; };
 		OBJ_108 /* ChannelwiseConversionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelwiseConversionTests.swift; sourceTree = "<group>"; };
 		OBJ_109 /* DataTypeConversionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataTypeConversionTests.swift; sourceTree = "<group>"; };
@@ -370,7 +367,6 @@
 		OBJ_24 /* ImageBinaryOperators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageBinaryOperators.swift; sourceTree = "<group>"; };
 		OBJ_25 /* ImageUnaryOperators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageUnaryOperators.swift; sourceTree = "<group>"; };
 		OBJ_27 /* AdditiveBlend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdditiveBlend.swift; sourceTree = "<group>"; };
-		OBJ_28 /* AlphaBlend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlphaBlend.swift; sourceTree = "<group>"; };
 		OBJ_29 /* Blender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Blender.swift; sourceTree = "<group>"; };
 		OBJ_30 /* MultiplyBlend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiplyBlend.swift; sourceTree = "<group>"; };
 		OBJ_31 /* OverlayBlend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverlayBlend.swift; sourceTree = "<group>"; };
@@ -556,7 +552,6 @@
 		OBJ_104 /* BlendTests */ = {
 			isa = PBXGroup;
 			children = (
-				OBJ_105 /* AlphaBlendTests.swift */,
 			);
 			path = BlendTests;
 			sourceTree = "<group>";
@@ -754,7 +749,6 @@
 			isa = PBXGroup;
 			children = (
 				OBJ_27 /* AdditiveBlend.swift */,
-				OBJ_28 /* AlphaBlend.swift */,
 				OBJ_29 /* Blender.swift */,
 				OBJ_30 /* MultiplyBlend.swift */,
 				OBJ_31 /* OverlayBlend.swift */,
@@ -1182,7 +1176,6 @@
 				OBJ_197 /* ImageUnaryOperators.swift in Sources */,
 				A732C29A2283D33900C96067 /* EdgeMode.swift in Sources */,
 				OBJ_198 /* AdditiveBlend.swift in Sources */,
-				OBJ_199 /* AlphaBlend.swift in Sources */,
 				OBJ_200 /* Blender.swift in Sources */,
 				OBJ_201 /* MultiplyBlend.swift in Sources */,
 				OBJ_202 /* OverlayBlend.swift in Sources */,
@@ -1276,7 +1269,6 @@
 				OBJ_277 /* Im2colTests.swift in Sources */,
 				OBJ_278 /* IntegralImageTests.swift in Sources */,
 				OBJ_279 /* ImageArithmeticTests.swift in Sources */,
-				OBJ_280 /* AlphaBlendTests.swift in Sources */,
 				OBJ_281 /* ChannelCompositionTests.swift in Sources */,
 				A732B3A72271913600B2256E /* AbsTests.swift in Sources */,
 				OBJ_282 /* ChannelwiseConversionTests.swift in Sources */,
