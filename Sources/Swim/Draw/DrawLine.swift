@@ -1,4 +1,9 @@
 extension Image {
+    /// Draw line between two points (x1, y) and (x2, y).
+    ///
+    /// Because of its simplicity, this method is much faster than `drawLine`.
+    ///
+    /// It should be used to fill area, like `drawRect` and `drawCircle`.
     @inlinable
     mutating func drawHorizontalLine(x1: Int, x2: Int, y: Int, pixel: Pixel<P, T>) {
         guard 0 <= y && y < height else {
@@ -46,12 +51,13 @@ extension Image {
         }
         
         // draw p2
-        self.drawPixel(x: x, y: y, pixel: pixel)
+        drawPixel(x: x, y: y, pixel: pixel)
     }
     
-    /// Draw line between specified points.
+    /// Draw lines between adjascent points.
+    ///
     /// - Parameters:
-    ///   - close: It true, draw line between first and last points. Default: true.
+    ///   - close: If true, also draw line between first and last points. Default: true.
     @inlinable
     public mutating func drawLines(points: [(x: Int, y: Int)],
                                    pixel: Pixel<P, T>,

@@ -79,6 +79,7 @@
 		A7FC411A22929ACB008A90D2 /* DrawRect.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7FC411922929ACB008A90D2 /* DrawRect.swift */; };
 		A7FC411E22938EA1008A90D2 /* DrawImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7FC411D22938EA1008A90D2 /* DrawImage.swift */; };
 		A7FC41202293A910008A90D2 /* DrawPerformanceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7FC411F2293A910008A90D2 /* DrawPerformanceTests.swift */; };
+		A7FC41222293F060008A90D2 /* DrawPolygon.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7FC41212293F060008A90D2 /* DrawPolygon.swift */; };
 		OBJ_167 /* image_io.c in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_9 /* image_io.c */; };
 		OBJ_169 /* stb_image_write.h in Headers */ = {isa = PBXBuildFile; fileRef = OBJ_11 /* stb_image_write.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		OBJ_170 /* stb_image.h in Headers */ = {isa = PBXBuildFile; fileRef = OBJ_12 /* stb_image.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -312,6 +313,7 @@
 		A7FC411922929ACB008A90D2 /* DrawRect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawRect.swift; sourceTree = "<group>"; };
 		A7FC411D22938EA1008A90D2 /* DrawImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawImage.swift; sourceTree = "<group>"; };
 		A7FC411F2293A910008A90D2 /* DrawPerformanceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawPerformanceTests.swift; sourceTree = "<group>"; };
+		A7FC41212293F060008A90D2 /* DrawPolygon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawPolygon.swift; sourceTree = "<group>"; };
 		OBJ_100 /* Im2colTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Im2colTests.swift; sourceTree = "<group>"; };
 		OBJ_101 /* IntegralImageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntegralImageTests.swift; sourceTree = "<group>"; };
 		OBJ_103 /* ImageArithmeticTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageArithmeticTests.swift; sourceTree = "<group>"; };
@@ -518,6 +520,7 @@
 				A7FC411922929ACB008A90D2 /* DrawRect.swift */,
 				A7FC41172292994B008A90D2 /* DrawPixel.swift */,
 				A7FC411D22938EA1008A90D2 /* DrawImage.swift */,
+				A7FC41212293F060008A90D2 /* DrawPolygon.swift */,
 			);
 			path = Draw;
 			sourceTree = "<group>";
@@ -1185,6 +1188,7 @@
 				A738381B22906EFA00412CA8 /* BitOperations.swift in Sources */,
 				A7383816228F0D7E00412CA8 /* FourierTransformer.swift in Sources */,
 				A732B3A82271913A00B2256E /* Abs.swift in Sources */,
+				A7FC41222293F060008A90D2 /* DrawPolygon.swift in Sources */,
 				OBJ_220 /* BilinearInterpolator.swift in Sources */,
 				OBJ_221 /* Interpolator.swift in Sources */,
 				OBJ_222 /* NearestNeighborInterpolator.swift in Sources */,

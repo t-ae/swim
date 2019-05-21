@@ -55,6 +55,25 @@ class DrawVisualTests: XCTestCase {
         XCTAssertTrue(ns.isValid, "break here")
     }
     
+    func testDrawPolygon() {
+        var image = Image<Gray, UInt8>(width: 201, height: 201, value: 0)
+        
+        // clockwise
+        image.drawPolygon(points: [(0, 30), (15, 0), (30, 25)], pixel: Pixel(gray: 255))
+        // counter clockwise
+        image.drawPolygon(points: [(110, 30), (130, 25), (115, 0)], pixel: Pixel(gray: 255))
+        // not convex
+        image.drawPolygon(points: [(0, 130), (30, 200), (60, 130), (30, 170)], pixel: Pixel(gray: 255))
+        image.drawPolygon(points: [(100, 200), (130, 150), (100, 100), (150, 130), (200, 100), (170, 150), (200, 200), (150, 170)], pixel: Pixel(gray: 255))
+        
+        // self-intersecting
+        image.drawPolygon(points: [(50, 50), (100, 50), (50, 100), (100, 100)], pixel: Pixel(gray: 255))
+        
+        let ns = image.nsImage()
+        
+        XCTAssertTrue(ns.isValid, "break here")
+    }
+    
     func testDrawImage() {
         var image = Image<Gray, UInt8>(width: 201, height: 201, value: 0)
         let draw = Image<Gray, UInt8>(width: 50, height: 50, value: 255)
