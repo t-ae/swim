@@ -48,8 +48,8 @@ class DrawPerformanceTests: XCTestCase {
     }
     
     func testDrawImage() {
-        var image = Image<RGBA, Double>(width: 1920, height: 1080, value: 0)
-        let draw = Image<RGBA, Double>(width: 1000, height: 70, value: 1)
+        var image = Image<RGB, Double>(width: 1920, height: 1080, value: 0)
+        let draw = Image<RGB, Double>(width: 1000, height: 70, value: 1)
         
         measure {
             image.drawImage(origin: (10, 10), image: draw)
@@ -57,12 +57,21 @@ class DrawPerformanceTests: XCTestCase {
     }
     
     func testDrawImageWithmask() {
-        var image = Image<RGBA, Double>(width: 1920, height: 1080, value: 0)
-        let draw = Image<RGBA, Double>(width: 1000, height: 70, value: 1)
+        var image = Image<RGB, Double>(width: 1920, height: 1080, value: 0)
+        let draw = Image<RGB, Double>(width: 1000, height: 700, value: 1)
         let mask = Image<Gray, Bool>.full(value: true, like: draw)
         
         measure {
             image.drawImage(origin: (10, 10), image: draw, mask: mask)
+        }
+    }
+    
+    func testDrawImageAlphaBlend() {
+        var image = Image<RGB, Double>(width: 1920, height: 1080, value: 0)
+        let draw = Image<RGBA, Double>(width: 1000, height: 700, value: 1)
+        
+        measure {
+            image.drawImage(origin: (10, 10), image: draw)
         }
     }
 }

@@ -80,4 +80,30 @@ class DrawVisualTests: XCTestCase {
         
         XCTAssertTrue(ns.isValid, "break here")
     }
+    
+    func testDrawImageAlphaBlend() {
+        var imageBase = Image<RGB, Double>(width: 500,
+                                            height: 500,
+                                            value: 0.9)
+        
+        var red = Image<RGBA, Double>(width: 201, height: 201, value: 0)
+        red.drawCircle(center: (100, 100), radius: 100, pixel: Pixel(r: 1, g: 0, b: 0, a: 1))
+        red.drawCircle(center: (100, 100), radius:  95, pixel: Pixel(r: 1, g: 0, b: 0, a: 0.5))
+        
+        var green = Image<RGBA, Double>(width: 201, height: 201, value: 0)
+        green.drawCircle(center: (100, 100), radius: 100, pixel: Pixel(r: 0, g: 1, b: 0, a: 1))
+        green.drawCircle(center: (100, 100), radius:  95, pixel: Pixel(r: 0, g: 1, b: 0, a: 0.5))
+        
+        var blue = Image<RGBA, Double>(width: 201, height: 201, value: 0)
+        blue.drawCircle(center: (100, 100), radius: 100, pixel: Pixel(r: 0, g: 0, b: 1, a: 1))
+        blue.drawCircle(center: (100, 100), radius:  95, pixel: Pixel(r: 0, g: 0, b: 1, a: 0.5))
+        
+        imageBase.drawImage(origin: (150, 100), image: red)
+        imageBase.drawImage(origin: (100, 200), image: green)
+        imageBase.drawImage(origin: (200, 200), image: blue)
+        
+        let nsImage = doubleToNSImage(imageBase)
+        
+        XCTAssertTrue(nsImage.isValid, "Break and check nsImage in debugger.")
+    }
 }
