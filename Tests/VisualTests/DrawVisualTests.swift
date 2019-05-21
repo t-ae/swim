@@ -90,9 +90,9 @@ class DrawVisualTests: XCTestCase {
         red.drawCircle(center: (100, 100), radius: 100, pixel: Pixel(r: 1, g: 0, b: 0, a: 1))
         red.drawCircle(center: (100, 100), radius:  95, pixel: Pixel(r: 1, g: 0, b: 0, a: 0.5))
         
-        var green = Image<RGBA, Double>(width: 201, height: 201, value: 0)
-        green.drawCircle(center: (100, 100), radius: 100, pixel: Pixel(r: 0, g: 1, b: 0, a: 1))
-        green.drawCircle(center: (100, 100), radius:  95, pixel: Pixel(r: 0, g: 1, b: 0, a: 0.5))
+        var green = Image<ARGB, Double>(width: 201, height: 201, value: 0)
+        green.drawCircle(center: (100, 100), radius: 100, pixel: Pixel(a: 1.0, r: 0, g: 1, b: 0))
+        green.drawCircle(center: (100, 100), radius:  95, pixel: Pixel(a: 0.5, r: 0, g: 1, b: 0))
         
         var blue = Image<RGBA, Double>(width: 201, height: 201, value: 0)
         blue.drawCircle(center: (100, 100), radius: 100, pixel: Pixel(r: 0, g: 0, b: 1, a: 1))
