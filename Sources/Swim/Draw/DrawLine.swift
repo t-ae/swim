@@ -1,4 +1,23 @@
 extension Image {
+    @inlinable
+    mutating func drawHorizontalLine(x1: Int, x2: Int, y: Int, pixel: Pixel<P, T>) {
+        guard 0 <= y && y < height else {
+            return
+        }
+        
+        let left = max(min(x1, x2), 0)
+        let right = min(max(x1, x2) + 1, width)
+        
+        
+        if left > width || right < 0 {
+            return
+        }
+        
+        pixelwiseConvert(left..<right, y..<y+1) { ref in
+            ref.assign(pixel: pixel)
+        }
+    }
+    
     /// Draw line between specified points.
     @inlinable
     public mutating func drawLine(p1: (x: Int, y: Int),
@@ -13,7 +32,7 @@ extension Image {
         
         var (x, y) = p1
         while (x ,y) != p2 {
-            self.drawPixel(x: x, y: y, pixel: pixel)
+            drawPixel(x: x, y: y, pixel: pixel)
             
             let e2 = error*2
             if e2 > -dy {

@@ -23,10 +23,10 @@ extension Image {
                 y -= 1
             }
             
-            self.drawLine(p1: (center.x-x, center.y+y), p2: (center.x+x, center.y+y), pixel: pixel)
-            self.drawLine(p1: (center.x-y, center.y+x), p2: (center.x+y, center.y+x), pixel: pixel)
-            self.drawLine(p1: (center.x-x, center.y-y), p2: (center.x+x, center.y-y), pixel: pixel)
-            self.drawLine(p1: (center.x-y, center.y-x), p2: (center.x+y, center.y-x), pixel: pixel)
+            drawHorizontalLine(x1: center.x-x, x2: center.x+x, y: center.y+y, pixel: pixel)
+            drawHorizontalLine(x1: center.x-y, x2: center.x+y, y: center.y+x, pixel: pixel)
+            drawHorizontalLine(x1: center.x-x, x2: center.x+x, y: center.y-y, pixel: pixel)
+            drawHorizontalLine(x1: center.x-y, x2: center.x+y, y: center.y-x, pixel: pixel)
             x += 1
         }
     }
@@ -53,14 +53,14 @@ extension Image {
                 y -= 1
             }
             
-            self.drawPixel(x: center.x + x, y: center.y + y, pixel: pixel)
-            self.drawPixel(x: center.x + y, y: center.y + x, pixel: pixel)
-            self.drawPixel(x: center.x - x, y: center.y + y, pixel: pixel)
-            self.drawPixel(x: center.x - y, y: center.y + x, pixel: pixel)
-            self.drawPixel(x: center.x + x, y: center.y - y, pixel: pixel)
-            self.drawPixel(x: center.x + y, y: center.y - x, pixel: pixel)
-            self.drawPixel(x: center.x - x, y: center.y - y, pixel: pixel)
-            self.drawPixel(x: center.x - y, y: center.y - x, pixel: pixel)
+            drawPixel(x: center.x + x, y: center.y + y, pixel: pixel)
+            drawPixel(x: center.x + y, y: center.y + x, pixel: pixel)
+            drawPixel(x: center.x - x, y: center.y + y, pixel: pixel)
+            drawPixel(x: center.x - y, y: center.y + x, pixel: pixel)
+            drawPixel(x: center.x + x, y: center.y - y, pixel: pixel)
+            drawPixel(x: center.x + y, y: center.y - x, pixel: pixel)
+            drawPixel(x: center.x - x, y: center.y - y, pixel: pixel)
+            drawPixel(x: center.x - y, y: center.y - x, pixel: pixel)
             
             x += 1
         }

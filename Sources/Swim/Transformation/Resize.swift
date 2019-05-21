@@ -3,6 +3,7 @@ import Foundation
 /// It's for all `DataType`s. But if T: BinaryFloatingPoint, this method is overloaded and invisible.
 extension Image {
     /// Resize image with nearest neighbor method.
+    ///
     /// If you need more sophisticated methods, see `Image<P, BinaryFloatingPoint>.resize`.
     ///
     /// - Parameters:

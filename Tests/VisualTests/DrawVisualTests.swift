@@ -42,10 +42,13 @@ class DrawVisualTests: XCTestCase {
     func testDrawRect() {
         var image = Image<Gray, UInt8>(width: 201, height: 201, value: 0)
         
-        image.drawRect(origin: (0, 0), size: (100, 100), pixel: Pixel(gray: 128))
-        image.drawRect(origin: (30, 30), size: (200, 200), pixel: Pixel(gray: 192))
+        image.drawRectPelimeter(origin: (0, 0), size: (100, 100), pixel: Pixel(gray: 128))
+        image.drawRectPelimeter(origin: (30, 30), size: (200, 200), pixel: Pixel(gray: 192))
+        image.drawRectPelimeter(origin: (-30, -30), size: (200, 200), pixel: Pixel(gray: 255))
         
-        image.drawRect(origin: (-30, -30), size: (200, 200), pixel: Pixel(gray: 255))
+        image.drawRect(origin: (100, 100), size: (10, 10), pixel: Pixel(gray: 64))
+        image.drawRect(origin: (180, -10), size: (30, 30), pixel: Pixel(gray: 64))
+        image.drawRect(origin: (-10, 180), size: (30, 30), pixel: Pixel(gray: 64))
         
         let ns = image.nsImage()
         
