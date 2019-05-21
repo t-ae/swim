@@ -4,6 +4,9 @@ public protocol Blender {
 }
 
 extension Blender {
+    /// Blend image to target.
+    ///
+    /// All pixel values are assumed to be in range [0, 1].
     @inlinable
     public static func blend<P: NoAlpha>(top: Image<P, T>, bottom: inout Image<P, T>) {
         precondition(top.size == bottom.size)
@@ -52,6 +55,9 @@ public enum BlendMode {
 }
 
 extension Image where P: NoAlpha, T: FloatingPoint {
+    /// Blend image.
+    ///
+    /// All pixel values are assumed to be in range [0, 1].
     @inlinable
     public mutating func blend(image: Image<P, T>, mode: BlendMode) {
         switch mode {
