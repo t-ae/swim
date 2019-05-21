@@ -106,4 +106,22 @@ class DrawVisualTests: XCTestCase {
         
         XCTAssertTrue(nsImage.isValid, "Break and check nsImage in debugger.")
     }
+    
+    func testDrawImageAlphaBlending_gray() {
+        var imageBase = Image<GrayAlpha, Double>(width: 500,
+                                                 height: 500,
+                                                 value: 0)
+        
+        var circle = Image<GrayAlpha, Double>(width: 201, height: 201, value: 0)
+        circle.drawCircle(center: (100, 100), radius: 100, pixel: Pixel(gray: 1, alpha: 1.0))
+        circle.drawCircle(center: (100, 100), radius:  95, pixel: Pixel(gray: 1, alpha: 0.5))
+        
+        imageBase.drawImage(origin: (150, 100), image: circle)
+        imageBase.drawImage(origin: (100, 200), image: circle)
+        imageBase.drawImage(origin: (200, 200), image: circle)
+        
+        let nsImage = doubleToNSImage(imageBase.toRGBA())
+        
+        XCTAssertTrue(nsImage.isValid, "Break and check nsImage in debugger.")
+    }
 }

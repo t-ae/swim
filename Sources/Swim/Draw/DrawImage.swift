@@ -56,7 +56,7 @@ extension Image where P: HasAlpha, T: BinaryFloatingPoint {
     /// Draw image with alpha blending.
     @inlinable
     public mutating func drawImage<P2: HasAlpha>(origin: (x: Int, y: Int),
-                                                 image: Image<P2, T>) where P2.BaseType == P {
+                                                 image: Image<P2, T>) where P2.BaseType == P.BaseType{
         let selfRangeX = max(origin.x, 0)..<min(origin.x + image.width, width)
         let selfRangeY = max(origin.y, 0)..<min(origin.y + image.height, height)
         

@@ -42,9 +42,37 @@ extension Image where P == Gray {
     public func toRGBA(with alphaValue: T) -> Image<RGBA, T> {
         return toRGBWithAlpha(with: alphaValue)
     }
+    
     @inlinable
     public func toARGB(with alphaValue: T) -> Image<ARGB, T> {
         return toRGBWithAlpha(with: alphaValue)
+    }
+}
+
+// MARK: GrayAlpha -> RGBWithAlpha
+extension Image where P == GrayAlpha {
+    @inlinable
+    func toRGBWithAlpha<P2: RGBWithAlpha>() -> Image<P2, T> {
+        var newImage = Image<P2, T>(width: width, height: height)
+        
+        for i in 0..<pixelCount {
+            newImage.data[4*i+P2.colorStartIndex+0] = data[2*i+0]
+            newImage.data[4*i+P2.colorStartIndex+1] = data[2*i+0]
+            newImage.data[4*i+P2.colorStartIndex+2] = data[2*i+0]
+            newImage.data[4*i+P2.alphaIndex] = data[2*i+1]
+        }
+        
+        return newImage
+    }
+    
+    @inlinable
+    public func toRGBA() -> Image<RGBA, T> {
+        return toRGBWithAlpha()
+    }
+    
+    @inlinable
+    public func toARGB() -> Image<ARGB, T> {
+        return toRGBWithAlpha()
     }
 }
 
