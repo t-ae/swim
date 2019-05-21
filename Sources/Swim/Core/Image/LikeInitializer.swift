@@ -10,6 +10,18 @@ extension Image {
     public static func full<P2, T2>(value: T, like image: Image<P2, T2>) -> Image {
         return Image(width: image.width, height: image.height, value: value)
     }
+    
+    /// Create new image which is filled with `pixel` and size/type is like `image`.
+    @inlinable
+    public static func full(pixel: Pixel<P, T>, like image: Image<P, T>) -> Image {
+        return Image(width: image.width, height: image.height, pixel: pixel)
+    }
+    
+    /// Create new image which is filled with `pixel` and size is like `image`.
+    @inlinable
+    public static func full<P2, T2>(pixel: Pixel<P, T>, like image: Image<P2, T2>) -> Image {
+        return Image(width: image.width, height: image.height, pixel: pixel)
+    }
 }
 
 extension Image where T: AdditiveArithmetic {
