@@ -1,7 +1,9 @@
 # Swim
 Image library for Swift.
 
-## Generic `Image` type
+## API
+
+### Generic `Image` type
 ```swift
 struct Image<P: PixelType, T: DataType>
 ```
@@ -10,7 +12,7 @@ Supported types
 PixelType: `Gray`, `GrayAlpha`, `RGB`, `RGBA`, `ARGB`  
 DataType: `Bool`, `UInt8`, `Int`, `Float`, `Double`  
 
-## Creation
+### Creation
 ```swift
 let image = Image<RGBA, UInt8>(width: 3, height: 5, data: uint8Array])
 
@@ -21,13 +23,13 @@ let rgba = Image(width: 3, height: 5, rgba: doubleArray)
 let argb = Image(width: 5, height: 3, argb: uint8Array)
 ```
 
-## Save/Load image
+### Save/Load image
 ```swift
 let image = Image<RGBA, UInt8>(contentsOf: url)!
 try? image.write(path: dstPath)
 ```
 
-## Convertible from/to CoreGraphics image types
+### Convertible from/to CoreGraphics image types
 ```swift
 let image = Image<RGBA, UInt8>(contentsOf: url)!
 
@@ -40,8 +42,8 @@ let uiImage = image.uiImage()
 let imageFromUI = Image<RGBA, UInt8>(uiImage: uiImage)!
 ```
 
-## Subscriptions
-### Pixel manipulation
+### Subscriptions
+#### Pixel manipulation
 ```swift
 let image = Image<RGBA, UInt8>(contentsOf: url)!
 let px: Pixel<RGBA, UInt8> = image[0, 0]
@@ -53,7 +55,7 @@ image[1, 0] += 1 // Add 1 for each R,G,B,A
 image[1, 0, .green] += 1 // Add 1 for Green channel
 ```
 
-### Subimage
+#### Subimage
 ```swift
 let image = Image<RGBA, UInt8>(contentsOf: url)!
 let sub1: Image<RGBA, UInt8> = image[0..<100, 0..<100]
@@ -61,14 +63,14 @@ let sub2: Image<RGBA, UInt8> = image[rows: 0..<100]
 image[col: 2] += 1
 ```
 
-### Channel extraction
+#### Channel extraction
 ```swift
 let image = Image<RGBA, UInt8>(contentsOf: url)!
 let red: Image<Gray, UInt8> = image[channel: 0]
 image[channel: .blue] += 1
 ```
 
-## Conversion
+### Conversion
 
 ```swift
 let image = Image<RGB, Float>(contentsOf: url)!
@@ -87,7 +89,7 @@ let redOnlyRGBA = image.pixelwiseConverted { px in
 }
 ```
 
-## Drawing
+### Drawing
 
 ```swift
 var image = Image<RGB, Float>(contentsOf: url)!
@@ -100,7 +102,7 @@ image.drawImage(origin: (80, 80), rgbImage) // simply overwrites
 image.drawImage(origin: (200, 200), rgbaImage) // with alpha blending
 ```
 
-## Resize
+### Resize
 ```swift 
 let image = Image<RGB, Float>(contentsOf: url)!
 let resizedBL = image.resize(width: 512, height: 512) // default bilinear
@@ -113,7 +115,7 @@ let resizedAA = image.resize(width: 512, height: 512, method: .areaAverage)
 
 ![resize](https://user-images.githubusercontent.com/12446914/56634980-dbccaa80-669e-11e9-90f7-5046d85e9f29.png)
 
-## Warp
+### Warp
 ```swift
 let image = Image<RGBA, Double>(contentsOf: url)!
 let affine = AffineTransformation<Double>(scale: (1, 1.5), rotation: .pi/6. translation: (100, 120))
@@ -125,8 +127,6 @@ let warpedImage = image.warp(transformation: affine, outputSize: (500, 500), int
 [Example: NN+Wrap / BL+Constant / BC+Reflect](https://github.com/t-ae/swim/blob/7a055c45e4a1db9755f04a785599e18fde1f86bd/Tests/VisualTests/WarpVisualTests.swift#L140-L172)
 
 ![warp](https://user-images.githubusercontent.com/12446914/56634776-2a2d7980-669e-11e9-8ff2-179dbdb3dff4.png)
-
-## Advanced
 
 ### Correlation
 ```swift
