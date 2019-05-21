@@ -52,4 +52,30 @@ class DrawVisualTests: XCTestCase {
         
         XCTAssertTrue(ns.isValid, "break here")
     }
+    
+    func testDrawImage() {
+        var image = Image<Gray, UInt8>(width: 201, height: 201, value: 0)
+        let draw = Image<Gray, UInt8>(width: 50, height: 50, value: 255)
+        
+        let mask = Image<Gray, Bool>(width: 5,
+                                     height: 5,
+                                     data: [true, true, true, true, true,
+                                            true, false, false, false, false,
+                                            true, true, true, true, true,
+                                            false, false, false, false, true,
+                                            true, true, true, true, true])
+            .resizeNN(width: draw.width, height: draw.height)
+        
+        image.drawImage(origin: (50, 50), image: draw)
+        image.drawImage(origin: (130, 130), image: draw, mask: mask)
+        
+        image.drawImage(origin: (-5, -5), image: draw, mask: mask)
+        image.drawImage(origin: (170, -5), image: draw, mask: mask)
+        image.drawImage(origin: (-5, 170), image: draw, mask: mask)
+        image.drawImage(origin: (170, 170), image: draw, mask: mask)
+        
+        let ns = image.nsImage()
+        
+        XCTAssertTrue(ns.isValid, "break here")
+    }
 }

@@ -1,6 +1,6 @@
 import Foundation
 
-extension Image where T == UInt8 {
+extension Image {
     /// Resize image with nearest neighbor method.
     /// If you need more sophisticated methods, see `Image<P, BinaryFloatingPoint>.resize`.
     /// - Parameters:

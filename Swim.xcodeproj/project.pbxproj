@@ -78,6 +78,7 @@
 		A7FC411622928D1D008A90D2 /* DrawVisualTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7FC411422928D1B008A90D2 /* DrawVisualTests.swift */; };
 		A7FC41182292994B008A90D2 /* DrawPixel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7FC41172292994B008A90D2 /* DrawPixel.swift */; };
 		A7FC411A22929ACB008A90D2 /* DrawRect.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7FC411922929ACB008A90D2 /* DrawRect.swift */; };
+		A7FC411E22938EA1008A90D2 /* DrawImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7FC411D22938EA1008A90D2 /* DrawImage.swift */; };
 		OBJ_167 /* image_io.c in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_9 /* image_io.c */; };
 		OBJ_169 /* stb_image_write.h in Headers */ = {isa = PBXBuildFile; fileRef = OBJ_11 /* stb_image_write.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		OBJ_170 /* stb_image.h in Headers */ = {isa = PBXBuildFile; fileRef = OBJ_12 /* stb_image.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -319,6 +320,7 @@
 		A7FC411422928D1B008A90D2 /* DrawVisualTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawVisualTests.swift; sourceTree = "<group>"; };
 		A7FC41172292994B008A90D2 /* DrawPixel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawPixel.swift; sourceTree = "<group>"; };
 		A7FC411922929ACB008A90D2 /* DrawRect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawRect.swift; sourceTree = "<group>"; };
+		A7FC411D22938EA1008A90D2 /* DrawImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawImage.swift; sourceTree = "<group>"; };
 		OBJ_100 /* Im2colTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Im2colTests.swift; sourceTree = "<group>"; };
 		OBJ_101 /* IntegralImageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntegralImageTests.swift; sourceTree = "<group>"; };
 		OBJ_103 /* ImageArithmeticTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageArithmeticTests.swift; sourceTree = "<group>"; };
@@ -533,6 +535,7 @@
 				A7FC411222928744008A90D2 /* DrawLine.swift */,
 				A7FC411922929ACB008A90D2 /* DrawRect.swift */,
 				A7FC41172292994B008A90D2 /* DrawPixel.swift */,
+				A7FC411D22938EA1008A90D2 /* DrawImage.swift */,
 			);
 			path = Draw;
 			sourceTree = "<group>";
@@ -1207,6 +1210,7 @@
 				OBJ_200 /* Blender.swift in Sources */,
 				OBJ_201 /* MultiplyBlend.swift in Sources */,
 				OBJ_202 /* OverlayBlend.swift in Sources */,
+				A7FC411E22938EA1008A90D2 /* DrawImage.swift in Sources */,
 				OBJ_203 /* ScreenBlend.swift in Sources */,
 				OBJ_204 /* ChannelComposition.swift in Sources */,
 				OBJ_205 /* ChannelwiseConversion.swift in Sources */,

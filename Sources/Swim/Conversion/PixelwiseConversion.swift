@@ -6,15 +6,30 @@ extension Image {
     /// - Note: `MutablePixelRef` contains `UnsafeMutableBufferPointer`. So it's unsafe to bring it outside closure.
     @inlinable
     public mutating func pixelwiseConvert(_ f: (MutablePixelRef<P, T>)->Void) {
-        let (width, height) = size
+        pixelwiseConvert(0..<width, 0..<height, f)
+    }
+    
+    /// Convert pixels in specified range.
+    /// - Note: `MutablePixelRef` contains `UnsafeMutableBufferPointer`. So it's unsafe to bring it outside closure.
+    @inlinable
+    public mutating func pixelwiseConvert(_ xRange: Range<Int>,
+                                          _ yRange: Range<Int>,
+                                          _ f: (MutablePixelRef<P, T>)->Void) {
+        precondition(0 <= xRange.startIndex && xRange.endIndex <= width, "xRagne out of range.")
+        precondition(0 <= yRange.startIndex && yRange.endIndex <= height, "yRagne out of range.")
+        
+        var rowStart = dataIndex(x: xRange.startIndex, y: yRange.startIndex)
+        let rowSize = self.width * P.channels
+        
         data.withUnsafeMutableBufferPointer {
-            var start = 0
-            for y in 0..<height {
-                for x in 0..<width {
+            for y in yRange {
+                var start = rowStart
+                for x in xRange {
                     let pixel = MutablePixelRef<P, T>(x: x, y: y, rebasing: $0[start..<start+P.channels])
                     f(pixel)
                     start += P.channels
                 }
+                rowStart += rowSize
             }
         }
     }
