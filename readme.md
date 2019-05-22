@@ -100,6 +100,13 @@ image.drawCircle(center: (50, 50), radius: 30, pixel: Pixel(r: 0, g: 0, b: 1))
 
 image.drawImage(origin: (80, 80), rgbImage) // simply overwrites
 image.drawImage(origin: (200, 200), rgbaImage) // with alpha blending
+
+let font = try! TrueTypeFont(url: URL(fileURLWithPath: "/System/Library/Fonts/Helvetica.ttc"), 
+                             fontSize: 30)
+image.drawText(origin: (100, 100),
+               text: "TEXT DRAWING", 
+               font: font, 
+               pixel: Pixel(r: 0, g: 0, b: 0, a: 1))
 ```
 
 ### Resize
