@@ -4,8 +4,13 @@
 
 #include "CStbImage.h"
 
-int init_font(stbtt_fontinfo* info, const unsigned char* bytes) {
-    int offset = stbtt_GetFontOffsetForIndex(bytes, 0);
+int get_number_of_fonts(const unsigned char* bytes) {
+    return stbtt_GetNumberOfFonts(bytes);
+}
+
+int init_font(stbtt_fontinfo* info, const unsigned char* bytes, int index) {
+    int offset = stbtt_GetFontOffsetForIndex(bytes, index);
+    
     return stbtt_InitFont(info, bytes, offset);
 }
 

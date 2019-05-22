@@ -27,7 +27,7 @@ public struct TrueTypeFont {
         var info = stbtt_fontinfo()
         let bytes = try Data(contentsOf: url)
         let result = bytes.withUnsafeBytes { p in
-            init_font(&info, p.bindMemory(to: UInt8.self).baseAddress!)
+            init_font(&info, p.bindMemory(to: UInt8.self).baseAddress!, 0)
         }
         
         guard result != 0 else {

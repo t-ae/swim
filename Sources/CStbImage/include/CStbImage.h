@@ -17,7 +17,8 @@ extern "C" {
     int write_image_png(const char* path, int width, int height, int bpp, const void* data);
 
     // Text
-    int init_font(stbtt_fontinfo* info, const unsigned char* bytes);
+    int get_number_of_fonts(const unsigned char* bytes);
+    int init_font(stbtt_fontinfo* info, const unsigned char* bytes, int index);
     void get_vmetrics(const stbtt_fontinfo info, int* ascent, int* descent, int* lineGap);
     void get_hmetrics(const stbtt_fontinfo info, int codepoint, int* advanceWidth, int* leftSideBearing);
     void get_codepoint_bitmap_box(const stbtt_fontinfo info, int codepoint, float scale,
