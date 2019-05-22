@@ -170,7 +170,7 @@ class DrawVisualTests: XCTestCase {
         let path = testResoruceRoot().appendingPathComponent("lena_512.png")
         var lena = try! Image<RGB, Double>(contentsOf: path)
         
-        let size = lena.getTextBoundingBox(text: "LENA", font: font)
+        let size = lena.getTextSize(text: "LENA", font: font)
         
         lena.drawText(origin: (0, 0), text: "LENA", font: font, pixel: Pixel(r: 0, g: 0, b: 0, a: 1))
         lena.drawText(origin: (50, 50), text: "LENA", font: font, pixel: Pixel(r: 0, g: 0, b: 1, a: 0.7))

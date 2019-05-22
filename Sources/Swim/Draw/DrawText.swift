@@ -22,6 +22,7 @@ public struct TrueTypeFont {
     let info: stbtt_fontinfo
     let fontSize: Int
     
+    /// Create font with font file(ttf/ttc) and fontSize.
     public init(url: URL, fontSize: Int) throws {
         var info = stbtt_fontinfo()
         let bytes = try Data(contentsOf: url)
@@ -134,14 +135,20 @@ public struct TrueTypeFont {
     }
 }
 
-extension Image where P: NoAlpha, T: BinaryFloatingPoint {
+extension Image {
+    /// Compute size of bounding box which covers text.
     @inlinable
-    public func getTextBoundingBox(text: String,
-                                   font: TrueTypeFont) -> (width: Int, height: Int) {
+    public func getTextSize(text: String,
+                            font: TrueTypeFont) -> (width: Int, height: Int) {
         let metrics = font.getTextImageMetrics(text: text)
         return (metrics.width, metrics.height)
     }
-    
+}
+
+extension Image where P: NoAlpha, T: BinaryFloatingPoint {
+    /// Draw text in image.
+    ///
+    /// If you want to know the size of text area in advance, `use getTextSize`.
     @inlinable
     public mutating func drawText<P2: HasAlpha>(origin: (x: Int, y: Int),
                                                 text: String,
@@ -155,6 +162,30 @@ extension Image where P: NoAlpha, T: BinaryFloatingPoint {
             for x in 0..<grayImage.width {
                 let grayValue = grayImage[x, y, .gray]
                 colorImage[x, y, P2.alphaIndex] *= T(grayValue) / 255
+            }
+        }
+        
+        drawImage(origin: origin, image: colorImage)
+    }
+}
+
+extension Image where P: HasAlpha, T: BinaryFloatingPoint {
+    /// Draw text in image.
+    ///
+    /// If you want to know the size of text area in advance, `use getTextSize`.
+    @inlinable
+    public mutating func drawText(origin: (x: Int, y: Int),
+                                  text: String,
+                                  font: TrueTypeFont,
+                                  pixel: Pixel<P, T>) {
+        let grayImage = font.createTextImage(text: text)
+        
+        var colorImage = Image<P, T>.full(pixel: pixel, like: grayImage)
+        
+        for y in 0..<grayImage.height {
+            for x in 0..<grayImage.width {
+                let grayValue = grayImage[x, y, .gray]
+                colorImage[x, y, P.alphaIndex] *= T(grayValue) / 255
             }
         }
         
