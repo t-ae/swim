@@ -75,6 +75,8 @@ extension Image {
     }
     
     /// Draw cross mark at the specified point.
+    ///
+    /// - Note: If size is not odd, the size of mark will be size+1.
     @inlinable
     public mutating func drawX(center: (x: Int, y: Int), size: Int, pixel: Pixel<P, T>) {
         let length = size / 2
