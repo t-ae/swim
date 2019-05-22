@@ -65,6 +65,25 @@ extension FilterVisualTests {
         XCTAssertFalse([maximum, minimum, median].isEmpty, "Break and check nsImages in debugger")
     }
     
+    func testBilateral() {
+        let path = testResoruceRoot().appendingPathComponent("lena_256.png")
+        var image = try! Image<RGB, Double>(contentsOf: path)
+        var images: [Image<RGB, Double>] = [image]
+        
+        image = image.bilateralFilter(kernelSize: 5, sigma2_1: 1, sigma2_2: 0.1)
+        images.append(image)
+        
+        image = image.bilateralFilter(kernelSize: 5, sigma2_1: 1, sigma2_2: 0.1)
+        images.append(image)
+        
+        image = image.bilateralFilter(kernelSize: 5, sigma2_1: 1, sigma2_2: 0.1)
+        images.append(image)
+        
+        let ns = doubleToNSImage(Image.concatH(images))
+        
+        XCTAssertTrue(ns.isValid, "break here")
+    }
+    
     func testLena() {
         let path = testResoruceRoot().appendingPathComponent("lena_256.png")
         let image = try! Image<RGB, Double>(contentsOf: path)
