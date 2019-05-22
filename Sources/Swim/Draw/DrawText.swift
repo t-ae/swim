@@ -20,8 +20,9 @@ public enum TrueTypeFontError: Error {
 
 public struct TrueTypeFont {
     let info: stbtt_fontinfo
+    let fontSize: Int
     
-    public init(url: URL) throws {
+    public init(url: URL, fontSize: Int) throws {
         var info = stbtt_fontinfo()
         let bytes = try Data(contentsOf: url)
         let result = bytes.withUnsafeBytes { p in
@@ -33,9 +34,10 @@ public struct TrueTypeFont {
         }
         
         self.info = info
+        self.fontSize = fontSize
     }
     
-    public func getTextImageMetrics(text: String, fontSize: Int) -> TextImageMetrics {
+    public func getTextImageMetrics(text: String) -> TextImageMetrics {
         
         let scale = get_scale_for_pixel_height(info, Int32(fontSize))
         
@@ -82,8 +84,8 @@ public struct TrueTypeFont {
                                 ascent: ascent, descent: descent, lineGap: lineGap, scale: scale)
     }
     
-    public func createTextImage(text: String, fontSize: Int) -> Image<Gray, UInt8> {
-        let metrics = getTextImageMetrics(text: text, fontSize: fontSize)
+    public func createTextImage(text: String) -> Image<Gray, UInt8> {
+        let metrics = getTextImageMetrics(text: text)
         var image = Image<Gray, UInt8>(width: metrics.width, height: metrics.height, value: 0)
         
         let scale = metrics.scale
@@ -135,9 +137,8 @@ public struct TrueTypeFont {
 extension Image where P: NoAlpha, T: BinaryFloatingPoint {
     @inlinable
     public func getTextBoundingBox(text: String,
-                                   font: TrueTypeFont,
-                                   fontSize: Int) -> (width: Int, height: Int) {
-        let metrics = font.getTextImageMetrics(text: text, fontSize: fontSize)
+                                   font: TrueTypeFont) -> (width: Int, height: Int) {
+        let metrics = font.getTextImageMetrics(text: text)
         return (metrics.width, metrics.height)
     }
     
@@ -145,9 +146,8 @@ extension Image where P: NoAlpha, T: BinaryFloatingPoint {
     public mutating func drawText<P2: HasAlpha>(origin: (x: Int, y: Int),
                                                 text: String,
                                                 font: TrueTypeFont,
-                                                fontSize: Int,
                                                 pixel: Pixel<P2, T>) where P2.BaseType == P {
-        let grayImage = font.createTextImage(text: text, fontSize: fontSize)
+        let grayImage = font.createTextImage(text: text)
         
         var colorImage = Image<P2, T>.full(pixel: pixel, like: grayImage)
         

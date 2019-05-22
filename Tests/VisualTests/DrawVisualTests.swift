@@ -148,14 +148,14 @@ class DrawVisualTests: XCTestCase {
     }
     
     func testTextImage() {
-        guard let font = try? TrueTypeFont(url: URL(fileURLWithPath: "/System/Library/Fonts/ヒラギノ角ゴシック W0.ttc")) else {
+        guard let font = try? TrueTypeFont(url: URL(fileURLWithPath: "/System/Library/Fonts/ヒラギノ角ゴシック W0.ttc"), fontSize: 50) else {
             return
         }
         let image = font.createTextImage(text: """
             abcdefg
             hijklmn
             あいうえお
-            """, fontSize: 50)
+            """)
         
         let nsImage = image.nsImage()
         
@@ -163,25 +163,24 @@ class DrawVisualTests: XCTestCase {
     }
     
     func testDrawText() {
-        guard let font = try? TrueTypeFont(url: URL(fileURLWithPath: "/System/Library/Fonts/ヒラギノ角ゴシック W0.ttc")) else {
+        guard let font = try? TrueTypeFont(url: URL(fileURLWithPath: "/System/Library/Fonts/ヒラギノ角ゴシック W0.ttc"), fontSize: 30) else {
             return
         }
         
         let path = testResoruceRoot().appendingPathComponent("lena_512.png")
         var lena = try! Image<RGB, Double>(contentsOf: path)
         
-        let size = lena.getTextBoundingBox(text: "LENA", font: font, fontSize: 30)
+        let size = lena.getTextBoundingBox(text: "LENA", font: font)
         
-        lena.drawText(origin: (0, 0), text: "LENA", font: font, fontSize: 30, pixel: Pixel(r: 0, g: 0, b: 0, a: 1))
-        lena.drawText(origin: (50, 50), text: "LENA", font: font, fontSize: 30, pixel: Pixel(r: 0, g: 0, b: 1, a: 0.7))
+        lena.drawText(origin: (0, 0), text: "LENA", font: font, pixel: Pixel(r: 0, g: 0, b: 0, a: 1))
+        lena.drawText(origin: (50, 50), text: "LENA", font: font, pixel: Pixel(r: 0, g: 0, b: 1, a: 0.7))
         
-        lena.drawText(origin: (511-size.width, 511-size.height), text: "LENA", font: font, fontSize: 30, pixel: Pixel(r: 0, g: 1, b: 1, a: 0.7))
+        lena.drawText(origin: (511-size.width, 511-size.height), text: "LENA", font: font, pixel: Pixel(r: 0, g: 1, b: 1, a: 0.7))
         
-        lena.drawText(origin: (-30, 256), text: "LENA", font: font, fontSize: 30, pixel: Pixel(r: 1, g: 1, b: 1, a: 0.7))
+        lena.drawText(origin: (-30, 256), text: "LENA", font: font, pixel: Pixel(r: 1, g: 1, b: 1, a: 0.7))
         
         let nsImage = doubleToNSImage(lena)
         
         XCTAssertTrue(nsImage.isValid, "Break and check nsImage in debugger.")
-        
     }
 }
