@@ -73,6 +73,7 @@
 		A738381B22906EFA00412CA8 /* BitOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = A738381A22906EFA00412CA8 /* BitOperations.swift */; };
 		A738381F2290714F00412CA8 /* BitOperationsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A738381D2290713F00412CA8 /* BitOperationsTests.swift */; };
 		A7C8CECE2294DB5F0064EDFA /* BilateralFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7C8CECC2294DB1F0064EDFA /* BilateralFilter.swift */; };
+		A7C8CED02294E6E60064EDFA /* FilterPerformanceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7C8CECF2294E6E60064EDFA /* FilterPerformanceTests.swift */; };
 		A7FC411122928570008A90D2 /* DrawCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7FC411022928570008A90D2 /* DrawCircle.swift */; };
 		A7FC411322928744008A90D2 /* DrawLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7FC411222928744008A90D2 /* DrawLine.swift */; };
 		A7FC411622928D1D008A90D2 /* DrawVisualTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7FC411422928D1B008A90D2 /* DrawVisualTests.swift */; };
@@ -308,6 +309,7 @@
 		A738381A22906EFA00412CA8 /* BitOperations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BitOperations.swift; sourceTree = "<group>"; };
 		A738381D2290713F00412CA8 /* BitOperationsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BitOperationsTests.swift; sourceTree = "<group>"; };
 		A7C8CECC2294DB1F0064EDFA /* BilateralFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BilateralFilter.swift; sourceTree = "<group>"; };
+		A7C8CECF2294E6E60064EDFA /* FilterPerformanceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterPerformanceTests.swift; sourceTree = "<group>"; };
 		A7FC411022928570008A90D2 /* DrawCircle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawCircle.swift; sourceTree = "<group>"; };
 		A7FC411222928744008A90D2 /* DrawLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawLine.swift; sourceTree = "<group>"; };
 		A7FC411422928D1B008A90D2 /* DrawVisualTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawVisualTests.swift; sourceTree = "<group>"; };
@@ -940,11 +942,12 @@
 				A73827112289430B00412CA8 /* ConversionPerformanceTests.swift */,
 				A738270B22891A1A00412CA8 /* CorrelationPerformanceTests.swift */,
 				A732B3AF2271AACF00B2256E /* DataTypeConversionPerformanceTests.swift */,
+				A7FC411F2293A910008A90D2 /* DrawPerformanceTests.swift */,
+				A7C8CECF2294E6E60064EDFA /* FilterPerformanceTests.swift */,
 				OBJ_93 /* PerformanceTests.swift */,
 				A732B3B72272A7CB00B2256E /* ResizePerformanceTests.swift */,
 				A732B3B32271AF1800B2256E /* RoundingPerformanceTests.swift */,
 				A732B3B52271B14400B2256E /* SubscriptPerformanceTests.swift */,
-				A7FC411F2293A910008A90D2 /* DrawPerformanceTests.swift */,
 			);
 			name = PerformanceTests;
 			path = Tests/PerformanceTests;
@@ -1159,6 +1162,7 @@
 				A732B3B42271AF1800B2256E /* RoundingPerformanceTests.swift in Sources */,
 				A732B3AE2271A83600B2256E /* BlendPerformanceTests.swift in Sources */,
 				A732B3B22271AC6800B2256E /* ClipPerformanceTests.swift in Sources */,
+				A7C8CED02294E6E60064EDFA /* FilterPerformanceTests.swift in Sources */,
 				A732B3A322718C1000B2256E /* ArithmeticPerformanceTests.swift in Sources */,
 				OBJ_178 /* PerformanceTests.swift in Sources */,
 				A732B3BA2272DFC500B2256E /* BayerPerformanceTests.swift in Sources */,
