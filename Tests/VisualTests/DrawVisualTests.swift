@@ -149,6 +149,7 @@ class DrawVisualTests: XCTestCase {
     
     func testTextImage() {
         guard let font = try? TrueTypeFont(url: URL(fileURLWithPath: "/System/Library/Fonts/ヒラギノ明朝 ProN.ttc"), fontSize: 50) else {
+            XCTFail("Font not found.")
             return
         }
         let image = font.createTextImage(text: """
@@ -163,10 +164,12 @@ class DrawVisualTests: XCTestCase {
     }
     
     func testDrawText() {
-        guard let font = try? TrueTypeFont(url: URL(fileURLWithPath: "/System/Library/Fonts/ヒラギノ明朝 ProN.ttc"), fontSize: 30) else {
+        guard let font = try? TrueTypeFont(url: URL(fileURLWithPath: "/System/Library/Fonts/Helvetica.ttc"), fontSize: 30) else {
+            XCTFail("Font not found.")
             return
         }
         guard let font2 = try? TrueTypeFont(url: URL(fileURLWithPath: "/System/Library/Fonts/ヒラギノ明朝 ProN.ttc"), fontSize: 20) else {
+            XCTFail("Font not found.")
             return
         }
         
