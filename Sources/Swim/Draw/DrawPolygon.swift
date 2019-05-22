@@ -20,31 +20,75 @@ extension Image {
         minY = max(minY, 0)
         maxY = min(maxY, height-1)
         
-        pixelwiseConvert(minX..<maxX+1, minY..<maxY+1) { ref in
+        func countRightCross(x: Int, y: Int) -> Int {
+            var count = 0
             var j = points.count - 1
-            
-            var inside = false
-            
             for i in 0..<points.count {
                 let pi = points[j]
                 let pj = points[i]
                 
-                // Project line from (ref.x, ref.y) to left.
-                // If the line is crossed with polygon edge, invert `inside`.
-                // Cross conut is odd iff (ref.x, ref.y) is inside polygon(excluding edges).
-                if pi.y <= ref.y && ref.y < pj.y
-                    && (ref.x - pi.x) * (pj.y - pi.y) < (pj.x - pi.x) * (ref.y - pi.y) {
-                    inside.toggle()
-                } else if pj.y <= ref.y && ref.y < pi.y
-                    && (ref.x - pi.x) * (pj.y - pi.y) > (pj.x - pi.x) * (ref.y - pi.y) {
-                    inside.toggle()
+                // Project line from (x, y) to right.
+                if pi.y <= y && y < pj.y
+                    && (x - pi.x) * (pj.y - pi.y) < (pj.x - pi.x) * (y - pi.y) {
+                    count += 1
+                } else if pj.y <= y && y < pi.y
+                    && (x - pi.x) * (pj.y - pi.y) > (pj.x - pi.x) * (y - pi.y) {
+                    count += 1
                 }
                 
                 j = i
             }
+            return count
+        }
+        
+        for y in minY...maxY {
+            var start = minX
             
-            if inside {
-                ref.assign(pixel: pixel)
+            let maxXValue = countRightCross(x: maxX, y: y)
+            
+            while start <= maxX {
+                let startValue = countRightCross(x: start, y: y)
+                
+                // Cross conut is odd iff (x, y) is inside polygon.
+                let inside = startValue % 2 == 1
+                
+                if startValue == maxXValue {
+                    if inside {
+                        // All pixels btw start & maxX is inside polygon
+                        drawHorizontalLine(x1: start, x2: maxX, y: y, pixel: pixel)
+                    }
+                    // end search
+                    break
+                } else if (start + maxX) / 2 == start {
+                    if inside {
+                        // Single pixel
+                        drawPixel(x: start, y: y, pixel: pixel)
+                    }
+                    start += 1
+                } else {
+                    // Binary search
+                    var left = start
+                    var right = maxX
+                    
+                    while true {
+                        let mid = (left + right) / 2
+                        if mid == left {
+                            if inside {
+                                // All pixels btw start & left is inside polygon
+                                drawHorizontalLine(x1: start, x2: left, y: y, pixel: pixel)
+                            }
+                            start = left + 1
+                            break
+                        }
+                        let midValue = countRightCross(x: mid, y: y)
+                        
+                        if midValue == startValue {
+                            left = mid
+                        } else {
+                            right = mid
+                        }
+                    }
+                }
             }
         }
     }

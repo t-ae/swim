@@ -69,6 +69,9 @@ class DrawVisualTests: XCTestCase {
         // self-intersecting
         image.drawPolygon(points: [(50, 50), (100, 50), (50, 100), (100, 100)], pixel: Pixel(gray: 255))
         
+        // zigzag
+        image.drawPolygon(points: [(100, 90), (200, 90), (200, 50), (190, 80), (180, 50), (170, 80), (160, 50), (150, 80), (140, 50), (130, 80), (120, 50), (110, 80), (100, 50)], pixel: Pixel(gray: 255))
+        
         let ns = image.nsImage()
         
         XCTAssertTrue(ns.isValid, "break here")
