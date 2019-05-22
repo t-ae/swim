@@ -9,10 +9,6 @@ int init_font(stbtt_fontinfo* info, const unsigned char* bytes) {
     return stbtt_InitFont(info, bytes, offset);
 }
 
-float get_scale_for_pixel_height(const stbtt_fontinfo info, int height) {
-    return stbtt_ScaleForPixelHeight(&info, height);
-}
-
 void get_vmetrics(const stbtt_fontinfo info, int* ascent, int* descent, int* lineGap) {
     stbtt_GetFontVMetrics(&info, ascent, descent, lineGap);
 }

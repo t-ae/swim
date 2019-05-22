@@ -20,10 +20,10 @@ public enum TrueTypeFontError: Error {
 
 public struct TrueTypeFont {
     let info: stbtt_fontinfo
-    let fontSize: Int
+    let fontSize: Float
     
-    /// Create font with font file(ttf/ttc) and fontSize.
-    public init(url: URL, fontSize: Int) throws {
+    /// Create font with font file(ttf/ttc) and fontSize in pixel.
+    public init(url: URL, fontSize: Float) throws {
         var info = stbtt_fontinfo()
         let bytes = try Data(contentsOf: url)
         let result = bytes.withUnsafeBytes { p in
@@ -39,14 +39,13 @@ public struct TrueTypeFont {
     }
     
     public func getTextImageMetrics(text: String) -> TextImageMetrics {
-        
-        let scale = get_scale_for_pixel_height(info, Int32(fontSize))
-        
         var ascent: Int32 = 0
         var descent: Int32 = 0
         var lineGap: Int32 = 0
         
         get_vmetrics(info, &ascent, &descent, &lineGap)
+        
+        let scale = fontSize / Float(ascent - descent)
         
         let lineHeight = Int(Float(ascent - descent)*scale)
         

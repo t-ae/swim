@@ -18,7 +18,6 @@ extern "C" {
 
     // Text
     int init_font(stbtt_fontinfo* info, const unsigned char* bytes);
-    float get_scale_for_pixel_height(const stbtt_fontinfo info, int height);
     void get_vmetrics(const stbtt_fontinfo info, int* ascent, int* descent, int* lineGap);
     void get_hmetrics(const stbtt_fontinfo info, int codepoint, int* advanceWidth, int* leftSideBearing);
     void get_codepoint_bitmap_box(const stbtt_fontinfo info, int codepoint, float scale,
