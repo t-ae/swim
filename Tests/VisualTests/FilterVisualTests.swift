@@ -97,13 +97,13 @@ extension FilterVisualTests {
         var image = try! Image<RGB, Double>(contentsOf: path)
         var images: [Image<RGB, Double>] = [image]
         
-        image = image.bilateralFilter(kernelSize: 5, sigma2_1: 1, sigma2_2: 0.1)
+        image = image.bilateralFilter(kernelSize: 5, sigma2_1: 1, sigma2_2: 0.01)
         images.append(image)
         
-        image = image.bilateralFilter(kernelSize: 5, sigma2_1: 1, sigma2_2: 0.1)
+        image = image.bilateralFilter(kernelSize: 5, sigma2_1: 1, sigma2_2: 0.01)
         images.append(image)
         
-        image = image.bilateralFilter(kernelSize: 5, sigma2_1: 1, sigma2_2: 0.1)
+        image = image.bilateralFilter(kernelSize: 5, sigma2_1: 1, sigma2_2: 0.01)
         images.append(image)
         
         let ns = doubleToNSImage(Image.concatH(images))
