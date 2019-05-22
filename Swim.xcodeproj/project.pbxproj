@@ -512,6 +512,24 @@
 			path = BooleanTests;
 			sourceTree = "<group>";
 		};
+		A7C8CECA2294DAD00064EDFA /* Filter */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_17 /* Convolution.swift */,
+				OBJ_19 /* RankFilter.swift */,
+			);
+			path = Filter;
+			sourceTree = "<group>";
+		};
+		A7C8CECB2294DAE60064EDFA /* FilterTests */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_97 /* ConvolutionTests.swift */,
+				OBJ_99 /* FilterTests.swift */,
+			);
+			path = FilterTests;
+			sourceTree = "<group>";
+		};
 		A7FC410F2292855F008A90D2 /* Draw */ = {
 			isa = PBXGroup;
 			children = (
@@ -650,13 +668,14 @@
 			children = (
 				OBJ_15 /* Advance */,
 				OBJ_22 /* Arithmetic */,
-				A738381922906EE100412CA8 /* Boolean */,
 				OBJ_26 /* Blend */,
+				A738381922906EE100412CA8 /* Boolean */,
 				OBJ_33 /* Conversion */,
 				OBJ_39 /* Core */,
 				A7FC410F2292855F008A90D2 /* Draw */,
-				OBJ_47 /* IO */,
+				A7C8CECA2294DAD00064EDFA /* Filter */,
 				OBJ_51 /* Interpolation */,
+				OBJ_47 /* IO */,
 				OBJ_56 /* Manipulation */,
 				OBJ_61 /* Platform */,
 				OBJ_72 /* Subscript */,
@@ -700,9 +719,7 @@
 			isa = PBXGroup;
 			children = (
 				OBJ_16 /* Bayer.swift */,
-				OBJ_17 /* Convolution.swift */,
 				OBJ_18 /* Correlation.swift */,
-				OBJ_19 /* RankFilter.swift */,
 				OBJ_20 /* Im2col.swift */,
 				OBJ_21 /* IntegralImage.swift */,
 				A732C28C2283AFC000C96067 /* HistogramEqualizer.swift */,
@@ -939,6 +956,7 @@
 				OBJ_104 /* BlendTests */,
 				OBJ_106 /* ConversionTests */,
 				OBJ_112 /* CoreTests */,
+				A7C8CECB2294DAE60064EDFA /* FilterTests */,
 				OBJ_115 /* IOTests */,
 				OBJ_117 /* InterpolationTests */,
 				OBJ_121 /* ManipulationTests */,
@@ -956,9 +974,7 @@
 			isa = PBXGroup;
 			children = (
 				OBJ_96 /* BayerTests.swift */,
-				OBJ_97 /* ConvolutionTests.swift */,
 				OBJ_98 /* CorrelationTests.swift */,
-				OBJ_99 /* FilterTests.swift */,
 				OBJ_100 /* Im2colTests.swift */,
 				OBJ_101 /* IntegralImageTests.swift */,
 			);
