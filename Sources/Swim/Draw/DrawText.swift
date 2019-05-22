@@ -78,7 +78,10 @@ public struct TrueTypeFont {
             maxWidth = max(width, maxWidth)
         }
         
-        let height = lineNum * lineHeight + (lineNum-1) * Int(Float(lineGap) * scale)
+        // FIXME: we don't need lineGap for last line.
+        // But some characters, like `q`, are renderd beyond descent.
+        // So lineGap is added for last line.
+        let height = lineNum * lineHeight + (lineNum-0) * Int(Float(lineGap) * scale)
         
         return TextImageMetrics(text: text, width: maxWidth, height: height,
                                 ascent: ascent, descent: descent, lineGap: lineGap, scale: scale)
@@ -112,9 +115,11 @@ public struct TrueTypeFont {
                 let xx = x + Int(Float(leftSideBearing)*scale)
                 let yy = y + Int(Float(metrics.ascent)*scale) + Int(iy0)
                 let dataOffset = image.dataIndex(x: xx, y: yy)
+                let w = ix1-ix0
+                let h = iy1-iy0
                 image.data.withUnsafeMutableBufferPointer { bp in
                     let p = bp.baseAddress!.advanced(by: dataOffset)
-                    make_codepoint_bitmap(self.info, p, ix1-ix0, iy1-iy0, Int32(metrics.width), scale, codepoints[i])
+                    make_codepoint_bitmap(self.info, p, w, h, Int32(metrics.width), scale, codepoints[i])
                 }
                 
                 x += Int(Float(advanceWidth)*scale)
@@ -127,7 +132,8 @@ public struct TrueTypeFont {
             }
             
             // advance line
-            y += Int(Float(metrics.ascent - metrics.descent + metrics.lineGap) * scale)
+            y += Int(Float(metrics.ascent - metrics.descent) * scale)
+            y += Int(Float(metrics.lineGap) * scale)
         }
         
         return image

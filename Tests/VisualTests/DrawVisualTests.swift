@@ -148,13 +148,13 @@ class DrawVisualTests: XCTestCase {
     }
     
     func testTextImage() {
-        guard let font = try? TrueTypeFont(url: URL(fileURLWithPath: "/System/Library/Fonts/ヒラギノ角ゴシック W0.ttc"), fontSize: 50) else {
+        guard let font = try? TrueTypeFont(url: URL(fileURLWithPath: "/System/Library/Fonts/ヒラギノ明朝 ProN.ttc"), fontSize: 50) else {
             return
         }
         let image = font.createTextImage(text: """
-            abcdefg
-            hijklmn
-            あいうえお
+            abcdefghijklmnopqrstuvwxyz
+            ABCDEFGHIJKLMNOPQRSTUVWXYZ
+            あいうえお阿伊宇江於
             """)
         
         let nsImage = image.nsImage()
@@ -163,7 +163,10 @@ class DrawVisualTests: XCTestCase {
     }
     
     func testDrawText() {
-        guard let font = try? TrueTypeFont(url: URL(fileURLWithPath: "/System/Library/Fonts/ヒラギノ角ゴシック W0.ttc"), fontSize: 30) else {
+        guard let font = try? TrueTypeFont(url: URL(fileURLWithPath: "/System/Library/Fonts/ヒラギノ明朝 ProN.ttc"), fontSize: 30) else {
+            return
+        }
+        guard let font2 = try? TrueTypeFont(url: URL(fileURLWithPath: "/System/Library/Fonts/ヒラギノ明朝 ProN.ttc"), fontSize: 20) else {
             return
         }
         
@@ -175,9 +178,18 @@ class DrawVisualTests: XCTestCase {
         lena.drawText(origin: (0, 0), text: "LENA", font: font, pixel: Pixel(r: 0, g: 0, b: 0, a: 1))
         lena.drawText(origin: (50, 50), text: "LENA", font: font, pixel: Pixel(r: 0, g: 0, b: 1, a: 0.7))
         
-        lena.drawText(origin: (511-size.width, 511-size.height), text: "LENA", font: font, pixel: Pixel(r: 0, g: 1, b: 1, a: 0.7))
+        lena.drawText(origin: (511-size.width, 256), text: "LENA", font: font, pixel: Pixel(r: 0, g: 1, b: 1, a: 0.7))
         
         lena.drawText(origin: (-30, 256), text: "LENA", font: font, pixel: Pixel(r: 1, g: 1, b: 1, a: 0.7))
+        
+        let lorem = """
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+        Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        """
+        
+        lena.drawText(origin: (0, 300), text: lorem, font: font2, pixel: Pixel(r: 0, g: 0, b: 0, a: 1))
         
         let nsImage = doubleToNSImage(lena)
         
