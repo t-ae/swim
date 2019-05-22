@@ -74,6 +74,9 @@
 		A738381F2290714F00412CA8 /* BitOperationsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A738381D2290713F00412CA8 /* BitOperationsTests.swift */; };
 		A7C8CECE2294DB5F0064EDFA /* BilateralFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7C8CECC2294DB1F0064EDFA /* BilateralFilter.swift */; };
 		A7C8CED02294E6E60064EDFA /* FilterPerformanceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7C8CECF2294E6E60064EDFA /* FilterPerformanceTests.swift */; };
+		A7C8CED22294EB260064EDFA /* stb_truetype.h in Headers */ = {isa = PBXBuildFile; fileRef = A7C8CED12294EB260064EDFA /* stb_truetype.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A7C8CED42294EBDD0064EDFA /* DrawText.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7C8CED32294EBDD0064EDFA /* DrawText.swift */; };
+		A7C8CED62294EE660064EDFA /* truetype.c in Sources */ = {isa = PBXBuildFile; fileRef = A7C8CED52294EE660064EDFA /* truetype.c */; };
 		A7FC411122928570008A90D2 /* DrawCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7FC411022928570008A90D2 /* DrawCircle.swift */; };
 		A7FC411322928744008A90D2 /* DrawLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7FC411222928744008A90D2 /* DrawLine.swift */; };
 		A7FC411622928D1D008A90D2 /* DrawVisualTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7FC411422928D1B008A90D2 /* DrawVisualTests.swift */; };
@@ -310,6 +313,9 @@
 		A738381D2290713F00412CA8 /* BitOperationsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BitOperationsTests.swift; sourceTree = "<group>"; };
 		A7C8CECC2294DB1F0064EDFA /* BilateralFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BilateralFilter.swift; sourceTree = "<group>"; };
 		A7C8CECF2294E6E60064EDFA /* FilterPerformanceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterPerformanceTests.swift; sourceTree = "<group>"; };
+		A7C8CED12294EB260064EDFA /* stb_truetype.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stb_truetype.h; sourceTree = "<group>"; };
+		A7C8CED32294EBDD0064EDFA /* DrawText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawText.swift; sourceTree = "<group>"; };
+		A7C8CED52294EE660064EDFA /* truetype.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = truetype.c; sourceTree = "<group>"; };
 		A7FC411022928570008A90D2 /* DrawCircle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawCircle.swift; sourceTree = "<group>"; };
 		A7FC411222928744008A90D2 /* DrawLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawLine.swift; sourceTree = "<group>"; };
 		A7FC411422928D1B008A90D2 /* DrawVisualTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawVisualTests.swift; sourceTree = "<group>"; };
@@ -419,7 +425,7 @@
 		OBJ_99 /* FilterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterTests.swift; sourceTree = "<group>"; };
 		"Swim::CStbImage::Product" /* CStbImage.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = CStbImage.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		"Swim::PerformanceTests::Product" /* PerformanceTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; path = PerformanceTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		"Swim::Swim::Product" /* Swim.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Swim.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		"Swim::Swim::Product" /* Swim.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Swim.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		"Swim::SwimTests::Product" /* SwimTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; path = SwimTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		"Swim::VisualTests::Product" /* VisualTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; path = VisualTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -544,6 +550,7 @@
 				A7FC41172292994B008A90D2 /* DrawPixel.swift */,
 				A7FC411D22938EA1008A90D2 /* DrawImage.swift */,
 				A7FC41212293F060008A90D2 /* DrawPolygon.swift */,
+				A7C8CED32294EBDD0064EDFA /* DrawText.swift */,
 			);
 			path = Draw;
 			sourceTree = "<group>";
@@ -553,6 +560,7 @@
 			children = (
 				OBJ_11 /* stb_image_write.h */,
 				OBJ_12 /* stb_image.h */,
+				A7C8CED12294EB260064EDFA /* stb_truetype.h */,
 				OBJ_13 /* CStbImage.h */,
 			);
 			path = include;
@@ -903,6 +911,7 @@
 			isa = PBXGroup;
 			children = (
 				OBJ_9 /* image_io.c */,
+				A7C8CED52294EE660064EDFA /* truetype.c */,
 				OBJ_10 /* include */,
 			);
 			name = CStbImage;
@@ -996,6 +1005,7 @@
 			files = (
 				OBJ_169 /* stb_image_write.h in Headers */,
 				OBJ_170 /* stb_image.h in Headers */,
+				A7C8CED22294EB260064EDFA /* stb_truetype.h in Headers */,
 				OBJ_171 /* CStbImage.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1117,6 +1127,9 @@
 					"Swim::CStbImage" = {
 						LastSwiftMigration = 1020;
 					};
+					"Swim::Swim" = {
+						LastSwiftMigration = 1020;
+					};
 				};
 			};
 			buildConfigurationList = OBJ_2 /* Build configuration list for PBXProject "Swim" */;
@@ -1177,6 +1190,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 0;
 			files = (
+				A7C8CED42294EBDD0064EDFA /* DrawText.swift in Sources */,
 				A732B39822714E3E00B2256E /* Interpolator4x4.swift in Sources */,
 				OBJ_189 /* Bayer.swift in Sources */,
 				OBJ_190 /* Convolution.swift in Sources */,
@@ -1203,6 +1217,7 @@
 				OBJ_212 /* ImageInitializers.swift in Sources */,
 				OBJ_213 /* Pixel.swift in Sources */,
 				OBJ_214 /* PixelType.swift in Sources */,
+				A7C8CED62294EE660064EDFA /* truetype.c in Sources */,
 				A732AC21226EAB4600B2256E /* PixelBinaryScalarOperator.swift in Sources */,
 				OBJ_216 /* ImageFileFormat.swift in Sources */,
 				OBJ_217 /* ReadImage.swift in Sources */,
@@ -1519,6 +1534,8 @@
 		OBJ_186 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				DEFINES_MODULE = YES;
 				ENABLE_TESTABILITY = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1540,6 +1557,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGET_NAME = Swim;
 				TVOS_DEPLOYMENT_TARGET = 9.0;
@@ -1550,6 +1568,8 @@
 		OBJ_187 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				DEFINES_MODULE = YES;
 				ENABLE_TESTABILITY = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
