@@ -77,21 +77,19 @@ extension Filter where T == Double {
         precondition(sigma2 > 0, "sigma2 must be greater than 0.")
         var image = Image<Gray, T>(width: size, height: size, value: 0)
         
-        let c: T = 1 / (2 * T.pi * sigma2)
+        let c = 1 / (2 * T.pi * sigma2).squareRoot()
         
-        var sum: T = 0
+        let gauss1D: [T] = (0..<size).map {
+            let d = T($0) - T(size-1)/2
+            return c * exp(-d*d / (2*sigma2))
+        }
+        
         image.pixelwiseConvert { ref in
-            let dx = T(ref.x) - T(size-1)/2
-            let dy = T(ref.y) - T(size-1)/2
-            
-            let norm = dx*dx + dy*dy
-            
-            ref[0] = c * exp(-norm / (2*sigma2))
-            sum += ref[0]
+            ref[0] = gauss1D[ref.x] * gauss1D[ref.y]
         }
         
         if scaleTo1 {
-            image /= sum
+            image /= image.data.reduce(0, +)
         }
         
         return image

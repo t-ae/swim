@@ -49,6 +49,33 @@ extension FilterVisualTests {
         XCTAssertFalse(nsImages.isEmpty, "Break and check nsImages in debugger")
     }
     
+    func testGaussian2() {
+        var image = imageBase!
+        var nsImages = [NSImage]()
+        
+        let filter = Filter.gaussian(size: 3, sigma2: 1, scaleTo1: true)
+        
+        image = image.convoluted(filter)
+        nsImages.append(doubleToNSImage(image))
+        
+        for _ in 0..<4 {
+            image = image.convoluted(filter)
+        }
+        nsImages.append(doubleToNSImage(image))
+        
+        for _ in 0..<10 {
+            image = image.convoluted(filter)
+        }
+        nsImages.append(doubleToNSImage(image))
+        
+        for _ in 0..<15 {
+            image = image.convoluted(filter)
+        }
+        nsImages.append(doubleToNSImage(image))
+        
+        XCTAssertFalse(nsImages.isEmpty, "Break and check nsImages in debugger")
+    }
+    
     func testSobelLaplacian() {
         let sobelH = doubleToNSImage(imageBase.convoluted(Filter.sobel3x3H))
         let sobelV = doubleToNSImage(imageBase.convoluted(Filter.sobel3x3V))
