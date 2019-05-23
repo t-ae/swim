@@ -16,6 +16,7 @@ public struct TextImageMetrics {
 
 public enum TrueTypeFontError: Error {
     case failedToLoad
+    case fontIndexOutOfRange
 }
 
 public struct TrueTypeFont {
@@ -25,11 +26,29 @@ public struct TrueTypeFont {
     public let fontSize: Float
     
     /// Create font with font file(ttf/ttc) and fontSize in pixel.
-    public init(url: URL, fontSize: Float) throws {
+    /// - Parameters:
+    ///   - url: URL of ttf/ttc file.
+    ///   - fontIndex: Index of font in ttc file. If file is ttf, set 0. Default: 0.
+    ///   - fontSize: Font size in pixels.
+    public init(url: URL,
+                fontIndex: Int = 0,
+                fontSize: Float) throws {
+        
+        precondition(fontSize > 0, "Font size must be greater than 0.")
+        
         var info = stbtt_fontinfo()
         let bytes = try Data(contentsOf: url)
-        let result = bytes.withUnsafeBytes { p in
-            init_font(&info, p.bindMemory(to: UInt8.self).baseAddress!, 0)
+        
+        let result = try bytes.withUnsafeBytes { p -> Int32 in
+            let uint8p = p.bindMemory(to: UInt8.self)
+            
+            let numFonts = Int(get_number_of_fonts(uint8p.baseAddress!))
+            
+            guard 0 <= fontIndex && fontIndex < numFonts else {
+                throw TrueTypeFontError.fontIndexOutOfRange
+            }
+            
+            return init_font(&info, uint8p.baseAddress!, Int32(fontIndex))
         }
         
         guard result != 0 else {
