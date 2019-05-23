@@ -8,9 +8,13 @@ Cross platform image library for Swift.
 struct Image<P: PixelType, T: DataType>
 ```
 
-Supported types  
-PixelType: `Gray`, `GrayAlpha`, `RGB`, `RGBA`, `ARGB`  
-DataType: `Bool`, `UInt8`, `Int`, `Float`, `Double`  
+#### Supported types
+`PixelType`: `Gray`, `GrayAlpha`, `RGB`, `RGBA`, `ARGB`  
+`DataType`: `Bool`, `UInt8`, `Int`, `Float`, `Double`  
+
+Some functions assume pixel values are:
+- in  [0, 255] range if `DataType` is integer.
+- in [0, 1] range if `DataType` is floating point.
 
 ### Creation
 ```swift
