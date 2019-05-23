@@ -18,6 +18,14 @@ class FilterPerformanceTests: XCTestCase {
         }
     }
     
+    func testRankFilterMedian() {
+        let image = Image<Gray, Double>(width: 1920, height: 1080, value: 0)
+        
+        measure {
+            _ = image.rankFilter(.median, kernelSize: 3)
+        }
+    }
+    
     func testBilateralFilter() {
         let image = Image<Gray, Double>(width: 1920, height: 1080, value: 0)
         

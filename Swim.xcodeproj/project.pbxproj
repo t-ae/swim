@@ -124,7 +124,6 @@
 		OBJ_329 /* Rotate.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_109 /* Rotate.swift */; };
 		OBJ_330 /* Transpose.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_110 /* Transpose.swift */; };
 		OBJ_331 /* Warp.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_111 /* Warp.swift */; };
-		OBJ_332 /* ArrayExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_113 /* ArrayExt.swift */; };
 		OBJ_333 /* Clamp.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_114 /* Clamp.swift */; };
 		OBJ_334 /* Interleave.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_115 /* Interleave.swift */; };
 		OBJ_335 /* Rect.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_116 /* Rect.swift */; };
@@ -279,7 +278,6 @@
 		OBJ_109 /* Rotate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rotate.swift; sourceTree = "<group>"; };
 		OBJ_110 /* Transpose.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transpose.swift; sourceTree = "<group>"; };
 		OBJ_111 /* Warp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Warp.swift; sourceTree = "<group>"; };
-		OBJ_113 /* ArrayExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayExt.swift; sourceTree = "<group>"; };
 		OBJ_114 /* Clamp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Clamp.swift; sourceTree = "<group>"; };
 		OBJ_115 /* Interleave.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Interleave.swift; sourceTree = "<group>"; };
 		OBJ_116 /* Rect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rect.swift; sourceTree = "<group>"; };
@@ -512,7 +510,6 @@
 		OBJ_112 /* Utility */ = {
 			isa = PBXGroup;
 			children = (
-				OBJ_113 /* ArrayExt.swift */,
 				OBJ_114 /* Clamp.swift */,
 				OBJ_115 /* Interleave.swift */,
 				OBJ_116 /* Rect.swift */,
@@ -851,7 +848,7 @@
 			path = Image;
 			sourceTree = "<group>";
 		};
-		OBJ_5 /*  */ = {
+		OBJ_5 = {
 			isa = PBXGroup;
 			children = (
 				OBJ_6 /* Package.swift */,
@@ -862,7 +859,6 @@
 				OBJ_211 /* LICENSE */,
 				OBJ_212 /* readme.md */,
 			);
-			name = "";
 			sourceTree = "<group>";
 		};
 		OBJ_52 /* Pixel */ = {
@@ -1144,7 +1140,7 @@
 				English,
 				en,
 			);
-			mainGroup = OBJ_5 /*  */;
+			mainGroup = OBJ_5;
 			productRefGroup = OBJ_204 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -1273,7 +1269,6 @@
 				OBJ_329 /* Rotate.swift in Sources */,
 				OBJ_330 /* Transpose.swift in Sources */,
 				OBJ_331 /* Warp.swift in Sources */,
-				OBJ_332 /* ArrayExt.swift in Sources */,
 				OBJ_333 /* Clamp.swift in Sources */,
 				OBJ_334 /* Interleave.swift in Sources */,
 				OBJ_335 /* Rect.swift in Sources */,

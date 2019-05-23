@@ -11,28 +11,33 @@ extension Image where P == Gray, T: Comparable {
         case .maximum:
             return rankFilter(kernelSize: kernelSize) { $0.max()! }
         case .median:
-            return rankFilter(kernelSize: kernelSize) { $0.median()! }
+            return rankFilter(kernelSize: kernelSize) {
+                $0.sort()
+                return $0[($0.startIndex + $0.endIndex)/2]
+            }
         }
     }
     
     /// Apply non-linear local filter.
     @inlinable
-    func rankFilter(kernelSize: Int, kernelFunc: ([T])->T) -> Image<P, T> {
+    func rankFilter(kernelSize: Int, kernelFunc: (inout ArraySlice<T>)->T) -> Image<P, T> {
         precondition(kernelSize > 0)
         var newImage = self
         
         let pad = (kernelSize - 1) / 2
+        
+        var patch = [T](repeating: T.swimDefaultValue, count: kernelSize*kernelSize)
+        
         for y in 0..<height {
             for x in 0..<width {
-                var patch: [T] = []
-                patch.reserveCapacity(kernelSize*kernelSize)
-                
+                var count = 0
                 for yy in max(y-pad, 0)..<min(y-pad+kernelSize, height) {
                     for xx in max(x-pad, 0)..<min(x-pad+kernelSize, width) {
-                        patch.append(self[xx, yy, .gray])
+                        patch[count] = self[xx, yy, .gray]
+                        count += 1
                     }
                 }
-                newImage[x, y, .gray] = kernelFunc(patch)
+                newImage[x, y, .gray] = kernelFunc(&patch[..<count])
             }
         }
         
