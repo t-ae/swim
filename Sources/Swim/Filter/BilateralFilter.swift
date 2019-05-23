@@ -27,7 +27,7 @@ extension Image where T == Double {
                             let xx = clamp(x + px, min: 0, max: width-1)
                             
                             let pixelValue = self[xx, yy, c]
-                            let distanceGauss = exp(-hypot(Double(px), Double(py)) / (2*sigma2_1))
+                            let distanceGauss = exp(-Double(px*px + py+py) / (2*sigma2_1))
                             
                             let diff = pixelValue - centerValue
                             let valueGauss = exp(-diff*diff / (2*sigma2_2))
