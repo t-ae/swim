@@ -212,7 +212,7 @@ class DrawVisualTests: XCTestCase {
         XCTAssertTrue(nsImage.isValid, "Break and check nsImage in debugger.")
     }
     
-    func testDrawText() {
+    func testDrawTextDouble() {
         guard let font = try? TrueTypeFont(url: URL(fileURLWithPath: "/System/Library/Fonts/Helvetica.ttc"), fontSize: 30) else {
             XCTFail("Font not found.")
             return
@@ -248,6 +248,46 @@ class DrawVisualTests: XCTestCase {
                       color: Pixel(r: 0, g: 0, b: 0, a: 1))
         
         let nsImage = doubleToNSImage(lena)
+        
+        XCTAssertTrue(nsImage.isValid, "Break and check nsImage in debugger.")
+    }
+    
+    func testDrawTextUInt8() {
+        guard let font = try? TrueTypeFont(url: URL(fileURLWithPath: "/System/Library/Fonts/Helvetica.ttc"), fontSize: 30) else {
+            XCTFail("Font not found.")
+            return
+        }
+        guard let font2 = try? TrueTypeFont(url: URL(fileURLWithPath: "/System/Library/Fonts/ヒラギノ明朝 ProN.ttc"), fontSize: 20) else {
+            XCTFail("Font not found.")
+            return
+        }
+        
+        let path = testResoruceRoot().appendingPathComponent("lena_512.png")
+        var lena = try! Image<RGB, UInt8>(contentsOf: path)
+        
+        let size = Image.getTextImageSize(text: "LENA", font: font)
+        
+        lena.drawText(origin: (0, 0), text: "LENA", font: font, color: Pixel(r: 0, g: 0, b: 0, a: 255))
+        lena.drawText(origin: (50, 50), text: "LENA", font: font, color: Pixel(r: 0, g: 0, b: 255, a: 200))
+        
+        lena.drawText(origin: (511-size.width, 256), text: "LENA", font: font, color: Pixel(r: 0, g: 255, b: 255, a: 200))
+        
+        lena.drawText(origin: (-30, 256), text: "LENA", font: font, color: Pixel(r: 255, g: 255, b: 255, a: 200))
+        
+        let lorem = """
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+        Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        """
+        
+        lena.drawText(origin: (0, 300),
+                      text: lorem,
+                      font: font2,
+                      lineGap: 0,
+                      color: Pixel(r: 0, g: 0, b: 0, a: 255))
+        
+        let nsImage = lena.nsImage()
         
         XCTAssertTrue(nsImage.isValid, "Break and check nsImage in debugger.")
     }

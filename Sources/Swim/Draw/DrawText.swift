@@ -207,6 +207,34 @@ extension Image where P == Gray, T == UInt8 {
 }
 
 // MARK: - Color image creation
+extension Image where P: HasAlpha, T: BinaryInteger {
+    /// Create image contains specified text/color.
+    ///
+    /// - Parameters:
+    ///   - lineGap: Gap between lines in pixel. If nil, proper size will be used. Default: nil.
+    @inlinable
+    public static func createTextImage(text: String,
+                                       font: TrueTypeFont,
+                                       lineGap: Int? = nil,
+                                       color: Pixel<P, T>) -> Image {
+        let grayImage = Image<Gray, UInt8>.createTextImage(text: text, font: font, lineGap: lineGap)
+        
+        var colorImage = Image<P, T>.zeros(like: grayImage)
+        
+        colorImage.pixelwiseConvert { ref in
+            let grayValue = grayImage[ref.x, ref.y, .gray]
+            guard grayValue > 0 else {
+                return
+            }
+            ref.assign(pixel: color)
+            let alpha = T(Int(ref[P.alphaIndex]) * Int(grayValue) / 255)
+            ref[P.alphaIndex] = alpha
+        }
+        
+        return colorImage
+    }
+}
+
 extension Image where P: HasAlpha, T: BinaryFloatingPoint {
     /// Create image contains specified text/color.
     ///
@@ -235,6 +263,28 @@ extension Image where P: HasAlpha, T: BinaryFloatingPoint {
 }
 
 // MARK: - Draw method
+extension Image where P: NoAlpha, T: BinaryInteger {
+    /// Draw text in image.
+    ///
+    /// If you want to know the size of text area in advance, use `getTextImageSize`.
+    @inlinable
+    public mutating func drawText<P2: HasAlpha>(origin: (x: Int, y: Int),
+                                                text: String,
+                                                font: TrueTypeFont,
+                                                lineGap: Int? = nil,
+                                                color: Pixel<P2, T>) where P2.BaseType == P {
+        guard origin.x < width && origin.y < height else {
+            // Drawing area is out of image.
+            return
+        }
+        let colorImage = Image<P2, T>.createTextImage(text: text,
+                                                      font: font,
+                                                      lineGap: lineGap,
+                                                      color: color)
+        drawImage(origin: origin, image: colorImage)
+    }
+}
+
 extension Image where P: NoAlpha, T: BinaryFloatingPoint {
     /// Draw text in image.
     ///
@@ -256,6 +306,29 @@ extension Image where P: NoAlpha, T: BinaryFloatingPoint {
         drawImage(origin: origin, image: colorImage)
     }
 }
+
+extension Image where P: HasAlpha, T: BinaryInteger {
+    /// Draw text in image.
+    ///
+    /// If you want to know the size of text area in advance, use `getTextImageSize`.
+    @inlinable
+    public mutating func drawText(origin: (x: Int, y: Int),
+                                  text: String,
+                                  font: TrueTypeFont,
+                                  lineGap: Int? = nil,
+                                  color: Pixel<P, T>) {
+        guard origin.x < width && origin.y < height else {
+            // Drawing area is out of image.
+            return
+        }
+        let colorImage = Image<P, T>.createTextImage(text: text,
+                                                     font: font,
+                                                     lineGap: lineGap,
+                                                     color: color)
+        drawImage(origin: origin, image: colorImage)
+    }
+}
+
 
 extension Image where P: HasAlpha, T: BinaryFloatingPoint {
     /// Draw text in image.
