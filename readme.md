@@ -1,5 +1,5 @@
 # Swim
-Image library for Swift.
+Cross platform image library for Swift.
 
 ## API
 
@@ -94,9 +94,9 @@ let redOnlyRGBA = image.pixelwiseConverted { px in
 ```swift
 var image = Image<RGB, Float>(contentsOf: url)!
 
-image.drawLine((0, 0), (100, 120), pixel: Pixel(r: 1, g: 0, b: 0))
-image.drawRect(10..<20, 30..<50, pixel: Pixel(r: 0, g: 1, b: 0))
-image.drawCircle(center: (50, 50), radius: 30, pixel: Pixel(r: 0, g: 0, b: 1))
+image.drawLine((0, 0), (100, 120), color: Pixel(r: 1, g: 0, b: 0))
+image.drawRect(10..<20, 30..<50, color: .green)
+image.drawCircle(center: (50, 50), radius: 30, color: .blue)
 
 image.drawImage(origin: (80, 80), rgbImage) // simply overwrites
 image.drawImage(origin: (200, 200), rgbaImage) // with alpha blending
@@ -106,7 +106,7 @@ let font = try! TrueTypeFont(url: URL(fileURLWithPath: "/System/Library/Fonts/He
 image.drawText(origin: (100, 100),
                text: "TEXT DRAWING", 
                font: font, 
-               color: Pixel(r: 0, g: 0, b: 0, a: 1))
+               color: .black)
 ```
 
 ### Resize
