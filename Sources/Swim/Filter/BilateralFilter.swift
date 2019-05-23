@@ -12,6 +12,14 @@ extension Image where T == Double {
         
         let pad = (kernelSize-1)/2
         
+        var distanceLUT = Image<Gray, Double>(width: kernelSize, height: kernelSize, value: 0)
+        distanceLUT.pixelwiseConvert { ref in
+            let dx = ref.x - pad
+            let dy = ref.y - pad
+            
+            ref[.gray] = exp(-Double(dx*dx + dy+dy) / (2*sigma2_1))
+        }
+        
         for y in 0..<height {
             for x in 0..<width {
                 for c in 0..<P.channels {
@@ -20,15 +28,15 @@ extension Image where T == Double {
                     var denominator: Double = 0
                     var numerator: Double = 0
                     
-                    for py in -pad..<kernelSize-pad {
-                        let yy = clamp(y + py, min: 0, max: height-1)
+                    for py in 0..<kernelSize {
+                        let yy = clamp(y + py - pad, min: 0, max: height-1)
                         
-                        for px in -pad..<kernelSize-pad {
-                            let xx = clamp(x + px, min: 0, max: width-1)
+                        for px in 0..<kernelSize {
+                            let xx = clamp(x + px - pad, min: 0, max: width-1)
+                            
+                            let distanceGauss = distanceLUT[px, py, .gray]
                             
                             let pixelValue = self[xx, yy, c]
-                            let distanceGauss = exp(-Double(px*px + py+py) / (2*sigma2_1))
-                            
                             let diff = pixelValue - centerValue
                             let valueGauss = exp(-diff*diff / (2*sigma2_2))
                             
