@@ -21,27 +21,14 @@ extension Image where P == Gray, T: Comparable {
         precondition(kernelSize > 0)
         var newImage = self
         
-        let kernelRange: ClosedRange<Int>
-        do {
-            let l = (1-kernelSize)/2
-            let r = kernelSize/2
-            kernelRange = l...r
-        }
-        
+        let pad = (kernelSize - 1) / 2
         for y in 0..<height {
             for x in 0..<width {
                 var patch: [T] = []
                 patch.reserveCapacity(kernelSize*kernelSize)
-                for dy in kernelRange {
-                    let yy = y+dy
-                    guard 0 <= yy && yy < height else {
-                        continue
-                    }
-                    for dx in kernelRange {
-                        let xx = x+dx
-                        guard 0 <= xx && xx < width else {
-                            continue
-                        }
+                
+                for yy in max(y-pad, 0)..<min(y-pad+kernelSize, height) {
+                    for xx in max(x-pad, 0)..<min(x-pad+kernelSize, width) {
                         patch.append(self[xx, yy, .gray])
                     }
                 }
