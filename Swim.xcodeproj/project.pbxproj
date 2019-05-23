@@ -1,3061 +1,1861 @@
 // !$*UTF8*$!
 {
-   archiveVersion = "1";
-   objectVersion = "46";
-   objects = {
-      "OBJ_1" = {
-         isa = "PBXProject";
-         attributes = {
-            LastSwiftMigration = "9999";
-            LastUpgradeCheck = "9999";
-         };
-         buildConfigurationList = "OBJ_2";
-         compatibilityVersion = "Xcode 3.2";
-         developmentRegion = "English";
-         hasScannedForEncodings = "0";
-         knownRegions = (
-            "en"
-         );
-         mainGroup = "OBJ_5";
-         productRefGroup = "OBJ_204";
-         projectDirPath = ".";
-         targets = (
-            "Swim::CStbImage",
-            "Swim::PerformanceTests",
-            "Swim::Swim",
-            "Swim::SwiftPMPackageDescription",
-            "Swim::SwimPackageTests::ProductTarget",
-            "Swim::SwimTests",
-            "Swim::VisualTests"
-         );
-      };
-      "OBJ_10" = {
-         isa = "PBXFileReference";
-         path = "truetype.c";
-         sourceTree = "<group>";
-      };
-      "OBJ_100" = {
-         isa = "PBXFileReference";
-         path = "Concatenation.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_101" = {
-         isa = "PBXFileReference";
-         path = "EdgeMode.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_102" = {
-         isa = "PBXFileReference";
-         path = "Flip.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_103" = {
-         isa = "PBXGroup";
-         children = (
-            "OBJ_104",
-            "OBJ_105",
-            "OBJ_106"
-         );
-         name = "Matrix";
-         path = "Matrix";
-         sourceTree = "<group>";
-      };
-      "OBJ_104" = {
-         isa = "PBXFileReference";
-         path = "AffineTransformation.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_105" = {
-         isa = "PBXFileReference";
-         path = "HomogeneousTransformationMatrix.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_106" = {
-         isa = "PBXFileReference";
-         path = "ProjectiveTransformation.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_107" = {
-         isa = "PBXFileReference";
-         path = "Padding.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_108" = {
-         isa = "PBXFileReference";
-         path = "Resize.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_109" = {
-         isa = "PBXFileReference";
-         path = "Rotate.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_11" = {
-         isa = "PBXGroup";
-         children = (
-            "OBJ_12",
-            "OBJ_13",
-            "OBJ_14",
-            "OBJ_15"
-         );
-         name = "include";
-         path = "include";
-         sourceTree = "<group>";
-      };
-      "OBJ_110" = {
-         isa = "PBXFileReference";
-         path = "Transpose.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_111" = {
-         isa = "PBXFileReference";
-         path = "Warp.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_112" = {
-         isa = "PBXGroup";
-         children = (
-            "OBJ_113",
-            "OBJ_114",
-            "OBJ_115",
-            "OBJ_116",
-            "OBJ_117"
-         );
-         name = "Utility";
-         path = "Utility";
-         sourceTree = "<group>";
-      };
-      "OBJ_113" = {
-         isa = "PBXFileReference";
-         path = "ArrayExt.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_114" = {
-         isa = "PBXFileReference";
-         path = "Clamp.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_115" = {
-         isa = "PBXFileReference";
-         path = "Interleave.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_116" = {
-         isa = "PBXFileReference";
-         path = "Rect.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_117" = {
-         isa = "PBXFileReference";
-         path = "StrideCopy.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_118" = {
-         isa = "PBXGroup";
-         children = (
-            "OBJ_119",
-            "OBJ_134",
-            "OBJ_190"
-         );
-         name = "Tests";
-         path = "";
-         sourceTree = "SOURCE_ROOT";
-      };
-      "OBJ_119" = {
-         isa = "PBXGroup";
-         children = (
-            "OBJ_120",
-            "OBJ_121",
-            "OBJ_122",
-            "OBJ_123",
-            "OBJ_124",
-            "OBJ_125",
-            "OBJ_126",
-            "OBJ_127",
-            "OBJ_128",
-            "OBJ_129",
-            "OBJ_130",
-            "OBJ_131",
-            "OBJ_132",
-            "OBJ_133"
-         );
-         name = "PerformanceTests";
-         path = "Tests/PerformanceTests";
-         sourceTree = "SOURCE_ROOT";
-      };
-      "OBJ_12" = {
-         isa = "PBXFileReference";
-         path = "stb_image_write.h";
-         sourceTree = "<group>";
-      };
-      "OBJ_120" = {
-         isa = "PBXFileReference";
-         path = "ArithmeticPerformanceTests.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_121" = {
-         isa = "PBXFileReference";
-         path = "BasicPerformanceTests.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_122" = {
-         isa = "PBXFileReference";
-         path = "BayerPerformanceTests.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_123" = {
-         isa = "PBXFileReference";
-         path = "BlendPerformanceTests.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_124" = {
-         isa = "PBXFileReference";
-         path = "ClipPerformanceTests.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_125" = {
-         isa = "PBXFileReference";
-         path = "ConversionPerformanceTests.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_126" = {
-         isa = "PBXFileReference";
-         path = "CorrelationPerformanceTests.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_127" = {
-         isa = "PBXFileReference";
-         path = "DataTypeConversionPerformanceTests.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_128" = {
-         isa = "PBXFileReference";
-         path = "DrawPerformanceTests.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_129" = {
-         isa = "PBXFileReference";
-         path = "FilterPerformanceTests.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_13" = {
-         isa = "PBXFileReference";
-         path = "stb_image.h";
-         sourceTree = "<group>";
-      };
-      "OBJ_130" = {
-         isa = "PBXFileReference";
-         path = "PerformanceTests.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_131" = {
-         isa = "PBXFileReference";
-         path = "ResizePerformanceTests.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_132" = {
-         isa = "PBXFileReference";
-         path = "RoundingPerformanceTests.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_133" = {
-         isa = "PBXFileReference";
-         path = "SubscriptPerformanceTests.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_134" = {
-         isa = "PBXGroup";
-         children = (
-            "OBJ_135",
-            "OBJ_140",
-            "OBJ_143",
-            "OBJ_145",
-            "OBJ_151",
-            "OBJ_154",
-            "OBJ_157",
-            "OBJ_159",
-            "OBJ_163",
-            "OBJ_168",
-            "OBJ_172",
-            "OBJ_176",
-            "OBJ_184",
-            "OBJ_188"
-         );
-         name = "SwimTests";
-         path = "Tests/SwimTests";
-         sourceTree = "SOURCE_ROOT";
-      };
-      "OBJ_135" = {
-         isa = "PBXGroup";
-         children = (
-            "OBJ_136",
-            "OBJ_137",
-            "OBJ_138",
-            "OBJ_139"
-         );
-         name = "AdvanceTests";
-         path = "AdvanceTests";
-         sourceTree = "<group>";
-      };
-      "OBJ_136" = {
-         isa = "PBXFileReference";
-         path = "BayerTests.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_137" = {
-         isa = "PBXFileReference";
-         path = "CorrelationTests.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_138" = {
-         isa = "PBXFileReference";
-         path = "Im2colTests.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_139" = {
-         isa = "PBXFileReference";
-         path = "IntegralImageTests.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_14" = {
-         isa = "PBXFileReference";
-         path = "stb_truetype.h";
-         sourceTree = "<group>";
-      };
-      "OBJ_140" = {
-         isa = "PBXGroup";
-         children = (
-            "OBJ_141",
-            "OBJ_142"
-         );
-         name = "ArithmeticTests";
-         path = "ArithmeticTests";
-         sourceTree = "<group>";
-      };
-      "OBJ_141" = {
-         isa = "PBXFileReference";
-         path = "ImageArithmeticTests.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_142" = {
-         isa = "PBXFileReference";
-         path = "MutablePixelRefArithmeticTests.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_143" = {
-         isa = "PBXGroup";
-         children = (
-            "OBJ_144"
-         );
-         name = "BooleanTests";
-         path = "BooleanTests";
-         sourceTree = "<group>";
-      };
-      "OBJ_144" = {
-         isa = "PBXFileReference";
-         path = "BitOperationsTests.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_145" = {
-         isa = "PBXGroup";
-         children = (
-            "OBJ_146",
-            "OBJ_147",
-            "OBJ_148",
-            "OBJ_149",
-            "OBJ_150"
-         );
-         name = "ConversionTests";
-         path = "ConversionTests";
-         sourceTree = "<group>";
-      };
-      "OBJ_146" = {
-         isa = "PBXFileReference";
-         path = "ChannelCompositionTests.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_147" = {
-         isa = "PBXFileReference";
-         path = "ChannelwiseConversionTests.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_148" = {
-         isa = "PBXFileReference";
-         path = "DataTypeConversionTests.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_149" = {
-         isa = "PBXFileReference";
-         path = "PixelTypeConversionTests.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_15" = {
-         isa = "PBXFileReference";
-         path = "CStbImage.h";
-         sourceTree = "<group>";
-      };
-      "OBJ_150" = {
-         isa = "PBXFileReference";
-         path = "PixelwiseConversionTests.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_151" = {
-         isa = "PBXGroup";
-         children = (
-            "OBJ_152",
-            "OBJ_153"
-         );
-         name = "CoreTests";
-         path = "CoreTests";
-         sourceTree = "<group>";
-      };
-      "OBJ_152" = {
-         isa = "PBXFileReference";
-         path = "ImageTests.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_153" = {
-         isa = "PBXFileReference";
-         path = "LikeInitializerTests.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_154" = {
-         isa = "PBXGroup";
-         children = (
-            "OBJ_155",
-            "OBJ_156"
-         );
-         name = "FilterTests";
-         path = "FilterTests";
-         sourceTree = "<group>";
-      };
-      "OBJ_155" = {
-         isa = "PBXFileReference";
-         path = "ConvolutionTests.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_156" = {
-         isa = "PBXFileReference";
-         path = "FilterTests.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_157" = {
-         isa = "PBXGroup";
-         children = (
-            "OBJ_158"
-         );
-         name = "IOTests";
-         path = "IOTests";
-         sourceTree = "<group>";
-      };
-      "OBJ_158" = {
-         isa = "PBXFileReference";
-         path = "ImageIOTests.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_159" = {
-         isa = "PBXGroup";
-         children = (
-            "OBJ_160",
-            "OBJ_161",
-            "OBJ_162"
-         );
-         name = "InterpolationTests";
-         path = "InterpolationTests";
-         sourceTree = "<group>";
-      };
-      "OBJ_16" = {
-         isa = "PBXGroup";
-         children = (
-            "OBJ_17",
-            "OBJ_24",
-            "OBJ_35",
-            "OBJ_37",
-            "OBJ_39",
-            "OBJ_45",
-            "OBJ_57",
-            "OBJ_65",
-            "OBJ_69",
-            "OBJ_73",
-            "OBJ_80",
-            "OBJ_86",
-            "OBJ_95",
-            "OBJ_99",
-            "OBJ_112"
-         );
-         name = "Swim";
-         path = "Sources/Swim";
-         sourceTree = "SOURCE_ROOT";
-      };
-      "OBJ_160" = {
-         isa = "PBXFileReference";
-         path = "BicubicInterpolationTests.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_161" = {
-         isa = "PBXFileReference";
-         path = "BilinearInterpolationTests.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_162" = {
-         isa = "PBXFileReference";
-         path = "NearestNeighborInterpolatorTests.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_163" = {
-         isa = "PBXGroup";
-         children = (
-            "OBJ_164",
-            "OBJ_165",
-            "OBJ_166",
-            "OBJ_167"
-         );
-         name = "ManipulationTests";
-         path = "ManipulationTests";
-         sourceTree = "<group>";
-      };
-      "OBJ_164" = {
-         isa = "PBXFileReference";
-         path = "AbsTests.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_165" = {
-         isa = "PBXFileReference";
-         path = "ClipTests.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_166" = {
-         isa = "PBXFileReference";
-         path = "PowerTests.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_167" = {
-         isa = "PBXFileReference";
-         path = "RoundingTests.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_168" = {
-         isa = "PBXGroup";
-         children = (
-            "OBJ_169",
-            "OBJ_170",
-            "OBJ_171"
-         );
-         name = "PlatformTests";
-         path = "PlatformTests";
-         sourceTree = "<group>";
-      };
-      "OBJ_169" = {
-         isa = "PBXFileReference";
-         path = "AppKitTests.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_17" = {
-         isa = "PBXGroup";
-         children = (
-            "OBJ_18",
-            "OBJ_19",
-            "OBJ_20",
-            "OBJ_21",
-            "OBJ_22",
-            "OBJ_23"
-         );
-         name = "Advance";
-         path = "Advance";
-         sourceTree = "<group>";
-      };
-      "OBJ_170" = {
-         isa = "PBXFileReference";
-         path = "UIKitTests.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_171" = {
-         isa = "PBXFileReference";
-         path = "vImageUtilsTests.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_172" = {
-         isa = "PBXGroup";
-         children = (
-            "OBJ_173",
-            "OBJ_174",
-            "OBJ_175"
-         );
-         name = "SubscriptTests";
-         path = "SubscriptTests";
-         sourceTree = "<group>";
-      };
-      "OBJ_173" = {
-         isa = "PBXFileReference";
-         path = "ChannelSubscriptTests.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_174" = {
-         isa = "PBXFileReference";
-         path = "PixelSubscriptTests.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_175" = {
-         isa = "PBXFileReference";
-         path = "SubimageSubscriptTests.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_176" = {
-         isa = "PBXGroup";
-         children = (
-            "OBJ_177",
-            "OBJ_178",
-            "OBJ_179",
-            "OBJ_180",
-            "OBJ_181",
-            "OBJ_182",
-            "OBJ_183"
-         );
-         name = "TransformationTests";
-         path = "TransformationTests";
-         sourceTree = "<group>";
-      };
-      "OBJ_177" = {
-         isa = "PBXFileReference";
-         path = "AffineTransformationTests.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_178" = {
-         isa = "PBXFileReference";
-         path = "ConcatenateTests.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_179" = {
-         isa = "PBXFileReference";
-         path = "HomogeneousTransformationMatrixTests.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_18" = {
-         isa = "PBXFileReference";
-         path = "Bayer.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_180" = {
-         isa = "PBXFileReference";
-         path = "PaddingTests.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_181" = {
-         isa = "PBXFileReference";
-         path = "ResizeTests.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_182" = {
-         isa = "PBXFileReference";
-         path = "TransformationTests.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_183" = {
-         isa = "PBXFileReference";
-         path = "TransposeTests.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_184" = {
-         isa = "PBXGroup";
-         children = (
-            "OBJ_185",
-            "OBJ_186",
-            "OBJ_187"
-         );
-         name = "Utility";
-         path = "Utility";
-         sourceTree = "<group>";
-      };
-      "OBJ_185" = {
-         isa = "PBXFileReference";
-         path = "Random.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_186" = {
-         isa = "PBXFileReference";
-         path = "Utils.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_187" = {
-         isa = "PBXFileReference";
-         path = "XCTAssertEqualWithAccuracy.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_188" = {
-         isa = "PBXGroup";
-         children = (
-            "OBJ_189"
-         );
-         name = "UtilityTests";
-         path = "UtilityTests";
-         sourceTree = "<group>";
-      };
-      "OBJ_189" = {
-         isa = "PBXFileReference";
-         path = "ClampTests.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_19" = {
-         isa = "PBXFileReference";
-         path = "Correlation.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_190" = {
-         isa = "PBXGroup";
-         children = (
-            "OBJ_191",
-            "OBJ_192",
-            "OBJ_193",
-            "OBJ_194",
-            "OBJ_195",
-            "OBJ_196",
-            "OBJ_197",
-            "OBJ_198",
-            "OBJ_199",
-            "OBJ_200",
-            "OBJ_201",
-            "OBJ_202",
-            "OBJ_203"
-         );
-         name = "VisualTests";
-         path = "Tests/VisualTests";
-         sourceTree = "SOURCE_ROOT";
-      };
-      "OBJ_191" = {
-         isa = "PBXFileReference";
-         path = "ApplicationVisualTests.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_192" = {
-         isa = "PBXFileReference";
-         path = "BayerVisualTests.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_193" = {
-         isa = "PBXFileReference";
-         path = "BlendVisualTests.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_194" = {
-         isa = "PBXFileReference";
-         path = "DrawVisualTests.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_195" = {
-         isa = "PBXFileReference";
-         path = "FilterVisualTests.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_196" = {
-         isa = "PBXFileReference";
-         path = "FourierTransformerVisualTests.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_197" = {
-         isa = "PBXFileReference";
-         path = "HistogramEqualizerVisualTests.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_198" = {
-         isa = "PBXFileReference";
-         path = "PaddingVisualTests.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_199" = {
-         isa = "PBXFileReference";
-         path = "ResizeVisualTests.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_2" = {
-         isa = "XCConfigurationList";
-         buildConfigurations = (
-            "OBJ_3",
-            "OBJ_4"
-         );
-         defaultConfigurationIsVisible = "0";
-         defaultConfigurationName = "Release";
-      };
-      "OBJ_20" = {
-         isa = "PBXFileReference";
-         path = "FourierTransformer.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_200" = {
-         isa = "PBXFileReference";
-         path = "SubimageVisualTests.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_201" = {
-         isa = "PBXFileReference";
-         path = "TransformationVisualTests.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_202" = {
-         isa = "PBXFileReference";
-         path = "Utils.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_203" = {
-         isa = "PBXFileReference";
-         path = "WarpVisualTests.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_204" = {
-         isa = "PBXGroup";
-         children = (
-            "Swim::VisualTests::Product",
-            "Swim::SwimTests::Product",
-            "Swim::CStbImage::Product",
-            "Swim::PerformanceTests::Product",
-            "Swim::Swim::Product"
-         );
-         name = "Products";
-         path = "";
-         sourceTree = "BUILT_PRODUCTS_DIR";
-      };
-      "OBJ_21" = {
-         isa = "PBXFileReference";
-         path = "HistogramEqualizer.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_210" = {
-         isa = "PBXFileReference";
-         path = "TestResources";
-         sourceTree = "SOURCE_ROOT";
-      };
-      "OBJ_211" = {
-         isa = "PBXFileReference";
-         path = "LICENSE";
-         sourceTree = "<group>";
-      };
-      "OBJ_212" = {
-         isa = "PBXFileReference";
-         path = "readme.md";
-         sourceTree = "<group>";
-      };
-      "OBJ_214" = {
-         isa = "XCConfigurationList";
-         buildConfigurations = (
-            "OBJ_215",
-            "OBJ_216"
-         );
-         defaultConfigurationIsVisible = "0";
-         defaultConfigurationName = "Release";
-      };
-      "OBJ_215" = {
-         isa = "XCBuildConfiguration";
-         buildSettings = {
-            CLANG_ENABLE_MODULES = "YES";
-            DEFINES_MODULE = "YES";
-            ENABLE_TESTABILITY = "YES";
-            FRAMEWORK_SEARCH_PATHS = (
-               "$(inherited)",
-               "$(PLATFORM_DIR)/Developer/Library/Frameworks"
-            );
-            HEADER_SEARCH_PATHS = (
-               "$(inherited)",
-               "$(SRCROOT)/Sources/CStbImage/include"
-            );
-            INFOPLIST_FILE = "Swim.xcodeproj/CStbImage_Info.plist";
-            IPHONEOS_DEPLOYMENT_TARGET = "8.0";
-            LD_RUNPATH_SEARCH_PATHS = (
-               "$(inherited)",
-               "$(TOOLCHAIN_DIR)/usr/lib/swift/macosx"
-            );
-            MACOSX_DEPLOYMENT_TARGET = "10.10";
-            OTHER_CFLAGS = (
-               "$(inherited)"
-            );
-            OTHER_LDFLAGS = (
-               "$(inherited)"
-            );
-            OTHER_SWIFT_FLAGS = (
-               "$(inherited)"
-            );
-            PRODUCT_BUNDLE_IDENTIFIER = "CStbImage";
-            PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
-            PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-            SKIP_INSTALL = "YES";
-            SWIFT_ACTIVE_COMPILATION_CONDITIONS = (
-               "$(inherited)"
-            );
-            TARGET_NAME = "CStbImage";
-            TVOS_DEPLOYMENT_TARGET = "9.0";
-            WATCHOS_DEPLOYMENT_TARGET = "2.0";
-         };
-         name = "Debug";
-      };
-      "OBJ_216" = {
-         isa = "XCBuildConfiguration";
-         buildSettings = {
-            CLANG_ENABLE_MODULES = "YES";
-            DEFINES_MODULE = "YES";
-            ENABLE_TESTABILITY = "YES";
-            FRAMEWORK_SEARCH_PATHS = (
-               "$(inherited)",
-               "$(PLATFORM_DIR)/Developer/Library/Frameworks"
-            );
-            HEADER_SEARCH_PATHS = (
-               "$(inherited)",
-               "$(SRCROOT)/Sources/CStbImage/include"
-            );
-            INFOPLIST_FILE = "Swim.xcodeproj/CStbImage_Info.plist";
-            IPHONEOS_DEPLOYMENT_TARGET = "8.0";
-            LD_RUNPATH_SEARCH_PATHS = (
-               "$(inherited)",
-               "$(TOOLCHAIN_DIR)/usr/lib/swift/macosx"
-            );
-            MACOSX_DEPLOYMENT_TARGET = "10.10";
-            OTHER_CFLAGS = (
-               "$(inherited)"
-            );
-            OTHER_LDFLAGS = (
-               "$(inherited)"
-            );
-            OTHER_SWIFT_FLAGS = (
-               "$(inherited)"
-            );
-            PRODUCT_BUNDLE_IDENTIFIER = "CStbImage";
-            PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
-            PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-            SKIP_INSTALL = "YES";
-            SWIFT_ACTIVE_COMPILATION_CONDITIONS = (
-               "$(inherited)"
-            );
-            TARGET_NAME = "CStbImage";
-            TVOS_DEPLOYMENT_TARGET = "9.0";
-            WATCHOS_DEPLOYMENT_TARGET = "2.0";
-         };
-         name = "Release";
-      };
-      "OBJ_217" = {
-         isa = "PBXSourcesBuildPhase";
-         files = (
-            "OBJ_218",
-            "OBJ_219"
-         );
-      };
-      "OBJ_218" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_9";
-      };
-      "OBJ_219" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_10";
-      };
-      "OBJ_22" = {
-         isa = "PBXFileReference";
-         path = "Im2col.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_220" = {
-         isa = "PBXHeadersBuildPhase";
-         files = (
-            "OBJ_221",
-            "OBJ_222",
-            "OBJ_223",
-            "OBJ_224"
-         );
-      };
-      "OBJ_221" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_12";
-         settings = {
-            ATTRIBUTES = (
-               "Public"
-            );
-         };
-      };
-      "OBJ_222" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_13";
-         settings = {
-            ATTRIBUTES = (
-               "Public"
-            );
-         };
-      };
-      "OBJ_223" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_14";
-         settings = {
-            ATTRIBUTES = (
-               "Public"
-            );
-         };
-      };
-      "OBJ_224" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_15";
-         settings = {
-            ATTRIBUTES = (
-               "Public"
-            );
-         };
-      };
-      "OBJ_225" = {
-         isa = "PBXFrameworksBuildPhase";
-         files = (
-         );
-      };
-      "OBJ_227" = {
-         isa = "XCConfigurationList";
-         buildConfigurations = (
-            "OBJ_228",
-            "OBJ_229"
-         );
-         defaultConfigurationIsVisible = "0";
-         defaultConfigurationName = "Release";
-      };
-      "OBJ_228" = {
-         isa = "XCBuildConfiguration";
-         buildSettings = {
-            CLANG_ENABLE_MODULES = "YES";
-            EMBEDDED_CONTENT_CONTAINS_SWIFT = "YES";
-            FRAMEWORK_SEARCH_PATHS = (
-               "$(inherited)",
-               "$(PLATFORM_DIR)/Developer/Library/Frameworks"
-            );
-            HEADER_SEARCH_PATHS = (
-               "$(inherited)",
-               "$(SRCROOT)/Sources/CStbImage/include"
-            );
-            INFOPLIST_FILE = "Swim.xcodeproj/PerformanceTests_Info.plist";
-            IPHONEOS_DEPLOYMENT_TARGET = "8.0";
-            LD_RUNPATH_SEARCH_PATHS = (
-               "$(inherited)",
-               "@loader_path/../Frameworks",
-               "@loader_path/Frameworks"
-            );
-            MACOSX_DEPLOYMENT_TARGET = "10.10";
-            OTHER_CFLAGS = (
-               "$(inherited)"
-            );
-            OTHER_LDFLAGS = (
-               "$(inherited)"
-            );
-            OTHER_SWIFT_FLAGS = (
-               "$(inherited)"
-            );
-            SWIFT_ACTIVE_COMPILATION_CONDITIONS = (
-               "$(inherited)"
-            );
-            SWIFT_VERSION = "5.0";
-            TARGET_NAME = "PerformanceTests";
-            TVOS_DEPLOYMENT_TARGET = "9.0";
-            WATCHOS_DEPLOYMENT_TARGET = "2.0";
-         };
-         name = "Debug";
-      };
-      "OBJ_229" = {
-         isa = "XCBuildConfiguration";
-         buildSettings = {
-            CLANG_ENABLE_MODULES = "YES";
-            EMBEDDED_CONTENT_CONTAINS_SWIFT = "YES";
-            FRAMEWORK_SEARCH_PATHS = (
-               "$(inherited)",
-               "$(PLATFORM_DIR)/Developer/Library/Frameworks"
-            );
-            HEADER_SEARCH_PATHS = (
-               "$(inherited)",
-               "$(SRCROOT)/Sources/CStbImage/include"
-            );
-            INFOPLIST_FILE = "Swim.xcodeproj/PerformanceTests_Info.plist";
-            IPHONEOS_DEPLOYMENT_TARGET = "8.0";
-            LD_RUNPATH_SEARCH_PATHS = (
-               "$(inherited)",
-               "@loader_path/../Frameworks",
-               "@loader_path/Frameworks"
-            );
-            MACOSX_DEPLOYMENT_TARGET = "10.10";
-            OTHER_CFLAGS = (
-               "$(inherited)"
-            );
-            OTHER_LDFLAGS = (
-               "$(inherited)"
-            );
-            OTHER_SWIFT_FLAGS = (
-               "$(inherited)"
-            );
-            SWIFT_ACTIVE_COMPILATION_CONDITIONS = (
-               "$(inherited)"
-            );
-            SWIFT_VERSION = "5.0";
-            TARGET_NAME = "PerformanceTests";
-            TVOS_DEPLOYMENT_TARGET = "9.0";
-            WATCHOS_DEPLOYMENT_TARGET = "2.0";
-         };
-         name = "Release";
-      };
-      "OBJ_23" = {
-         isa = "PBXFileReference";
-         path = "IntegralImage.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_230" = {
-         isa = "PBXSourcesBuildPhase";
-         files = (
-            "OBJ_231",
-            "OBJ_232",
-            "OBJ_233",
-            "OBJ_234",
-            "OBJ_235",
-            "OBJ_236",
-            "OBJ_237",
-            "OBJ_238",
-            "OBJ_239",
-            "OBJ_240",
-            "OBJ_241",
-            "OBJ_242",
-            "OBJ_243",
-            "OBJ_244"
-         );
-      };
-      "OBJ_231" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_120";
-      };
-      "OBJ_232" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_121";
-      };
-      "OBJ_233" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_122";
-      };
-      "OBJ_234" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_123";
-      };
-      "OBJ_235" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_124";
-      };
-      "OBJ_236" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_125";
-      };
-      "OBJ_237" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_126";
-      };
-      "OBJ_238" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_127";
-      };
-      "OBJ_239" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_128";
-      };
-      "OBJ_24" = {
-         isa = "PBXGroup";
-         children = (
-            "OBJ_25",
-            "OBJ_26",
-            "OBJ_27",
-            "OBJ_28",
-            "OBJ_29",
-            "OBJ_30",
-            "OBJ_31",
-            "OBJ_32",
-            "OBJ_33",
-            "OBJ_34"
-         );
-         name = "Arithmetic";
-         path = "Arithmetic";
-         sourceTree = "<group>";
-      };
-      "OBJ_240" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_129";
-      };
-      "OBJ_241" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_130";
-      };
-      "OBJ_242" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_131";
-      };
-      "OBJ_243" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_132";
-      };
-      "OBJ_244" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_133";
-      };
-      "OBJ_245" = {
-         isa = "PBXFrameworksBuildPhase";
-         files = (
-            "OBJ_246",
-            "OBJ_247"
-         );
-      };
-      "OBJ_246" = {
-         isa = "PBXBuildFile";
-         fileRef = "Swim::Swim::Product";
-      };
-      "OBJ_247" = {
-         isa = "PBXBuildFile";
-         fileRef = "Swim::CStbImage::Product";
-      };
-      "OBJ_248" = {
-         isa = "PBXTargetDependency";
-         target = "Swim::Swim";
-      };
-      "OBJ_25" = {
-         isa = "PBXFileReference";
-         path = "ImageBinaryOperators.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_250" = {
-         isa = "PBXTargetDependency";
-         target = "Swim::CStbImage";
-      };
-      "OBJ_251" = {
-         isa = "XCConfigurationList";
-         buildConfigurations = (
-            "OBJ_252",
-            "OBJ_253"
-         );
-         defaultConfigurationIsVisible = "0";
-         defaultConfigurationName = "Release";
-      };
-      "OBJ_252" = {
-         isa = "XCBuildConfiguration";
-         buildSettings = {
-            ENABLE_TESTABILITY = "YES";
-            FRAMEWORK_SEARCH_PATHS = (
-               "$(inherited)",
-               "$(PLATFORM_DIR)/Developer/Library/Frameworks"
-            );
-            HEADER_SEARCH_PATHS = (
-               "$(inherited)",
-               "$(SRCROOT)/Sources/CStbImage/include"
-            );
-            INFOPLIST_FILE = "Swim.xcodeproj/Swim_Info.plist";
-            IPHONEOS_DEPLOYMENT_TARGET = "8.0";
-            LD_RUNPATH_SEARCH_PATHS = (
-               "$(inherited)",
-               "$(TOOLCHAIN_DIR)/usr/lib/swift/macosx"
-            );
-            MACOSX_DEPLOYMENT_TARGET = "10.10";
-            OTHER_CFLAGS = (
-               "$(inherited)"
-            );
-            OTHER_LDFLAGS = (
-               "$(inherited)"
-            );
-            OTHER_SWIFT_FLAGS = (
-               "$(inherited)"
-            );
-            PRODUCT_BUNDLE_IDENTIFIER = "Swim";
-            PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
-            PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-            SKIP_INSTALL = "YES";
-            SWIFT_ACTIVE_COMPILATION_CONDITIONS = (
-               "$(inherited)"
-            );
-            SWIFT_VERSION = "5.0";
-            TARGET_NAME = "Swim";
-            TVOS_DEPLOYMENT_TARGET = "9.0";
-            WATCHOS_DEPLOYMENT_TARGET = "2.0";
-         };
-         name = "Debug";
-      };
-      "OBJ_253" = {
-         isa = "XCBuildConfiguration";
-         buildSettings = {
-            ENABLE_TESTABILITY = "YES";
-            FRAMEWORK_SEARCH_PATHS = (
-               "$(inherited)",
-               "$(PLATFORM_DIR)/Developer/Library/Frameworks"
-            );
-            HEADER_SEARCH_PATHS = (
-               "$(inherited)",
-               "$(SRCROOT)/Sources/CStbImage/include"
-            );
-            INFOPLIST_FILE = "Swim.xcodeproj/Swim_Info.plist";
-            IPHONEOS_DEPLOYMENT_TARGET = "8.0";
-            LD_RUNPATH_SEARCH_PATHS = (
-               "$(inherited)",
-               "$(TOOLCHAIN_DIR)/usr/lib/swift/macosx"
-            );
-            MACOSX_DEPLOYMENT_TARGET = "10.10";
-            OTHER_CFLAGS = (
-               "$(inherited)"
-            );
-            OTHER_LDFLAGS = (
-               "$(inherited)"
-            );
-            OTHER_SWIFT_FLAGS = (
-               "$(inherited)"
-            );
-            PRODUCT_BUNDLE_IDENTIFIER = "Swim";
-            PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
-            PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-            SKIP_INSTALL = "YES";
-            SWIFT_ACTIVE_COMPILATION_CONDITIONS = (
-               "$(inherited)"
-            );
-            SWIFT_VERSION = "5.0";
-            TARGET_NAME = "Swim";
-            TVOS_DEPLOYMENT_TARGET = "9.0";
-            WATCHOS_DEPLOYMENT_TARGET = "2.0";
-         };
-         name = "Release";
-      };
-      "OBJ_254" = {
-         isa = "PBXSourcesBuildPhase";
-         files = (
-            "OBJ_255",
-            "OBJ_256",
-            "OBJ_257",
-            "OBJ_258",
-            "OBJ_259",
-            "OBJ_260",
-            "OBJ_261",
-            "OBJ_262",
-            "OBJ_263",
-            "OBJ_264",
-            "OBJ_265",
-            "OBJ_266",
-            "OBJ_267",
-            "OBJ_268",
-            "OBJ_269",
-            "OBJ_270",
-            "OBJ_271",
-            "OBJ_272",
-            "OBJ_273",
-            "OBJ_274",
-            "OBJ_275",
-            "OBJ_276",
-            "OBJ_277",
-            "OBJ_278",
-            "OBJ_279",
-            "OBJ_280",
-            "OBJ_281",
-            "OBJ_282",
-            "OBJ_283",
-            "OBJ_284",
-            "OBJ_285",
-            "OBJ_286",
-            "OBJ_287",
-            "OBJ_288",
-            "OBJ_289",
-            "OBJ_290",
-            "OBJ_291",
-            "OBJ_292",
-            "OBJ_293",
-            "OBJ_294",
-            "OBJ_295",
-            "OBJ_296",
-            "OBJ_297",
-            "OBJ_298",
-            "OBJ_299",
-            "OBJ_300",
-            "OBJ_301",
-            "OBJ_302",
-            "OBJ_303",
-            "OBJ_304",
-            "OBJ_305",
-            "OBJ_306",
-            "OBJ_307",
-            "OBJ_308",
-            "OBJ_309",
-            "OBJ_310",
-            "OBJ_311",
-            "OBJ_312",
-            "OBJ_313",
-            "OBJ_314",
-            "OBJ_315",
-            "OBJ_316",
-            "OBJ_317",
-            "OBJ_318",
-            "OBJ_319",
-            "OBJ_320",
-            "OBJ_321",
-            "OBJ_322",
-            "OBJ_323",
-            "OBJ_324",
-            "OBJ_325",
-            "OBJ_326",
-            "OBJ_327",
-            "OBJ_328",
-            "OBJ_329",
-            "OBJ_330",
-            "OBJ_331",
-            "OBJ_332",
-            "OBJ_333",
-            "OBJ_334",
-            "OBJ_335",
-            "OBJ_336"
-         );
-      };
-      "OBJ_255" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_18";
-      };
-      "OBJ_256" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_19";
-      };
-      "OBJ_257" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_20";
-      };
-      "OBJ_258" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_21";
-      };
-      "OBJ_259" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_22";
-      };
-      "OBJ_26" = {
-         isa = "PBXFileReference";
-         path = "ImageBinaryScalarOperator.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_260" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_23";
-      };
-      "OBJ_261" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_25";
-      };
-      "OBJ_262" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_26";
-      };
-      "OBJ_263" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_27";
-      };
-      "OBJ_264" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_28";
-      };
-      "OBJ_265" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_29";
-      };
-      "OBJ_266" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_30";
-      };
-      "OBJ_267" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_31";
-      };
-      "OBJ_268" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_32";
-      };
-      "OBJ_269" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_33";
-      };
-      "OBJ_27" = {
-         isa = "PBXFileReference";
-         path = "ImageCompoundAssignmentOperator.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_270" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_34";
-      };
-      "OBJ_271" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_36";
-      };
-      "OBJ_272" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_38";
-      };
-      "OBJ_273" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_40";
-      };
-      "OBJ_274" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_41";
-      };
-      "OBJ_275" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_42";
-      };
-      "OBJ_276" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_43";
-      };
-      "OBJ_277" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_44";
-      };
-      "OBJ_278" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_46";
-      };
-      "OBJ_279" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_47";
-      };
-      "OBJ_28" = {
-         isa = "PBXFileReference";
-         path = "ImageUnaryOperators.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_280" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_49";
-      };
-      "OBJ_281" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_50";
-      };
-      "OBJ_282" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_51";
-      };
-      "OBJ_283" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_53";
-      };
-      "OBJ_284" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_54";
-      };
-      "OBJ_285" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_55";
-      };
-      "OBJ_286" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_56";
-      };
-      "OBJ_287" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_58";
-      };
-      "OBJ_288" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_59";
-      };
-      "OBJ_289" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_60";
-      };
-      "OBJ_29" = {
-         isa = "PBXFileReference";
-         path = "PixelBinaryScalarOperator.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_290" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_61";
-      };
-      "OBJ_291" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_62";
-      };
-      "OBJ_292" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_63";
-      };
-      "OBJ_293" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_64";
-      };
-      "OBJ_294" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_66";
-      };
-      "OBJ_295" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_67";
-      };
-      "OBJ_296" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_68";
-      };
-      "OBJ_297" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_70";
-      };
-      "OBJ_298" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_71";
-      };
-      "OBJ_299" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_72";
-      };
-      "OBJ_3" = {
-         isa = "XCBuildConfiguration";
-         buildSettings = {
-            CLANG_ENABLE_OBJC_ARC = "YES";
-            COMBINE_HIDPI_IMAGES = "YES";
-            COPY_PHASE_STRIP = "NO";
-            DEBUG_INFORMATION_FORMAT = "dwarf";
-            DYLIB_INSTALL_NAME_BASE = "@rpath";
-            ENABLE_NS_ASSERTIONS = "YES";
-            GCC_OPTIMIZATION_LEVEL = "0";
-            GCC_PREPROCESSOR_DEFINITIONS = (
-               "$(inherited)",
-               "SWIFT_PACKAGE=1",
-               "DEBUG=1"
-            );
-            MACOSX_DEPLOYMENT_TARGET = "10.10";
-            ONLY_ACTIVE_ARCH = "YES";
-            OTHER_SWIFT_FLAGS = (
-               "-DXcode"
-            );
-            PRODUCT_NAME = "$(TARGET_NAME)";
-            SDKROOT = "macosx";
-            SUPPORTED_PLATFORMS = (
-               "macosx",
-               "iphoneos",
-               "iphonesimulator",
-               "appletvos",
-               "appletvsimulator",
-               "watchos",
-               "watchsimulator"
-            );
-            SWIFT_ACTIVE_COMPILATION_CONDITIONS = (
-               "$(inherited)",
-               "SWIFT_PACKAGE",
-               "DEBUG"
-            );
-            SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-            USE_HEADERMAP = "NO";
-         };
-         name = "Debug";
-      };
-      "OBJ_30" = {
-         isa = "PBXFileReference";
-         path = "PixelCompoundAssignmentOperator.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_300" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_74";
-      };
-      "OBJ_301" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_75";
-      };
-      "OBJ_302" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_76";
-      };
-      "OBJ_303" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_77";
-      };
-      "OBJ_304" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_78";
-      };
-      "OBJ_305" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_79";
-      };
-      "OBJ_306" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_81";
-      };
-      "OBJ_307" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_82";
-      };
-      "OBJ_308" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_83";
-      };
-      "OBJ_309" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_84";
-      };
-      "OBJ_31" = {
-         isa = "PBXFileReference";
-         path = "PixelRefCompoundAssignmentOperator.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_310" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_85";
-      };
-      "OBJ_311" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_87";
-      };
-      "OBJ_312" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_88";
-      };
-      "OBJ_313" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_89";
-      };
-      "OBJ_314" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_91";
-      };
-      "OBJ_315" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_92";
-      };
-      "OBJ_316" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_93";
-      };
-      "OBJ_317" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_94";
-      };
-      "OBJ_318" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_96";
-      };
-      "OBJ_319" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_97";
-      };
-      "OBJ_32" = {
-         isa = "PBXFileReference";
-         path = "PixelRefScalarCompoundAssignmentOperator.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_320" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_98";
-      };
-      "OBJ_321" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_100";
-      };
-      "OBJ_322" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_101";
-      };
-      "OBJ_323" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_102";
-      };
-      "OBJ_324" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_104";
-      };
-      "OBJ_325" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_105";
-      };
-      "OBJ_326" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_106";
-      };
-      "OBJ_327" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_107";
-      };
-      "OBJ_328" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_108";
-      };
-      "OBJ_329" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_109";
-      };
-      "OBJ_33" = {
-         isa = "PBXFileReference";
-         path = "PixelUnaryOperator.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_330" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_110";
-      };
-      "OBJ_331" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_111";
-      };
-      "OBJ_332" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_113";
-      };
-      "OBJ_333" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_114";
-      };
-      "OBJ_334" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_115";
-      };
-      "OBJ_335" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_116";
-      };
-      "OBJ_336" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_117";
-      };
-      "OBJ_337" = {
-         isa = "PBXFrameworksBuildPhase";
-         files = (
-            "OBJ_338"
-         );
-      };
-      "OBJ_338" = {
-         isa = "PBXBuildFile";
-         fileRef = "Swim::CStbImage::Product";
-      };
-      "OBJ_339" = {
-         isa = "PBXTargetDependency";
-         target = "Swim::CStbImage";
-      };
-      "OBJ_34" = {
-         isa = "PBXFileReference";
-         path = "ScalarCompoundAssignmentOperator.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_341" = {
-         isa = "XCConfigurationList";
-         buildConfigurations = (
-            "OBJ_342",
-            "OBJ_343"
-         );
-         defaultConfigurationIsVisible = "0";
-         defaultConfigurationName = "Release";
-      };
-      "OBJ_342" = {
-         isa = "XCBuildConfiguration";
-         buildSettings = {
-            LD = "/usr/bin/true";
-            OTHER_SWIFT_FLAGS = (
-               "-swift-version",
-               "5",
-               "-I",
-               "$(TOOLCHAIN_DIR)/usr/lib/swift/pm/4_2",
-               "-target",
-               "x86_64-apple-macosx10.10",
-               "-sdk",
-               "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk"
-            );
-            SWIFT_VERSION = "5.0";
-         };
-         name = "Debug";
-      };
-      "OBJ_343" = {
-         isa = "XCBuildConfiguration";
-         buildSettings = {
-            LD = "/usr/bin/true";
-            OTHER_SWIFT_FLAGS = (
-               "-swift-version",
-               "5",
-               "-I",
-               "$(TOOLCHAIN_DIR)/usr/lib/swift/pm/4_2",
-               "-target",
-               "x86_64-apple-macosx10.10",
-               "-sdk",
-               "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk"
-            );
-            SWIFT_VERSION = "5.0";
-         };
-         name = "Release";
-      };
-      "OBJ_344" = {
-         isa = "PBXSourcesBuildPhase";
-         files = (
-            "OBJ_345"
-         );
-      };
-      "OBJ_345" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_6";
-      };
-      "OBJ_347" = {
-         isa = "XCConfigurationList";
-         buildConfigurations = (
-            "OBJ_348",
-            "OBJ_349"
-         );
-         defaultConfigurationIsVisible = "0";
-         defaultConfigurationName = "Release";
-      };
-      "OBJ_348" = {
-         isa = "XCBuildConfiguration";
-         buildSettings = {
-         };
-         name = "Debug";
-      };
-      "OBJ_349" = {
-         isa = "XCBuildConfiguration";
-         buildSettings = {
-         };
-         name = "Release";
-      };
-      "OBJ_35" = {
-         isa = "PBXGroup";
-         children = (
-            "OBJ_36"
-         );
-         name = "Blend";
-         path = "Blend";
-         sourceTree = "<group>";
-      };
-      "OBJ_350" = {
-         isa = "PBXTargetDependency";
-         target = "Swim::SwimTests";
-      };
-      "OBJ_352" = {
-         isa = "PBXTargetDependency";
-         target = "Swim::VisualTests";
-      };
-      "OBJ_354" = {
-         isa = "PBXTargetDependency";
-         target = "Swim::PerformanceTests";
-      };
-      "OBJ_355" = {
-         isa = "XCConfigurationList";
-         buildConfigurations = (
-            "OBJ_356",
-            "OBJ_357"
-         );
-         defaultConfigurationIsVisible = "0";
-         defaultConfigurationName = "Release";
-      };
-      "OBJ_356" = {
-         isa = "XCBuildConfiguration";
-         buildSettings = {
-            CLANG_ENABLE_MODULES = "YES";
-            EMBEDDED_CONTENT_CONTAINS_SWIFT = "YES";
-            FRAMEWORK_SEARCH_PATHS = (
-               "$(inherited)",
-               "$(PLATFORM_DIR)/Developer/Library/Frameworks"
-            );
-            HEADER_SEARCH_PATHS = (
-               "$(inherited)",
-               "$(SRCROOT)/Sources/CStbImage/include"
-            );
-            INFOPLIST_FILE = "Swim.xcodeproj/SwimTests_Info.plist";
-            IPHONEOS_DEPLOYMENT_TARGET = "8.0";
-            LD_RUNPATH_SEARCH_PATHS = (
-               "$(inherited)",
-               "@loader_path/../Frameworks",
-               "@loader_path/Frameworks"
-            );
-            MACOSX_DEPLOYMENT_TARGET = "10.10";
-            OTHER_CFLAGS = (
-               "$(inherited)"
-            );
-            OTHER_LDFLAGS = (
-               "$(inherited)"
-            );
-            OTHER_SWIFT_FLAGS = (
-               "$(inherited)"
-            );
-            SWIFT_ACTIVE_COMPILATION_CONDITIONS = (
-               "$(inherited)"
-            );
-            SWIFT_VERSION = "5.0";
-            TARGET_NAME = "SwimTests";
-            TVOS_DEPLOYMENT_TARGET = "9.0";
-            WATCHOS_DEPLOYMENT_TARGET = "2.0";
-         };
-         name = "Debug";
-      };
-      "OBJ_357" = {
-         isa = "XCBuildConfiguration";
-         buildSettings = {
-            CLANG_ENABLE_MODULES = "YES";
-            EMBEDDED_CONTENT_CONTAINS_SWIFT = "YES";
-            FRAMEWORK_SEARCH_PATHS = (
-               "$(inherited)",
-               "$(PLATFORM_DIR)/Developer/Library/Frameworks"
-            );
-            HEADER_SEARCH_PATHS = (
-               "$(inherited)",
-               "$(SRCROOT)/Sources/CStbImage/include"
-            );
-            INFOPLIST_FILE = "Swim.xcodeproj/SwimTests_Info.plist";
-            IPHONEOS_DEPLOYMENT_TARGET = "8.0";
-            LD_RUNPATH_SEARCH_PATHS = (
-               "$(inherited)",
-               "@loader_path/../Frameworks",
-               "@loader_path/Frameworks"
-            );
-            MACOSX_DEPLOYMENT_TARGET = "10.10";
-            OTHER_CFLAGS = (
-               "$(inherited)"
-            );
-            OTHER_LDFLAGS = (
-               "$(inherited)"
-            );
-            OTHER_SWIFT_FLAGS = (
-               "$(inherited)"
-            );
-            SWIFT_ACTIVE_COMPILATION_CONDITIONS = (
-               "$(inherited)"
-            );
-            SWIFT_VERSION = "5.0";
-            TARGET_NAME = "SwimTests";
-            TVOS_DEPLOYMENT_TARGET = "9.0";
-            WATCHOS_DEPLOYMENT_TARGET = "2.0";
-         };
-         name = "Release";
-      };
-      "OBJ_358" = {
-         isa = "PBXSourcesBuildPhase";
-         files = (
-            "OBJ_359",
-            "OBJ_360",
-            "OBJ_361",
-            "OBJ_362",
-            "OBJ_363",
-            "OBJ_364",
-            "OBJ_365",
-            "OBJ_366",
-            "OBJ_367",
-            "OBJ_368",
-            "OBJ_369",
-            "OBJ_370",
-            "OBJ_371",
-            "OBJ_372",
-            "OBJ_373",
-            "OBJ_374",
-            "OBJ_375",
-            "OBJ_376",
-            "OBJ_377",
-            "OBJ_378",
-            "OBJ_379",
-            "OBJ_380",
-            "OBJ_381",
-            "OBJ_382",
-            "OBJ_383",
-            "OBJ_384",
-            "OBJ_385",
-            "OBJ_386",
-            "OBJ_387",
-            "OBJ_388",
-            "OBJ_389",
-            "OBJ_390",
-            "OBJ_391",
-            "OBJ_392",
-            "OBJ_393",
-            "OBJ_394",
-            "OBJ_395",
-            "OBJ_396",
-            "OBJ_397",
-            "OBJ_398",
-            "OBJ_399"
-         );
-      };
-      "OBJ_359" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_136";
-      };
-      "OBJ_36" = {
-         isa = "PBXFileReference";
-         path = "Blender.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_360" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_137";
-      };
-      "OBJ_361" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_138";
-      };
-      "OBJ_362" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_139";
-      };
-      "OBJ_363" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_141";
-      };
-      "OBJ_364" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_142";
-      };
-      "OBJ_365" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_144";
-      };
-      "OBJ_366" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_146";
-      };
-      "OBJ_367" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_147";
-      };
-      "OBJ_368" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_148";
-      };
-      "OBJ_369" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_149";
-      };
-      "OBJ_37" = {
-         isa = "PBXGroup";
-         children = (
-            "OBJ_38"
-         );
-         name = "Boolean";
-         path = "Boolean";
-         sourceTree = "<group>";
-      };
-      "OBJ_370" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_150";
-      };
-      "OBJ_371" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_152";
-      };
-      "OBJ_372" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_153";
-      };
-      "OBJ_373" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_155";
-      };
-      "OBJ_374" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_156";
-      };
-      "OBJ_375" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_158";
-      };
-      "OBJ_376" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_160";
-      };
-      "OBJ_377" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_161";
-      };
-      "OBJ_378" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_162";
-      };
-      "OBJ_379" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_164";
-      };
-      "OBJ_38" = {
-         isa = "PBXFileReference";
-         path = "BitOperations.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_380" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_165";
-      };
-      "OBJ_381" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_166";
-      };
-      "OBJ_382" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_167";
-      };
-      "OBJ_383" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_169";
-      };
-      "OBJ_384" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_170";
-      };
-      "OBJ_385" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_171";
-      };
-      "OBJ_386" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_173";
-      };
-      "OBJ_387" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_174";
-      };
-      "OBJ_388" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_175";
-      };
-      "OBJ_389" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_177";
-      };
-      "OBJ_39" = {
-         isa = "PBXGroup";
-         children = (
-            "OBJ_40",
-            "OBJ_41",
-            "OBJ_42",
-            "OBJ_43",
-            "OBJ_44"
-         );
-         name = "Conversion";
-         path = "Conversion";
-         sourceTree = "<group>";
-      };
-      "OBJ_390" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_178";
-      };
-      "OBJ_391" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_179";
-      };
-      "OBJ_392" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_180";
-      };
-      "OBJ_393" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_181";
-      };
-      "OBJ_394" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_182";
-      };
-      "OBJ_395" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_183";
-      };
-      "OBJ_396" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_185";
-      };
-      "OBJ_397" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_186";
-      };
-      "OBJ_398" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_187";
-      };
-      "OBJ_399" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_189";
-      };
-      "OBJ_4" = {
-         isa = "XCBuildConfiguration";
-         buildSettings = {
-            CLANG_ENABLE_OBJC_ARC = "YES";
-            COMBINE_HIDPI_IMAGES = "YES";
-            COPY_PHASE_STRIP = "YES";
-            DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-            DYLIB_INSTALL_NAME_BASE = "@rpath";
-            GCC_OPTIMIZATION_LEVEL = "s";
-            GCC_PREPROCESSOR_DEFINITIONS = (
-               "$(inherited)",
-               "SWIFT_PACKAGE=1"
-            );
-            MACOSX_DEPLOYMENT_TARGET = "10.10";
-            OTHER_SWIFT_FLAGS = (
-               "-DXcode"
-            );
-            PRODUCT_NAME = "$(TARGET_NAME)";
-            SDKROOT = "macosx";
-            SUPPORTED_PLATFORMS = (
-               "macosx",
-               "iphoneos",
-               "iphonesimulator",
-               "appletvos",
-               "appletvsimulator",
-               "watchos",
-               "watchsimulator"
-            );
-            SWIFT_ACTIVE_COMPILATION_CONDITIONS = (
-               "$(inherited)",
-               "SWIFT_PACKAGE"
-            );
-            SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-            USE_HEADERMAP = "NO";
-         };
-         name = "Release";
-      };
-      "OBJ_40" = {
-         isa = "PBXFileReference";
-         path = "ChannelComposition.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_400" = {
-         isa = "PBXFrameworksBuildPhase";
-         files = (
-            "OBJ_401",
-            "OBJ_402"
-         );
-      };
-      "OBJ_401" = {
-         isa = "PBXBuildFile";
-         fileRef = "Swim::Swim::Product";
-      };
-      "OBJ_402" = {
-         isa = "PBXBuildFile";
-         fileRef = "Swim::CStbImage::Product";
-      };
-      "OBJ_403" = {
-         isa = "PBXTargetDependency";
-         target = "Swim::Swim";
-      };
-      "OBJ_404" = {
-         isa = "PBXTargetDependency";
-         target = "Swim::CStbImage";
-      };
-      "OBJ_405" = {
-         isa = "XCConfigurationList";
-         buildConfigurations = (
-            "OBJ_406",
-            "OBJ_407"
-         );
-         defaultConfigurationIsVisible = "0";
-         defaultConfigurationName = "Release";
-      };
-      "OBJ_406" = {
-         isa = "XCBuildConfiguration";
-         buildSettings = {
-            CLANG_ENABLE_MODULES = "YES";
-            EMBEDDED_CONTENT_CONTAINS_SWIFT = "YES";
-            FRAMEWORK_SEARCH_PATHS = (
-               "$(inherited)",
-               "$(PLATFORM_DIR)/Developer/Library/Frameworks"
-            );
-            HEADER_SEARCH_PATHS = (
-               "$(inherited)",
-               "$(SRCROOT)/Sources/CStbImage/include"
-            );
-            INFOPLIST_FILE = "Swim.xcodeproj/VisualTests_Info.plist";
-            IPHONEOS_DEPLOYMENT_TARGET = "8.0";
-            LD_RUNPATH_SEARCH_PATHS = (
-               "$(inherited)",
-               "@loader_path/../Frameworks",
-               "@loader_path/Frameworks"
-            );
-            MACOSX_DEPLOYMENT_TARGET = "10.10";
-            OTHER_CFLAGS = (
-               "$(inherited)"
-            );
-            OTHER_LDFLAGS = (
-               "$(inherited)"
-            );
-            OTHER_SWIFT_FLAGS = (
-               "$(inherited)"
-            );
-            SWIFT_ACTIVE_COMPILATION_CONDITIONS = (
-               "$(inherited)"
-            );
-            SWIFT_VERSION = "5.0";
-            TARGET_NAME = "VisualTests";
-            TVOS_DEPLOYMENT_TARGET = "9.0";
-            WATCHOS_DEPLOYMENT_TARGET = "2.0";
-         };
-         name = "Debug";
-      };
-      "OBJ_407" = {
-         isa = "XCBuildConfiguration";
-         buildSettings = {
-            CLANG_ENABLE_MODULES = "YES";
-            EMBEDDED_CONTENT_CONTAINS_SWIFT = "YES";
-            FRAMEWORK_SEARCH_PATHS = (
-               "$(inherited)",
-               "$(PLATFORM_DIR)/Developer/Library/Frameworks"
-            );
-            HEADER_SEARCH_PATHS = (
-               "$(inherited)",
-               "$(SRCROOT)/Sources/CStbImage/include"
-            );
-            INFOPLIST_FILE = "Swim.xcodeproj/VisualTests_Info.plist";
-            IPHONEOS_DEPLOYMENT_TARGET = "8.0";
-            LD_RUNPATH_SEARCH_PATHS = (
-               "$(inherited)",
-               "@loader_path/../Frameworks",
-               "@loader_path/Frameworks"
-            );
-            MACOSX_DEPLOYMENT_TARGET = "10.10";
-            OTHER_CFLAGS = (
-               "$(inherited)"
-            );
-            OTHER_LDFLAGS = (
-               "$(inherited)"
-            );
-            OTHER_SWIFT_FLAGS = (
-               "$(inherited)"
-            );
-            SWIFT_ACTIVE_COMPILATION_CONDITIONS = (
-               "$(inherited)"
-            );
-            SWIFT_VERSION = "5.0";
-            TARGET_NAME = "VisualTests";
-            TVOS_DEPLOYMENT_TARGET = "9.0";
-            WATCHOS_DEPLOYMENT_TARGET = "2.0";
-         };
-         name = "Release";
-      };
-      "OBJ_408" = {
-         isa = "PBXSourcesBuildPhase";
-         files = (
-            "OBJ_409",
-            "OBJ_410",
-            "OBJ_411",
-            "OBJ_412",
-            "OBJ_413",
-            "OBJ_414",
-            "OBJ_415",
-            "OBJ_416",
-            "OBJ_417",
-            "OBJ_418",
-            "OBJ_419",
-            "OBJ_420",
-            "OBJ_421"
-         );
-      };
-      "OBJ_409" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_191";
-      };
-      "OBJ_41" = {
-         isa = "PBXFileReference";
-         path = "ChannelwiseConversion.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_410" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_192";
-      };
-      "OBJ_411" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_193";
-      };
-      "OBJ_412" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_194";
-      };
-      "OBJ_413" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_195";
-      };
-      "OBJ_414" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_196";
-      };
-      "OBJ_415" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_197";
-      };
-      "OBJ_416" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_198";
-      };
-      "OBJ_417" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_199";
-      };
-      "OBJ_418" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_200";
-      };
-      "OBJ_419" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_201";
-      };
-      "OBJ_42" = {
-         isa = "PBXFileReference";
-         path = "DataTypeConversion.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_420" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_202";
-      };
-      "OBJ_421" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_203";
-      };
-      "OBJ_422" = {
-         isa = "PBXFrameworksBuildPhase";
-         files = (
-            "OBJ_423",
-            "OBJ_424"
-         );
-      };
-      "OBJ_423" = {
-         isa = "PBXBuildFile";
-         fileRef = "Swim::Swim::Product";
-      };
-      "OBJ_424" = {
-         isa = "PBXBuildFile";
-         fileRef = "Swim::CStbImage::Product";
-      };
-      "OBJ_425" = {
-         isa = "PBXTargetDependency";
-         target = "Swim::Swim";
-      };
-      "OBJ_426" = {
-         isa = "PBXTargetDependency";
-         target = "Swim::CStbImage";
-      };
-      "OBJ_43" = {
-         isa = "PBXFileReference";
-         path = "PixelTypeConversion.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_44" = {
-         isa = "PBXFileReference";
-         path = "PixelwiseConversion.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_45" = {
-         isa = "PBXGroup";
-         children = (
-            "OBJ_46",
-            "OBJ_47",
-            "OBJ_48",
-            "OBJ_52",
-            "OBJ_56"
-         );
-         name = "Core";
-         path = "Core";
-         sourceTree = "<group>";
-      };
-      "OBJ_46" = {
-         isa = "PBXFileReference";
-         path = "DataContainer.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_47" = {
-         isa = "PBXFileReference";
-         path = "DataType.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_48" = {
-         isa = "PBXGroup";
-         children = (
-            "OBJ_49",
-            "OBJ_50",
-            "OBJ_51"
-         );
-         name = "Image";
-         path = "Image";
-         sourceTree = "<group>";
-      };
-      "OBJ_49" = {
-         isa = "PBXFileReference";
-         path = "Image.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_5" = {
-         isa = "PBXGroup";
-         children = (
-            "OBJ_6",
-            "OBJ_7",
-            "OBJ_118",
-            "OBJ_204",
-            "OBJ_210",
-            "OBJ_211",
-            "OBJ_212"
-         );
-         path = "";
-         sourceTree = "<group>";
-      };
-      "OBJ_50" = {
-         isa = "PBXFileReference";
-         path = "ImageInitializers.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_51" = {
-         isa = "PBXFileReference";
-         path = "LikeInitializer.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_52" = {
-         isa = "PBXGroup";
-         children = (
-            "OBJ_53",
-            "OBJ_54",
-            "OBJ_55"
-         );
-         name = "Pixel";
-         path = "Pixel";
-         sourceTree = "<group>";
-      };
-      "OBJ_53" = {
-         isa = "PBXFileReference";
-         path = "Pixel.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_54" = {
-         isa = "PBXFileReference";
-         path = "PixelProtocol.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_55" = {
-         isa = "PBXFileReference";
-         path = "PixelRef.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_56" = {
-         isa = "PBXFileReference";
-         path = "PixelType.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_57" = {
-         isa = "PBXGroup";
-         children = (
-            "OBJ_58",
-            "OBJ_59",
-            "OBJ_60",
-            "OBJ_61",
-            "OBJ_62",
-            "OBJ_63",
-            "OBJ_64"
-         );
-         name = "Draw";
-         path = "Draw";
-         sourceTree = "<group>";
-      };
-      "OBJ_58" = {
-         isa = "PBXFileReference";
-         path = "DrawCircle.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_59" = {
-         isa = "PBXFileReference";
-         path = "DrawImage.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_6" = {
-         isa = "PBXFileReference";
-         explicitFileType = "sourcecode.swift";
-         path = "Package.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_60" = {
-         isa = "PBXFileReference";
-         path = "DrawLine.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_61" = {
-         isa = "PBXFileReference";
-         path = "DrawPixel.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_62" = {
-         isa = "PBXFileReference";
-         path = "DrawPolygon.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_63" = {
-         isa = "PBXFileReference";
-         path = "DrawRect.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_64" = {
-         isa = "PBXFileReference";
-         path = "DrawText.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_65" = {
-         isa = "PBXGroup";
-         children = (
-            "OBJ_66",
-            "OBJ_67",
-            "OBJ_68"
-         );
-         name = "Filter";
-         path = "Filter";
-         sourceTree = "<group>";
-      };
-      "OBJ_66" = {
-         isa = "PBXFileReference";
-         path = "BilateralFilter.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_67" = {
-         isa = "PBXFileReference";
-         path = "Convolution.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_68" = {
-         isa = "PBXFileReference";
-         path = "RankFilter.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_69" = {
-         isa = "PBXGroup";
-         children = (
-            "OBJ_70",
-            "OBJ_71",
-            "OBJ_72"
-         );
-         name = "IO";
-         path = "IO";
-         sourceTree = "<group>";
-      };
-      "OBJ_7" = {
-         isa = "PBXGroup";
-         children = (
-            "OBJ_8",
-            "OBJ_16"
-         );
-         name = "Sources";
-         path = "";
-         sourceTree = "SOURCE_ROOT";
-      };
-      "OBJ_70" = {
-         isa = "PBXFileReference";
-         path = "ImageFileFormat.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_71" = {
-         isa = "PBXFileReference";
-         path = "ReadImage.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_72" = {
-         isa = "PBXFileReference";
-         path = "WriteImage.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_73" = {
-         isa = "PBXGroup";
-         children = (
-            "OBJ_74",
-            "OBJ_75",
-            "OBJ_76",
-            "OBJ_77",
-            "OBJ_78",
-            "OBJ_79"
-         );
-         name = "Interpolation";
-         path = "Interpolation";
-         sourceTree = "<group>";
-      };
-      "OBJ_74" = {
-         isa = "PBXFileReference";
-         path = "BicubicInterpolator.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_75" = {
-         isa = "PBXFileReference";
-         path = "BilinearInterpolator.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_76" = {
-         isa = "PBXFileReference";
-         path = "Interpolator.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_77" = {
-         isa = "PBXFileReference";
-         path = "Interpolator4x4.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_78" = {
-         isa = "PBXFileReference";
-         path = "LanczosInterpolator.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_79" = {
-         isa = "PBXFileReference";
-         path = "NearestNeighborInterpolator.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_8" = {
-         isa = "PBXGroup";
-         children = (
-            "OBJ_9",
-            "OBJ_10",
-            "OBJ_11"
-         );
-         name = "CStbImage";
-         path = "Sources/CStbImage";
-         sourceTree = "SOURCE_ROOT";
-      };
-      "OBJ_80" = {
-         isa = "PBXGroup";
-         children = (
-            "OBJ_81",
-            "OBJ_82",
-            "OBJ_83",
-            "OBJ_84",
-            "OBJ_85"
-         );
-         name = "Manipulation";
-         path = "Manipulation";
-         sourceTree = "<group>";
-      };
-      "OBJ_81" = {
-         isa = "PBXFileReference";
-         path = "Abs.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_82" = {
-         isa = "PBXFileReference";
-         path = "Clip.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_83" = {
-         isa = "PBXFileReference";
-         path = "IteratePixels.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_84" = {
-         isa = "PBXFileReference";
-         path = "Power.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_85" = {
-         isa = "PBXFileReference";
-         path = "Rounding.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_86" = {
-         isa = "PBXGroup";
-         children = (
-            "OBJ_87",
-            "OBJ_88",
-            "OBJ_89",
-            "OBJ_90"
-         );
-         name = "Platform";
-         path = "Platform";
-         sourceTree = "<group>";
-      };
-      "OBJ_87" = {
-         isa = "PBXFileReference";
-         path = "AppKit.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_88" = {
-         isa = "PBXFileReference";
-         path = "CoreGraphics.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_89" = {
-         isa = "PBXFileReference";
-         path = "UIKit.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_9" = {
-         isa = "PBXFileReference";
-         path = "image_io.c";
-         sourceTree = "<group>";
-      };
-      "OBJ_90" = {
-         isa = "PBXGroup";
-         children = (
-            "OBJ_91",
-            "OBJ_92",
-            "OBJ_93",
-            "OBJ_94"
-         );
-         name = "vImage";
-         path = "vImage";
-         sourceTree = "<group>";
-      };
-      "OBJ_91" = {
-         isa = "PBXFileReference";
-         path = "vImageAlphaBlend.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_92" = {
-         isa = "PBXFileReference";
-         path = "vImageBuffer.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_93" = {
-         isa = "PBXFileReference";
-         path = "vImageMorphology.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_94" = {
-         isa = "PBXFileReference";
-         path = "vImageUtils.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_95" = {
-         isa = "PBXGroup";
-         children = (
-            "OBJ_96",
-            "OBJ_97",
-            "OBJ_98"
-         );
-         name = "Subscript";
-         path = "Subscript";
-         sourceTree = "<group>";
-      };
-      "OBJ_96" = {
-         isa = "PBXFileReference";
-         path = "ChannelSubscript.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_97" = {
-         isa = "PBXFileReference";
-         path = "PixelSubscript.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_98" = {
-         isa = "PBXFileReference";
-         path = "SubimageSubscript.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_99" = {
-         isa = "PBXGroup";
-         children = (
-            "OBJ_100",
-            "OBJ_101",
-            "OBJ_102",
-            "OBJ_103",
-            "OBJ_107",
-            "OBJ_108",
-            "OBJ_109",
-            "OBJ_110",
-            "OBJ_111"
-         );
-         name = "Transformation";
-         path = "Transformation";
-         sourceTree = "<group>";
-      };
-      "Swim::CStbImage" = {
-         isa = "PBXNativeTarget";
-         buildConfigurationList = "OBJ_214";
-         buildPhases = (
-            "OBJ_217",
-            "OBJ_220",
-            "OBJ_225"
-         );
-         dependencies = (
-         );
-         name = "CStbImage";
-         productName = "CStbImage";
-         productReference = "Swim::CStbImage::Product";
-         productType = "com.apple.product-type.framework";
-      };
-      "Swim::CStbImage::Product" = {
-         isa = "PBXFileReference";
-         path = "CStbImage.framework";
-         sourceTree = "BUILT_PRODUCTS_DIR";
-      };
-      "Swim::PerformanceTests" = {
-         isa = "PBXNativeTarget";
-         buildConfigurationList = "OBJ_227";
-         buildPhases = (
-            "OBJ_230",
-            "OBJ_245"
-         );
-         dependencies = (
-            "OBJ_248",
-            "OBJ_250"
-         );
-         name = "PerformanceTests";
-         productName = "PerformanceTests";
-         productReference = "Swim::PerformanceTests::Product";
-         productType = "com.apple.product-type.bundle.unit-test";
-      };
-      "Swim::PerformanceTests::Product" = {
-         isa = "PBXFileReference";
-         path = "PerformanceTests.xctest";
-         sourceTree = "BUILT_PRODUCTS_DIR";
-      };
-      "Swim::SwiftPMPackageDescription" = {
-         isa = "PBXNativeTarget";
-         buildConfigurationList = "OBJ_341";
-         buildPhases = (
-            "OBJ_344"
-         );
-         dependencies = (
-         );
-         name = "SwimPackageDescription";
-         productName = "SwimPackageDescription";
-         productType = "com.apple.product-type.framework";
-      };
-      "Swim::Swim" = {
-         isa = "PBXNativeTarget";
-         buildConfigurationList = "OBJ_251";
-         buildPhases = (
-            "OBJ_254",
-            "OBJ_337"
-         );
-         dependencies = (
-            "OBJ_339"
-         );
-         name = "Swim";
-         productName = "Swim";
-         productReference = "Swim::Swim::Product";
-         productType = "com.apple.product-type.framework";
-      };
-      "Swim::Swim::Product" = {
-         isa = "PBXFileReference";
-         path = "Swim.framework";
-         sourceTree = "BUILT_PRODUCTS_DIR";
-      };
-      "Swim::SwimPackageTests::ProductTarget" = {
-         isa = "PBXAggregateTarget";
-         buildConfigurationList = "OBJ_347";
-         buildPhases = (
-         );
-         dependencies = (
-            "OBJ_350",
-            "OBJ_352",
-            "OBJ_354"
-         );
-         name = "SwimPackageTests";
-         productName = "SwimPackageTests";
-      };
-      "Swim::SwimTests" = {
-         isa = "PBXNativeTarget";
-         buildConfigurationList = "OBJ_355";
-         buildPhases = (
-            "OBJ_358",
-            "OBJ_400"
-         );
-         dependencies = (
-            "OBJ_403",
-            "OBJ_404"
-         );
-         name = "SwimTests";
-         productName = "SwimTests";
-         productReference = "Swim::SwimTests::Product";
-         productType = "com.apple.product-type.bundle.unit-test";
-      };
-      "Swim::SwimTests::Product" = {
-         isa = "PBXFileReference";
-         path = "SwimTests.xctest";
-         sourceTree = "BUILT_PRODUCTS_DIR";
-      };
-      "Swim::VisualTests" = {
-         isa = "PBXNativeTarget";
-         buildConfigurationList = "OBJ_405";
-         buildPhases = (
-            "OBJ_408",
-            "OBJ_422"
-         );
-         dependencies = (
-            "OBJ_425",
-            "OBJ_426"
-         );
-         name = "VisualTests";
-         productName = "VisualTests";
-         productReference = "Swim::VisualTests::Product";
-         productType = "com.apple.product-type.bundle.unit-test";
-      };
-      "Swim::VisualTests::Product" = {
-         isa = "PBXFileReference";
-         path = "VisualTests.xctest";
-         sourceTree = "BUILT_PRODUCTS_DIR";
-      };
-   };
-   rootObject = "OBJ_1";
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXAggregateTarget section */
+		"Swim::SwimPackageTests::ProductTarget" /* SwimPackageTests */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = OBJ_347 /* Build configuration list for PBXAggregateTarget "SwimPackageTests" */;
+			buildPhases = (
+			);
+			dependencies = (
+				OBJ_350 /* PBXTargetDependency */,
+				OBJ_352 /* PBXTargetDependency */,
+				OBJ_354 /* PBXTargetDependency */,
+			);
+			name = SwimPackageTests;
+			productName = SwimPackageTests;
+		};
+/* End PBXAggregateTarget section */
+
+/* Begin PBXBuildFile section */
+		A7C8CEE3229650C20064EDFA /* ColorPixel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7C8CEE1229650BF0064EDFA /* ColorPixel.swift */; };
+		OBJ_218 /* image_io.c in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_9 /* image_io.c */; };
+		OBJ_219 /* truetype.c in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_10 /* truetype.c */; };
+		OBJ_221 /* stb_image_write.h in Headers */ = {isa = PBXBuildFile; fileRef = OBJ_12 /* stb_image_write.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		OBJ_222 /* stb_image.h in Headers */ = {isa = PBXBuildFile; fileRef = OBJ_13 /* stb_image.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		OBJ_223 /* stb_truetype.h in Headers */ = {isa = PBXBuildFile; fileRef = OBJ_14 /* stb_truetype.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		OBJ_224 /* CStbImage.h in Headers */ = {isa = PBXBuildFile; fileRef = OBJ_15 /* CStbImage.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		OBJ_231 /* ArithmeticPerformanceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_120 /* ArithmeticPerformanceTests.swift */; };
+		OBJ_232 /* BasicPerformanceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_121 /* BasicPerformanceTests.swift */; };
+		OBJ_233 /* BayerPerformanceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_122 /* BayerPerformanceTests.swift */; };
+		OBJ_234 /* BlendPerformanceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_123 /* BlendPerformanceTests.swift */; };
+		OBJ_235 /* ClipPerformanceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_124 /* ClipPerformanceTests.swift */; };
+		OBJ_236 /* ConversionPerformanceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_125 /* ConversionPerformanceTests.swift */; };
+		OBJ_237 /* CorrelationPerformanceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_126 /* CorrelationPerformanceTests.swift */; };
+		OBJ_238 /* DataTypeConversionPerformanceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_127 /* DataTypeConversionPerformanceTests.swift */; };
+		OBJ_239 /* DrawPerformanceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_128 /* DrawPerformanceTests.swift */; };
+		OBJ_240 /* FilterPerformanceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_129 /* FilterPerformanceTests.swift */; };
+		OBJ_241 /* PerformanceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_130 /* PerformanceTests.swift */; };
+		OBJ_242 /* ResizePerformanceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_131 /* ResizePerformanceTests.swift */; };
+		OBJ_243 /* RoundingPerformanceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_132 /* RoundingPerformanceTests.swift */; };
+		OBJ_244 /* SubscriptPerformanceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_133 /* SubscriptPerformanceTests.swift */; };
+		OBJ_246 /* Swim.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Swim::Swim::Product" /* Swim.framework */; };
+		OBJ_247 /* CStbImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Swim::CStbImage::Product" /* CStbImage.framework */; };
+		OBJ_255 /* Bayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_18 /* Bayer.swift */; };
+		OBJ_256 /* Correlation.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_19 /* Correlation.swift */; };
+		OBJ_257 /* FourierTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_20 /* FourierTransformer.swift */; };
+		OBJ_258 /* HistogramEqualizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_21 /* HistogramEqualizer.swift */; };
+		OBJ_259 /* Im2col.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_22 /* Im2col.swift */; };
+		OBJ_260 /* IntegralImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_23 /* IntegralImage.swift */; };
+		OBJ_261 /* ImageBinaryOperators.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_25 /* ImageBinaryOperators.swift */; };
+		OBJ_262 /* ImageBinaryScalarOperator.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_26 /* ImageBinaryScalarOperator.swift */; };
+		OBJ_263 /* ImageCompoundAssignmentOperator.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_27 /* ImageCompoundAssignmentOperator.swift */; };
+		OBJ_264 /* ImageUnaryOperators.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_28 /* ImageUnaryOperators.swift */; };
+		OBJ_265 /* PixelBinaryScalarOperator.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_29 /* PixelBinaryScalarOperator.swift */; };
+		OBJ_266 /* PixelCompoundAssignmentOperator.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_30 /* PixelCompoundAssignmentOperator.swift */; };
+		OBJ_267 /* PixelRefCompoundAssignmentOperator.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_31 /* PixelRefCompoundAssignmentOperator.swift */; };
+		OBJ_268 /* PixelRefScalarCompoundAssignmentOperator.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_32 /* PixelRefScalarCompoundAssignmentOperator.swift */; };
+		OBJ_269 /* PixelUnaryOperator.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_33 /* PixelUnaryOperator.swift */; };
+		OBJ_270 /* ScalarCompoundAssignmentOperator.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_34 /* ScalarCompoundAssignmentOperator.swift */; };
+		OBJ_271 /* Blender.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_36 /* Blender.swift */; };
+		OBJ_272 /* BitOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_38 /* BitOperations.swift */; };
+		OBJ_273 /* ChannelComposition.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_40 /* ChannelComposition.swift */; };
+		OBJ_274 /* ChannelwiseConversion.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_41 /* ChannelwiseConversion.swift */; };
+		OBJ_275 /* DataTypeConversion.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_42 /* DataTypeConversion.swift */; };
+		OBJ_276 /* PixelTypeConversion.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_43 /* PixelTypeConversion.swift */; };
+		OBJ_277 /* PixelwiseConversion.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_44 /* PixelwiseConversion.swift */; };
+		OBJ_278 /* DataContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_46 /* DataContainer.swift */; };
+		OBJ_279 /* DataType.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_47 /* DataType.swift */; };
+		OBJ_280 /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_49 /* Image.swift */; };
+		OBJ_281 /* ImageInitializers.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_50 /* ImageInitializers.swift */; };
+		OBJ_282 /* LikeInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_51 /* LikeInitializer.swift */; };
+		OBJ_283 /* Pixel.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_53 /* Pixel.swift */; };
+		OBJ_284 /* PixelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_54 /* PixelProtocol.swift */; };
+		OBJ_285 /* PixelRef.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_55 /* PixelRef.swift */; };
+		OBJ_286 /* PixelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_56 /* PixelType.swift */; };
+		OBJ_287 /* DrawCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_58 /* DrawCircle.swift */; };
+		OBJ_288 /* DrawImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_59 /* DrawImage.swift */; };
+		OBJ_289 /* DrawLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_60 /* DrawLine.swift */; };
+		OBJ_290 /* DrawPixel.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_61 /* DrawPixel.swift */; };
+		OBJ_291 /* DrawPolygon.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_62 /* DrawPolygon.swift */; };
+		OBJ_292 /* DrawRect.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_63 /* DrawRect.swift */; };
+		OBJ_293 /* DrawText.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_64 /* DrawText.swift */; };
+		OBJ_294 /* BilateralFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_66 /* BilateralFilter.swift */; };
+		OBJ_295 /* Convolution.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_67 /* Convolution.swift */; };
+		OBJ_296 /* RankFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_68 /* RankFilter.swift */; };
+		OBJ_297 /* ImageFileFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_70 /* ImageFileFormat.swift */; };
+		OBJ_298 /* ReadImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_71 /* ReadImage.swift */; };
+		OBJ_299 /* WriteImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_72 /* WriteImage.swift */; };
+		OBJ_300 /* BicubicInterpolator.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_74 /* BicubicInterpolator.swift */; };
+		OBJ_301 /* BilinearInterpolator.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_75 /* BilinearInterpolator.swift */; };
+		OBJ_302 /* Interpolator.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_76 /* Interpolator.swift */; };
+		OBJ_303 /* Interpolator4x4.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_77 /* Interpolator4x4.swift */; };
+		OBJ_304 /* LanczosInterpolator.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_78 /* LanczosInterpolator.swift */; };
+		OBJ_305 /* NearestNeighborInterpolator.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_79 /* NearestNeighborInterpolator.swift */; };
+		OBJ_306 /* Abs.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_81 /* Abs.swift */; };
+		OBJ_307 /* Clip.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_82 /* Clip.swift */; };
+		OBJ_308 /* IteratePixels.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_83 /* IteratePixels.swift */; };
+		OBJ_309 /* Power.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_84 /* Power.swift */; };
+		OBJ_310 /* Rounding.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_85 /* Rounding.swift */; };
+		OBJ_311 /* AppKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_87 /* AppKit.swift */; };
+		OBJ_312 /* CoreGraphics.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_88 /* CoreGraphics.swift */; };
+		OBJ_313 /* UIKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_89 /* UIKit.swift */; };
+		OBJ_314 /* vImageAlphaBlend.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_91 /* vImageAlphaBlend.swift */; };
+		OBJ_315 /* vImageBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_92 /* vImageBuffer.swift */; };
+		OBJ_316 /* vImageMorphology.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_93 /* vImageMorphology.swift */; };
+		OBJ_317 /* vImageUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_94 /* vImageUtils.swift */; };
+		OBJ_318 /* ChannelSubscript.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_96 /* ChannelSubscript.swift */; };
+		OBJ_319 /* PixelSubscript.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_97 /* PixelSubscript.swift */; };
+		OBJ_320 /* SubimageSubscript.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_98 /* SubimageSubscript.swift */; };
+		OBJ_321 /* Concatenation.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_100 /* Concatenation.swift */; };
+		OBJ_322 /* EdgeMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_101 /* EdgeMode.swift */; };
+		OBJ_323 /* Flip.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_102 /* Flip.swift */; };
+		OBJ_324 /* AffineTransformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_104 /* AffineTransformation.swift */; };
+		OBJ_325 /* HomogeneousTransformationMatrix.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_105 /* HomogeneousTransformationMatrix.swift */; };
+		OBJ_326 /* ProjectiveTransformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_106 /* ProjectiveTransformation.swift */; };
+		OBJ_327 /* Padding.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_107 /* Padding.swift */; };
+		OBJ_328 /* Resize.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_108 /* Resize.swift */; };
+		OBJ_329 /* Rotate.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_109 /* Rotate.swift */; };
+		OBJ_330 /* Transpose.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_110 /* Transpose.swift */; };
+		OBJ_331 /* Warp.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_111 /* Warp.swift */; };
+		OBJ_332 /* ArrayExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_113 /* ArrayExt.swift */; };
+		OBJ_333 /* Clamp.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_114 /* Clamp.swift */; };
+		OBJ_334 /* Interleave.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_115 /* Interleave.swift */; };
+		OBJ_335 /* Rect.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_116 /* Rect.swift */; };
+		OBJ_336 /* StrideCopy.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_117 /* StrideCopy.swift */; };
+		OBJ_338 /* CStbImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Swim::CStbImage::Product" /* CStbImage.framework */; };
+		OBJ_345 /* Package.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_6 /* Package.swift */; };
+		OBJ_359 /* BayerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_136 /* BayerTests.swift */; };
+		OBJ_360 /* CorrelationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_137 /* CorrelationTests.swift */; };
+		OBJ_361 /* Im2colTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_138 /* Im2colTests.swift */; };
+		OBJ_362 /* IntegralImageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_139 /* IntegralImageTests.swift */; };
+		OBJ_363 /* ImageArithmeticTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_141 /* ImageArithmeticTests.swift */; };
+		OBJ_364 /* MutablePixelRefArithmeticTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_142 /* MutablePixelRefArithmeticTests.swift */; };
+		OBJ_365 /* BitOperationsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_144 /* BitOperationsTests.swift */; };
+		OBJ_366 /* ChannelCompositionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_146 /* ChannelCompositionTests.swift */; };
+		OBJ_367 /* ChannelwiseConversionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_147 /* ChannelwiseConversionTests.swift */; };
+		OBJ_368 /* DataTypeConversionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_148 /* DataTypeConversionTests.swift */; };
+		OBJ_369 /* PixelTypeConversionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_149 /* PixelTypeConversionTests.swift */; };
+		OBJ_370 /* PixelwiseConversionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_150 /* PixelwiseConversionTests.swift */; };
+		OBJ_371 /* ImageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_152 /* ImageTests.swift */; };
+		OBJ_372 /* LikeInitializerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_153 /* LikeInitializerTests.swift */; };
+		OBJ_373 /* ConvolutionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_155 /* ConvolutionTests.swift */; };
+		OBJ_374 /* FilterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_156 /* FilterTests.swift */; };
+		OBJ_375 /* ImageIOTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_158 /* ImageIOTests.swift */; };
+		OBJ_376 /* BicubicInterpolationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_160 /* BicubicInterpolationTests.swift */; };
+		OBJ_377 /* BilinearInterpolationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_161 /* BilinearInterpolationTests.swift */; };
+		OBJ_378 /* NearestNeighborInterpolatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_162 /* NearestNeighborInterpolatorTests.swift */; };
+		OBJ_379 /* AbsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_164 /* AbsTests.swift */; };
+		OBJ_380 /* ClipTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_165 /* ClipTests.swift */; };
+		OBJ_381 /* PowerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_166 /* PowerTests.swift */; };
+		OBJ_382 /* RoundingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_167 /* RoundingTests.swift */; };
+		OBJ_383 /* AppKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_169 /* AppKitTests.swift */; };
+		OBJ_384 /* UIKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_170 /* UIKitTests.swift */; };
+		OBJ_385 /* vImageUtilsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_171 /* vImageUtilsTests.swift */; };
+		OBJ_386 /* ChannelSubscriptTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_173 /* ChannelSubscriptTests.swift */; };
+		OBJ_387 /* PixelSubscriptTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_174 /* PixelSubscriptTests.swift */; };
+		OBJ_388 /* SubimageSubscriptTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_175 /* SubimageSubscriptTests.swift */; };
+		OBJ_389 /* AffineTransformationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_177 /* AffineTransformationTests.swift */; };
+		OBJ_390 /* ConcatenateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_178 /* ConcatenateTests.swift */; };
+		OBJ_391 /* HomogeneousTransformationMatrixTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_179 /* HomogeneousTransformationMatrixTests.swift */; };
+		OBJ_392 /* PaddingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_180 /* PaddingTests.swift */; };
+		OBJ_393 /* ResizeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_181 /* ResizeTests.swift */; };
+		OBJ_394 /* TransformationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_182 /* TransformationTests.swift */; };
+		OBJ_395 /* TransposeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_183 /* TransposeTests.swift */; };
+		OBJ_396 /* Random.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_185 /* Random.swift */; };
+		OBJ_397 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_186 /* Utils.swift */; };
+		OBJ_398 /* XCTAssertEqualWithAccuracy.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_187 /* XCTAssertEqualWithAccuracy.swift */; };
+		OBJ_399 /* ClampTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_189 /* ClampTests.swift */; };
+		OBJ_401 /* Swim.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Swim::Swim::Product" /* Swim.framework */; };
+		OBJ_402 /* CStbImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Swim::CStbImage::Product" /* CStbImage.framework */; };
+		OBJ_409 /* ApplicationVisualTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_191 /* ApplicationVisualTests.swift */; };
+		OBJ_410 /* BayerVisualTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_192 /* BayerVisualTests.swift */; };
+		OBJ_411 /* BlendVisualTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_193 /* BlendVisualTests.swift */; };
+		OBJ_412 /* DrawVisualTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_194 /* DrawVisualTests.swift */; };
+		OBJ_413 /* FilterVisualTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_195 /* FilterVisualTests.swift */; };
+		OBJ_414 /* FourierTransformerVisualTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_196 /* FourierTransformerVisualTests.swift */; };
+		OBJ_415 /* HistogramEqualizerVisualTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_197 /* HistogramEqualizerVisualTests.swift */; };
+		OBJ_416 /* PaddingVisualTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_198 /* PaddingVisualTests.swift */; };
+		OBJ_417 /* ResizeVisualTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_199 /* ResizeVisualTests.swift */; };
+		OBJ_418 /* SubimageVisualTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_200 /* SubimageVisualTests.swift */; };
+		OBJ_419 /* TransformationVisualTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_201 /* TransformationVisualTests.swift */; };
+		OBJ_420 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_202 /* Utils.swift */; };
+		OBJ_421 /* WarpVisualTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_203 /* WarpVisualTests.swift */; };
+		OBJ_423 /* Swim.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Swim::Swim::Product" /* Swim.framework */; };
+		OBJ_424 /* CStbImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Swim::CStbImage::Product" /* CStbImage.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		A7C8CED722964D330064EDFA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = "Swim::CStbImage";
+			remoteInfo = CStbImage;
+		};
+		A7C8CED822964D330064EDFA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = "Swim::Swim";
+			remoteInfo = Swim;
+		};
+		A7C8CED922964D330064EDFA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = "Swim::CStbImage";
+			remoteInfo = CStbImage;
+		};
+		A7C8CEDA22964D330064EDFA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = "Swim::Swim";
+			remoteInfo = Swim;
+		};
+		A7C8CEDB22964D330064EDFA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = "Swim::CStbImage";
+			remoteInfo = CStbImage;
+		};
+		A7C8CEDC22964D330064EDFA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = "Swim::Swim";
+			remoteInfo = Swim;
+		};
+		A7C8CEDD22964D330064EDFA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = "Swim::CStbImage";
+			remoteInfo = CStbImage;
+		};
+		A7C8CEDE22964D350064EDFA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = "Swim::SwimTests";
+			remoteInfo = SwimTests;
+		};
+		A7C8CEDF22964D350064EDFA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = "Swim::VisualTests";
+			remoteInfo = VisualTests;
+		};
+		A7C8CEE022964D350064EDFA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = "Swim::PerformanceTests";
+			remoteInfo = PerformanceTests;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		A7C8CEE1229650BF0064EDFA /* ColorPixel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPixel.swift; sourceTree = "<group>"; };
+		OBJ_10 /* truetype.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = truetype.c; sourceTree = "<group>"; };
+		OBJ_100 /* Concatenation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Concatenation.swift; sourceTree = "<group>"; };
+		OBJ_101 /* EdgeMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EdgeMode.swift; sourceTree = "<group>"; };
+		OBJ_102 /* Flip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Flip.swift; sourceTree = "<group>"; };
+		OBJ_104 /* AffineTransformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AffineTransformation.swift; sourceTree = "<group>"; };
+		OBJ_105 /* HomogeneousTransformationMatrix.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomogeneousTransformationMatrix.swift; sourceTree = "<group>"; };
+		OBJ_106 /* ProjectiveTransformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectiveTransformation.swift; sourceTree = "<group>"; };
+		OBJ_107 /* Padding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Padding.swift; sourceTree = "<group>"; };
+		OBJ_108 /* Resize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resize.swift; sourceTree = "<group>"; };
+		OBJ_109 /* Rotate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rotate.swift; sourceTree = "<group>"; };
+		OBJ_110 /* Transpose.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transpose.swift; sourceTree = "<group>"; };
+		OBJ_111 /* Warp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Warp.swift; sourceTree = "<group>"; };
+		OBJ_113 /* ArrayExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayExt.swift; sourceTree = "<group>"; };
+		OBJ_114 /* Clamp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Clamp.swift; sourceTree = "<group>"; };
+		OBJ_115 /* Interleave.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Interleave.swift; sourceTree = "<group>"; };
+		OBJ_116 /* Rect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rect.swift; sourceTree = "<group>"; };
+		OBJ_117 /* StrideCopy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StrideCopy.swift; sourceTree = "<group>"; };
+		OBJ_12 /* stb_image_write.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = stb_image_write.h; sourceTree = "<group>"; };
+		OBJ_120 /* ArithmeticPerformanceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArithmeticPerformanceTests.swift; sourceTree = "<group>"; };
+		OBJ_121 /* BasicPerformanceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicPerformanceTests.swift; sourceTree = "<group>"; };
+		OBJ_122 /* BayerPerformanceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BayerPerformanceTests.swift; sourceTree = "<group>"; };
+		OBJ_123 /* BlendPerformanceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlendPerformanceTests.swift; sourceTree = "<group>"; };
+		OBJ_124 /* ClipPerformanceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipPerformanceTests.swift; sourceTree = "<group>"; };
+		OBJ_125 /* ConversionPerformanceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversionPerformanceTests.swift; sourceTree = "<group>"; };
+		OBJ_126 /* CorrelationPerformanceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CorrelationPerformanceTests.swift; sourceTree = "<group>"; };
+		OBJ_127 /* DataTypeConversionPerformanceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataTypeConversionPerformanceTests.swift; sourceTree = "<group>"; };
+		OBJ_128 /* DrawPerformanceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawPerformanceTests.swift; sourceTree = "<group>"; };
+		OBJ_129 /* FilterPerformanceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterPerformanceTests.swift; sourceTree = "<group>"; };
+		OBJ_13 /* stb_image.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = stb_image.h; sourceTree = "<group>"; };
+		OBJ_130 /* PerformanceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerformanceTests.swift; sourceTree = "<group>"; };
+		OBJ_131 /* ResizePerformanceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResizePerformanceTests.swift; sourceTree = "<group>"; };
+		OBJ_132 /* RoundingPerformanceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundingPerformanceTests.swift; sourceTree = "<group>"; };
+		OBJ_133 /* SubscriptPerformanceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptPerformanceTests.swift; sourceTree = "<group>"; };
+		OBJ_136 /* BayerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BayerTests.swift; sourceTree = "<group>"; };
+		OBJ_137 /* CorrelationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CorrelationTests.swift; sourceTree = "<group>"; };
+		OBJ_138 /* Im2colTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Im2colTests.swift; sourceTree = "<group>"; };
+		OBJ_139 /* IntegralImageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntegralImageTests.swift; sourceTree = "<group>"; };
+		OBJ_14 /* stb_truetype.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = stb_truetype.h; sourceTree = "<group>"; };
+		OBJ_141 /* ImageArithmeticTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageArithmeticTests.swift; sourceTree = "<group>"; };
+		OBJ_142 /* MutablePixelRefArithmeticTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MutablePixelRefArithmeticTests.swift; sourceTree = "<group>"; };
+		OBJ_144 /* BitOperationsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BitOperationsTests.swift; sourceTree = "<group>"; };
+		OBJ_146 /* ChannelCompositionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelCompositionTests.swift; sourceTree = "<group>"; };
+		OBJ_147 /* ChannelwiseConversionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelwiseConversionTests.swift; sourceTree = "<group>"; };
+		OBJ_148 /* DataTypeConversionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataTypeConversionTests.swift; sourceTree = "<group>"; };
+		OBJ_149 /* PixelTypeConversionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PixelTypeConversionTests.swift; sourceTree = "<group>"; };
+		OBJ_15 /* CStbImage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CStbImage.h; sourceTree = "<group>"; };
+		OBJ_150 /* PixelwiseConversionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PixelwiseConversionTests.swift; sourceTree = "<group>"; };
+		OBJ_152 /* ImageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageTests.swift; sourceTree = "<group>"; };
+		OBJ_153 /* LikeInitializerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeInitializerTests.swift; sourceTree = "<group>"; };
+		OBJ_155 /* ConvolutionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConvolutionTests.swift; sourceTree = "<group>"; };
+		OBJ_156 /* FilterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterTests.swift; sourceTree = "<group>"; };
+		OBJ_158 /* ImageIOTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageIOTests.swift; sourceTree = "<group>"; };
+		OBJ_160 /* BicubicInterpolationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BicubicInterpolationTests.swift; sourceTree = "<group>"; };
+		OBJ_161 /* BilinearInterpolationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BilinearInterpolationTests.swift; sourceTree = "<group>"; };
+		OBJ_162 /* NearestNeighborInterpolatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearestNeighborInterpolatorTests.swift; sourceTree = "<group>"; };
+		OBJ_164 /* AbsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbsTests.swift; sourceTree = "<group>"; };
+		OBJ_165 /* ClipTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipTests.swift; sourceTree = "<group>"; };
+		OBJ_166 /* PowerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerTests.swift; sourceTree = "<group>"; };
+		OBJ_167 /* RoundingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundingTests.swift; sourceTree = "<group>"; };
+		OBJ_169 /* AppKitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppKitTests.swift; sourceTree = "<group>"; };
+		OBJ_170 /* UIKitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIKitTests.swift; sourceTree = "<group>"; };
+		OBJ_171 /* vImageUtilsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = vImageUtilsTests.swift; sourceTree = "<group>"; };
+		OBJ_173 /* ChannelSubscriptTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelSubscriptTests.swift; sourceTree = "<group>"; };
+		OBJ_174 /* PixelSubscriptTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PixelSubscriptTests.swift; sourceTree = "<group>"; };
+		OBJ_175 /* SubimageSubscriptTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubimageSubscriptTests.swift; sourceTree = "<group>"; };
+		OBJ_177 /* AffineTransformationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AffineTransformationTests.swift; sourceTree = "<group>"; };
+		OBJ_178 /* ConcatenateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConcatenateTests.swift; sourceTree = "<group>"; };
+		OBJ_179 /* HomogeneousTransformationMatrixTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomogeneousTransformationMatrixTests.swift; sourceTree = "<group>"; };
+		OBJ_18 /* Bayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bayer.swift; sourceTree = "<group>"; };
+		OBJ_180 /* PaddingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaddingTests.swift; sourceTree = "<group>"; };
+		OBJ_181 /* ResizeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResizeTests.swift; sourceTree = "<group>"; };
+		OBJ_182 /* TransformationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransformationTests.swift; sourceTree = "<group>"; };
+		OBJ_183 /* TransposeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransposeTests.swift; sourceTree = "<group>"; };
+		OBJ_185 /* Random.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Random.swift; sourceTree = "<group>"; };
+		OBJ_186 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		OBJ_187 /* XCTAssertEqualWithAccuracy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XCTAssertEqualWithAccuracy.swift; sourceTree = "<group>"; };
+		OBJ_189 /* ClampTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClampTests.swift; sourceTree = "<group>"; };
+		OBJ_19 /* Correlation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Correlation.swift; sourceTree = "<group>"; };
+		OBJ_191 /* ApplicationVisualTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationVisualTests.swift; sourceTree = "<group>"; };
+		OBJ_192 /* BayerVisualTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BayerVisualTests.swift; sourceTree = "<group>"; };
+		OBJ_193 /* BlendVisualTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlendVisualTests.swift; sourceTree = "<group>"; };
+		OBJ_194 /* DrawVisualTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawVisualTests.swift; sourceTree = "<group>"; };
+		OBJ_195 /* FilterVisualTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterVisualTests.swift; sourceTree = "<group>"; };
+		OBJ_196 /* FourierTransformerVisualTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FourierTransformerVisualTests.swift; sourceTree = "<group>"; };
+		OBJ_197 /* HistogramEqualizerVisualTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistogramEqualizerVisualTests.swift; sourceTree = "<group>"; };
+		OBJ_198 /* PaddingVisualTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaddingVisualTests.swift; sourceTree = "<group>"; };
+		OBJ_199 /* ResizeVisualTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResizeVisualTests.swift; sourceTree = "<group>"; };
+		OBJ_20 /* FourierTransformer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FourierTransformer.swift; sourceTree = "<group>"; };
+		OBJ_200 /* SubimageVisualTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubimageVisualTests.swift; sourceTree = "<group>"; };
+		OBJ_201 /* TransformationVisualTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransformationVisualTests.swift; sourceTree = "<group>"; };
+		OBJ_202 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		OBJ_203 /* WarpVisualTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WarpVisualTests.swift; sourceTree = "<group>"; };
+		OBJ_21 /* HistogramEqualizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistogramEqualizer.swift; sourceTree = "<group>"; };
+		OBJ_210 /* TestResources */ = {isa = PBXFileReference; lastKnownFileType = folder; path = TestResources; sourceTree = SOURCE_ROOT; };
+		OBJ_211 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		OBJ_212 /* readme.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = readme.md; sourceTree = "<group>"; };
+		OBJ_22 /* Im2col.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Im2col.swift; sourceTree = "<group>"; };
+		OBJ_23 /* IntegralImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntegralImage.swift; sourceTree = "<group>"; };
+		OBJ_25 /* ImageBinaryOperators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageBinaryOperators.swift; sourceTree = "<group>"; };
+		OBJ_26 /* ImageBinaryScalarOperator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageBinaryScalarOperator.swift; sourceTree = "<group>"; };
+		OBJ_27 /* ImageCompoundAssignmentOperator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCompoundAssignmentOperator.swift; sourceTree = "<group>"; };
+		OBJ_28 /* ImageUnaryOperators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageUnaryOperators.swift; sourceTree = "<group>"; };
+		OBJ_29 /* PixelBinaryScalarOperator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PixelBinaryScalarOperator.swift; sourceTree = "<group>"; };
+		OBJ_30 /* PixelCompoundAssignmentOperator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PixelCompoundAssignmentOperator.swift; sourceTree = "<group>"; };
+		OBJ_31 /* PixelRefCompoundAssignmentOperator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PixelRefCompoundAssignmentOperator.swift; sourceTree = "<group>"; };
+		OBJ_32 /* PixelRefScalarCompoundAssignmentOperator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PixelRefScalarCompoundAssignmentOperator.swift; sourceTree = "<group>"; };
+		OBJ_33 /* PixelUnaryOperator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PixelUnaryOperator.swift; sourceTree = "<group>"; };
+		OBJ_34 /* ScalarCompoundAssignmentOperator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScalarCompoundAssignmentOperator.swift; sourceTree = "<group>"; };
+		OBJ_36 /* Blender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Blender.swift; sourceTree = "<group>"; };
+		OBJ_38 /* BitOperations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BitOperations.swift; sourceTree = "<group>"; };
+		OBJ_40 /* ChannelComposition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelComposition.swift; sourceTree = "<group>"; };
+		OBJ_41 /* ChannelwiseConversion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelwiseConversion.swift; sourceTree = "<group>"; };
+		OBJ_42 /* DataTypeConversion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataTypeConversion.swift; sourceTree = "<group>"; };
+		OBJ_43 /* PixelTypeConversion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PixelTypeConversion.swift; sourceTree = "<group>"; };
+		OBJ_44 /* PixelwiseConversion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PixelwiseConversion.swift; sourceTree = "<group>"; };
+		OBJ_46 /* DataContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataContainer.swift; sourceTree = "<group>"; };
+		OBJ_47 /* DataType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataType.swift; sourceTree = "<group>"; };
+		OBJ_49 /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
+		OBJ_50 /* ImageInitializers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageInitializers.swift; sourceTree = "<group>"; };
+		OBJ_51 /* LikeInitializer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeInitializer.swift; sourceTree = "<group>"; };
+		OBJ_53 /* Pixel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pixel.swift; sourceTree = "<group>"; };
+		OBJ_54 /* PixelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PixelProtocol.swift; sourceTree = "<group>"; };
+		OBJ_55 /* PixelRef.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PixelRef.swift; sourceTree = "<group>"; };
+		OBJ_56 /* PixelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PixelType.swift; sourceTree = "<group>"; };
+		OBJ_58 /* DrawCircle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawCircle.swift; sourceTree = "<group>"; };
+		OBJ_59 /* DrawImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawImage.swift; sourceTree = "<group>"; };
+		OBJ_6 /* Package.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
+		OBJ_60 /* DrawLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawLine.swift; sourceTree = "<group>"; };
+		OBJ_61 /* DrawPixel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawPixel.swift; sourceTree = "<group>"; };
+		OBJ_62 /* DrawPolygon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawPolygon.swift; sourceTree = "<group>"; };
+		OBJ_63 /* DrawRect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawRect.swift; sourceTree = "<group>"; };
+		OBJ_64 /* DrawText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawText.swift; sourceTree = "<group>"; };
+		OBJ_66 /* BilateralFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BilateralFilter.swift; sourceTree = "<group>"; };
+		OBJ_67 /* Convolution.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Convolution.swift; sourceTree = "<group>"; };
+		OBJ_68 /* RankFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankFilter.swift; sourceTree = "<group>"; };
+		OBJ_70 /* ImageFileFormat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageFileFormat.swift; sourceTree = "<group>"; };
+		OBJ_71 /* ReadImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadImage.swift; sourceTree = "<group>"; };
+		OBJ_72 /* WriteImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteImage.swift; sourceTree = "<group>"; };
+		OBJ_74 /* BicubicInterpolator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BicubicInterpolator.swift; sourceTree = "<group>"; };
+		OBJ_75 /* BilinearInterpolator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BilinearInterpolator.swift; sourceTree = "<group>"; };
+		OBJ_76 /* Interpolator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Interpolator.swift; sourceTree = "<group>"; };
+		OBJ_77 /* Interpolator4x4.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Interpolator4x4.swift; sourceTree = "<group>"; };
+		OBJ_78 /* LanczosInterpolator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanczosInterpolator.swift; sourceTree = "<group>"; };
+		OBJ_79 /* NearestNeighborInterpolator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearestNeighborInterpolator.swift; sourceTree = "<group>"; };
+		OBJ_81 /* Abs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Abs.swift; sourceTree = "<group>"; };
+		OBJ_82 /* Clip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Clip.swift; sourceTree = "<group>"; };
+		OBJ_83 /* IteratePixels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IteratePixels.swift; sourceTree = "<group>"; };
+		OBJ_84 /* Power.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Power.swift; sourceTree = "<group>"; };
+		OBJ_85 /* Rounding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rounding.swift; sourceTree = "<group>"; };
+		OBJ_87 /* AppKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppKit.swift; sourceTree = "<group>"; };
+		OBJ_88 /* CoreGraphics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreGraphics.swift; sourceTree = "<group>"; };
+		OBJ_89 /* UIKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIKit.swift; sourceTree = "<group>"; };
+		OBJ_9 /* image_io.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = image_io.c; sourceTree = "<group>"; };
+		OBJ_91 /* vImageAlphaBlend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = vImageAlphaBlend.swift; sourceTree = "<group>"; };
+		OBJ_92 /* vImageBuffer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = vImageBuffer.swift; sourceTree = "<group>"; };
+		OBJ_93 /* vImageMorphology.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = vImageMorphology.swift; sourceTree = "<group>"; };
+		OBJ_94 /* vImageUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = vImageUtils.swift; sourceTree = "<group>"; };
+		OBJ_96 /* ChannelSubscript.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelSubscript.swift; sourceTree = "<group>"; };
+		OBJ_97 /* PixelSubscript.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PixelSubscript.swift; sourceTree = "<group>"; };
+		OBJ_98 /* SubimageSubscript.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubimageSubscript.swift; sourceTree = "<group>"; };
+		"Swim::CStbImage::Product" /* CStbImage.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = CStbImage.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		"Swim::PerformanceTests::Product" /* PerformanceTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; path = PerformanceTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		"Swim::Swim::Product" /* Swim.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Swim.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		"Swim::SwimTests::Product" /* SwimTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; path = SwimTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		"Swim::VisualTests::Product" /* VisualTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; path = VisualTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		OBJ_225 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		OBJ_245 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 0;
+			files = (
+				OBJ_246 /* Swim.framework in Frameworks */,
+				OBJ_247 /* CStbImage.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		OBJ_337 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 0;
+			files = (
+				OBJ_338 /* CStbImage.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		OBJ_400 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 0;
+			files = (
+				OBJ_401 /* Swim.framework in Frameworks */,
+				OBJ_402 /* CStbImage.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		OBJ_422 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 0;
+			files = (
+				OBJ_423 /* Swim.framework in Frameworks */,
+				OBJ_424 /* CStbImage.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		OBJ_103 /* Matrix */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_104 /* AffineTransformation.swift */,
+				OBJ_105 /* HomogeneousTransformationMatrix.swift */,
+				OBJ_106 /* ProjectiveTransformation.swift */,
+			);
+			path = Matrix;
+			sourceTree = "<group>";
+		};
+		OBJ_11 /* include */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_12 /* stb_image_write.h */,
+				OBJ_13 /* stb_image.h */,
+				OBJ_14 /* stb_truetype.h */,
+				OBJ_15 /* CStbImage.h */,
+			);
+			path = include;
+			sourceTree = "<group>";
+		};
+		OBJ_112 /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_113 /* ArrayExt.swift */,
+				OBJ_114 /* Clamp.swift */,
+				OBJ_115 /* Interleave.swift */,
+				OBJ_116 /* Rect.swift */,
+				OBJ_117 /* StrideCopy.swift */,
+			);
+			path = Utility;
+			sourceTree = "<group>";
+		};
+		OBJ_118 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_119 /* PerformanceTests */,
+				OBJ_134 /* SwimTests */,
+				OBJ_190 /* VisualTests */,
+			);
+			name = Tests;
+			sourceTree = SOURCE_ROOT;
+		};
+		OBJ_119 /* PerformanceTests */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_120 /* ArithmeticPerformanceTests.swift */,
+				OBJ_121 /* BasicPerformanceTests.swift */,
+				OBJ_122 /* BayerPerformanceTests.swift */,
+				OBJ_123 /* BlendPerformanceTests.swift */,
+				OBJ_124 /* ClipPerformanceTests.swift */,
+				OBJ_125 /* ConversionPerformanceTests.swift */,
+				OBJ_126 /* CorrelationPerformanceTests.swift */,
+				OBJ_127 /* DataTypeConversionPerformanceTests.swift */,
+				OBJ_128 /* DrawPerformanceTests.swift */,
+				OBJ_129 /* FilterPerformanceTests.swift */,
+				OBJ_130 /* PerformanceTests.swift */,
+				OBJ_131 /* ResizePerformanceTests.swift */,
+				OBJ_132 /* RoundingPerformanceTests.swift */,
+				OBJ_133 /* SubscriptPerformanceTests.swift */,
+			);
+			name = PerformanceTests;
+			path = Tests/PerformanceTests;
+			sourceTree = SOURCE_ROOT;
+		};
+		OBJ_134 /* SwimTests */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_135 /* AdvanceTests */,
+				OBJ_140 /* ArithmeticTests */,
+				OBJ_143 /* BooleanTests */,
+				OBJ_145 /* ConversionTests */,
+				OBJ_151 /* CoreTests */,
+				OBJ_154 /* FilterTests */,
+				OBJ_157 /* IOTests */,
+				OBJ_159 /* InterpolationTests */,
+				OBJ_163 /* ManipulationTests */,
+				OBJ_168 /* PlatformTests */,
+				OBJ_172 /* SubscriptTests */,
+				OBJ_176 /* TransformationTests */,
+				OBJ_184 /* Utility */,
+				OBJ_188 /* UtilityTests */,
+			);
+			name = SwimTests;
+			path = Tests/SwimTests;
+			sourceTree = SOURCE_ROOT;
+		};
+		OBJ_135 /* AdvanceTests */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_136 /* BayerTests.swift */,
+				OBJ_137 /* CorrelationTests.swift */,
+				OBJ_138 /* Im2colTests.swift */,
+				OBJ_139 /* IntegralImageTests.swift */,
+			);
+			path = AdvanceTests;
+			sourceTree = "<group>";
+		};
+		OBJ_140 /* ArithmeticTests */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_141 /* ImageArithmeticTests.swift */,
+				OBJ_142 /* MutablePixelRefArithmeticTests.swift */,
+			);
+			path = ArithmeticTests;
+			sourceTree = "<group>";
+		};
+		OBJ_143 /* BooleanTests */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_144 /* BitOperationsTests.swift */,
+			);
+			path = BooleanTests;
+			sourceTree = "<group>";
+		};
+		OBJ_145 /* ConversionTests */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_146 /* ChannelCompositionTests.swift */,
+				OBJ_147 /* ChannelwiseConversionTests.swift */,
+				OBJ_148 /* DataTypeConversionTests.swift */,
+				OBJ_149 /* PixelTypeConversionTests.swift */,
+				OBJ_150 /* PixelwiseConversionTests.swift */,
+			);
+			path = ConversionTests;
+			sourceTree = "<group>";
+		};
+		OBJ_151 /* CoreTests */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_152 /* ImageTests.swift */,
+				OBJ_153 /* LikeInitializerTests.swift */,
+			);
+			path = CoreTests;
+			sourceTree = "<group>";
+		};
+		OBJ_154 /* FilterTests */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_155 /* ConvolutionTests.swift */,
+				OBJ_156 /* FilterTests.swift */,
+			);
+			path = FilterTests;
+			sourceTree = "<group>";
+		};
+		OBJ_157 /* IOTests */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_158 /* ImageIOTests.swift */,
+			);
+			path = IOTests;
+			sourceTree = "<group>";
+		};
+		OBJ_159 /* InterpolationTests */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_160 /* BicubicInterpolationTests.swift */,
+				OBJ_161 /* BilinearInterpolationTests.swift */,
+				OBJ_162 /* NearestNeighborInterpolatorTests.swift */,
+			);
+			path = InterpolationTests;
+			sourceTree = "<group>";
+		};
+		OBJ_16 /* Swim */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_17 /* Advance */,
+				OBJ_24 /* Arithmetic */,
+				OBJ_35 /* Blend */,
+				OBJ_37 /* Boolean */,
+				OBJ_39 /* Conversion */,
+				OBJ_45 /* Core */,
+				OBJ_57 /* Draw */,
+				OBJ_65 /* Filter */,
+				OBJ_69 /* IO */,
+				OBJ_73 /* Interpolation */,
+				OBJ_80 /* Manipulation */,
+				OBJ_86 /* Platform */,
+				OBJ_95 /* Subscript */,
+				OBJ_99 /* Transformation */,
+				OBJ_112 /* Utility */,
+			);
+			name = Swim;
+			path = Sources/Swim;
+			sourceTree = SOURCE_ROOT;
+		};
+		OBJ_163 /* ManipulationTests */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_164 /* AbsTests.swift */,
+				OBJ_165 /* ClipTests.swift */,
+				OBJ_166 /* PowerTests.swift */,
+				OBJ_167 /* RoundingTests.swift */,
+			);
+			path = ManipulationTests;
+			sourceTree = "<group>";
+		};
+		OBJ_168 /* PlatformTests */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_169 /* AppKitTests.swift */,
+				OBJ_170 /* UIKitTests.swift */,
+				OBJ_171 /* vImageUtilsTests.swift */,
+			);
+			path = PlatformTests;
+			sourceTree = "<group>";
+		};
+		OBJ_17 /* Advance */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_18 /* Bayer.swift */,
+				OBJ_19 /* Correlation.swift */,
+				OBJ_20 /* FourierTransformer.swift */,
+				OBJ_21 /* HistogramEqualizer.swift */,
+				OBJ_22 /* Im2col.swift */,
+				OBJ_23 /* IntegralImage.swift */,
+			);
+			path = Advance;
+			sourceTree = "<group>";
+		};
+		OBJ_172 /* SubscriptTests */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_173 /* ChannelSubscriptTests.swift */,
+				OBJ_174 /* PixelSubscriptTests.swift */,
+				OBJ_175 /* SubimageSubscriptTests.swift */,
+			);
+			path = SubscriptTests;
+			sourceTree = "<group>";
+		};
+		OBJ_176 /* TransformationTests */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_177 /* AffineTransformationTests.swift */,
+				OBJ_178 /* ConcatenateTests.swift */,
+				OBJ_179 /* HomogeneousTransformationMatrixTests.swift */,
+				OBJ_180 /* PaddingTests.swift */,
+				OBJ_181 /* ResizeTests.swift */,
+				OBJ_182 /* TransformationTests.swift */,
+				OBJ_183 /* TransposeTests.swift */,
+			);
+			path = TransformationTests;
+			sourceTree = "<group>";
+		};
+		OBJ_184 /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_185 /* Random.swift */,
+				OBJ_186 /* Utils.swift */,
+				OBJ_187 /* XCTAssertEqualWithAccuracy.swift */,
+			);
+			path = Utility;
+			sourceTree = "<group>";
+		};
+		OBJ_188 /* UtilityTests */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_189 /* ClampTests.swift */,
+			);
+			path = UtilityTests;
+			sourceTree = "<group>";
+		};
+		OBJ_190 /* VisualTests */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_191 /* ApplicationVisualTests.swift */,
+				OBJ_192 /* BayerVisualTests.swift */,
+				OBJ_193 /* BlendVisualTests.swift */,
+				OBJ_194 /* DrawVisualTests.swift */,
+				OBJ_195 /* FilterVisualTests.swift */,
+				OBJ_196 /* FourierTransformerVisualTests.swift */,
+				OBJ_197 /* HistogramEqualizerVisualTests.swift */,
+				OBJ_198 /* PaddingVisualTests.swift */,
+				OBJ_199 /* ResizeVisualTests.swift */,
+				OBJ_200 /* SubimageVisualTests.swift */,
+				OBJ_201 /* TransformationVisualTests.swift */,
+				OBJ_202 /* Utils.swift */,
+				OBJ_203 /* WarpVisualTests.swift */,
+			);
+			name = VisualTests;
+			path = Tests/VisualTests;
+			sourceTree = SOURCE_ROOT;
+		};
+		OBJ_204 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				"Swim::VisualTests::Product" /* VisualTests.xctest */,
+				"Swim::SwimTests::Product" /* SwimTests.xctest */,
+				"Swim::CStbImage::Product" /* CStbImage.framework */,
+				"Swim::PerformanceTests::Product" /* PerformanceTests.xctest */,
+				"Swim::Swim::Product" /* Swim.framework */,
+			);
+			name = Products;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		OBJ_24 /* Arithmetic */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_25 /* ImageBinaryOperators.swift */,
+				OBJ_26 /* ImageBinaryScalarOperator.swift */,
+				OBJ_27 /* ImageCompoundAssignmentOperator.swift */,
+				OBJ_28 /* ImageUnaryOperators.swift */,
+				OBJ_29 /* PixelBinaryScalarOperator.swift */,
+				OBJ_30 /* PixelCompoundAssignmentOperator.swift */,
+				OBJ_31 /* PixelRefCompoundAssignmentOperator.swift */,
+				OBJ_32 /* PixelRefScalarCompoundAssignmentOperator.swift */,
+				OBJ_33 /* PixelUnaryOperator.swift */,
+				OBJ_34 /* ScalarCompoundAssignmentOperator.swift */,
+			);
+			path = Arithmetic;
+			sourceTree = "<group>";
+		};
+		OBJ_35 /* Blend */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_36 /* Blender.swift */,
+			);
+			path = Blend;
+			sourceTree = "<group>";
+		};
+		OBJ_37 /* Boolean */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_38 /* BitOperations.swift */,
+			);
+			path = Boolean;
+			sourceTree = "<group>";
+		};
+		OBJ_39 /* Conversion */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_40 /* ChannelComposition.swift */,
+				OBJ_41 /* ChannelwiseConversion.swift */,
+				OBJ_42 /* DataTypeConversion.swift */,
+				OBJ_43 /* PixelTypeConversion.swift */,
+				OBJ_44 /* PixelwiseConversion.swift */,
+			);
+			path = Conversion;
+			sourceTree = "<group>";
+		};
+		OBJ_45 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_46 /* DataContainer.swift */,
+				OBJ_47 /* DataType.swift */,
+				OBJ_48 /* Image */,
+				OBJ_52 /* Pixel */,
+				OBJ_56 /* PixelType.swift */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		OBJ_48 /* Image */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_49 /* Image.swift */,
+				OBJ_50 /* ImageInitializers.swift */,
+				OBJ_51 /* LikeInitializer.swift */,
+			);
+			path = Image;
+			sourceTree = "<group>";
+		};
+		OBJ_5 /*  */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_6 /* Package.swift */,
+				OBJ_7 /* Sources */,
+				OBJ_118 /* Tests */,
+				OBJ_204 /* Products */,
+				OBJ_210 /* TestResources */,
+				OBJ_211 /* LICENSE */,
+				OBJ_212 /* readme.md */,
+			);
+			name = "";
+			sourceTree = "<group>";
+		};
+		OBJ_52 /* Pixel */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_53 /* Pixel.swift */,
+				OBJ_54 /* PixelProtocol.swift */,
+				OBJ_55 /* PixelRef.swift */,
+				A7C8CEE1229650BF0064EDFA /* ColorPixel.swift */,
+			);
+			path = Pixel;
+			sourceTree = "<group>";
+		};
+		OBJ_57 /* Draw */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_58 /* DrawCircle.swift */,
+				OBJ_59 /* DrawImage.swift */,
+				OBJ_60 /* DrawLine.swift */,
+				OBJ_61 /* DrawPixel.swift */,
+				OBJ_62 /* DrawPolygon.swift */,
+				OBJ_63 /* DrawRect.swift */,
+				OBJ_64 /* DrawText.swift */,
+			);
+			path = Draw;
+			sourceTree = "<group>";
+		};
+		OBJ_65 /* Filter */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_66 /* BilateralFilter.swift */,
+				OBJ_67 /* Convolution.swift */,
+				OBJ_68 /* RankFilter.swift */,
+			);
+			path = Filter;
+			sourceTree = "<group>";
+		};
+		OBJ_69 /* IO */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_70 /* ImageFileFormat.swift */,
+				OBJ_71 /* ReadImage.swift */,
+				OBJ_72 /* WriteImage.swift */,
+			);
+			path = IO;
+			sourceTree = "<group>";
+		};
+		OBJ_7 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_8 /* CStbImage */,
+				OBJ_16 /* Swim */,
+			);
+			name = Sources;
+			sourceTree = SOURCE_ROOT;
+		};
+		OBJ_73 /* Interpolation */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_74 /* BicubicInterpolator.swift */,
+				OBJ_75 /* BilinearInterpolator.swift */,
+				OBJ_76 /* Interpolator.swift */,
+				OBJ_77 /* Interpolator4x4.swift */,
+				OBJ_78 /* LanczosInterpolator.swift */,
+				OBJ_79 /* NearestNeighborInterpolator.swift */,
+			);
+			path = Interpolation;
+			sourceTree = "<group>";
+		};
+		OBJ_8 /* CStbImage */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_9 /* image_io.c */,
+				OBJ_10 /* truetype.c */,
+				OBJ_11 /* include */,
+			);
+			name = CStbImage;
+			path = Sources/CStbImage;
+			sourceTree = SOURCE_ROOT;
+		};
+		OBJ_80 /* Manipulation */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_81 /* Abs.swift */,
+				OBJ_82 /* Clip.swift */,
+				OBJ_83 /* IteratePixels.swift */,
+				OBJ_84 /* Power.swift */,
+				OBJ_85 /* Rounding.swift */,
+			);
+			path = Manipulation;
+			sourceTree = "<group>";
+		};
+		OBJ_86 /* Platform */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_87 /* AppKit.swift */,
+				OBJ_88 /* CoreGraphics.swift */,
+				OBJ_89 /* UIKit.swift */,
+				OBJ_90 /* vImage */,
+			);
+			path = Platform;
+			sourceTree = "<group>";
+		};
+		OBJ_90 /* vImage */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_91 /* vImageAlphaBlend.swift */,
+				OBJ_92 /* vImageBuffer.swift */,
+				OBJ_93 /* vImageMorphology.swift */,
+				OBJ_94 /* vImageUtils.swift */,
+			);
+			path = vImage;
+			sourceTree = "<group>";
+		};
+		OBJ_95 /* Subscript */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_96 /* ChannelSubscript.swift */,
+				OBJ_97 /* PixelSubscript.swift */,
+				OBJ_98 /* SubimageSubscript.swift */,
+			);
+			path = Subscript;
+			sourceTree = "<group>";
+		};
+		OBJ_99 /* Transformation */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_100 /* Concatenation.swift */,
+				OBJ_101 /* EdgeMode.swift */,
+				OBJ_102 /* Flip.swift */,
+				OBJ_103 /* Matrix */,
+				OBJ_107 /* Padding.swift */,
+				OBJ_108 /* Resize.swift */,
+				OBJ_109 /* Rotate.swift */,
+				OBJ_110 /* Transpose.swift */,
+				OBJ_111 /* Warp.swift */,
+			);
+			path = Transformation;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		OBJ_220 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 0;
+			files = (
+				OBJ_221 /* stb_image_write.h in Headers */,
+				OBJ_222 /* stb_image.h in Headers */,
+				OBJ_223 /* stb_truetype.h in Headers */,
+				OBJ_224 /* CStbImage.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		"Swim::CStbImage" /* CStbImage */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = OBJ_214 /* Build configuration list for PBXNativeTarget "CStbImage" */;
+			buildPhases = (
+				OBJ_217 /* Sources */,
+				OBJ_220 /* Headers */,
+				OBJ_225 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CStbImage;
+			productName = CStbImage;
+			productReference = "Swim::CStbImage::Product" /* CStbImage.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		"Swim::PerformanceTests" /* PerformanceTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = OBJ_227 /* Build configuration list for PBXNativeTarget "PerformanceTests" */;
+			buildPhases = (
+				OBJ_230 /* Sources */,
+				OBJ_245 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				OBJ_248 /* PBXTargetDependency */,
+				OBJ_250 /* PBXTargetDependency */,
+			);
+			name = PerformanceTests;
+			productName = PerformanceTests;
+			productReference = "Swim::PerformanceTests::Product" /* PerformanceTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		"Swim::SwiftPMPackageDescription" /* SwimPackageDescription */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = OBJ_341 /* Build configuration list for PBXNativeTarget "SwimPackageDescription" */;
+			buildPhases = (
+				OBJ_344 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SwimPackageDescription;
+			productName = SwimPackageDescription;
+			productType = "com.apple.product-type.framework";
+		};
+		"Swim::Swim" /* Swim */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = OBJ_251 /* Build configuration list for PBXNativeTarget "Swim" */;
+			buildPhases = (
+				OBJ_254 /* Sources */,
+				OBJ_337 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				OBJ_339 /* PBXTargetDependency */,
+			);
+			name = Swim;
+			productName = Swim;
+			productReference = "Swim::Swim::Product" /* Swim.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		"Swim::SwimTests" /* SwimTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = OBJ_355 /* Build configuration list for PBXNativeTarget "SwimTests" */;
+			buildPhases = (
+				OBJ_358 /* Sources */,
+				OBJ_400 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				OBJ_403 /* PBXTargetDependency */,
+				OBJ_404 /* PBXTargetDependency */,
+			);
+			name = SwimTests;
+			productName = SwimTests;
+			productReference = "Swim::SwimTests::Product" /* SwimTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		"Swim::VisualTests" /* VisualTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = OBJ_405 /* Build configuration list for PBXNativeTarget "VisualTests" */;
+			buildPhases = (
+				OBJ_408 /* Sources */,
+				OBJ_422 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				OBJ_425 /* PBXTargetDependency */,
+				OBJ_426 /* PBXTargetDependency */,
+			);
+			name = VisualTests;
+			productName = VisualTests;
+			productReference = "Swim::VisualTests::Product" /* VisualTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		OBJ_1 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftMigration = 9999;
+				LastUpgradeCheck = 9999;
+				TargetAttributes = {
+					"Swim::CStbImage" = {
+						LastSwiftMigration = 1020;
+					};
+				};
+			};
+			buildConfigurationList = OBJ_2 /* Build configuration list for PBXProject "Swim" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				English,
+				en,
+			);
+			mainGroup = OBJ_5 /*  */;
+			productRefGroup = OBJ_204 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				"Swim::CStbImage" /* CStbImage */,
+				"Swim::PerformanceTests" /* PerformanceTests */,
+				"Swim::Swim" /* Swim */,
+				"Swim::SwiftPMPackageDescription" /* SwimPackageDescription */,
+				"Swim::SwimPackageTests::ProductTarget" /* SwimPackageTests */,
+				"Swim::SwimTests" /* SwimTests */,
+				"Swim::VisualTests" /* VisualTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		OBJ_217 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 0;
+			files = (
+				OBJ_218 /* image_io.c in Sources */,
+				OBJ_219 /* truetype.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		OBJ_230 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 0;
+			files = (
+				OBJ_231 /* ArithmeticPerformanceTests.swift in Sources */,
+				OBJ_232 /* BasicPerformanceTests.swift in Sources */,
+				OBJ_233 /* BayerPerformanceTests.swift in Sources */,
+				OBJ_234 /* BlendPerformanceTests.swift in Sources */,
+				OBJ_235 /* ClipPerformanceTests.swift in Sources */,
+				OBJ_236 /* ConversionPerformanceTests.swift in Sources */,
+				OBJ_237 /* CorrelationPerformanceTests.swift in Sources */,
+				OBJ_238 /* DataTypeConversionPerformanceTests.swift in Sources */,
+				OBJ_239 /* DrawPerformanceTests.swift in Sources */,
+				OBJ_240 /* FilterPerformanceTests.swift in Sources */,
+				OBJ_241 /* PerformanceTests.swift in Sources */,
+				OBJ_242 /* ResizePerformanceTests.swift in Sources */,
+				OBJ_243 /* RoundingPerformanceTests.swift in Sources */,
+				OBJ_244 /* SubscriptPerformanceTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		OBJ_254 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 0;
+			files = (
+				OBJ_255 /* Bayer.swift in Sources */,
+				OBJ_256 /* Correlation.swift in Sources */,
+				OBJ_257 /* FourierTransformer.swift in Sources */,
+				OBJ_258 /* HistogramEqualizer.swift in Sources */,
+				OBJ_259 /* Im2col.swift in Sources */,
+				OBJ_260 /* IntegralImage.swift in Sources */,
+				OBJ_261 /* ImageBinaryOperators.swift in Sources */,
+				OBJ_262 /* ImageBinaryScalarOperator.swift in Sources */,
+				OBJ_263 /* ImageCompoundAssignmentOperator.swift in Sources */,
+				OBJ_264 /* ImageUnaryOperators.swift in Sources */,
+				OBJ_265 /* PixelBinaryScalarOperator.swift in Sources */,
+				OBJ_266 /* PixelCompoundAssignmentOperator.swift in Sources */,
+				OBJ_267 /* PixelRefCompoundAssignmentOperator.swift in Sources */,
+				OBJ_268 /* PixelRefScalarCompoundAssignmentOperator.swift in Sources */,
+				OBJ_269 /* PixelUnaryOperator.swift in Sources */,
+				OBJ_270 /* ScalarCompoundAssignmentOperator.swift in Sources */,
+				OBJ_271 /* Blender.swift in Sources */,
+				OBJ_272 /* BitOperations.swift in Sources */,
+				OBJ_273 /* ChannelComposition.swift in Sources */,
+				OBJ_274 /* ChannelwiseConversion.swift in Sources */,
+				OBJ_275 /* DataTypeConversion.swift in Sources */,
+				A7C8CEE3229650C20064EDFA /* ColorPixel.swift in Sources */,
+				OBJ_276 /* PixelTypeConversion.swift in Sources */,
+				OBJ_277 /* PixelwiseConversion.swift in Sources */,
+				OBJ_278 /* DataContainer.swift in Sources */,
+				OBJ_279 /* DataType.swift in Sources */,
+				OBJ_280 /* Image.swift in Sources */,
+				OBJ_281 /* ImageInitializers.swift in Sources */,
+				OBJ_282 /* LikeInitializer.swift in Sources */,
+				OBJ_283 /* Pixel.swift in Sources */,
+				OBJ_284 /* PixelProtocol.swift in Sources */,
+				OBJ_285 /* PixelRef.swift in Sources */,
+				OBJ_286 /* PixelType.swift in Sources */,
+				OBJ_287 /* DrawCircle.swift in Sources */,
+				OBJ_288 /* DrawImage.swift in Sources */,
+				OBJ_289 /* DrawLine.swift in Sources */,
+				OBJ_290 /* DrawPixel.swift in Sources */,
+				OBJ_291 /* DrawPolygon.swift in Sources */,
+				OBJ_292 /* DrawRect.swift in Sources */,
+				OBJ_293 /* DrawText.swift in Sources */,
+				OBJ_294 /* BilateralFilter.swift in Sources */,
+				OBJ_295 /* Convolution.swift in Sources */,
+				OBJ_296 /* RankFilter.swift in Sources */,
+				OBJ_297 /* ImageFileFormat.swift in Sources */,
+				OBJ_298 /* ReadImage.swift in Sources */,
+				OBJ_299 /* WriteImage.swift in Sources */,
+				OBJ_300 /* BicubicInterpolator.swift in Sources */,
+				OBJ_301 /* BilinearInterpolator.swift in Sources */,
+				OBJ_302 /* Interpolator.swift in Sources */,
+				OBJ_303 /* Interpolator4x4.swift in Sources */,
+				OBJ_304 /* LanczosInterpolator.swift in Sources */,
+				OBJ_305 /* NearestNeighborInterpolator.swift in Sources */,
+				OBJ_306 /* Abs.swift in Sources */,
+				OBJ_307 /* Clip.swift in Sources */,
+				OBJ_308 /* IteratePixels.swift in Sources */,
+				OBJ_309 /* Power.swift in Sources */,
+				OBJ_310 /* Rounding.swift in Sources */,
+				OBJ_311 /* AppKit.swift in Sources */,
+				OBJ_312 /* CoreGraphics.swift in Sources */,
+				OBJ_313 /* UIKit.swift in Sources */,
+				OBJ_314 /* vImageAlphaBlend.swift in Sources */,
+				OBJ_315 /* vImageBuffer.swift in Sources */,
+				OBJ_316 /* vImageMorphology.swift in Sources */,
+				OBJ_317 /* vImageUtils.swift in Sources */,
+				OBJ_318 /* ChannelSubscript.swift in Sources */,
+				OBJ_319 /* PixelSubscript.swift in Sources */,
+				OBJ_320 /* SubimageSubscript.swift in Sources */,
+				OBJ_321 /* Concatenation.swift in Sources */,
+				OBJ_322 /* EdgeMode.swift in Sources */,
+				OBJ_323 /* Flip.swift in Sources */,
+				OBJ_324 /* AffineTransformation.swift in Sources */,
+				OBJ_325 /* HomogeneousTransformationMatrix.swift in Sources */,
+				OBJ_326 /* ProjectiveTransformation.swift in Sources */,
+				OBJ_327 /* Padding.swift in Sources */,
+				OBJ_328 /* Resize.swift in Sources */,
+				OBJ_329 /* Rotate.swift in Sources */,
+				OBJ_330 /* Transpose.swift in Sources */,
+				OBJ_331 /* Warp.swift in Sources */,
+				OBJ_332 /* ArrayExt.swift in Sources */,
+				OBJ_333 /* Clamp.swift in Sources */,
+				OBJ_334 /* Interleave.swift in Sources */,
+				OBJ_335 /* Rect.swift in Sources */,
+				OBJ_336 /* StrideCopy.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		OBJ_344 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 0;
+			files = (
+				OBJ_345 /* Package.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		OBJ_358 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 0;
+			files = (
+				OBJ_359 /* BayerTests.swift in Sources */,
+				OBJ_360 /* CorrelationTests.swift in Sources */,
+				OBJ_361 /* Im2colTests.swift in Sources */,
+				OBJ_362 /* IntegralImageTests.swift in Sources */,
+				OBJ_363 /* ImageArithmeticTests.swift in Sources */,
+				OBJ_364 /* MutablePixelRefArithmeticTests.swift in Sources */,
+				OBJ_365 /* BitOperationsTests.swift in Sources */,
+				OBJ_366 /* ChannelCompositionTests.swift in Sources */,
+				OBJ_367 /* ChannelwiseConversionTests.swift in Sources */,
+				OBJ_368 /* DataTypeConversionTests.swift in Sources */,
+				OBJ_369 /* PixelTypeConversionTests.swift in Sources */,
+				OBJ_370 /* PixelwiseConversionTests.swift in Sources */,
+				OBJ_371 /* ImageTests.swift in Sources */,
+				OBJ_372 /* LikeInitializerTests.swift in Sources */,
+				OBJ_373 /* ConvolutionTests.swift in Sources */,
+				OBJ_374 /* FilterTests.swift in Sources */,
+				OBJ_375 /* ImageIOTests.swift in Sources */,
+				OBJ_376 /* BicubicInterpolationTests.swift in Sources */,
+				OBJ_377 /* BilinearInterpolationTests.swift in Sources */,
+				OBJ_378 /* NearestNeighborInterpolatorTests.swift in Sources */,
+				OBJ_379 /* AbsTests.swift in Sources */,
+				OBJ_380 /* ClipTests.swift in Sources */,
+				OBJ_381 /* PowerTests.swift in Sources */,
+				OBJ_382 /* RoundingTests.swift in Sources */,
+				OBJ_383 /* AppKitTests.swift in Sources */,
+				OBJ_384 /* UIKitTests.swift in Sources */,
+				OBJ_385 /* vImageUtilsTests.swift in Sources */,
+				OBJ_386 /* ChannelSubscriptTests.swift in Sources */,
+				OBJ_387 /* PixelSubscriptTests.swift in Sources */,
+				OBJ_388 /* SubimageSubscriptTests.swift in Sources */,
+				OBJ_389 /* AffineTransformationTests.swift in Sources */,
+				OBJ_390 /* ConcatenateTests.swift in Sources */,
+				OBJ_391 /* HomogeneousTransformationMatrixTests.swift in Sources */,
+				OBJ_392 /* PaddingTests.swift in Sources */,
+				OBJ_393 /* ResizeTests.swift in Sources */,
+				OBJ_394 /* TransformationTests.swift in Sources */,
+				OBJ_395 /* TransposeTests.swift in Sources */,
+				OBJ_396 /* Random.swift in Sources */,
+				OBJ_397 /* Utils.swift in Sources */,
+				OBJ_398 /* XCTAssertEqualWithAccuracy.swift in Sources */,
+				OBJ_399 /* ClampTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		OBJ_408 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 0;
+			files = (
+				OBJ_409 /* ApplicationVisualTests.swift in Sources */,
+				OBJ_410 /* BayerVisualTests.swift in Sources */,
+				OBJ_411 /* BlendVisualTests.swift in Sources */,
+				OBJ_412 /* DrawVisualTests.swift in Sources */,
+				OBJ_413 /* FilterVisualTests.swift in Sources */,
+				OBJ_414 /* FourierTransformerVisualTests.swift in Sources */,
+				OBJ_415 /* HistogramEqualizerVisualTests.swift in Sources */,
+				OBJ_416 /* PaddingVisualTests.swift in Sources */,
+				OBJ_417 /* ResizeVisualTests.swift in Sources */,
+				OBJ_418 /* SubimageVisualTests.swift in Sources */,
+				OBJ_419 /* TransformationVisualTests.swift in Sources */,
+				OBJ_420 /* Utils.swift in Sources */,
+				OBJ_421 /* WarpVisualTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		OBJ_248 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = "Swim::Swim" /* Swim */;
+			targetProxy = A7C8CEDC22964D330064EDFA /* PBXContainerItemProxy */;
+		};
+		OBJ_250 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = "Swim::CStbImage" /* CStbImage */;
+			targetProxy = A7C8CEDD22964D330064EDFA /* PBXContainerItemProxy */;
+		};
+		OBJ_339 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = "Swim::CStbImage" /* CStbImage */;
+			targetProxy = A7C8CED722964D330064EDFA /* PBXContainerItemProxy */;
+		};
+		OBJ_350 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = "Swim::SwimTests" /* SwimTests */;
+			targetProxy = A7C8CEDE22964D350064EDFA /* PBXContainerItemProxy */;
+		};
+		OBJ_352 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = "Swim::VisualTests" /* VisualTests */;
+			targetProxy = A7C8CEDF22964D350064EDFA /* PBXContainerItemProxy */;
+		};
+		OBJ_354 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = "Swim::PerformanceTests" /* PerformanceTests */;
+			targetProxy = A7C8CEE022964D350064EDFA /* PBXContainerItemProxy */;
+		};
+		OBJ_403 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = "Swim::Swim" /* Swim */;
+			targetProxy = A7C8CED822964D330064EDFA /* PBXContainerItemProxy */;
+		};
+		OBJ_404 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = "Swim::CStbImage" /* CStbImage */;
+			targetProxy = A7C8CED922964D330064EDFA /* PBXContainerItemProxy */;
+		};
+		OBJ_425 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = "Swim::Swim" /* Swim */;
+			targetProxy = A7C8CEDA22964D330064EDFA /* PBXContainerItemProxy */;
+		};
+		OBJ_426 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = "Swim::CStbImage" /* CStbImage */;
+			targetProxy = A7C8CEDB22964D330064EDFA /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		OBJ_215 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				DEFINES_MODULE = YES;
+				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/Sources/CStbImage/include",
+				);
+				INFOPLIST_FILE = Swim.xcodeproj/CStbImage_Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) $(TOOLCHAIN_DIR)/usr/lib/swift/macosx";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				OTHER_CFLAGS = "$(inherited)";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = CStbImage;
+				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGET_NAME = CStbImage;
+				TVOS_DEPLOYMENT_TARGET = 9.0;
+				WATCHOS_DEPLOYMENT_TARGET = 2.0;
+			};
+			name = Debug;
+		};
+		OBJ_216 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				DEFINES_MODULE = YES;
+				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/Sources/CStbImage/include",
+				);
+				INFOPLIST_FILE = Swim.xcodeproj/CStbImage_Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) $(TOOLCHAIN_DIR)/usr/lib/swift/macosx";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				OTHER_CFLAGS = "$(inherited)";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = CStbImage;
+				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited)";
+				SWIFT_VERSION = 5.0;
+				TARGET_NAME = CStbImage;
+				TVOS_DEPLOYMENT_TARGET = 9.0;
+				WATCHOS_DEPLOYMENT_TARGET = 2.0;
+			};
+			name = Release;
+		};
+		OBJ_228 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/Sources/CStbImage/include",
+				);
+				INFOPLIST_FILE = Swim.xcodeproj/PerformanceTests_Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @loader_path/../Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				OTHER_CFLAGS = "$(inherited)";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited)";
+				SWIFT_VERSION = 5.0;
+				TARGET_NAME = PerformanceTests;
+				TVOS_DEPLOYMENT_TARGET = 9.0;
+				WATCHOS_DEPLOYMENT_TARGET = 2.0;
+			};
+			name = Debug;
+		};
+		OBJ_229 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/Sources/CStbImage/include",
+				);
+				INFOPLIST_FILE = Swim.xcodeproj/PerformanceTests_Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @loader_path/../Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				OTHER_CFLAGS = "$(inherited)";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited)";
+				SWIFT_VERSION = 5.0;
+				TARGET_NAME = PerformanceTests;
+				TVOS_DEPLOYMENT_TARGET = 9.0;
+				WATCHOS_DEPLOYMENT_TARGET = 2.0;
+			};
+			name = Release;
+		};
+		OBJ_252 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/Sources/CStbImage/include",
+				);
+				INFOPLIST_FILE = Swim.xcodeproj/Swim_Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) $(TOOLCHAIN_DIR)/usr/lib/swift/macosx";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				OTHER_CFLAGS = "$(inherited)";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = Swim;
+				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited)";
+				SWIFT_VERSION = 5.0;
+				TARGET_NAME = Swim;
+				TVOS_DEPLOYMENT_TARGET = 9.0;
+				WATCHOS_DEPLOYMENT_TARGET = 2.0;
+			};
+			name = Debug;
+		};
+		OBJ_253 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/Sources/CStbImage/include",
+				);
+				INFOPLIST_FILE = Swim.xcodeproj/Swim_Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) $(TOOLCHAIN_DIR)/usr/lib/swift/macosx";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				OTHER_CFLAGS = "$(inherited)";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = Swim;
+				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited)";
+				SWIFT_VERSION = 5.0;
+				TARGET_NAME = Swim;
+				TVOS_DEPLOYMENT_TARGET = 9.0;
+				WATCHOS_DEPLOYMENT_TARGET = 2.0;
+			};
+			name = Release;
+		};
+		OBJ_3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_NS_ASSERTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"SWIFT_PACKAGE=1",
+					"DEBUG=1",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_SWIFT_FLAGS = "-DXcode";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SUPPORTED_PLATFORMS = "macosx iphoneos iphonesimulator appletvos appletvsimulator watchos watchsimulator";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) SWIFT_PACKAGE DEBUG";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				USE_HEADERMAP = NO;
+			};
+			name = Debug;
+		};
+		OBJ_342 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				LD = /usr/bin/true;
+				OTHER_SWIFT_FLAGS = "-swift-version 5 -I $(TOOLCHAIN_DIR)/usr/lib/swift/pm/4_2 -target x86_64-apple-macosx10.10 -sdk /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		OBJ_343 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				LD = /usr/bin/true;
+				OTHER_SWIFT_FLAGS = "-swift-version 5 -I $(TOOLCHAIN_DIR)/usr/lib/swift/pm/4_2 -target x86_64-apple-macosx10.10 -sdk /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		OBJ_348 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Debug;
+		};
+		OBJ_349 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Release;
+		};
+		OBJ_356 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/Sources/CStbImage/include",
+				);
+				INFOPLIST_FILE = Swim.xcodeproj/SwimTests_Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @loader_path/../Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				OTHER_CFLAGS = "$(inherited)";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited)";
+				SWIFT_VERSION = 5.0;
+				TARGET_NAME = SwimTests;
+				TVOS_DEPLOYMENT_TARGET = 9.0;
+				WATCHOS_DEPLOYMENT_TARGET = 2.0;
+			};
+			name = Debug;
+		};
+		OBJ_357 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/Sources/CStbImage/include",
+				);
+				INFOPLIST_FILE = Swim.xcodeproj/SwimTests_Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @loader_path/../Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				OTHER_CFLAGS = "$(inherited)";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited)";
+				SWIFT_VERSION = 5.0;
+				TARGET_NAME = SwimTests;
+				TVOS_DEPLOYMENT_TARGET = 9.0;
+				WATCHOS_DEPLOYMENT_TARGET = 2.0;
+			};
+			name = Release;
+		};
+		OBJ_4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_OPTIMIZATION_LEVEL = s;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"SWIFT_PACKAGE=1",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				OTHER_SWIFT_FLAGS = "-DXcode";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SUPPORTED_PLATFORMS = "macosx iphoneos iphonesimulator appletvos appletvsimulator watchos watchsimulator";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) SWIFT_PACKAGE";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				USE_HEADERMAP = NO;
+			};
+			name = Release;
+		};
+		OBJ_406 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/Sources/CStbImage/include",
+				);
+				INFOPLIST_FILE = Swim.xcodeproj/VisualTests_Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @loader_path/../Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				OTHER_CFLAGS = "$(inherited)";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited)";
+				SWIFT_VERSION = 5.0;
+				TARGET_NAME = VisualTests;
+				TVOS_DEPLOYMENT_TARGET = 9.0;
+				WATCHOS_DEPLOYMENT_TARGET = 2.0;
+			};
+			name = Debug;
+		};
+		OBJ_407 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/Sources/CStbImage/include",
+				);
+				INFOPLIST_FILE = Swim.xcodeproj/VisualTests_Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @loader_path/../Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				OTHER_CFLAGS = "$(inherited)";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited)";
+				SWIFT_VERSION = 5.0;
+				TARGET_NAME = VisualTests;
+				TVOS_DEPLOYMENT_TARGET = 9.0;
+				WATCHOS_DEPLOYMENT_TARGET = 2.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		OBJ_2 /* Build configuration list for PBXProject "Swim" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				OBJ_3 /* Debug */,
+				OBJ_4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		OBJ_214 /* Build configuration list for PBXNativeTarget "CStbImage" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				OBJ_215 /* Debug */,
+				OBJ_216 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		OBJ_227 /* Build configuration list for PBXNativeTarget "PerformanceTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				OBJ_228 /* Debug */,
+				OBJ_229 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		OBJ_251 /* Build configuration list for PBXNativeTarget "Swim" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				OBJ_252 /* Debug */,
+				OBJ_253 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		OBJ_341 /* Build configuration list for PBXNativeTarget "SwimPackageDescription" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				OBJ_342 /* Debug */,
+				OBJ_343 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		OBJ_347 /* Build configuration list for PBXAggregateTarget "SwimPackageTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				OBJ_348 /* Debug */,
+				OBJ_349 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		OBJ_355 /* Build configuration list for PBXNativeTarget "SwimTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				OBJ_356 /* Debug */,
+				OBJ_357 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		OBJ_405 /* Build configuration list for PBXNativeTarget "VisualTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				OBJ_406 /* Debug */,
+				OBJ_407 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = OBJ_1 /* Project object */;
 }
