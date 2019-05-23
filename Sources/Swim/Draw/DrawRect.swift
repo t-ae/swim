@@ -14,6 +14,14 @@ extension Image {
     public mutating func drawRect(origin: (x: Int, y: Int),
                                   size: (width: Int, height: Int),
                                   pixel: Pixel<P, T>) {
+        precondition(size.width >= 0, "size must be positive.")
+        precondition(size.height >= 0, "size must be positive.")
+        
+        guard origin.x < width && origin.y < height else {
+            // Drawing area is out of image.
+            return
+        }
+        
         let bottom = origin.y + size.height
         
         for y in origin.y..<bottom {
@@ -26,6 +34,13 @@ extension Image {
     public mutating func drawRectPelimeter(origin: (x: Int, y: Int),
                                            size: (width: Int, height: Int),
                                            pixel: Pixel<P, T>) {
+        precondition(size.width >= 0, "size must be positive.")
+        precondition(size.height >= 0, "size must be positive.")
+        
+        guard origin.x < width && origin.y < height else {
+            // Drawing area is out of image.
+            return
+        }
         
         let right = origin.x + size.width
         let bottom = origin.y + size.height

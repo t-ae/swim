@@ -92,4 +92,12 @@ extension Image {
             }
         }
     }
+    
+    /// Draw polygon pelimeter.
+    ///
+    /// Same as `drawLines` with `close: true`.
+    @inlinable
+    public mutating func drawPolygonPelimeter(points: [(x: Int, y: Int)], pixel: Pixel<P, T>) {
+        drawLines(points: points, pixel: pixel, close: true)
+    }
 }

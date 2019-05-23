@@ -2,11 +2,23 @@ extension Image where P: NoAlpha {
     /// Draw image.
     ///
     /// This method only overwrites the pixel values.
+    ///
+    /// - Parameters:
+    ///   - origin: Origin in `self` to draw
+    ///   - image: Image to draw.
+    ///   - mask: If given, `image[x, y]` is drawn iff `mask[x, y]` is `true`.
+    /// - Precondition: `image` and `mask` have same size.
     @inlinable
     public mutating func drawImage(origin: (x: Int, y: Int),
                                    image: Image,
                                    mask: Image<Gray, Bool>? = nil) {
         precondition(image.size == mask?.size ?? image.size, "Image and mask must have same size.")
+        
+        guard origin.x < width && origin.y < height
+            && origin.x + image.width > 0 && origin.y + image.height > 0 else {
+            // Drawing area is out of image.
+            return
+        }
         
         let selfRangeX = max(origin.x, 0)..<min(origin.x + image.width, width)
         let selfRangeY = max(origin.y, 0)..<min(origin.y + image.height, height)
@@ -32,6 +44,12 @@ extension Image where P: NoAlpha, T: BinaryFloatingPoint {
     @inlinable
     public mutating func drawImage<P2: HasAlpha>(origin: (x: Int, y: Int),
                                                  image: Image<P2, T>) where P2.BaseType == P {
+        guard origin.x < width && origin.y < height
+            && origin.x + image.width > 0 && origin.y + image.height > 0 else {
+                // Drawing area is out of image.
+                return
+        }
+        
         let selfRangeX = max(origin.x, 0)..<min(origin.x + image.width, width)
         let selfRangeY = max(origin.y, 0)..<min(origin.y + image.height, height)
         
@@ -57,6 +75,12 @@ extension Image where P: HasAlpha, T: BinaryFloatingPoint {
     @inlinable
     public mutating func drawImage<P2: HasAlpha>(origin: (x: Int, y: Int),
                                                  image: Image<P2, T>) where P2.BaseType == P.BaseType{
+        guard origin.x < width && origin.y < height
+            && origin.x + image.width > 0 && origin.y + image.height > 0 else {
+                // Drawing area is out of image.
+                return
+        }
+        
         let selfRangeX = max(origin.x, 0)..<min(origin.x + image.width, width)
         let selfRangeY = max(origin.y, 0)..<min(origin.y + image.height, height)
         
