@@ -71,7 +71,7 @@ extension Filter where T == Double {
     /// - Parameters:
     ///   - size: Width/height of imege.
     ///   - sigma2: Variance of Gaussian.
-    ///   - scaleTo1: If true, output pixel valuues are scaled so that these sum is 1.
+    ///   - scaleTo1: If true, output pixel values are scaled so that these sum is 1.
     @inlinable
     public static func gaussian(size: Int, sigma2: T, scaleTo1: Bool = false) -> Image<Gray, T> {
         precondition(sigma2 > 0, "sigma2 must be greater than 0.")
