@@ -147,6 +147,54 @@ class DrawVisualTests: XCTestCase {
         XCTAssertTrue(nsImage.isValid, "Break and check nsImage in debugger.")
     }
     
+    func testDrawImageAlphaBlend_UInt8_RGB() {
+        var color: Image<RGB, UInt8> = rainbowImage256()
+        let alpha: Image<Gray, UInt8> = gradiationImage256()
+        let rgba = Image(rgb: color, a: alpha).transposed()
+        
+        color.drawImage(origin: (0, 0), image: rgba)
+        
+        let nsImage = color.nsImage()
+        
+        XCTAssertTrue(nsImage.isValid, "Break and check nsImage in debugger.")
+    }
+    
+    func testDrawImageAlphaBlend_Double_RGB() {
+        var color: Image<RGB, Double> = rainbowImage256()
+        let alpha: Image<Gray, Double> = gradiationImage256()
+        let rgba = Image(rgb: color, a: alpha).transposed()
+        
+        color.drawImage(origin: (0, 0), image: rgba)
+        
+        let nsImage = color.nsImage()
+        
+        XCTAssertTrue(nsImage.isValid, "Break and check nsImage in debugger.")
+    }
+    
+    func testDrawImageAlphaBlend_UInt8_RGBA() {
+        let color: Image<RGB, UInt8> = rainbowImage256()
+        let alpha: Image<Gray, UInt8> = gradiationImage256()
+        var rgba = Image(rgb: color, a: alpha)
+        
+        rgba.drawImage(origin: (0, 0), image: rgba.transposed())
+        
+        let nsImage = rgba.nsImage()
+        
+        XCTAssertTrue(nsImage.isValid, "Break and check nsImage in debugger.")
+    }
+    
+    func testDrawImageAlphaBlend_Double_RGBA() {
+        let color: Image<RGB, Double> = rainbowImage256()
+        let alpha: Image<Gray, Double> = gradiationImage256()
+        var rgba = Image(rgb: color, a: alpha)
+        
+        rgba.drawImage(origin: (0, 0), image: rgba.transposed())
+        
+        let nsImage = rgba.nsImage()
+        
+        XCTAssertTrue(nsImage.isValid, "Break and check nsImage in debugger.")
+    }
+    
     func testCreateTextImage() {
         guard let font = try? TrueTypeFont(url: URL(fileURLWithPath: "/System/Library/Fonts/ヒラギノ明朝 ProN.ttc"), fontSize: 50) else {
             XCTFail("Font not found.")
