@@ -307,6 +307,52 @@ extension Image where P: NoAlpha, T: BinaryFloatingPoint {
     }
 }
 
+// Providing this to solve ambiguity of `image.drawText(origin: ..., color: .red)`.
+extension Image where P == RGB, T: BinaryInteger {
+    /// Draw text in image.
+    ///
+    /// If you want to know the size of text area in advance, use `getTextImageSize`.
+    @inlinable
+    public mutating func drawText(origin: (x: Int, y: Int),
+                                  text: String,
+                                  font: TrueTypeFont,
+                                  lineGap: Int? = nil,
+                                  color: Pixel<RGBA, T>) {
+        guard origin.x < width && origin.y < height else {
+            // Drawing area is out of image.
+            return
+        }
+        let colorImage = Image<RGBA, T>.createTextImage(text: text,
+                                                        font: font,
+                                                        lineGap: lineGap,
+                                                        color: color)
+        drawImage(origin: origin, image: colorImage)
+    }
+}
+
+// Providing this to solve ambiguity of `image.drawText(origin: ..., color: .red)`.
+extension Image where P == RGB, T: BinaryFloatingPoint {
+    /// Draw text in image.
+    ///
+    /// If you want to know the size of text area in advance, use `getTextImageSize`.
+    @inlinable
+    public mutating func drawText(origin: (x: Int, y: Int),
+                                  text: String,
+                                  font: TrueTypeFont,
+                                  lineGap: Int? = nil,
+                                  color: Pixel<RGBA, T>) {
+        guard origin.x < width && origin.y < height else {
+            // Drawing area is out of image.
+            return
+        }
+        let colorImage = Image<RGBA, T>.createTextImage(text: text,
+                                                        font: font,
+                                                        lineGap: lineGap,
+                                                        color: color)
+        drawImage(origin: origin, image: colorImage)
+    }
+}
+
 extension Image where P: HasAlpha, T: BinaryInteger {
     /// Draw text in image.
     ///

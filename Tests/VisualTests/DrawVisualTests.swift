@@ -6,16 +6,16 @@ class DrawVisualTests: XCTestCase {
     func testDrawLine() {
         var image = Image<Gray, UInt8>(width: 201, height: 201, value: 0)
         
-        image.drawLine(p1: (50, 0), p2: (150, 200), color: Pixel(gray: 255))
-        image.drawLine(p1: (150, 0), p2: (50, 200), color: Pixel(gray: 255))
+        image.drawLine(p1: (50, 0), p2: (150, 200), color: .white)
+        image.drawLine(p1: (150, 0), p2: (50, 200), color: .white)
         
-        image.drawLine(p1: (0, 50), p2: (200, 150), color: Pixel(gray: 255))
-        image.drawLine(p1: (0, 150), p2: (200, 50), color: Pixel(gray: 255))
+        image.drawLine(p1: (0, 50), p2: (200, 150), color: .white)
+        image.drawLine(p1: (0, 150), p2: (200, 50), color: .white)
         
-        image.drawLine(p1: (100, 0), p2: (100, 200), color: Pixel(gray: 255))
-        image.drawLine(p1: (0, 100), p2: (200, 100), color: Pixel(gray: 255))
+        image.drawLine(p1: (100, 0), p2: (100, 200), color: .white)
+        image.drawLine(p1: (0, 100), p2: (200, 100), color: .white)
         
-        image.drawLines(points: [(10, 10), (190, 190), (190, 10), (10, 190)], color: Pixel(gray: 128))
+        image.drawLines(points: [(10, 10), (190, 190), (190, 10), (10, 190)], color: .gray)
         
         image.drawX(center: (60, 10), size: 5, color: Pixel(gray: 192))
         image.drawX(center: (70, 10), size: 6, color: Pixel(gray: 192))
@@ -31,9 +31,9 @@ class DrawVisualTests: XCTestCase {
         image.drawCircle(center: (100, 100), radius: 112, color: Pixel(value: 96))
         image.drawCircle(center: (50, 50), radius: 50, color: Pixel(value: 192))
         
-        image.drawCirclePelimeter(center: (100, 100), radius: 30, color: Pixel(value: 255))
+        image.drawCirclePelimeter(center: (100, 100), radius: 30, color: .white)
         
-        image.drawCirclePelimeter(center: (150, 150), radius: 70, color: Pixel(value: 255))
+        image.drawCirclePelimeter(center: (150, 150), radius: 70, color: .white)
         
         let ns = image.nsImage()
         XCTAssertTrue(ns.isValid, "break here")
@@ -59,18 +59,18 @@ class DrawVisualTests: XCTestCase {
         var image = Image<Gray, UInt8>(width: 201, height: 201, value: 0)
         
         // clockwise
-        image.drawPolygon(points: [(0, 30), (15, 0), (30, 25)], color: Pixel(gray: 255))
+        image.drawPolygon(points: [(0, 30), (15, 0), (30, 25)], color: .white)
         // counter clockwise
-        image.drawPolygon(points: [(110, 30), (130, 25), (115, 0)], color: Pixel(gray: 255))
+        image.drawPolygon(points: [(110, 30), (130, 25), (115, 0)], color: .white)
         // not convex
         image.drawPolygon(points: [(0, 130), (30, 200), (60, 130), (30, 170)], color: Pixel(gray: 255))
-        image.drawPolygon(points: [(100, 200), (130, 150), (100, 100), (150, 130), (200, 100), (170, 150), (200, 200), (150, 170)], color: Pixel(gray: 255))
+        image.drawPolygon(points: [(100, 200), (130, 150), (100, 100), (150, 130), (200, 100), (170, 150), (200, 200), (150, 170)], color: .white)
         
         // self-intersecting
-        image.drawPolygon(points: [(50, 50), (100, 50), (50, 100), (100, 100)], color: Pixel(gray: 255))
+        image.drawPolygon(points: [(50, 50), (100, 50), (50, 100), (100, 100)], color: .white)
         
         // zigzag
-        image.drawPolygon(points: [(100, 90), (200, 90), (200, 50), (190, 80), (180, 50), (170, 80), (160, 50), (150, 80), (140, 50), (130, 80), (120, 50), (110, 80), (100, 50)], color: Pixel(gray: 255))
+        image.drawPolygon(points: [(100, 90), (200, 90), (200, 50), (190, 80), (180, 50), (170, 80), (160, 50), (150, 80), (140, 50), (130, 80), (120, 50), (110, 80), (100, 50)], color: .white)
         
         let ns = image.nsImage()
         
@@ -109,15 +109,15 @@ class DrawVisualTests: XCTestCase {
                                             value: 0.9)
         
         var red = Image<RGBA, Double>(width: 201, height: 201, value: 0)
-        red.drawCircle(center: (100, 100), radius: 100, color: Pixel(r: 1, g: 0, b: 0, a: 1))
+        red.drawCircle(center: (100, 100), radius: 100, color: .red)
         red.drawCircle(center: (100, 100), radius:  95, color: Pixel(r: 1, g: 0, b: 0, a: 0.5))
         
         var green = Image<ARGB, Double>(width: 201, height: 201, value: 0)
-        green.drawCircle(center: (100, 100), radius: 100, color: Pixel(a: 1.0, r: 0, g: 1, b: 0))
+        green.drawCircle(center: (100, 100), radius: 100, color: .green)
         green.drawCircle(center: (100, 100), radius:  95, color: Pixel(a: 0.5, r: 0, g: 1, b: 0))
         
         var blue = Image<RGBA, Double>(width: 201, height: 201, value: 0)
-        blue.drawCircle(center: (100, 100), radius: 100, color: Pixel(r: 0, g: 0, b: 1, a: 1))
+        blue.drawCircle(center: (100, 100), radius: 100, color: .blue)
         blue.drawCircle(center: (100, 100), radius:  95, color: Pixel(r: 0, g: 0, b: 1, a: 0.5))
         
         imageBase.drawImage(origin: (150, 100), image: red)
@@ -135,7 +135,7 @@ class DrawVisualTests: XCTestCase {
                                                  value: 0)
         
         var circle = Image<GrayAlpha, Double>(width: 201, height: 201, value: 0)
-        circle.drawCircle(center: (100, 100), radius: 100, color: Pixel(gray: 1, alpha: 1.0))
+        circle.drawCircle(center: (100, 100), radius: 100, color: .white)
         circle.drawCircle(center: (100, 100), radius:  95, color: Pixel(gray: 1, alpha: 0.5))
         
         imageBase.drawImage(origin: (150, 100), image: circle)
@@ -267,7 +267,7 @@ class DrawVisualTests: XCTestCase {
         
         let size = Image.getTextImageSize(text: "LENA", font: font)
         
-        lena.drawText(origin: (0, 0), text: "LENA", font: font, color: Pixel(r: 0, g: 0, b: 0, a: 255))
+        lena.drawText(origin: (0, 0), text: "LENA", font: font, color: .black)
         lena.drawText(origin: (50, 50), text: "LENA", font: font, color: Pixel(r: 0, g: 0, b: 255, a: 200))
         
         lena.drawText(origin: (511-size.width, 256), text: "LENA", font: font, color: Pixel(r: 0, g: 255, b: 255, a: 200))
