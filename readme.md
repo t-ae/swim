@@ -173,6 +173,7 @@ let integral = IntegralImageConverter.convert(image: image)
 let image = Image<Gray, Float>(contentsOf: url)!
 let blur = image.convoluted(Filter.gaussian3x3)
 let maximum = image.rankFilter(.maximum, kernelSize: 3)
+let bilateral = image.bilateralFilter(kernelSize: 5, sigma2_1: 1, sigma2_2: 0.01)
 ```
 
 [Example: Gaussian x10 / Mean x10 / Emboss / Sobel(Horizontal) / Laplacian](https://github.com/t-ae/swim/blob/af1fa115cffe7c20513cb37e91e1549790fb2a5c/Tests/VisualTests/FilterVisualTests.swift#L68-L98)

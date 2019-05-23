@@ -1,6 +1,11 @@
 import Foundation
 
 extension Image where T == Double {
+    /// Apply bilateral filter.
+    ///
+    /// - Parameters:
+    ///   - sigma2_1: Variance of distance gaussian.
+    ///   - sigma2_2: Variance of pixel value gaussian.
     @inlinable
     public func bilateralFilter(kernelSize: Int, sigma2_1: Double, sigma2_2: Double) -> Image {
         var newImage = Image<P, T>(width: width, height: height, value: 0)
