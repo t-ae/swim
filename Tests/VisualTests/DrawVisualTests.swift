@@ -2,7 +2,11 @@ import XCTest
 import Swim
 
 class DrawVisualTests: XCTestCase {
+}
 
+#if canImport(AppKit)
+
+extension DrawVisualTests {
     func testDrawLine() {
         var image = Image<Gray, UInt8>(width: 201, height: 201, value: 0)
         
@@ -292,3 +296,5 @@ class DrawVisualTests: XCTestCase {
         XCTAssertTrue(nsImage.isValid, "Break and check nsImage in debugger.")
     }
 }
+
+#endif

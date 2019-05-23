@@ -2,6 +2,11 @@ import XCTest
 import Swim
 
 class TransformationVisualTests: XCTestCase {
+}
+
+#if canImport(AppKit)
+
+extension TransformationVisualTests {
     func testTransform() {
         let path = testResoruceRoot().appendingPathComponent("lena_128.png")
         let lena = try! Image<RGB, Double>(contentsOf: path)
@@ -20,3 +25,5 @@ class TransformationVisualTests: XCTestCase {
         XCTAssertTrue(ns.isValid, "break here")
     }
 }
+
+#endif

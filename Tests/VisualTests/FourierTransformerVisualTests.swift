@@ -2,6 +2,11 @@ import XCTest
 import Swim
 
 class FourierTransformerVisualTests: XCTestCase {
+}
+
+#if canImport(AppKit)
+
+extension FourierTransformerVisualTests {
     func testFFT() {
         let path = testResoruceRoot().appendingPathComponent("lena_512_gray.png")
         let lena = try! Image<Gray, Double>(contentsOf: path).resize(width: 256, height: 256)
@@ -78,3 +83,5 @@ class FourierTransformerVisualTests: XCTestCase {
         XCTAssertTrue(ns.isValid, "break here")
     }
 }
+
+#endif
