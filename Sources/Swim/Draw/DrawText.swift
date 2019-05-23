@@ -76,7 +76,7 @@ public struct TrueTypeFont {
 
 @inlinable
 func getCodepoint(char: Character) -> Int32 {
-    return Int32(char.unicodeScalars.reduce(0) { acc, v in (acc << 8) & v.value })
+    return Int32(char.unicodeScalars.reduce(0) { acc, v in (acc << 8) | v.value })
 }
 
 extension Image where P == Gray, T == UInt8 {
