@@ -17,6 +17,9 @@ extension EdgeMode where T: AdditiveArithmetic {
 }
 
 extension EdgeMode {
+    /// Clamp value into `0..<max` by self mode.
+    ///
+    /// Return `nil` if `self` is `.constant` and `value` is out of range.
     @inlinable
     func clampValue(value: Int, max: Int) -> Int? {
         guard value < 0 || value >= max else {

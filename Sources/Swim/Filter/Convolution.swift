@@ -107,18 +107,13 @@ extension Image where T: Numeric {
         let padLeft = (filter.width-1)/2
         let padTop = (filter.height-1)/2
         
-        for py in 0..<filter.height {
-            for y in 0..<height {
-                let yy = clamp(y+py-padTop, min: 0, max: height-1)
-                
+        newImage.pixelwiseConvert { ref in
+            for py in 0..<filter.height {
+                let yy = clamp(ref.y+py-padTop, min: 0, max: height-1)
                 for px in 0..<filter.width {
-                    for x in 0..<width {
-                        let xx = clamp(x+px-padLeft, min: 0, max: width-1)
-                        
-                        for c in 0..<P.channels {
-                            newImage[x, y, c] += self[xx, yy, c] * filter[px, py, .gray]
-                        }
-                    }
+                    let xx = clamp(ref.x+px-padLeft, min: 0, max: width-1)
+
+                    ref.add(x: xx, y: yy, in: self, with: filter[px, py, .gray])
                 }
             }
         }
