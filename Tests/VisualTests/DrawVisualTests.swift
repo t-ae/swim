@@ -193,7 +193,11 @@ class DrawVisualTests: XCTestCase {
         Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
         """
         
-        lena.drawText(origin: (0, 300), text: lorem, font: font2, pixel: Pixel(r: 0, g: 0, b: 0, a: 1))
+        lena.drawText(origin: (0, 300),
+                      text: lorem,
+                      font: font2,
+                      lineGap: 0,
+                      pixel: Pixel(r: 0, g: 0, b: 0, a: 1))
         
         let nsImage = doubleToNSImage(lena)
         

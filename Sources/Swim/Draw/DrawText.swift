@@ -29,7 +29,7 @@ public struct TrueTypeFont {
     /// - Parameters:
     ///   - url: URL of ttf/ttc file.
     ///   - fontIndex: Index of font in ttc file. If file is ttf, set 0. Default: 0.
-    ///   - fontSize: Font size in pixels.
+    ///   - fontSize: Font size in pixel.
     public init(url: URL,
                 fontIndex: Int = 0,
                 fontSize: Float) throws {
@@ -62,40 +62,66 @@ public struct TrueTypeFont {
 
 extension Image where P == Gray, T == UInt8 {
     /// Compute size of bounding box which covers text.
+    ///
+    /// - Parameters:
+    ///   - lineGap: Gap between lines in pixel. If nil, proper size will be used. Default: nil.
     @inlinable
     public static func getTextImageSize(text: String,
-                                        font: TrueTypeFont) -> (width: Int, height: Int) {
+                                        font: TrueTypeFont,
+                                        lineGap: Int? = nil) -> (width: Int, height: Int) {
         let metrics = getTextImageMetrics(text: text, font: font)
         return (metrics.width, metrics.height)
     }
     
-    public static func getTextImageMetrics(text: String, font: TrueTypeFont) -> TextImageMetrics {
+    /// Get text image metrics
+    ///
+    /// - Parameters:
+    ///   - lineGap: Gap between lines in pixel. If nil, proper size will be used. Default: nil.
+    public static func getTextImageMetrics(text: String,
+                                           font: TrueTypeFont,
+                                           lineGap: Int? = nil) -> TextImageMetrics {
+        precondition(lineGap ?? Int.max >= 0, "lineGap must be positive.")
         var ascent: Int32 = 0
         var descent: Int32 = 0
-        var lineGap: Int32 = 0
+        var autoLineGap: Int32 = 0
         
-        get_vmetrics(font.info, &ascent, &descent, &lineGap)
+        get_vmetrics(font.info, &ascent, &descent, &autoLineGap)
         
         let scale = font.fontSize / Float(ascent - descent)
+        
+        // unscaled lineGap
+        let lineGap: Int32 = lineGap.map { Int32(Float($0) / scale) } ?? autoLineGap
         
         let lineHeight = Int(Float(ascent - descent)*scale)
         
         var maxWidth = 0
         var lineNum = 0
         
+        var lastLineHeight = 0
         text.enumerateLines { line, _ in
             lineNum += 1
             
             var width = 0
+            var actualLineHeight = lineHeight
             
             let codepoints = line.map { c in
                 Int32(c.unicodeScalars.reduce(0) { acc, v in acc << 8 + v.value })
             }
             
             for i in 0..<codepoints.count {
+                var ix0: Int32 = 0
+                var iy0: Int32 = 0
+                var ix1: Int32 = 0
+                var iy1: Int32 = 0
+                get_codepoint_bitmap_box(font.info, codepoints[i], scale, &ix0, &iy0, &ix1, &iy1)
+                
                 var advanceWidth: Int32 = 0
                 var leftSideBearing: Int32 = 0
                 get_hmetrics(font.info, codepoints[i], &advanceWidth, &leftSideBearing)
+                
+                // iy1 is height below baseline
+                let charHeight = Int(Float(ascent)*scale) + Int(iy1)
+                actualLineHeight = max(charHeight, actualLineHeight)
                 
                 width += Int(Float(advanceWidth) * scale)
                 
@@ -107,22 +133,28 @@ extension Image where P == Gray, T == UInt8 {
             }
             
             maxWidth = max(width, maxWidth)
+            lastLineHeight = actualLineHeight
         }
         
-        // FIXME: we don't need lineGap for last line.
-        // But some characters, like `q`, are renderd beyond descent.
-        // So lineGap is added for last line.
-        let height = lineNum * lineHeight + (lineNum-0) * Int(Float(lineGap) * scale)
+        /// Some characters can protrule beyond lineHeight.
+        /// All lines but last line has lineGap and below line so protrusion is OK.
+        /// Only last line we have to consider its actual height.
+        let height = (lineNum-1) * (lineHeight + Int(Float(lineGap) * scale)) + lastLineHeight
         
         return TextImageMetrics(text: text, width: maxWidth, height: height,
                                 ascent: ascent, descent: descent, lineGap: lineGap, scale: scale)
     }
     
     /// Create image contains specified text.
+    ///
+    /// - Parameters:
+    ///   - lineGap: Gap between lines in pixel. If nil, proper size will be used. Default: nil.
     @inlinable
     public static func createTextImage(text: String,
-                                       font: TrueTypeFont) -> Image {
-        let metrics = getTextImageMetrics(text: text, font: font)
+                                       font: TrueTypeFont,
+                                       lineGap: Int? = nil) -> Image {
+        precondition(lineGap ?? Int.max >= 0, "lineGap must be positive.")
+        let metrics = getTextImageMetrics(text: text, font: font, lineGap: lineGap)
         var image = Image<Gray, UInt8>(width: metrics.width, height: metrics.height, value: 0)
         
         let scale = metrics.scale
@@ -182,8 +214,9 @@ extension Image where P: NoAlpha, T: BinaryFloatingPoint {
     public mutating func drawText<P2: HasAlpha>(origin: (x: Int, y: Int),
                                                 text: String,
                                                 font: TrueTypeFont,
+                                                lineGap: Int? = nil,
                                                 pixel: Pixel<P2, T>) where P2.BaseType == P {
-        let grayImage = Image<Gray, UInt8>.createTextImage(text: text, font: font)
+        let grayImage = Image<Gray, UInt8>.createTextImage(text: text, font: font, lineGap: lineGap)
         
         var colorImage = Image<P2, T>.full(pixel: pixel, like: grayImage)
         
@@ -206,8 +239,9 @@ extension Image where P: HasAlpha, T: BinaryFloatingPoint {
     public mutating func drawText(origin: (x: Int, y: Int),
                                   text: String,
                                   font: TrueTypeFont,
+                                  lineGap: Int? = nil,
                                   pixel: Pixel<P, T>) {
-        let grayImage = Image<Gray, UInt8>.createTextImage(text: text, font: font)
+        let grayImage = Image<Gray, UInt8>.createTextImage(text: text, font: font, lineGap: lineGap)
         
         var colorImage = Image<P, T>.full(pixel: pixel, like: grayImage)
         
