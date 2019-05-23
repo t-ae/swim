@@ -12,32 +12,32 @@ class AppKitTests: XCTestCase {
         let yRange = 0..<256
         
         var start = 0
-        gray.drawRect(start..<start+32, yRange, pixel: Pixel(gray: 0))
-        rgba.drawRect(start..<start+32, yRange, pixel: Pixel(r: 0, g: 0, b: 0, a: 255))
+        gray.drawRect(start..<start+32, yRange, color: Pixel(gray: 0))
+        rgba.drawRect(start..<start+32, yRange, color: Pixel(r: 0, g: 0, b: 0, a: 255))
         start += 32
-        gray.drawRect(start..<start+32, yRange, pixel: Pixel(gray: UInt8(start)))
-        rgba.drawRect(start..<start+32, yRange, pixel: Pixel(r: 255, g: 0, b: 0, a: 255))
+        gray.drawRect(start..<start+32, yRange, color: Pixel(gray: UInt8(start)))
+        rgba.drawRect(start..<start+32, yRange, color: Pixel(r: 255, g: 0, b: 0, a: 255))
         start += 32
-        gray.drawRect(start..<start+32, yRange, pixel: Pixel(gray: UInt8(start)))
-        rgba.drawRect(start..<start+32, yRange, pixel: Pixel(r: 0, g: 255, b: 0, a: 255))
+        gray.drawRect(start..<start+32, yRange, color: Pixel(gray: UInt8(start)))
+        rgba.drawRect(start..<start+32, yRange, color: Pixel(r: 0, g: 255, b: 0, a: 255))
         start += 32
-        gray.drawRect(start..<start+32, yRange, pixel: Pixel(gray: UInt8(start)))
-        rgba.drawRect(start..<start+32, yRange, pixel: Pixel(r: 0, g: 0, b: 255, a: 255))
+        gray.drawRect(start..<start+32, yRange, color: Pixel(gray: UInt8(start)))
+        rgba.drawRect(start..<start+32, yRange, color: Pixel(r: 0, g: 0, b: 255, a: 255))
         start += 32
-        gray.drawRect(start..<start+32, yRange, pixel: Pixel(gray: UInt8(start)))
-        rgba.drawRect(start..<start+32, yRange, pixel: Pixel(r: 255, g: 255, b: 0, a: 255))
+        gray.drawRect(start..<start+32, yRange, color: Pixel(gray: UInt8(start)))
+        rgba.drawRect(start..<start+32, yRange, color: Pixel(r: 255, g: 255, b: 0, a: 255))
         start += 32
-        gray.drawRect(start..<start+32, yRange, pixel: Pixel(gray: UInt8(start)))
-        rgba.drawRect(start..<start+32, yRange, pixel: Pixel(r: 0, g: 255, b: 255, a: 255))
+        gray.drawRect(start..<start+32, yRange, color: Pixel(gray: UInt8(start)))
+        rgba.drawRect(start..<start+32, yRange, color: Pixel(r: 0, g: 255, b: 255, a: 255))
         start += 32
-        gray.drawRect(start..<start+32, yRange, pixel: Pixel(gray: UInt8(start)))
-        rgba.drawRect(start..<start+32, yRange, pixel: Pixel(r: 255, g: 0, b: 255, a: 255))
+        gray.drawRect(start..<start+32, yRange, color: Pixel(gray: UInt8(start)))
+        rgba.drawRect(start..<start+32, yRange, color: Pixel(r: 255, g: 0, b: 255, a: 255))
         start += 32
-        gray.drawRect(start..<start+32, yRange, pixel: Pixel(gray: 255))
-        rgba.drawRect(start..<start+32, yRange, pixel: Pixel(r: 255, g: 255, b: 255, a: 255))
+        gray.drawRect(start..<start+32, yRange, color: Pixel(gray: 255))
+        rgba.drawRect(start..<start+32, yRange, color: Pixel(r: 255, g: 255, b: 255, a: 255))
         start += 32
         
-        rgba[channel: .alpha].drawRect(0..<256, 128..<256, pixel: Pixel(gray: 128))
+        rgba[channel: .alpha].drawRect(0..<256, 128..<256, color: Pixel(gray: 128))
     }
 }
 

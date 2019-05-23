@@ -1,6 +1,6 @@
 extension Image {
     @inlinable
-    public mutating func drawPolygon(points: [(x: Int, y: Int)], pixel: Pixel<P, T>) {
+    public mutating func drawPolygon(points: [(x: Int, y: Int)], color: Pixel<P, T>) {
         precondition(points.count >= 3, "Needs at least 3 points.")
         
         var minX = Int.max
@@ -55,14 +55,14 @@ extension Image {
                 if startValue == maxXValue {
                     if inside {
                         // All pixels btw start & maxX is inside polygon
-                        drawHorizontalLine(x1: start, x2: maxX, y: y, pixel: pixel)
+                        drawHorizontalLine(x1: start, x2: maxX, y: y, color: color)
                     }
                     // end search
                     break
                 } else if (start + maxX) / 2 == start {
                     if inside {
                         // Single pixel
-                        drawPixel(x: start, y: y, pixel: pixel)
+                        drawPixel(x: start, y: y, color: color)
                     }
                     start += 1
                 } else {
@@ -75,7 +75,7 @@ extension Image {
                         if mid == left {
                             if inside {
                                 // All pixels btw start & left is inside polygon
-                                drawHorizontalLine(x1: start, x2: left, y: y, pixel: pixel)
+                                drawHorizontalLine(x1: start, x2: left, y: y, color: color)
                             }
                             start = left + 1
                             break
@@ -97,7 +97,7 @@ extension Image {
     ///
     /// Same as `drawLines` with `close: true`.
     @inlinable
-    public mutating func drawPolygonPelimeter(points: [(x: Int, y: Int)], pixel: Pixel<P, T>) {
-        drawLines(points: points, pixel: pixel, close: true)
+    public mutating func drawPolygonPelimeter(points: [(x: Int, y: Int)], color: Pixel<P, T>) {
+        drawLines(points: points, close: true, color: color)
     }
 }

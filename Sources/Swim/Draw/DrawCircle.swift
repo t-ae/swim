@@ -5,7 +5,7 @@ extension Image {
     @inlinable
     public mutating func drawCircle(center: (x: Int, y: Int),
                                     radius: Int,
-                                    pixel: Pixel<P, T>) {
+                                    color: Pixel<P, T>) {
         var d = 1 - radius
         var dH = 3
         var dD = 5 - 2*radius
@@ -23,10 +23,10 @@ extension Image {
                 y -= 1
             }
             
-            drawHorizontalLine(x1: center.x-x, x2: center.x+x, y: center.y+y, pixel: pixel)
-            drawHorizontalLine(x1: center.x-y, x2: center.x+y, y: center.y+x, pixel: pixel)
-            drawHorizontalLine(x1: center.x-x, x2: center.x+x, y: center.y-y, pixel: pixel)
-            drawHorizontalLine(x1: center.x-y, x2: center.x+y, y: center.y-x, pixel: pixel)
+            drawHorizontalLine(x1: center.x-x, x2: center.x+x, y: center.y+y, color: color)
+            drawHorizontalLine(x1: center.x-y, x2: center.x+y, y: center.y+x, color: color)
+            drawHorizontalLine(x1: center.x-x, x2: center.x+x, y: center.y-y, color: color)
+            drawHorizontalLine(x1: center.x-y, x2: center.x+y, y: center.y-x, color: color)
             x += 1
         }
     }
@@ -35,7 +35,7 @@ extension Image {
     @inlinable
     public mutating func drawCirclePelimeter(center: (x: Int, y: Int),
                                              radius: Int,
-                                             pixel: Pixel<P, T>) {
+                                             color: Pixel<P, T>) {
         var d = 1 - radius
         var dH = 3
         var dD = 5 - 2*radius
@@ -53,14 +53,14 @@ extension Image {
                 y -= 1
             }
             
-            drawPixel(x: center.x + x, y: center.y + y, pixel: pixel)
-            drawPixel(x: center.x + y, y: center.y + x, pixel: pixel)
-            drawPixel(x: center.x - x, y: center.y + y, pixel: pixel)
-            drawPixel(x: center.x - y, y: center.y + x, pixel: pixel)
-            drawPixel(x: center.x + x, y: center.y - y, pixel: pixel)
-            drawPixel(x: center.x + y, y: center.y - x, pixel: pixel)
-            drawPixel(x: center.x - x, y: center.y - y, pixel: pixel)
-            drawPixel(x: center.x - y, y: center.y - x, pixel: pixel)
+            drawPixel(x: center.x + x, y: center.y + y, color: color)
+            drawPixel(x: center.x + y, y: center.y + x, color: color)
+            drawPixel(x: center.x - x, y: center.y + y, color: color)
+            drawPixel(x: center.x - y, y: center.y + x, color: color)
+            drawPixel(x: center.x + x, y: center.y - y, color: color)
+            drawPixel(x: center.x + y, y: center.y - x, color: color)
+            drawPixel(x: center.x - x, y: center.y - y, color: color)
+            drawPixel(x: center.x - y, y: center.y - x, color: color)
             
             x += 1
         }

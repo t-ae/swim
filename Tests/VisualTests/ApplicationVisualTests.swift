@@ -12,15 +12,15 @@ extension ApplicationVisualTests {
         var image = Image<Gray, Double>(width: size, height: size, value: 0)
         
         // base
-        image.drawRect(30..<70, 30..<70, pixel: Pixel(gray: 1))
-        image.drawRect(10..<90, 40..<45, pixel: Pixel(gray: 1))
-        image.drawRect(10..<90, 55..<60, pixel: Pixel(gray: 1))
+        image.drawRect(30..<70, 30..<70, color: Pixel(gray: 1))
+        image.drawRect(10..<90, 40..<45, color: Pixel(gray: 1))
+        image.drawRect(10..<90, 55..<60, color: Pixel(gray: 1))
         
         // noise
-        image.drawRect(40..<43, 27..<30, pixel: Pixel(gray: 1))
-        image.drawRect(40..<43, 67..<70, pixel: Pixel(gray: 0))
-        image.drawRect(20..<22, 35..<40, pixel: Pixel(gray: 1))
-        image.drawRect(20..<22, 55..<60, pixel: Pixel(gray: 0))
+        image.drawRect(40..<43, 27..<30, color: Pixel(gray: 1))
+        image.drawRect(40..<43, 67..<70, color: Pixel(gray: 0))
+        image.drawRect(20..<22, 35..<40, color: Pixel(gray: 1))
+        image.drawRect(20..<22, 55..<60, color: Pixel(gray: 0))
         
         let nsImage = doubleToNSImage(image)
         
@@ -208,7 +208,7 @@ extension ApplicationVisualTests {
         
         // pentadecathlon
         var b0 = Image<Gray, UInt8>(width: 16, height: 16, value: 0)
-        b0.drawRect(3..<13, 8..<9, pixel: Pixel(gray: 1))
+        b0.drawRect(3..<13, 8..<9, color: Pixel(gray: 1))
         
         var b = b0
         
@@ -294,7 +294,7 @@ extension ApplicationVisualTests {
         }
         sharpen.drawRectPelimeter(origin: (0, 0),
                                   size: (sharpen.width, sharpen.height),
-                                  pixel: Pixel(gray: 0))
+                                  color: Pixel(gray: 0))
         images.append(sharpen)
         
         // Double Thresholding

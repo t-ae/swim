@@ -5,7 +5,7 @@ extension Image {
     ///
     /// It should be used to fill area, like `drawRect` and `drawCircle`.
     @inlinable
-    mutating func drawHorizontalLine(x1: Int, x2: Int, y: Int, pixel: Pixel<P, T>) {
+    mutating func drawHorizontalLine(x1: Int, x2: Int, y: Int, color: Pixel<P, T>) {
         guard 0 <= y && y < height else {
             return
         }
@@ -19,7 +19,7 @@ extension Image {
         }
         
         pixelwiseConvert(left..<right, y..<y+1) { ref in
-            ref.assign(pixel: pixel)
+            ref.assign(pixel: color)
         }
     }
     
@@ -27,7 +27,7 @@ extension Image {
     @inlinable
     public mutating func drawLine(p1: (x: Int, y: Int),
                                   p2: (x: Int, y: Int),
-                                  pixel: Pixel<P, T>) {
+                                  color: Pixel<P, T>) {
         let dx = Swift.abs(p1.x - p2.x)
         let dy = Swift.abs(p1.y - p2.y)
         let sx = p1.x < p2.x ? 1 : -1
@@ -37,7 +37,7 @@ extension Image {
         
         var (x, y) = p1
         while (x ,y) != p2 {
-            drawPixel(x: x, y: y, pixel: pixel)
+            drawPixel(x: x, y: y, color: color)
             
             let e2 = error*2
             if e2 > -dy {
@@ -51,7 +51,7 @@ extension Image {
         }
         
         // draw p2
-        drawPixel(x: x, y: y, pixel: pixel)
+        drawPixel(x: x, y: y, color: color)
     }
     
     /// Draw lines between adjascent points.
@@ -60,17 +60,17 @@ extension Image {
     ///   - close: If true, also draw line between first and last points. Default: true.
     @inlinable
     public mutating func drawLines(points: [(x: Int, y: Int)],
-                                   pixel: Pixel<P, T>,
-                                   close: Bool = true) {
+                                   close: Bool = true,
+                                   color: Pixel<P, T>) {
         guard points.count > 1 else {
             return
         }
         for i in 1..<points.count {
-            drawLine(p1: points[i-1], p2: points[i], pixel: pixel)
+            drawLine(p1: points[i-1], p2: points[i], color: color)
         }
         
         if close {
-            drawLine(p1: points[0], p2: points.last!, pixel: pixel)
+            drawLine(p1: points[0], p2: points.last!, color: color)
         }
     }
     
@@ -78,7 +78,7 @@ extension Image {
     ///
     /// - Note: If size is not odd, the size of mark will be size+1.
     @inlinable
-    public mutating func drawX(center: (x: Int, y: Int), size: Int, pixel: Pixel<P, T>) {
+    public mutating func drawX(center: (x: Int, y: Int), size: Int, color: Pixel<P, T>) {
         let length = size / 2
         
         let left = center.x - length
@@ -86,7 +86,7 @@ extension Image {
         let top = center.y - length
         let bottom = center.y + length
         
-        drawLine(p1: (left, top), p2: (right, bottom), pixel: pixel)
-        drawLine(p1: (left, bottom), p2: (right, top), pixel: pixel)
+        drawLine(p1: (left, top), p2: (right, bottom), color: color)
+        drawLine(p1: (left, bottom), p2: (right, top), color: color)
     }
 }
