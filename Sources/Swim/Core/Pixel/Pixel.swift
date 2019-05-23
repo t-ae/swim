@@ -22,10 +22,10 @@ extension Pixel where T: AdditiveArithmetic {
     }
 }
 
-extension Pixel: Equatable {
+extension Pixel: Equatable where T: Equatable {
     @inlinable
-    public static func == (lhs: Pixel, rhs: Pixel) -> Bool {
-        return memcmp(lhs.data, rhs.data, P.channels*MemoryLayout<T>.size) == 0
+    public static func ==(lhs: Pixel, rhs: Pixel) -> Bool {
+        return lhs.data == rhs.data
     }
 }
 

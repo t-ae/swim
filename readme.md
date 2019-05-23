@@ -106,7 +106,7 @@ let font = try! TrueTypeFont(url: URL(fileURLWithPath: "/System/Library/Fonts/He
 image.drawText(origin: (100, 100),
                text: "TEXT DRAWING", 
                font: font, 
-               pixel: Pixel(r: 0, g: 0, b: 0, a: 1))
+               color: Pixel(r: 0, g: 0, b: 0, a: 1))
 ```
 
 ### Resize
