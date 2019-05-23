@@ -40,4 +40,9 @@ class PixelwiseConversion: XCTestCase {
             XCTAssertEqual(redDouble, Image(width: 2, height: 3, data: [0, 4, 8, 12, 16, 20]))
         }
     }
+    
+    static let allTests = [
+        ("testConvert", testConvert),
+        ("testConverted", testConverted)
+    ]
 }

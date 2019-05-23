@@ -14,4 +14,8 @@ class MutablePixelRefArithmeticTests: XCTestCase {
         
         XCTAssertEqual(image, answer)
     }
+    
+    static let allTests = [
+        ("testAdd", testAdd)
+    ]
 }

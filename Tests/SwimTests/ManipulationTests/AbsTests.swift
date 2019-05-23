@@ -38,4 +38,10 @@ class AbsTests: XCTestCase {
         image.applyAbs()
         XCTAssertEqual(image, answer)
     }
+    
+    static let allTests = [
+        ("testInt", testInt),
+        ("testFloat", testFloat),
+        ("testDouble", testDouble),
+    ]
 }

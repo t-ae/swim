@@ -39,4 +39,8 @@ class Im2colTests: XCTestCase {
                                     6, 7, 10, 11, 14, 15])
         }
     }
+    
+    static let allTests = [
+        ("testIm2Col", testIm2Col)
+    ]
 }

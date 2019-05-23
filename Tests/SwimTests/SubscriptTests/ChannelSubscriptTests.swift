@@ -176,4 +176,8 @@ class ChannelSubscriptTests: XCTestCase {
         }
     }
     
+    static let allTests = [
+        ("testChannelSubscriptGet", testChannelSubscriptGet),
+        ("testChannelSubscriptSet", testChannelSubscriptSet)
+    ]
 }

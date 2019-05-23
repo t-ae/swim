@@ -55,4 +55,11 @@ class ImageTests: XCTestCase {
             XCTAssertTrue(image1 != image2)
         }
     }
+    
+    
+    static let allTests = [
+        ("testInitialize", testInitialize),
+        ("testEquality", testEquality),
+        ("testCoW", testCoW)
+    ]
 }

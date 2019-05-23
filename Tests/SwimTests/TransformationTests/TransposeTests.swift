@@ -13,4 +13,8 @@ class TransposeTests: XCTestCase {
         
         XCTAssertEqual(image.transposed(), transposed)
     }
+    
+    static let allTests = [
+        ("testTranspose", testTranspose)
+    ]
 }

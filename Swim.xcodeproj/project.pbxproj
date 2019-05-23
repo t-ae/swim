@@ -163,7 +163,7 @@
 		OBJ_388 /* SubimageSubscriptTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_175 /* SubimageSubscriptTests.swift */; };
 		OBJ_389 /* AffineTransformationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_177 /* AffineTransformationTests.swift */; };
 		OBJ_390 /* ConcatenateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_178 /* ConcatenateTests.swift */; };
-		OBJ_391 /* HomogeneousTransformationMatrixTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_179 /* HomogeneousTransformationMatrixTests.swift */; };
+		OBJ_391 /* ProjectiveTransformationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_179 /* ProjectiveTransformationTests.swift */; };
 		OBJ_392 /* PaddingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_180 /* PaddingTests.swift */; };
 		OBJ_393 /* ResizeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_181 /* ResizeTests.swift */; };
 		OBJ_394 /* TransformationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_182 /* TransformationTests.swift */; };
@@ -334,7 +334,7 @@
 		OBJ_175 /* SubimageSubscriptTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubimageSubscriptTests.swift; sourceTree = "<group>"; };
 		OBJ_177 /* AffineTransformationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AffineTransformationTests.swift; sourceTree = "<group>"; };
 		OBJ_178 /* ConcatenateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConcatenateTests.swift; sourceTree = "<group>"; };
-		OBJ_179 /* HomogeneousTransformationMatrixTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomogeneousTransformationMatrixTests.swift; sourceTree = "<group>"; };
+		OBJ_179 /* ProjectiveTransformationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectiveTransformationTests.swift; sourceTree = "<group>"; };
 		OBJ_18 /* Bayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bayer.swift; sourceTree = "<group>"; };
 		OBJ_180 /* PaddingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaddingTests.swift; sourceTree = "<group>"; };
 		OBJ_181 /* ResizeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResizeTests.swift; sourceTree = "<group>"; };
@@ -724,8 +724,8 @@
 			children = (
 				OBJ_177 /* AffineTransformationTests.swift */,
 				OBJ_178 /* ConcatenateTests.swift */,
-				OBJ_179 /* HomogeneousTransformationMatrixTests.swift */,
 				OBJ_180 /* PaddingTests.swift */,
+				OBJ_179 /* ProjectiveTransformationTests.swift */,
 				OBJ_181 /* ResizeTests.swift */,
 				OBJ_182 /* TransformationTests.swift */,
 				OBJ_183 /* TransposeTests.swift */,
@@ -1326,7 +1326,7 @@
 				OBJ_389 /* AffineTransformationTests.swift in Sources */,
 				A7C8CEE722965BC20064EDFA /* DrawRectTests.swift in Sources */,
 				OBJ_390 /* ConcatenateTests.swift in Sources */,
-				OBJ_391 /* HomogeneousTransformationMatrixTests.swift in Sources */,
+				OBJ_391 /* ProjectiveTransformationTests.swift in Sources */,
 				OBJ_392 /* PaddingTests.swift in Sources */,
 				OBJ_393 /* ResizeTests.swift in Sources */,
 				OBJ_394 /* TransformationTests.swift in Sources */,

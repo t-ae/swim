@@ -82,5 +82,13 @@ class ResizeTests: XCTestCase {
         XCTAssertEqual(resizedY.resize(width: width, height: height, method: .areaAverage),
                        resized, accuracy: 1e-3)
     }
+    
+    static let allTests = [
+        ("testResizeNN_UInt8", testResizeNN_UInt8),
+        ("testResizeAA_upscale", testResizeAA_upscale),
+        ("testResizeAA_downscale_separate", testResizeAA_downscale_separate),
+        ("testResizeAA_downscale", testResizeAA_downscale),
+        ("testResizeAA_separate", testResizeAA_separate),
+    ]
 }
 

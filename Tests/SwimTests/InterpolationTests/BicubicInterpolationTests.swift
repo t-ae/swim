@@ -14,4 +14,8 @@ class BicubicInterpolationTests: XCTestCase {
         XCTAssertEqual(intpl.interpolate(x: 1, y: 2, in: image), Pixel(gray: 10))
         XCTAssertEqual(intpl.interpolate(x: 3, y: 3, in: image), Pixel(gray: 16))
     }
+    
+    static let allTests = [
+        ("testInterpolate", testInterpolate)
+    ]
 }

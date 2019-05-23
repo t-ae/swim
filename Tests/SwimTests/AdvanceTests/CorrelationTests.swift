@@ -100,4 +100,12 @@ class CorrelationTests: XCTestCase {
                        Correlation.zncc(image1/255, image2/255),
                        accuracy: 1e-3)
     }
+    
+    static let allTests = [
+        ("testSSD", testSSD),
+        ("testSAD", testSAD),
+        ("testNCC", testNCC),
+        ("testZNCC", testZNCC),
+        ("testScale", testScale)
+    ]
 }

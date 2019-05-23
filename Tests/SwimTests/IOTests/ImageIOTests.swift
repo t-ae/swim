@@ -141,4 +141,10 @@ class ImageIOTests: XCTestCase {
             XCTAssertEqual(reloaded, image)
         }
     }
+    
+    static let allTests = [
+        ("testSaveLoadUInt8", testSaveLoadUInt8),
+        ("testSaveLoadFloat", testSaveLoadFloat),
+        ("testSaveLoadDouble", testSaveLoadDouble),
+    ]
 }

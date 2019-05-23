@@ -18,4 +18,8 @@ class BilinearInterpolationTests: XCTestCase {
         XCTAssertEqual(intpl.interpolate(x: 0, y: 0.5, in: image), Pixel(gray: 2))
         XCTAssertEqual(intpl.interpolate(x: 0.5, y: 0.5, in: image), Pixel(gray: 2.5))
     }
+    
+    static let allTests = [
+        ("testInterpolate", testInterpolate)
+    ]
 }

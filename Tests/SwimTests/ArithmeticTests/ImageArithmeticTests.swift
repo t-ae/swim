@@ -149,4 +149,12 @@ class ImageArithmeticTests: XCTestCase {
             XCTAssertEqual(image, Image(width: 2, height: 2, data: after1))
         }
     }
+    
+    static let allTests = [
+        ("testNagate", testNegate),
+        ("testAdd", testAdd),
+        ("testSub", testSub),
+        ("testMul", testMul),
+        ("testDiv", testDiv),
+    ]
 }

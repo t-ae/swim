@@ -118,4 +118,9 @@ class SubimageSubscriptTests: XCTestCase {
                                                          53, 54, 55,
                                                          56, 57, 58]))
     }
+    
+    static let allTests = [
+        ("testSubimageSubscriptGet", testSubimageSubscriptGet),
+        ("testSubimageSubscriptSet", testSubimageSubscriptSet)
+    ]
 }

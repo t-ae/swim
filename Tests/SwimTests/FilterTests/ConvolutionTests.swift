@@ -2,7 +2,6 @@ import XCTest
 import Swim
 
 class ConvolutionTests: XCTestCase {
-    
     func testGaussianFilter() {
         do {
             let f = Filter.gaussian(size: 3, sigma2: 2 / Double.pi)
@@ -43,4 +42,8 @@ class ConvolutionTests: XCTestCase {
         }
     }
     
+    static let allTests = [
+        ("testGaussianFilter", testGaussianFilter),
+        ("testConvoluted", testConvoluted)
+    ]
 }

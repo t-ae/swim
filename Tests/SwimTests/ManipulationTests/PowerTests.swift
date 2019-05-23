@@ -20,4 +20,9 @@ class PowerTests: XCTestCase {
         
         XCTAssertEqual(image.powered(2), answer)
     }
+    
+    static let allTests = [
+        ("testPowFloat", testPowFloat),
+        ("testPowDouble", testPowDouble)
+    ]
 }

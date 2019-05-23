@@ -35,4 +35,7 @@ class IntegralImageTests: XCTestCase {
         }
     }
     
+    static let allTests = [
+        ("testToIntegralImage", testToIntegralImage)
+    ]
 }

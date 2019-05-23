@@ -53,4 +53,11 @@ class RoundingTests: XCTestCase {
         image2.applyTrunc()
         XCTAssertEqual(image2, rounded)
     }
+    
+    static let allTests = [
+        ("testRound", testRound),
+        ("testCeil", testCeil),
+        ("testFloor", testFloor),
+        ("testTrunc", testTrunc)
+    ]
 }

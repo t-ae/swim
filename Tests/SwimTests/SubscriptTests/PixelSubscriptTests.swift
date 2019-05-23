@@ -104,4 +104,9 @@ class PixelSubscriptTests: XCTestCase {
                                                              12, 13, 14, 15]))
         }
     }
+    
+    static let allTests = [
+        ("testSubscriptGet", testSubscriptGet),
+        ("testSubscriptSet", testSubscriptSet)
+    ]
 }

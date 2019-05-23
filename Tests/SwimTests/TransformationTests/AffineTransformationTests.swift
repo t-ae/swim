@@ -34,6 +34,10 @@ class AffineTransformationTests: XCTestCase {
                            accuracy: 1e-4)
         }
     }
+    
+    static let allTests = [
+        ("testAffineTransform", testAffineTransform)
+    ]
 }
 
 private func XCTAssertEqual(_ expression1: AffineTransformation,

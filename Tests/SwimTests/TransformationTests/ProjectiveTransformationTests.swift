@@ -1,8 +1,8 @@
 import XCTest
 import Swim
 
-class HomogeneousTransformationMatrixTests: XCTestCase {
-    func testHomogeneousTransform() {
+class ProjectiveTransformationTests: XCTestCase {
+    func testProjectiveTransformation() {
         do {
             let a = ProjectiveTransformation(1, -1, 1,
                                                     1, 1, 0,
@@ -21,4 +21,8 @@ class HomogeneousTransformationMatrixTests: XCTestCase {
             XCTAssertEqual(id.e22, 1, accuracy: 1e-4)
         }
     }
+    
+    static let allTests = [
+        ("testProjectiveTransformation", testProjectiveTransformation)
+    ]
 }

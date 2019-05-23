@@ -48,4 +48,9 @@ class ConcatenateTests: XCTestCase {
             XCTAssertEqual(concat[rows: 8..<10], image2)
         }
     }
+    
+    static let allTests = [
+        ("testConcatH", testConcatH),
+        ("testConcatV", testConcatV),
+    ]
 }

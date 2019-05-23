@@ -18,4 +18,8 @@ class ChannelwiseConversionTests: XCTestCase {
             XCTAssertEqual(image, Image(width: 4, height: 5, data: expect))
         }
     }
+    
+    static let allTests = [
+        ("testChannelwiseConvert", testChannelwiseConvert)
+    ]
 }

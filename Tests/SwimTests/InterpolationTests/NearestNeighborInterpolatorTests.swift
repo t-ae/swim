@@ -21,4 +21,7 @@ class NearestNeighborInterpolatorTests: XCTestCase {
         XCTAssertEqual(intpl.interpolate(x: 2.7, y: 3.3, in: image), Pixel(gray: 15))
     }
 
+    static let allTests = [
+        ("testInterpolate", testInterpolate)
+    ]
 }

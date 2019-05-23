@@ -20,4 +20,7 @@ class ClipTests: XCTestCase {
         }
     }
     
+    static let allTests = [
+        ("testClip", testClip)
+    ]
 }

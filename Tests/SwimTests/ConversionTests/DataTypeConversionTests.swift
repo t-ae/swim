@@ -41,4 +41,9 @@ class DataTypeConversionTests: XCTestCase {
         
         XCTAssertEqual(image.cast(to: Int.self), Image.full(value: -1, like: image))
     }
+    
+    static let allTests = [
+        ("testCast", testCast),
+        ("testRounding", testRounding)
+    ]
 }

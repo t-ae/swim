@@ -24,4 +24,8 @@ class ClampTests: XCTestCase {
             XCTAssertTrue(clamp(x, min: 0, max: 1).isNaN)
         }
     }
+    
+    static let allTests = [
+        ("testClamp", testClamp)
+    ]
 }

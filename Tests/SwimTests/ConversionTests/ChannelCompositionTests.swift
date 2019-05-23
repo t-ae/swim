@@ -68,4 +68,8 @@ class ChannelCompositionTests: XCTestCase {
             XCTAssertEqual(argb[channel: .alpha], a)
         }
     }
+    
+    static let allTests = [
+        ("testCompound", testCompound)
+    ]
 }

@@ -191,4 +191,15 @@ class PixelTypeConversionTests: XCTestCase {
             XCTAssertEqual(argb[channel: .alpha], rgba[channel: .alpha])
         }
     }
+    
+    public static let allTests = [
+        ("testToBrightness", testToBrightness),
+        ("testGrayToGrayAlpha", testGrayToGrayAlpha),
+        ("testGrayToRGB", testGrayToRGB),
+        ("testGrayToRGBA", testGrayToRGBA),
+        ("testRGBtoRGBA", testRGBtoRGBA),
+        ("testRGBAtoRGB", testRGBAtoRGB),
+        ("testARGBtoRGBA", testARGBtoRGBA),
+        ("testRGBAtoARGB", testRGBAtoARGB)
+    ]
 }

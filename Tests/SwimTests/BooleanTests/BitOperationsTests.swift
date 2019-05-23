@@ -43,4 +43,11 @@ class BitOperationsTests: XCTestCase {
         
         XCTAssertEqual(image1, Image(width: 1, height: 1, data: [false, true, true, false]))
     }
+    
+    static let allTests = [
+        ("testNagete", testNegate),
+        ("testAnd", testAnd),
+        ("testOr", testOr),
+        ("testXor", testXor),
+    ]
 }

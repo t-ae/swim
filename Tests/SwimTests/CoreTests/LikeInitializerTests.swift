@@ -23,4 +23,7 @@ class LikeInitializerTests: XCTestCase {
         }
     }
     
+    static let allTests = [
+        ("testLike", testLike)
+    ]
 }

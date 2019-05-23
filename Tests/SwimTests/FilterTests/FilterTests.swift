@@ -47,4 +47,10 @@ class FilterTests: XCTestCase {
             XCTAssertEqual(filtered, Image(width: 3, height: 3, data: [1, 2, 2, 3, 4, 4, 4, 5, 5]))
         }
     }
+    
+    static let allTests = [
+        ("testMaximumFilter", testMaximumFilter),
+        ("testMinimumFilter", testMinimumFilter),
+        ("testMedianFilter", testMedianFilter),
+    ]
 }

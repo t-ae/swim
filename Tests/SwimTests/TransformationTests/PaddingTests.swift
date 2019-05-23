@@ -43,4 +43,10 @@ class PaddingTests: XCTestCase {
         
         XCTAssertEqual(padded, image)
     }
+    
+    static let allTests = [
+        ("testConstantPadding", testConstantPadding),
+        ("testSymmetricPadding", testSymmetricPadding),
+        ("testZeroPadding", testZeroPadding)
+    ]
 }

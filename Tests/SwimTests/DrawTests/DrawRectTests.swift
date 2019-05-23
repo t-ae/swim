@@ -29,4 +29,9 @@ class DrawRectTests: XCTestCase {
         XCTAssertEqual(image[0..<50, 50..<100], Image.zeros(like: image[0..<50, 0..<50]))
         XCTAssertEqual(image[50..<100, 50..<100], Image.zeros(like: image[0..<50, 0..<50]))
     }
+    
+    static let allTests = [
+        ("testDrawRect", testDrawRect),
+        ("testDrawRectPelimeter", testDrawRectPelimeter),
+    ]
 }

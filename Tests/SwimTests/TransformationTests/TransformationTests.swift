@@ -76,4 +76,10 @@ class TransformationTests: XCTestCase {
             XCTAssertEqual(r270, image.rot90().rot90().rot90())
         }
     }
+    
+    static let allTests = [
+        ("testFlipLR", testFlipLR),
+        ("testFlipUD", testFlipUD),
+        ("testRot", testRot)
+    ]
 }

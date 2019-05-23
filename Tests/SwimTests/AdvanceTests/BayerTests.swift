@@ -61,4 +61,9 @@ class BayerTests: XCTestCase {
                                              13, 12, 8,  13, 11, 9,  14, 14, 10, 15, 12, 10]))
         }
     }
+    
+    static let allTests = [
+        ("testBayered", testBayered),
+        ("testDebayered", testDebayered)
+    ]
 }
