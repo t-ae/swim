@@ -96,15 +96,15 @@ extension Correlation where T: FloatingPoint {
         let sumasumb = suma*sumb
         let suma2 = suma*suma
         let sumb2 = sumb*sumb
-        let up: T = c*sumCross - sumasumb
+        let denominator: T = c*sumCross - sumasumb
         
-        let da: T = c*sum2a - suma2
-        let db: T = c*sum2b - sumb2
+        let numeratorA: T = c*sum2a - suma2
+        let numeratorB: T = c*sum2b - sumb2
         
-        precondition(da > 0, "All pixels in `a` have same value.")
-        precondition(db > 0, "All pixels in `b` have same value.")
+        precondition(numeratorA > 0, "All pixels in `a` have same value.")
+        precondition(numeratorB > 0, "All pixels in `b` have same value.")
         
-        return clamp(up / sqrt(da*db), min: -1, max: 1)
+        return clamp(denominator / sqrt(numeratorA*numeratorB), min: -1, max: 1)
     }
 }
 
