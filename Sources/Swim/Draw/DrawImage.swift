@@ -64,7 +64,7 @@ extension Image where P: NoAlpha, T: BinaryFloatingPoint {
             let colorStartIndex = image.dataIndex(x: imageX, y: imageY, c: P2.colorStartIndex)
             for c in 0..<P.channels {
                 ref[c] *= (1-alpha)
-                ref[c] += alpha * image[data: colorStartIndex + c]
+                ref[c] += alpha * image.data[colorStartIndex + c]
             }
         }
     }
@@ -110,7 +110,7 @@ extension Image where P: HasAlpha, T: BinaryFloatingPoint {
                 for c in 0..<P.channels {
                     let colorIndex = P.colorStartIndex + c
                     ref[colorIndex] *= factor
-                    ref[colorIndex] += imageAlpha * image[data: imageColorStartIndex + c]
+                    ref[colorIndex] += imageAlpha * image.data[imageColorStartIndex + c]
                     ref[colorIndex] /= blendAlpha
                 }
                 ref[P.alphaIndex] = blendAlpha

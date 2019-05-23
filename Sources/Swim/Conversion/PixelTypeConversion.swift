@@ -30,9 +30,9 @@ extension Image where P == Gray {
         var newImage = Image<P2, T>.full(value: alphaValue, like: self)
         
         for i in 0..<data.count {
-            newImage.data[4*i+P2.redIndex+0] = data[i]
-            newImage.data[4*i+P2.redIndex+1] = data[i]
-            newImage.data[4*i+P2.redIndex+2] = data[i]
+            newImage.data[4*i+P2.redIndex] = data[i]
+            newImage.data[4*i+P2.greenIndex] = data[i]
+            newImage.data[4*i+P2.blueIndex] = data[i]
         }
         
         return newImage
@@ -56,9 +56,9 @@ extension Image where P == GrayAlpha {
         var newImage = Image<P2, T>(width: width, height: height)
         
         for i in 0..<pixelCount {
-            newImage.data[4*i+P2.colorStartIndex+0] = data[2*i+0]
-            newImage.data[4*i+P2.colorStartIndex+1] = data[2*i+0]
-            newImage.data[4*i+P2.colorStartIndex+2] = data[2*i+0]
+            newImage.data[4*i+P2.redIndex] = data[2*i+0]
+            newImage.data[4*i+P2.greenIndex] = data[2*i+0]
+            newImage.data[4*i+P2.blueIndex] = data[2*i+0]
             newImage.data[4*i+P2.alphaIndex] = data[2*i+1]
         }
         
@@ -151,7 +151,7 @@ extension Image where P == RGB {
         data.withUnsafeBufferPointer {
             var src = $0.baseAddress!
             newImage.data.withUnsafeMutableBufferPointer {
-                var dst = $0.baseAddress! + P2.redIndex
+                var dst = $0.baseAddress! + P2.colorStartIndex
                 for _ in 0..<width*height {
                     memcpy(dst, src, RGB.channels * MemoryLayout<T>.size)
                     src += RGB.channels
@@ -182,16 +182,16 @@ extension Image where P: RGBWithAlpha {
     public func toRGB() -> Image<RGB, T> {
         var newImage = Image<RGB, T>(width: width, height: height)
 
-        var srcColor = P.redIndex
-        var dstColor = RGB.red.rawValue
+        var src = P.colorStartIndex
+        var dst = RGB.red.rawValue
 
         for _ in 0..<width*height {
-            newImage.data[dstColor+0] = data[srcColor+0]
-            newImage.data[dstColor+1] = data[srcColor+1]
-            newImage.data[dstColor+2] = data[srcColor+2]
+            newImage.data[dst+P.redIndex] = data[src+RGB.red.rawValue]
+            newImage.data[dst+P.greenIndex] = data[src+RGB.green.rawValue]
+            newImage.data[dst+P.blueIndex] = data[src+RGB.blue.rawValue]
 
-            srcColor += P.channels
-            dstColor += RGB.channels
+            src += P.channels
+            dst += RGB.channels
         }
 
         return newImage
@@ -203,22 +203,18 @@ extension Image where P: RGBWithAlpha {
     @inlinable
     func permuteAlpha<P2: RGBWithAlpha>() -> Image<P2, T> {
         var newImage = Image<P2, T>(width: width, height: height)
-        
-        var srcAlpha = P.alphaIndex
-        var srcColor = P.redIndex
-        var dstAlpha = P2.alphaIndex
-        var dstColor = P2.redIndex
+    
+        var src = 0
+        var dst = 0
         
         for _ in 0..<width*height {
-            newImage.data[dstAlpha] = data[srcAlpha]
-            newImage.data[dstColor+0] = data[srcColor+0]
-            newImage.data[dstColor+1] = data[srcColor+1]
-            newImage.data[dstColor+2] = data[srcColor+2]
+            newImage.data[dst+P2.alphaIndex] = data[src+P.alphaIndex]
+            newImage.data[dst+P2.redIndex] = data[src+P.redIndex]
+            newImage.data[dst+P2.greenIndex] = data[src+P.greenIndex]
+            newImage.data[dst+P2.blueIndex] = data[src+P.blueIndex]
             
-            srcAlpha += P.channels
-            srcColor += P.channels
-            dstAlpha += P2.channels
-            dstColor += P2.channels
+            src += P.channels
+            dst += P2.channels
         }
         
         return newImage
