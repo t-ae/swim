@@ -98,7 +98,7 @@ extension Filter where T == Double {
 
 // MARK: - convoluted
 extension Image where T: Numeric {
-    /// Convolve image with specified `filter`.
+    /// Apply convolution with specified `filter`.
     /// `filter` will be applied to each channel.
     @inlinable
     public func convoluted(_ filter: Image<Gray, T>) -> Image<P, T> {
