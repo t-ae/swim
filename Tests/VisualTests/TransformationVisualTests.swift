@@ -16,7 +16,7 @@ extension TransformationVisualTests {
         images.append(lena.flipUD())
         images.append(lena.rot90())
         images.append(lena.rot180())
-        images.append(lena.rot90())
+        images.append(lena.rot270())
         images.append(lena.transposed())
         
         // result

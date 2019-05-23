@@ -4,14 +4,28 @@ import CStbImage
 public struct TextImageMetrics {
     public let text: String
     
+    // size in pixel
     public let width: Int
     public let height: Int
     
+    // Unscaled sizes
     public let ascent: Int32
     public let descent: Int32
     public let lineGap: Int32
     
+    // scale = fontSize / (ascent - descent)
     public let scale: Float
+    
+    public init(text: String, width: Int, height: Int,
+                ascent: Int32, descent: Int32, lineGap: Int32, scale: Float) {
+        self.text = text
+        self.width = width
+        self.height = height
+        self.ascent = ascent
+        self.descent = descent
+        self.lineGap = lineGap
+        self.scale = scale
+    }
 }
 
 public enum TrueTypeFontError: Error {
@@ -60,6 +74,11 @@ public struct TrueTypeFont {
     }
 }
 
+@inlinable
+func getCodepoint(char: Character) -> Int32 {
+    return Int32(char.unicodeScalars.reduce(0) { acc, v in (acc << 8) & v.value })
+}
+
 extension Image where P == Gray, T == UInt8 {
     /// Compute size of bounding box which covers text.
     ///
@@ -77,6 +96,7 @@ extension Image where P == Gray, T == UInt8 {
     ///
     /// - Parameters:
     ///   - lineGap: Gap between lines in pixel. If nil, proper size will be used. Default: nil.
+    @inlinable
     public static func getTextImageMetrics(text: String,
                                            font: TrueTypeFont,
                                            lineGap: Int? = nil) -> TextImageMetrics {
@@ -104,9 +124,7 @@ extension Image where P == Gray, T == UInt8 {
             var width = 0
             var actualLineHeight = lineHeight
             
-            let codepoints = line.map { c in
-                Int32(c.unicodeScalars.reduce(0) { acc, v in acc << 8 + v.value })
-            }
+            let codepoints = line.map(getCodepoint)
             
             for i in 0..<codepoints.count {
                 var ix0: Int32 = 0
@@ -161,9 +179,7 @@ extension Image where P == Gray, T == UInt8 {
         
         var y = 0
         text.enumerateLines { line, _ in
-            let codepoints = line.map { c in
-                Int32(c.unicodeScalars.reduce(0) { acc, v in acc << 8 + v.value })
-            }
+            let codepoints = line.map(getCodepoint)
             
             var x = 0
             
