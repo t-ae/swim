@@ -19,8 +19,10 @@ public enum TrueTypeFontError: Error {
 }
 
 public struct TrueTypeFont {
+    @usableFromInline
     let info: stbtt_fontinfo
-    let fontSize: Float
+    
+    public let fontSize: Float
     
     /// Create font with font file(ttf/ttc) and fontSize in pixel.
     public init(url: URL, fontSize: Float) throws {
@@ -37,15 +39,25 @@ public struct TrueTypeFont {
         self.info = info
         self.fontSize = fontSize
     }
+}
+
+extension Image where P == Gray, T == UInt8 {
+    /// Compute size of bounding box which covers text.
+    @inlinable
+    public static func getTextImageSize(text: String,
+                                        font: TrueTypeFont) -> (width: Int, height: Int) {
+        let metrics = getTextImageMetrics(text: text, font: font)
+        return (metrics.width, metrics.height)
+    }
     
-    public func getTextImageMetrics(text: String) -> TextImageMetrics {
+    public static func getTextImageMetrics(text: String, font: TrueTypeFont) -> TextImageMetrics {
         var ascent: Int32 = 0
         var descent: Int32 = 0
         var lineGap: Int32 = 0
         
-        get_vmetrics(info, &ascent, &descent, &lineGap)
+        get_vmetrics(font.info, &ascent, &descent, &lineGap)
         
-        let scale = fontSize / Float(ascent - descent)
+        let scale = font.fontSize / Float(ascent - descent)
         
         let lineHeight = Int(Float(ascent - descent)*scale)
         
@@ -64,13 +76,13 @@ public struct TrueTypeFont {
             for i in 0..<codepoints.count {
                 var advanceWidth: Int32 = 0
                 var leftSideBearing: Int32 = 0
-                get_hmetrics(self.info, codepoints[i], &advanceWidth, &leftSideBearing)
+                get_hmetrics(font.info, codepoints[i], &advanceWidth, &leftSideBearing)
                 
                 width += Int(Float(advanceWidth) * scale)
                 
                 // kerning
                 if i < codepoints.count-1 {
-                    let kern = get_kern(self.info, codepoints[i], codepoints[i+1])
+                    let kern = get_kern(font.info, codepoints[i], codepoints[i+1])
                     width -= Int(Float(kern) * scale)
                 }
             }
@@ -87,8 +99,11 @@ public struct TrueTypeFont {
                                 ascent: ascent, descent: descent, lineGap: lineGap, scale: scale)
     }
     
-    public func createTextImage(text: String) -> Image<Gray, UInt8> {
-        let metrics = getTextImageMetrics(text: text)
+    /// Create image contains specified text.
+    @inlinable
+    public static func createTextImage(text: String,
+                                       font: TrueTypeFont) -> Image {
+        let metrics = getTextImageMetrics(text: text, font: font)
         var image = Image<Gray, UInt8>(width: metrics.width, height: metrics.height, value: 0)
         
         let scale = metrics.scale
@@ -106,11 +121,11 @@ public struct TrueTypeFont {
                 var iy0: Int32 = 0
                 var ix1: Int32 = 0
                 var iy1: Int32 = 0
-                get_codepoint_bitmap_box(self.info, codepoints[i], scale, &ix0, &iy0, &ix1, &iy1)
+                get_codepoint_bitmap_box(font.info, codepoints[i], scale, &ix0, &iy0, &ix1, &iy1)
                 
                 var advanceWidth: Int32 = 0
                 var leftSideBearing: Int32 = 0
-                get_hmetrics(self.info, codepoints[i], &advanceWidth, &leftSideBearing)
+                get_hmetrics(font.info, codepoints[i], &advanceWidth, &leftSideBearing)
                 
                 let xx = x + Int(Float(leftSideBearing)*scale)
                 let yy = y + Int(Float(metrics.ascent)*scale) + Int(iy0)
@@ -119,14 +134,14 @@ public struct TrueTypeFont {
                 let h = iy1-iy0
                 image.data.withUnsafeMutableBufferPointer { bp in
                     let p = bp.baseAddress!.advanced(by: dataOffset)
-                    make_codepoint_bitmap(self.info, p, w, h, Int32(metrics.width), scale, codepoints[i])
+                    make_codepoint_bitmap(font.info, p, w, h, Int32(metrics.width), scale, codepoints[i])
                 }
                 
                 x += Int(Float(advanceWidth)*scale)
                 
                 // kerning
                 if i < codepoints.count-1 {
-                    let kern = get_kern(self.info, codepoints[i], codepoints[i+1])
+                    let kern = get_kern(font.info, codepoints[i], codepoints[i+1])
                     x -= Int(Float(kern) * scale)
                 }
             }
@@ -140,16 +155,6 @@ public struct TrueTypeFont {
     }
 }
 
-extension Image {
-    /// Compute size of bounding box which covers text.
-    @inlinable
-    public func getTextSize(text: String,
-                            font: TrueTypeFont) -> (width: Int, height: Int) {
-        let metrics = font.getTextImageMetrics(text: text)
-        return (metrics.width, metrics.height)
-    }
-}
-
 extension Image where P: NoAlpha, T: BinaryFloatingPoint {
     /// Draw text in image.
     ///
@@ -159,7 +164,7 @@ extension Image where P: NoAlpha, T: BinaryFloatingPoint {
                                                 text: String,
                                                 font: TrueTypeFont,
                                                 pixel: Pixel<P2, T>) where P2.BaseType == P {
-        let grayImage = font.createTextImage(text: text)
+        let grayImage = Image<Gray, UInt8>.createTextImage(text: text, font: font)
         
         var colorImage = Image<P2, T>.full(pixel: pixel, like: grayImage)
         
@@ -183,7 +188,7 @@ extension Image where P: HasAlpha, T: BinaryFloatingPoint {
                                   text: String,
                                   font: TrueTypeFont,
                                   pixel: Pixel<P, T>) {
-        let grayImage = font.createTextImage(text: text)
+        let grayImage = Image<Gray, UInt8>.createTextImage(text: text, font: font)
         
         var colorImage = Image<P, T>.full(pixel: pixel, like: grayImage)
         
