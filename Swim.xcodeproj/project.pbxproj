@@ -24,6 +24,7 @@
 
 /* Begin PBXBuildFile section */
 		A7C8CEE3229650C20064EDFA /* ColorPixel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7C8CEE1229650BF0064EDFA /* ColorPixel.swift */; };
+		A7C8CEE722965BC20064EDFA /* DrawRectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7C8CEE522965BB80064EDFA /* DrawRectTests.swift */; };
 		OBJ_218 /* image_io.c in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_9 /* image_io.c */; };
 		OBJ_219 /* truetype.c in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_10 /* truetype.c */; };
 		OBJ_221 /* stb_image_write.h in Headers */ = {isa = PBXBuildFile; fileRef = OBJ_12 /* stb_image_write.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -265,6 +266,7 @@
 
 /* Begin PBXFileReference section */
 		A7C8CEE1229650BF0064EDFA /* ColorPixel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPixel.swift; sourceTree = "<group>"; };
+		A7C8CEE522965BB80064EDFA /* DrawRectTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawRectTests.swift; sourceTree = "<group>"; };
 		OBJ_10 /* truetype.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = truetype.c; sourceTree = "<group>"; };
 		OBJ_100 /* Concatenation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Concatenation.swift; sourceTree = "<group>"; };
 		OBJ_101 /* EdgeMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EdgeMode.swift; sourceTree = "<group>"; };
@@ -478,6 +480,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A7C8CEE422965BA60064EDFA /* DrawTests */ = {
+			isa = PBXGroup;
+			children = (
+				A7C8CEE522965BB80064EDFA /* DrawRectTests.swift */,
+			);
+			path = DrawTests;
+			sourceTree = "<group>";
+		};
 		OBJ_103 /* Matrix */ = {
 			isa = PBXGroup;
 			children = (
@@ -551,6 +561,7 @@
 				OBJ_143 /* BooleanTests */,
 				OBJ_145 /* ConversionTests */,
 				OBJ_151 /* CoreTests */,
+				A7C8CEE422965BA60064EDFA /* DrawTests */,
 				OBJ_154 /* FilterTests */,
 				OBJ_157 /* IOTests */,
 				OBJ_159 /* InterpolationTests */,
@@ -1313,6 +1324,7 @@
 				OBJ_387 /* PixelSubscriptTests.swift in Sources */,
 				OBJ_388 /* SubimageSubscriptTests.swift in Sources */,
 				OBJ_389 /* AffineTransformationTests.swift in Sources */,
+				A7C8CEE722965BC20064EDFA /* DrawRectTests.swift in Sources */,
 				OBJ_390 /* ConcatenateTests.swift in Sources */,
 				OBJ_391 /* HomogeneousTransformationMatrixTests.swift in Sources */,
 				OBJ_392 /* PaddingTests.swift in Sources */,

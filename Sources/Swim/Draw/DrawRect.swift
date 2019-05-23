@@ -28,8 +28,18 @@ extension Image {
             drawHorizontalLine(x1: origin.x, x2: origin.x+size.width-1, y: y, color: color)
         }
     }
+    
+    /// Draw rectangle pelimeter.
+    @inlinable
+    public mutating func drawRectPelimeter(_ xRange: Range<Int>,
+                                           _ yRange: Range<Int>,
+                                           color: Pixel<P, T>) {
+        drawRectPelimeter(origin: (xRange.startIndex, yRange.startIndex),
+                          size: (xRange.count, yRange.count),
+                          color: color)
+    }
         
-    /// Draw Rectangle pelimeter.
+    /// Draw rectangle pelimeter.
     @inlinable
     public mutating func drawRectPelimeter(origin: (x: Int, y: Int),
                                            size: (width: Int, height: Int),
@@ -46,9 +56,9 @@ extension Image {
         let bottom = origin.y + size.height
         
         drawLine(p1: (origin.x, origin.y), p2: (origin.x, bottom-1), color: color)
-        drawLine(p1: (right, origin.y), p2: (right, bottom-1), color: color)
+        drawLine(p1: (right-1, origin.y), p2: (right-1, bottom-1), color: color)
         
         drawHorizontalLine(x1: origin.x, x2: right-1, y: origin.y, color: color)
-        drawHorizontalLine(x1: origin.x, x2: right-1, y: bottom, color: color)
+        drawHorizontalLine(x1: origin.x, x2: right-1, y: bottom-1, color: color)
     }
 }
