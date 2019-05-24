@@ -61,42 +61,19 @@ class ConversionPerformanceTests: XCTestCase {
         }
     }
     
-    func testBrightnessInt() {
+    func testToGrayInt() {
         let image = Image<RGB, UInt8>(width: 1920, height: 1080, value: 0)
         
         measure {
-            for _ in 0..<100 {
-                _ = image.toBrightness()
-            }
+            _ = image.toGray()
         }
     }
     
-    func testBrightnessDouble() {
-        let image = Image<RGB, UInt8>(width: 1920, height: 1080, value: 0)
-        
-        measure {
-            for _ in 0..<100 {
-                _ = image.toBrightness()
-            }
-        }
-    }
-    func testLuminanceInt() {
-        let image = Image<RGB, UInt8>(width: 1920, height: 1080, value: 0)
-        
-        measure {
-            for _ in 0..<100 {
-                _ = image.toLuminance()
-            }
-        }
-    }
-    
-    func testLuminanceDouble() {
+    func testToGrayDouble() {
         let image = Image<RGB, Double>(width: 1920, height: 1080, value: 0)
         
         measure {
-            for _ in 0..<100 {
-                _ = image.toLuminance()
-            }
+            _ = image.toGray()
         }
     }
     

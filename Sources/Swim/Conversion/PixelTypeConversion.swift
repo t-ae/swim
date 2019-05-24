@@ -78,46 +78,44 @@ extension Image where P == GrayAlpha {
 
 // MARK: - RGB -> Gray
 extension Image where P == RGB, T: BinaryInteger {
-    /// Create grayscale image.
-    /// Output = (R + G + B) / 3.
+    /// Create grayscale image by weighted sum.
+    ///
+    /// Output = wr*R + wg*G + wb*B.
     @inlinable
-    public func toBrightness() -> Image<Gray, T> {
+    public func toGray<T2: BinaryFloatingPoint>(wr: T2, wg: T2, wb: T2) -> Image<Gray, T> {
         var newImage = Image<Gray, T>.zeros(like: self)
         
         for i in 0..<width*height {
-            let sum = Int(data[3*i+0]) + Int(data[3*i+1]) + Int(data[3*i+2])
-            newImage.data[i] = T(sum / 3)
+            var sum = wr * T2(data[3*i+0])
+            sum += wr * T2(data[3*i+0])
+            sum += wg * T2(data[3*i+1])
+            newImage.data[i] = T(sum)
         }
         
         return newImage
     }
     
     /// Create grayscale image.
+    ///
     /// Output = 0.2126*R + 0.7152*G + 0.0722*B.
     @inlinable
-    public func toLuminance() -> Image<Gray, T> {
-        var newImage = Image<Gray, T>.zeros(like: self)
-        
-        for i in 0..<width*height {
-            var sum = 2126 * Int(data[3*i+0])
-            sum += 7152 * Int(data[3*i+1])
-            sum += 0722 * Int(data[3*i+2])
-            newImage.data[i] = T(sum / 10000)
-        }
-        
-        return newImage
+    public func toGray() -> Image<Gray, T> {
+        return toGray(wr: 0.2126, wg: 0.7152, wb: 0.0722)
     }
 }
 
 extension Image where P == RGB, T: FloatingPoint {
-    /// Create grayscale image.
-    /// Output = (R + G + B) / 3.
+    /// Create grayscale image by weighted sum.
+    ///
+    /// Output = wr*R + wg*G + wb*B.
     @inlinable
-    public func toBrightness() -> Image<Gray, T> {
+    public func toGray(wr: T, wg: T, wb: T) -> Image<Gray, T> {
         var newImage = Image<Gray, T>.zeros(like: self)
         
         for i in 0..<width*height {
-            newImage.data[i] = (data[3*i+0] + data[3*i+1] + data[3*i+2]) / 3
+            newImage.data[i] = wr * data[3*i+0]
+            newImage.data[i] += wg * data[3*i+1]
+            newImage.data[i] += wb * data[3*i+2]
         }
         
         return newImage
@@ -126,18 +124,11 @@ extension Image where P == RGB, T: FloatingPoint {
 
 extension Image where P == RGB, T: BinaryFloatingPoint {
     /// Create grayscale image.
+    ///
     /// Output = 0.2126*R + 0.7152*G + 0.0722*B.
     @inlinable
-    public func toLuminance() -> Image<Gray, T> {
-        var newImage = Image<Gray, T>.zeros(like: self)
-        
-        for i in 0..<width*height {
-            newImage.data[i] = 0.2126 * data[3*i+0]
-            newImage.data[i] += 0.7152 * data[3*i+1]
-            newImage.data[i] += 0.0722 * data[3*i+2]
-        }
-        
-        return newImage
+    public func toGray() -> Image<Gray, T> {
+        return toGray(wr: 0.2126, wg: 0.7152, wb: 0.0722)
     }
 }
 

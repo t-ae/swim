@@ -129,13 +129,13 @@ extension FilterVisualTests {
         }
         images.append(mean)
         
-        let emboss = image.toLuminance().convoluted(Filter.emboss3x3)
+        let emboss = image.toGray().convoluted(Filter.emboss3x3)
         images.append(emboss.toRGB())
         
-        let sobelH = image.toLuminance().convoluted(Filter.sobel3x3H)
+        let sobelH = image.toGray().convoluted(Filter.sobel3x3H)
         images.append(sobelH.toRGB())
         
-        let laplacian = image.toLuminance().convoluted(Filter.laplacian3x3)
+        let laplacian = image.toGray().convoluted(Filter.laplacian3x3)
         images.append(laplacian.toRGB())
         
         let nsImage = doubleToNSImage(Image.concatH(images))

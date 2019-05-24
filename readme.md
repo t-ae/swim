@@ -80,8 +80,8 @@ image[channel: .blue] += 1
 let image = Image<RGB, Float>(contentsOf: url)!
 
 // to gray scale
-let brightness: Image<Gray, Float> = image.toBrightness()
-let luminance: Image<Gray, Float> = image.toLuminance()
+let gray1: Image<Gray, Float> = image.toGray() // with default weights
+let gray2: Image<Gray, Float> = image.toGray(wr: 1/3, wg: 1/3, 2b: 1/3) // specifying weights
 
 // type conversion
 let doubleImage1: Image<RGB, Double> = image.cast()
