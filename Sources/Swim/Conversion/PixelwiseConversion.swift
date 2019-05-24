@@ -38,24 +38,27 @@ extension Image {
 // MARK: - Different type conversion
 extension Image {
     /// Create new image from `self` by applying `f` for each pixel.
-    /// - Note: `PixelRef` contains `UnsafeBufferPointer`. So it's unsafe to bring it outside closure.
+    ///
+    /// `f` takes two arguments. `PixelRef` refers `self` pixel. `MutablePixelRef` refers new image's pixel.
+    /// You have to assign all pixel values of `MutablePixelRef`.
+    ///
+    /// - Note: `*PixelRef` contains `Unsafe*BufferPointer`. So it's unsafe to bring them outside closure.
     @inlinable
-    public func pixelwiseConverted<P2, T2>(_ f: (PixelRef<P, T>)->Pixel<P2, T2>) -> Image<P2, T2> {
+    public func pixelwiseConverted<P2, T2>(_ f: (PixelRef<P, T>, MutablePixelRef<P2, T2>)->Void) -> Image<P2, T2> {
         var newImage = Image<P2, T2>(width: width, height: height)
         data.withUnsafeBufferPointer { src in
-            newImage.data.withUnsafeMutableBufferPointer {
-                var dst = $0.baseAddress!
-                
-                var start = 0
+            newImage.data.withUnsafeMutableBufferPointer { dst in
+                var si = 0
+                var di = 0
                 for y in 0..<height {
                     for x in 0..<width {
-                        let ref = PixelRef<P, T>(x: x, y: y, rebasing: src[start..<start+P.channels])
+                        let ref1 = PixelRef<P, T>(x: x, y: y, rebasing: src[si..<si+P.channels])
+                        let ref2 = MutablePixelRef<P2, T2>(x: x, y: y, rebasing: dst[di..<di+P2.channels])
                         
-                        let out = f(ref)
-                        memcpy(dst, out.data, P2.channels*MemoryLayout<T2>.size)
+                        f(ref1, ref2)
                         
-                        start += P.channels
-                        dst += P2.channels
+                        si += P.channels
+                        di += P2.channels
                     }
                 }
             }

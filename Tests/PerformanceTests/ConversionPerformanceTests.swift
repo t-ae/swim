@@ -18,23 +18,13 @@ class ConversionPerformanceTests: XCTestCase {
         let image = Image<RGBA, UInt8>(width: 1920, height: 1080, value: 0)
         
         measure {
-            _ = image.pixelwiseConverted { src in
-                Pixel(from: src)
-            }
-        }
-    }
-    
-    func testPixelwiseConvertedWithReservedPixel() {
-        let image = Image<RGBA, UInt8>(width: 1920, height: 1080, value: 0)
-        
-        measure {
-            var pixel = Pixel<RGBA, UInt8>.zero
-            _ = image.pixelwiseConverted { src -> Pixel<RGBA, UInt8> in
-                pixel[.red] = src[.red]
-                pixel[.green] = src[.green]
-                pixel[.blue] = src[.blue]
-                pixel[.alpha] = src[.alpha]
-                return pixel
+            for _ in 0..<10 {
+                _ = image.pixelwiseConverted { src, dst in
+                    dst[.red] = src[.red]
+                    dst[.green] = src[.green]
+                    dst[.blue] = src[.blue]
+                    dst[.alpha] = src[.alpha]
+                    } as Image<RGBA, UInt8>
             }
         }
     }

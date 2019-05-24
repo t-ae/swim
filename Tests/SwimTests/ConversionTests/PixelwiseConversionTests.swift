@@ -29,13 +29,13 @@ class PixelwiseConversion: XCTestCase {
             let data = (0..<24).map { UInt8($0) }
             let image = Image(width: 2, height: 3, rgba: data)
 
-            let red = image.pixelwiseConverted { px in
-                Pixel(gray: px[.red])
+            let red: Image<Gray, UInt8> = image.pixelwiseConverted { src, dst in
+                dst[.gray] = src[.red]
             }
             XCTAssertEqual(red, Image(width: 2, height: 3, data: [0, 4, 8, 12, 16, 20]))
             
-            let redDouble = image.pixelwiseConverted { px in
-                Pixel(gray: Double(px[.red]))
+            let redDouble: Image<Gray, Double> = image.pixelwiseConverted { src, dst in
+                dst[.gray] = Double(src[.red])
             }
             XCTAssertEqual(redDouble, Image(width: 2, height: 3, data: [0, 4, 8, 12, 16, 20]))
         }

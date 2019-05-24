@@ -88,8 +88,11 @@ let doubleImage1: Image<RGB, Double> = image.cast()
 let doubleImage2 = image.cast(to: Double.self) // ditto
 
 // pixel conversion
-let redOnlyRGBA = image.pixelwiseConverted { px in 
-    Pixel(r: px[.red], g: 0, b: 0, a: 1)
+let redOnlyRGBA: Image<RGBA, Float> = image.pixelwiseConverted { src, dst in 
+    dst[.red] = src[.red]
+    dst[.green] = 0
+    dst[.blue] = 0
+    dst[.alpha] = 1
 }
 ```
 
