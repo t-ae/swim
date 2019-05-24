@@ -12,9 +12,9 @@ extension Image {
                               _ f: (PixelRef<P, T>)->Void) {
         data.withUnsafeBufferPointer { src in
             var rowStart = dataIndex(x: xRange.startIndex, y: yRange.startIndex)
-            for y in 0..<height {
+            for y in yRange {
                 var start = rowStart
-                for x in 0..<width {
+                for x in xRange {
                     let ref = PixelRef<P, T>(x: x, y: y, rebasing: src[start..<start+P.channels])
                     
                     f(ref)

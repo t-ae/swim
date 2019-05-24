@@ -214,9 +214,6 @@ extension ApplicationVisualTests {
         
         var steps: [NSImage] = []
         for _ in 0..<20 {
-//            var bd = Image(cast: b, to: Double.self)
-//            bd = bd.resize(width: 128, height: 128, method: .nearestNeighbor)
-//            let ns = doubleToNSImage(bd)
             let ns = (b*UInt8.max).resize(width: 256, height: 256).nsImage()
             steps.append(ns)
             b = next(b)
