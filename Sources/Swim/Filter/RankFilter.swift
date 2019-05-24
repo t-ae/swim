@@ -30,9 +30,6 @@ extension Image where P == Gray, T: Comparable {
 
                 // minimum of rest elements is median
                 return bp[mid...].min()!
-                
-//                bp.sort()
-//                return bp[mid]
             }
         }
     }
