@@ -10,7 +10,7 @@ class FilterPerformanceTests: XCTestCase {
         }
     }
     
-    func testRankFilter() {
+    func testRankFilterMaximum() {
         let image = Image<Gray, Double>(width: 1920, height: 1080, value: 0)
         
         measure {
