@@ -35,7 +35,9 @@ public struct MultiplyBlender<T: FloatingPoint>: Blender {
 public struct ScreenBlender<T: FloatingPoint>: Blender {
     @inlinable
     public static func blend(topColor: T, bottomColor: T) -> T {
-        return 1 - (1 - topColor)*(1 - bottomColor)
+        var value: T = 1 - topColor
+        value *= 1 - bottomColor
+        return 1 - value
     }
 }
 
@@ -45,7 +47,9 @@ public struct OverlayBlender<T: FloatingPoint>: Blender {
         if 2*topColor < 1 {
             return 2 * topColor * bottomColor
         } else {
-            return 1 - 2 * (1 - topColor)*(1 - bottomColor)
+            var value: T = 1 - topColor
+            value *= 1 - bottomColor
+            return 1 - 2*value
         }
     }
 }

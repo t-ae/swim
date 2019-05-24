@@ -427,7 +427,7 @@
 		OBJ_98 /* SubimageSubscript.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubimageSubscript.swift; sourceTree = "<group>"; };
 		"Swim::CStbImage::Product" /* CStbImage.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = CStbImage.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		"Swim::PerformanceTests::Product" /* PerformanceTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; path = PerformanceTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		"Swim::Swim::Product" /* Swim.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Swim.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		"Swim::Swim::Product" /* Swim.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Swim.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		"Swim::SwimTests::Product" /* SwimTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; path = SwimTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		"Swim::VisualTests::Product" /* VisualTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; path = VisualTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */

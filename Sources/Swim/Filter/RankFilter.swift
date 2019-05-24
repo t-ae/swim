@@ -13,15 +13,15 @@ extension Image where P == Gray, T: Comparable {
         case .median:
             return rankFilter(kernelSize: kernelSize) { bp in
                 var bp = bp
-                let mid = (bp.startIndex + bp.endIndex) / 2
-
-                // insertion sort
-                for i in bp.startIndex..<bp.endIndex-1 {
+                // if count is even, take smaller one
+                let mid = (bp.startIndex + bp.endIndex - 1) / 2
+                
+                // insertion sort up to mid-1
+                for i in bp.startIndex..<mid {
                     var minIndex = i
 
                     for j in (i+1)..<bp.endIndex {
                         if bp[j] < bp[minIndex] {
-                            bp[minIndex] = bp[j]
                             minIndex = j
                         }
                     }
