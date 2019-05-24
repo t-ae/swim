@@ -2,6 +2,23 @@ import XCTest
 import Swim
 
 class PixelTypeConversionTests: XCTestCase {
+    func testToGray() {
+        do {
+            let white = Image<RGB, Int>(width: 3, height: 3, value: 255)
+            
+            XCTAssertLessThan(white.toGray().withUnsafeBufferPointer { $0.max()! }, 256)
+            XCTAssertLessThan(white.toGray(wr: 1.0/3, wg: 1.0/3, wb: 1.0/3)
+                .withUnsafeBufferPointer { $0.max()! }, 256)
+        }
+        do {
+            let white = Image<RGB, Double>(width: 3, height: 3, value: 1)
+            
+            XCTAssertLessThanOrEqual(white.toGray().withUnsafeBufferPointer { $0.max()! }, 1)
+            XCTAssertLessThanOrEqual(white.toGray(wr: 1.0/3, wg: 1.0/3, wb: 1.0/3)
+                .withUnsafeBufferPointer { $0.max()! }, 1)
+        }
+    }
+    
     func testGrayToGrayAlpha() {
         do {
             let data = (0..<9).map { UInt8($0) }
@@ -168,6 +185,7 @@ class PixelTypeConversionTests: XCTestCase {
     }
     
     public static let allTests = [
+        ("testToGray", testToGray),
         ("testGrayToGrayAlpha", testGrayToGrayAlpha),
         ("testGrayToRGB", testGrayToRGB),
         ("testGrayToRGBA", testGrayToRGBA),

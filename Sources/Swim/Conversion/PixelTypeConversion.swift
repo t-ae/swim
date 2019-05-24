@@ -87,8 +87,8 @@ extension Image where P == RGB, T: BinaryInteger {
         
         for i in 0..<width*height {
             var sum = wr * T2(data[3*i+0])
-            sum += wr * T2(data[3*i+0])
             sum += wg * T2(data[3*i+1])
+            sum += wb * T2(data[3*i+2])
             newImage.data[i] = T(sum)
         }
         
