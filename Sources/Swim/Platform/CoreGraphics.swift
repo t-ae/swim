@@ -36,7 +36,7 @@ extension Image where P: ConvertibleFromCGImage, T: BinaryFloatingPoint {
     @inlinable
     public init(cgImage: CGImage) {
         let uint8 = Image<P, UInt8>(cgImage: cgImage)
-        self = uint8.cast() / T(UInt8.max)
+        self = uint8.cast(to: T.self) / T(UInt8.max)
     }
 }
 
