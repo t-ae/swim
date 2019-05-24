@@ -307,11 +307,13 @@ extension Pixel where P == RGBA, T: BinaryFloatingPoint {
 
 extension Pixel where P: RGBWithAlpha {
     private static func createPixel(r: T, g: T, b: T, a: T) -> Pixel {
-        var data = [T](repeating: T.swimDefaultValue, count: 4)
-        data[P.redIndex] = r
-        data[P.greenIndex] = g
-        data[P.blueIndex] = b
-        data[P.alphaIndex] = a
-        return Pixel(data: data)
+        switch P.colorStartIndex {
+        case 0: // RGBA
+            return Pixel(data: [r, g, b, a])
+        case 1: // ARGB
+            return Pixel(data: [a, r, g, b])
+        default:
+            fatalError("Never happens.")
+        }
     }
 }
