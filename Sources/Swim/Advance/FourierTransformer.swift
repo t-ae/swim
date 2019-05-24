@@ -58,8 +58,7 @@ public enum FourierTransformer {
         assert(Int(exactly: log2(Double(image.width))) != nil)
         
         let countInRow = image.width * GrayAlpha.channels
-        for y in 0..<image.height {
-            let start = image.dataIndex(x: 0, y: y)
+        for start in stride(from: 0, to: image.data.count, by: countInRow) {
             image.data[start..<start+countInRow].withUnsafeMutableBufferPointer {
                 inplaceFFT(data: $0, inverse: inverse)
             }
