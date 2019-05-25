@@ -2,6 +2,10 @@ import XCTest
 import Swim
 
 class IterationPerformanceTests: XCTestCase {
+    
+    // This is the slowest.
+    // `Image.subscript(x:y:)` creates new `Pixel` instance.
+    // `Pixel` has its own buffer so it must be initialized.
     func testIteration1() {
         let image = Image<RGBA, Double>(width: 1920, height: 1080, value: 1)
         var pixel = Pixel<RGBA, Double>(r: 0, g: 0, b: 0, a: 0)
@@ -15,6 +19,8 @@ class IterationPerformanceTests: XCTestCase {
         }
     }
     
+    // This is some slower.
+    // `withPixelRef` always calculates the index in data.
     func testIteration2() {
         let image = Image<RGBA, Double>(width: 1920, height: 1080, value: 1)
         var pixel = Pixel<RGBA, Double>(r: 0, g: 0, b: 0, a: 0)
@@ -30,6 +36,8 @@ class IterationPerformanceTests: XCTestCase {
         }
     }
     
+    // This is the fastest.
+    // `iteratePixels`'s index calculation doesn't need many multiplications.
     func testIteration3() {
         let image = Image<RGBA, Double>(width: 1920, height: 1080, value: 1)
         var pixel = Pixel<RGBA, Double>(r: 0, g: 0, b: 0, a: 0)
@@ -41,6 +49,9 @@ class IterationPerformanceTests: XCTestCase {
         }
     }
     
+    // This is the slowest.
+    // `Image.subscript(x:y:)` creates new `Pixel` instance.
+    // `Pixel` has its own buffer so it must be initialized.
     func testMutableIteration1() {
         var image = Image<RGBA, Double>(width: 1920, height: 1080, value: 1)
         let pixel = Pixel<RGBA, Double>(r: 0, g: 0, b: 0, a: 1)
@@ -54,6 +65,8 @@ class IterationPerformanceTests: XCTestCase {
         }
     }
     
+    // This is slower since `withMutablePixelRef` calls `Array.withUnsafeMutablePointer` internally.
+    // After closure execution, `withUnsafeMutablePointer` checks if pointer is changed.
     func testMutableIteration2() {
         var image = Image<RGBA, Double>(width: 1920, height: 1080, value: 1)
         let pixel = Pixel<RGBA, Double>(r: 0, g: 0, b: 0, a: 1)
@@ -69,6 +82,8 @@ class IterationPerformanceTests: XCTestCase {
         }
     }
     
+    // This is the fastest.
+    // `pixelwiseConvert` calls `Array.withUnsafeMutablePointer` only once.
     func testMutableIteration3() {
         var image = Image<RGBA, Double>(width: 1920, height: 1080, value: 1)
         let pixel = Pixel<RGBA, Double>(r: 0, g: 0, b: 0, a: 1)
