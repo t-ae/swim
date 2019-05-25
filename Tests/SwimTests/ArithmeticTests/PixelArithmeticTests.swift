@@ -24,7 +24,10 @@ class PixelArithmeticTests: XCTestCase {
     func testAddInt() {
         var pixel = Pixel<RGBA, Int>(data: [0, 1, 2, 3])
         
-        XCTAssertEqual(1 + pixel + pixel + 1, Pixel(data: [2, 4, 6, 8]))
+        var t = 1 + pixel
+        t = t + pixel
+        t = t + 1
+        XCTAssertEqual(t, Pixel(data: [2, 4, 6, 8]))
         
         pixel += pixel
         pixel += 1
@@ -35,7 +38,10 @@ class PixelArithmeticTests: XCTestCase {
     func testAddDouble() {
         var pixel = Pixel<RGBA, Double>(data: [0, 1, 2, 3])
         
-        XCTAssertEqual(1 + pixel + pixel + 1, Pixel(data: [2, 4, 6, 8]))
+        var t = 1 + pixel
+        t = t + pixel
+        t = t + 1
+        XCTAssertEqual(t, Pixel(data: [2, 4, 6, 8]))
         
         pixel += pixel
         pixel += 1
@@ -46,7 +52,10 @@ class PixelArithmeticTests: XCTestCase {
     func testSubInt() {
         var pixel = Pixel<RGBA, Int>(data: [0, 1, 2, 3])
         
-        XCTAssertEqual(1 - pixel - pixel - 1, Pixel(data: [-0, -2, -4, -6]))
+        var t = 1 - pixel
+        t = t - pixel
+        t = t - 1
+        XCTAssertEqual(t, Pixel(data: [-0, -2, -4, -6]))
         
         pixel -= pixel
         pixel -= 1
@@ -57,7 +66,10 @@ class PixelArithmeticTests: XCTestCase {
     func testSubDouble() {
         var pixel = Pixel<RGBA, Double>(data: [0, 1, 2, 3])
         
-        XCTAssertEqual(1 - pixel - pixel - 1, Pixel(data: [-0, -2, -4, -6]))
+        var t = 1 - pixel
+        t = t - pixel
+        t = t - 1
+        XCTAssertEqual(t, Pixel(data: [-0, -2, -4, -6]))
         
         pixel -= pixel
         pixel -= 1
@@ -68,7 +80,10 @@ class PixelArithmeticTests: XCTestCase {
     func testMulInt() {
         var pixel = Pixel<RGBA, Int>(data: [0, 1, 2, 3])
         
-        XCTAssertEqual(2 * pixel * pixel * 2, Pixel(data: [0, 4, 16, 36]))
+        var t = 2 * pixel
+        t = t * pixel
+        t = t * 2
+        XCTAssertEqual(t, Pixel(data: [0, 4, 16, 36]))
         
         pixel *= pixel
         pixel *= 2
@@ -79,7 +94,10 @@ class PixelArithmeticTests: XCTestCase {
     func testMulDouble() {
         var pixel = Pixel<RGBA, Double>(data: [0, 1, 2, 3])
         
-        XCTAssertEqual(2 * pixel * pixel * 2, Pixel(data: [0, 4, 16, 36]))
+        var t = 2 * pixel
+        t = t * pixel
+        t = t * 2
+        XCTAssertEqual(t, Pixel(data: [0, 4, 16, 36]))
         
         pixel *= pixel
         pixel *= 2

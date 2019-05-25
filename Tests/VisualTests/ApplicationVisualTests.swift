@@ -147,7 +147,8 @@ extension ApplicationVisualTests {
                 let cvi = vi.dataConverted(c)
                 
                 // wavelet values
-                let w = (cui * cvi) * (gx * ui + gy * vi)
+                let c = cui * cvi
+                let w = c * (gx * ui + gy * vi)
                 
                 // weight sum
                 let coef = Image(width: 2, height: 2, gray: [(1-u)*(1-v), u*(1-v),
