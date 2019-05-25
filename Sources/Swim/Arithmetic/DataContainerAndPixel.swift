@@ -1,6 +1,6 @@
-extension DataContainer where T: AdditiveArithmetic {
+extension Image where T: AdditiveArithmetic {
     @inlinable
-    public static func +=<P2: PixelProtocol>(lhs: inout Self, rhs: P2) where P2.P == P, P2.T == T {
+    public static func +=<P2: PixelProtocol>(lhs: inout Image, rhs: P2) where P2.P == P, P2.T == T {
         lhs.withUnsafeMutableBufferPointer { lbp in
             rhs.withUnsafeBufferPointer { rbp in
                 for li in stride(from: 0, to: lbp.count, by: rbp.count) {
@@ -12,28 +12,20 @@ extension DataContainer where T: AdditiveArithmetic {
         }
     }
     
-    // FIXME: need this to disambiguate pixel + pixel
     @inlinable
-    public static func +(lhs: Self, rhs: Pixel<P, T>) -> Self {
+    public static func +<P2: PixelProtocol>(lhs: Image, rhs: P2) -> Image where P2.P == P, P2.T == T {
         var new = lhs
         new += rhs
         return new
     }
     
     @inlinable
-    public static func +<P2: PixelProtocol>(lhs: Self, rhs: P2) -> Self where P2.P == P, P2.T == T {
-        var new = lhs
-        new += rhs
-        return new
-    }
-    
-    @inlinable
-    public static func +<P2: PixelProtocol>(lhs: P2, rhs: Self) -> Self where P2.P == P, P2.T == T {
+    public static func +<P2: PixelProtocol>(lhs: P2, rhs: Image) -> Image where P2.P == P, P2.T == T {
         return rhs + lhs
     }
     
     @inlinable
-    public static func -=<P2: PixelProtocol>(lhs: inout Self, rhs: P2) where P2.P == P, P2.T == T {
+    public static func -=<P2: PixelProtocol>(lhs: inout Image, rhs: P2) where P2.P == P, P2.T == T {
         lhs.withUnsafeMutableBufferPointer { lbp in
             rhs.withUnsafeBufferPointer { rbp in
                 for li in stride(from: 0, to: lbp.count, by: rbp.count) {
@@ -45,23 +37,15 @@ extension DataContainer where T: AdditiveArithmetic {
         }
     }
     
-    // FIXME: need this to disambiguate pixel - pixel
     @inlinable
-    public static func -(lhs: Self, rhs: Pixel<P, T>) -> Self {
+    public static func -<P2: PixelProtocol>(lhs: Image, rhs: P2) -> Image where P2.P == P, P2.T == T {
         var new = lhs
         new -= rhs
         return new
     }
     
     @inlinable
-    public static func -<P2: PixelProtocol>(lhs: Self, rhs: P2) -> Self where P2.P == P, P2.T == T {
-        var new = lhs
-        new -= rhs
-        return new
-    }
-    
-    @inlinable
-    public static func -<P2: PixelProtocol>(lhs: P2, rhs: Self) -> Self where P2.P == P, P2.T == T {
+    public static func -<P2: PixelProtocol>(lhs: P2, rhs: Image) -> Image where P2.P == P, P2.T == T {
         var new = rhs
         
         lhs.withUnsafeBufferPointer { lbp in
@@ -78,9 +62,9 @@ extension DataContainer where T: AdditiveArithmetic {
     }
 }
 
-extension DataContainer where T: Numeric {
+extension Image where T: Numeric {
     @inlinable
-    public static func *=<P2: PixelProtocol>(lhs: inout Self, rhs: P2) where P2.P == P, P2.T == T {
+    public static func *=<P2: PixelProtocol>(lhs: inout Image, rhs: P2) where P2.P == P, P2.T == T {
         lhs.withUnsafeMutableBufferPointer { lbp in
             rhs.withUnsafeBufferPointer { rbp in
                 for li in stride(from: 0, to: lbp.count, by: rbp.count) {
@@ -92,30 +76,22 @@ extension DataContainer where T: Numeric {
         }
     }
     
-    // FIXME: need this to disambiguate pixel * pixel
     @inlinable
-    public static func *(lhs: Self, rhs: Pixel<P, T>) -> Self {
+    public static func *<P2: PixelProtocol>(lhs: Image, rhs: P2) -> Image where P2.P == P, P2.T == T {
         var new = lhs
         new *= rhs
         return new
     }
     
     @inlinable
-    public static func *<P2: PixelProtocol>(lhs: Self, rhs: P2) -> Self where P2.P == P, P2.T == T {
-        var new = lhs
-        new *= rhs
-        return new
-    }
-    
-    @inlinable
-    public static func *<P2: PixelProtocol>(lhs: P2, rhs: Self) -> Self where P2.P == P, P2.T == T {
+    public static func *<P2: PixelProtocol>(lhs: P2, rhs: Image) -> Image where P2.P == P, P2.T == T {
         return rhs * lhs
     }
 }
 
-extension DataContainer where T: BinaryInteger {
+extension Image where T: BinaryInteger {
     @inlinable
-    public static func /=<P2: PixelProtocol>(lhs: inout Self, rhs: P2) where P2.P == P, P2.T == T {
+    public static func /=<P2: PixelProtocol>(lhs: inout Image, rhs: P2) where P2.P == P, P2.T == T {
         lhs.withUnsafeMutableBufferPointer { lbp in
             rhs.withUnsafeBufferPointer { rbp in
                 for li in stride(from: 0, to: lbp.count, by: rbp.count) {
@@ -127,23 +103,15 @@ extension DataContainer where T: BinaryInteger {
         }
     }
     
-    // FIXME: need this to disambiguate pixel / pixel
     @inlinable
-    public static func /(lhs: Self, rhs: Pixel<P, T>) -> Self {
+    public static func /<P2: PixelProtocol>(lhs: Image, rhs: P2) -> Image where P2.P == P, P2.T == T {
         var new = lhs
         new /= rhs
         return new
     }
     
     @inlinable
-    public static func /<P2: PixelProtocol>(lhs: Self, rhs: P2) -> Self where P2.P == P, P2.T == T {
-        var new = lhs
-        new /= rhs
-        return new
-    }
-    
-    @inlinable
-    public static func /<P2: PixelProtocol>(lhs: P2, rhs: Self) -> Self where P2.P == P, P2.T == T {
+    public static func /<P2: PixelProtocol>(lhs: P2, rhs: Image) -> Image where P2.P == P, P2.T == T {
         var new = rhs
         
         lhs.withUnsafeBufferPointer { lbp in
@@ -160,9 +128,9 @@ extension DataContainer where T: BinaryInteger {
     }
 }
 
-extension DataContainer where T: FloatingPoint {
+extension Image where T: FloatingPoint {
     @inlinable
-    public static func /=<P2: PixelProtocol>(lhs: inout Self, rhs: P2) where P2.P == P, P2.T == T {
+    public static func /=<P2: PixelProtocol>(lhs: inout Image, rhs: P2) where P2.P == P, P2.T == T {
         lhs.withUnsafeMutableBufferPointer { lbp in
             rhs.withUnsafeBufferPointer { rbp in
                 for li in stride(from: 0, to: lbp.count, by: rbp.count) {
@@ -174,23 +142,15 @@ extension DataContainer where T: FloatingPoint {
         }
     }
     
-    // FIXME: need this to disambiguate pixel / pixel
     @inlinable
-    public static func /(lhs: Self, rhs: Pixel<P, T>) -> Self {
+    public static func /<P2: PixelProtocol>(lhs: Image, rhs: P2) -> Image where P2.P == P, P2.T == T {
         var new = lhs
         new /= rhs
         return new
     }
     
     @inlinable
-    public static func /<P2: PixelProtocol>(lhs: Self, rhs: P2) -> Self where P2.P == P, P2.T == T {
-        var new = lhs
-        new /= rhs
-        return new
-    }
-    
-    @inlinable
-    public static func /<P2: PixelProtocol>(lhs: P2, rhs: Self) -> Self where P2.P == P, P2.T == T {
+    public static func /<P2: PixelProtocol>(lhs: P2, rhs: Image) -> Image where P2.P == P, P2.T == T {
         var new = rhs
         
         lhs.withUnsafeBufferPointer { lbp in
