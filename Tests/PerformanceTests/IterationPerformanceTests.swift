@@ -65,8 +65,8 @@ class IterationPerformanceTests: XCTestCase {
         }
     }
     
-    // This is slower since `withMutablePixelRef` calls `Array.withUnsafeMutablePointer` internally.
-    // After closure execution, `withUnsafeMutablePointer` checks if pointer is changed.
+    // This is slower since `withMutablePixelRef` calls `Array.withUnsafeMutableBufferPointer` internally.
+    // After closure execution, `withUnsafeMutableBufferPointer` checks if pointer is changed.
     func testMutableIteration2() {
         var image = Image<RGBA, Double>(width: 1920, height: 1080, value: 1)
         let pixel = Pixel<RGBA, Double>(r: 0, g: 0, b: 0, a: 1)
@@ -83,7 +83,7 @@ class IterationPerformanceTests: XCTestCase {
     }
     
     // This is the fastest.
-    // `pixelwiseConvert` calls `Array.withUnsafeMutablePointer` only once.
+    // `pixelwiseConvert` calls `Array.withUnsafeMutableBufferPointer` only once.
     func testMutableIteration3() {
         var image = Image<RGBA, Double>(width: 1920, height: 1080, value: 1)
         let pixel = Pixel<RGBA, Double>(r: 0, g: 0, b: 0, a: 1)

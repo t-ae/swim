@@ -5,9 +5,9 @@ extension Image {
     ///
     /// - Note: `*PixelRef` contains `Unsafe*BufferPointer`. So it's unsafe to bring them outside closure.
     @inlinable
-    public func createMask(_ f: (PixelRef<P, T>)->Bool) -> Image<Gray, Bool> {
+    public func createMask(_ body: (PixelRef<P, T>)->Bool) -> Image<Gray, Bool> {
         return pixelwiseConverted { src, dst in
-            dst[.gray] = f(src)
+            dst[.gray] = body(src)
         }
     }
 }
