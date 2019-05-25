@@ -75,4 +75,13 @@ class ArithmeticPerformanceTests: XCTestCase {
             _ = image1 + image2
         }
     }
+    
+    func testMulPixelDouble2() {
+        var image = Image<RGBA, Double>(width: 3840, height: 2160, value: 0)
+        let pixel = Pixel<RGBA, Double>.red
+        
+        measure {
+            image *= pixel
+        }
+    }
 }

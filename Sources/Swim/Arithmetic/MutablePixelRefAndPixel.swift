@@ -120,5 +120,3 @@ extension MutablePixelRef where T: Numeric {
         }
     }
 }
-
-

@@ -1,6 +1,7 @@
 import Foundation
 
 public protocol DataContainer {
+    associatedtype P
     associatedtype T
     
     func withUnsafeBufferPointer<R>(_ body: (UnsafeBufferPointer<T>)->R) -> R
