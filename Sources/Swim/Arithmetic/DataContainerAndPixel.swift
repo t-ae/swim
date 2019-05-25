@@ -12,6 +12,14 @@ extension DataContainer where T: AdditiveArithmetic {
         }
     }
     
+    // FIXME: need this to disambiguate pixel + pixel
+    @inlinable
+    public static func +(lhs: Self, rhs: Pixel<P, T>) -> Self {
+        var new = lhs
+        new += rhs
+        return new
+    }
+    
     @inlinable
     public static func +<P2: PixelProtocol>(lhs: Self, rhs: P2) -> Self where P2.P == P, P2.T == T {
         var new = lhs
@@ -35,6 +43,14 @@ extension DataContainer where T: AdditiveArithmetic {
                 }
             }
         }
+    }
+    
+    // FIXME: need this to disambiguate pixel - pixel
+    @inlinable
+    public static func -(lhs: Self, rhs: Pixel<P, T>) -> Self {
+        var new = lhs
+        new -= rhs
+        return new
     }
     
     @inlinable
@@ -76,6 +92,14 @@ extension DataContainer where T: Numeric {
         }
     }
     
+    // FIXME: need this to disambiguate pixel * pixel
+    @inlinable
+    public static func *(lhs: Self, rhs: Pixel<P, T>) -> Self {
+        var new = lhs
+        new *= rhs
+        return new
+    }
+    
     @inlinable
     public static func *<P2: PixelProtocol>(lhs: Self, rhs: P2) -> Self where P2.P == P, P2.T == T {
         var new = lhs
@@ -101,6 +125,14 @@ extension DataContainer where T: BinaryInteger {
                 }
             }
         }
+    }
+    
+    // FIXME: need this to disambiguate pixel / pixel
+    @inlinable
+    public static func /(lhs: Self, rhs: Pixel<P, T>) -> Self {
+        var new = lhs
+        new /= rhs
+        return new
     }
     
     @inlinable
@@ -140,6 +172,14 @@ extension DataContainer where T: FloatingPoint {
                 }
             }
         }
+    }
+    
+    // FIXME: need this to disambiguate pixel / pixel
+    @inlinable
+    public static func /(lhs: Self, rhs: Pixel<P, T>) -> Self {
+        var new = lhs
+        new /= rhs
+        return new
     }
     
     @inlinable

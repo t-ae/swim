@@ -1,8 +1,8 @@
 import Foundation
 
 public protocol DataContainer {
-    associatedtype P
-    associatedtype T
+    associatedtype P: PixelType
+    associatedtype T: DataType
     
     func withUnsafeBufferPointer<R>(_ body: (UnsafeBufferPointer<T>)->R) -> R
     mutating func withUnsafeMutableBufferPointer<R>(_ body: (UnsafeMutableBufferPointer<T>)->R) -> R
