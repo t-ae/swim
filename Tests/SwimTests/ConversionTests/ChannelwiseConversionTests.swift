@@ -21,9 +21,9 @@ class ChannelwiseConversionTests: XCTestCase {
         var image = Image(width: 4, height: 5, rgba: (0..<80).map { Int($0) })
         
         var expect = image
-        expect[channel: .red] *= 2
+        expect[channel: .green] *= 2
         
-        image.channelwiseConvert(channel: .red) { x, y, value in
+        image.channelwiseConvert(channel: .green) { x, y, value in
             value * 2
         }
         

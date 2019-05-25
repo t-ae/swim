@@ -53,7 +53,7 @@ extension Image {
                                             _ yRange: Range<Int>,
                                             _ channel: P,
                                             _ body: (_ x: Int, _ y: Int, _ value: T) -> T) {
-        var start = dataIndex(x: xRange.startIndex, y: yRange.startIndex)
+        var start = dataIndex(x: xRange.startIndex, y: yRange.startIndex, c: channel.rawValue)
         for y in yRange {
             var i = start
             for x in xRange {
