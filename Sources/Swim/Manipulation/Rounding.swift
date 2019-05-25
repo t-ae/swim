@@ -3,7 +3,7 @@ import Foundation
 extension Image where T: FloatingPoint {
     @inlinable
     public mutating func applyRound() {
-        channelwiseConvert(Foundation.round)
+        dataConvert(Foundation.round)
     }
     
     @inlinable
@@ -15,7 +15,7 @@ extension Image where T: FloatingPoint {
     
     @inlinable
     public mutating func applyCeil() {
-        channelwiseConvert(Foundation.ceil)
+        dataConvert(Foundation.ceil)
     }
 
     @inlinable
@@ -27,7 +27,7 @@ extension Image where T: FloatingPoint {
     
     @inlinable
     public mutating func applyFloor() {
-        channelwiseConvert(Foundation.floor)
+        dataConvert(Foundation.floor)
     }
     
     @inlinable
@@ -39,7 +39,7 @@ extension Image where T: FloatingPoint {
     
     @inlinable
     public mutating func applyTrunc() {
-        channelwiseConvert(Foundation.trunc)
+        dataConvert(Foundation.trunc)
     }
     
     @inlinable

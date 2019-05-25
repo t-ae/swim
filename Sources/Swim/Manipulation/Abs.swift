@@ -3,7 +3,7 @@ import Foundation
 extension Image where T: Comparable&SignedNumeric {
     @inlinable
     public mutating func applyAbs() {
-        channelwiseConvert(Swift.abs)
+        dataConvert(Swift.abs)
     }
     
     @inlinable

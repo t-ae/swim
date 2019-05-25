@@ -143,11 +143,11 @@ extension ApplicationVisualTests {
                                                            u, u-1])
                 let vi = Image(width: 2, height: 2, gray: [v, v,
                                                            v-1, v-1])
-                let cui = ui.channelwiseConverted(c)
-                let cvi = vi.channelwiseConverted(c)
+                let cui = ui.dataConverted(c)
+                let cvi = vi.dataConverted(c)
                 
                 // wavelet values
-                let w = cui * cvi * (gx * ui + gy * vi)
+                let w = (cui * cvi) * (gx * ui + gy * vi)
                 
                 // weight sum
                 let coef = Image(width: 2, height: 2, gray: [(1-u)*(1-v), u*(1-v),
@@ -297,8 +297,8 @@ extension ApplicationVisualTests {
         // Double Thresholding
         let ht = 0.3
         let lt = 0.2
-        let high: Image<Gray, Double> = sharpen.channelwiseConverted { $0 < ht ? 0 : 1 }
-        let low: Image<Gray, Double> = sharpen.channelwiseConverted { $0 < lt ? 0 : 1 }
+        let high: Image<Gray, Double> = sharpen.dataConverted { $0 < ht ? 0 : 1 }
+        let low: Image<Gray, Double> = sharpen.dataConverted { $0 < lt ? 0 : 1 }
         images.append(high)
         images.append(low)
         
@@ -417,7 +417,7 @@ extension ApplicationVisualTests {
         let lena = try! Image<Gray, Double>(contentsOf: path)
         var images: [Image<Gray, Double>] = [lena]
         
-        let randDither = lena.channelwiseConverted { px -> Double in
+        let randDither = lena.dataConverted { px -> Double in
             (px < .random(in: 0..<1)) ? 0 : 1
         }
         

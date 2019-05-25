@@ -18,7 +18,7 @@ extension FourierTransformerVisualTests {
         do {
             // spectrum
             var spectrum = shifted[channel: 0].powered(2) + shifted[channel: 1].powered(2)
-            spectrum.channelwiseConvert { log1p(sqrt($0)) }
+            spectrum.dataConvert { log1p(sqrt($0)) }
             
             let (minSpectrum, maxSpectrum) = spectrum.withUnsafeBufferPointer { ($0.min()!, $0.max()!) }
             images.append((spectrum - minSpectrum) / (maxSpectrum - minSpectrum))
@@ -49,7 +49,7 @@ extension FourierTransformerVisualTests {
             
             // spectrum
             var spectrum = shifted[channel: 0].powered(2) + shifted[channel: 1].powered(2)
-            spectrum.channelwiseConvert { log1p(sqrt($0)) }
+            spectrum.dataConvert { log1p(sqrt($0)) }
             
             let (minSpectrum, maxSpectrum) = spectrum.withUnsafeBufferPointer { ($0.min()!, $0.max()!) }
             images.append((spectrum - minSpectrum) / (maxSpectrum - minSpectrum))
@@ -67,7 +67,7 @@ extension FourierTransformerVisualTests {
             
             // spectrum
             var spectrum = shifted[channel: 0].powered(2) + shifted[channel: 1].powered(2)
-            spectrum.channelwiseConvert { log1p(sqrt($0)) }
+            spectrum.dataConvert { log1p(sqrt($0)) }
             
             let (minSpectrum, maxSpectrum) = spectrum.withUnsafeBufferPointer { ($0.min()!, $0.max()!) }
             images.append((spectrum - minSpectrum) / (maxSpectrum - minSpectrum))

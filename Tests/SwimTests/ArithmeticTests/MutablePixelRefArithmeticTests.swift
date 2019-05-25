@@ -4,7 +4,7 @@ import Swim
 class MutablePixelRefArithmeticTests: XCTestCase {
     func testAdd() {
         do {
-            var image = Image(width: 2, height: 2, rgba: (0..<2*2*4).map { UInt8($0) })
+            var image = Image(width: 2, height: 2, rgba: (0..<16).map { UInt8($0) })
             var answer = image
             
             image.withMutablePixelRef(x: 0, y: 0) { ref in
@@ -18,7 +18,7 @@ class MutablePixelRefArithmeticTests: XCTestCase {
             XCTAssertEqual(image, answer)
         }
         do {
-            var image = Image(width: 2, height: 2, rgba: (0..<2*2*4).map { Double($0) })
+            var image = Image(width: 2, height: 2, rgba: (0..<16).map { Double($0) })
             var answer = image
             
             image.withMutablePixelRef(x: 0, y: 0) { ref in
@@ -35,7 +35,7 @@ class MutablePixelRefArithmeticTests: XCTestCase {
     
     func testSub() {
         do {
-            var image = Image(width: 2, height: 2, rgba: (10..<10+2*2*4).map { UInt8($0) })
+            var image = Image(width: 2, height: 2, rgba: (10..<10+16).map { UInt8($0) })
             var answer = image
             
             image.withMutablePixelRef(x: 0, y: 0) { ref in
@@ -49,7 +49,7 @@ class MutablePixelRefArithmeticTests: XCTestCase {
             XCTAssertEqual(image, answer)
         }
         do {
-            var image = Image(width: 2, height: 2, rgba: (10..<10+2*2*4).map { Double($0) })
+            var image = Image(width: 2, height: 2, rgba: (10..<10+16).map { Double($0) })
             var answer = image
             
             image.withMutablePixelRef(x: 0, y: 0) { ref in
@@ -66,7 +66,7 @@ class MutablePixelRefArithmeticTests: XCTestCase {
     
     func testMul() {
         do {
-            var image = Image(width: 2, height: 2, rgba: (0..<2*2*4).map { UInt8($0) })
+            var image = Image(width: 2, height: 2, rgba: (0..<16).map { UInt8($0) })
             var answer = image
             
             image.withMutablePixelRef(x: 0, y: 0) { ref in
@@ -80,7 +80,7 @@ class MutablePixelRefArithmeticTests: XCTestCase {
             XCTAssertEqual(image, answer)
         }
         do {
-            var image = Image(width: 2, height: 2, rgba: (0..<2*2*4).map { Double($0) })
+            var image = Image(width: 2, height: 2, rgba: (0..<16).map { Double($0) })
             var answer = image
             
             image.withMutablePixelRef(x: 0, y: 0) { ref in
@@ -97,7 +97,7 @@ class MutablePixelRefArithmeticTests: XCTestCase {
     
     func testDiv() {
         do {
-            var image = Image(width: 2, height: 2, rgba: (100..<100+2*2*4).map { UInt8($0) })
+            var image = Image(width: 2, height: 2, rgba: (100..<100+16).map { UInt8($0) })
             var answer = image
             
             image.withMutablePixelRef(x: 0, y: 0) { ref in
@@ -111,7 +111,7 @@ class MutablePixelRefArithmeticTests: XCTestCase {
             XCTAssertEqual(image, answer)
         }
         do {
-            var image = Image(width: 2, height: 2, rgba: (100..<100+2*2*4).map { Double($0) })
+            var image = Image(width: 2, height: 2, rgba: (100..<100+16).map { Double($0) })
             var answer = image
             
             image.withMutablePixelRef(x: 0, y: 0) { ref in

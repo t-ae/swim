@@ -7,8 +7,8 @@ import Foundation
 extension Image where T == Float {
     @inlinable
     public mutating func power(_ exponent: T) {
-        channelwiseConvert { px in
-            pow(px, exponent)
+        for i in 0..<data.count {
+            data[i] = pow(data[i], exponent)
         }
     }
     
@@ -23,8 +23,8 @@ extension Image where T == Float {
 extension Image where T == Double {
     @inlinable
     public mutating func power(_ exponent: T){
-        channelwiseConvert { px in
-            pow(px, exponent)
+        for i in 0..<data.count {
+            data[i] = pow(data[i], exponent)
         }
     }
     

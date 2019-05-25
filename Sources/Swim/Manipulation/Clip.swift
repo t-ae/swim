@@ -1,7 +1,7 @@
 extension Image where T: Comparable {
     @inlinable
     public mutating func clip(low: T, high: T) {
-        self.channelwiseConvert { clamp($0, min: low, max: high) }
+        self.dataConvert { clamp($0, min: low, max: high) }
     }
     
     @inlinable

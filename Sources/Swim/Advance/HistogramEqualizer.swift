@@ -19,7 +19,7 @@ public enum HistogramEqualizer<T: BinaryInteger&DataType> {
         
         var newImage = image
         
-        newImage.channelwiseConvert { px in
+        newImage.dataConvert { px in
             T(Int(UInt8.max) * cumsum[Int(px)] / scale)
         }
         
@@ -46,7 +46,7 @@ public enum HistogramEqualizer<T: BinaryInteger&DataType> {
         
         var newImage = image
         
-        newImage.channelwiseConvert { px in
+        newImage.dataConvert { px in
             T(Int(UInt8.max) * cumsum[Int(px)] / scale)
         }
         

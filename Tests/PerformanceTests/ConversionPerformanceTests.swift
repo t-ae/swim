@@ -34,7 +34,7 @@ class ConversionPerformanceTests: XCTestCase {
         
         measure {
             for _ in 0..<100 {
-                image.channelwiseConvert { src in
+                image.dataConvert { src in
                     src &+ 1
                 }
             }
@@ -46,7 +46,7 @@ class ConversionPerformanceTests: XCTestCase {
         
         measure {
             for _ in 0..<100 {
-                _ = image.channelwiseConverted { $0 + 1 }
+                _ = image.dataConverted { $0 + 1 }
             }
         }
     }

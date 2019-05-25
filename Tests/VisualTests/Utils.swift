@@ -71,7 +71,7 @@ func gradiationImage256() -> Image<Gray, Double> {
 import AppKit
 
 func doubleToNSImage<P: ConvertibleToCGImage>(_ image: Image<P, Double>) -> NSImage {
-    return image.channelwiseConverted { UInt8(min(max($0, 0), 1)*255) }.nsImage()
+    return image.dataConverted { UInt8(min(max($0, 0), 1)*255) }.nsImage()
 }
 
 #endif
