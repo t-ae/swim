@@ -14,8 +14,6 @@ extension Image {
     /// Convert pixel values in specified range.
     ///
     /// Closure takes 4 arguments, x, y, channel, value. And returns new value.
-    ///
-    /// - Note: If you don't need x, y, channel information, using `dataConvert` is faster.
     @inlinable
     public mutating func channelwiseConvert(_ xRange: Range<Int>,
                                             _ yRange: Range<Int>,
@@ -36,8 +34,6 @@ extension Image {
     /// Convert pixel values of specified channel.
     ///
     /// Closure takes 3 arguments, x, y, value. And returns new value.
-    ///
-    /// - Note: If you don't need x, y information, using `dataConvert` is faster.
     @inlinable
     public mutating func channelwiseConvert(channel: P, _ body: (_ x: Int, _ y: Int, _ value: T) -> T) {
         channelwiseConvert(0..<width, 0..<height, channel, body)
@@ -46,8 +42,6 @@ extension Image {
     /// Convert pixel values of specified channel/range.
     ///
     /// Closure takes 3 arguments, x, y, value. And returns new value.
-    ///
-    /// - Note: If you don't need x, y information, using `dataConvert` is faster.
     @inlinable
     public mutating func channelwiseConvert(_ xRange: Range<Int>,
                                             _ yRange: Range<Int>,
