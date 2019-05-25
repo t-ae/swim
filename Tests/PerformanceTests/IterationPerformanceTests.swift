@@ -48,6 +48,9 @@ class IterationPerformanceTests: XCTestCase {
             }
         }
     }
+}
+
+extension IterationPerformanceTests {
     
     // This is the slowest.
     // `Image.subscript(x:y:)` creates new `Pixel` instance.
@@ -94,7 +97,9 @@ class IterationPerformanceTests: XCTestCase {
             }
         }
     }
-    
+}
+
+extension IterationPerformanceTests {
     func testIterationPixelValues1() {
         var image = Image<RGBA, Double>(width: 3840, height: 2160, value: 1)
         
@@ -110,6 +115,36 @@ class IterationPerformanceTests: XCTestCase {
         
         measure {
             image.channelwiseConvert { x, y, c, value in
+                value + 1
+            }
+        }
+    }
+}
+
+extension IterationPerformanceTests {
+    func testChannelConvert1() {
+        var image = Image<RGBA, Double>(width: 3840, height: 2160, value: 1)
+        
+        measure {
+            _ = image[channel: .red].dataConverted { value in value + 1 }
+        }
+    }
+    
+    func testChannelConvert2() {
+        var image = Image<RGBA, Double>(width: 3840, height: 2160, value: 1)
+        
+        measure {
+            image.channelwiseConvert { x, y, c, value in
+                return c == .red ? value+1 : value
+            }
+        }
+    }
+    
+    func testChannelConvert3() {
+        var image = Image<RGBA, Double>(width: 3840, height: 2160, value: 1)
+        
+        measure {
+            image.channelwiseConvert(channel: .red) { x, y, value in
                 value + 1
             }
         }
