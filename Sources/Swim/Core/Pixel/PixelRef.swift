@@ -87,7 +87,7 @@ extension MutablePixelRef {
 extension Image {
     /// Create `PixelRef` pointing specified coord and execute `body`.
     ///
-    /// For ruster iteration, using `iteratePixels` is faster.
+    /// For raster iteration, using `iteratePixels` is faster.
     @inlinable
     public func withPixelRef<R>(x: Int, y: Int, _ body: (PixelRef<P, T>)->R) -> R {
         let start = dataIndex(x: x, y: y)
@@ -100,7 +100,7 @@ extension Image {
     
     /// Create `MutablePixelRef` pointing specified coord and execute `body`.
     ///
-    /// For ruster iteration, using `pixelwiseConvert` is faster.
+    /// For raster iteration, using `pixelwiseConvert` is faster.
     @inlinable
     public mutating func withMutablePixelRef<R>(x: Int, y: Int, _ body: (MutablePixelRef<P, T>)->R) -> R {
         let start = dataIndex(x: x, y: y)
