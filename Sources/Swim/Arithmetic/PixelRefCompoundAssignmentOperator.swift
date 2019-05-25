@@ -5,7 +5,7 @@ extension MutablePixelRef where T: AdditiveArithmetic {
     public static func +=<P2: PixelProtocol>(lhs: MutablePixelRef,
                                              rhs: P2) where P2.P == P, P2.T == T {
         rhs.withUnsafeBufferPointer { rbp in
-            for i in 0..<P.channels {
+            for i in 0..<lhs.pointer.count {
                 lhs.pointer[i] += rbp[i]
             }
         }
@@ -15,7 +15,7 @@ extension MutablePixelRef where T: AdditiveArithmetic {
     public static func -=<P2: PixelProtocol>(lhs: MutablePixelRef,
                                              rhs: P2) where P2.P == P, P2.T == T {
         rhs.withUnsafeBufferPointer { rbp in
-            for i in 0..<P.channels {
+            for i in 0..<lhs.pointer.count {
                 lhs.pointer[i] -= rbp[i]
             }
         }
@@ -27,7 +27,7 @@ extension MutablePixelRef where T: Numeric {
     public static func *=<P2: PixelProtocol>(lhs: MutablePixelRef,
                                              rhs: P2) where P2.P == P, P2.T == T {
         rhs.withUnsafeBufferPointer { rbp in
-            for i in 0..<P.channels {
+            for i in 0..<lhs.pointer.count {
                 lhs.pointer[i] *= rbp[i]
             }
         }
@@ -39,7 +39,7 @@ extension MutablePixelRef where T: BinaryInteger {
     public static func /=<P2: PixelProtocol>(lhs: MutablePixelRef,
                                              rhs: P2) where P2.P == P, P2.T == T {
         rhs.withUnsafeBufferPointer { rbp in
-            for i in 0..<P.channels {
+            for i in 0..<lhs.pointer.count {
                 lhs.pointer[i] /= rbp[i]
             }
         }
@@ -51,7 +51,7 @@ extension MutablePixelRef where T: FloatingPoint {
     public static func /=<P2: PixelProtocol>(lhs: MutablePixelRef,
                                              rhs: P2) where P2.P == P, P2.T == T {
         rhs.withUnsafeBufferPointer { rbp in
-            for i in 0..<P.channels {
+            for i in 0..<lhs.pointer.count {
                 lhs.pointer[i] /= rbp[i]
             }
         }
@@ -85,7 +85,7 @@ extension MutablePixelRef where T: Numeric {
     @inlinable
     func add<P2: PixelProtocol>(pixel: P2, with factor: T = 1) where P2.P == P, P2.T == T {
         pixel.withUnsafeBufferPointer { rbp in
-            for i in 0..<P.channels {
+            for i in 0..<pointer.count {
                 pointer[i] += rbp[i] * factor
             }
         }
@@ -95,7 +95,7 @@ extension MutablePixelRef where T: Numeric {
     func add(x: Int, y: Int, in image: Image<P, T>, with factor: T = 1) {
         let start = image.dataIndex(x: x, y: y)
         image.withUnsafeBufferPointer { rbp in
-            for i in 0..<P.channels {
+            for i in 0..<pointer.count {
                 pointer[i] += rbp[start+i] * factor
             }
         }
@@ -104,7 +104,7 @@ extension MutablePixelRef where T: Numeric {
     @inlinable
     func assign<P2: PixelProtocol>(pixel: P2, with factor: T) where P2.P == P, P2.T == T {
         pixel.withUnsafeBufferPointer { rbp in
-            for i in 0..<P.channels {
+            for i in 0..<pointer.count {
                 pointer[i] = rbp[i] * factor
             }
         }
@@ -114,7 +114,7 @@ extension MutablePixelRef where T: Numeric {
     func assign(x: Int,y: Int, in image: Image<P, T>, with factor: T) {
         let start = image.dataIndex(x: x, y: y)
         image.withUnsafeBufferPointer { rbp in
-            for i in 0..<P.channels {
+            for i in 0..<pointer.count {
                 pointer[i] = rbp[start+i] * factor
             }
         }
