@@ -3,11 +3,17 @@ import Foundation
 extension Image where T == Double {
     /// Apply bilateral filter.
     ///
+    /// Filter will be applied to each channel separately.
+    ///
     /// - Parameters:
     ///   - sigma2_1: Variance of distance gaussian.
     ///   - sigma2_2: Variance of pixel value gaussian.
+    ///
+    /// - Precondition: kernelSize > 0
     @inlinable
     public func bilateralFilter(kernelSize: Int, sigma2_1: Double, sigma2_2: Double) -> Image {
+        precondition(kernelSize > 0, "kernelSize must be greater than 0.")
+        
         var newImage = Image<P, T>(width: width, height: height, value: 0)
         
         let pad = (kernelSize-1)/2

@@ -454,6 +454,29 @@ extension ApplicationVisualTests {
         
         XCTAssertTrue(ns.isValid, "break here")
     }
+    
+    func testDenoise() {
+        let path = testResoruceRoot().appendingPathComponent("lena_256.png")
+        var lena = try! Image<RGB, Double>(contentsOf: path)
+        for _ in 0..<1000 {
+            let x = Int.random(in: 0..<lena.width)
+            let y = Int.random(in: 0..<lena.height)
+            
+            lena[x, y] = Bool.random() ? Pixel.white : Pixel.black
+        }
+        var images: [Image<RGB, Double>] = [lena]
+        
+        let gaussian = lena.convoluted(Filter.gaussian3x3)
+        images.append(gaussian)
+        
+        let median = lena.rankFilter(.median, kernelSize: 3)
+        images.append(median)
+        
+        // result
+        let ns = doubleToNSImage(Image.concatH(images))
+        
+        XCTAssertTrue(ns.isValid, "break here")
+    }
 }
 
 #endif
