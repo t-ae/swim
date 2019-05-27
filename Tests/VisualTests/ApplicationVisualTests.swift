@@ -496,14 +496,14 @@ extension ApplicationVisualTests {
             return r*r + g*g + b*b
         }
         
-        // k-Means
+        // k-means
         var centers = (0..<k).map { _ in
             Pixel<RGB, Double>(r: .random(in: 0..<1),
                                g: .random(in: 0..<1),
                                b: .random(in: 0..<1))
         }
         
-        for _ in 0..<maxIter {
+        for iter in 0..<maxIter {
             // Check nearest pixels
             var newClassImage = classImage
             lena.iteratePixels { ref in
@@ -518,6 +518,7 @@ extension ApplicationVisualTests {
             }
             
             if newClassImage == classImage {
+                print("Break at iter: \(iter)")
                 break
             }
             classImage = newClassImage
