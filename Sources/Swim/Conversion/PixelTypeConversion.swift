@@ -158,24 +158,15 @@ extension Image where P == RGB {
 // MARK: - RGBWithAlpha -> RGB
 extension Image where P: RGBWithAlpha {
     /// Extract RGB image.
-    /// This method simply ignores alpha channel.
+    ///
+    /// This method simply discards alpha channel.
     @inlinable
     public func toRGB() -> Image<RGB, T> {
-        var newImage = Image<RGB, T>(width: width, height: height)
-
-        var src = P.colorStartIndex
-        var dst = RGB.red.rawValue
-
-        for _ in 0..<width*height {
-            newImage.data[dst+P.redIndex] = data[src+RGB.red.rawValue]
-            newImage.data[dst+P.greenIndex] = data[src+RGB.green.rawValue]
-            newImage.data[dst+P.blueIndex] = data[src+RGB.blue.rawValue]
-
-            src += P.channels
-            dst += RGB.channels
+        return pixelwiseConverted { src, dst in
+            dst[.red] = src[P.redIndex]
+            dst[.green] = src[P.greenIndex]
+            dst[.blue] = src[P.blueIndex]
         }
-
-        return newImage
     }
 }
 
