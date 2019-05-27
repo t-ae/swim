@@ -43,10 +43,7 @@ extension Image {
             precondition(0 <= y && y < height, "Index out of range.")
             
             let start = dataIndex(x: x, y: y)
-            data.withUnsafeMutableBufferPointer {
-                let dst = $0.baseAddress! + start
-                memcpy(dst, newValue.data, MemoryLayout<T>.size * P.channels)
-            }
+            data[start..<start+P.channels] = ArraySlice(newValue.data)
         }
     }
 }
