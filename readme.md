@@ -183,9 +183,9 @@ let maximum = image.rankFilter(.maximum, kernelSize: 3)
 let bilateral = image.bilateralFilter(kernelSize: 5, sigma2_1: 1, sigma2_2: 0.01)
 ```
 
-[Example: Gaussian x10 / Mean x10 / Emboss / Sobel(Horizontal) / Laplacian](https://github.com/t-ae/swim/blob/af1fa115cffe7c20513cb37e91e1549790fb2a5c/Tests/VisualTests/FilterVisualTests.swift#L68-L98)
+[Example: Gaussian x10 / Bilateral x5 / Emboss / Sobel(Horizontal) / Laplacian](https://github.com/t-ae/swim/blob/41a186efc64dc355ac5da5941b14c9bfe906bb5e/Tests/VisualTests/FilterVisualTests.swift#L114-L144)
 
-![filter](https://user-images.githubusercontent.com/12446914/56787940-00f52080-6839-11e9-8171-22d8dab37910.png)
+![filter](https://user-images.githubusercontent.com/12446914/58389904-4b043880-8069-11e9-8555-c84be376da9b.png)
 
 ### Fast Fourier transformation
 
