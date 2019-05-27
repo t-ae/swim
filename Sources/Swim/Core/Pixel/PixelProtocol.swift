@@ -13,6 +13,11 @@ extension Pixel: PixelProtocol {
     public init<Px: PixelProtocol>(from pixel: Px) where Px.P == P, Px.T == T {
         self.init(data: pixel.withUnsafeBufferPointer(Array.init))
     }
+    
+    @inlinable
+    public func withUnsafeBufferPointer<R>(_ body: (UnsafeBufferPointer<T>) -> R) -> R {
+        return data.withUnsafeBufferPointer(body)
+    }
 }
 
 extension PixelRef: PixelProtocol {

@@ -90,3 +90,17 @@ extension Image {
         return (y * width + x) * P.channels + c
     }
 }
+
+extension Image {
+    @inlinable
+    public func withUnsafeBufferPointer<R>(_ body: (UnsafeBufferPointer<T>) -> R) -> R {
+        return data.withUnsafeBufferPointer(body)
+    }
+    
+    @inlinable
+    public mutating func withUnsafeMutableBufferPointer<R>(_ body: (UnsafeMutableBufferPointer<T>) -> R) -> R {
+        return data.withUnsafeMutableBufferPointer { bp in
+            body(bp)
+        }
+    }
+}
