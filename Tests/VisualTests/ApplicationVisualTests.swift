@@ -477,6 +477,83 @@ extension ApplicationVisualTests {
         
         XCTAssertTrue(ns.isValid, "break here")
     }
+    
+    func testColorQuantization() {
+        let path = testResoruceRoot().appendingPathComponent("lena_512.png")
+        let lena = try! Image<RGB, Double>(contentsOf: path)
+        var images: [Image<RGB, Double>] = [lena]
+        
+        var classImage = Image<Gray, Int>.zeros(like: lena)
+        
+        let k = 10
+        let maxIter = 100
+        
+        func colorDistance2(px1: PixelRef<RGB, Double>, px2: Pixel<RGB, Double>) -> Double {
+            let r = px1[.red] - px2[.red]
+            let g = px1[.green] - px2[.green]
+            let b = px1[.blue] - px2[.blue]
+            
+            return r*r + g*g + b*b
+        }
+        
+        // k-Means
+        var centers = (0..<k).map { _ in
+            Pixel<RGB, Double>(r: .random(in: 0..<1),
+                               g: .random(in: 0..<1),
+                               b: .random(in: 0..<1))
+        }
+        
+        for _ in 0..<maxIter {
+            // Check nearest pixels
+            var newClassImage = classImage
+            lena.iteratePixels { ref in
+                var minDist = Double.infinity
+                for (i, c) in centers.enumerated() {
+                    let d = colorDistance2(px1: ref, px2: c)
+                    if d < minDist {
+                        newClassImage[ref.x, ref.y, .gray] = i
+                        minDist = d
+                    }
+                }
+            }
+            
+            if newClassImage == classImage {
+                break
+            }
+            classImage = newClassImage
+            
+            // Update center
+            var newCenters = [Pixel<RGB, Double>](repeating: Pixel.zero, count: centers.count)
+            var counts = [Int](repeating: 0, count: centers.count)
+            lena.iteratePixels { ref in
+                let cls = classImage[ref.x, ref.y, .gray]
+                newCenters[cls] += ref
+                counts[cls] += 1
+            }
+            
+            // mean
+            for i in 0..<newCenters.count {
+                newCenters[i] /= Double(counts[i])
+            }
+            
+            centers = newCenters
+        }
+        
+        // apply reduction
+        var reduced = lena
+        reduced.pixelwiseConvert { ref in
+            let cls = classImage[ref.x, ref.y, .gray]
+            ref[.red] = centers[cls][.red]
+            ref[.green] = centers[cls][.green]
+            ref[.blue] = centers[cls][.blue]
+        }
+        images.append(reduced)
+        
+        // result
+        let ns = doubleToNSImage(Image.concatH(images))
+        
+        XCTAssertTrue(ns.isValid, "break here")
+    }
 }
 
 #endif
