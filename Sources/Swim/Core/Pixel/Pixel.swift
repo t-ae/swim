@@ -33,11 +33,9 @@ extension Pixel {
     @inlinable
     public subscript(channel: Int) -> T {
         get {
-            precondition(0 <= channel && channel < P.channels, "Index out of range.")
             return data[channel]
         }
         set {
-            precondition(0 <= channel && channel < P.channels, "Index out of range.")
             data[channel] = newValue
         }
     }

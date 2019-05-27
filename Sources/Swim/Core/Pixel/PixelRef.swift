@@ -24,7 +24,6 @@ extension PixelRef {
     @inlinable
     public subscript(channel: Int) -> T {
         get {
-            precondition(0 <= channel && channel < P.channels, "Index out of range.")
             return pointer[channel]
         }
     }
@@ -63,11 +62,9 @@ extension MutablePixelRef {
     @inlinable
     public subscript(channel: Int) -> T {
         get {
-            precondition(0 <= channel && channel < P.channels, "Index out of range.")
             return pointer[channel]
         }
         nonmutating set {
-            precondition(0 <= channel && channel < P.channels, "Index out of range.")
             pointer[channel] = newValue
         }
     }
