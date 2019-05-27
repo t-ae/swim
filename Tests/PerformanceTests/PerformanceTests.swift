@@ -2,6 +2,14 @@ import XCTest
 import Swim
 
 class PerformanceTests: XCTestCase {
+    func testFillPixelInit() {
+        let pixel = Pixel<RGBA, Double>(r: 0, g: 1, b: 2, a: 3)
+        
+        measure {
+            _ = Image(width: 3840, height: 2160, pixel: pixel)
+        }
+    }
+    
     func testEqual() {
         let image1 = Image<RGBA, Double>(width: 1920, height: 1080, value: 0)
         var image2 = Image<RGBA, Double>(width: 1920, height: 1080, value: 0)
