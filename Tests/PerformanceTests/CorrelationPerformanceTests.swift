@@ -60,7 +60,7 @@ class CorrelationPerformanceTests: XCTestCase {
         measure {
             for _ in 0..<100 {
                 let d = Correlation.ncc(image1, image2)
-                XCTAssertEqual(d, 1)
+                XCTAssertEqual(d, 1, accuracy: 1e-3)
             }
         }
     }
@@ -73,7 +73,7 @@ class CorrelationPerformanceTests: XCTestCase {
         measure {
             for _ in 0..<100 {
                 let d = Correlation.ncc(image1, image2, mask: mask)
-                XCTAssertEqual(d, 1)
+                XCTAssertEqual(d, 1, accuracy: 1e-3)
             }
         }
     }

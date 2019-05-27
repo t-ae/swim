@@ -242,7 +242,7 @@ extension Image where P: HasAlpha, T: BinaryInteger {
             guard grayValue > 0 else {
                 return
             }
-            ref.assign(pixel: color)
+            ref.setColor(pixel: color)
             let alpha = T(Int(ref[P.alphaIndex]) * Int(grayValue) / 255)
             ref[P.alphaIndex] = alpha
         }
@@ -270,7 +270,7 @@ extension Image where P: HasAlpha, T: BinaryFloatingPoint {
             guard grayValue > 0 else {
                 return
             }
-            ref.assign(pixel: color)
+            ref.setColor(pixel: color)
             ref[P.alphaIndex] *= T(grayValue) / 255
         }
         

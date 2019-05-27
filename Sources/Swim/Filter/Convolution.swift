@@ -114,7 +114,7 @@ extension Image where T: Numeric {
                 for px in 0..<filter.width {
                     let xx = clamp(ref.x+px-padLeft, min: 0, max: width-1)
 
-                    ref.add(x: xx, y: yy, in: self, with: filter[px, py, .gray])
+                    ref.addColor(x: xx, y: yy, in: self, with: filter[px, py, .gray])
                 }
             }
         }

@@ -34,7 +34,7 @@ extension Image where P: NoAlpha {
                 return
             }
             
-            ref.assign(x: imageX, y: imageY, in: image)
+            ref.setColor(x: imageX, y: imageY, in: image)
         }
     }
 }

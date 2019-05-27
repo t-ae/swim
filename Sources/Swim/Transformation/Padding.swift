@@ -22,9 +22,9 @@ extension Image {
             
             if let x = edgeMode.clampValue(value: originalX, max: self.width),
                 let y = edgeMode.clampValue(value: originalY, max: self.height) {
-                ref.assign(x: x, y: y, in: self)
+                ref.setColor(x: x, y: y, in: self)
             } else if case let .constant(px) = edgeMode {
-                ref.assign(pixel: px)
+                ref.setColor(pixel: px)
             } else {
                 fatalError("Never happens.")
             }

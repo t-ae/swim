@@ -13,9 +13,9 @@ public struct NearestNeighborInterpolator<P: PixelType, T: DataType>: Interpolat
         
         if let x = edgeMode.clampValue(value: x, max: image.width),
             let y = edgeMode.clampValue(value: y, max: image.height) {
-            pixel.assign(x: x, y: y, in: image)
+            pixel.setColor(x: x, y: y, in: image)
         } else if case let .constant(px) = edgeMode {
-            pixel.assign(pixel: px)
+            pixel.setColor(pixel: px)
         } else {
             fatalError("Never happens")
         }

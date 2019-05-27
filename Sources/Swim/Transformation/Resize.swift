@@ -48,7 +48,7 @@ extension Image where T: BinaryFloatingPoint {
                     // refer single pixel
                     for y in 0..<newImage.height {
                         newImage.withMutablePixelRef(x: x, y: y) { ref in
-                            ref.add(x: Int(startX), y: y, in: baseImage)
+                            ref.addColor(x: Int(startX), y: y, in: baseImage)
                         }
                     }
                     continue
@@ -60,13 +60,13 @@ extension Image where T: BinaryFloatingPoint {
                 for y in 0..<newImage.height {
                     newImage.withMutablePixelRef(x: x, y: y) { ref in
                         if startVolume > 0 {
-                            ref.add(x: Int(startX), y: y, in: baseImage, with: startVolume)
+                            ref.addColor(x: Int(startX), y: y, in: baseImage, with: startVolume)
                         }
                         for dx in Int(ceilStartX)..<Int(floorEndX) {
-                            ref.add(x: dx, y: y, in: baseImage)
+                            ref.addColor(x: dx, y: y, in: baseImage)
                         }
                         if endVolume > 0 {
-                            ref.add(x: Int(endX), y: y, in: baseImage, with: endVolume)
+                            ref.addColor(x: Int(endX), y: y, in: baseImage, with: endVolume)
                         }
                         ref /= volume
                     }
@@ -93,7 +93,7 @@ extension Image where T: BinaryFloatingPoint {
                     // refer single pixel
                     for x in 0..<newImage.width {
                         newImage.withMutablePixelRef(x: x, y: y) { ref in
-                            ref.add(x: x, y: Int(startY), in: baseImage)
+                            ref.addColor(x: x, y: Int(startY), in: baseImage)
                         }
                     }
                     continue
@@ -105,13 +105,13 @@ extension Image where T: BinaryFloatingPoint {
                 for x in 0..<newImage.width {
                     newImage.withMutablePixelRef(x: x, y: y) { ref in
                         if startVolume > 0 {
-                            ref.add(x: x, y: Int(startY), in: baseImage, with: startVolume)
+                            ref.addColor(x: x, y: Int(startY), in: baseImage, with: startVolume)
                         }
                         for dy in Int(ceilStartY)..<Int(floorEndY) {
-                            ref.add(x: x, y: dy, in: baseImage)
+                            ref.addColor(x: x, y: dy, in: baseImage)
                         }
                         if endVolume > 0 {
-                            ref.add(x: x, y: Int(endY), in: baseImage, with: endVolume)
+                            ref.addColor(x: x, y: Int(endY), in: baseImage, with: endVolume)
                         }
                         ref /= volume
                     }

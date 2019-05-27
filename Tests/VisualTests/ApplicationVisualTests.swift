@@ -543,9 +543,7 @@ extension ApplicationVisualTests {
         var reduced = lena
         reduced.pixelwiseConvert { ref in
             let cls = classImage[ref.x, ref.y, .gray]
-            ref[.red] = centers[cls][.red]
-            ref[.green] = centers[cls][.green]
-            ref[.blue] = centers[cls][.blue]
+            ref.setColor(pixel: centers[cls])
         }
         images.append(reduced)
         

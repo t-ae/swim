@@ -19,7 +19,7 @@ extension Image {
         }
         
         pixelwiseConvert(left..<right, y..<y+1) { ref in
-            ref.assign(pixel: color)
+            ref.setColor(pixel: color)
         }
     }
     
