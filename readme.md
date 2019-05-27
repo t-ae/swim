@@ -181,6 +181,7 @@ let image = Image<Gray, Float>(contentsOf: url)!
 let blur = image.convoluted(Filter.gaussian3x3)
 let maximum = image.rankFilter(.maximum, kernelSize: 3)
 let bilateral = image.bilateralFilter(kernelSize: 5, sigma2_1: 1, sigma2_2: 0.01)
+let nlmean = image.nonLocalMeanFilter(kernelSize: 5, sigma2: 0.01)
 ```
 
 [Example: Gaussian x10 / Bilateral x5 / Emboss / Sobel(Horizontal) / Laplacian](https://github.com/t-ae/swim/blob/41a186efc64dc355ac5da5941b14c9bfe906bb5e/Tests/VisualTests/FilterVisualTests.swift#L114-L144)

@@ -37,7 +37,7 @@ public enum FourierTransformer {
         return image[channel: .gray]
     }
     
-    /// Shift output of fft by (width/2, height/2)
+    /// Shift output of fft by (width/2, height/2).
     @inlinable
     public static func shift(image: Image<GrayAlpha, Double>) -> Image<GrayAlpha, Double> {
         precondition(image.width % 2 == 0, "Image width must be even number.")
