@@ -136,22 +136,12 @@ extension Image where P == RGB, T: BinaryFloatingPoint {
 extension Image where P == RGB {
     @inlinable
     func toRGBWithAlpha<P2: RGBWithAlpha>(with alphaValue: T) -> Image<P2, T> {
-        var newImage = Image<P2, T>.full(value: alphaValue, like: self)
-        let (width, height) = size
-        
-        data.withUnsafeBufferPointer {
-            var src = $0.baseAddress!
-            newImage.data.withUnsafeMutableBufferPointer {
-                var dst = $0.baseAddress! + P2.colorStartIndex
-                for _ in 0..<width*height {
-                    memcpy(dst, src, RGB.channels * MemoryLayout<T>.size)
-                    src += RGB.channels
-                    dst += P2.channels
-                }
-            }
+        return pixelwiseConverted { src, dst in
+            dst[P2.redIndex] = src[.red]
+            dst[P2.greenIndex] = src[.green]
+            dst[P2.blueIndex] = src[.blue]
+            dst[P2.alphaIndex] = alphaValue
         }
-        
-        return newImage
     }
     
     @inlinable
@@ -190,39 +180,27 @@ extension Image where P: RGBWithAlpha {
 }
 
 // MARK: - RGBA <-> ARGB
-extension Image where P: RGBWithAlpha {
-    @inlinable
-    func permuteAlpha<P2: RGBWithAlpha>() -> Image<P2, T> {
-        var newImage = Image<P2, T>(width: width, height: height)
-    
-        var src = 0
-        var dst = 0
-        
-        for _ in 0..<width*height {
-            newImage.data[dst+P2.alphaIndex] = data[src+P.alphaIndex]
-            newImage.data[dst+P2.redIndex] = data[src+P.redIndex]
-            newImage.data[dst+P2.greenIndex] = data[src+P.greenIndex]
-            newImage.data[dst+P2.blueIndex] = data[src+P.blueIndex]
-            
-            src += P.channels
-            dst += P2.channels
-        }
-        
-        return newImage
-    }
-}
-
 extension Image where P == RGBA {
     @inlinable
     public func toARGB() -> Image<ARGB, T> {
-        return permuteAlpha()
+        return pixelwiseConverted { src, dst in
+            dst[.red] = src[.red]
+            dst[.green] = src[.green]
+            dst[.blue] = src[.blue]
+            dst[.alpha] = src[.alpha]
+        }
     }
 }
 
 extension Image where P == ARGB {
     @inlinable
     public func toRGBA() -> Image<RGBA, T> {
-        return permuteAlpha()
+        return pixelwiseConverted { src, dst in
+            dst[.red] = src[.red]
+            dst[.green] = src[.green]
+            dst[.blue] = src[.blue]
+            dst[.alpha] = src[.alpha]
+        }
     }
 }
 

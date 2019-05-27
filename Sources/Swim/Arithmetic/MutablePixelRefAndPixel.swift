@@ -68,10 +68,10 @@ extension MutablePixelRef {
     /// for c in 0..<P.channels { self[c] = pixel[c] }
     @inlinable
     public func setColor<Px: PixelProtocol>(pixel: Px) where Px.P == P, Px.T == T {
-        let lp = self.pointer.baseAddress!
         pixel.withUnsafeBufferPointer { rbp in
-            let rp = rbp.baseAddress!
-            memcpy(lp, rp, P.channels * MemoryLayout<T>.size)
+            for i in 0..<pointer.count {
+                pointer[i] = rbp[i]
+            }
         }
     }
     
@@ -82,11 +82,11 @@ extension MutablePixelRef {
     /// for c in 0..<P.channels { self[c] = image[x, y, c] }
     @inlinable
     public func setColor(x: Int,y: Int, in image: Image<P, T>) {
-        let lp = self.pointer.baseAddress!
         let start = image.dataIndex(x: x, y: y)
         image.withUnsafeBufferPointer { rbp in
-            let rp = rbp.baseAddress!.advanced(by: start)
-            memcpy(lp, rp, P.channels * MemoryLayout<T>.size)
+            for i in 0..<pointer.count {
+                pointer[i] = rbp[start + i]
+            }
         }
     }
 }

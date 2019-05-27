@@ -101,6 +101,16 @@ class ConversionPerformanceTests: XCTestCase {
         }
     }
     
+    func testRGBToRGBA() {
+        let rgb = Image<RGB, Double>(width: 1920, height: 1080, value: 0.3)
+        
+        measure {
+            for _ in 0..<10 {
+                _ = rgb.toRGBA(with: 1)
+            }
+        }
+    }
+    
     func testRGBAToARGB() {
         let rgba = Image<RGBA, Double>(width: 1920, height: 1080, value: 0.3)
         
