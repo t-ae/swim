@@ -27,17 +27,7 @@ extension FourierTransformerVisualTests {
             images.append(FourierTransformer.ifft(image: fft))
         }
         
-        let r: Double = 20
         var lowPassFilter = Image<Gray, Double>.zeros(like: shifted)
-        let (w, h) = lowPassFilter.size
-        lowPassFilter.pixelwiseConvert { ref in
-            let dx = Double(ref.x - w/2)
-            let dy = Double(ref.y - h/2)
-            if dx*dx + dy*dy <= r*r {
-                ref[0] = 1
-            }
-        }
-        
         lowPassFilter.drawCircle(center: (x: (lowPassFilter.width-1)/2,
                                           y: (lowPassFilter.height-1)/2),
                                  radius: 20,
