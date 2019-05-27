@@ -48,8 +48,8 @@ class CorrelationTests: XCTestCase {
             let l1 = zip(data1, data1).map { $0*$1 }.reduce(0, +)
             let l2 = zip(data2, data2).map { $0*$1 }.reduce(0, +)
             
-            XCTAssertEqual(Correlation.ncc(image1, image1), 1)
-            XCTAssertEqual(Correlation.ncc(image1, image2), ip / sqrt(l1 * l2))
+            XCTAssertEqual(Correlation.ncc(image1, image1), 1, accuracy: 1e-4)
+            XCTAssertEqual(Correlation.ncc(image1, image2), ip / sqrt(l1 * l2), accuracy: 1e-4)
         }
         do {
             let data1 = [0.0, 1, 2, 3, 4, 5]
@@ -61,8 +61,16 @@ class CorrelationTests: XCTestCase {
             let l1 = zip(data1, data1).map { $0*$1 }.reduce(0, +)
             let l2 = zip(data2, data2).map { $0*$1 }.reduce(0, +)
             
-            XCTAssertEqual(Correlation.ncc(image1, image1), 1)
-            XCTAssertEqual(Correlation.ncc(image1, image2), ip / sqrt(l1 * l2))
+            XCTAssertEqual(Correlation.ncc(image1, image1), 1, accuracy: 1e-4)
+            XCTAssertEqual(Correlation.ncc(image1, image2), ip / sqrt(l1 * l2), accuracy: 1e-4)
+        }
+        do {
+            let data1 = [0.0, 0, 0, 0, 0 ,0]
+            let data2 = [2.0, 4, 6, 2, 4, 6]
+            let image1 = Image(width: 3, height: 2, gray: data1)
+            let image2 = Image(width: 3, height: 2, gray: data2)
+            
+            XCTAssertEqual(Correlation.ncc(image1, image2), 0)
         }
     }
     
@@ -70,22 +78,30 @@ class CorrelationTests: XCTestCase {
         do {
             let image1 = Image(width: 3, height: 2, gray: [0, 1, 2, 3, 4, 5] as [Float])
             
-            XCTAssertEqual(Correlation.zncc(image1, image1), 1)
+            XCTAssertEqual(Correlation.zncc(image1, image1), 1, accuracy: 1e-4)
             
             let i1 = Image(width: 3, height: 1, gray: [0, 1, 0] as [Float])
             let i2 = Image(width: 3, height: 1, gray: [1, 0, 1] as [Float])
             
-            XCTAssertEqual(Correlation.zncc(i1, i2), -1)
+            XCTAssertEqual(Correlation.zncc(i1, i2), -1, accuracy: 1e-4)
         }
         do {
             let image1 = Image(width: 3, height: 2, gray: [0.0, 1, 2, 3, 4, 5])
             
-            XCTAssertEqual(Correlation.zncc(image1, image1), 1)
+            XCTAssertEqual(Correlation.zncc(image1, image1), 1, accuracy: 1e-4)
             
             let i1 = Image(width: 3, height: 1, gray: [0.0, 1, 0])
             let i2 = Image(width: 3, height: 1, gray: [1.0, 0, 1])
             
-            XCTAssertEqual(Correlation.zncc(i1, i2), -1)
+            XCTAssertEqual(Correlation.zncc(i1, i2), -1, accuracy: 1e-4)
+        }
+        do {
+            let data1 = [1.0, 1, 1, 1, 1 ,1]
+            let data2 = [2.0, 4, 6, 2, 4, 6]
+            let image1 = Image(width: 3, height: 2, gray: data1)
+            let image2 = Image(width: 3, height: 2, gray: data2)
+            
+            XCTAssertEqual(Correlation.zncc(image1, image2), 0)
         }
     }
     

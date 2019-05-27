@@ -6,6 +6,10 @@ public enum Correlation<T: DataType> {
 
 extension Correlation where T: Strideable {
     /// Compute sum of square difference.
+    ///
+    /// - Parameters:
+    ///   - mask: If given, `false` coords are ignored.
+    /// - Precondition: a.size == b.size (== mask.size)
     @inlinable
     public static func ssd(_ a: Image<Gray, T>, _ b: Image<Gray, T>, mask: Image<Gray, Bool>? = nil) -> T.Stride {
         precondition(a.size == b.size, "Images must have same size.")
@@ -23,6 +27,10 @@ extension Correlation where T: Strideable {
     }
     
     /// Compute sum of square difference.
+    ///
+    /// - Parameters:
+    ///   - mask: If given, `false` coords are ignored.
+    /// - Precondition: a.size == b.size (== mask.size)
     @inlinable
     public static func sad(_ a: Image<Gray, T>, _ b: Image<Gray, T>, mask: Image<Gray, Bool>? = nil) -> T.Stride {
         precondition(a.size == b.size, "Images must have same size.")
@@ -39,11 +47,19 @@ extension Correlation where T: Strideable {
     }
 }
 
-extension Correlation where T: FloatingPoint {
+extension Correlation where T: BinaryFloatingPoint {
     /// Compute normalized cross correlation.
-    /// - Precondition: Each of `a` and `b` have at least one non-zero value.
+    ///
+    /// - Parameters:
+    ///   - mask: If given, `false` coords are ignored.
+    ///   - epsilon: Small value for avoiding zero division.
+    /// - Note: If values of `a` (or `b`) is all zero, this method always returns 0.
+    /// - Precondition: a.size == b.size (== mask.size)
     @inlinable
-    public static func ncc(_ a: Image<Gray, T>, _ b: Image<Gray, T>, mask: Image<Gray, Bool>? = nil) -> T {
+    public static func ncc(_ a: Image<Gray, T>,
+                           _ b: Image<Gray, T>,
+                           mask: Image<Gray, Bool>? = nil,
+                           epsilon: T = 1e-8) -> T {
         precondition(a.size == b.size, "Images must have same size.")
         precondition(a.size == mask?.size ?? a.size, "Mask must have same size as images.")
         
@@ -60,16 +76,23 @@ extension Correlation where T: FloatingPoint {
             sumCross += a.data[i]*b.data[i]
         }
         
-        precondition(sum2a > 0, "`a` is all zero.")
-        precondition(sum2b > 0, "`b` is all zero.")
+        let numerator = sqrt(sum2a * sum2b) + epsilon
         
-        return sumCross / sqrt(sum2a * sum2b)
+        return sumCross / numerator
     }
     
     /// Compute zero means normalized cross correlation.
-    /// - Precondition: Each of `a` and `b` can't have same value in all pixels.
+    ///
+    /// - Parameters:
+    ///   - mask: If given, `false` coords are ignored.
+    ///   - epsilon: Small value for avoiding zero division.
+    /// - Note: If values of `a` (or `b`) is all same, this method always returns 0.
+    /// - Precondition: a.size == b.size (== mask.size)
     @inlinable
-    public static func zncc(_ a: Image<Gray, T>, _ b: Image<Gray, T>, mask: Image<Gray, Bool>? = nil) -> T {
+    public static func zncc(_ a: Image<Gray, T>,
+                            _ b: Image<Gray, T>,
+                            mask: Image<Gray, Bool>? = nil,
+                            epsilon: T = 1e-8) -> T {
         precondition(a.size == b.size, "Images must have same size.")
         precondition(a.size == mask?.size ?? a.size, "Mask must have same size as images.")
         
@@ -100,11 +123,10 @@ extension Correlation where T: FloatingPoint {
         
         let numeratorA: T = c*sum2a - suma2
         let numeratorB: T = c*sum2b - sumb2
+
+        let numerator = sqrt(numeratorA*numeratorB) + epsilon
         
-        precondition(numeratorA > 0, "All pixels in `a` have same value.")
-        precondition(numeratorB > 0, "All pixels in `b` have same value.")
-        
-        return clamp(denominator / sqrt(numeratorA*numeratorB), min: -1, max: 1)
+        return clamp(denominator / numerator, min: -1, max: 1)
     }
 }
 
