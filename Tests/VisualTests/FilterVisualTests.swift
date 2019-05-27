@@ -123,11 +123,11 @@ extension FilterVisualTests {
         }
         images.append(gaussian)
         
-        var mean = image
-        for _ in 0..<10 {
-            mean = mean.convoluted(Filter.mean5x5)
+        var bilateral = image
+        for _ in 0..<5 {
+            bilateral = bilateral.bilateralFilter(kernelSize: 3, sigma2_1: 1, sigma2_2: 0.01)
         }
-        images.append(mean)
+        images.append(bilateral)
         
         let emboss = image.toGray().convoluted(Filter.emboss3x3)
         images.append(emboss.toRGB())
