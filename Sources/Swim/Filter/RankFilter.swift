@@ -16,7 +16,7 @@ extension Image where P == Gray, T: Comparable {
                 // if count is even, take smaller one
                 let mid = (bp.startIndex + bp.endIndex - 1) / 2
                 
-                // insertion sort up to mid-1
+                // partial selection sort up to mid-1
                 for i in bp.startIndex..<mid {
                     var minIndex = i
 
