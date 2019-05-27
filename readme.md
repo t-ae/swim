@@ -33,13 +33,13 @@ let red = Image<RGBA, Double>(width: 3, height: 5, pixel: Pixel(r: 1, g: 0, b: 0
 
 ### Save/Load image
 ```swift
-let image = Image<RGBA, UInt8>(contentsOf: url)!
-try? image.write(path: dstPath)
+let image = try Image<RGBA, UInt8>(contentsOf: url)
+try image.write(path: dstPath)
 ```
 
 ### Convertible from/to CoreGraphics image types
 ```swift
-let image = Image<RGBA, UInt8>(contentsOf: url)!
+let image = try! Image<RGBA, UInt8>(contentsOf: url)
 
 // on macOS
 let nsImage = image.nsImage()
@@ -53,19 +53,19 @@ let imageFromUI = Image<RGBA, UInt8>(uiImage: uiImage)!
 ### Subscriptions
 #### Pixel manipulation
 ```swift
-let image = Image<RGBA, UInt8>(contentsOf: url)!
+let image = try Image<RGBA, UInt8>(contentsOf: url)
 let px: Pixel<RGBA, UInt8> = image[0, 0]
 let red: UInt8 = image[0, 0, 0] // red channel of (x: 0, y: 0)
 let red2: UInt8 = image[0, 0, .red] // ditto
 let red3: UInt8 = image[0, 0][.red] // ditto
 
-image[1, 0] += 1 // Add 1 for each R,G,B,A
+image[1, 0] += 1 // Add 1 for each channel
 image[1, 0, .green] += 1 // Add 1 for Green channel
 ```
 
 #### Subimage
 ```swift
-let image = Image<RGBA, UInt8>(contentsOf: url)!
+let image = try Image<RGBA, UInt8>(contentsOf: url)
 let sub1: Image<RGBA, UInt8> = image[0..<100, 0..<100]
 let sub2: Image<RGBA, UInt8> = image[rows: 0..<100]
 image[col: 2] += 1
@@ -73,7 +73,7 @@ image[col: 2] += 1
 
 #### Channel extraction
 ```swift
-let image = Image<RGBA, UInt8>(contentsOf: url)!
+let image = try Image<RGBA, UInt8>(contentsOf: url)
 let red: Image<Gray, UInt8> = image[channel: 0]
 image[channel: .blue] += 1
 ```
@@ -81,11 +81,11 @@ image[channel: .blue] += 1
 ### Conversion
 
 ```swift
-let image = Image<RGB, Float>(contentsOf: url)!
+let image = try Image<RGB, Float>(contentsOf: url)
 
 // to gray scale
 let gray1: Image<Gray, Float> = image.toGray() // with default weights
-let gray2: Image<Gray, Float> = image.toGray(wr: 1/3, wg: 1/3, 2b: 1/3) // specifying weights
+let gray2: Image<Gray, Float> = image.toGray(wr: 1/3, wg: 1/3, wb: 1/3) // with specified weights
 
 // type conversion
 let doubleImage1: Image<RGB, Double> = image.cast()
@@ -103,7 +103,7 @@ let redOnlyRGBA: Image<RGBA, Float> = image.pixelwiseConverted { src, dst in
 ### Drawing
 
 ```swift
-var image = Image<RGB, Float>(contentsOf: url)!
+var image = try Image<RGB, Float>(contentsOf: url)
 
 image.drawLine((0, 0), (100, 120), color: Pixel(r: 1, g: 0, b: 0))
 image.drawRect(10..<20, 30..<50, color: .green)
@@ -122,8 +122,8 @@ image.drawText(origin: (100, 100),
 
 ### Resize
 ```swift 
-let image = Image<RGB, Float>(contentsOf: url)!
-let resizedBL = image.resize(width: 512, height: 512) // default bilinear
+let image = try Image<RGB, Float>(contentsOf: url)
+let resizedBL = image.resize(width: 512, height: 512) // default .bilinear
 let resizedNN = image.resize(width: 512, height: 512, method: .nearestNeighbor)
 let resizedBC = image.resize(width: 512, height: 512, method: .bicubic)
 let resizedAA = image.resize(width: 512, height: 512, method: .areaAverage)
@@ -135,7 +135,7 @@ let resizedAA = image.resize(width: 512, height: 512, method: .areaAverage)
 
 ### Warp
 ```swift
-let image = Image<RGBA, Double>(contentsOf: url)!
+let image = try Image<RGBA, Double>(contentsOf: url)
 let affine = AffineTransformation<Double>(scale: (1, 1.5), rotation: .pi/6. translation: (100, 120))
 // `edgeMode` specifies how to fill pixels outside the base image.
 let interpolator = BilinearInterpolator<RGBA, Double>(edgeMode: .edge)
@@ -148,8 +148,8 @@ let warpedImage = image.warp(transformation: affine, outputSize: (500, 500), int
 
 ### Correlation
 ```swift
-let image1 = Image<Gray, Float>(contentsOf: url1)!
-let image2 = Image<Gray, Float>(contentsOf: url2)!
+let image1 = try Image<Gray, Float>(contentsOf: url1)
+let image2 = try Image<Gray, Float>(contentsOf: url2)
 
 let ssd = Correlation.ssd(image1, image2)
 let sad = Correlation.sad(image1, image2)
@@ -159,8 +159,8 @@ let zncc = Correlation.zncc(image1, image2)
 
 ### Blending
 ```swift
-var bottomImage = Image<RGB, Float>(contentsOf: url1)!
-let topimage = Image<RGB, Float>(contentsOf: url2)!
+var bottomImage = try Image<RGB, Float>(contentsOf: url1)
+let topimage = try Image<RGB, Float>(contentsOf: url2)
 
 bottomImage(image: topImage, mode: .multiply)
 bottomImage(image: topImage, mode: .additive)
@@ -174,14 +174,14 @@ bottomImage(image: topImage, mode: .overlay)
 
 ### Integral image
 ```swift 
-let image = Image<Gray, Float>(contentsOf: url)!
+let image = try Image<Gray, Float>(contentsOf: url)
 let integral = IntegralImageConverter.convert(image: image)
 ```
 
 ### Convolution/Filter
 
 ```swift 
-let image = Image<Gray, Float>(contentsOf: url)!
+let image = try Image<Gray, Float>(contentsOf: url)
 let blur = image.convoluted(Filter.gaussian3x3)
 let maximum = image.rankFilter(.maximum, kernelSize: 3)
 let bilateral = image.bilateralFilter(kernelSize: 5, sigma2_1: 1, sigma2_2: 0.01)
@@ -195,7 +195,7 @@ let nlmean = image.nonLocalMeanFilter(kernelSize: 5, sigma2: 0.01)
 ### Fast Fourier transformation
 
 ```swift
-let image = Image<Gray, Double>(contentsOf: url)!
+let image = try Image<Gray, Double>(contentsOf: url)
 // image size must be power of 2
 let transformed: Image<GrayAlpha, Double> = FourierTransformer.fft(image: image)
 let inverted: Image<Gray, Double> = FourierTransformer.ifft(image: transformed)
@@ -208,7 +208,7 @@ let inverted: Image<Gray, Double> = FourierTransformer.ifft(image: transformed)
 
 ### Bayer filter
 ```swift 
-let image = Image<RGB, Float>(contentsOf: url)!
+let image = try Image<RGB, Float>(contentsOf: url)
 let converter = BayerConverter(pattern: .bggr)
 let bayer = converter.convert(image: image)
 let reconstruct = converter.demosaic(image: bayer)
