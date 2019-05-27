@@ -4,20 +4,16 @@ extension MutablePixelRef where T: AdditiveArithmetic {
     @inlinable
     public static func +=<Px: PixelProtocol>(lhs: MutablePixelRef,
                                              rhs: Px) where Px.P == P, Px.T == T {
-        rhs.withUnsafeBufferPointer { rbp in
-            for i in 0..<lhs.pointer.count {
-                lhs.pointer[i] += rbp[i]
-            }
+        for i in 0..<lhs.pointer.count {
+            lhs.pointer[i] += rhs[i]
         }
     }
     
     @inlinable
     public static func -=<Px: PixelProtocol>(lhs: MutablePixelRef,
                                              rhs: Px) where Px.P == P, Px.T == T {
-        rhs.withUnsafeBufferPointer { rbp in
-            for i in 0..<lhs.pointer.count {
-                lhs.pointer[i] -= rbp[i]
-            }
+        for i in 0..<lhs.pointer.count {
+            lhs.pointer[i] -= rhs[i]
         }
     }
 }
@@ -26,10 +22,8 @@ extension MutablePixelRef where T: Numeric {
     @inlinable
     public static func *=<Px: PixelProtocol>(lhs: MutablePixelRef,
                                              rhs: Px) where Px.P == P, Px.T == T {
-        rhs.withUnsafeBufferPointer { rbp in
-            for i in 0..<lhs.pointer.count {
-                lhs.pointer[i] *= rbp[i]
-            }
+        for i in 0..<lhs.pointer.count {
+            lhs.pointer[i] *= rhs[i]
         }
     }
 }
@@ -38,10 +32,8 @@ extension MutablePixelRef where T: BinaryInteger {
     @inlinable
     public static func /=<Px: PixelProtocol>(lhs: MutablePixelRef,
                                              rhs: Px) where Px.P == P, Px.T == T {
-        rhs.withUnsafeBufferPointer { rbp in
-            for i in 0..<lhs.pointer.count {
-                lhs.pointer[i] /= rbp[i]
-            }
+        for i in 0..<lhs.pointer.count {
+            lhs.pointer[i] /= rhs[i]
         }
     }
 }
@@ -50,10 +42,8 @@ extension MutablePixelRef where T: FloatingPoint {
     @inlinable
     public static func /=<Px: PixelProtocol>(lhs: MutablePixelRef,
                                              rhs: Px) where Px.P == P, Px.T == T {
-        rhs.withUnsafeBufferPointer { rbp in
-            for i in 0..<lhs.pointer.count {
-                lhs.pointer[i] /= rbp[i]
-            }
+        for i in 0..<lhs.pointer.count {
+            lhs.pointer[i] /= rhs[i]
         }
     }
 }
@@ -68,10 +58,8 @@ extension MutablePixelRef {
     /// for c in 0..<P.channels { self[c] = pixel[c] }
     @inlinable
     public func setColor<Px: PixelProtocol>(pixel: Px) where Px.P == P, Px.T == T {
-        pixel.withUnsafeBufferPointer { rbp in
-            for i in 0..<pointer.count {
-                pointer[i] = rbp[i]
-            }
+        for i in 0..<pointer.count {
+            pointer[i] = pixel[i]
         }
     }
     
@@ -83,10 +71,8 @@ extension MutablePixelRef {
     @inlinable
     public func setColor(x: Int,y: Int, in image: Image<P, T>) {
         let start = image.dataIndex(x: x, y: y)
-        image.withUnsafeBufferPointer { rbp in
-            for i in 0..<pointer.count {
-                pointer[i] = rbp[start + i]
-            }
+        for i in 0..<pointer.count {
+            pointer[i] = image.data[start + i]
         }
     }
 }
@@ -99,10 +85,8 @@ extension MutablePixelRef where T: Numeric {
     /// for c in 0..<P.channels { self[c] = factor * pixel[c] }
     @inlinable
     func setColor<Px: PixelProtocol>(pixel: Px, with factor: T) where Px.P == P, Px.T == T {
-        pixel.withUnsafeBufferPointer { rbp in
-            for i in 0..<pointer.count {
-                pointer[i] = rbp[i] * factor
-            }
+        for i in 0..<pointer.count {
+            pointer[i] = pixel[i] * factor
         }
     }
     
@@ -114,10 +98,8 @@ extension MutablePixelRef where T: Numeric {
     @inlinable
     func setColor(x: Int,y: Int, in image: Image<P, T>, with factor: T) {
         let start = image.dataIndex(x: x, y: y)
-        image.withUnsafeBufferPointer { rbp in
-            for i in 0..<pointer.count {
-                pointer[i] = rbp[start+i] * factor
-            }
+        for i in 0..<pointer.count {
+            pointer[i] = image.data[start+i] * factor
         }
     }
     
@@ -128,10 +110,8 @@ extension MutablePixelRef where T: Numeric {
     /// for c in 0..<P.channels { self[c] += factor * pixel[c] }
     @inlinable
     func addColor<Px: PixelProtocol>(pixel: Px, with factor: T = 1) where Px.P == P, Px.T == T {
-        pixel.withUnsafeBufferPointer { rbp in
-            for i in 0..<pointer.count {
-                pointer[i] += rbp[i] * factor
-            }
+        for i in 0..<pointer.count {
+            pointer[i] += pixel[i] * factor
         }
     }
     
@@ -143,10 +123,8 @@ extension MutablePixelRef where T: Numeric {
     @inlinable
     public func addColor(x: Int, y: Int, in image: Image<P, T>, with factor: T = 1) {
         let start = image.dataIndex(x: x, y: y)
-        image.withUnsafeBufferPointer { rbp in
-            for i in 0..<pointer.count {
-                pointer[i] += rbp[start+i] * factor
-            }
+        for i in 0..<pointer.count {
+            pointer[i] += image.data[start+i] * factor
         }
     }
 }
