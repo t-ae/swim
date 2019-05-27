@@ -197,7 +197,7 @@ let transformed: Image<GrayAlpha, Double> = FourierTransformer.fft(image: image)
 let inverted: Image<Gray, Double> = FourierTransformer.ifft(image: transformed)
 ```
 
-[Example: Spectrum and inverted image / Low-pass filtered / High-pass filtered](https://github.com/t-ae/swim/blob/2f23f39702d77545b04b5fb995851adf31fcce12/Tests/VisualTests/FourierTransformerVisualTests.swift#L5-L74)
+[Example: Spectrum and inverted image / Low-pass filtered / High-pass filtered](https://github.com/t-ae/swim/blob/10cf1762853ee9a1152cc5701d474a2c58ffa5e7/Tests/VisualTests/FourierTransformerVisualTests.swift#L10-L74)
 
 ![fft](https://user-images.githubusercontent.com/12446914/57998357-109c1800-7b0c-11e9-818b-600f75485794.png)
 
@@ -219,6 +219,7 @@ let reconstruct = converter.demosaic(image: bayer)
 - [Template matching](https://github.com/t-ae/swim/blob/4128d352443da43027f95ce784d03b5c6e4e33f1/Tests/VisualTests/ApplicationVisualTests.swift#L342-L416)
 - [Canny edge detection](https://github.com/t-ae/swim/blob/4128d352443da43027f95ce784d03b5c6e4e33f1/Tests/VisualTests/ApplicationVisualTests.swift#L227-L340)
 - [Dithering](https://github.com/t-ae/swim/blob/4128d352443da43027f95ce784d03b5c6e4e33f1/Tests/VisualTests/ApplicationVisualTests.swift#L418-L458)
+- [Color quantization using k-means](https://github.com/t-ae/swim/blob/10cf1762853ee9a1152cc5701d474a2c58ffa5e7/Tests/VisualTests/ApplicationVisualTests.swift#L481-L554)
 
 [VisualTests](https://github.com/t-ae/swim/blob/master/Tests/VisualTests) contains more examples (works only on macOS).
 
