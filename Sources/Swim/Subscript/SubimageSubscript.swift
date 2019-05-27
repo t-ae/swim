@@ -11,16 +11,11 @@ extension Image {
         let start = dataIndex(x: x, y: y)
         
         var newImage = Image<P, T>(width: width, height: height)
-        data.withUnsafeBufferPointer {
-            var src = $0.baseAddress! + start
-            newImage.data.withUnsafeMutableBufferPointer {
-                var dst = $0.baseAddress!
-                for _ in 0..<height {
-                    memcpy(dst, src, width*P.channels*MemoryLayout<T>.size)
-                    src += self.width*P.channels
-                    dst += width*P.channels
-                }
-            }
+        
+        for y in 0..<height {
+            strideCopy(src: data, srcOffset: start + y*self.width*P.channels, srcStride: 1,
+                       dst: &newImage.data, dstOffset: y*width*P.channels, dstStride: 1,
+                       count: width*P.channels)
         }
         
         return newImage
@@ -39,17 +34,11 @@ extension Image {
                      "Invalid size: \((width, height)) != \(newValue.size)")
         
         let start = dataIndex(x: x, y: y)
-        let baseWidth = self.width
-        newValue.data.withUnsafeBufferPointer {
-            var src = $0.baseAddress!
-            data.withUnsafeMutableBufferPointer {
-                var dst = $0.baseAddress! + start
-                for _ in 0..<height {
-                    memcpy(dst, src, width*P.channels*MemoryLayout<T>.size)
-                    src += width*P.channels
-                    dst += baseWidth*P.channels
-                }
-            }
+        
+        for y in 0..<height {
+            strideCopy(src: newValue.data, srcOffset: y*width*P.channels, srcStride: 1,
+                       dst: &data, dstOffset: start + y*self.width*P.channels, dstStride: 1,
+                       count: width*P.channels)
         }
     }
 }
