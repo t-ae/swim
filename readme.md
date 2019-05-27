@@ -18,13 +18,17 @@ Some functions assume pixel values are:
 
 ### Creation
 ```swift
-let image = Image<RGBA, UInt8>(width: 3, height: 5, data: uint8Array])
+let image = Image<RGBA, UInt8>(width: 3, height: 5, data: uint8Array)
 
 // Can use type inference
 let gray = Image(width: 3, height: 20, gray: intArray)
 let rgb = Image(width: 4, height: 5, rgb: floatArray)
 let rgba = Image(width: 3, height: 5, rgba: doubleArray)
 let argb = Image(width: 5, height: 3, argb: uint8Array)
+
+// Filled with values/pixels
+let zero = Image<RGBA, Double>(width: 3, height: 4, value: 0)
+let red = Image<RGBA, Double>(width: 3, height: 5, pixel: Pixel(r: 1, g: 0, b: 0, a: 1))
 ```
 
 ### Save/Load image
