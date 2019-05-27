@@ -6,7 +6,9 @@ class ArithmeticPerformanceTests: XCTestCase {
         var image = Image<RGBA, Double>(width: 3840, height: 2160, value: 1)
         
         measure {
-            image *= 1.1
+            for _ in 0..<10 {
+                image *= 1.1
+            }
         }
     }
     
@@ -15,7 +17,9 @@ class ArithmeticPerformanceTests: XCTestCase {
         let pixel = Pixel<RGBA, Double>(r: 0.9, g: 1.1, b: 0.9, a: 1.1)
         
         measure {
-            image *= pixel
+            for _ in 0..<10 {
+                image *= pixel
+            }
         }
     }
     
@@ -24,7 +28,9 @@ class ArithmeticPerformanceTests: XCTestCase {
         let image2 = Image<RGBA, Double>(width: 3840, height: 2160, value: 1.1)
         
         measure {
-            image1 *= image2
+            for _ in 0..<10 {
+                image1 *= image2
+            }
         }
     }
 }
