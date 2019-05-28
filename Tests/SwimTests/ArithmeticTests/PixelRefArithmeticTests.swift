@@ -1,7 +1,7 @@
 import XCTest
 import Swim
 
-class MutablePixelRefArithmeticTests: XCTestCase {
+class PixelRefArithmeticTests: XCTestCase {
     func testAdd() {
         do {
             var image = Image(width: 2, height: 2, rgba: (0..<16).map { UInt8($0) })
