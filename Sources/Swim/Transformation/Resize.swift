@@ -44,32 +44,28 @@ extension Image where T: BinaryFloatingPoint {
                 let ceilStartX = Foundation.ceil(startX)
                 let floorEndX = Foundation.floor(endX)
                 
-                guard ceilStartX <= floorEndX else {
-                    // refer single pixel
-                    for y in 0..<newImage.height {
-                        newImage.withPixelRef(x: x, y: y) { ref in
-                            ref.addColor(x: Int(startX), y: y, in: baseImage)
-                        }
-                    }
-                    continue
-                }
-                
                 let startVolume = ceilStartX - startX
                 let endVolume = endX - floorEndX
                 
-                for y in 0..<newImage.height {
-                    newImage.withPixelRef(x: x, y: y) { ref in
-                        if startVolume > 0 {
-                            ref.addColor(x: Int(startX), y: y, in: baseImage, with: startVolume)
-                        }
-                        for dx in Int(ceilStartX)..<Int(floorEndX) {
-                            ref.addColor(x: dx, y: y, in: baseImage)
-                        }
-                        if endVolume > 0 {
-                            ref.addColor(x: Int(endX), y: y, in: baseImage, with: endVolume)
-                        }
-                        ref /= volume
+                let height = newImage.height
+                
+                newImage.pixelwiseConvert(x..<x+1, 0..<height) { ref in
+                    guard ceilStartX <= floorEndX else {
+                        // refer single pixel
+                        ref.setColor(x: Int(startX), y: ref.y, in: baseImage)
+                        return
                     }
+                    
+                    if startVolume > 0 {
+                        ref.addColor(x: Int(startX), y: ref.y, in: baseImage, with: startVolume)
+                    }
+                    for dx in Int(ceilStartX)..<Int(floorEndX) {
+                        ref.addColor(x: dx, y: ref.y, in: baseImage)
+                    }
+                    if endVolume > 0 {
+                        ref.addColor(x: Int(endX), y: ref.y, in: baseImage, with: endVolume)
+                    }
+                    ref /= volume
                 }
             }
             xScaleImage = newImage
@@ -82,6 +78,7 @@ extension Image where T: BinaryFloatingPoint {
             let baseImage = xScaleImage
             var newImage = Image<P, T>(width: width, height: height, value: 0)
             let volume: T = T(self.height) / T(height)
+            
             for y in 0..<newImage.height {
                 let startY: T = T(y) * volume
                 let endY: T = T(y+1) * volume
@@ -89,32 +86,27 @@ extension Image where T: BinaryFloatingPoint {
                 let ceilStartY = Foundation.ceil(startY)
                 let floorEndY = Foundation.floor(endY)
                 
-                guard ceilStartY <= floorEndY else {
-                    // refer single pixel
-                    for x in 0..<newImage.width {
-                        newImage.withPixelRef(x: x, y: y) { ref in
-                            ref.addColor(x: x, y: Int(startY), in: baseImage)
-                        }
-                    }
-                    continue
-                }
-                
                 let startVolume = ceilStartY - startY
                 let endVolume = endY - floorEndY
                 
-                for x in 0..<newImage.width {
-                    newImage.withPixelRef(x: x, y: y) { ref in
-                        if startVolume > 0 {
-                            ref.addColor(x: x, y: Int(startY), in: baseImage, with: startVolume)
-                        }
-                        for dy in Int(ceilStartY)..<Int(floorEndY) {
-                            ref.addColor(x: x, y: dy, in: baseImage)
-                        }
-                        if endVolume > 0 {
-                            ref.addColor(x: x, y: Int(endY), in: baseImage, with: endVolume)
-                        }
-                        ref /= volume
+                let width = newImage.width
+                newImage.pixelwiseConvert(0..<width, y..<y+1) { ref in
+                    guard ceilStartY <= floorEndY else {
+                        // refer single pixel
+                        ref.setColor(x: ref.x, y: Int(startY), in: baseImage)
+                        return
                     }
+                    
+                    if startVolume > 0 {
+                        ref.addColor(x: ref.x, y: Int(startY), in: baseImage, with: startVolume)
+                    }
+                    for dy in Int(ceilStartY)..<Int(floorEndY) {
+                        ref.addColor(x: ref.x, y: dy, in: baseImage)
+                    }
+                    if endVolume > 0 {
+                        ref.addColor(x: ref.x, y: Int(endY), in: baseImage, with: endVolume)
+                    }
+                    ref /= volume
                 }
             }
             yScaleImage = newImage
