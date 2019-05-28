@@ -17,8 +17,8 @@ extension Color where T: AdditiveArithmetic {
     
     @inlinable
     public static func -=<C: ColorProtocol>(lhs: inout Color, rhs: C) where C.P == P, C.T == T {
-        for i in 0..<lhs.data.count {
-            lhs.data[i] -= rhs[i]
+        for i in 0..<P.channels {
+            lhs[i] -= rhs[i]
         }
     }
     
@@ -33,8 +33,8 @@ extension Color where T: AdditiveArithmetic {
 extension Color where T: Numeric {
     @inlinable
     public static func *=<C: ColorProtocol>(lhs: inout Color, rhs: C) where C.P == P, C.T == T {
-        for i in 0..<lhs.data.count {
-            lhs.data[i] *= rhs[i]
+        for i in 0..<P.channels {
+            lhs[i] *= rhs[i]
         }
     }
     
@@ -49,8 +49,8 @@ extension Color where T: Numeric {
 extension Color where T: BinaryInteger {
     @inlinable
     public static func /=<C: ColorProtocol>(lhs: inout Color, rhs: C) where C.P == P, C.T == T {
-        for i in 0..<lhs.data.count {
-            lhs.data[i] /= rhs[i]
+        for i in 0..<P.channels {
+            lhs[i] /= rhs[i]
         }
     }
     
@@ -65,8 +65,8 @@ extension Color where T: BinaryInteger {
 extension Color where T: BinaryFloatingPoint {
     @inlinable
     public static func /=<C: ColorProtocol>(lhs: inout Color, rhs: C) where C.P == P, C.T == T {
-        for i in 0..<lhs.data.count {
-            lhs.data[i] /= rhs[i]
+        for i in 0..<P.channels {
+            lhs[i] /= rhs[i]
         }
     }
     
