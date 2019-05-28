@@ -29,11 +29,11 @@ public struct Image<P: PixelType, T: DataType> {
     public init(width: Int, height: Int, pixel: Pixel<P, T>) {
         var data = [T](repeating: T.swimDefaultValue, count: width*height*P.channels)
         
-        data.withUnsafeMutableBufferPointer {
-            var dst = $0.baseAddress!
-            for _ in 0..<width*height {
-                memcpy(dst, pixel.data, P.channels*MemoryLayout<T>.size)
-                dst += P.channels
+        var i = 0
+        for _ in 0..<width*height {
+            for c in 0..<P.channels {
+                data[i] = pixel[c]
+                i += 1
             }
         }
         
