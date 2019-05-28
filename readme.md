@@ -26,9 +26,9 @@ let rgb = Image(width: 4, height: 5, rgb: floatArray)
 let rgba = Image(width: 3, height: 5, rgba: doubleArray)
 let argb = Image(width: 5, height: 3, argb: uint8Array)
 
-// Filled with values/pixels
+// Filled with values/colors
 let zero = Image<RGBA, Double>(width: 3, height: 4, value: 0)
-let red = Image<RGBA, Double>(width: 3, height: 5, pixel: Pixel(r: 1, g: 0, b: 0, a: 1))
+let red = Image<RGBA, Double>(width: 3, height: 5, color: Color(r: 1, g: 0, b: 0, a: 1))
 ```
 
 ### Save/Load image
@@ -54,7 +54,7 @@ let imageFromUI = Image<RGBA, UInt8>(uiImage: uiImage)!
 #### Pixel manipulation
 ```swift
 let image = try Image<RGBA, UInt8>(contentsOf: url)
-let px: Pixel<RGBA, UInt8> = image[0, 0]
+let color: Color<RGBA, UInt8> = image[0, 0]
 let red: UInt8 = image[0, 0, 0] // red channel of (x: 0, y: 0)
 let red2: UInt8 = image[0, 0, .red] // ditto
 let red3: UInt8 = image[0, 0][.red] // ditto
@@ -105,7 +105,7 @@ let redOnlyRGBA: Image<RGBA, Float> = image.pixelwiseConverted { src, dst in
 ```swift
 var image = try Image<RGB, Float>(contentsOf: url)
 
-image.drawLine((0, 0), (100, 120), color: Pixel(r: 1, g: 0, b: 0))
+image.drawLine((0, 0), (100, 120), color: Color(r: 1, g: 0, b: 0))
 image.drawRect(10..<20, 30..<50, color: .green)
 image.drawCircle(center: (50, 50), radius: 30, color: .blue)
 
