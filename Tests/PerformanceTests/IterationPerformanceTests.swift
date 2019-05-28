@@ -48,6 +48,17 @@ class IterationPerformanceTests: XCTestCase {
             }
         }
     }
+    
+    func testIteration4() {
+        let image = Image<RGBA, Double>(width: 3840, height: 2160, value: 1)
+        var pixel = Pixel<RGBA, Double>(r: 0, g: 0, b: 0, a: 0)
+        
+        measure {
+            for px in image.pixels() {
+                pixel += px
+            }
+        }
+    }
 }
 
 extension IterationPerformanceTests {
