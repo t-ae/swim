@@ -18,6 +18,14 @@ class ResizePerformanceTests: XCTestCase {
         }
     }
     
+    func testResizeAA_Upscale() {
+        let image = Image<Gray, Double>(width: 64, height: 48, value: 0)
+        
+        measure {
+            _ = image.resize(width: 1920, height: 1080, method: .areaAverage)
+        }
+    }
+    
     func testResizeNN() {
         let image = Image<Gray, Double>(width: 64, height: 48, value: 0)
         

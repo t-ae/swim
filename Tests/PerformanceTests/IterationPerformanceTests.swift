@@ -30,8 +30,9 @@ class IterationPerformanceTests: XCTestCase {
 extension IterationPerformanceTests {
     
     // This is the slowest.
-    // `Image.subscript(x:y:)` creates new `Pixel` instance.
-    // `Pixel` has its own buffer so it must be initialized.
+    // `Image.subscript(x:y:)` creates new `Color` instance.
+    // When mutating func, `+=` in this case, is called, `Color` creates its own buffer.
+    // That occurs for each pixel so it's slow.
     func testMutableIteration1() {
         var image = Image<RGBA, Double>(width: 3840, height: 2160, value: 1)
         let color = Color<RGBA, Double>(r: 0, g: 0, b: 0, a: 1)
@@ -71,6 +72,20 @@ extension IterationPerformanceTests {
         measure {
             image.pixelwiseConvert { ref in
                 ref += color
+            }
+        }
+    }
+    
+    // Separate channel. Slower.
+    func testMutableIteration4() {
+        var image = Image<RGBA, Double>(width: 3840, height: 2160, value: 1)
+        let color = Color<RGBA, Double>(r: 0, g: 0, b: 0, a: 1)
+        
+        measure {
+            for c in RGBA.allCases {
+                image.channelwiseConvert(channel: c) { x, y, value in
+                    value + color[c]
+                }
             }
         }
     }
