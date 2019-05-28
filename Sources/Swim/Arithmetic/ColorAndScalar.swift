@@ -111,8 +111,8 @@ extension Color where T: FloatingPoint {
     public static func /(lhs: T, rhs: Color) -> Color {
         var new = rhs
         
-        for i in 0..<new.data.count {
-            new.data[i] = lhs / new.data[i]
+        for i in 0..<P.channels {
+            new[i] = lhs / new[i]
         }
         
         return new

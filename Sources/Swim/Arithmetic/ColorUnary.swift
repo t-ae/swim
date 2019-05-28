@@ -3,8 +3,8 @@ extension Color where T: SignedNumeric {
     public static prefix func -(arg: Color) -> Color {
         var new = arg
         
-        for i in 0..<new.data.count {
-            new.data[i].negate()
+        for i in 0..<P.channels {
+            new[i].negate()
         }
         
         return new
