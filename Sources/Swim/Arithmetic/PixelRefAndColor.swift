@@ -46,6 +46,14 @@ extension PixelRef where T: FloatingPoint {
 // MARK: - Utility
 
 extension PixelRef {
+    /// Fill with given value.
+    @inlinable
+    public func fill(value: T) {
+        for i in 0..<pointer.count {
+            pointer[i] = value
+        }
+    }
+    
     /// Set color.
     ///
     /// It's convenient implementation of:
