@@ -33,4 +33,12 @@ class FilterPerformanceTests: XCTestCase {
             _ = image.bilateralFilter(kernelSize: 5, sigma2_1: 1, sigma2_2: 0.01)
         }
     }
+    
+    func testNLMeanFilter() {
+        let image = Image<Gray, Double>(width: 640, height: 480, value: 0)
+        
+        measure {
+            _ = image.nonLocalMeanFilter(kernelSize: 5, sigma2: 0.01)
+        }
+    }
 }
