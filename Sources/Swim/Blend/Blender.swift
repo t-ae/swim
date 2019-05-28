@@ -9,7 +9,7 @@ extension Blender {
     /// All pixel values are assumed to be in range [0, 1].
     @inlinable
     public static func blend<P: NoAlpha>(top: Image<P, T>, bottom: inout Image<P, T>) {
-        precondition(top.size == bottom.size)
+        precondition(top.size == bottom.size, "Size mismatch.")
         
         for i in 0..<top.data.count {
             bottom.data[i] = blend(topColor: top.data[i],
