@@ -488,7 +488,7 @@ extension ApplicationVisualTests {
         let k = 10
         let maxIter = 100
         
-        func colorDistance2(px1: PixelRef<RGB, Double>, px2: Color<RGB, Double>) -> Double {
+        func colorDistance2(px1: Pixel<RGB, Double>, px2: Color<RGB, Double>) -> Double {
             let r = px1[.red] - px2[.red]
             let g = px1[.green] - px2[.green]
             let b = px1[.blue] - px2[.blue]
@@ -506,12 +506,12 @@ extension ApplicationVisualTests {
         for iter in 0..<maxIter {
             // Check nearest pixels
             var newClassImage = classImage
-            lena.iteratePixels { ref in
+            for pixel in lena.pixels() {
                 var minDist = Double.infinity
                 for (i, c) in centers.enumerated() {
-                    let d = colorDistance2(px1: ref, px2: c)
+                    let d = colorDistance2(px1: pixel, px2: c)
                     if d < minDist {
-                        newClassImage[ref.x, ref.y, .gray] = i
+                        newClassImage[pixel.x, pixel.y, .gray] = i
                         minDist = d
                     }
                 }
@@ -526,9 +526,10 @@ extension ApplicationVisualTests {
             // Update center
             var newCenters = [Color<RGB, Double>](repeating: Color.zero, count: centers.count)
             var counts = [Int](repeating: 0, count: centers.count)
-            lena.iteratePixels { ref in
-                let cls = classImage[ref.x, ref.y, .gray]
-                newCenters[cls] += ref
+            
+            for pixel in lena.pixels() {
+                let cls = classImage[pixel.x, pixel.y, .gray]
+                newCenters[cls] += pixel
                 counts[cls] += 1
             }
             

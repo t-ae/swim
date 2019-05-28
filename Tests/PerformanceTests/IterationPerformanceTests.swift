@@ -2,10 +2,6 @@ import XCTest
 import Swim
 
 class IterationPerformanceTests: XCTestCase {
-    
-    // This is the slowest.
-    // `Image.subscript(x:y:)` creates new `Pixel` instance.
-    // `Pixel` has its own buffer so it must be initialized.
     func testIteration1() {
         let image = Image<RGBA, Double>(width: 3840, height: 2160, value: 1)
         var color = Color<RGBA, Double>(r: 0, g: 0, b: 0, a: 0)
@@ -19,37 +15,7 @@ class IterationPerformanceTests: XCTestCase {
         }
     }
     
-    // This is some slower.
-    // `withPixelRef` always calculates the index in data.
     func testIteration2() {
-        let image = Image<RGBA, Double>(width: 3840, height: 2160, value: 1)
-        var color = Color<RGBA, Double>(r: 0, g: 0, b: 0, a: 0)
-        
-        measure {
-            for y in 0..<2160 {
-                for x in 0..<3840 {
-                    image.withPixelRef(x: x, y: y) { ref -> Void in
-                        color += ref
-                    }
-                }
-            }
-        }
-    }
-    
-    // This is the fastest.
-    // `iteratePixels`'s index calculation doesn't need many multiplications.
-    func testIteration3() {
-        let image = Image<RGBA, Double>(width: 3840, height: 2160, value: 1)
-        var color = Color<RGBA, Double>(r: 0, g: 0, b: 0, a: 0)
-        
-        measure {
-            image.iteratePixels { ref in
-                color += ref
-            }
-        }
-    }
-    
-    func testIteration4() {
         let image = Image<RGBA, Double>(width: 3840, height: 2160, value: 1)
         var color = Color<RGBA, Double>(r: 0, g: 0, b: 0, a: 0)
         

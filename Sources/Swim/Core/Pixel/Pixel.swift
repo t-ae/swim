@@ -10,6 +10,11 @@ public struct Pixel<P: PixelType, T: DataType> {
         self.y = y
         self.color = color
     }
+    
+    @inlinable
+    init(x: Int, y: Int, data: ArraySlice<T>) {
+        self.init(x: x, y: y, color: Color(data: data))
+    }
 }
 
 extension Pixel {
