@@ -1,47 +1,42 @@
 import Foundation
 
-extension MutablePixelRef where T: AdditiveArithmetic {
+extension PixelRef where T: AdditiveArithmetic {
     @inlinable
-    public static func +=<C: ColorProtocol>(lhs: MutablePixelRef,
-                                             rhs: C) where C.P == P, C.T == T {
+    public static func +=<C: ColorProtocol>(lhs: PixelRef, rhs: C) where C.P == P, C.T == T {
         for i in 0..<lhs.pointer.count {
             lhs.pointer[i] += rhs[i]
         }
     }
     
     @inlinable
-    public static func -=<C: ColorProtocol>(lhs: MutablePixelRef,
-                                             rhs: C) where C.P == P, C.T == T {
+    public static func -=<C: ColorProtocol>(lhs: PixelRef, rhs: C) where C.P == P, C.T == T {
         for i in 0..<lhs.pointer.count {
             lhs.pointer[i] -= rhs[i]
         }
     }
 }
 
-extension MutablePixelRef where T: Numeric {
+extension PixelRef where T: Numeric {
     @inlinable
-    public static func *=<C: ColorProtocol>(lhs: MutablePixelRef,
-                                             rhs: C) where C.P == P, C.T == T {
+    public static func *=<C: ColorProtocol>(lhs: PixelRef, rhs: C) where C.P == P, C.T == T {
         for i in 0..<lhs.pointer.count {
             lhs.pointer[i] *= rhs[i]
         }
     }
 }
 
-extension MutablePixelRef where T: BinaryInteger {
+extension PixelRef where T: BinaryInteger {
     @inlinable
-    public static func /=<C: ColorProtocol>(lhs: MutablePixelRef,
-                                             rhs: C) where C.P == P, C.T == T {
+    public static func /=<C: ColorProtocol>(lhs: PixelRef, rhs: C) where C.P == P, C.T == T {
         for i in 0..<lhs.pointer.count {
             lhs.pointer[i] /= rhs[i]
         }
     }
 }
 
-extension MutablePixelRef where T: FloatingPoint {
+extension PixelRef where T: FloatingPoint {
     @inlinable
-    public static func /=<C: ColorProtocol>(lhs: MutablePixelRef,
-                                             rhs: C) where C.P == P, C.T == T {
+    public static func /=<C: ColorProtocol>(lhs: PixelRef, rhs: C) where C.P == P, C.T == T {
         for i in 0..<lhs.pointer.count {
             lhs.pointer[i] /= rhs[i]
         }
@@ -50,7 +45,7 @@ extension MutablePixelRef where T: FloatingPoint {
 
 // MARK: - Utility
 
-extension MutablePixelRef {
+extension PixelRef {
     /// Set color.
     ///
     /// It's convenient implementation of:
@@ -77,7 +72,7 @@ extension MutablePixelRef {
     }
 }
 
-extension MutablePixelRef where T: Numeric {
+extension PixelRef where T: Numeric {
     /// Set color with multiply factor.
     ///
     /// It's convenient implementation of:

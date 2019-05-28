@@ -47,7 +47,7 @@ extension Image where T: BinaryFloatingPoint {
                 guard ceilStartX <= floorEndX else {
                     // refer single pixel
                     for y in 0..<newImage.height {
-                        newImage.withMutablePixelRef(x: x, y: y) { ref in
+                        newImage.withPixelRef(x: x, y: y) { ref in
                             ref.addColor(x: Int(startX), y: y, in: baseImage)
                         }
                     }
@@ -58,7 +58,7 @@ extension Image where T: BinaryFloatingPoint {
                 let endVolume = endX - floorEndX
                 
                 for y in 0..<newImage.height {
-                    newImage.withMutablePixelRef(x: x, y: y) { ref in
+                    newImage.withPixelRef(x: x, y: y) { ref in
                         if startVolume > 0 {
                             ref.addColor(x: Int(startX), y: y, in: baseImage, with: startVolume)
                         }
@@ -92,7 +92,7 @@ extension Image where T: BinaryFloatingPoint {
                 guard ceilStartY <= floorEndY else {
                     // refer single pixel
                     for x in 0..<newImage.width {
-                        newImage.withMutablePixelRef(x: x, y: y) { ref in
+                        newImage.withPixelRef(x: x, y: y) { ref in
                             ref.addColor(x: x, y: Int(startY), in: baseImage)
                         }
                     }
@@ -103,7 +103,7 @@ extension Image where T: BinaryFloatingPoint {
                 let endVolume = endY - floorEndY
                 
                 for x in 0..<newImage.width {
-                    newImage.withMutablePixelRef(x: x, y: y) { ref in
+                    newImage.withPixelRef(x: x, y: y) { ref in
                         if startVolume > 0 {
                             ref.addColor(x: x, y: Int(startY), in: baseImage, with: startVolume)
                         }

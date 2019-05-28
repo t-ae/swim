@@ -1,5 +1,5 @@
-// MARK: - MutablePixelRef
-public struct MutablePixelRef<P: PixelType, T: DataType> {
+// MARK: - PixelRef
+public struct PixelRef<P: PixelType, T: DataType> {
     public let x: Int
     public let y: Int
     
@@ -20,7 +20,7 @@ public struct MutablePixelRef<P: PixelType, T: DataType> {
     }
 }
 
-extension MutablePixelRef {
+extension PixelRef {
     @inlinable
     public subscript(channel: Int) -> T {
         get {
@@ -44,15 +44,15 @@ extension MutablePixelRef {
 
 // MARK: - Image extension
 extension Image {
-    /// Create `MutablePixelRef` pointing specified coord and execute `body`.
+    /// Create `PixelRef` pointing specified coord and execute `body`.
     ///
     /// For raster iteration, using `pixelwiseConvert` is faster.
     @inlinable
-    public mutating func withMutablePixelRef<R>(x: Int, y: Int, _ body: (MutablePixelRef<P, T>)->R) -> R {
+    public mutating func withPixelRef<R>(x: Int, y: Int, _ body: (PixelRef<P, T>)->R) -> R {
         let start = dataIndex(x: x, y: y)
         return data.withUnsafeMutableBufferPointer {
             let bp = UnsafeMutableBufferPointer(rebasing: $0[start..<start+P.channels])
-            let ref = MutablePixelRef<P, T>(x: x, y: y, pointer: bp)
+            let ref = PixelRef<P, T>(x: x, y: y, pointer: bp)
             return body(ref)
         }
     }

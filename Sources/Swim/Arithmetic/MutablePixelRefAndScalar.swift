@@ -1,40 +1,40 @@
-extension MutablePixelRef where T: AdditiveArithmetic {
+extension PixelRef where T: AdditiveArithmetic {
     @inlinable
-    public static func +=(lhs: MutablePixelRef, rhs: T) {
+    public static func +=(lhs: PixelRef, rhs: T) {
         for i in 0..<lhs.pointer.count {
             lhs.pointer[i] += rhs
         }
     }
     
     @inlinable
-    public static func -=(lhs: MutablePixelRef, rhs: T) {
+    public static func -=(lhs: PixelRef, rhs: T) {
         for i in 0..<lhs.pointer.count {
             lhs.pointer[i] -= rhs
         }
     }
 }
 
-extension MutablePixelRef where T: Numeric {
+extension PixelRef where T: Numeric {
     @inlinable
-    public static func *=(lhs: MutablePixelRef, rhs: T) {
+    public static func *=(lhs: PixelRef, rhs: T) {
         for i in 0..<lhs.pointer.count {
             lhs.pointer[i] *= rhs
         }
     }
 }
 
-extension MutablePixelRef where T: BinaryInteger {
+extension PixelRef where T: BinaryInteger {
     @inlinable
-    public static func /=(lhs: MutablePixelRef, rhs: T) {
+    public static func /=(lhs: PixelRef, rhs: T) {
         for i in 0..<lhs.pointer.count {
             lhs.pointer[i] /= rhs
         }
     }
 }
 
-extension MutablePixelRef where T: FloatingPoint {
+extension PixelRef where T: FloatingPoint {
     @inlinable
-    public static func /=(lhs: MutablePixelRef, rhs: T) {
+    public static func /=(lhs: PixelRef, rhs: T) {
         for i in 0..<lhs.pointer.count {
             lhs.pointer[i] /= rhs
         }
