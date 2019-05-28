@@ -2,10 +2,15 @@ import Foundation
 
 public struct Pixel<P: PixelType, T: DataType> {
     @usableFromInline
-    var data: [T]
+    var data: ArraySlice<T>
     
     @inlinable
     public init(data: [T]) {
+        self.init(data: ArraySlice(data))
+    }
+    
+    @inlinable
+    init(data: ArraySlice<T>) {
         precondition(data.count == P.channels, "Size of `data` must be exact same as the number of channels.")
         self.data = data
     }
@@ -13,6 +18,11 @@ public struct Pixel<P: PixelType, T: DataType> {
     @inlinable
     public init(value: T) {
         self.init(data: [T](repeating: value, count: P.channels))
+    }
+    
+    @inlinable
+    public mutating func ensureOwnBuffer() {
+        data = ArraySlice(Array(data))
     }
 }
 
@@ -33,20 +43,20 @@ extension Pixel {
     @inlinable
     public subscript(channel: Int) -> T {
         get {
-            return data[channel]
+            return data[channel + data.startIndex]
         }
         set {
-            data[channel] = newValue
+            data[channel + data.startIndex] = newValue
         }
     }
     
     @inlinable
     public subscript(channel: P) -> T {
         get {
-            return data[channel.rawValue]
+            return self[channel.rawValue]
         }
         set {
-            data[channel.rawValue] = newValue
+            self[channel.rawValue] = newValue
         }
     }
 }

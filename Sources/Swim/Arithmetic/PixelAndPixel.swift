@@ -3,8 +3,8 @@ import Foundation
 extension Pixel where T: AdditiveArithmetic {
     @inlinable
     public static func +=<Px: PixelProtocol>(lhs: inout Pixel, rhs: Px) where Px.P == P, Px.T == T {
-        for i in 0..<lhs.data.count {
-            lhs.data[i] += rhs[i]
+        for i in 0..<P.channels {
+            lhs[i] += rhs[i]
         }
     }
     

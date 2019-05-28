@@ -1,8 +1,8 @@
 extension Pixel where T: AdditiveArithmetic {
     @inlinable
     public static func +=(lhs: inout Pixel, rhs: T) {
-        for i in 0..<lhs.data.count {
-            lhs.data[i] += rhs
+        for i in 0..<P.channels {
+            lhs[i] += rhs
         }
     }
     
@@ -20,8 +20,8 @@ extension Pixel where T: AdditiveArithmetic {
     
     @inlinable
     public static func -=(lhs: inout Pixel, rhs: T) {
-        for i in 0..<lhs.data.count {
-            lhs.data[i] -= rhs
+        for i in 0..<P.channels {
+            lhs[i] -= rhs
         }
     }
     
@@ -36,8 +36,8 @@ extension Pixel where T: AdditiveArithmetic {
     public static func -(lhs: T, rhs: Pixel) -> Pixel {
         var new = rhs
         
-        for i in 0..<new.data.count {
-            new.data[i] = lhs - new.data[i]
+        for i in 0..<P.channels {
+            new[i] = lhs - new[i]
         }
         
         return new
@@ -47,8 +47,8 @@ extension Pixel where T: AdditiveArithmetic {
 extension Pixel where T: Numeric {
     @inlinable
     public static func *=(lhs: inout Pixel, rhs: T) {
-        for i in 0..<lhs.data.count {
-            lhs.data[i] *= rhs
+        for i in 0..<P.channels {
+            lhs[i] *= rhs
         }
     }
     
@@ -68,8 +68,8 @@ extension Pixel where T: Numeric {
 extension Pixel where T: BinaryInteger {
     @inlinable
     public static func /=(lhs: inout Pixel, rhs: T) {
-        for i in 0..<lhs.data.count {
-            lhs.data[i] /= rhs
+        for i in 0..<P.channels {
+            lhs[i] /= rhs
         }
     }
     
@@ -84,8 +84,8 @@ extension Pixel where T: BinaryInteger {
     public static func /(lhs: T, rhs: Pixel) -> Pixel {
         var new = rhs
         
-        for i in 0..<new.data.count {
-            new.data[i] = lhs / new.data[i]
+        for i in 0..<P.channels {
+            new[i] = lhs / new[i]
         }
         
         return new
@@ -95,8 +95,8 @@ extension Pixel where T: BinaryInteger {
 extension Pixel where T: FloatingPoint {
     @inlinable
     public static func /=(lhs: inout Pixel, rhs: T) {
-        for i in 0..<lhs.data.count {
-            lhs.data[i] /= rhs
+        for i in 0..<P.channels {
+            lhs[i] /= rhs
         }
     }
     

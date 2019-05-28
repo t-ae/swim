@@ -29,11 +29,13 @@ public struct Image<P: PixelType, T: DataType> {
     public init(width: Int, height: Int, pixel: Pixel<P, T>) {
         var data = [T](repeating: T.swimDefaultValue, count: width*height*P.channels)
         
-        var i = 0
-        for _ in 0..<width*height {
-            for c in 0..<P.channels {
-                data[i] = pixel[c]
-                i += 1
+        pixel.withUnsafeBufferPointer { bp in
+            var i = 0
+            for _ in 0..<width*height {
+                for c in 0..<bp.count {
+                    data[i] = bp[c]
+                    i += 1
+                }
             }
         }
         

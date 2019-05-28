@@ -36,14 +36,14 @@ extension Image {
             precondition(0 <= y && y < height, "Index out of range.")
             
             let start = dataIndex(x: x, y: y)
-            return Pixel(data: [T](data[start..<start+P.channels]))
+            return Pixel(data: data[start..<start+P.channels])
         }
         set {
             precondition(0 <= x && x < width, "Index out of range.")
             precondition(0 <= y && y < height, "Index out of range.")
             
             let start = dataIndex(x: x, y: y)
-            data[start..<start+P.channels] = ArraySlice(newValue.data)
+            data[start..<start+P.channels] = newValue.data
         }
     }
 }
