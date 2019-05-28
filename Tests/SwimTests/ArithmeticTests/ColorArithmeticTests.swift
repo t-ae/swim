@@ -1,7 +1,7 @@
 import XCTest
 import Swim
 
-class PixelArithmeticTests: XCTestCase {
+class ColorArithmeticTests: XCTestCase {
     func testNegate() {
         do {
             let before = (0..<4).map { Int($0) }
