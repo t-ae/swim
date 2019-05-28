@@ -130,93 +130,44 @@ extension Image where P == RGBA, T == UInt8 {
     }
 }
 
-// MARK: - Float
-extension Image where P == Gray, T == Float {
+// MARK: - BinaryFloatingPoint
+extension Image where P == Gray, T: BinaryFloatingPoint {
     /// Read image from file.
     ///
     /// All pixel values will be in [0, 1] range.
     @inlinable
     public init(contentsOf url: URL) throws {
-        let uint8 = try Image<P, UInt8>(contentsOf: url)
-        self = uint8.cast(to: T.self) / T(UInt8.max)
+        self = try convertPixelValue(image: Image<P, UInt8>(contentsOf: url))
     }
 }
 
-extension Image where P == GrayAlpha, T == Float {
+extension Image where P == GrayAlpha, T: BinaryFloatingPoint {
     /// Read image from file.
     ///
     /// All pixel values will be in [0, 1] range.
     @inlinable
     public init(contentsOf url: URL) throws {
-        let uint8 = try Image<P, UInt8>(contentsOf: url)
-        self = uint8.cast(to: T.self) / T(UInt8.max)
+        self = try convertPixelValue(image: Image<P, UInt8>(contentsOf: url))
     }
 }
 
-extension Image where P == RGB, T == Float {
+extension Image where P == RGB, T: BinaryFloatingPoint {
     /// Read image from file.
     ///
     /// All pixel values will be in [0, 1] range.
     @inlinable
     public init(contentsOf url: URL) throws {
-        let uint8 = try Image<P, UInt8>(contentsOf: url)
-        self = uint8.cast(to: T.self) / T(UInt8.max)
+        self = try convertPixelValue(image: Image<P, UInt8>(contentsOf: url))
     }
 }
 
-extension Image where P == RGBA, T == Float {
+extension Image where P == RGBA, T: BinaryFloatingPoint {
     /// Read image from file.
     ///
     /// All pixel values will be in [0, 1] range.
     @inlinable
     public init(contentsOf url: URL) throws {
-        let uint8 = try Image<P, UInt8>(contentsOf: url)
-        self = uint8.cast(to: T.self) / T(UInt8.max)
-    }
-}
-
-// MARK: - Double
-extension Image where P == Gray, T == Double {
-    /// Read image from file.
-    ///
-    /// All pixel values will be in [0, 1] range.
-    @inlinable
-    public init(contentsOf url: URL) throws {
-        let uint8 = try Image<P, UInt8>(contentsOf: url)
-        self = uint8.cast(to: T.self) / T(UInt8.max)
-    }
-}
-
-extension Image where P == GrayAlpha, T == Double {
-    /// Read image from file.
-    ///
-    /// All pixel values will be in [0, 1] range.
-    @inlinable
-    public init(contentsOf url: URL) throws {
-        let uint8 = try Image<P, UInt8>(contentsOf: url)
-        self = uint8.cast(to: T.self) / T(UInt8.max)
-    }
-}
-
-extension Image where P == RGB, T == Double {
-    /// Read image from file.
-    ///
-    /// All pixel values will be in [0, 1] range.
-    @inlinable
-    public init(contentsOf url: URL) throws {
-        let uint8 = try Image<P, UInt8>(contentsOf: url)
-        self = uint8.cast(to: T.self) / T(UInt8.max)
-    }
-}
-
-extension Image where P == RGBA, T == Double {
-    /// Read image from file.
-    ///
-    /// All pixel values will be in [0, 1] range.
-    @inlinable
-    public init(contentsOf url: URL) throws {
-        let uint8 = try Image<P, UInt8>(contentsOf: url)
-        self = uint8.cast(to: T.self) / T(UInt8.max)
+        self = try convertPixelValue(image: Image<P, UInt8>(contentsOf: url))
     }
 }
 

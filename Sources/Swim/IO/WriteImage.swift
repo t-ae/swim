@@ -122,9 +122,7 @@ extension Image where P: AlphaImageFileFormat, T: BinaryFloatingPoint {
     /// Values outside the range will be clipped.
     @inlinable
     public func write(to url: URL) throws {
-        var i255 = self.clipped(low: 0, high: 1) * 255
-        i255.applyRound()
-        try i255.cast(to: UInt8.self).write(to: url)
+        return try convertPixelValue(image: self).write(to: url)
     }
 }
 
@@ -149,9 +147,7 @@ extension Image where P: ImageFileFormat, T: BinaryFloatingPoint {
     /// - Parameter format: Image file format. Default: .png
     @inlinable
     public func write(to url: URL, format: WriteFormat = .png) throws {
-        var i255 = self.clipped(low: 0, high: 1) * 255
-        i255.applyRound()
-        try i255.cast(to: UInt8.self).write(to: url, format: format)
+        return try convertPixelValue(image: self).write(to: url, format: format)
     }
 }
 

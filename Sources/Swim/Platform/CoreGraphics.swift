@@ -35,8 +35,7 @@ extension Image where P: ConvertibleFromCGImage, T: BinaryFloatingPoint {
     /// Values outside the range will be clipped.
     @inlinable
     public init(cgImage: CGImage) {
-        let uint8 = Image<P, UInt8>(cgImage: cgImage)
-        self = uint8.cast(to: T.self) / T(UInt8.max)
+        self = convertPixelValue(image: Image<P, UInt8>(cgImage: cgImage))
     }
 }
 
@@ -47,9 +46,7 @@ extension Image where P: ConvertibleToCGImage, T: BinaryFloatingPoint {
     /// Values outside the range will be clipped.
     @inlinable
     public func cgImage() -> CGImage {
-        var i255 = clipped(low: 0, high: 1) * 255
-        i255.applyRound()
-        return i255.cast(to: UInt8.self).cgImage()
+        return convertPixelValue(image: self).cgImage()
     }
 }
 
