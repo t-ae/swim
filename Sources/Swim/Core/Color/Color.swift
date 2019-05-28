@@ -20,9 +20,27 @@ public struct Color<P: PixelType, T: DataType> {
         self.init(data: [T](repeating: value, count: P.channels))
     }
     
+    /// Create copy of `data` and set it as buffer.
+    ///
+    /// If `Color` is got by `image[x, y]`, `data` is slice of original `image.data`.
+    /// Even when image is discarded, this slice refers original buffer and prolong its lifetime.
+    /// This method can be used to avoid that.
     @inlinable
     public mutating func ensureOwnBuffer() {
         data = ArraySlice(Array(data))
+    }
+}
+
+extension Color {
+    @inlinable
+    public init<C: ColorProtocol>(from color: C) where C.P == P, C.T == T {
+        self.init(data: color.withUnsafeBufferPointer(Array.init))
+    }
+    
+    // Special case
+    @inlinable
+    public init(from pixel: Pixel<P, T>) {
+        self = pixel.color
     }
 }
 

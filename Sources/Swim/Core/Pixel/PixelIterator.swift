@@ -37,6 +37,8 @@ public struct PixelIterator<P: PixelType, T: DataType>: IteratorProtocol, Sequen
             return nil
         }
         
+        // TODO: If Pixel's fields are `@usableFromInline public internal(set)`, We don't have to create new Pixel each time. But it's not possible now.
+        // https://bugs.swift.org/browse/SR-7590
         return Pixel(x: x, y: y, color: Color(data: image.data[start..<start+P.channels]))
     }
 }

@@ -7,8 +7,8 @@ class IterationPerformanceTests: XCTestCase {
         var color = Color<RGBA, Double>(r: 0, g: 0, b: 0, a: 0)
         
         measure {
-            for y in 0..<2160 {
-                for x in 0..<3840 {
+            for y in 1..<2159 {
+                for x in 1..<3839 {
                     color += image[x, y]
                 }
             }
@@ -20,7 +20,7 @@ class IterationPerformanceTests: XCTestCase {
         var color = Color<RGBA, Double>(r: 0, g: 0, b: 0, a: 0)
         
         measure {
-            for px in image.pixels() {
+            for px in image.pixels(in: 1..<3839, 1..<2159) {
                 color += px
             }
         }

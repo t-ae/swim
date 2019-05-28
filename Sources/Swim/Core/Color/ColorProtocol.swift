@@ -10,11 +10,6 @@ public protocol ColorProtocol {
 
 extension Color: ColorProtocol {
     @inlinable
-    public init<C: ColorProtocol>(from color: C) where C.P == P, C.T == T {
-        self.init(data: color.withUnsafeBufferPointer(Array.init))
-    }
-    
-    @inlinable
     public func withUnsafeBufferPointer<R>(_ body: (UnsafeBufferPointer<T>) -> R) -> R {
         return data.withUnsafeBufferPointer(body)
     }
