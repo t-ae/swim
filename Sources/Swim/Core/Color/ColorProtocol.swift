@@ -20,6 +20,13 @@ extension Color: ColorProtocol {
     }
 }
 
+extension Pixel: ColorProtocol {
+    @inlinable
+    public func withUnsafeBufferPointer<R>(_ body: (UnsafeBufferPointer<T>) -> R) -> R {
+        return color.withUnsafeBufferPointer(body)
+    }
+}
+
 extension PixelRef: ColorProtocol {
     @inlinable
     public func withUnsafeBufferPointer<R>(_ body: (UnsafeBufferPointer<T>)->R) -> R {
