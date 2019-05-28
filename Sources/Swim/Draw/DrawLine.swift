@@ -5,7 +5,7 @@ extension Image {
     ///
     /// It should be used to fill area, like `drawRect` and `drawCircle`.
     @inlinable
-    mutating func drawHorizontalLine(x1: Int, x2: Int, y: Int, color: Pixel<P, T>) {
+    mutating func drawHorizontalLine(x1: Int, x2: Int, y: Int, color: Color<P, T>) {
         guard 0 <= y && y < height else {
             return
         }
@@ -19,7 +19,7 @@ extension Image {
         }
         
         pixelwiseConvert(left..<right, y..<y+1) { ref in
-            ref.setColor(pixel: color)
+            ref.setColor(color: color)
         }
     }
     
@@ -27,7 +27,7 @@ extension Image {
     @inlinable
     public mutating func drawLine(p1: (x: Int, y: Int),
                                   p2: (x: Int, y: Int),
-                                  color: Pixel<P, T>) {
+                                  color: Color<P, T>) {
         let dx = Swift.abs(p1.x - p2.x)
         let dy = Swift.abs(p1.y - p2.y)
         let sx = p1.x < p2.x ? 1 : -1
@@ -61,7 +61,7 @@ extension Image {
     @inlinable
     public mutating func drawLines(points: [(x: Int, y: Int)],
                                    close: Bool = true,
-                                   color: Pixel<P, T>) {
+                                   color: Color<P, T>) {
         guard points.count > 1 else {
             return
         }
@@ -78,7 +78,7 @@ extension Image {
     ///
     /// - Note: If size is not odd, the size of mark will be size+1.
     @inlinable
-    public mutating func drawX(center: (x: Int, y: Int), size: Int, color: Pixel<P, T>) {
+    public mutating func drawX(center: (x: Int, y: Int), size: Int, color: Color<P, T>) {
         let length = size / 2
         
         let left = center.x - length

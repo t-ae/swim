@@ -55,11 +55,11 @@ extension MutablePixelRef {
     ///
     /// It's convenient implementation of:
     ///
-    /// for c in 0..<P.channels { self[c] = pixel[c] }
+    /// for c in 0..<P.channels { self[c] = color[c] }
     @inlinable
-    public func setColor<C: ColorProtocol>(pixel: C) where C.P == P, C.T == T {
+    public func setColor<C: ColorProtocol>(color: C) where C.P == P, C.T == T {
         for i in 0..<pointer.count {
-            pointer[i] = pixel[i]
+            pointer[i] = color[i]
         }
     }
     
@@ -82,11 +82,11 @@ extension MutablePixelRef where T: Numeric {
     ///
     /// It's convenient implementation of:
     ///
-    /// for c in 0..<P.channels { self[c] = factor * pixel[c] }
+    /// for c in 0..<P.channels { self[c] = factor * color[c] }
     @inlinable
-    func setColor<C: ColorProtocol>(pixel: C, with factor: T) where C.P == P, C.T == T {
+    func setColor<C: ColorProtocol>(color: C, with factor: T) where C.P == P, C.T == T {
         for i in 0..<pointer.count {
-            pointer[i] = pixel[i] * factor
+            pointer[i] = color[i] * factor
         }
     }
     
@@ -107,11 +107,11 @@ extension MutablePixelRef where T: Numeric {
     ///
     /// It's convenient implementation of:
     ///
-    /// for c in 0..<P.channels { self[c] += factor * pixel[c] }
+    /// for c in 0..<P.channels { self[c] += factor * color[c] }
     @inlinable
-    func addColor<C: ColorProtocol>(pixel: C, with factor: T = 1) where C.P == P, C.T == T {
+    func addColor<C: ColorProtocol>(color: C, with factor: T = 1) where C.P == P, C.T == T {
         for i in 0..<pointer.count {
-            pointer[i] += pixel[i] * factor
+            pointer[i] += color[i] * factor
         }
     }
     

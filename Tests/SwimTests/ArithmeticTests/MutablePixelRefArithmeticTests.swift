@@ -9,7 +9,7 @@ class MutablePixelRefArithmeticTests: XCTestCase {
             
             image.withMutablePixelRef(x: 0, y: 0) { ref in
                 ref += 1
-                ref += Pixel(r: 0, g: 0, b: 0, a: 1)
+                ref += Color(r: 0, g: 0, b: 0, a: 1)
             }
             
             answer[0, 0] += 1
@@ -23,7 +23,7 @@ class MutablePixelRefArithmeticTests: XCTestCase {
             
             image.withMutablePixelRef(x: 0, y: 0) { ref in
                 ref += 1
-                ref += Pixel(r: 0, g: 0, b: 0, a: 1)
+                ref += Color(r: 0, g: 0, b: 0, a: 1)
             }
             
             answer[0, 0] += 1
@@ -40,7 +40,7 @@ class MutablePixelRefArithmeticTests: XCTestCase {
             
             image.withMutablePixelRef(x: 0, y: 0) { ref in
                 ref -= 1
-                ref -= Pixel(r: 0, g: 0, b: 0, a: 1)
+                ref -= Color(r: 0, g: 0, b: 0, a: 1)
             }
             
             answer[0, 0] -= 1
@@ -54,7 +54,7 @@ class MutablePixelRefArithmeticTests: XCTestCase {
             
             image.withMutablePixelRef(x: 0, y: 0) { ref in
                 ref -= 1
-                ref -= Pixel(r: 0, g: 0, b: 0, a: 1)
+                ref -= Color(r: 0, g: 0, b: 0, a: 1)
             }
             
             answer[0, 0] -= 1
@@ -71,7 +71,7 @@ class MutablePixelRefArithmeticTests: XCTestCase {
             
             image.withMutablePixelRef(x: 0, y: 0) { ref in
                 ref *= 2
-                ref *= Pixel(r: 1, g: 1, b: 1, a: 2)
+                ref *= Color(r: 1, g: 1, b: 1, a: 2)
             }
             
             answer[0, 0] *= 2
@@ -85,7 +85,7 @@ class MutablePixelRefArithmeticTests: XCTestCase {
             
             image.withMutablePixelRef(x: 0, y: 0) { ref in
                 ref *= 2
-                ref *= Pixel(r: 1, g: 1, b: 1, a: 2)
+                ref *= Color(r: 1, g: 1, b: 1, a: 2)
             }
             
             answer[0, 0] *= 2
@@ -102,7 +102,7 @@ class MutablePixelRefArithmeticTests: XCTestCase {
             
             image.withMutablePixelRef(x: 0, y: 0) { ref in
                 ref /= 2
-                ref /= Pixel(r: 1, g: 1, b: 1, a: 2)
+                ref /= Color(r: 1, g: 1, b: 1, a: 2)
             }
             
             answer[0, 0] /= 2
@@ -116,7 +116,7 @@ class MutablePixelRefArithmeticTests: XCTestCase {
             
             image.withMutablePixelRef(x: 0, y: 0) { ref in
                 ref /= 2
-                ref /= Pixel(r: 1, g: 1, b: 1, a: 2)
+                ref /= Color(r: 1, g: 1, b: 1, a: 2)
             }
             
             answer[0, 0] /= 2

@@ -3,10 +3,10 @@ import Swim
 
 class PerformanceTests: XCTestCase {
     func testFillPixelInit() {
-        let pixel = Pixel<RGBA, Double>(r: 0, g: 1, b: 2, a: 3)
+        let color = Color<RGBA, Double>(r: 0, g: 1, b: 2, a: 3)
         
         measure {
-            _ = Image(width: 3840, height: 2160, pixel: pixel)
+            _ = Image(width: 3840, height: 2160, color: color)
         }
     }
     

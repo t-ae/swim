@@ -26,10 +26,10 @@ public struct Image<P: PixelType, T: DataType> {
     }
     
     @inlinable
-    public init(width: Int, height: Int, pixel: Pixel<P, T>) {
+    public init(width: Int, height: Int, color: Color<P, T>) {
         var data = [T](repeating: T.swimDefaultValue, count: width*height*P.channels)
         
-        pixel.withUnsafeBufferPointer { bp in
+        color.withUnsafeBufferPointer { bp in
             var i = 0
             for _ in 0..<width*height {
                 for c in 0..<bp.count {

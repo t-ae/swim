@@ -14,11 +14,11 @@ class ArithmeticPerformanceTests: XCTestCase {
     
     func testMulPixel() {
         var image = Image<RGBA, Double>(width: 3840, height: 2160, value: 1)
-        let pixel = Pixel<RGBA, Double>(r: 0.9, g: 1.1, b: 0.9, a: 1.1)
+        let color = Color<RGBA, Double>(r: 0.9, g: 1.1, b: 0.9, a: 1.1)
         
         measure {
             for _ in 0..<10 {
-                image *= pixel
+                image *= color
             }
         }
     }

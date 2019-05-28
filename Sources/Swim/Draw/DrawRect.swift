@@ -3,7 +3,7 @@ extension Image {
     @inlinable
     public mutating func drawRect(_ xRange: Range<Int>,
                                   _ yRange: Range<Int>,
-                                  color: Pixel<P, T>) {
+                                  color: Color<P, T>) {
         drawRect(origin: (xRange.startIndex, yRange.startIndex),
                  size: (xRange.count, yRange.count),
                  color: color)
@@ -13,7 +13,7 @@ extension Image {
     @inlinable
     public mutating func drawRect(origin: (x: Int, y: Int),
                                   size: (width: Int, height: Int),
-                                  color: Pixel<P, T>) {
+                                  color: Color<P, T>) {
         precondition(size.width >= 0, "size must be positive.")
         precondition(size.height >= 0, "size must be positive.")
         
@@ -33,7 +33,7 @@ extension Image {
     @inlinable
     public mutating func drawRectPelimeter(_ xRange: Range<Int>,
                                            _ yRange: Range<Int>,
-                                           color: Pixel<P, T>) {
+                                           color: Color<P, T>) {
         drawRectPelimeter(origin: (xRange.startIndex, yRange.startIndex),
                           size: (xRange.count, yRange.count),
                           color: color)
@@ -43,7 +43,7 @@ extension Image {
     @inlinable
     public mutating func drawRectPelimeter(origin: (x: Int, y: Int),
                                            size: (width: Int, height: Int),
-                                           color: Pixel<P, T>) {
+                                           color: Color<P, T>) {
         precondition(size.width >= 0, "size must be positive.")
         precondition(size.height >= 0, "size must be positive.")
         

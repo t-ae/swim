@@ -21,8 +21,8 @@ extension DrawVisualTests {
         
         image.drawLines(points: [(10, 10), (190, 190), (190, 10), (10, 190)], color: .gray)
         
-        image.drawX(center: (60, 10), size: 5, color: Pixel(gray: 192))
-        image.drawX(center: (70, 10), size: 6, color: Pixel(gray: 192))
+        image.drawX(center: (60, 10), size: 5, color: Color(gray: 192))
+        image.drawX(center: (70, 10), size: 6, color: Color(gray: 192))
         
         let ns = image.nsImage()
         
@@ -32,8 +32,8 @@ extension DrawVisualTests {
     func testDrawCircle() {
         var image = Image<Gray, UInt8>(width: 201, height: 201, value: 0)
         
-        image.drawCircle(center: (100, 100), radius: 112, color: Pixel(value: 96))
-        image.drawCircle(center: (50, 50), radius: 50, color: Pixel(value: 192))
+        image.drawCircle(center: (100, 100), radius: 112, color: Color(value: 96))
+        image.drawCircle(center: (50, 50), radius: 50, color: Color(value: 192))
         
         image.drawCirclePelimeter(center: (100, 100), radius: 30, color: .white)
         
@@ -46,13 +46,13 @@ extension DrawVisualTests {
     func testDrawRect() {
         var image = Image<Gray, UInt8>(width: 201, height: 201, value: 0)
         
-        image.drawRectPelimeter(origin: (0, 0), size: (100, 100), color: Pixel(gray: 128))
-        image.drawRectPelimeter(origin: (30, 30), size: (200, 200), color: Pixel(gray: 192))
-        image.drawRectPelimeter(origin: (-30, -30), size: (200, 200), color: Pixel(gray: 255))
+        image.drawRectPelimeter(origin: (0, 0), size: (100, 100), color: Color(gray: 128))
+        image.drawRectPelimeter(origin: (30, 30), size: (200, 200), color: Color(gray: 192))
+        image.drawRectPelimeter(origin: (-30, -30), size: (200, 200), color: Color(gray: 255))
         
-        image.drawRect(origin: (100, 100), size: (10, 10), color: Pixel(gray: 64))
-        image.drawRect(origin: (180, -10), size: (30, 30), color: Pixel(gray: 64))
-        image.drawRect(origin: (-10, 180), size: (30, 30), color: Pixel(gray: 64))
+        image.drawRect(origin: (100, 100), size: (10, 10), color: Color(gray: 64))
+        image.drawRect(origin: (180, -10), size: (30, 30), color: Color(gray: 64))
+        image.drawRect(origin: (-10, 180), size: (30, 30), color: Color(gray: 64))
         
         let ns = image.nsImage()
         
@@ -67,7 +67,7 @@ extension DrawVisualTests {
         // counter clockwise
         image.drawPolygon(points: [(110, 30), (130, 25), (115, 0)], color: .white)
         // not convex
-        image.drawPolygon(points: [(0, 130), (30, 200), (60, 130), (30, 170)], color: Pixel(gray: 255))
+        image.drawPolygon(points: [(0, 130), (30, 200), (60, 130), (30, 170)], color: Color(gray: 255))
         image.drawPolygon(points: [(100, 200), (130, 150), (100, 100), (150, 130), (200, 100), (170, 150), (200, 200), (150, 170)], color: .white)
         
         // self-intersecting
@@ -114,15 +114,15 @@ extension DrawVisualTests {
         
         var red = Image<RGBA, Double>(width: 201, height: 201, value: 0)
         red.drawCircle(center: (100, 100), radius: 100, color: .red)
-        red.drawCircle(center: (100, 100), radius:  95, color: Pixel(r: 1, g: 0, b: 0, a: 0.5))
+        red.drawCircle(center: (100, 100), radius:  95, color: Color(r: 1, g: 0, b: 0, a: 0.5))
         
         var green = Image<ARGB, Double>(width: 201, height: 201, value: 0)
         green.drawCircle(center: (100, 100), radius: 100, color: .green)
-        green.drawCircle(center: (100, 100), radius:  95, color: Pixel(a: 0.5, r: 0, g: 1, b: 0))
+        green.drawCircle(center: (100, 100), radius:  95, color: Color(a: 0.5, r: 0, g: 1, b: 0))
         
         var blue = Image<RGBA, Double>(width: 201, height: 201, value: 0)
         blue.drawCircle(center: (100, 100), radius: 100, color: .blue)
-        blue.drawCircle(center: (100, 100), radius:  95, color: Pixel(r: 0, g: 0, b: 1, a: 0.5))
+        blue.drawCircle(center: (100, 100), radius:  95, color: Color(r: 0, g: 0, b: 1, a: 0.5))
         
         imageBase.drawImage(origin: (150, 100), image: red)
         imageBase.drawImage(origin: (100, 200), image: green)
@@ -140,7 +140,7 @@ extension DrawVisualTests {
         
         var circle = Image<GrayAlpha, Double>(width: 201, height: 201, value: 0)
         circle.drawCircle(center: (100, 100), radius: 100, color: .white)
-        circle.drawCircle(center: (100, 100), radius:  95, color: Pixel(gray: 1, alpha: 0.5))
+        circle.drawCircle(center: (100, 100), radius:  95, color: Color(gray: 1, alpha: 0.5))
         
         imageBase.drawImage(origin: (150, 100), image: circle)
         imageBase.drawImage(origin: (100, 200), image: circle)
@@ -231,12 +231,12 @@ extension DrawVisualTests {
         
         let size = Image.getTextImageSize(text: "LENA", font: font)
         
-        lena.drawText(origin: (0, 0), text: "LENA", font: font, color: Pixel(r: 0, g: 0, b: 0, a: 1))
-        lena.drawText(origin: (50, 50), text: "LENA", font: font, color: Pixel(r: 0, g: 0, b: 1, a: 0.7))
+        lena.drawText(origin: (0, 0), text: "LENA", font: font, color: Color(r: 0, g: 0, b: 0, a: 1))
+        lena.drawText(origin: (50, 50), text: "LENA", font: font, color: Color(r: 0, g: 0, b: 1, a: 0.7))
         
-        lena.drawText(origin: (511-size.width, 256), text: "LENA", font: font, color: Pixel(r: 0, g: 1, b: 1, a: 0.7))
+        lena.drawText(origin: (511-size.width, 256), text: "LENA", font: font, color: Color(r: 0, g: 1, b: 1, a: 0.7))
         
-        lena.drawText(origin: (-30, 256), text: "LENA", font: font, color: Pixel(r: 1, g: 1, b: 1, a: 0.7))
+        lena.drawText(origin: (-30, 256), text: "LENA", font: font, color: Color(r: 1, g: 1, b: 1, a: 0.7))
         
         let lorem = """
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
@@ -249,7 +249,7 @@ extension DrawVisualTests {
                       text: lorem,
                       font: font2,
                       lineGap: 0,
-                      color: Pixel(r: 0, g: 0, b: 0, a: 1))
+                      color: Color(r: 0, g: 0, b: 0, a: 1))
         
         let nsImage = doubleToNSImage(lena)
         
@@ -272,11 +272,11 @@ extension DrawVisualTests {
         let size = Image.getTextImageSize(text: "LENA", font: font)
         
         lena.drawText(origin: (0, 0), text: "LENA", font: font, color: .black)
-        lena.drawText(origin: (50, 50), text: "LENA", font: font, color: Pixel(r: 0, g: 0, b: 255, a: 200))
+        lena.drawText(origin: (50, 50), text: "LENA", font: font, color: Color(r: 0, g: 0, b: 255, a: 200))
         
-        lena.drawText(origin: (511-size.width, 256), text: "LENA", font: font, color: Pixel(r: 0, g: 255, b: 255, a: 200))
+        lena.drawText(origin: (511-size.width, 256), text: "LENA", font: font, color: Color(r: 0, g: 255, b: 255, a: 200))
         
-        lena.drawText(origin: (-30, 256), text: "LENA", font: font, color: Pixel(r: 255, g: 255, b: 255, a: 200))
+        lena.drawText(origin: (-30, 256), text: "LENA", font: font, color: Color(r: 255, g: 255, b: 255, a: 200))
         
         let lorem = """
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
@@ -289,7 +289,7 @@ extension DrawVisualTests {
                       text: lorem,
                       font: font2,
                       lineGap: 0,
-                      color: Pixel(r: 0, g: 0, b: 0, a: 255))
+                      color: Color(r: 0, g: 0, b: 0, a: 255))
         
         let nsImage = lena.nsImage()
         

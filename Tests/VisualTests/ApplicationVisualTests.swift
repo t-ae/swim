@@ -12,15 +12,15 @@ extension ApplicationVisualTests {
         var image = Image<Gray, Double>(width: size, height: size, value: 0)
         
         // base
-        image.drawRect(30..<70, 30..<70, color: Pixel(gray: 1))
-        image.drawRect(10..<90, 40..<45, color: Pixel(gray: 1))
-        image.drawRect(10..<90, 55..<60, color: Pixel(gray: 1))
+        image.drawRect(30..<70, 30..<70, color: Color(gray: 1))
+        image.drawRect(10..<90, 40..<45, color: Color(gray: 1))
+        image.drawRect(10..<90, 55..<60, color: Color(gray: 1))
         
         // noise
-        image.drawRect(40..<43, 27..<30, color: Pixel(gray: 1))
-        image.drawRect(40..<43, 67..<70, color: Pixel(gray: 0))
-        image.drawRect(20..<22, 35..<40, color: Pixel(gray: 1))
-        image.drawRect(20..<22, 55..<60, color: Pixel(gray: 0))
+        image.drawRect(40..<43, 27..<30, color: Color(gray: 1))
+        image.drawRect(40..<43, 67..<70, color: Color(gray: 0))
+        image.drawRect(20..<22, 35..<40, color: Color(gray: 1))
+        image.drawRect(20..<22, 55..<60, color: Color(gray: 0))
         
         let nsImage = doubleToNSImage(image)
         
@@ -56,11 +56,11 @@ extension ApplicationVisualTests {
         let range: Double = 3.2
         let maxIteration = 256
         
-        func getJuliaImage(c: (Double, Double), color: Pixel<RGB, Double>) -> Image<RGBA, Double> {
-            let color = Pixel(r: color[.red], g: color[.green], b: color[.blue], a: 0)
+        func getJuliaImage(c: (Double, Double), color: Color<RGB, Double>) -> Image<RGBA, Double> {
+            let color = Color(r: color[.red], g: color[.green], b: color[.blue], a: 0)
             var image = Image<RGBA, Double>(width: size,
                                             height: size,
-                                            pixel: color)
+                                            color: color)
             
             var iterationMax = 0
             
@@ -85,25 +85,25 @@ extension ApplicationVisualTests {
         }
         
         
-        let julia1 = getJuliaImage(c: (-0.6180339887498949, 0), color: Pixel(r: 1, g: 0, b: 0))
+        let julia1 = getJuliaImage(c: (-0.6180339887498949, 0), color: Color(r: 1, g: 0, b: 0))
         let ns1 = doubleToNSImage(julia1)
 
-        let julia2 = getJuliaImage(c: (0.285, 0), color: Pixel(r: 0, g: 1, b: 0))
+        let julia2 = getJuliaImage(c: (0.285, 0), color: Color(r: 0, g: 1, b: 0))
         let ns2 = doubleToNSImage(julia2)
 
-        let julia3 = getJuliaImage(c: (0.285, 0.01), color: Pixel(r: 0, g: 0, b: 1))
+        let julia3 = getJuliaImage(c: (0.285, 0.01), color: Color(r: 0, g: 0, b: 1))
         let ns3 = doubleToNSImage(julia3)
 
-        let julia4 = getJuliaImage(c: (-0.70176, -0.3842), color: Pixel(r: 0.7, g: 0.7, b: 0))
+        let julia4 = getJuliaImage(c: (-0.70176, -0.3842), color: Color(r: 0.7, g: 0.7, b: 0))
         let ns4 = doubleToNSImage(julia4)
 
-        let julia5 = getJuliaImage(c: (-0.835, 0.2321), color: Pixel(r: 1, g: 0, b: 1))
+        let julia5 = getJuliaImage(c: (-0.835, 0.2321), color: Color(r: 1, g: 0, b: 1))
         let ns5 = doubleToNSImage(julia5)
 
-        let julia6 = getJuliaImage(c: (-0.8, 0.156), color: Pixel(r: 0, g: 1, b: 1))
+        let julia6 = getJuliaImage(c: (-0.8, 0.156), color: Color(r: 0, g: 1, b: 1))
         let ns6 = doubleToNSImage(julia6)
         
-        let julia7 = getJuliaImage(c: (-0.75, 0.13), color: Pixel(r: 0, g: 0.4, b: 0))
+        let julia7 = getJuliaImage(c: (-0.75, 0.13), color: Color(r: 0, g: 0.4, b: 0))
         var base = Image<RGB, Double>(width: size, height: size, value: 0.95)
         
         base.drawImage(origin: (0, 0), image: julia7)
@@ -209,7 +209,7 @@ extension ApplicationVisualTests {
         
         // pentadecathlon
         var b0 = Image<Gray, UInt8>(width: 16, height: 16, value: 0)
-        b0.drawRect(3..<13, 8..<9, color: Pixel(gray: 1))
+        b0.drawRect(3..<13, 8..<9, color: Color(gray: 1))
         
         var b = b0
         
@@ -292,7 +292,7 @@ extension ApplicationVisualTests {
         }
         sharpen.drawRectPelimeter(origin: (0, 0),
                                   size: (sharpen.width, sharpen.height),
-                                  color: Pixel(gray: 0))
+                                  color: Color(gray: 0))
         images.append(sharpen)
         
         // Double Thresholding
@@ -462,7 +462,7 @@ extension ApplicationVisualTests {
             let x = Int.random(in: 0..<lena.width)
             let y = Int.random(in: 0..<lena.height)
             
-            lena[x, y] = Bool.random() ? Pixel.white : Pixel.black
+            lena[x, y] = Bool.random() ? Color.white : Color.black
         }
         var images: [Image<RGB, Double>] = [lena]
         
@@ -488,7 +488,7 @@ extension ApplicationVisualTests {
         let k = 10
         let maxIter = 100
         
-        func colorDistance2(px1: PixelRef<RGB, Double>, px2: Pixel<RGB, Double>) -> Double {
+        func colorDistance2(px1: PixelRef<RGB, Double>, px2: Color<RGB, Double>) -> Double {
             let r = px1[.red] - px2[.red]
             let g = px1[.green] - px2[.green]
             let b = px1[.blue] - px2[.blue]
@@ -498,7 +498,7 @@ extension ApplicationVisualTests {
         
         // k-means
         var centers = (0..<k).map { _ in
-            Pixel<RGB, Double>(r: .random(in: 0..<1),
+            Color<RGB, Double>(r: .random(in: 0..<1),
                                g: .random(in: 0..<1),
                                b: .random(in: 0..<1))
         }
@@ -524,7 +524,7 @@ extension ApplicationVisualTests {
             classImage = newClassImage
             
             // Update center
-            var newCenters = [Pixel<RGB, Double>](repeating: Pixel.zero, count: centers.count)
+            var newCenters = [Color<RGB, Double>](repeating: Color.zero, count: centers.count)
             var counts = [Int](repeating: 0, count: centers.count)
             lena.iteratePixels { ref in
                 let cls = classImage[ref.x, ref.y, .gray]
@@ -544,7 +544,7 @@ extension ApplicationVisualTests {
         var reduced = lena
         reduced.pixelwiseConvert { ref in
             let cls = classImage[ref.x, ref.y, .gray]
-            ref.setColor(pixel: centers[cls])
+            ref.setColor(color: centers[cls])
         }
         images.append(reduced)
         

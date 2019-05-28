@@ -23,7 +23,7 @@ public struct PixelIterator<P: PixelType, T: DataType>: IteratorProtocol, Sequen
     }
     
     @inlinable
-    public mutating func next() -> Pixel<P, T>? {
+    public mutating func next() -> Color<P, T>? {
         defer {
             x += 1
             if x >= xRange.endIndex {
@@ -37,7 +37,7 @@ public struct PixelIterator<P: PixelType, T: DataType>: IteratorProtocol, Sequen
             return nil
         }
         
-        return Pixel(data: image.data[start..<start+P.channels])
+        return Color(data: image.data[start..<start+P.channels])
     }
 }
 

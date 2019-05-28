@@ -31,7 +31,7 @@ extension WarpVisualTests {
             nsImages["constant0"] = doubleToNSImage(result)
         }
         do {
-            let intpl = Intpl(edgeMode: .constant(pixel: Pixel(r: 1, g: 0, b: 0)))
+            let intpl = Intpl(edgeMode: .constant(color: Color(r: 1, g: 0, b: 0)))
             let result = try! src.warp(transformation: affine, outputSize: (512, 512), interpolator: intpl)
             nsImages["constant-red"] = doubleToNSImage(result)
         }

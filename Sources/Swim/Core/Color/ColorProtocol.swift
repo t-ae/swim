@@ -8,10 +8,10 @@ public protocol ColorProtocol {
     subscript(channel: P) -> T { get }
 }
 
-extension Pixel: ColorProtocol {
+extension Color: ColorProtocol {
     @inlinable
-    public init<Px: ColorProtocol>(from pixel: Px) where Px.P == P, Px.T == T {
-        self.init(data: pixel.withUnsafeBufferPointer(Array.init))
+    public init<C: ColorProtocol>(from color: C) where C.P == P, C.T == T {
+        self.init(data: color.withUnsafeBufferPointer(Array.init))
     }
     
     @inlinable

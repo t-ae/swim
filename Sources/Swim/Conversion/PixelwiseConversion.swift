@@ -25,8 +25,8 @@ extension Image {
             for y in yRange {
                 var start = rowStart
                 for x in xRange {
-                    let pixel = MutablePixelRef<P, T>(x: x, y: y, rebasing: $0[start..<start+P.channels])
-                    body(pixel)
+                    let ref = MutablePixelRef<P, T>(x: x, y: y, rebasing: $0[start..<start+P.channels])
+                    body(ref)
                     start += P.channels
                 }
                 rowStart += rowSize

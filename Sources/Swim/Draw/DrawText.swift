@@ -232,7 +232,7 @@ extension Image where P: HasAlpha, T: BinaryInteger {
     public static func createTextImage(text: String,
                                        font: TrueTypeFont,
                                        lineGap: Int? = nil,
-                                       color: Pixel<P, T>) -> Image {
+                                       color: Color<P, T>) -> Image {
         let grayImage = Image<Gray, UInt8>.createTextImage(text: text, font: font, lineGap: lineGap)
         
         var colorImage = Image<P, T>.zeros(like: grayImage)
@@ -242,7 +242,7 @@ extension Image where P: HasAlpha, T: BinaryInteger {
             guard grayValue > 0 else {
                 return
             }
-            ref.setColor(pixel: color)
+            ref.setColor(color: color)
             let alpha = T(Int(ref[P.alphaIndex]) * Int(grayValue) / 255)
             ref[P.alphaIndex] = alpha
         }
@@ -260,7 +260,7 @@ extension Image where P: HasAlpha, T: BinaryFloatingPoint {
     public static func createTextImage(text: String,
                                        font: TrueTypeFont,
                                        lineGap: Int? = nil,
-                                       color: Pixel<P, T>) -> Image {
+                                       color: Color<P, T>) -> Image {
         let grayImage = Image<Gray, UInt8>.createTextImage(text: text, font: font, lineGap: lineGap)
         
         var colorImage = Image<P, T>.zeros(like: grayImage)
@@ -270,7 +270,7 @@ extension Image where P: HasAlpha, T: BinaryFloatingPoint {
             guard grayValue > 0 else {
                 return
             }
-            ref.setColor(pixel: color)
+            ref.setColor(color: color)
             ref[P.alphaIndex] *= T(grayValue) / 255
         }
         
@@ -288,7 +288,7 @@ extension Image where P: NoAlpha, T: BinaryInteger {
                                                 text: String,
                                                 font: TrueTypeFont,
                                                 lineGap: Int? = nil,
-                                                color: Pixel<P2, T>) where P2.BaseType == P {
+                                                color: Color<P2, T>) where P2.BaseType == P {
         guard origin.x < width && origin.y < height else {
             // Drawing area is out of image.
             return
@@ -310,7 +310,7 @@ extension Image where P: NoAlpha, T: BinaryFloatingPoint {
                                                 text: String,
                                                 font: TrueTypeFont,
                                                 lineGap: Int? = nil,
-                                                color: Pixel<P2, T>) where P2.BaseType == P {
+                                                color: Color<P2, T>) where P2.BaseType == P {
         guard origin.x < width && origin.y < height else {
             // Drawing area is out of image.
             return
@@ -332,7 +332,7 @@ extension Image where P: HasAlpha, T: BinaryInteger {
                                   text: String,
                                   font: TrueTypeFont,
                                   lineGap: Int? = nil,
-                                  color: Pixel<P, T>) {
+                                  color: Color<P, T>) {
         guard origin.x < width && origin.y < height else {
             // Drawing area is out of image.
             return
@@ -355,7 +355,7 @@ extension Image where P: HasAlpha, T: BinaryFloatingPoint {
                                   text: String,
                                   font: TrueTypeFont,
                                   lineGap: Int? = nil,
-                                  color: Pixel<P, T>) {
+                                  color: Color<P, T>) {
         guard origin.x < width && origin.y < height else {
             // Drawing area is out of image.
             return

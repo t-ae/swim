@@ -31,7 +31,7 @@ extension FourierTransformerVisualTests {
         lowPassFilter.drawCircle(center: (x: (lowPassFilter.width-1)/2,
                                           y: (lowPassFilter.height-1)/2),
                                  radius: 20,
-                                 color: Pixel(gray: 1))
+                                 color: Color(gray: 1))
         do { // low pass filter
             var shifted = shifted
             shifted[channel: .gray] *= lowPassFilter

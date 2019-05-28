@@ -9,10 +9,10 @@ class BicubicInterpolationTests: XCTestCase {
                                         height: 4,
                                         data: (0..<4*4).map { Double($0+1) })
         
-        XCTAssertEqual(intpl.interpolate(x: 0, y: 0, in: image), Pixel(gray: 1))
-        XCTAssertEqual(intpl.interpolate(x: 1, y: 1, in: image), Pixel(gray: 6))
-        XCTAssertEqual(intpl.interpolate(x: 1, y: 2, in: image), Pixel(gray: 10))
-        XCTAssertEqual(intpl.interpolate(x: 3, y: 3, in: image), Pixel(gray: 16))
+        XCTAssertEqual(intpl.interpolate(x: 0, y: 0, in: image), Color(gray: 1))
+        XCTAssertEqual(intpl.interpolate(x: 1, y: 1, in: image), Color(gray: 6))
+        XCTAssertEqual(intpl.interpolate(x: 1, y: 2, in: image), Color(gray: 10))
+        XCTAssertEqual(intpl.interpolate(x: 3, y: 3, in: image), Color(gray: 16))
     }
     
     static let allTests = [

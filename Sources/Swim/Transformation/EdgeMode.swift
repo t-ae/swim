@@ -1,12 +1,12 @@
 public enum EdgeMode<P: PixelType, T: DataType> {
-    case constant(pixel: Pixel<P, T>)
+    case constant(color: Color<P, T>)
     case edge
     case symmetric
     case reflect
     case wrap
     
     public static func constant(value: T) -> EdgeMode<P, T> {
-        return .constant(pixel: Pixel(value: value))
+        return .constant(color: Color(value: value))
     }
 }
 

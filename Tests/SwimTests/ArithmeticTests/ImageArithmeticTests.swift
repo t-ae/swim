@@ -31,14 +31,14 @@ class ImageArithmeticTests: XCTestCase {
         }
         do { // pixel
             var image = Image(width: 2, height: 2, rgba: [Int](0..<16))
-            let pixel = Pixel(r: 4, g: 3, b: 2, a: 1)
+            let color = Color(r: 4, g: 3, b: 2, a: 1)
             
             let answer = Image(width: 2, height: 2, rgba: [4, 4, 4, 4, 8, 8, 8, 8,
                                                            12, 12, 12,12, 16, 16, 16, 16])
-            XCTAssertEqual(image + pixel, answer)
-            XCTAssertEqual(pixel + image, answer)
+            XCTAssertEqual(image + color, answer)
+            XCTAssertEqual(color + image, answer)
             
-            image += pixel
+            image += color
             XCTAssertEqual(image, answer)
         }
         do { // image
@@ -68,14 +68,14 @@ class ImageArithmeticTests: XCTestCase {
         }
         do { // pixel
             var image = Image(width: 2, height: 2, rgba: (0..<16).map { Double($0) })
-            let pixel = Pixel(r: 4.0, g: 3, b: 2, a: 1)
+            let color = Color(r: 4.0, g: 3, b: 2, a: 1)
             
             let answer = Image(width: 2, height: 2, rgba: [4.0, 4, 4, 4, 8, 8, 8, 8,
                                                            12, 12, 12,12, 16, 16, 16, 16])
-            XCTAssertEqual(image + pixel, answer)
-            XCTAssertEqual(pixel + image, answer)
+            XCTAssertEqual(image + color, answer)
+            XCTAssertEqual(color + image, answer)
             
-            image += pixel
+            image += color
             XCTAssertEqual(image, answer)
         }
         do { // image
@@ -107,14 +107,14 @@ class ImageArithmeticTests: XCTestCase {
         }
         do { // pixel
             var image = Image(width: 2, height: 2, rgba: [Int](0..<16))
-            let pixel = Pixel(r: 0, g: 1, b: 2, a: 3)
+            let color = Color(r: 0, g: 1, b: 2, a: 3)
             
             let answer = Image(width: 2, height: 2, rgba: [0, 0, 0, 0, 4, 4, 4, 4,
                                                            8, 8, 8, 8, 12, 12, 12,12])
-            XCTAssertEqual(image - pixel, answer)
-            XCTAssertEqual(pixel - image, -answer)
+            XCTAssertEqual(image - color, answer)
+            XCTAssertEqual(color - image, -answer)
             
-            image -= pixel
+            image -= color
             XCTAssertEqual(image, answer)
         }
         do { // image
@@ -148,14 +148,14 @@ class ImageArithmeticTests: XCTestCase {
         }
         do { // pixel
             var image = Image(width: 2, height: 2, rgba: (0..<16).map { Double($0) })
-            let pixel = Pixel(r: 0.0, g: 1, b: 2, a: 3)
+            let color = Color(r: 0.0, g: 1, b: 2, a: 3)
             
             let answer = Image(width: 2, height: 2, rgba: [0.0, 0, 0, 0, 4, 4, 4, 4,
                                                            8, 8, 8, 8, 12, 12, 12,12])
-            XCTAssertEqual(image - pixel, answer)
-            XCTAssertEqual(pixel - image, -answer)
+            XCTAssertEqual(image - color, answer)
+            XCTAssertEqual(color - image, -answer)
             
-            image -= pixel
+            image -= color
             XCTAssertEqual(image, answer)
         }
         do { // image
@@ -190,14 +190,14 @@ class ImageArithmeticTests: XCTestCase {
         }
         do { // pixel
             var image = Image(width: 2, height: 2, rgba: (0..<16).map { T($0) })
-            let pixel = Pixel<RGBA ,T>(r: 0, g: 1, b: 2, a: 3)
+            let color = Color<RGBA ,T>(r: 0, g: 1, b: 2, a: 3)
             
             let answer = Image<RGBA, T>(width: 2, height: 2, rgba: [0, 1, 4, 9, 0, 5, 12, 21,
                                                                     0, 9, 20, 33, 0, 13, 28, 45])
-            XCTAssertEqual(image * pixel, answer)
-            XCTAssertEqual(pixel * image, answer)
+            XCTAssertEqual(image * color, answer)
+            XCTAssertEqual(color * image, answer)
             
-            image *= pixel
+            image *= color
             XCTAssertEqual(image, answer)
         }
         do { // image
@@ -234,14 +234,14 @@ class ImageArithmeticTests: XCTestCase {
         }
         do { // pixel
             var image = Image(width: 2, height: 2, rgba: (0..<16).map { T($0) })
-            let pixel = Pixel<RGBA, T>(r: 0, g: 1, b: 2, a: 3)
+            let color = Color<RGBA, T>(r: 0, g: 1, b: 2, a: 3)
             
             let answer = Image<RGBA, T>(width: 2, height: 2, rgba: [0, 1, 4, 9, 0, 5, 12, 21,
                                                                     0, 9, 20, 33, 0, 13, 28, 45])
-            XCTAssertEqual(image * pixel, answer)
-            XCTAssertEqual(pixel * image, answer)
+            XCTAssertEqual(image * color, answer)
+            XCTAssertEqual(color * image, answer)
             
-            image *= pixel
+            image *= color
             XCTAssertEqual(image, answer)
         }
         do { // image
@@ -278,17 +278,17 @@ class ImageArithmeticTests: XCTestCase {
         }
         do { // pixel
             var image = Image(width: 2, height: 2, rgba: (1..<17).map { T($0) })
-            let pixel = Pixel<RGBA ,T>(r: 1, g: 2, b: 3, a: 4)
+            let color = Color<RGBA ,T>(r: 1, g: 2, b: 3, a: 4)
             
             let answer = Image<RGBA, T>(width: 2, height: 2, rgba: [1, 1, 1, 1, 5, 3, 2, 2,
                                                                     9, 5, 3, 3, 13, 7, 5, 4])
             
             let answer2 = Image<RGBA, T>(width: 2, height: 2, rgba: [1, 1, 1, 1, 0, 0, 0, 0,
                                                                      0, 0, 0, 0, 0, 0, 0, 0])
-            XCTAssertEqual(image / pixel, answer)
-            XCTAssertEqual(pixel / image, answer2)
+            XCTAssertEqual(image / color, answer)
+            XCTAssertEqual(color / image, answer2)
             
-            image /= pixel
+            image /= color
             XCTAssertEqual(image, answer)
         }
         do { // image
@@ -328,7 +328,7 @@ class ImageArithmeticTests: XCTestCase {
             let imdata = (1..<17).map { T($0) }
             let pxdata = (1..<5).map { T($0) }
             var image = Image(width: 2, height: 2, rgba: imdata)
-            let pixel = Pixel<RGBA ,T>(data: pxdata)
+            let color = Color<RGBA ,T>(data: pxdata)
             
             var ansdata = imdata
             for i in 0..<4 {
@@ -346,10 +346,10 @@ class ImageArithmeticTests: XCTestCase {
             }
             let answer2 = Image<RGBA, T>(width: 2, height: 2, rgba: ansdata2)
             
-            XCTAssertEqual(image / pixel, answer)
-            XCTAssertEqual(pixel / image, answer2)
+            XCTAssertEqual(image / color, answer)
+            XCTAssertEqual(color / image, answer2)
             
-            image /= pixel
+            image /= color
             XCTAssertEqual(image, answer)
         }
         do { // image

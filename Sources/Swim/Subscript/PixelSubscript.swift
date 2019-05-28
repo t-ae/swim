@@ -30,13 +30,13 @@ extension Image {
     }
     
     @inlinable
-    public subscript(x: Int, y: Int) -> Pixel<P, T> {
+    public subscript(x: Int, y: Int) -> Color<P, T> {
         get {
             precondition(0 <= x && x < width, "Index out of range.")
             precondition(0 <= y && y < height, "Index out of range.")
             
             let start = dataIndex(x: x, y: y)
-            return Pixel(data: data[start..<start+P.channels])
+            return Color(data: data[start..<start+P.channels])
         }
         set {
             precondition(0 <= x && x < width, "Index out of range.")

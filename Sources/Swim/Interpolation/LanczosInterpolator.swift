@@ -56,7 +56,7 @@ public struct Lanczos3Interpolator<P: PixelType, T: BinaryFloatingPoint&DataType
         let xmin = floor(x) - 2
         let ymin = floor(y) - 2
         
-        var constant: Pixel<P, T>?
+        var constant: Color<P, T>?
         switch edgeMode {
         case let .constant(px):
             constant = px
@@ -94,7 +94,7 @@ public struct Lanczos3Interpolator<P: PixelType, T: BinaryFloatingPoint&DataType
             if let x = x0 {
                 pixel.setColor(x: x, y: y, in: image, with: xw0 * yw0)
             } else if let constant = constant {
-                pixel.setColor(pixel: constant, with: xw0 * yw0)
+                pixel.setColor(color: constant, with: xw0 * yw0)
             } else {
                 fatalError("Never happens")
             }
@@ -102,7 +102,7 @@ public struct Lanczos3Interpolator<P: PixelType, T: BinaryFloatingPoint&DataType
             if let x = x1 {
                 pixel.addColor(x: x, y: y, in: image, with: xw1 * yw0)
             } else if let constant = constant {
-                pixel.addColor(pixel: constant, with: xw1 * yw0)
+                pixel.addColor(color: constant, with: xw1 * yw0)
             } else {
                 fatalError("Never happens")
             }
@@ -110,7 +110,7 @@ public struct Lanczos3Interpolator<P: PixelType, T: BinaryFloatingPoint&DataType
             if let x = x2 {
                 pixel.addColor(x: x, y: y, in: image, with: xw2 * yw0)
             } else if let constant = constant {
-                pixel.addColor(pixel: constant, with: xw2 * yw0)
+                pixel.addColor(color: constant, with: xw2 * yw0)
             } else {
                 fatalError("Never happens")
             }
@@ -118,7 +118,7 @@ public struct Lanczos3Interpolator<P: PixelType, T: BinaryFloatingPoint&DataType
             if let x = x3 {
                 pixel.addColor(x: x, y: y, in: image, with: xw3 * yw0)
             } else if let constant = constant {
-                pixel.addColor(pixel: constant, with: xw3 * yw0)
+                pixel.addColor(color: constant, with: xw3 * yw0)
             } else {
                 fatalError("Never happens")
             }
@@ -126,7 +126,7 @@ public struct Lanczos3Interpolator<P: PixelType, T: BinaryFloatingPoint&DataType
             if let x = x4 {
                 pixel.addColor(x: x, y: y, in: image, with: xw4 * yw0)
             } else if let constant = constant {
-                pixel.addColor(pixel: constant, with: xw4 * yw0)
+                pixel.addColor(color: constant, with: xw4 * yw0)
             } else {
                 fatalError("Never happens")
             }
@@ -134,13 +134,13 @@ public struct Lanczos3Interpolator<P: PixelType, T: BinaryFloatingPoint&DataType
             if let x = x5 {
                 pixel.addColor(x: x, y: y, in: image, with: xw5 * yw0)
             } else if let constant = constant {
-                pixel.addColor(pixel: constant, with: xw5 * yw0)
+                pixel.addColor(color: constant, with: xw5 * yw0)
             } else {
                 fatalError("Never happens")
             }
         } else if let constant = constant {
             // all pixels are constant
-            pixel.setColor(pixel: constant, with: yw0)
+            pixel.setColor(color: constant, with: yw0)
         } else {
             fatalError("Never happens.")
         }
@@ -149,7 +149,7 @@ public struct Lanczos3Interpolator<P: PixelType, T: BinaryFloatingPoint&DataType
             if let x = x0 {
                 pixel.addColor(x: x, y: y, in: image, with: xw0 * yw1)
             } else if let constant = constant {
-                pixel.addColor(pixel: constant, with: xw0 * yw1)
+                pixel.addColor(color: constant, with: xw0 * yw1)
             } else {
                 fatalError("Never happens")
             }
@@ -157,7 +157,7 @@ public struct Lanczos3Interpolator<P: PixelType, T: BinaryFloatingPoint&DataType
             if let x = x1 {
                 pixel.addColor(x: x, y: y, in: image, with: xw1 * yw1)
             } else if let constant = constant {
-                pixel.addColor(pixel: constant, with: xw1 * yw1)
+                pixel.addColor(color: constant, with: xw1 * yw1)
             } else {
                 fatalError("Never happens")
             }
@@ -165,7 +165,7 @@ public struct Lanczos3Interpolator<P: PixelType, T: BinaryFloatingPoint&DataType
             if let x = x2 {
                 pixel.addColor(x: x, y: y, in: image, with: xw2 * yw1)
             } else if let constant = constant {
-                pixel.addColor(pixel: constant, with: xw2 * yw1)
+                pixel.addColor(color: constant, with: xw2 * yw1)
             } else {
                 fatalError("Never happens")
             }
@@ -173,7 +173,7 @@ public struct Lanczos3Interpolator<P: PixelType, T: BinaryFloatingPoint&DataType
             if let x = x3 {
                 pixel.addColor(x: x, y: y, in: image, with: xw3 * yw1)
             } else if let constant = constant {
-                pixel.addColor(pixel: constant, with: xw3 * yw1)
+                pixel.addColor(color: constant, with: xw3 * yw1)
             } else {
                 fatalError("Never happens")
             }
@@ -181,7 +181,7 @@ public struct Lanczos3Interpolator<P: PixelType, T: BinaryFloatingPoint&DataType
             if let x = x4 {
                 pixel.addColor(x: x, y: y, in: image, with: xw4 * yw1)
             } else if let constant = constant {
-                pixel.addColor(pixel: constant, with: xw4 * yw1)
+                pixel.addColor(color: constant, with: xw4 * yw1)
             } else {
                 fatalError("Never happens")
             }
@@ -189,13 +189,13 @@ public struct Lanczos3Interpolator<P: PixelType, T: BinaryFloatingPoint&DataType
             if let x = x5 {
                 pixel.addColor(x: x, y: y, in: image, with: xw5 * yw1)
             } else if let constant = constant {
-                pixel.addColor(pixel: constant, with: xw5 * yw1)
+                pixel.addColor(color: constant, with: xw5 * yw1)
             } else {
                 fatalError("Never happens")
             }
         } else if let constant = constant {
             // all pixels are constant
-            pixel.addColor(pixel: constant, with: yw1)
+            pixel.addColor(color: constant, with: yw1)
         } else {
             fatalError("Never happens.")
         }
@@ -204,7 +204,7 @@ public struct Lanczos3Interpolator<P: PixelType, T: BinaryFloatingPoint&DataType
             if let x = x0 {
                 pixel.addColor(x: x, y: y, in: image, with: xw0 * yw2)
             } else if let constant = constant {
-                pixel.addColor(pixel: constant, with: xw0 * yw2)
+                pixel.addColor(color: constant, with: xw0 * yw2)
             } else {
                 fatalError("Never happens")
             }
@@ -212,7 +212,7 @@ public struct Lanczos3Interpolator<P: PixelType, T: BinaryFloatingPoint&DataType
             if let x = x1 {
                 pixel.addColor(x: x, y: y, in: image, with: xw1 * yw2)
             } else if let constant = constant {
-                pixel.addColor(pixel: constant, with: xw1 * yw2)
+                pixel.addColor(color: constant, with: xw1 * yw2)
             } else {
                 fatalError("Never happens")
             }
@@ -220,7 +220,7 @@ public struct Lanczos3Interpolator<P: PixelType, T: BinaryFloatingPoint&DataType
             if let x = x2 {
                 pixel.addColor(x: x, y: y, in: image, with: xw2 * yw2)
             } else if let constant = constant {
-                pixel.addColor(pixel: constant, with: xw2 * yw2)
+                pixel.addColor(color: constant, with: xw2 * yw2)
             } else {
                 fatalError("Never happens")
             }
@@ -228,7 +228,7 @@ public struct Lanczos3Interpolator<P: PixelType, T: BinaryFloatingPoint&DataType
             if let x = x3 {
                 pixel.addColor(x: x, y: y, in: image, with: xw3 * yw2)
             } else if let constant = constant {
-                pixel.addColor(pixel: constant, with: xw3 * yw2)
+                pixel.addColor(color: constant, with: xw3 * yw2)
             } else {
                 fatalError("Never happens")
             }
@@ -236,7 +236,7 @@ public struct Lanczos3Interpolator<P: PixelType, T: BinaryFloatingPoint&DataType
             if let x = x4 {
                 pixel.addColor(x: x, y: y, in: image, with: xw4 * yw2)
             } else if let constant = constant {
-                pixel.addColor(pixel: constant, with: xw4 * yw2)
+                pixel.addColor(color: constant, with: xw4 * yw2)
             } else {
                 fatalError("Never happens")
             }
@@ -244,13 +244,13 @@ public struct Lanczos3Interpolator<P: PixelType, T: BinaryFloatingPoint&DataType
             if let x = x5 {
                 pixel.addColor(x: x, y: y, in: image, with: xw5 * yw2)
             } else if let constant = constant {
-                pixel.addColor(pixel: constant, with: xw5 * yw2)
+                pixel.addColor(color: constant, with: xw5 * yw2)
             } else {
                 fatalError("Never happens")
             }
         } else if let constant = constant {
             // all pixels are constant
-            pixel.addColor(pixel: constant, with: yw2)
+            pixel.addColor(color: constant, with: yw2)
         } else {
             fatalError("Never happens.")
         }
@@ -259,7 +259,7 @@ public struct Lanczos3Interpolator<P: PixelType, T: BinaryFloatingPoint&DataType
             if let x = x0 {
                 pixel.addColor(x: x, y: y, in: image, with: xw0 * yw3)
             } else if let constant = constant {
-                pixel.addColor(pixel: constant, with: xw0 * yw3)
+                pixel.addColor(color: constant, with: xw0 * yw3)
             } else {
                 fatalError("Never happens")
             }
@@ -267,7 +267,7 @@ public struct Lanczos3Interpolator<P: PixelType, T: BinaryFloatingPoint&DataType
             if let x = x1 {
                 pixel.addColor(x: x, y: y, in: image, with: xw1 * yw3)
             } else if let constant = constant {
-                pixel.addColor(pixel: constant, with: xw1 * yw3)
+                pixel.addColor(color: constant, with: xw1 * yw3)
             } else {
                 fatalError("Never happens")
             }
@@ -275,7 +275,7 @@ public struct Lanczos3Interpolator<P: PixelType, T: BinaryFloatingPoint&DataType
             if let x = x2 {
                 pixel.addColor(x: x, y: y, in: image, with: xw2 * yw3)
             } else if let constant = constant {
-                pixel.addColor(pixel: constant, with: xw2 * yw3)
+                pixel.addColor(color: constant, with: xw2 * yw3)
             } else {
                 fatalError("Never happens")
             }
@@ -283,7 +283,7 @@ public struct Lanczos3Interpolator<P: PixelType, T: BinaryFloatingPoint&DataType
             if let x = x3 {
                 pixel.addColor(x: x, y: y, in: image, with: xw3 * yw3)
             } else if let constant = constant {
-                pixel.addColor(pixel: constant, with: xw3 * yw3)
+                pixel.addColor(color: constant, with: xw3 * yw3)
             } else {
                 fatalError("Never happens")
             }
@@ -291,7 +291,7 @@ public struct Lanczos3Interpolator<P: PixelType, T: BinaryFloatingPoint&DataType
             if let x = x4 {
                 pixel.addColor(x: x, y: y, in: image, with: xw4 * yw3)
             } else if let constant = constant {
-                pixel.addColor(pixel: constant, with: xw4 * yw3)
+                pixel.addColor(color: constant, with: xw4 * yw3)
             } else {
                 fatalError("Never happens")
             }
@@ -299,13 +299,13 @@ public struct Lanczos3Interpolator<P: PixelType, T: BinaryFloatingPoint&DataType
             if let x = x5 {
                 pixel.addColor(x: x, y: y, in: image, with: xw5 * yw3)
             } else if let constant = constant {
-                pixel.addColor(pixel: constant, with: xw5 * yw3)
+                pixel.addColor(color: constant, with: xw5 * yw3)
             } else {
                 fatalError("Never happens")
             }
         } else if let constant = constant {
             // all pixels are constant
-            pixel.addColor(pixel: constant, with: yw3)
+            pixel.addColor(color: constant, with: yw3)
         } else {
             fatalError("Never happens.")
         }
@@ -314,7 +314,7 @@ public struct Lanczos3Interpolator<P: PixelType, T: BinaryFloatingPoint&DataType
             if let x = x0 {
                 pixel.addColor(x: x, y: y, in: image, with: xw0 * yw4)
             } else if let constant = constant {
-                pixel.addColor(pixel: constant, with: xw0 * yw4)
+                pixel.addColor(color: constant, with: xw0 * yw4)
             } else {
                 fatalError("Never happens")
             }
@@ -322,7 +322,7 @@ public struct Lanczos3Interpolator<P: PixelType, T: BinaryFloatingPoint&DataType
             if let x = x1 {
                 pixel.addColor(x: x, y: y, in: image, with: xw1 * yw4)
             } else if let constant = constant {
-                pixel.addColor(pixel: constant, with: xw1 * yw4)
+                pixel.addColor(color: constant, with: xw1 * yw4)
             } else {
                 fatalError("Never happens")
             }
@@ -330,7 +330,7 @@ public struct Lanczos3Interpolator<P: PixelType, T: BinaryFloatingPoint&DataType
             if let x = x2 {
                 pixel.addColor(x: x, y: y, in: image, with: xw2 * yw4)
             } else if let constant = constant {
-                pixel.addColor(pixel: constant, with: xw2 * yw4)
+                pixel.addColor(color: constant, with: xw2 * yw4)
             } else {
                 fatalError("Never happens")
             }
@@ -338,7 +338,7 @@ public struct Lanczos3Interpolator<P: PixelType, T: BinaryFloatingPoint&DataType
             if let x = x3 {
                 pixel.addColor(x: x, y: y, in: image, with: xw3 * yw4)
             } else if let constant = constant {
-                pixel.addColor(pixel: constant, with: xw3 * yw4)
+                pixel.addColor(color: constant, with: xw3 * yw4)
             } else {
                 fatalError("Never happens")
             }
@@ -346,7 +346,7 @@ public struct Lanczos3Interpolator<P: PixelType, T: BinaryFloatingPoint&DataType
             if let x = x4 {
                 pixel.addColor(x: x, y: y, in: image, with: xw4 * yw4)
             } else if let constant = constant {
-                pixel.addColor(pixel: constant, with: xw4 * yw4)
+                pixel.addColor(color: constant, with: xw4 * yw4)
             } else {
                 fatalError("Never happens")
             }
@@ -354,13 +354,13 @@ public struct Lanczos3Interpolator<P: PixelType, T: BinaryFloatingPoint&DataType
             if let x = x5 {
                 pixel.addColor(x: x, y: y, in: image, with: xw5 * yw4)
             } else if let constant = constant {
-                pixel.addColor(pixel: constant, with: xw5 * yw4)
+                pixel.addColor(color: constant, with: xw5 * yw4)
             } else {
                 fatalError("Never happens")
             }
         } else if let constant = constant {
             // all pixels are constant
-            pixel.addColor(pixel: constant, with: yw4)
+            pixel.addColor(color: constant, with: yw4)
         } else {
             fatalError("Never happens.")
         }
@@ -369,7 +369,7 @@ public struct Lanczos3Interpolator<P: PixelType, T: BinaryFloatingPoint&DataType
             if let x = x0 {
                 pixel.addColor(x: x, y: y, in: image, with: xw0 * yw5)
             } else if let constant = constant {
-                pixel.addColor(pixel: constant, with: xw0 * yw5)
+                pixel.addColor(color: constant, with: xw0 * yw5)
             } else {
                 fatalError("Never happens")
             }
@@ -377,7 +377,7 @@ public struct Lanczos3Interpolator<P: PixelType, T: BinaryFloatingPoint&DataType
             if let x = x1 {
                 pixel.addColor(x: x, y: y, in: image, with: xw1 * yw5)
             } else if let constant = constant {
-                pixel.addColor(pixel: constant, with: xw1 * yw5)
+                pixel.addColor(color: constant, with: xw1 * yw5)
             } else {
                 fatalError("Never happens")
             }
@@ -385,7 +385,7 @@ public struct Lanczos3Interpolator<P: PixelType, T: BinaryFloatingPoint&DataType
             if let x = x2 {
                 pixel.addColor(x: x, y: y, in: image, with: xw2 * yw5)
             } else if let constant = constant {
-                pixel.addColor(pixel: constant, with: xw2 * yw5)
+                pixel.addColor(color: constant, with: xw2 * yw5)
             } else {
                 fatalError("Never happens")
             }
@@ -393,7 +393,7 @@ public struct Lanczos3Interpolator<P: PixelType, T: BinaryFloatingPoint&DataType
             if let x = x3 {
                 pixel.addColor(x: x, y: y, in: image, with: xw3 * yw5)
             } else if let constant = constant {
-                pixel.addColor(pixel: constant, with: xw3 * yw5)
+                pixel.addColor(color: constant, with: xw3 * yw5)
             } else {
                 fatalError("Never happens")
             }
@@ -401,7 +401,7 @@ public struct Lanczos3Interpolator<P: PixelType, T: BinaryFloatingPoint&DataType
             if let x = x4 {
                 pixel.addColor(x: x, y: y, in: image, with: xw4 * yw5)
             } else if let constant = constant {
-                pixel.addColor(pixel: constant, with: xw4 * yw5)
+                pixel.addColor(color: constant, with: xw4 * yw5)
             } else {
                 fatalError("Never happens")
             }
@@ -409,13 +409,13 @@ public struct Lanczos3Interpolator<P: PixelType, T: BinaryFloatingPoint&DataType
             if let x = x5 {
                 pixel.addColor(x: x, y: y, in: image, with: xw5 * yw5)
             } else if let constant = constant {
-                pixel.addColor(pixel: constant, with: xw5 * yw5)
+                pixel.addColor(color: constant, with: xw5 * yw5)
             } else {
                 fatalError("Never happens")
             }
         } else if let constant = constant {
             // all pixels are constant
-            pixel.addColor(pixel: constant, with: yw5)
+            pixel.addColor(color: constant, with: yw5)
         } else {
             fatalError("Never happens.")
         }

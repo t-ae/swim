@@ -19,7 +19,7 @@ public struct BilinearInterpolator<P:PixelType, T: BinaryFloatingPoint&DataType>
         let y0y = T(y - y0)
         let yy1 = T(y1 - y)
         
-        var constant: Pixel<P, T>?
+        var constant: Color<P, T>?
         switch edgeMode {
         case let .constant(px):
             constant = px
@@ -31,7 +31,7 @@ public struct BilinearInterpolator<P:PixelType, T: BinaryFloatingPoint&DataType>
             if let x = edgeMode.clampValue(value: Int(x0), max: image.width) {
                 pixel.setColor(x: x, y: y, in: image, with: xx1 * yy1)
             } else if let constant = constant {
-                pixel.setColor(pixel: constant, with: xx1 * yy1)
+                pixel.setColor(color: constant, with: xx1 * yy1)
             } else {
                 fatalError("Never happens.")
             }
@@ -39,12 +39,12 @@ public struct BilinearInterpolator<P:PixelType, T: BinaryFloatingPoint&DataType>
             if let x = edgeMode.clampValue(value: Int(x1), max: image.width) {
                 pixel.addColor(x: x, y: y, in: image, with: x0x * yy1)
             } else if let constant = constant {
-                pixel.addColor(pixel: constant, with: x0x * yy1)
+                pixel.addColor(color: constant, with: x0x * yy1)
             } else {
                 fatalError("Never happens.")
             }
         } else if let constant = constant {
-            pixel.setColor(pixel: constant, with: yy1)
+            pixel.setColor(color: constant, with: yy1)
         } else {
             fatalError("Never happens.")
         }
@@ -53,7 +53,7 @@ public struct BilinearInterpolator<P:PixelType, T: BinaryFloatingPoint&DataType>
             if let x = edgeMode.clampValue(value: Int(x0), max: image.width) {
                 pixel.addColor(x: x, y: y, in: image, with: xx1 * y0y)
             } else if let constant = constant {
-                pixel.addColor(pixel: constant, with: xx1 * y0y)
+                pixel.addColor(color: constant, with: xx1 * y0y)
             } else {
                 fatalError("Never happens.")
             }
@@ -61,12 +61,12 @@ public struct BilinearInterpolator<P:PixelType, T: BinaryFloatingPoint&DataType>
             if let x = edgeMode.clampValue(value: Int(x1), max: image.width) {
                 pixel.addColor(x: x, y: y, in: image, with: x0x * y0y)
             } else if let constant = constant {
-                pixel.addColor(pixel: constant, with: x0x * y0y)
+                pixel.addColor(color: constant, with: x0x * y0y)
             } else {
                 fatalError("Never happens.")
             }
         } else if let constant = constant {
-            pixel.addColor(pixel: constant, with: y0y)
+            pixel.addColor(color: constant, with: y0y)
         } else {
             fatalError("Never happens.")
         }

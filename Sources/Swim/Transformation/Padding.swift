@@ -24,7 +24,7 @@ extension Image {
                 let y = edgeMode.clampValue(value: originalY, max: self.height) {
                 ref.setColor(x: x, y: y, in: self)
             } else if case let .constant(px) = edgeMode {
-                ref.setColor(pixel: px)
+                ref.setColor(color: px)
             } else {
                 fatalError("Never happens.")
             }

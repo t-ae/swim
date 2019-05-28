@@ -1,6 +1,6 @@
 extension Image {
     @inlinable
-    public mutating func drawPolygon(points: [(x: Int, y: Int)], color: Pixel<P, T>) {
+    public mutating func drawPolygon(points: [(x: Int, y: Int)], color: Color<P, T>) {
         precondition(points.count >= 3, "Needs at least 3 points.")
         
         var minX = Int.max
@@ -97,7 +97,7 @@ extension Image {
     ///
     /// Same as `drawLines` with `close: true`.
     @inlinable
-    public mutating func drawPolygonPelimeter(points: [(x: Int, y: Int)], color: Pixel<P, T>) {
+    public mutating func drawPolygonPelimeter(points: [(x: Int, y: Int)], color: Color<P, T>) {
         drawLines(points: points, close: true, color: color)
     }
 }

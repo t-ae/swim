@@ -5,7 +5,7 @@ extension Image {
     @inlinable
     public mutating func drawCircle(center: (x: Int, y: Int),
                                     radius: Int,
-                                    color: Pixel<P, T>) {
+                                    color: Color<P, T>) {
         var d = 1 - radius
         var dH = 3
         var dD = 5 - 2*radius
@@ -35,7 +35,7 @@ extension Image {
     @inlinable
     public mutating func drawCirclePelimeter(center: (x: Int, y: Int),
                                              radius: Int,
-                                             color: Pixel<P, T>) {
+                                             color: Color<P, T>) {
         var d = 1 - radius
         var dH = 3
         var dD = 5 - 2*radius

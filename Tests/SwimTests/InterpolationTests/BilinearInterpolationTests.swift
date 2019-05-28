@@ -9,14 +9,14 @@ class BilinearInterpolationTests: XCTestCase {
                                         height: 4,
                                         data: (0..<4*4).map { Double($0) })
         
-        XCTAssertEqual(intpl.interpolate(x: 0, y: 0, in: image), Pixel(gray: 0))
-        XCTAssertEqual(intpl.interpolate(x: 1, y: 1, in: image), Pixel(gray: 5))
-        XCTAssertEqual(intpl.interpolate(x: 1, y: 2, in: image), Pixel(gray: 9))
-        XCTAssertEqual(intpl.interpolate(x: 3, y: 3, in: image), Pixel(gray: 15))
+        XCTAssertEqual(intpl.interpolate(x: 0, y: 0, in: image), Color(gray: 0))
+        XCTAssertEqual(intpl.interpolate(x: 1, y: 1, in: image), Color(gray: 5))
+        XCTAssertEqual(intpl.interpolate(x: 1, y: 2, in: image), Color(gray: 9))
+        XCTAssertEqual(intpl.interpolate(x: 3, y: 3, in: image), Color(gray: 15))
         
-        XCTAssertEqual(intpl.interpolate(x: 0.5, y: 0, in: image), Pixel(gray: 0.5))
-        XCTAssertEqual(intpl.interpolate(x: 0, y: 0.5, in: image), Pixel(gray: 2))
-        XCTAssertEqual(intpl.interpolate(x: 0.5, y: 0.5, in: image), Pixel(gray: 2.5))
+        XCTAssertEqual(intpl.interpolate(x: 0.5, y: 0, in: image), Color(gray: 0.5))
+        XCTAssertEqual(intpl.interpolate(x: 0, y: 0.5, in: image), Color(gray: 2))
+        XCTAssertEqual(intpl.interpolate(x: 0.5, y: 0.5, in: image), Color(gray: 2.5))
     }
     
     static let allTests = [

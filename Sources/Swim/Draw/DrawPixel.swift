@@ -3,7 +3,7 @@ extension Image {
     ///
     /// If specified point is outside of image, this method does nothing.
     @inlinable
-    public mutating func drawPixel(x: Int, y: Int, color: Pixel<P, T>) {
+    public mutating func drawPixel(x: Int, y: Int, color: Color<P, T>) {
         guard 0 <= x && x < width && 0 <= y && y < height else {
             return
         }

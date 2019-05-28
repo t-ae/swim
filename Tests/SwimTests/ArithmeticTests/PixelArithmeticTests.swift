@@ -6,129 +6,129 @@ class PixelArithmeticTests: XCTestCase {
         do {
             let before = (0..<4).map { Int($0) }
             let after = before.map { -$0 }
-            let pixel = Pixel(rgba: before)
-            let answer = Pixel(rgba: after)
+            let color = Color(rgba: before)
+            let answer = Color(rgba: after)
             
-            XCTAssertEqual(-pixel, answer)
+            XCTAssertEqual(-color, answer)
         }
         do {
             let before = (0..<4).map { Double($0) }
             let after = before.map { -$0 }
-            let pixel = Pixel(rgba: before)
-            let answer = Pixel(rgba: after)
+            let color = Color(rgba: before)
+            let answer = Color(rgba: after)
             
-            XCTAssertEqual(-pixel, answer)
+            XCTAssertEqual(-color, answer)
         }
     }
     
     func testAddInt() {
-        var pixel = Pixel<RGBA, Int>(data: [0, 1, 2, 3])
+        var color = Color<RGBA, Int>(data: [0, 1, 2, 3])
         
-        var t = 1 + pixel
-        t = t + pixel
+        var t = 1 + color
+        t = t + color
         t = t + 1
-        XCTAssertEqual(t, Pixel(data: [2, 4, 6, 8]))
+        XCTAssertEqual(t, Color(data: [2, 4, 6, 8]))
         
-        pixel += pixel
-        pixel += 1
+        color += color
+        color += 1
         
-        XCTAssertEqual(pixel, Pixel(data: [1, 3, 5, 7]))
+        XCTAssertEqual(color, Color(data: [1, 3, 5, 7]))
     }
     
     func testAddDouble() {
-        var pixel = Pixel<RGBA, Double>(data: [0, 1, 2, 3])
+        var color = Color<RGBA, Double>(data: [0, 1, 2, 3])
         
-        var t = 1 + pixel
-        t = t + pixel
+        var t = 1 + color
+        t = t + color
         t = t + 1
-        XCTAssertEqual(t, Pixel(data: [2, 4, 6, 8]))
+        XCTAssertEqual(t, Color(data: [2, 4, 6, 8]))
         
-        pixel += pixel
-        pixel += 1
+        color += color
+        color += 1
         
-        XCTAssertEqual(pixel, Pixel(data: [1, 3, 5, 7]))
+        XCTAssertEqual(color, Color(data: [1, 3, 5, 7]))
     }
     
     func testSubInt() {
-        var pixel = Pixel<RGBA, Int>(data: [0, 1, 2, 3])
+        var color = Color<RGBA, Int>(data: [0, 1, 2, 3])
         
-        var t = 1 - pixel
-        t = t - pixel
+        var t = 1 - color
+        t = t - color
         t = t - 1
-        XCTAssertEqual(t, Pixel(data: [-0, -2, -4, -6]))
+        XCTAssertEqual(t, Color(data: [-0, -2, -4, -6]))
         
-        pixel -= pixel
-        pixel -= 1
+        color -= color
+        color -= 1
         
-        XCTAssertEqual(pixel, Pixel(data: [-1, -1, -1, -1]))
+        XCTAssertEqual(color, Color(data: [-1, -1, -1, -1]))
     }
     
     func testSubDouble() {
-        var pixel = Pixel<RGBA, Double>(data: [0, 1, 2, 3])
+        var color = Color<RGBA, Double>(data: [0, 1, 2, 3])
         
-        var t = 1 - pixel
-        t = t - pixel
+        var t = 1 - color
+        t = t - color
         t = t - 1
-        XCTAssertEqual(t, Pixel(data: [-0, -2, -4, -6]))
+        XCTAssertEqual(t, Color(data: [-0, -2, -4, -6]))
         
-        pixel -= pixel
-        pixel -= 1
+        color -= color
+        color -= 1
         
-        XCTAssertEqual(pixel, Pixel(data: [-1, -1, -1, -1]))
+        XCTAssertEqual(color, Color(data: [-1, -1, -1, -1]))
     }
     
     func testMulInt() {
-        var pixel = Pixel<RGBA, Int>(data: [0, 1, 2, 3])
+        var color = Color<RGBA, Int>(data: [0, 1, 2, 3])
         
-        var t = 2 * pixel
-        t = t * pixel
+        var t = 2 * color
+        t = t * color
         t = t * 2
-        XCTAssertEqual(t, Pixel(data: [0, 4, 16, 36]))
+        XCTAssertEqual(t, Color(data: [0, 4, 16, 36]))
         
-        pixel *= pixel
-        pixel *= 2
+        color *= color
+        color *= 2
         
-        XCTAssertEqual(pixel, Pixel(data: [0, 2, 8, 18]))
+        XCTAssertEqual(color, Color(data: [0, 2, 8, 18]))
     }
     
     func testMulDouble() {
-        var pixel = Pixel<RGBA, Double>(data: [0, 1, 2, 3])
+        var color = Color<RGBA, Double>(data: [0, 1, 2, 3])
         
-        var t = 2 * pixel
-        t = t * pixel
+        var t = 2 * color
+        t = t * color
         t = t * 2
-        XCTAssertEqual(t, Pixel(data: [0, 4, 16, 36]))
+        XCTAssertEqual(t, Color(data: [0, 4, 16, 36]))
         
-        pixel *= pixel
-        pixel *= 2
+        color *= color
+        color *= 2
         
-        XCTAssertEqual(pixel, Pixel(data: [0, 2, 8, 18]))
+        XCTAssertEqual(color, Color(data: [0, 2, 8, 18]))
     }
     
     func testDivInt() {
-        var pixel = Pixel<RGBA, Int>(data: [10, 11, 12, 13])
+        var color = Color<RGBA, Int>(data: [10, 11, 12, 13])
         
-        XCTAssertEqual(pixel / 2, Pixel(data: [5, 5, 6, 6]))
-        XCTAssertEqual(22 / pixel, Pixel(data: [2, 2, 1, 1]))
+        XCTAssertEqual(color / 2, Color(data: [5, 5, 6, 6]))
+        XCTAssertEqual(22 / color, Color(data: [2, 2, 1, 1]))
         
-        pixel *= pixel
-        pixel /= Pixel<RGBA, Int>(data: [10, 11, 12, 13])
-        pixel /= 2
+        color *= color
+        color /= Color<RGBA, Int>(data: [10, 11, 12, 13])
+        color /= 2
         
-        XCTAssertEqual(pixel, Pixel(data: [5, 5, 6, 6]))
+        XCTAssertEqual(color, Color(data: [5, 5, 6, 6]))
     }
     
     func testDivDouble() {
         let data: [Double] = [10, 11, 12, 13]
-        var pixel = Pixel<RGBA, Double>(data: data)
+        var color = Color<RGBA, Double>(data: data)
         
-        XCTAssertEqual(pixel / 2, Pixel(data: data.map { $0 / 2 }))
-        XCTAssertEqual(22 / pixel, Pixel(data: data.map { 22 / $0 }))
+        XCTAssertEqual(color / 2, Color(data: data.map { $0 / 2 }))
+        XCTAssertEqual(22 / color, Color(data: data.map { 22 / $0 }))
         
-        pixel /= Pixel<RGBA, Double>(data: data)
-        pixel /= 2
+        color /= Color<RGBA, Double>(data: data)
+        color /= 2
         
-        XCTAssertEqual(pixel, Pixel(data: [0.5, 0.5, 0.5, 0.5]))
+        XCTAssertEqual(color, Color(data: [0.5, 0.5, 0.5, 0.5]))
     }
     
     static let allTests = [

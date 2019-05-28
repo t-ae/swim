@@ -25,21 +25,21 @@ func rainbowImage256() -> Image<RGB, UInt8> {
     
     let yRange = 0..<256
     
-    image.drawRect(start..<start+32, yRange, color: Pixel(r: 0, g: 0, b: 0))
+    image.drawRect(start..<start+32, yRange, color: Color(r: 0, g: 0, b: 0))
     start += 32
-    image.drawRect(start..<start+32, yRange, color: Pixel(r: 255, g: 0, b: 0))
+    image.drawRect(start..<start+32, yRange, color: Color(r: 255, g: 0, b: 0))
     start += 32
-    image.drawRect(start..<start+32, yRange, color: Pixel(r: 0, g: 255, b: 0))
+    image.drawRect(start..<start+32, yRange, color: Color(r: 0, g: 255, b: 0))
     start += 32
-    image.drawRect(start..<start+32, yRange, color: Pixel(r: 0, g: 0, b: 255))
+    image.drawRect(start..<start+32, yRange, color: Color(r: 0, g: 0, b: 255))
     start += 32
-    image.drawRect(start..<start+32, yRange, color: Pixel(r: 255, g: 255, b: 0))
+    image.drawRect(start..<start+32, yRange, color: Color(r: 255, g: 255, b: 0))
     start += 32
-    image.drawRect(start..<start+32, yRange, color: Pixel(r: 0, g: 255, b: 255))
+    image.drawRect(start..<start+32, yRange, color: Color(r: 0, g: 255, b: 255))
     start += 32
-    image.drawRect(start..<start+32, yRange, color: Pixel(r: 255, g: 0, b: 255))
+    image.drawRect(start..<start+32, yRange, color: Color(r: 255, g: 0, b: 255))
     start += 32
-    image.drawRect(start..<start+32, yRange, color: Pixel(r: 255, g: 255, b: 255))
+    image.drawRect(start..<start+32, yRange, color: Color(r: 255, g: 255, b: 255))
     
     return image
 }
