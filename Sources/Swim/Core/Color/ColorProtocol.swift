@@ -1,4 +1,4 @@
-public protocol PixelProtocol {
+public protocol ColorProtocol {
     associatedtype P: PixelType
     associatedtype T: DataType
     
@@ -8,9 +8,9 @@ public protocol PixelProtocol {
     subscript(channel: P) -> T { get }
 }
 
-extension Pixel: PixelProtocol {
+extension Pixel: ColorProtocol {
     @inlinable
-    public init<Px: PixelProtocol>(from pixel: Px) where Px.P == P, Px.T == T {
+    public init<Px: ColorProtocol>(from pixel: Px) where Px.P == P, Px.T == T {
         self.init(data: pixel.withUnsafeBufferPointer(Array.init))
     }
     
@@ -20,14 +20,14 @@ extension Pixel: PixelProtocol {
     }
 }
 
-extension PixelRef: PixelProtocol {
+extension PixelRef: ColorProtocol {
     @inlinable
     public func withUnsafeBufferPointer<R>(_ body: (UnsafeBufferPointer<T>)->R) -> R {
         return body(pointer)
     }
 }
 
-extension MutablePixelRef: PixelProtocol {
+extension MutablePixelRef: ColorProtocol {
     @inlinable
     public func withUnsafeBufferPointer<R>(_ body: (UnsafeBufferPointer<T>)->R) -> R {
         return body(UnsafeBufferPointer(pointer))

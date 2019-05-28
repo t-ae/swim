@@ -2,16 +2,16 @@ import Foundation
 
 extension MutablePixelRef where T: AdditiveArithmetic {
     @inlinable
-    public static func +=<Px: PixelProtocol>(lhs: MutablePixelRef,
-                                             rhs: Px) where Px.P == P, Px.T == T {
+    public static func +=<C: ColorProtocol>(lhs: MutablePixelRef,
+                                             rhs: C) where C.P == P, C.T == T {
         for i in 0..<lhs.pointer.count {
             lhs.pointer[i] += rhs[i]
         }
     }
     
     @inlinable
-    public static func -=<Px: PixelProtocol>(lhs: MutablePixelRef,
-                                             rhs: Px) where Px.P == P, Px.T == T {
+    public static func -=<C: ColorProtocol>(lhs: MutablePixelRef,
+                                             rhs: C) where C.P == P, C.T == T {
         for i in 0..<lhs.pointer.count {
             lhs.pointer[i] -= rhs[i]
         }
@@ -20,8 +20,8 @@ extension MutablePixelRef where T: AdditiveArithmetic {
 
 extension MutablePixelRef where T: Numeric {
     @inlinable
-    public static func *=<Px: PixelProtocol>(lhs: MutablePixelRef,
-                                             rhs: Px) where Px.P == P, Px.T == T {
+    public static func *=<C: ColorProtocol>(lhs: MutablePixelRef,
+                                             rhs: C) where C.P == P, C.T == T {
         for i in 0..<lhs.pointer.count {
             lhs.pointer[i] *= rhs[i]
         }
@@ -30,8 +30,8 @@ extension MutablePixelRef where T: Numeric {
 
 extension MutablePixelRef where T: BinaryInteger {
     @inlinable
-    public static func /=<Px: PixelProtocol>(lhs: MutablePixelRef,
-                                             rhs: Px) where Px.P == P, Px.T == T {
+    public static func /=<C: ColorProtocol>(lhs: MutablePixelRef,
+                                             rhs: C) where C.P == P, C.T == T {
         for i in 0..<lhs.pointer.count {
             lhs.pointer[i] /= rhs[i]
         }
@@ -40,8 +40,8 @@ extension MutablePixelRef where T: BinaryInteger {
 
 extension MutablePixelRef where T: FloatingPoint {
     @inlinable
-    public static func /=<Px: PixelProtocol>(lhs: MutablePixelRef,
-                                             rhs: Px) where Px.P == P, Px.T == T {
+    public static func /=<C: ColorProtocol>(lhs: MutablePixelRef,
+                                             rhs: C) where C.P == P, C.T == T {
         for i in 0..<lhs.pointer.count {
             lhs.pointer[i] /= rhs[i]
         }
@@ -57,7 +57,7 @@ extension MutablePixelRef {
     ///
     /// for c in 0..<P.channels { self[c] = pixel[c] }
     @inlinable
-    public func setColor<Px: PixelProtocol>(pixel: Px) where Px.P == P, Px.T == T {
+    public func setColor<C: ColorProtocol>(pixel: C) where C.P == P, C.T == T {
         for i in 0..<pointer.count {
             pointer[i] = pixel[i]
         }
@@ -84,7 +84,7 @@ extension MutablePixelRef where T: Numeric {
     ///
     /// for c in 0..<P.channels { self[c] = factor * pixel[c] }
     @inlinable
-    func setColor<Px: PixelProtocol>(pixel: Px, with factor: T) where Px.P == P, Px.T == T {
+    func setColor<C: ColorProtocol>(pixel: C, with factor: T) where C.P == P, C.T == T {
         for i in 0..<pointer.count {
             pointer[i] = pixel[i] * factor
         }
@@ -109,7 +109,7 @@ extension MutablePixelRef where T: Numeric {
     ///
     /// for c in 0..<P.channels { self[c] += factor * pixel[c] }
     @inlinable
-    func addColor<Px: PixelProtocol>(pixel: Px, with factor: T = 1) where Px.P == P, Px.T == T {
+    func addColor<C: ColorProtocol>(pixel: C, with factor: T = 1) where C.P == P, C.T == T {
         for i in 0..<pointer.count {
             pointer[i] += pixel[i] * factor
         }

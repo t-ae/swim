@@ -2,7 +2,7 @@ import Foundation
 
 extension Pixel where T: AdditiveArithmetic {
     @inlinable
-    public static func +=<Px: PixelProtocol>(lhs: inout Pixel, rhs: Px) where Px.P == P, Px.T == T {
+    public static func +=<C: ColorProtocol>(lhs: inout Pixel, rhs: C) where C.P == P, C.T == T {
         for i in 0..<P.channels {
             lhs[i] += rhs[i]
         }
@@ -16,7 +16,7 @@ extension Pixel where T: AdditiveArithmetic {
     }
     
     @inlinable
-    public static func -=<Px: PixelProtocol>(lhs: inout Pixel, rhs: Px) where Px.P == P, Px.T == T {
+    public static func -=<C: ColorProtocol>(lhs: inout Pixel, rhs: C) where C.P == P, C.T == T {
         for i in 0..<lhs.data.count {
             lhs.data[i] -= rhs[i]
         }
@@ -32,7 +32,7 @@ extension Pixel where T: AdditiveArithmetic {
 
 extension Pixel where T: Numeric {
     @inlinable
-    public static func *=<Px: PixelProtocol>(lhs: inout Pixel, rhs: Px) where Px.P == P, Px.T == T {
+    public static func *=<C: ColorProtocol>(lhs: inout Pixel, rhs: C) where C.P == P, C.T == T {
         for i in 0..<lhs.data.count {
             lhs.data[i] *= rhs[i]
         }
@@ -48,7 +48,7 @@ extension Pixel where T: Numeric {
 
 extension Pixel where T: BinaryInteger {
     @inlinable
-    public static func /=<Px: PixelProtocol>(lhs: inout Pixel, rhs: Px) where Px.P == P, Px.T == T {
+    public static func /=<C: ColorProtocol>(lhs: inout Pixel, rhs: C) where C.P == P, C.T == T {
         for i in 0..<lhs.data.count {
             lhs.data[i] /= rhs[i]
         }
@@ -64,7 +64,7 @@ extension Pixel where T: BinaryInteger {
 
 extension Pixel where T: BinaryFloatingPoint {
     @inlinable
-    public static func /=<Px: PixelProtocol>(lhs: inout Pixel, rhs: Px) where Px.P == P, Px.T == T {
+    public static func /=<C: ColorProtocol>(lhs: inout Pixel, rhs: C) where C.P == P, C.T == T {
         for i in 0..<lhs.data.count {
             lhs.data[i] /= rhs[i]
         }
