@@ -10,15 +10,15 @@ extension Image {
         
         let start = dataIndex(x: x, y: y)
         
-        var newImage = Image<P, T>(width: width, height: height)
-        
-        for y in 0..<height {
-            strideCopy(src: data, srcOffset: start + y*self.width*P.channels, srcStride: 1,
-                       dst: &newImage.data, dstOffset: y*width*P.channels, dstStride: 1,
-                       count: width*P.channels)
+        return Image.createWithUnsafeMutableBufferPointer(width: width, height: height) { dst in
+            data.withUnsafeBufferPointer { src in
+                for y in 0..<height {
+                    strideCopy(src: src, srcOffset: start + y*self.width*P.channels, srcStride: 1,
+                               dst: dst, dstOffset: y*width*P.channels, dstStride: 1,
+                               count: width*P.channels)
+                }
+            }
         }
-        
-        return newImage
     }
     
     @inlinable

@@ -14,6 +14,19 @@ extension Image {
     }
     
     @inlinable
+    public static func createWithPixelValues(width: Int,
+                                             height: Int,
+                                             initializer: (_ x: Int, _ y: Int, _ c: P)->T) -> Image {
+        var image = Image<P, T>(width: width, height: height)
+        
+        image.channelwiseConvert { x, y, c, value in
+            initializer(x, y, c)
+        }
+        
+        return image
+    }
+    
+    @inlinable
     public static func createWithUnsafeMutableBufferPointer(width: Int,
                                                             height: Int,
                                                             initializer: (UnsafeMutableBufferPointer<T>)->Void) -> Image {

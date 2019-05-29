@@ -3,11 +3,13 @@ extension Image {
     public subscript(channel channel: Int) -> Image<Gray, T> {
         get{
             precondition(0 <= channel && channel < P.channels, "Index out of range.")
-            var newImage = Image<Gray, T>(width: width, height: height)
-            strideCopy(src: data, srcOffset: channel, srcStride: P.channels,
-                       dst: &newImage.data, dstOffset: 0, dstStride: 1,
-                       count: newImage.data.count)
-            return newImage
+            
+            return .createWithUnsafeMutableBufferPointer(width: width, height: height) { dst in
+                data.withUnsafeBufferPointer { src in
+                    strideCopy(src: src, srcOffset: channel, srcStride: P.channels,
+                               dst: dst, dstOffset: 0, dstStride: 1, count: dst.count)
+                }
+            }
         }
         set {
             precondition(0 <= channel && channel < P.channels, "Index out of range.")

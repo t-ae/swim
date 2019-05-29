@@ -6,12 +6,12 @@ extension Image {
     
     @inlinable
     public func transposed() -> Image<P, T> {
-        var newImage = Image<P, T>(width: height, height: width)
-        
-        data.withUnsafeBufferPointer {
-            var src = $0.baseAddress!
-            newImage.data.withUnsafeMutableBufferPointer {
-                var dst = $0.baseAddress!
+        return Image.createWithUnsafeMutableBufferPointer(width: height, height: width) {
+            var dst = $0.baseAddress!
+            
+            data.withUnsafeBufferPointer {
+                var src = $0.baseAddress!
+                
                 for _ in 0..<height {
                     var dst2 = dst
                     for _ in 0..<width {
@@ -23,7 +23,5 @@ extension Image {
                 }
             }
         }
-        
-        return newImage
     }
 }
