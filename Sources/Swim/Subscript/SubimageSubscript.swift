@@ -11,12 +11,9 @@ extension Image {
         let start = dataIndex(x: x, y: y)
         
         return Image.createWithUnsafeMutableBufferPointer(width: width, height: height) { dst in
-            data.withUnsafeBufferPointer { src in
-                for y in 0..<height {
-                    strideCopy(src: src, srcOffset: start + y*self.width*P.channels, srcStride: 1,
-                               dst: dst, dstOffset: y*width*P.channels, dstStride: 1,
-                               count: width*P.channels)
-                }
+            for y in 0..<height {
+                copy(src: data, srcOffset: start + y*self.width*P.channels,
+                     dst: dst, dstOffset: y*width*P.channels, count: width*P.channels)
             }
         }
     }
@@ -36,9 +33,9 @@ extension Image {
         let start = dataIndex(x: x, y: y)
         
         for y in 0..<height {
-            strideCopy(src: newValue.data, srcOffset: y*width*P.channels, srcStride: 1,
-                       dst: &data, dstOffset: start + y*self.width*P.channels, dstStride: 1,
-                       count: width*P.channels)
+            copy(src: newValue.data, srcOffset: y*width*P.channels,
+                 dst: &data, dstOffset: start + y*self.width*P.channels,
+                 count: width*P.channels)
         }
     }
 }
