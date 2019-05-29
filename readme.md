@@ -129,9 +129,9 @@ let resizedBC = image.resize(width: 512, height: 512, method: .bicubic)
 let resizedAA = image.resize(width: 512, height: 512, method: .areaAverage)
 ```
 
-[Example: NearestNeighbor / Bilinear / Bicubic](https://github.com/t-ae/swim/blob/7a055c45e4a1db9755f04a785599e18fde1f86bd/Tests/VisualTests/ResizeVisualTests.swift#L29-L44)
+[Example: NearestNeighbor / Bilinear / Bicubic / Lanczos2 / Lanczos3 / Area Average](https://github.com/t-ae/swim/blob/99e7be2655057190b62426cdb85fe56b130d7126/Tests/VisualTests/ResizeVisualTests.swift#L29-L49)
 
-![resize](https://user-images.githubusercontent.com/12446914/56634980-dbccaa80-669e-11e9-90f7-5046d85e9f29.png)
+![resize](https://user-images.githubusercontent.com/12446914/58522331-c2b59d00-81fa-11e9-9d13-801c9e28c6c3.png)
 
 ### Warp
 ```swift
@@ -142,9 +142,9 @@ let interpolator = BilinearInterpolator<RGBA, Double>(edgeMode: .edge)
 let warpedImage = image.warp(transformation: affine, outputSize: (500, 500), interpolator: interpolator)
 ```
 
-[Example: NN+Wrap / BL+Constant / BC+Reflect](https://github.com/t-ae/swim/blob/7a055c45e4a1db9755f04a785599e18fde1f86bd/Tests/VisualTests/WarpVisualTests.swift#L140-L172)
+[Example: NN+Wrap / BL+Constant / BC+Reflect / Lanczos2+Edge / Lanczos3+Symmetric](https://github.com/t-ae/swim/blob/99e7be2655057190b62426cdb85fe56b130d7126/Tests/VisualTests/WarpVisualTests.swift#L216-L258)
 
-![warp](https://user-images.githubusercontent.com/12446914/56634776-2a2d7980-669e-11e9-8ff2-179dbdb3dff4.png)
+![warp](https://user-images.githubusercontent.com/12446914/58522375-09a39280-81fb-11e9-9229-3478797c26e8.png)
 
 ### Correlation
 ```swift
@@ -168,7 +168,7 @@ bottomImage(image: topImage, mode: .screen)
 bottomImage(image: topImage, mode: .overlay)
 ```
 
-[Example: Multiply / Additive / Screen / Overlay](https://github.com/t-ae/swim/blob/08e0d74381ad8be7086ce084c894f7f086b92d33/Tests/VisualTests/BlendVisualTests.swift#L10-L25)
+[Example: Multiply / Additive / Screen / Overlay](https://github.com/t-ae/swim/blob/99e7be2655057190b62426cdb85fe56b130d7126/Tests/VisualTests/BlendVisualTests.swift#L10-L25)
 
 ![blend](https://user-images.githubusercontent.com/12446914/58079157-54198380-7beb-11e9-93dd-ac5dac2b12d3.png)
 
@@ -188,7 +188,7 @@ let bilateral = image.bilateralFilter(kernelSize: 5, sigma2_1: 1, sigma2_2: 0.01
 let nlmean = image.nonLocalMeanFilter(kernelSize: 5, sigma2: 0.01)
 ```
 
-[Example: Gaussian x10 / Bilateral x5 / Emboss / Sobel(Horizontal) / Laplacian](https://github.com/t-ae/swim/blob/41a186efc64dc355ac5da5941b14c9bfe906bb5e/Tests/VisualTests/FilterVisualTests.swift#L114-L144)
+[Example: Gaussian x10 / Bilateral x5 / Emboss / Sobel(Horizontal) / Laplacian](https://github.com/t-ae/swim/blob/99e7be2655057190b62426cdb85fe56b130d7126/Tests/VisualTests/FilterVisualTests.swift#L133-L163)
 
 ![filter](https://user-images.githubusercontent.com/12446914/58389904-4b043880-8069-11e9-8555-c84be376da9b.png)
 
@@ -201,7 +201,7 @@ let transformed: Image<GrayAlpha, Double> = FourierTransformer.fft(image: image)
 let inverted: Image<Gray, Double> = FourierTransformer.ifft(image: transformed)
 ```
 
-[Example: Spectrum and inverted image / Low-pass filtered / High-pass filtered](https://github.com/t-ae/swim/blob/10cf1762853ee9a1152cc5701d474a2c58ffa5e7/Tests/VisualTests/FourierTransformerVisualTests.swift#L10-L74)
+[Example: Spectrum and inverted image / Low-pass filtered / High-pass filtered](https://github.com/t-ae/swim/blob/99e7be2655057190b62426cdb85fe56b130d7126/Tests/VisualTests/FourierTransformerVisualTests.swift#L10-L74)
 
 ![fft](https://user-images.githubusercontent.com/12446914/57998357-109c1800-7b0c-11e9-818b-600f75485794.png)
 
@@ -214,16 +214,16 @@ let bayer = converter.convert(image: image)
 let reconstruct = converter.demosaic(image: bayer)
 ```
 
-[Example: Base / Bayer format / Reconstructed](https://github.com/t-ae/swim/blob/7a055c45e4a1db9755f04a785599e18fde1f86bd/Tests/VisualTests/BayerVisualTests.swift#L12-L27)
+[Example: Base / Bayer format / Reconstructed](https://github.com/t-ae/swim/blob/99e7be2655057190b62426cdb85fe56b130d7126/Tests/VisualTests/BayerVisualTests.swift#L12-L28)
 
 ![bayer_bggr](https://user-images.githubusercontent.com/12446914/56634959-cce5f800-669e-11e9-89a2-ce49121a44bc.png)
 
 ## Application exapmles
 
-- [Template matching](https://github.com/t-ae/swim/blob/4128d352443da43027f95ce784d03b5c6e4e33f1/Tests/VisualTests/ApplicationVisualTests.swift#L342-L416)
-- [Canny edge detection](https://github.com/t-ae/swim/blob/4128d352443da43027f95ce784d03b5c6e4e33f1/Tests/VisualTests/ApplicationVisualTests.swift#L227-L340)
-- [Dithering](https://github.com/t-ae/swim/blob/4128d352443da43027f95ce784d03b5c6e4e33f1/Tests/VisualTests/ApplicationVisualTests.swift#L418-L458)
-- [Color quantization using k-means](https://github.com/t-ae/swim/blob/10cf1762853ee9a1152cc5701d474a2c58ffa5e7/Tests/VisualTests/ApplicationVisualTests.swift#L481-L554)
+- [Template matching](https://github.com/t-ae/swim/blob/99e7be2655057190b62426cdb85fe56b130d7126/Tests/VisualTests/ApplicationVisualTests.swift#L340-L414)
+- [Canny edge detection](https://github.com/t-ae/swim/blob/99e7be2655057190b62426cdb85fe56b130d7126/Tests/VisualTests/ApplicationVisualTests.swift#L226-L338)
+- [Dithering](https://github.com/t-ae/swim/blob/99e7be2655057190b62426cdb85fe56b130d7126/Tests/VisualTests/ApplicationVisualTests.swift#L416-L456)
+- [Color quantization using k-means](https://github.com/t-ae/swim/blob/99e7be2655057190b62426cdb85fe56b130d7126/Tests/VisualTests/ApplicationVisualTests.swift#L481-L556)
 
 [VisualTests](https://github.com/t-ae/swim/blob/master/Tests/VisualTests) contains more examples (works only on macOS).
 
