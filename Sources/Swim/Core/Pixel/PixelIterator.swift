@@ -10,6 +10,7 @@ public struct PixelIterator<P: PixelType, T: DataType>: IteratorProtocol, Sequen
     
     @usableFromInline var start = 0
     
+    @inlinable
     public init(image: Image<P, T>, xRange: Range<Int>, yRange: Range<Int>) {
         self.image = image
         self.x = xRange.startIndex
@@ -18,6 +19,7 @@ public struct PixelIterator<P: PixelType, T: DataType>: IteratorProtocol, Sequen
         self.yRange = yRange
     }
     
+    @inlinable
     public init(image: Image<P, T>) {
         self.init(image: image, xRange: 0..<image.width, yRange: 0..<image.height)
     }
@@ -37,15 +39,17 @@ public struct PixelIterator<P: PixelType, T: DataType>: IteratorProtocol, Sequen
             return nil
         }
         
-        return Pixel(x: x, y: y, color: Color(data: image.data[start..<start+P.channels]))
+        return Pixel(x: x, y: y, data: image.data[start..<start+P.channels])
     }
 }
 
 extension Image {
+    @inlinable
     public func pixels() -> PixelIterator<P, T> {
         return PixelIterator(image: self)
     }
     
+    @inlinable
     public func pixels(in xRange: Range<Int>, _ yRange: Range<Int>) -> PixelIterator<P, T> {
         return PixelIterator(image: self, xRange: xRange, yRange: yRange)
     }

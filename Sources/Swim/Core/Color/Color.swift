@@ -6,7 +6,7 @@ public struct Color<P: PixelType, T: DataType> {
     
     @inlinable
     public init(data: [T]) {
-        self.init(data: ArraySlice(data))
+        self.init(data: data[...])
     }
     
     @inlinable
@@ -27,7 +27,7 @@ public struct Color<P: PixelType, T: DataType> {
     /// This method can be used to avoid that.
     @inlinable
     public mutating func ensureOwnBuffer() {
-        data = ArraySlice(Array(data))
+        data = Array(data)[...]
     }
 }
 
