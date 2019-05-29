@@ -19,20 +19,15 @@ extension Image {
     
     @inlinable
     public func flipUD() -> Image<P, T> {
-        var newImage = Image<P, T>(width: width, height: height)
-        
-        data.withUnsafeBufferPointer { src in
-            newImage.data.withUnsafeMutableBufferPointer { dst in
-                var src = src.baseAddress!
-                var dst = dst.baseAddress! + (height-1)*width*P.channels
-                for _ in 0..<height {
-                    memcpy(dst, src, width * P.channels * MemoryLayout<T>.size)
-                    src += width*P.channels
-                    dst -= width*P.channels
-                }
+        return Image.createWithUnsafeMutableBufferPointer(width: width, height: height) { dst in
+            var srcOffset = 0
+            var dstOffset = (height-1)*width*P.channels
+            for  _ in 0..<height {
+                copy(src: data, srcOffset: srcOffset,
+                     dst: dst, dstOffset: dstOffset, count: width*P.channels)
+                srcOffset += width*P.channels
+                dstOffset -= width*P.channels
             }
         }
-        
-        return newImage
     }
 }
