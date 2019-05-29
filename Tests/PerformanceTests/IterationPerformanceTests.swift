@@ -47,7 +47,7 @@ extension IterationPerformanceTests {
     }
     
     // This is slower since `withPixelRef` calls `Array.withUnsafeMutableBufferPointer` internally.
-    // After closure execution, `withUnsafeMutableBufferPointer` checks if pointer is changed.
+    // The overhead of that makes this slower.
     func testMutableIteration2() {
         var image = Image<RGBA, Double>(width: 3840, height: 2160, value: 1)
         let color = Color<RGBA, Double>(r: 0, g: 0, b: 0, a: 1)

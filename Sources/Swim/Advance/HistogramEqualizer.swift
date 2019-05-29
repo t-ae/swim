@@ -2,6 +2,7 @@ import Foundation
 
 public enum HistogramEqualizer<T: BinaryInteger&DataType> {
     /// Create histogram equalized image.
+    ///
     /// This function assumes pixel value range is [0, 255].
     @inlinable
     public static func equalize(image: Image<Gray, T>) -> Image<Gray, T> {
@@ -27,6 +28,7 @@ public enum HistogramEqualizer<T: BinaryInteger&DataType> {
     }
     
     /// Create histogram equalized image.
+    ///
     /// This function assumes pixel value range is [0, 255].
     @inlinable
     public static func equalize(image: Image<RGB, T>) -> Image<RGB, T> {

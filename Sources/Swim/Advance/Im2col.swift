@@ -1,5 +1,6 @@
 extension Image where P == Gray {
     /// im2col.
+    ///
     /// Each column in returned matrix corresponds to patch.
     ///
     /// - Returns:

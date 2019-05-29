@@ -12,18 +12,14 @@ extension Image {
     @inlinable
     public func resize(width: Int,
                        height: Int) -> Image<P, T> {
-        var dest = Image<P, T>(width: width, height: height)
-        
         let intpl = NearestNeighborInterpolator<P, T>(edgeMode: .edge)
         
-        // range: -0.5 ... baseImage.width+0.5
-        dest.pixelwiseConvert { ref in
+        return Image.createWithPixelRef(width: width, height: height) { ref in
+            // range: -0.5 ... baseImage.width+0.5
             let xp = Double(self.width) * Double(ref.x) / Double(width)
             let yp = Double(self.height) * Double(ref.y) / Double(height)
             intpl.interpolate(x: xp-0.5, y: yp-0.5, in: self, into: ref)
         }
-        
-        return dest
     }
 }
 
@@ -180,16 +176,12 @@ extension Image where T: BinaryFloatingPoint {
             baseImage = self
         }
         
-        var dest = Image<P, T>(width: width, height: height)
-        
-        // range: -0.5 ... baseImage.width+0.5
-        dest.pixelwiseConvert { ref in
+        return Image.createWithPixelRef(width: width, height: height)  { ref in
+            // range: -0.5 ... baseImage.width+0.5
             let xp = Double(baseImage.width) * Double(ref.x) / Double(width)
             let yp = Double(baseImage.height) * Double(ref.y) / Double(height)
             interpolator.interpolate(x: xp-0.5, y: yp-0.5, in: baseImage, into: ref)
         }
-        
-        return dest
     }
 }
 

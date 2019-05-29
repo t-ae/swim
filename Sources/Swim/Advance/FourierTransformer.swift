@@ -66,6 +66,7 @@ public enum FourierTransformer {
     }
     
     /// 1D FFT.
+    ///
     /// http://www.kurims.kyoto-u.ac.jp/~ooura/fftman/ftmn1_2.html
     @inlinable
     static func inplaceFFT(data: UnsafeMutableBufferPointer<Double>, inverse: Bool) {

@@ -14,9 +14,8 @@ extension Image {
         
         let width = self.width + left + right
         let height = self.height + top + bottom
-        var newImage = Image(width: width, height: height)
         
-        newImage.pixelwiseConvert { ref in
+        return Image.createWithPixelRef(width: width, height: height) { ref in
             let originalX = ref.x - left
             let originalY = ref.y - top
             
@@ -29,8 +28,6 @@ extension Image {
                 fatalError("Never happens.")
             }
         }
-        
-        return newImage
     }
     
     @inlinable

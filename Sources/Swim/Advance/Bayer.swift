@@ -63,8 +63,6 @@ extension BayerConverter {
     public func demosaic<T: BinaryInteger>(image: Image<Gray, T>) -> Image<RGB, T> {
         let (offsetX, offsetY) = pattern.offsetToBGGR
         
-        var newImage = Image<RGB, T>(width: image.width, height: image.height)
-        
         func crossMean(x: Int, y: Int) -> T {
             let index = image.dataIndex(x: x, y: y)
             var sum = 0
@@ -172,21 +170,17 @@ extension BayerConverter {
             }
         }
         
-        newImage.pixelwiseConvert { ref in
+        return Image.createWithPixelRef(width: image.width, height: image.height) { ref in
             ref[.red] = getPixelValue(x: ref.x, y: ref.y, channel: .red)
             ref[.green] = getPixelValue(x: ref.x, y: ref.y, channel: .green)
             ref[.blue] = getPixelValue(x: ref.x, y: ref.y, channel: .blue)
         }
-        
-        return newImage
     }
     
     /// Reconstruct color image from bayer format image.
     @inlinable
     public func demosaic<T: BinaryFloatingPoint>(image: Image<Gray, T>) -> Image<RGB, T> {
         let (offsetX, offsetY) = pattern.offsetToBGGR
-        
-        var newImage = Image<RGB, T>(width: image.width, height: image.height)
         
         func crossMean(x: Int, y: Int) -> T {
             let index = image.dataIndex(x: x, y: y)
@@ -295,12 +289,10 @@ extension BayerConverter {
             }
         }
         
-        newImage.pixelwiseConvert { ref in
+        return Image.createWithPixelRef(width: image.width, height: image.height)  { ref in
             ref[.red] = getPixelValue(x: ref.x, y: ref.y, channel: .red)
             ref[.green] = getPixelValue(x: ref.x, y: ref.y, channel: .green)
             ref[.blue] = getPixelValue(x: ref.x, y: ref.y, channel: .blue)
         }
-        
-        return newImage
     }
 }
