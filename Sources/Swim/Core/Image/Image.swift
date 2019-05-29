@@ -83,6 +83,14 @@ extension Image {
     /// Get the index of specified pixel/channel in buffer.
     @inlinable
     public func dataIndex(x: Int, y: Int, c: Int = 0) -> Int {
+        return Image.dataIndex(x: x, y: y, c: c, width: width, height: height)
+    }
+    
+    /// Get the index of specified pixel/channel in buffer.
+    ///
+    /// This function can be used before initialize image.
+    @inlinable
+    public static func dataIndex(x: Int, y: Int, c: Int = 0, width: Int, height: Int) -> Int {
         precondition(0 <= x && x < width, "Index out of range.")
         precondition(0 <= y && y < height, "Index out of range.")
         precondition(0 <= c && c < P.channels, "Index out of range.")
