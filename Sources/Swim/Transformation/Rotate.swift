@@ -3,20 +3,12 @@ import Foundation
 extension Image {
     @inlinable
     public func rot90() -> Image<P, T> {
-        return Image.createWithUnsafeMutableBufferPointer(width: height, height: width) {
-            var dst = $0.baseAddress! + (height - 1)*P.channels
-            
-            data.withUnsafeBufferPointer {
-                var src = $0.baseAddress!
+        return Image.createWithUnsafeMutableBufferPointer(width: height, height: width) { dst in
+            for px in self.pixels() {
+                let dstOffset = Image<P, T>.dataIndex(x: height - 1 - px.y, y: px.x, width: height, height: width)
                 
-                for _ in 0..<height {
-                    var dst2 = dst
-                    for _ in 0..<width {
-                        memcpy(dst2, src, P.channels * MemoryLayout<T>.size)
-                        src  += P.channels
-                        dst2 += height * P.channels
-                    }
-                    dst -= P.channels
+                px.color.withUnsafeBufferPointer { bp in
+                    copy(src: bp, dst: dst, dstOffset: dstOffset, count: P.channels)
                 }
             }
         }
@@ -24,37 +16,26 @@ extension Image {
     
     @inlinable
     public func rot180() -> Image<P, T> {
-        return Image.createWithUnsafeMutableBufferPointer(width: width, height: height) {
-            var dst = $0.baseAddress! + (pixelCount-1) * P.channels
+        return Image.createWithUnsafeMutableBufferPointer(width: width, height: height) { dst in
+            var srcOffset = 0
+            var dstOffset = Image<P, T>.dataIndex(x: width-1, y: height-1, width: width, height: height)
             
-            data.withUnsafeBufferPointer {
-                var src = $0.baseAddress!
-                
-                for _ in 0..<pixelCount {
-                    memcpy(dst, src, P.channels * MemoryLayout<T>.size)
-                    src += P.channels
-                    dst -= P.channels
-                }
+            for _ in 0..<pixelCount {
+                copy(src: data, srcOffset: srcOffset, dst: dst, dstOffset: dstOffset, count: P.channels)
+                srcOffset += P.channels
+                dstOffset -= P.channels
             }
         }
     }
     
     @inlinable
     public func rot270() -> Image<P, T> {
-        return Image.createWithUnsafeMutableBufferPointer(width: height, height: width) {
-            var dst = $0.baseAddress!
-            
-            data.withUnsafeBufferPointer {
-                var src = $0.baseAddress!
+        return Image.createWithUnsafeMutableBufferPointer(width: height, height: width) { dst in
+            for px in self.pixels() {
+                let dstOffset = Image<P, T>.dataIndex(x: px.y, y: width - 1 - px.x, width: height, height: width)
                 
-                for _ in 0..<height {
-                    var dst2 = dst + (width-1)*height*P.channels
-                    for _ in 0..<width {
-                        memcpy(dst2, src, P.channels * MemoryLayout<T>.size)
-                        src  += P.channels
-                        dst2 -= height * P.channels
-                    }
-                    dst += P.channels
+                px.color.withUnsafeBufferPointer { bp in
+                    copy(src: bp, dst: dst, dstOffset: dstOffset, count: P.channels)
                 }
             }
         }

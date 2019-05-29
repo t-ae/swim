@@ -20,24 +20,6 @@ class PerformanceTests: XCTestCase {
         }
     }
     
-    func testFlipLR() {
-        let image = Image<RGBA, Double>(width: 1920, height: 1080, value: 0)
-        
-        measure {
-            _ = image.flipLR()
-        }
-    }
-    
-    func testWarp() {
-        let image = Image<RGBA, Double>(width: 1920, height: 1080, value: 0)
-        
-        let affine = AffineTransformation(scale: (2, 1), translation: (640, 0))
-        
-        measure {
-            _ = try? image.warp(transformation: affine)
-        }
-    }
-    
     func testIntegralImage() {
         let image = Image<Gray, Double>(width: 1920, height: 1080, value: 0)
         
@@ -61,22 +43,6 @@ class PerformanceTests: XCTestCase {
         
         measure {
             _ = HistogramEqualizer.equalize(image: image)
-        }
-    }
-    
-    func testRot90() {
-        let image = Image<RGBA, Int>(width: 1920, height: 1080, value: 1)
-        
-        measure {
-            _ = image.rot90()
-        }
-    }
-    
-    func testTranspose() {
-        let image = Image<RGBA, Int>(width: 1920, height: 1080, value: 1)
-        
-        measure {
-            _ = image.transposed()
         }
     }
     
