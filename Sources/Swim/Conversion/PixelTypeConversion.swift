@@ -14,15 +14,13 @@ extension Image where P == Gray {
     
     @inlinable
     public func toRGB() -> Image<RGB, T> {
-        var newImage = Image<RGB, T>(width: width, height: height)
-
-        for i in 0..<data.count {
-            newImage.data[3*i+0] = data[i]
-            newImage.data[3*i+1] = data[i]
-            newImage.data[3*i+2] = data[i]
+        return .createWithUnsafeMutableBufferPointer(width: width, height: height) { bp in
+            for i in 0..<data.count {
+                bp[3*i+0] = data[i]
+                bp[3*i+1] = data[i]
+                bp[3*i+2] = data[i]
+            }
         }
-        
-        return newImage
     }
     
     @inlinable

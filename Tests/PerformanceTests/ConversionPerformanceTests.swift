@@ -3,7 +3,7 @@ import Swim
 
 class ConversionPerformanceTests: XCTestCase {
     func testPixelwiseConvert() {
-        var image = Image<RGBA, UInt8>(width: 1920, height: 1080, value: 0)
+        var image = Image<RGBA, UInt8>(width: 3840, height: 2160, value: 0)
         
         measure {
             for _ in 0..<10 {
@@ -15,7 +15,7 @@ class ConversionPerformanceTests: XCTestCase {
     }
     
     func testPixelwiseConverted() {
-        let image = Image<RGBA, UInt8>(width: 1920, height: 1080, value: 0)
+        let image = Image<RGBA, UInt8>(width: 3840, height: 2160, value: 0)
         
         measure {
             for _ in 0..<10 {
@@ -30,7 +30,7 @@ class ConversionPerformanceTests: XCTestCase {
     }
     
     func testChannelwiseConvert() {
-        var image = Image<RGBA, UInt8>(width: 1920, height: 1080, value: 0)
+        var image = Image<RGBA, UInt8>(width: 3840, height: 2160, value: 0)
         
         measure {
             for _ in 0..<100 {
@@ -42,17 +42,17 @@ class ConversionPerformanceTests: XCTestCase {
     }
     
     func testChannelwiseConverted() {
-        let image = Image<RGBA, UInt8>(width: 1920, height: 1080, value: 0)
+        let image = Image<RGBA, UInt8>(width: 3840, height: 2160, value: 0)
         
         measure {
-            for _ in 0..<100 {
+            for _ in 0..<10 {
                 _ = image.dataConverted { $0 + 1 }
             }
         }
     }
     
     func testToGrayInt() {
-        let image = Image<RGB, UInt8>(width: 1920, height: 1080, value: 0)
+        let image = Image<RGB, UInt8>(width: 3840, height: 2160, value: 0)
         
         measure {
             _ = image.toGray()
@@ -60,7 +60,7 @@ class ConversionPerformanceTests: XCTestCase {
     }
     
     func testToGrayDouble() {
-        let image = Image<RGB, Double>(width: 1920, height: 1080, value: 0)
+        let image = Image<RGB, Double>(width: 3840, height: 2160, value: 0)
         
         measure {
             _ = image.toGray()
@@ -68,10 +68,10 @@ class ConversionPerformanceTests: XCTestCase {
     }
     
     func testCompundRGBA() {
-        let r = Image<Gray, Double>(width: 1920, height: 1080, value: 0.3)
-        let g = Image<Gray, Double>(width: 1920, height: 1080, value: 0.3)
-        let b = Image<Gray, Double>(width: 1920, height: 1080, value: 0.3)
-        let a = Image<Gray, Double>(width: 1920, height: 1080, value: 0.3)
+        let r = Image<Gray, Double>(width: 3840, height: 2160, value: 0.3)
+        let g = Image<Gray, Double>(width: 3840, height: 2160, value: 0.3)
+        let b = Image<Gray, Double>(width: 3840, height: 2160, value: 0.3)
+        let a = Image<Gray, Double>(width: 3840, height: 2160, value: 0.3)
         
         measure {
             for _ in 0..<10 {
@@ -81,8 +81,8 @@ class ConversionPerformanceTests: XCTestCase {
     }
     
     func testCompundRGBA2() {
-        let rgb = Image<RGB, Double>(width: 1920, height: 1080, value: 0.3)
-        let a = Image<Gray, Double>(width: 1920, height: 1080, value: 0.3)
+        let rgb = Image<RGB, Double>(width: 3840, height: 2160, value: 0.3)
+        let a = Image<Gray, Double>(width: 3840, height: 2160, value: 0.3)
         
         measure {
             for _ in 0..<10 {
@@ -92,7 +92,7 @@ class ConversionPerformanceTests: XCTestCase {
     }
     
     func testGrayToRGB() {
-        let g = Image<Gray, Double>(width: 1920, height: 1080, value: 0.3)
+        let g = Image<Gray, Double>(width: 3840, height: 2160, value: 0.3)
         
         measure {
             for _ in 0..<10 {
@@ -102,7 +102,7 @@ class ConversionPerformanceTests: XCTestCase {
     }
     
     func testRGBToGray() {
-        let g = Image<RGB, Double>(width: 1920, height: 1080, value: 0.3)
+        let g = Image<RGB, Double>(width: 3840, height: 2160, value: 0.3)
         
         measure {
             for _ in 0..<10 {
@@ -112,7 +112,7 @@ class ConversionPerformanceTests: XCTestCase {
     }
     
     func testRGBToRGBA() {
-        let rgb = Image<RGB, Double>(width: 1920, height: 1080, value: 0.3)
+        let rgb = Image<RGB, Double>(width: 3840, height: 2160, value: 0.3)
         
         measure {
             for _ in 0..<10 {
@@ -122,7 +122,7 @@ class ConversionPerformanceTests: XCTestCase {
     }
     
     func testRGBAToARGB() {
-        let rgba = Image<RGBA, Double>(width: 1920, height: 1080, value: 0.3)
+        let rgba = Image<RGBA, Double>(width: 3840, height: 2160, value: 0.3)
         
         measure {
             for _ in 0..<10 {
@@ -132,7 +132,7 @@ class ConversionPerformanceTests: XCTestCase {
     }
     
     func testRGBAToRGB() {
-        let rgba = Image<RGBA, Double>(width: 1920, height: 1080, value: 0.3)
+        let rgba = Image<RGBA, Double>(width: 3840, height: 2160, value: 0.3)
         
         measure {
             for _ in 0..<10 {
