@@ -1,3 +1,6 @@
+// TODO: Replace with uninitialized initializer when Swift5.1 is out.
+// https://github.com/apple/swift-evolution/blob/master/proposals/0245-array-uninitialized-initializer.md
+
 @inlinable
 func interleave<T: DataType>(data1: [T], data2: [T]) -> [T] {
     assert(data1.count == data2.count)

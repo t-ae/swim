@@ -1,4 +1,3 @@
-
 extension Image {
     /// Convert all pixel values.
     @inlinable

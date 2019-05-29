@@ -30,7 +30,7 @@ class IterationPerformanceTests: XCTestCase {
 extension IterationPerformanceTests {
     
     // This is the slowest.
-    // `Image.subscript(x:y:)` creates new `Color` instance.
+    // `Image.subscript(x:y:)` creates new `Color` instance which contains `ArraySlice`.
     // When mutating func, `+=` in this case, is called, `Color` creates its own buffer.
     // That occurs for each pixel so it's slow.
     func testMutableIteration1() {
