@@ -45,6 +45,7 @@ XCTMain([
     testCase(SubimageSubscriptTests.allTests),
     // TransformationTests
     testCase(AffineTransformationTests.allTests),
+    testCase(EdgeModeTests.allTests),
     testCase(PaddingTests.allTests),
     testCase(ProjectiveTransformationTests.allTests),
     testCase(ResizeTests.allTests),
