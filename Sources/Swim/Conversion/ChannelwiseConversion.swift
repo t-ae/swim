@@ -65,19 +65,17 @@ extension Image {
     /// - Note: If you don't need x, y, channel information, using `dataConverted` is faster.
     @inlinable
     public func channelwiseConverted<T2>(_ body: ChannelwiseConversion<P, T, T2>) -> Image<P, T2> {
-        var newImage = Image<P, T2>(width: width, height: height)
-        
-        var i = 0
-        for y in 0..<height {
-            for x in 0..<width {
-                for c in 0..<P.channels {
-                    newImage.data[i] = body(x, y, P(rawValue: c)!, data[i])
-                    i += 1
+        return .createWithUnsafeMutableBufferPointer(width: width, height: height) { bp in
+            var i = 0
+            for y in 0..<height {
+                for x in 0..<width {
+                    for c in 0..<P.channels {
+                        bp[i] = body(x, y, P(rawValue: c)!, data[i])
+                        i += 1
+                    }
                 }
             }
         }
-        
-        return newImage
     }
 }
 

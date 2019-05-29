@@ -21,11 +21,11 @@ extension Image {
         var rowStart = dataIndex(x: xRange.startIndex, y: yRange.startIndex)
         let rowSize = self.width * P.channels
         
-        data.withUnsafeMutableBufferPointer {
+        data.withUnsafeMutableBufferPointer { bp in
             for y in yRange {
                 var start = rowStart
                 for x in xRange {
-                    let ref = PixelRef<P, T>(x: x, y: y, rebasing: $0[start..<start+P.channels])
+                    let ref = PixelRef<P, T>(x: x, y: y, rebasing: bp[start..<start+P.channels])
                     body(ref)
                     start += P.channels
                 }
@@ -45,15 +45,13 @@ extension Image {
     /// - Note: `PixelRef` contains `UnsafeMutableBufferPointer`. So it's unsafe to bring them outside closure.
     @inlinable
     public func pixelwiseConverted<P2, T2>(_ body: (Pixel<P, T>, PixelRef<P2, T2>)->Void) -> Image<P2, T2> {
-        var newImage = Image<P2, T2>(width: width, height: height)
-        
-        newImage.data.withUnsafeMutableBufferPointer { dst in
+        return .createWithUnsafeMutableBufferPointer(width: width, height: height) { bp in
             var si = 0
             var di = 0
             for y in 0..<height {
                 for x in 0..<width {
                     let pixel = Pixel<P, T>(x: x, y: y, data: data[si..<si+P.channels])
-                    let ref = PixelRef<P2, T2>(x: x, y: y, rebasing: dst[di..<di+P2.channels])
+                    let ref = PixelRef<P2, T2>(x: x, y: y, rebasing: bp[di..<di+P2.channels])
                     
                     body(pixel, ref)
                     
@@ -62,7 +60,5 @@ extension Image {
                 }
             }
         }
-        
-        return newImage
     }
 }
