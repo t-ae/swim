@@ -5,15 +5,14 @@ extension Image {
             precondition(0 <= channel && channel < P.channels, "Index out of range.")
             
             return .createWithUnsafeMutableBufferPointer(width: width, height: height) { dst in
-                data.withUnsafeBufferPointer { src in
-                    strideCopy(src: src, srcOffset: channel, srcStride: P.channels,
-                               dst: dst, dstOffset: 0, dstStride: 1, count: dst.count)
-                }
+                strideCopy(src: data, srcOffset: channel, srcStride: P.channels,
+                           dst: dst, dstOffset: 0, dstStride: 1, count: dst.count)
             }
         }
         set {
             precondition(0 <= channel && channel < P.channels, "Index out of range.")
             precondition(size == newValue.size, "Invalid `size`.")
+            
             strideCopy(src: newValue.data, srcOffset: 0, srcStride: 1,
                        dst: &data, dstOffset: channel, dstStride: P.channels,
                        count: newValue.data.count)

@@ -29,13 +29,11 @@ public struct Image<P: PixelType, T: DataType> {
     public init(width: Int, height: Int, color: Color<P, T>) {
         var data = [T](repeating: T.swimDefaultValue, count: width*height*P.channels)
         
+        var offset = 0
         color.withUnsafeBufferPointer { bp in
-            var i = 0
             for _ in 0..<width*height {
-                for c in 0..<bp.count {
-                    data[i] = bp[c]
-                    i += 1
-                }
+                copy(src: bp, dst: &data, dstOffset: offset, count: P.channels)
+                offset += P.channels
             }
         }
         

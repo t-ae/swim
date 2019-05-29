@@ -1,31 +1,41 @@
+@usableFromInline
+protocol CopySource {
+    associatedtype Element
+    subscript(i: Int) -> Element { get }
+    var count: Int { get }
+}
+
+extension Array: CopySource {}
+extension UnsafeBufferPointer: CopySource {}
+
 @inlinable
-func copy<S: RandomAccessCollection, T>(src: S, srcOffset: Int = 0,
-                                        dst: inout [T], dstOffset: Int = 0,
-                                        count: Int) where S.Index == Int, S.Element == T {
+func copy<S: CopySource, T>(src: S, srcOffset: Int = 0,
+                            dst: inout [T], dstOffset: Int = 0,
+                            count: Int) where S.Element == T {
     assert(src.count >= count + srcOffset)
     assert(dst.count >= count + dstOffset)
     
     for i in 0..<count {
-        dst[i+dstOffset] = src[i+srcOffset]
+        dst[i+dstOffset] = src[i + srcOffset]
     }
 }
 
 @inlinable
-func copy<S: RandomAccessCollection, T>(src: S, srcOffset: Int = 0,
-                                        dst: UnsafeMutableBufferPointer<T>, dstOffset: Int = 0,
-                                        count: Int) where S.Index == Int, S.Element == T {
+func copy<S: CopySource, T>(src: S, srcOffset: Int = 0,
+                            dst: UnsafeMutableBufferPointer<T>, dstOffset: Int = 0,
+                            count: Int) where S.Element == T {
     assert(src.count >= count + srcOffset)
     assert(dst.count >= count + dstOffset)
     
     for i in 0..<count {
-        dst[i+dstOffset] = src[i+srcOffset]
+        dst[i+dstOffset] = src[i + srcOffset]
     }
 }
 
 @inlinable
-func strideCopy<S: RandomAccessCollection, T>(src: S, srcOffset: Int, srcStride: Int,
-                                              dst: inout [T], dstOffset: Int, dstStride: Int,
-                                              count: Int) where S.Index == Int, S.Element == T {
+func strideCopy<S: CopySource, T>(src: S, srcOffset: Int, srcStride: Int,
+                                  dst: inout [T], dstOffset: Int, dstStride: Int,
+                                  count: Int) where S.Element == T {
     assert(srcStride*(count-1) + srcOffset < src.count)
     assert(dstStride*(count-1) + dstOffset < dst.count)
     
@@ -39,9 +49,9 @@ func strideCopy<S: RandomAccessCollection, T>(src: S, srcOffset: Int, srcStride:
 }
 
 @inlinable
-func strideCopy<S: RandomAccessCollection, T>(src: S, srcOffset: Int, srcStride: Int,
-                                              dst: UnsafeMutableBufferPointer<T>, dstOffset: Int, dstStride: Int,
-                                              count: Int) where S.Index == Int, S.Element == T {
+func strideCopy<S: CopySource, T>(src: S, srcOffset: Int, srcStride: Int,
+                                  dst: UnsafeMutableBufferPointer<T>, dstOffset: Int, dstStride: Int,
+                                  count: Int) where S.Element == T {
     assert(srcStride*(count-1) + srcOffset < src.count)
     assert(dstStride*(count-1) + dstOffset < dst.count)
     
