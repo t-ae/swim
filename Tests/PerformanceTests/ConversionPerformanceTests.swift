@@ -74,9 +74,7 @@ class ConversionPerformanceTests: XCTestCase {
         let a = Image<Gray, Double>(width: 3840, height: 2160, value: 0.3)
         
         measure {
-            for _ in 0..<10 {
-                _ = Image(r: r, g: g, b: b, a: a)
-            }
+            _ = Image(r: r, g: g, b: b, a: a)
         }
     }
     
@@ -85,9 +83,7 @@ class ConversionPerformanceTests: XCTestCase {
         let a = Image<Gray, Double>(width: 3840, height: 2160, value: 0.3)
         
         measure {
-            for _ in 0..<10 {
-                _ = Image(rgb: rgb, a: a)
-            }
+            _ = Image(rgb: rgb, a: a)
         }
     }
     
@@ -95,9 +91,7 @@ class ConversionPerformanceTests: XCTestCase {
         let g = Image<Gray, Double>(width: 3840, height: 2160, value: 0.3)
         
         measure {
-            for _ in 0..<10 {
-                _ = g.toRGB()
-            }
+            _ = g.toRGB()
         }
     }
     
@@ -115,9 +109,7 @@ class ConversionPerformanceTests: XCTestCase {
         let rgb = Image<RGB, Double>(width: 3840, height: 2160, value: 0.3)
         
         measure {
-            for _ in 0..<10 {
-                _ = rgb.toRGBA(with: 1)
-            }
+            _ = rgb.toRGBA(with: 1)
         }
     }
     
@@ -125,9 +117,7 @@ class ConversionPerformanceTests: XCTestCase {
         let rgba = Image<RGBA, Double>(width: 3840, height: 2160, value: 0.3)
         
         measure {
-            for _ in 0..<10 {
-                _ = rgba.toARGB()
-            }
+            _ = rgba.toARGB()
         }
     }
     
@@ -135,9 +125,7 @@ class ConversionPerformanceTests: XCTestCase {
         let rgba = Image<RGBA, Double>(width: 3840, height: 2160, value: 0.3)
         
         measure {
-            for _ in 0..<10 {
-                _ = rgba.toRGB()
-            }
+            _ = rgba.toRGB()
         }
     }
 }

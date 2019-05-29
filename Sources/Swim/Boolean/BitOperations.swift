@@ -16,6 +16,7 @@ extension Image where T == Bool {
     @inlinable
     public static func &=(lhs: inout Image, rhs: Image) {
         precondition(lhs.size == rhs.size, "Images must have same size.")
+        
         for i in 0..<lhs.data.count {
             lhs.data[i] = lhs.data[i] && rhs.data[i]
         }
@@ -23,15 +24,20 @@ extension Image where T == Bool {
     
     @inlinable
     public static func &(lhs: Image, rhs: Image) -> Image {
-        var newImage = lhs
-        newImage &= rhs
-        return newImage
+        precondition(lhs.size == rhs.size, "Images must have same size.")
+        
+        return .createWithUnsafeMutableBufferPointer(width: lhs.width, height: lhs.height) { bp in
+            for i in 0..<bp.count {
+                bp[i] = lhs.data[i] && rhs.data[i]
+            }
+        }
     }
     
     // MARK: - Or
     @inlinable
     public static func |=(lhs: inout Image, rhs: Image) {
         precondition(lhs.size == rhs.size, "Images must have same size.")
+        
         for i in 0..<lhs.data.count {
             lhs.data[i] = lhs.data[i] || rhs.data[i]
         }
@@ -39,15 +45,20 @@ extension Image where T == Bool {
     
     @inlinable
     public static func |(lhs: Image, rhs: Image) -> Image {
-        var newImage = lhs
-        newImage |= rhs
-        return newImage
+        precondition(lhs.size == rhs.size, "Images must have same size.")
+        
+        return .createWithUnsafeMutableBufferPointer(width: lhs.width, height: lhs.height) { bp in
+            for i in 0..<bp.count {
+                bp[i] = lhs.data[i] || rhs.data[i]
+            }
+        }
     }
     
     // MARK: - Xor
     @inlinable
     public static func ^=(lhs: inout Image, rhs: Image) {
         precondition(lhs.size == rhs.size, "Images must have same size.")
+        
         for i in 0..<lhs.data.count {
             lhs.data[i] = lhs.data[i] != rhs.data[i]
         }
@@ -55,8 +66,12 @@ extension Image where T == Bool {
     
     @inlinable
     public static func ^(lhs: Image, rhs: Image) -> Image {
-        var newImage = lhs
-        newImage ^= rhs
-        return newImage
+        precondition(lhs.size == rhs.size, "Images must have same size.")
+        
+        return .createWithUnsafeMutableBufferPointer(width: lhs.width, height: lhs.height) { bp in
+            for i in 0..<bp.count {
+                bp[i] = lhs.data[i] != rhs.data[i]
+            }
+        }
     }
 }

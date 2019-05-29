@@ -10,9 +10,13 @@ extension Image where T: AdditiveArithmetic {
     
     @inlinable
     public static func +(lhs: Image, rhs: Image) -> Image {
-        var newImage = lhs
-        newImage += rhs
-        return newImage
+        precondition(lhs.size == rhs.size, "Size mismatch.")
+        
+        return .createWithUnsafeMutableBufferPointer(width: lhs.width, height: lhs.height) { bp in
+            for i in 0..<bp.count {
+                bp[i] = lhs.data[i] + rhs.data[i]
+            }
+        }
     }
     
     @inlinable
@@ -26,9 +30,13 @@ extension Image where T: AdditiveArithmetic {
     
     @inlinable
     public static func -(lhs: Image, rhs: Image) -> Image {
-        var newImage = lhs
-        newImage -= rhs
-        return newImage
+        precondition(lhs.size == rhs.size, "Size mismatch.")
+        
+        return .createWithUnsafeMutableBufferPointer(width: lhs.width, height: lhs.height) { bp in
+            for i in 0..<bp.count {
+                bp[i] = lhs.data[i] - rhs.data[i]
+            }
+        }
     }
 }
 
@@ -44,9 +52,13 @@ extension Image where T: Numeric {
     
     @inlinable
     public static func *(lhs: Image, rhs: Image) -> Image {
-        var newImage = lhs
-        newImage *= rhs
-        return newImage
+        precondition(lhs.size == rhs.size, "Size mismatch.")
+        
+        return .createWithUnsafeMutableBufferPointer(width: lhs.width, height: lhs.height) { bp in
+            for i in 0..<bp.count {
+                bp[i] = lhs.data[i] * rhs.data[i]
+            }
+        }
     }
 }
 
@@ -62,9 +74,13 @@ extension Image where T: BinaryInteger {
     
     @inlinable
     public static func /(lhs: Image<P, T>, rhs: Image<P, T>) -> Image<P, T> {
-        var newImage = lhs
-        newImage /= rhs
-        return newImage
+        precondition(lhs.size == rhs.size, "Size mismatch.")
+        
+        return .createWithUnsafeMutableBufferPointer(width: lhs.width, height: lhs.height) { bp in
+            for i in 0..<bp.count {
+                bp[i] = lhs.data[i] / rhs.data[i]
+            }
+        }
     }
 }
 
@@ -80,8 +96,12 @@ extension Image where T: FloatingPoint {
     
     @inlinable
     public static func /(lhs: Image, rhs: Image) -> Image {
-        var newImage = lhs
-        newImage /= rhs
-        return newImage
+        precondition(lhs.size == rhs.size, "Size mismatch.")
+        
+        return .createWithUnsafeMutableBufferPointer(width: lhs.width, height: lhs.height) { bp in
+            for i in 0..<bp.count {
+                bp[i] = lhs.data[i] / rhs.data[i]
+            }
+        }
     }
 }
