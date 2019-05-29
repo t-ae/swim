@@ -14,12 +14,8 @@ extension Image where P == Gray {
     
     @inlinable
     public func toRGB() -> Image<RGB, T> {
-        return .createWithUnsafeMutableBufferPointer(width: width, height: height) { bp in
-            for i in 0..<data.count {
-                bp[3*i+0] = data[i]
-                bp[3*i+1] = data[i]
-                bp[3*i+2] = data[i]
-            }
+        return .createWithPixelRef(width: width, height: height) { ref in
+            ref.fill(value: self[ref.x, ref.y, 0])
         }
     }
     
