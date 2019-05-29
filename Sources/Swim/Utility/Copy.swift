@@ -36,6 +36,8 @@ func copy<S: CopySource, T>(src: S, srcOffset: Int = 0,
 func strideCopy<S: CopySource, T>(src: S, srcOffset: Int, srcStride: Int,
                                   dst: inout [T], dstOffset: Int, dstStride: Int,
                                   count: Int) where S.Element == T {
+    assert(0 <= srcStride*(count-1) + srcOffset)
+    assert(0 <= dstStride*(count-1) + dstOffset)
     assert(srcStride*(count-1) + srcOffset < src.count)
     assert(dstStride*(count-1) + dstOffset < dst.count)
     
@@ -52,6 +54,8 @@ func strideCopy<S: CopySource, T>(src: S, srcOffset: Int, srcStride: Int,
 func strideCopy<S: CopySource, T>(src: S, srcOffset: Int, srcStride: Int,
                                   dst: UnsafeMutableBufferPointer<T>, dstOffset: Int, dstStride: Int,
                                   count: Int) where S.Element == T {
+    assert(0 <= srcStride*(count-1) + srcOffset)
+    assert(0 <= dstStride*(count-1) + dstOffset)
     assert(srcStride*(count-1) + srcOffset < src.count)
     assert(dstStride*(count-1) + dstOffset < dst.count)
     

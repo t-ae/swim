@@ -6,7 +6,7 @@ extension Image {
         return .createWithUnsafeMutableBufferPointer(width: width, height: height) { dst in
             for px in self.pixels() {
                 let dstOffset = Image<P, T>.dataIndex(x: width - 1 - px.x, y: px.y, width: width, height: height)
-                px.color.withUnsafeBufferPointer { bp in
+                px.withUnsafeBufferPointer { bp in
                     copy(src: bp, dst: dst, dstOffset: dstOffset, count: P.channels)
                 }
             }

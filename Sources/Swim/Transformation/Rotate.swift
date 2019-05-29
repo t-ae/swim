@@ -7,7 +7,7 @@ extension Image {
             for px in self.pixels() {
                 let dstOffset = Image<P, T>.dataIndex(x: height - 1 - px.y, y: px.x, width: height, height: width)
                 
-                px.color.withUnsafeBufferPointer { bp in
+                px.withUnsafeBufferPointer { bp in
                     copy(src: bp, dst: dst, dstOffset: dstOffset, count: P.channels)
                 }
             }
@@ -34,7 +34,7 @@ extension Image {
             for px in self.pixels() {
                 let dstOffset = Image<P, T>.dataIndex(x: px.y, y: width - 1 - px.x, width: height, height: width)
                 
-                px.color.withUnsafeBufferPointer { bp in
+                px.withUnsafeBufferPointer { bp in
                     copy(src: bp, dst: dst, dstOffset: dstOffset, count: P.channels)
                 }
             }
