@@ -1,24 +1,24 @@
 @inlinable
-func copy<S: RandomAccessCollection, T>(src: S,
-                                        dst: inout [T],
+func copy<S: RandomAccessCollection, T>(src: S, srcOffset: Int = 0,
+                                        dst: inout [T], dstOffset: Int = 0,
                                         count: Int) where S.Index == Int, S.Element == T {
-    assert(src.count >= count)
-    assert(dst.count >= count)
+    assert(src.count >= count + srcOffset)
+    assert(dst.count >= count + dstOffset)
     
     for i in 0..<count {
-        dst[i] = src[i]
+        dst[i+dstOffset] = src[i+srcOffset]
     }
 }
 
 @inlinable
-func copy<S: RandomAccessCollection, T>(src: S,
-                                        dst: UnsafeMutableBufferPointer<T>,
+func copy<S: RandomAccessCollection, T>(src: S, srcOffset: Int = 0,
+                                        dst: UnsafeMutableBufferPointer<T>, dstOffset: Int = 0,
                                         count: Int) where S.Index == Int, S.Element == T {
-    assert(src.count >= count)
-    assert(dst.count >= count)
+    assert(src.count >= count + srcOffset)
+    assert(dst.count >= count + dstOffset)
     
     for i in 0..<count {
-        dst[i] = src[i]
+        dst[i+dstOffset] = src[i+srcOffset]
     }
 }
 

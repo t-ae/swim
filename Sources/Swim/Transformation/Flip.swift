@@ -3,24 +3,18 @@ import Foundation
 extension Image {
     @inlinable
     public func flipLR() -> Image<P, T> {
-        var newImage = Image<P, T>(width: width, height: height)
-        
-        data.withUnsafeBufferPointer { src in
-            newImage.data.withUnsafeMutableBufferPointer { dst in
-                let dstTail = dst.baseAddress! + (width-1)*P.channels
-                for y in 0..<height {
-                    var src = src.baseAddress! + y*width*P.channels
-                    var dst = dstTail + y*width*P.channels
-                    for _ in 0..<width {
-                        memcpy(dst, src, P.channels * MemoryLayout<T>.size)
-                        src += P.channels
-                        dst -= P.channels
-                    }
+        return Image.createWithUnsafeMutableBufferPointer(width: width, height: height) { dst in
+            var srcOffset = 0
+            for y in 0..<height {
+                var dstOffset = (y+1)*width*P.channels - P.channels
+                for _ in 0..<width {
+                    copy(src: data, srcOffset: srcOffset,
+                         dst: dst, dstOffset: dstOffset, count: P.channels)
+                    srcOffset += P.channels
+                    dstOffset -= P.channels
                 }
             }
         }
-        
-        return newImage
     }
     
     @inlinable
