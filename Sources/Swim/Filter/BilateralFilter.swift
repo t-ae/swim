@@ -24,7 +24,7 @@ extension Image where T == Double {
             ref[.gray] = exp(-Double(dx*dx + dy+dy) / (2*sigma2_1))
         }
         
-        return Image.createWithPixelValues(width: width, height: height) { x, y, c in
+        return .createWithPixelValues(width: width, height: height) { x, y, c in
             let centerValue = self[x, y, c]
             
             var denominator: Double = 0

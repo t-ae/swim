@@ -6,7 +6,7 @@ extension Image {
     
     @inlinable
     public func transposed() -> Image<P, T> {
-        return Image.createWithUnsafeMutableBufferPointer(width: height, height: width) { dst in
+        return .createWithUnsafeMutableBufferPointer(width: height, height: width) { dst in
             for px in self.pixels() {
                 let dstOffset = Image<P, T>.dataIndex(x: px.y, y: px.x, width: height, height: width)
                 

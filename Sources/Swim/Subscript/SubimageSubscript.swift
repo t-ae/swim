@@ -10,7 +10,7 @@ extension Image {
         
         let start = dataIndex(x: x, y: y)
         
-        return Image.createWithUnsafeMutableBufferPointer(width: width, height: height) { dst in
+        return .createWithUnsafeMutableBufferPointer(width: width, height: height) { dst in
             for y in 0..<height {
                 copy(src: data, srcOffset: start + y*self.width*P.channels,
                      dst: dst, dstOffset: y*width*P.channels, count: width*P.channels)

@@ -15,7 +15,7 @@ extension Image where T == Double {
 
         let pad = (kernelSize-1)/2
         
-        return Image.createWithPixelValues(width: width, height: height) { x, y, c in
+        return .createWithPixelValues(width: width, height: height) { x, y, c in
             var weightedSum: Double = 0
             var z: Double = 0 // sum of weights
             

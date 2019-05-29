@@ -15,7 +15,7 @@ extension Image {
         let width = self.width + left + right
         let height = self.height + top + bottom
         
-        return Image.createWithPixelRef(width: width, height: height) { ref in
+        return .createWithPixelRef(width: width, height: height) { ref in
             let originalX = ref.x - left
             let originalY = ref.y - top
             

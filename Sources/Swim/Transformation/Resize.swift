@@ -14,7 +14,7 @@ extension Image {
                        height: Int) -> Image<P, T> {
         let intpl = NearestNeighborInterpolator<P, T>(edgeMode: .edge)
         
-        return Image.createWithPixelRef(width: width, height: height) { ref in
+        return .createWithPixelRef(width: width, height: height) { ref in
             // range: -0.5 ... baseImage.width+0.5
             let xp = Double(self.width) * Double(ref.x) / Double(width)
             let yp = Double(self.height) * Double(ref.y) / Double(height)
@@ -176,7 +176,7 @@ extension Image where T: BinaryFloatingPoint {
             baseImage = self
         }
         
-        return Image.createWithPixelRef(width: width, height: height)  { ref in
+        return .createWithPixelRef(width: width, height: height)  { ref in
             // range: -0.5 ... baseImage.width+0.5
             let xp = Double(baseImage.width) * Double(ref.x) / Double(width)
             let yp = Double(baseImage.height) * Double(ref.y) / Double(height)

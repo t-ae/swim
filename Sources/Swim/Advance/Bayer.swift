@@ -32,7 +32,7 @@ extension BayerConverter {
     public func convert<T>(image: Image<RGB, T>) -> Image<Gray, T> {
         let (offsetX, offsetY) = pattern.offsetToBGGR
         
-        return Image.createWithUnsafeMutableBufferPointer(width: image.width, height: image.height) { bp in
+        return .createWithUnsafeMutableBufferPointer(width: image.width, height: image.height) { bp in
             var i = 0
             var redRow = offsetY % 2 != 0 // or blue row
             for y in 0..<image.height {
@@ -170,7 +170,7 @@ extension BayerConverter {
             }
         }
         
-        return Image.createWithPixelRef(width: image.width, height: image.height) { ref in
+        return .createWithPixelRef(width: image.width, height: image.height) { ref in
             ref[.red] = getPixelValue(x: ref.x, y: ref.y, channel: .red)
             ref[.green] = getPixelValue(x: ref.x, y: ref.y, channel: .green)
             ref[.blue] = getPixelValue(x: ref.x, y: ref.y, channel: .blue)
@@ -289,7 +289,7 @@ extension BayerConverter {
             }
         }
         
-        return Image.createWithPixelRef(width: image.width, height: image.height)  { ref in
+        return .createWithPixelRef(width: image.width, height: image.height)  { ref in
             ref[.red] = getPixelValue(x: ref.x, y: ref.y, channel: .red)
             ref[.green] = getPixelValue(x: ref.x, y: ref.y, channel: .green)
             ref[.blue] = getPixelValue(x: ref.x, y: ref.y, channel: .blue)

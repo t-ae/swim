@@ -3,7 +3,7 @@ import Foundation
 extension Image {
     @inlinable
     public func flipLR() -> Image<P, T> {
-        return Image.createWithUnsafeMutableBufferPointer(width: width, height: height) { dst in
+        return .createWithUnsafeMutableBufferPointer(width: width, height: height) { dst in
             for px in self.pixels() {
                 let dstOffset = Image<P, T>.dataIndex(x: width - 1 - px.x, y: px.y, width: width, height: height)
                 px.color.withUnsafeBufferPointer { bp in
@@ -15,7 +15,7 @@ extension Image {
     
     @inlinable
     public func flipUD() -> Image<P, T> {
-        return Image.createWithUnsafeMutableBufferPointer(width: width, height: height) { dst in
+        return .createWithUnsafeMutableBufferPointer(width: width, height: height) { dst in
             var srcOffset = 0
             var dstOffset = Image<P, T>.dataIndex(x: 0, y: height-1, width: width, height: height)
             
