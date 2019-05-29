@@ -30,41 +30,47 @@ extension Image where T: BinaryFloatingPoint {
         let xScaleImage: Image<P, T>
         if width != self.width {
             let baseImage = self
-            var newImage = Image<P, T>(width: width, height: self.height, value: 0)
             
-            let volume: T = T(self.width) / T(width)
-            for x in 0..<newImage.width {
-                let startX: T = T(x) * volume
-                let endX: T = T(x+1) * volume
+            let height = self.height
+            
+            xScaleImage = .createWithUnsafeMutableBufferPointer(width: width, height: height) { bp in
+                let volume: T = T(self.width) / T(width)
                 
-                let ceilStartX = Foundation.ceil(startX)
-                let floorEndX = Foundation.floor(endX)
-                
-                let startVolume = ceilStartX - startX
-                let endVolume = endX - floorEndX
-                
-                let height = newImage.height
-                
-                newImage.pixelwiseConvert(x..<x+1, 0..<height) { ref in
-                    guard ceilStartX <= floorEndX else {
-                        // refer single pixel
-                        ref.setColor(x: Int(startX), y: ref.y, in: baseImage)
-                        return
-                    }
+                for x in 0..<width {
+                    let startX: T = T(x) * volume
+                    let endX: T = T(x+1) * volume
                     
-                    if startVolume > 0 {
-                        ref.addColor(x: Int(startX), y: ref.y, in: baseImage, with: startVolume)
+                    let ceilStartX = Foundation.ceil(startX)
+                    let floorEndX = Foundation.floor(endX)
+                    
+                    for y in 0..<height {
+                        let start = Image<P, T>.dataIndex(x: x, y: y, width: width, height: height)
+                        let ref = PixelRef<P, T>(x: x, y: y, rebasing: bp[start..<start+P.channels])
+                        
+                        guard ceilStartX <= floorEndX else {
+                            // refer single pixel
+                            ref.setColor(x: Int(startX), y: ref.y, in: baseImage)
+                            continue
+                        }
+                        
+                        let startVolume = ceilStartX - startX
+                        let endVolume = endX - floorEndX
+                        
+                        ref.fill(value: 0)
+                        
+                        if startVolume > 0 {
+                            ref.addColor(x: Int(startX), y: ref.y, in: baseImage, with: startVolume)
+                        }
+                        for dx in Int(ceilStartX)..<Int(floorEndX) {
+                            ref.addColor(x: dx, y: ref.y, in: baseImage)
+                        }
+                        if endVolume > 0 {
+                            ref.addColor(x: Int(endX), y: ref.y, in: baseImage, with: endVolume)
+                        }
+                        ref /= volume
                     }
-                    for dx in Int(ceilStartX)..<Int(floorEndX) {
-                        ref.addColor(x: dx, y: ref.y, in: baseImage)
-                    }
-                    if endVolume > 0 {
-                        ref.addColor(x: Int(endX), y: ref.y, in: baseImage, with: endVolume)
-                    }
-                    ref /= volume
                 }
             }
-            xScaleImage = newImage
         } else {
             xScaleImage = self
         }
@@ -72,40 +78,44 @@ extension Image where T: BinaryFloatingPoint {
         let yScaleImage: Image<P, T>
         if height != self.height {
             let baseImage = xScaleImage
-            var newImage = Image<P, T>(width: width, height: height, value: 0)
-            let volume: T = T(self.height) / T(height)
             
-            for y in 0..<newImage.height {
-                let startY: T = T(y) * volume
-                let endY: T = T(y+1) * volume
+            yScaleImage = .createWithUnsafeMutableBufferPointer(width: width, height: height) { bp in
+                let volume: T = T(self.height) / T(height)
                 
-                let ceilStartY = Foundation.ceil(startY)
-                let floorEndY = Foundation.floor(endY)
-                
-                let startVolume = ceilStartY - startY
-                let endVolume = endY - floorEndY
-                
-                let width = newImage.width
-                newImage.pixelwiseConvert(0..<width, y..<y+1) { ref in
-                    guard ceilStartY <= floorEndY else {
-                        // refer single pixel
-                        ref.setColor(x: ref.x, y: Int(startY), in: baseImage)
-                        return
-                    }
+                for y in 0..<height {
+                    let startY: T = T(y) * volume
+                    let endY: T = T(y+1) * volume
                     
-                    if startVolume > 0 {
-                        ref.addColor(x: ref.x, y: Int(startY), in: baseImage, with: startVolume)
+                    let ceilStartY = Foundation.ceil(startY)
+                    let floorEndY = Foundation.floor(endY)
+                    
+                    for x in 0..<width {
+                        let start = Image<P, T>.dataIndex(x: x, y: y, width: width, height: height)
+                        let ref = PixelRef<P, T>(x: x, y: y, rebasing: bp[start..<start+P.channels])
+                        
+                        guard ceilStartY <= floorEndY else {
+                            // refer single pixel
+                            ref.setColor(x: ref.x, y: Int(startY), in: baseImage)
+                            continue
+                        }
+                        
+                        let startVolume = ceilStartY - startY
+                        let endVolume = endY - floorEndY
+                        
+                        ref.fill(value: 0)
+                        if startVolume > 0 {
+                            ref.addColor(x: ref.x, y: Int(startY), in: baseImage, with: startVolume)
+                        }
+                        for dy in Int(ceilStartY)..<Int(floorEndY) {
+                            ref.addColor(x: ref.x, y: dy, in: baseImage)
+                        }
+                        if endVolume > 0 {
+                            ref.addColor(x: ref.x, y: Int(endY), in: baseImage, with: endVolume)
+                        }
+                        ref /= volume
                     }
-                    for dy in Int(ceilStartY)..<Int(floorEndY) {
-                        ref.addColor(x: ref.x, y: dy, in: baseImage)
-                    }
-                    if endVolume > 0 {
-                        ref.addColor(x: ref.x, y: Int(endY), in: baseImage, with: endVolume)
-                    }
-                    ref /= volume
                 }
             }
-            yScaleImage = newImage
         } else {
             yScaleImage = xScaleImage
         }
