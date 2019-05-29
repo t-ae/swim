@@ -30,30 +30,30 @@ extension BayerConverter {
     /// Convert color image to bayer format.
     @inlinable
     public func convert<T>(image: Image<RGB, T>) -> Image<Gray, T> {
-        var newImage = Image<Gray, T>(width: image.width, height: image.height)
-        
         let (offsetX, offsetY) = pattern.offsetToBGGR
         
-        var redRow = offsetY % 2 != 0 // or blue row
-        for y in 0..<image.height {
-            var oddCol = offsetX % 2 != 0
-            for x in 0..<image.width {
-                switch (oddCol, redRow) {
-                case (true, true): // r
-                    newImage[x, y, .gray] = image[x, y, .red]
-                case (false, true), (true, false): // g
-                    newImage[x, y, .gray] = image[x, y, .green]
-                case (false, false): // b
-                    newImage[x, y, .gray] = image[x, y, .blue]
+        return Image.createWithUnsafeMutableBufferPointer(width: image.width, height: image.height) { bp in
+            var i = 0
+            var redRow = offsetY % 2 != 0 // or blue row
+            for y in 0..<image.height {
+                var oddCol = offsetX % 2 != 0
+                for x in 0..<image.width {
+                    switch (oddCol, redRow) {
+                    case (true, true): // r
+                        bp[i] = image[x, y, .red]
+                    case (false, true), (true, false): // g
+                        bp[i] = image[x, y, .green]
+                    case (false, false): // b
+                        bp[i] = image[x, y, .blue]
+                    }
+                    i += 1
+                    
+                    oddCol.toggle()
                 }
                 
-                oddCol.toggle()
+                redRow.toggle()
             }
-            
-            redRow.toggle()
         }
-        
-        return newImage
     }
 }
 

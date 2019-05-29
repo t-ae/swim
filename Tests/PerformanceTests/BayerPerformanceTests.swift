@@ -3,7 +3,7 @@ import Swim
 
 class BayerPerformanceTests: XCTestCase {
     func testBayer() {
-        let image = Image<RGB, Double>(width: 1920, height: 1080, value: 0)
+        let image = Image<RGB, Double>(width: 3840, height: 2160, value: 0)
         
         let conv = BayerConverter(pattern: .bggr)
         
@@ -13,7 +13,7 @@ class BayerPerformanceTests: XCTestCase {
     }
     
     func testDemosaic() {
-        let image = Image<Gray, Double>(width: 1920, height: 1080, value: 0)
+        let image = Image<Gray, Double>(width: 3840, height: 2160, value: 0)
         
         let conv = BayerConverter(pattern: .bggr)
         
@@ -23,7 +23,7 @@ class BayerPerformanceTests: XCTestCase {
     }
     
     func testDemosaic_Int() {
-        let image = Image<Gray, Int>(width: 1920, height: 1080, value: 0)
+        let image = Image<Gray, Int>(width: 3840, height: 2160, value: 0)
         
         let conv = BayerConverter(pattern: .bggr)
         
