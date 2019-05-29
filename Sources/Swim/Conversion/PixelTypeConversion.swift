@@ -4,12 +4,12 @@ import Foundation
 extension Image where P == Gray {
     @inlinable
     public func toGrayAlpha(with alphaValue: T) -> Image<GrayAlpha, T> {
-        var newImage = Image<GrayAlpha, T>.full(value: alphaValue, like: self)
-        
-        strideCopy(src: data, srcOffset: 0, srcStride: 1,
-                   dst: &newImage.data, dstOffset: 0, dstStride: 2, count: pixelCount)
-        
-        return newImage
+        return .createWithUnsafeMutableBufferPointer(width: width, height: height) { bp in
+            for i in 0..<pixelCount {
+                bp[2*i+0] = data[i]
+                bp[2*i+1] = alphaValue
+            }
+        }
     }
     
     @inlinable
@@ -25,15 +25,14 @@ extension Image where P == Gray {
     
     @inlinable
     func toRGBWithAlpha<P2: RGBWithAlpha>(with alphaValue: T) -> Image<P2, T> {
-        var newImage = Image<P2, T>.full(value: alphaValue, like: self)
-        
-        for i in 0..<data.count {
-            newImage.data[4*i+P2.redIndex] = data[i]
-            newImage.data[4*i+P2.greenIndex] = data[i]
-            newImage.data[4*i+P2.blueIndex] = data[i]
+        return .createWithUnsafeMutableBufferPointer(width: width, height: height) { bp in
+            for i in 0..<data.count {
+                bp[4*i+P2.redIndex] = data[i]
+                bp[4*i+P2.greenIndex] = data[i]
+                bp[4*i+P2.blueIndex] = data[i]
+                bp[4*i+P2.alphaIndex] = alphaValue
+            }
         }
-        
-        return newImage
     }
     
     @inlinable
@@ -51,16 +50,12 @@ extension Image where P == Gray {
 extension Image where P == GrayAlpha {
     @inlinable
     func toRGBWithAlpha<P2: RGBWithAlpha>() -> Image<P2, T> {
-        var newImage = Image<P2, T>(width: width, height: height)
-        
-        for i in 0..<pixelCount {
-            newImage.data[4*i+P2.redIndex] = data[2*i+0]
-            newImage.data[4*i+P2.greenIndex] = data[2*i+0]
-            newImage.data[4*i+P2.blueIndex] = data[2*i+0]
-            newImage.data[4*i+P2.alphaIndex] = data[2*i+1]
+        return pixelwiseConverted { src, dst in
+            dst[P2.redIndex] = src[.gray]
+            dst[P2.greenIndex] = src[.gray]
+            dst[P2.blueIndex] = src[.gray]
+            dst[P2.alphaIndex] = src[.alpha]
         }
-        
-        return newImage
     }
     
     @inlinable
@@ -81,16 +76,14 @@ extension Image where P == RGB, T: BinaryInteger {
     /// Output = wr*R + wg*G + wb*B.
     @inlinable
     public func toGray<T2: BinaryFloatingPoint>(wr: T2, wg: T2, wb: T2) -> Image<Gray, T> {
-        var newImage = Image<Gray, T>.zeros(like: self)
-        
-        for i in 0..<width*height {
-            var sum = wr * T2(data[3*i+0])
-            sum += wg * T2(data[3*i+1])
-            sum += wb * T2(data[3*i+2])
-            newImage.data[i] = T(sum)
+        return .createWithUnsafeMutableBufferPointer(width: width, height: height) { bp in
+            for i in 0..<pixelCount {
+                var sum = wr * T2(data[3*i+0])
+                sum += wg * T2(data[3*i+1])
+                sum += wb * T2(data[3*i+2])
+                bp[i] = T(sum)
+            }
         }
-        
-        return newImage
     }
     
     /// Create grayscale image.
@@ -108,15 +101,13 @@ extension Image where P == RGB, T: FloatingPoint {
     /// Output = wr*R + wg*G + wb*B.
     @inlinable
     public func toGray(wr: T, wg: T, wb: T) -> Image<Gray, T> {
-        var newImage = Image<Gray, T>.zeros(like: self)
-        
-        for i in 0..<width*height {
-            newImage.data[i] = wr * data[3*i+0]
-            newImage.data[i] += wg * data[3*i+1]
-            newImage.data[i] += wb * data[3*i+2]
+        return .createWithUnsafeMutableBufferPointer(width: width, height: height) { bp in
+            for i in 0..<pixelCount {
+                bp[i] = wr * data[3*i+0]
+                bp[i] += wg * data[3*i+1]
+                bp[i] += wb * data[3*i+2]
+            }
         }
-        
-        return newImage
     }
 }
 
