@@ -13,9 +13,7 @@ extension Image where T == Double {
     @inlinable
     public func bilateralFilter(kernelSize: Int, sigma2_1: Double, sigma2_2: Double) -> Image {
         precondition(kernelSize > 0, "kernelSize must be greater than 0.")
-        
-        var newImage = Image<P, T>(width: width, height: height, value: 0)
-        
+    
         let pad = (kernelSize-1)/2
         
         var distanceLUT = Image<Gray, Double>(width: kernelSize, height: kernelSize, value: 0)
@@ -26,7 +24,7 @@ extension Image where T == Double {
             ref[.gray] = exp(-Double(dx*dx + dy+dy) / (2*sigma2_1))
         }
         
-        newImage.channelwiseConvert { x, y, c, value in
+        return Image.createWithPixelValues(width: width, height: height) { x, y, c in
             let centerValue = self[x, y, c]
             
             var denominator: Double = 0
@@ -53,7 +51,5 @@ extension Image where T == Double {
             
             return denominator / numerator
         }
-        
-        return newImage
     }
 }

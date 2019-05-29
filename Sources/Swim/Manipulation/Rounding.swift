@@ -8,9 +8,7 @@ extension Image where T: FloatingPoint {
     
     @inlinable
     public func round() -> Image<P, T> {
-        var newImage = self
-        newImage.applyRound()
-        return newImage
+        return dataConverted(Foundation.round)
     }
     
     @inlinable
@@ -20,9 +18,7 @@ extension Image where T: FloatingPoint {
 
     @inlinable
     public func ceil() -> Image<P, T> {
-        var newImage = self
-        newImage.applyCeil()
-        return newImage
+        return dataConverted(Foundation.ceil)
     }
     
     @inlinable
@@ -32,9 +28,7 @@ extension Image where T: FloatingPoint {
     
     @inlinable
     public func floor() -> Image<P, T> {
-        var newImage = self
-        newImage.applyFloor()
-        return newImage
+        return dataConverted(Foundation.floor)
     }
     
     @inlinable
@@ -44,8 +38,6 @@ extension Image where T: FloatingPoint {
     
     @inlinable
     public func trunc() -> Image<P, T> {
-        var newImage = self
-        newImage.applyTrunc()
-        return newImage
+        return dataConverted(Foundation.trunc)
     }
 }

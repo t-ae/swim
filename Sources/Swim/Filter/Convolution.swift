@@ -103,12 +103,10 @@ extension Image where T: Numeric {
     /// `filter` will be applied to each channel separately.
     @inlinable
     public func convoluted(_ filter: Image<Gray, T>) -> Image<P, T> {
-        var newImage = Image<P, T>(width: width, height: height, value: 0)
-        
         let padLeft = (filter.width-1)/2
         let padTop = (filter.height-1)/2
         
-        newImage.pixelwiseConvert { ref in
+        return Image.createWithPixelRef(width: width, height: height) { ref in
             for py in 0..<filter.height {
                 let yy = clamp(ref.y+py-padTop, min: 0, max: height-1)
                 for px in 0..<filter.width {
@@ -118,7 +116,5 @@ extension Image where T: Numeric {
                 }
             }
         }
-        
-        return newImage
     }
 }

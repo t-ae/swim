@@ -13,10 +13,10 @@ extension Image where T == Float {
     }
     
     @inlinable
-    public func powered(_ exponential: T) -> Image<P, T> {
-        var newImage = self
-        newImage.power(exponential)
-        return newImage
+    public func powered(_ exponent: T) -> Image<P, T> {
+        return dataConverted {
+            pow($0, exponent)
+        }
     }
 }
 
@@ -29,9 +29,9 @@ extension Image where T == Double {
     }
     
     @inlinable
-    public func powered(_ exponential: T) -> Image<P, T> {
-        var newImage = self
-        newImage.power(exponential)
-        return newImage
+    public func powered(_ exponent: T) -> Image<P, T> {
+        return dataConverted {
+            pow($0, exponent)
+        }
     }
 }

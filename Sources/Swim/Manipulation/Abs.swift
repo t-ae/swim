@@ -8,8 +8,6 @@ extension Image where T: Comparable&SignedNumeric {
     
     @inlinable
     public func abs() -> Image {
-        var newImage = self
-        newImage.applyAbs()
-        return newImage
+        return dataConverted(Swift.abs)
     }
 }

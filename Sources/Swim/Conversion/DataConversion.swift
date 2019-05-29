@@ -11,12 +11,10 @@ extension Image {
     /// Convert all pixel values.
     @inlinable
     public func dataConverted<T2>(_ body: (T) -> T2) -> Image<P, T2> {
-        var newImage = Image<P, T2>(width: width, height: height)
-        
-        for i in 0..<data.count {
-            newImage.data[i] = body(data[i])
+        return Image<P, T2>.createWithUnsafeMutableBufferPointer(width: width, height: height) { bp in
+            for i in 0..<bp.count {
+                bp[i] = body(data[i])
+            }
         }
-        
-        return newImage
     }
 }

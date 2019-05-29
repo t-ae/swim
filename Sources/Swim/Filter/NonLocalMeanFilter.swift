@@ -12,12 +12,10 @@ extension Image where T == Double {
     @inlinable
     public func nonLocalMeanFilter(kernelSize: Int, sigma2: Double) -> Image {
         precondition(kernelSize > 0, "kernelSize must be greater than 0.")
-        
-        var newImage = Image<P, T>(width: width, height: height, value: 0)
-        
+
         let pad = (kernelSize-1)/2
         
-        newImage.channelwiseConvert { x, y, c, value in
+        return Image.createWithPixelValues(width: width, height: height) { x, y, c in
             var weightedSum: Double = 0
             var z: Double = 0 // sum of weights
             
@@ -51,7 +49,5 @@ extension Image where T == Double {
             // normalize
             return weightedSum / z
         }
-        
-        return newImage
     }
 }

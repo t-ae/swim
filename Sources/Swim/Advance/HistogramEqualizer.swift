@@ -18,13 +18,9 @@ public enum HistogramEqualizer<T: BinaryInteger&DataType> {
         
         let scale = cumsum.last!
         
-        var newImage = image
-        
-        newImage.dataConvert { px in
+        return image.dataConverted { px in
             T(Int(UInt8.max) * cumsum[Int(px)] / scale)
         }
-        
-        return newImage
     }
     
     /// Create histogram equalized image.
@@ -46,12 +42,8 @@ public enum HistogramEqualizer<T: BinaryInteger&DataType> {
         
         let scale = cumsum.last!
         
-        var newImage = image
-        
-        newImage.dataConvert { px in
+        return image.dataConverted { px in
             T(Int(UInt8.max) * cumsum[Int(px)] / scale)
         }
-        
-        return newImage
     }
 }

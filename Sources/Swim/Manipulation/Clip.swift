@@ -6,8 +6,6 @@ extension Image where T: Comparable {
     
     @inlinable
     public func clipped(low: T, high: T) -> Image<P, T> {
-        var newImage = self
-        newImage.clip(low: low, high: high)
-        return newImage
+        return dataConverted { clamp($0, min: low, max: high) }
     }
 }

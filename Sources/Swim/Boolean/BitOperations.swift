@@ -9,9 +9,7 @@ extension Image where T == Bool {
     
     @inlinable
     public static prefix func ~(image: Image) -> Image {
-        var newImage = image
-        newImage.negate()
-        return newImage
+        return image.dataConverted(!)
     }
     
     // MARK: - And
