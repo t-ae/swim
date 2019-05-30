@@ -87,10 +87,8 @@ extension IterationPerformanceTests {
         let color = Color<RGBA, Double>(r: 0, g: 0, b: 0, a: 1)
         
         measure {
-            for c in RGBA.allCases {
-                image.channelwiseConvert(channel: c) { x, y, value in
-                    value + color[c]
-                }
+            image.channelwiseConvert { x, y, c, value in
+                value + color[c]
             }
         }
     }
