@@ -79,6 +79,21 @@ extension Color {
     }
 }
 
+extension Color {
+    // TODO: Replace with uninitialized initializer when Swift5.1 is out.
+    // https://github.com/apple/swift-evolution/blob/master/proposals/0245-array-uninitialized-initializer.md
+    @inlinable
+    public static func createWithUnsafeMutableBufferPointer(_ body: (UnsafeMutableBufferPointer<T>)->Void) -> Color {
+        var data = [T](repeating: T.swimDefaultValue, count: P.channels)
+        
+        data.withUnsafeMutableBufferPointer { bp in
+            body(bp)
+        }
+        
+        return Color(data: data)
+    }
+}
+
 // MARK: Gray
 extension Color where P == Gray {
     @inlinable

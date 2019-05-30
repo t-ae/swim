@@ -10,9 +10,11 @@ extension Color where T: AdditiveArithmetic {
     
     @inlinable
     public static func +(lhs: Color, rhs: Color) -> Color {
-        var new = lhs
-        new += rhs
-        return new
+        return .createWithUnsafeMutableBufferPointer { bp in
+            for i in 0..<bp.count {
+                bp[i] = lhs[i] + rhs[i]
+            }
+        }
     }
     
     @inlinable
@@ -24,9 +26,11 @@ extension Color where T: AdditiveArithmetic {
     
     @inlinable
     public static func -(lhs: Color, rhs: Color) -> Color {
-        var new = lhs
-        new -= rhs
-        return new
+        return .createWithUnsafeMutableBufferPointer { bp in
+            for i in 0..<bp.count {
+                bp[i] = lhs[i] - rhs[i]
+            }
+        }
     }
 }
 
@@ -40,9 +44,11 @@ extension Color where T: Numeric {
     
     @inlinable
     public static func *(lhs: Color, rhs: Color) -> Color {
-        var new = lhs
-        new *= rhs
-        return new
+        return .createWithUnsafeMutableBufferPointer { bp in
+            for i in 0..<bp.count {
+                bp[i] = lhs[i] * rhs[i]
+            }
+        }
     }
 }
 
@@ -56,9 +62,11 @@ extension Color where T: BinaryInteger {
     
     @inlinable
     public static func /(lhs: Color, rhs: Color) -> Color {
-        var new = lhs
-        new /= rhs
-        return new
+        return .createWithUnsafeMutableBufferPointer { bp in
+            for i in 0..<bp.count {
+                bp[i] = lhs[i] / rhs[i]
+            }
+        }
     }
 }
 
@@ -72,8 +80,10 @@ extension Color where T: BinaryFloatingPoint {
     
     @inlinable
     public static func /(lhs: Color, rhs: Color) -> Color {
-        var new = lhs
-        new /= rhs
-        return new
+        return .createWithUnsafeMutableBufferPointer { bp in
+            for i in 0..<bp.count {
+                bp[i] = lhs[i] / rhs[i]
+            }
+        }
     }
 }
