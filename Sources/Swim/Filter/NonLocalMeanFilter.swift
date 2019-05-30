@@ -17,7 +17,7 @@ extension Image where T == Double {
         
         return .createWithPixelValues(width: width, height: height) { x, y, c in
             var weightedSum: Double = 0
-            var z: Double = 0 // sum of weights
+            var weightSum: Double = 0
             
             for dy in 0..<kernelSize {
                 let ly = y + dy - pad
@@ -35,19 +35,21 @@ extension Image where T == Double {
                             
                             let s = self[xx1, yy1, c]
                             let l = self[xx2, yy2, c]
-                            distance2 += s*s + l*l - 2*s*l
+                            distance2 += (s-l)*(s-l)
                         }
                     }
                     
                     let w = exp(-distance2 / sigma2)
-                    z += w
+                    weightSum += w
                     
-                    weightedSum += w * self[clamp(lx, min: 0, max: width-1), clamp(ly, min: 0, max: height-1), c]
+                    let targetX = clamp(lx, min: 0, max: width-1)
+                    let targetY = clamp(ly, min: 0, max: height-1)
+                    weightedSum += w * self[targetX, targetY, c]
                 }
             }
             
             // normalize
-            return weightedSum / z
+            return weightedSum / weightSum
         }
     }
 }
