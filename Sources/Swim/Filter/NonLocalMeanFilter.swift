@@ -8,10 +8,11 @@ extension Image where T == Double {
     /// - Parameters:
     ///   - sigma2: Variance of pixel value gaussian.
     ///
-    /// - Precondition: kernelSize > 0
+    /// - Precondition: kernelSize > 0 && sigma2 > 0
     @inlinable
     public func nonLocalMeanFilter(kernelSize: Int, sigma2: Double) -> Image {
         precondition(kernelSize > 0, "kernelSize must be greater than 0.")
+        precondition(sigma2 > 0, "sigma2 must be greater than 0.")
 
         let pad = (kernelSize-1)/2
         

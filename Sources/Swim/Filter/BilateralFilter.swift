@@ -9,10 +9,12 @@ extension Image where T == Double {
     ///   - sigma2_1: Variance of distance gaussian.
     ///   - sigma2_2: Variance of pixel value gaussian.
     ///
-    /// - Precondition: kernelSize > 0
+    /// - Precondition: kernelSize > 0 && sigma2_1 > 0 && sigma2_2 > 0
     @inlinable
     public func bilateralFilter(kernelSize: Int, sigma2_1: Double, sigma2_2: Double) -> Image {
         precondition(kernelSize > 0, "kernelSize must be greater than 0.")
+        precondition(sigma2_1 > 0, "sigma2_1 must be greater than 0.")
+        precondition(sigma2_2 > 0, "sigma2_2 must be greater than 0.")
     
         let pad = (kernelSize-1)/2
         
