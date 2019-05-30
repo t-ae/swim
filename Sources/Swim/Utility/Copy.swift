@@ -1,9 +1,5 @@
 @usableFromInline
-protocol CopySource {
-    associatedtype Element
-    subscript(i: Int) -> Element { get }
-    var count: Int { get }
-}
+protocol CopySource: RandomAccessCollection where Index == Int {}
 
 extension Array: CopySource {}
 extension UnsafeBufferPointer: CopySource {}
