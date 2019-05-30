@@ -2,6 +2,9 @@ import XCTest
 import Swim
 
 class IterationPerformanceTests: XCTestCase {
+    // Summing up all color in image.
+    
+    // `image[x, y]` creates `Color` containing `ArraySlice`.
     func testIteration1() {
         let image = Image<RGBA, Double>(width: 3840, height: 2160, value: 1)
         var color = Color<RGBA, Double>(r: 0, g: 0, b: 0, a: 0)
@@ -15,6 +18,7 @@ class IterationPerformanceTests: XCTestCase {
         }
     }
     
+    // Pixel iteration version.
     func testIteration2() {
         let image = Image<RGBA, Double>(width: 3840, height: 2160, value: 1)
         var color = Color<RGBA, Double>(r: 0, g: 0, b: 0, a: 0)
@@ -28,6 +32,7 @@ class IterationPerformanceTests: XCTestCase {
 }
 
 extension IterationPerformanceTests {
+    // Add color for each pixel in image.
     
     // This is the slowest.
     // `Image.subscript(x:y:)` creates new `Color` instance which contains `ArraySlice`.
@@ -92,6 +97,9 @@ extension IterationPerformanceTests {
 }
 
 extension IterationPerformanceTests {
+    // Add scalar for each pixel value.
+    
+    // `dataConvert` simply iterates over `data`.
     func testIterationPixelValues1() {
         var image = Image<RGBA, Double>(width: 3840, height: 2160, value: 1)
         
@@ -102,6 +110,9 @@ extension IterationPerformanceTests {
         }
     }
     
+    // `channelwiseConvert` also iterates over `data`.
+    // But it has extra arguments, `x`, `y`, `c`.
+    // Computing them makes this a bit slower than `dataConvert`.
     func testIterationPixelValues2() {
         var image = Image<RGBA, Double>(width: 3840, height: 2160, value: 1)
         
@@ -114,14 +125,22 @@ extension IterationPerformanceTests {
 }
 
 extension IterationPerformanceTests {
+    // Add scalar for red channel pixel values.
+    
+    // This approach is done by 3 steps.
+    // 1. Extract red channel.
+    // 2. Apply `dataConvert`.
+    // 3. Write back red channel.
+    // So it's slower than `channelwiseConvert` approach.
     func testChannelConvert1() {
         var image = Image<RGBA, Double>(width: 3840, height: 2160, value: 1)
         
         measure {
-            _ = image[channel: .red].dataConverted { value in value + 1 }
+            _ = image[channel: .red].dataConvert { value in value + 1 }
         }
     }
     
+    // Iterate all channels but add only for red channel.
     func testChannelConvert2() {
         var image = Image<RGBA, Double>(width: 3840, height: 2160, value: 1)
         
@@ -132,12 +151,24 @@ extension IterationPerformanceTests {
         }
     }
     
+    // Iterate red channel
     func testChannelConvert3() {
         var image = Image<RGBA, Double>(width: 3840, height: 2160, value: 1)
         
         measure {
             image.channelwiseConvert(channel: .red) { x, y, value in
                 value + 1
+            }
+        }
+    }
+    
+    // Iterate pixels and add for red channel.
+    func testChannelConvert4() {
+        var image = Image<RGBA, Double>(width: 3840, height: 2160, value: 1)
+        
+        measure {
+            image.pixelwiseConvert { ref in
+                ref[.red] += 1
             }
         }
     }
