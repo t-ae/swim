@@ -27,7 +27,11 @@ class FilterPerformanceTests: XCTestCase {
     }
     
     func testBilateralFilter() {
-        let image = Image<Gray, Double>(width: 1920, height: 1080, value: 0)
+        let image = Image<RGB, Double>.createWithUnsafeMutableBufferPointer(width: 640, height: 480) {
+            for i in 0..<$0.count {
+                $0[i] = sin(Double(i))
+            }
+        }
         
         measure {
             _ = image.bilateralFilter(kernelSize: 5, sigma2_1: 1, sigma2_2: 0.01)
@@ -35,7 +39,11 @@ class FilterPerformanceTests: XCTestCase {
     }
     
     func testNLMeanFilter() {
-        let image = Image<Gray, Double>(width: 640, height: 480, value: 0)
+        let image = Image<RGB, Double>.createWithUnsafeMutableBufferPointer(width: 640, height: 480) {
+            for i in 0..<$0.count {
+                $0[i] = sin(Double(i))
+            }
+        }
         
         measure {
             _ = image.nonLocalMeanFilter(kernelSize: 5, sigma2: 0.01)
