@@ -8,9 +8,11 @@ extension Image where T: AdditiveArithmetic {
     
     @inlinable
     public static func +<C: ColorProtocol>(lhs: Image, rhs: C) -> Image where C.P == P, C.T == T {
-        var new = lhs
-        new += rhs
-        return new
+        return lhs.pixelwiseConverted { src, dst in
+            for c in 0..<P.channels {
+                dst[c] = src[c] + rhs[c]
+            }
+        }
     }
     
     @inlinable
@@ -27,9 +29,11 @@ extension Image where T: AdditiveArithmetic {
     
     @inlinable
     public static func -<C: ColorProtocol>(lhs: Image, rhs: C) -> Image where C.P == P, C.T == T {
-        var new = lhs
-        new -= rhs
-        return new
+        return lhs.pixelwiseConverted { src, dst in
+            for c in 0..<P.channels {
+                dst[c] = src[c] - rhs[c]
+            }
+        }
     }
     
     @inlinable
@@ -52,9 +56,11 @@ extension Image where T: Numeric {
     
     @inlinable
     public static func *<C: ColorProtocol>(lhs: Image, rhs: C) -> Image where C.P == P, C.T == T {
-        var new = lhs
-        new *= rhs
-        return new
+        return lhs.pixelwiseConverted { src, dst in
+            for c in 0..<P.channels {
+                dst[c] = src[c] * rhs[c]
+            }
+        }
     }
     
     @inlinable
@@ -73,9 +79,11 @@ extension Image where T: BinaryInteger {
     
     @inlinable
     public static func /<C: ColorProtocol>(lhs: Image, rhs: C) -> Image where C.P == P, C.T == T {
-        var new = lhs
-        new /= rhs
-        return new
+        return lhs.pixelwiseConverted { src, dst in
+            for c in 0..<P.channels {
+                dst[c] = src[c] / rhs[c]
+            }
+        }
     }
     
     @inlinable
@@ -98,9 +106,11 @@ extension Image where T: FloatingPoint {
     
     @inlinable
     public static func /<C: ColorProtocol>(lhs: Image, rhs: C) -> Image where C.P == P, C.T == T {
-        var new = lhs
-        new /= rhs
-        return new
+        return lhs.pixelwiseConverted { src, dst in
+            for c in 0..<P.channels {
+                dst[c] = src[c] / rhs[c]
+            }
+        }
     }
     
     @inlinable
