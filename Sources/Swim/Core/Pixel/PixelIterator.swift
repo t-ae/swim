@@ -26,6 +26,10 @@ public struct PixelIterator<P: PixelType, T: DataType>: IteratorProtocol, Sequen
     
     @inlinable
     public mutating func next() -> Pixel<P, T>? {
+        guard y < yRange.endIndex else {
+            return nil
+        }
+        
         defer {
             x += 1
             if x >= xRange.endIndex {
@@ -33,10 +37,6 @@ public struct PixelIterator<P: PixelType, T: DataType>: IteratorProtocol, Sequen
                 x = xRange.startIndex
             }
             start += P.channels
-        }
-        
-        guard y < yRange.endIndex else {
-            return nil
         }
         
         return Pixel(x: x, y: y, data: image.data[start..<start+P.channels])

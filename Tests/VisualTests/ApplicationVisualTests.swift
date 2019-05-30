@@ -128,9 +128,9 @@ extension ApplicationVisualTests {
                 }
             }
             gradX[row: gradX.height-1] = gradX[row: 0]
-            gradY[row: gradX.height-1] = gradY[row: 0]
+            gradY[row: gradY.height-1] = gradY[row: 0]
             gradX[col: gradX.height-1] = gradX[col: 0]
-            gradY[col: gradX.height-1] = gradY[col: 0]
+            gradY[col: gradY.height-1] = gradY[col: 0]
             
             func value(x: Double, y: Double) -> Double {
                 let gx = gradX[Rect(x: Int(x), y: Int(y), width: 2, height: 2)]
