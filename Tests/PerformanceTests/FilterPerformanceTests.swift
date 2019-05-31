@@ -46,7 +46,7 @@ class FilterPerformanceTests: XCTestCase {
         }
         
         measure {
-            _ = image.nonLocalMeanFilter(windowSize: 5, sigma: 0.1)
+            _ = image.nonLocalMeanFilter(windowSize: 5, distance: 2, sigma: 0.1)
         }
     }
 }

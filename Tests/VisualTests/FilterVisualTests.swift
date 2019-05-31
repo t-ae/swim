@@ -116,13 +116,13 @@ extension FilterVisualTests {
         var image = try! Image<RGB, Double>(contentsOf: path)
         var images: [Image<RGB, Double>] = [image]
         
-        image = image.nonLocalMeanFilter(windowSize: 5, sigma: 0.1)
+        image = image.nonLocalMeanFilter(windowSize: 5, distance: 2, sigma: 0.1)
         images.append(image)
         
-        image = image.nonLocalMeanFilter(windowSize: 5, sigma: 0.1)
+        image = image.nonLocalMeanFilter(windowSize: 5, distance: 2, sigma: 0.1)
         images.append(image)
         
-        image = image.nonLocalMeanFilter(windowSize: 5, sigma: 0.1)
+        image = image.nonLocalMeanFilter(windowSize: 5, distance: 2, sigma: 0.1)
         images.append(image)
         
         let ns = doubleToNSImage(Image.concatH(images))

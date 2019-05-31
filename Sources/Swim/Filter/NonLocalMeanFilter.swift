@@ -6,13 +6,15 @@ extension Image where T == Double {
     /// Filter will be applied to each channel separately.
     ///
     /// - Parameters:
+    ///   - distance: Max distance to patch to refer.
     ///   - sigma: Standatd deviation of pixel value gaussian.
     ///
     /// - Precondition: windowSize > 0
     @inlinable
-    public func nonLocalMeanFilter(windowSize: Int, sigma: Double) -> Image {
+    public func nonLocalMeanFilter(windowSize: Int, distance: Int, sigma: Double) -> Image {
+        precondition(distance >= 0, "distance must be positive.")
         precondition(windowSize > 0, "windowSize must be greater than 0.")
-
+        
         let pad = (windowSize-1)/2
         let sigma2 = sigma*sigma
         
@@ -20,10 +22,16 @@ extension Image where T == Double {
             var weightedSum: Double = 0
             var weightSum: Double = 0
             
-            for dy in 0..<windowSize {
-                let ly = y + dy - pad
-                for dx in 0..<windowSize {
-                    let lx = x + dx - pad
+            for dy in -distance...distance {
+                let ly = y + dy
+                guard 0 <= ly && ly < height else {
+                    continue
+                }
+                for dx in -distance...distance {
+                    let lx = x + dx
+                    guard 0 <= lx && lx < width else {
+                        continue
+                    }
                     
                     // Compute distance^2
                     var distance2: Double = 0
@@ -43,9 +51,7 @@ extension Image where T == Double {
                     let w = exp(-distance2 / sigma2)
                     weightSum += w
                     
-                    let targetX = clamp(lx, min: 0, max: width-1)
-                    let targetY = clamp(ly, min: 0, max: height-1)
-                    weightedSum += w * self[targetX, targetY, c]
+                    weightedSum += w * self[lx, ly, c]
                 }
             }
             
