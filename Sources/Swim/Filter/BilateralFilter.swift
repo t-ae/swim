@@ -27,9 +27,7 @@ extension Image where T == Double {
             ref[.gray] = exp(-Double(dx*dx + dy+dy) / (2*distanceSigma2))
         }
         
-        return .createWithPixelValues(width: width, height: height) { x, y, c in
-            let centerValue = self[x, y, c]
-            
+        return channelwiseConverted { x, y, c, value in
             var denominator: Double = 0
             var numerator: Double = 0
             
@@ -42,7 +40,7 @@ extension Image where T == Double {
                     let distanceGauss = distanceLUT[px, py, .gray]
                     
                     let pixelValue = self[xx, yy, c]
-                    let diff = pixelValue - centerValue
+                    let diff = pixelValue - value
                     let valueGauss = exp(-diff*diff / (2*valueSigma2))
                     
                     let prod = distanceGauss * valueGauss
