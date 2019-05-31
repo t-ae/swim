@@ -6,15 +6,15 @@ extension Image where T == Double {
     /// Filter will be applied to each channel separately.
     ///
     /// - Parameters:
-    ///   - sigma2: Variance of pixel value gaussian.
+    ///   - sigma: Standatd deviation of pixel value gaussian.
     ///
-    /// - Precondition: kernelSize > 0 && sigma2 > 0
+    /// - Precondition: kernelSize > 0
     @inlinable
-    public func nonLocalMeanFilter(kernelSize: Int, sigma2: Double) -> Image {
+    public func nonLocalMeanFilter(kernelSize: Int, sigma: Double) -> Image {
         precondition(kernelSize > 0, "kernelSize must be greater than 0.")
-        precondition(sigma2 > 0, "sigma2 must be greater than 0.")
 
         let pad = (kernelSize-1)/2
+        let sigma2 = sigma*sigma
         
         return .createWithPixelValues(width: width, height: height) { x, y, c in
             var weightedSum: Double = 0

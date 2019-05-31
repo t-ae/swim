@@ -53,7 +53,7 @@ extension FilterVisualTests {
         var image = imageBase!
         var nsImages = [NSImage]()
         
-        let filter = Filter.gaussian(size: 3, sigma2: 1, scaleTo1: true)
+        let filter = Filter.gaussian(size: 3, sigma: 1, scaleTo1: true)
         
         image = image.convoluted(filter)
         nsImages.append(doubleToNSImage(image))
@@ -97,13 +97,13 @@ extension FilterVisualTests {
         var image = try! Image<RGB, Double>(contentsOf: path)
         var images: [Image<RGB, Double>] = [image]
         
-        image = image.bilateralFilter(kernelSize: 5, sigma2_1: 1, sigma2_2: 0.01)
+        image = image.bilateralFilter(kernelSize: 5, distanceSigma: 1, valueSigma: 0.1)
         images.append(image)
         
-        image = image.bilateralFilter(kernelSize: 5, sigma2_1: 1, sigma2_2: 0.01)
+        image = image.bilateralFilter(kernelSize: 5, distanceSigma: 1, valueSigma: 0.1)
         images.append(image)
         
-        image = image.bilateralFilter(kernelSize: 5, sigma2_1: 1, sigma2_2: 0.01)
+        image = image.bilateralFilter(kernelSize: 5, distanceSigma: 1, valueSigma: 0.1)
         images.append(image)
         
         let ns = doubleToNSImage(Image.concatH(images))
@@ -116,13 +116,13 @@ extension FilterVisualTests {
         var image = try! Image<RGB, Double>(contentsOf: path)
         var images: [Image<RGB, Double>] = [image]
         
-        image = image.nonLocalMeanFilter(kernelSize: 5, sigma2: 0.01)
+        image = image.nonLocalMeanFilter(kernelSize: 5, sigma: 0.1)
         images.append(image)
         
-        image = image.nonLocalMeanFilter(kernelSize: 5, sigma2: 0.01)
+        image = image.nonLocalMeanFilter(kernelSize: 5, sigma: 0.1)
         images.append(image)
         
-        image = image.nonLocalMeanFilter(kernelSize: 5, sigma2: 0.01)
+        image = image.nonLocalMeanFilter(kernelSize: 5, sigma: 0.1)
         images.append(image)
         
         let ns = doubleToNSImage(Image.concatH(images))
@@ -144,7 +144,7 @@ extension FilterVisualTests {
         
         var bilateral = image
         for _ in 0..<5 {
-            bilateral = bilateral.bilateralFilter(kernelSize: 3, sigma2_1: 1, sigma2_2: 0.01)
+            bilateral = bilateral.bilateralFilter(kernelSize: 3, distanceSigma: 1, valueSigma: 0.1)
         }
         images.append(bilateral)
         

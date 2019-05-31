@@ -6,15 +6,16 @@ extension Image where T == Double {
     /// Filter will be applied to each channel separately.
     ///
     /// - Parameters:
-    ///   - sigma2_1: Variance of distance gaussian.
-    ///   - sigma2_2: Variance of pixel value gaussian.
+    ///   - distanceSigma: Standatd deviation of distance gaussian.
+    ///   - valueSigma: Standatd deviation of pixel value gaussian.
     ///
-    /// - Precondition: kernelSize > 0 && sigma2_1 > 0 && sigma2_2 > 0
+    /// - Precondition: kernelSize > 0
     @inlinable
-    public func bilateralFilter(kernelSize: Int, sigma2_1: Double, sigma2_2: Double) -> Image {
+    public func bilateralFilter(kernelSize: Int, distanceSigma: Double, valueSigma: Double) -> Image {
         precondition(kernelSize > 0, "kernelSize must be greater than 0.")
-        precondition(sigma2_1 > 0, "sigma2_1 must be greater than 0.")
-        precondition(sigma2_2 > 0, "sigma2_2 must be greater than 0.")
+        
+        let distanceSigma2 = distanceSigma * distanceSigma
+        let valueSigma2 = valueSigma * valueSigma
     
         let pad = (kernelSize-1)/2
         
@@ -23,7 +24,7 @@ extension Image where T == Double {
             let dx = ref.x - pad
             let dy = ref.y - pad
             
-            ref[.gray] = exp(-Double(dx*dx + dy+dy) / (2*sigma2_1))
+            ref[.gray] = exp(-Double(dx*dx + dy+dy) / (2*distanceSigma2))
         }
         
         return .createWithPixelValues(width: width, height: height) { x, y, c in
@@ -42,7 +43,7 @@ extension Image where T == Double {
                     
                     let pixelValue = self[xx, yy, c]
                     let diff = pixelValue - centerValue
-                    let valueGauss = exp(-diff*diff / (2*sigma2_2))
+                    let valueGauss = exp(-diff*diff / (2*valueSigma2))
                     
                     let prod = distanceGauss * valueGauss
                     

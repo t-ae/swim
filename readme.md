@@ -184,8 +184,8 @@ let integral = IntegralImageConverter.convert(image: image)
 let image = try Image<Gray, Float>(contentsOf: url)
 let blur = image.convoluted(Filter.gaussian3x3)
 let maximum = image.rankFilter(.maximum, kernelSize: 3)
-let bilateral = image.bilateralFilter(kernelSize: 5, sigma2_1: 1, sigma2_2: 0.01)
-let nlmean = image.nonLocalMeanFilter(kernelSize: 5, sigma2: 0.01)
+let bilateral = image.bilateralFilter(kernelSize: 5, distanceSigma: 1, valueSigma: 0.1)
+let nlmean = image.nonLocalMeanFilter(kernelSize: 5, sigma: 0.1)
 ```
 
 [Example: Gaussian x10 / Bilateral x5 / Emboss / Sobel(Horizontal) / Laplacian](https://github.com/t-ae/swim/blob/99e7be2655057190b62426cdb85fe56b130d7126/Tests/VisualTests/FilterVisualTests.swift#L133-L163)

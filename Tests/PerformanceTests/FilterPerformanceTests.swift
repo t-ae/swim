@@ -34,7 +34,7 @@ class FilterPerformanceTests: XCTestCase {
         }
         
         measure {
-            _ = image.bilateralFilter(kernelSize: 5, sigma2_1: 1, sigma2_2: 0.01)
+            _ = image.bilateralFilter(kernelSize: 5, distanceSigma: 1, valueSigma: 0.1)
         }
     }
     
@@ -46,7 +46,7 @@ class FilterPerformanceTests: XCTestCase {
         }
         
         measure {
-            _ = image.nonLocalMeanFilter(kernelSize: 5, sigma2: 0.01)
+            _ = image.nonLocalMeanFilter(kernelSize: 5, sigma: 0.1)
         }
     }
 }

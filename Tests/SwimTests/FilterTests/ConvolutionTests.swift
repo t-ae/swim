@@ -4,7 +4,7 @@ import Swim
 class ConvolutionTests: XCTestCase {
     func testGaussianFilter() {
         do {
-            let f = Filter.gaussian(size: 3, sigma2: 2 / Double.pi)
+            let f = Filter.gaussian(size: 3, sigma: 2 / Double.pi)
             
             XCTAssertEqual(f[row: 0], f[row: 2])
             XCTAssertEqual(f[col: 0], f[col: 2])
@@ -12,11 +12,11 @@ class ConvolutionTests: XCTestCase {
             XCTAssertEqual(f[row: 1], f[col: 1].transposed())
         }
         do {
-            let f = Filter.gaussian(size: 3, sigma2: 2 / Double.pi, scaleTo1: true)
+            let f = Filter.gaussian(size: 3, sigma: 2 / Double.pi, scaleTo1: true)
             XCTAssertEqual(f.withUnsafeBufferPointer { $0.reduce(0, +) }, 1)
         }
         do {
-            let f = Filter.gaussian(size: 256, sigma2: 1)
+            let f = Filter.gaussian(size: 256, sigma: 1)
             XCTAssertEqual(f.withUnsafeBufferPointer { $0.reduce(0, +) }, 1, accuracy: 1e-4)
         }
     }
