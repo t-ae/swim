@@ -6,32 +6,32 @@ import Foundation
 
 extension Image where T == Float {
     @inlinable
-    public mutating func power(_ exponent: T) {
+    public mutating func applyPow(_ exponent: T){
         for i in 0..<data.count {
-            data[i] = pow(data[i], exponent)
+            data[i] = Foundation.pow(data[i], exponent)
         }
     }
     
     @inlinable
-    public func powered(_ exponent: T) -> Image<P, T> {
+    public func pow(_ exponent: T) -> Image<P, T> {
         return dataConverted {
-            pow($0, exponent)
+            Foundation.pow($0, exponent)
         }
     }
 }
 
 extension Image where T == Double {
     @inlinable
-    public mutating func power(_ exponent: T){
+    public mutating func applyPow(_ exponent: T){
         for i in 0..<data.count {
-            data[i] = pow(data[i], exponent)
+            data[i] = Foundation.pow(data[i], exponent)
         }
     }
     
     @inlinable
-    public func powered(_ exponent: T) -> Image<P, T> {
+    public func pow(_ exponent: T) -> Image<P, T> {
         return dataConverted {
-            pow($0, exponent)
+            Foundation.pow($0, exponent)
         }
     }
 }

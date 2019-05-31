@@ -9,7 +9,7 @@ class PowerTests: XCTestCase {
         
         let answer = Image(width: 2, height: 2, rgba: data.map { pow($0, 2) })
         
-        XCTAssertEqual(image.powered(2), answer)
+        XCTAssertEqual(image.pow(2), answer)
     }
 
     func testPowDouble() {
@@ -18,7 +18,7 @@ class PowerTests: XCTestCase {
         
         let answer = Image(width: 2, height: 2, rgba: data.map { pow($0, 2) })
         
-        XCTAssertEqual(image.powered(2), answer)
+        XCTAssertEqual(image.pow(2), answer)
     }
     
     static let allTests = [

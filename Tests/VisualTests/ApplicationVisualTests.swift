@@ -345,7 +345,7 @@ extension ApplicationVisualTests {
         let templatePosition = (x: 127, y: 135)
         var template = lena[Rect(x: templatePosition.x, y: templatePosition.y, width: size, height: size)]
         
-        template.power(2)
+        template.applyPow(2)
         
         print("Full search")
         time {

@@ -59,7 +59,7 @@ class PerformanceTests: XCTestCase {
         let image2 = Image<RGBA, Double>(width: 1920, height: 1080, value: 2)
         
         measure {
-            _ = image1.powered(2) + image2.powered(2)
+            _ = image1.pow(2) + image2.pow(2)
         }
     }
     
