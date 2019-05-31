@@ -46,6 +46,14 @@ class PerformanceTests: XCTestCase {
         }
     }
     
+    func testHistogramEqualizeDouble() {
+        var image = Image<RGB, Double>(width: 1920, height: 1080, value: 1)
+        
+        measure {
+            Histograms.equalize(image: &image)
+        }
+    }
+    
     func testCombinationA() {
         let image1 = Image<RGBA, Double>(width: 1920, height: 1080, value: 1)
         let image2 = Image<RGBA, Double>(width: 1920, height: 1080, value: 2)
