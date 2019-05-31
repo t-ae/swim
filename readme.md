@@ -206,6 +206,18 @@ let inverted: Image<Gray, Double> = FourierTransformer.ifft(image: transformed)
 ![fft](https://user-images.githubusercontent.com/12446914/57998357-109c1800-7b0c-11e9-818b-600f75485794.png)
 
 
+### Histogram equalization
+
+```swift
+var image = try Image<Gray, Double>(contentsOf: url)
+Histograms.equalize(image: &image)
+```
+
+[Example: Before / After](https://github.com/t-ae/swim/blob/fc1cac179d957f0ce0190ef8af9a50a3aa03c2da/Tests/VisualTests/HistogramsVisualTests.swift#L18-L36)
+
+![hist](https://user-images.githubusercontent.com/12446914/58690827-6d79b700-83c5-11e9-9602-a3c8ea4a0fe1.png)
+
+
 ### Bayer filter
 ```swift 
 let image = try Image<RGB, Float>(contentsOf: url)
