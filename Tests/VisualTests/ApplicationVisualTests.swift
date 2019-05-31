@@ -457,20 +457,28 @@ extension ApplicationVisualTests {
     
     func testDenoise() {
         let path = testResoruceRoot().appendingPathComponent("lena_256.png")
-        var lena = try! Image<RGB, Double>(contentsOf: path)
+        let lena = try! Image<RGB, Double>(contentsOf: path)
+        
+        var noisy = lena
         for _ in 0..<1000 {
             let x = Int.random(in: 0..<lena.width)
             let y = Int.random(in: 0..<lena.height)
             
-            lena[x, y] = Bool.random() ? Color.white : Color.black
+            noisy[x, y] = Bool.random() ? Color.white : Color.black
         }
-        var images: [Image<RGB, Double>] = [lena]
+        var images: [Image<RGB, Double>] = [noisy]
         
-        let gaussian = lena.convoluted(Filter.gaussian3x3)
+        print("PSNR(noisy): \(ImageStatistics.psnr(image1: lena, image2: noisy))")
+        
+        let gaussian = noisy.convoluted(Filter.gaussian3x3)
         images.append(gaussian)
         
-        let median = lena.rankFilter(.median, windowSize: 3)
+        print("PSNR(gaussian): \(ImageStatistics.psnr(image1: lena, image2: gaussian))")
+        
+        let median = noisy.rankFilter(.median, windowSize: 3)
         images.append(median)
+        
+        print("PSNR(median): \(ImageStatistics.psnr(image1: lena, image2: median))")
         
         // result
         let ns = doubleToNSImage(Image.concatH(images))
