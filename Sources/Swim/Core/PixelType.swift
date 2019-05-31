@@ -46,13 +46,13 @@ public enum ARGB: Int, PixelType, CaseIterable {
 }
 
 // MARK: - NoAlpha
-public protocol NoAlpha {}
+public protocol NoAlpha: PixelType {}
 
 extension Gray: NoAlpha {}
 extension RGB: NoAlpha {}
 
 // MARK: - HasAlpha
-public protocol HasAlpha {
+public protocol HasAlpha: PixelType {
     associatedtype BaseType: PixelType&NoAlpha
     static var colorStartIndex: Int { get }
     static var alphaIndex: Int { get }
@@ -65,7 +65,7 @@ extension GrayAlpha: HasAlpha {
 }
 
 // MARK: - RGBWithAlpha
-public protocol RGBWithAlpha: PixelType, HasAlpha {
+public protocol RGBWithAlpha: HasAlpha {
     static var redIndex: Int { get }
     static var greenIndex: Int { get }
     static var blueIndex: Int { get }

@@ -12,7 +12,8 @@ extension HistogramEqualizerVisualTests {
         var lena = try! Image<RGB, UInt8>(contentsOf: path)
         lena.dataConvert { UInt8(pow(Double($0), 2) / 255) }
         
-        let eq = HistogramEqualizer.equalize(image: lena)
+        var eq = lena
+        Histograms.equalize(image: &eq)
         
         let image = Image.concatH([lena, eq])
         let ns = image.nsImage()
@@ -26,8 +27,8 @@ extension HistogramEqualizerVisualTests {
         lena_uint8.dataConvert { UInt8(pow(Double($0), 2) / 255) }
         let lena = lena_uint8.cast(to: Int.self)
         
-        
-        let eq = HistogramEqualizer.equalize(image: lena)
+        var eq = lena
+        Histograms.equalize(image: &eq)
         
         let image = Image.concatH([lena, eq])
         let ns = image.cast(to: UInt8.self).nsImage()
@@ -42,12 +43,13 @@ extension HistogramEqualizerVisualTests {
         
         // each channel
         var eq1 = lena
-        eq1[channel: .red] = HistogramEqualizer.equalize(image: eq1[channel: .red])
-        eq1[channel: .green] = HistogramEqualizer.equalize(image: eq1[channel: .green])
-        eq1[channel: .blue] = HistogramEqualizer.equalize(image: eq1[channel: .blue])
+        Histograms.equalize(image: &eq1[channel: .red])
+        Histograms.equalize(image: &eq1[channel: .green])
+        Histograms.equalize(image: &eq1[channel: .blue])
         
         // three color histogram
-        let eq2 = HistogramEqualizer.equalize(image: lena)
+        var eq2 = lena
+        Histograms.equalize(image: &eq2)
         
         let image = Image.concatH([lena, eq1, eq2])
         let ns = image.nsImage()

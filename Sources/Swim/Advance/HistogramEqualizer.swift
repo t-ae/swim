@@ -1,49 +1,52 @@
 import Foundation
 
-public enum HistogramEqualizer<T: BinaryInteger&DataType> {
-    /// Create histogram equalized image.
+public enum Histograms<P: NoAlpha, T: DataType> {
+}
+
+extension Histograms where T: BinaryInteger {
+    /// Compute histogram of given image.
     ///
     /// This function assumes pixel value range is [0, 255].
+    ///
+    /// - Returns: Array of 256 elements.
+    /// `array[i]` represents the number of occurrences of pixel value `i`.
     @inlinable
-    public static func equalize(image: Image<Gray, T>) -> Image<Gray, T> {
+    public static func histogram(of image: Image<P, T>) -> [Int] {
         var bins = [Int](repeating: 0, count: Int(UInt8.max)+1)
+        
         for px in image.data {
             bins[Int(px)] += 1
         }
         
-        var cumsum = bins
-        for i in 1..<cumsum.count {
-            cumsum[i] += cumsum[i-1]
-        }
-        
-        let scale = cumsum.last!
-        
-        return image.dataConverted { px in
-            T(Int(UInt8.max) * cumsum[Int(px)] / scale)
-        }
+        return bins
     }
     
-    /// Create histogram equalized image.
+    /// Cumulative distribution function of pixel values in image.
     ///
     /// This function assumes pixel value range is [0, 255].
+    ///
+    /// - Returns: Array of 256 elements.
     @inlinable
-    public static func equalize(image: Image<RGB, T>) -> Image<RGB, T> {
-        var bins = [Int](repeating: 0, count: Int(UInt8.max)+1)
+    public static func cdf(of image: Image<P, T>) -> [Double] {
+        var bins = histogram(of: image)
         
-        // Histgram over all channels
-        for e in image.data {
-            bins[Int(e)] += 1
+        for i in 1..<bins.count {
+            bins[i] += bins[i-1]
         }
         
-        var cumsum = bins
-        for i in 1..<cumsum.count {
-            cumsum[i] += cumsum[i-1]
-        }
+        let last = Double(bins.last!)
         
-        let scale = cumsum.last!
+        return bins.map { Double($0) / last }
+    }
+    
+    /// Equalize histogram of image.
+    ///
+    /// This function assumes pixel value range is [0, 255].
+    public static func equalize(image: inout Image<P, T>) {
+        let cumsum = cdf(of: image)
         
-        return image.dataConverted { px in
-            T(Int(UInt8.max) * cumsum[Int(px)] / scale)
+        image.dataConvert { value in
+            T(cumsum[Int(value)] * 255)
         }
     }
 }

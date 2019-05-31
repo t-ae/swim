@@ -39,10 +39,10 @@ class PerformanceTests: XCTestCase {
     }
     
     func testHistogramEqualize() {
-        let image = Image<RGB, Int>(width: 1920, height: 1080, value: 1)
+        var image = Image<RGB, Int>(width: 1920, height: 1080, value: 1)
         
         measure {
-            _ = HistogramEqualizer.equalize(image: image)
+            Histograms.equalize(image: &image)
         }
     }
     
