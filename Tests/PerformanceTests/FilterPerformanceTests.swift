@@ -14,7 +14,7 @@ class FilterPerformanceTests: XCTestCase {
         let image = Image<Gray, Double>(width: 1920, height: 1080, value: 0)
         
         measure {
-            _ = image.rankFilter(.maximum, kernelSize: 3)
+            _ = image.rankFilter(.maximum, windowSize: 3)
         }
     }
     
@@ -22,7 +22,7 @@ class FilterPerformanceTests: XCTestCase {
         let image = Image<Gray, Double>(width: 1920, height: 1080, value: 0)
         
         measure {
-            _ = image.rankFilter(.median, kernelSize: 3)
+            _ = image.rankFilter(.median, windowSize: 3)
         }
     }
     
@@ -34,7 +34,7 @@ class FilterPerformanceTests: XCTestCase {
         }
         
         measure {
-            _ = image.bilateralFilter(kernelSize: 5, distanceSigma: 1, valueSigma: 0.1)
+            _ = image.bilateralFilter(windowSize: 5, distanceSigma: 1, valueSigma: 0.1)
         }
     }
     
@@ -46,7 +46,7 @@ class FilterPerformanceTests: XCTestCase {
         }
         
         measure {
-            _ = image.nonLocalMeanFilter(kernelSize: 5, sigma: 0.1)
+            _ = image.nonLocalMeanFilter(windowSize: 5, sigma: 0.1)
         }
     }
 }

@@ -9,17 +9,17 @@ extension Image where T == Double {
     ///   - distanceSigma: Standatd deviation of distance gaussian.
     ///   - valueSigma: Standatd deviation of pixel value gaussian.
     ///
-    /// - Precondition: kernelSize > 0
+    /// - Precondition: windowSize > 0
     @inlinable
-    public func bilateralFilter(kernelSize: Int, distanceSigma: Double, valueSigma: Double) -> Image {
-        precondition(kernelSize > 0, "kernelSize must be greater than 0.")
+    public func bilateralFilter(windowSize: Int, distanceSigma: Double, valueSigma: Double) -> Image {
+        precondition(windowSize > 0, "windowSize must be greater than 0.")
         
         let distanceSigma2 = distanceSigma * distanceSigma
         let valueSigma2 = valueSigma * valueSigma
     
-        let pad = (kernelSize-1)/2
+        let pad = (windowSize-1)/2
         
-        var distanceLUT = Image<Gray, Double>(width: kernelSize, height: kernelSize, value: 0)
+        var distanceLUT = Image<Gray, Double>(width: windowSize, height: windowSize, value: 0)
         distanceLUT.pixelwiseConvert { ref in
             let dx = ref.x - pad
             let dy = ref.y - pad
@@ -31,10 +31,10 @@ extension Image where T == Double {
             var denominator: Double = 0
             var numerator: Double = 0
             
-            for py in 0..<kernelSize {
+            for py in 0..<windowSize {
                 let yy = clamp(y + py - pad, min: 0, max: height-1)
                 
-                for px in 0..<kernelSize {
+                for px in 0..<windowSize {
                     let xx = clamp(x + px - pad, min: 0, max: width-1)
                     
                     let distanceGauss = distanceLUT[px, py, .gray]

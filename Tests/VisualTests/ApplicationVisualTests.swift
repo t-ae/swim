@@ -24,18 +24,18 @@ extension ApplicationVisualTests {
         
         let nsImage = doubleToNSImage(image)
         
-        let close = image.rankFilter(.maximum, kernelSize: 3)
-            .rankFilter(.maximum, kernelSize: 3)
-            .rankFilter(.minimum, kernelSize: 3)
-            .rankFilter(.minimum, kernelSize: 3)
-        let open = image.rankFilter(.minimum, kernelSize: 3)
-            .rankFilter(.minimum, kernelSize: 3)
-            .rankFilter(.maximum, kernelSize: 3)
-            .rankFilter(.maximum, kernelSize: 3)
-        let closeOpen = close.rankFilter(.minimum, kernelSize: 3)
-            .rankFilter(.minimum, kernelSize: 3)
-            .rankFilter(.maximum, kernelSize: 3)
-            .rankFilter(.maximum, kernelSize: 3)
+        let close = image.rankFilter(.maximum, windowSize: 3)
+            .rankFilter(.maximum, windowSize: 3)
+            .rankFilter(.minimum, windowSize: 3)
+            .rankFilter(.minimum, windowSize: 3)
+        let open = image.rankFilter(.minimum, windowSize: 3)
+            .rankFilter(.minimum, windowSize: 3)
+            .rankFilter(.maximum, windowSize: 3)
+            .rankFilter(.maximum, windowSize: 3)
+        let closeOpen = close.rankFilter(.minimum, windowSize: 3)
+            .rankFilter(.minimum, windowSize: 3)
+            .rankFilter(.maximum, windowSize: 3)
+            .rankFilter(.maximum, windowSize: 3)
         
         let nsClose = doubleToNSImage(close)
         let nsOpen = doubleToNSImage(open)
@@ -469,7 +469,7 @@ extension ApplicationVisualTests {
         let gaussian = lena.convoluted(Filter.gaussian3x3)
         images.append(gaussian)
         
-        let median = lena.rankFilter(.median, kernelSize: 3)
+        let median = lena.rankFilter(.median, windowSize: 3)
         images.append(median)
         
         // result

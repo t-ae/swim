@@ -85,9 +85,9 @@ extension FilterVisualTests {
     }
     
     func testMinMaxMedian() {
-        let maximum = doubleToNSImage(imageBase.rankFilter(.maximum, kernelSize: 5))
-        let minimum = doubleToNSImage(imageBase.rankFilter(.minimum, kernelSize: 5))
-        let median = doubleToNSImage(imageBase.rankFilter(.median, kernelSize: 5))
+        let maximum = doubleToNSImage(imageBase.rankFilter(.maximum, windowSize: 5))
+        let minimum = doubleToNSImage(imageBase.rankFilter(.minimum, windowSize: 5))
+        let median = doubleToNSImage(imageBase.rankFilter(.median, windowSize: 5))
         
         XCTAssertFalse([maximum, minimum, median].isEmpty, "Break and check nsImages in debugger")
     }
@@ -97,13 +97,13 @@ extension FilterVisualTests {
         var image = try! Image<RGB, Double>(contentsOf: path)
         var images: [Image<RGB, Double>] = [image]
         
-        image = image.bilateralFilter(kernelSize: 5, distanceSigma: 1, valueSigma: 0.1)
+        image = image.bilateralFilter(windowSize: 5, distanceSigma: 1, valueSigma: 0.1)
         images.append(image)
         
-        image = image.bilateralFilter(kernelSize: 5, distanceSigma: 1, valueSigma: 0.1)
+        image = image.bilateralFilter(windowSize: 5, distanceSigma: 1, valueSigma: 0.1)
         images.append(image)
         
-        image = image.bilateralFilter(kernelSize: 5, distanceSigma: 1, valueSigma: 0.1)
+        image = image.bilateralFilter(windowSize: 5, distanceSigma: 1, valueSigma: 0.1)
         images.append(image)
         
         let ns = doubleToNSImage(Image.concatH(images))
@@ -116,13 +116,13 @@ extension FilterVisualTests {
         var image = try! Image<RGB, Double>(contentsOf: path)
         var images: [Image<RGB, Double>] = [image]
         
-        image = image.nonLocalMeanFilter(kernelSize: 5, sigma: 0.1)
+        image = image.nonLocalMeanFilter(windowSize: 5, sigma: 0.1)
         images.append(image)
         
-        image = image.nonLocalMeanFilter(kernelSize: 5, sigma: 0.1)
+        image = image.nonLocalMeanFilter(windowSize: 5, sigma: 0.1)
         images.append(image)
         
-        image = image.nonLocalMeanFilter(kernelSize: 5, sigma: 0.1)
+        image = image.nonLocalMeanFilter(windowSize: 5, sigma: 0.1)
         images.append(image)
         
         let ns = doubleToNSImage(Image.concatH(images))
@@ -144,7 +144,7 @@ extension FilterVisualTests {
         
         var bilateral = image
         for _ in 0..<5 {
-            bilateral = bilateral.bilateralFilter(kernelSize: 3, distanceSigma: 1, valueSigma: 0.1)
+            bilateral = bilateral.bilateralFilter(windowSize: 3, distanceSigma: 1, valueSigma: 0.1)
         }
         images.append(bilateral)
         

@@ -7,16 +7,16 @@ extension Image where T: Comparable {
     ///
     /// Filter will be applied to each channel separately.
     ///
-    /// - Precondition: kernelSize > 0
+    /// - Precondition: windowSize > 0
     @inlinable
-    public func rankFilter(_ mode: RankFilterMode, kernelSize: Int) -> Image<P, T> {
+    public func rankFilter(_ mode: RankFilterMode, windowSize: Int) -> Image<P, T> {
         switch mode {
         case .minimum:
-            return rankFilter(kernelSize: kernelSize) { $0.min()! }
+            return rankFilter(windowSize: windowSize) { $0.min()! }
         case .maximum:
-            return rankFilter(kernelSize: kernelSize) { $0.max()! }
+            return rankFilter(windowSize: windowSize) { $0.max()! }
         case .median:
-            return rankFilter(kernelSize: kernelSize) { bp in
+            return rankFilter(windowSize: windowSize) { bp in
                 var bp = bp
                 // if count is even, take smaller one
                 let mid = (bp.startIndex + bp.endIndex - 1) / 2
@@ -40,23 +40,23 @@ extension Image where T: Comparable {
     }
     
     @inlinable
-    func rankFilter(kernelSize: Int, kernelFunc: (Slice<UnsafeMutableBufferPointer<T>>)->T) -> Image<P, T> {
-        precondition(kernelSize > 0, "kernelSize must be greater than 0.")
+    func rankFilter(windowSize: Int, rankFunc: (Slice<UnsafeMutableBufferPointer<T>>)->T) -> Image<P, T> {
+        precondition(windowSize > 0, "windowSize must be greater than 0.")
         
-        let pad = (kernelSize - 1) / 2
+        let pad = (windowSize - 1) / 2
         
-        var patch = [T](repeating: T.swimDefaultValue, count: kernelSize*kernelSize)
+        var patch = [T](repeating: T.swimDefaultValue, count: windowSize*windowSize)
         
         return patch.withUnsafeMutableBufferPointer { patch in
             .createWithPixelValues(width: width, height: height) { x, y, c in
                 var count = 0
-                for yy in max(y-pad, 0)..<min(y-pad+kernelSize, height) {
-                    for xx in max(x-pad, 0)..<min(x-pad+kernelSize, width) {
+                for yy in max(y-pad, 0)..<min(y-pad+windowSize, height) {
+                    for xx in max(x-pad, 0)..<min(x-pad+windowSize, width) {
                         patch[count] = self[xx, yy, c]
                         count += 1
                     }
                 }
-                return kernelFunc(patch[..<count])
+                return rankFunc(patch[..<count])
             }
         }
     }

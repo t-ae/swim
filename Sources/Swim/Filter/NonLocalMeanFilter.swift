@@ -8,29 +8,29 @@ extension Image where T == Double {
     /// - Parameters:
     ///   - sigma: Standatd deviation of pixel value gaussian.
     ///
-    /// - Precondition: kernelSize > 0
+    /// - Precondition: windowSize > 0
     @inlinable
-    public func nonLocalMeanFilter(kernelSize: Int, sigma: Double) -> Image {
-        precondition(kernelSize > 0, "kernelSize must be greater than 0.")
+    public func nonLocalMeanFilter(windowSize: Int, sigma: Double) -> Image {
+        precondition(windowSize > 0, "windowSize must be greater than 0.")
 
-        let pad = (kernelSize-1)/2
+        let pad = (windowSize-1)/2
         let sigma2 = sigma*sigma
         
         return .createWithPixelValues(width: width, height: height) { x, y, c in
             var weightedSum: Double = 0
             var weightSum: Double = 0
             
-            for dy in 0..<kernelSize {
+            for dy in 0..<windowSize {
                 let ly = y + dy - pad
-                for dx in 0..<kernelSize {
+                for dx in 0..<windowSize {
                     let lx = x + dx - pad
                     
                     // Compute distance^2
                     var distance2: Double = 0
-                    for i in 0..<kernelSize {
+                    for i in 0..<windowSize {
                         let yy1 = clamp(y + i - pad, min: 0, max: height-1)
                         let yy2 = clamp(ly + i - pad, min: 0, max: height-1)
-                        for j in 0..<kernelSize {
+                        for j in 0..<windowSize {
                             let xx1 = clamp(x + j - pad, min: 0, max: width-1)
                             let xx2 = clamp(lx + j - pad, min: 0, max: width-1)
                             
