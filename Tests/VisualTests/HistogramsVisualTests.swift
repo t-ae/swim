@@ -9,14 +9,8 @@ class HistogramsVisualTests: XCTestCase {
 extension HistogramsVisualTests {
     func createHistogramImage<T: BinaryInteger>(image: Image<Gray, T>) -> Image<Gray, T> {
         let bins = Histograms.histogram(of: image)
-        let maximum = bins.max()!
         
-        var hist = Image<Gray, T>(width: 256, height: 256, value: 0)
-        
-        for i in 0..<256 {
-            let height = Int(255 * Double(bins[i]) / Double(maximum))
-            hist.drawLine(p1: (i, 255 - height), p2: (i, 255), color: .white)
-        }
+        let hist = Histograms<Gray, T>.createHistogramImage(bins: bins, color: .white, background: .black)
         
         return hist.resize(width: image.width, height: image.height)
     }
@@ -64,23 +58,24 @@ extension HistogramsVisualTests {
     
     func createColorHistogramImage<T: BinaryInteger>(image: Image<RGB, T>) -> Image<RGB, T> {
         let bins = (0..<RGB.channels).map { Histograms.histogram(of: image[channel: $0]) }
-        let maximum = bins.map { $0.max()! }.max()!
         
-        var hist = Image<RGB, T>(width: 256, height: 256, value: 0)
+        let red = Histograms<RGBA, T>.createHistogramImage(bins: bins[0],
+                                                           color: Color(r: 255, g: 0, b: 0, a: 128),
+                                                           background: .transparent)
+        let green = Histograms<RGBA, T>.createHistogramImage(bins: bins[1],
+                                                             color: Color(r: 0, g: 255, b: 0, a: 128),
+                                                             background: .transparent)
+        let blue = Histograms<RGBA, T>.createHistogramImage(bins: bins[2],
+                                                            color: Color(r: 0, g: 0, b: 255, a: 128),
+                                                            background: .transparent)
         
-        for c in 0..<RGB.channels {
-            let bins = bins[c]
-            var ch = Image<RGBA, T>.zeros(like: hist)
-            var color = Color<RGBA, T>(data: [0, 0, 0, 128])
-            color[c] = 255
-            
-            for i in 0..<256 {
-                let height = Int(255 * Double(bins[i]) / Double(maximum))
-                ch.drawLine(p1: (i, 255 - height), p2: (i, 255), color: color)
-            }
-            
-            hist.drawImage(origin: (0, 0), image: ch)
-        }
+        let maxHeight = [red.height, green.height, blue.height].max()!
+        
+        var hist = Image<RGB, T>(width: bins[0].count, height: maxHeight, value: 0)
+        
+        hist.drawImage(origin: (0, maxHeight - red.height), image: red)
+        hist.drawImage(origin: (0, maxHeight - green.height), image: green)
+        hist.drawImage(origin: (0, maxHeight - blue.height), image: blue)
         
         return hist.resize(width: image.width, height: image.height)
     }

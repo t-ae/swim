@@ -105,6 +105,10 @@ extension Color where P: RGBWithAlpha, T: BinaryInteger {
     public static var yellow: Color {
         return createColor(r: 255, g: 255, b: 0, a: 255)
     }
+    
+    public static var transparent: Color {
+        return createColor(r: 0, g: 0, b: 0, a: 0)
+    }
 }
 
 // We need this to disambiguate some codes, like `image.drawText(origin: ..., color: .red)`.
@@ -143,6 +147,10 @@ extension Color where P == RGBA, T: BinaryInteger {
     
     public static var yellow: Color {
         return Color(r: 255, g: 255, b: 0, a: 255)
+    }
+    
+    public static var transparent: Color {
+        return Color(r: 0, g: 0, b: 0, a: 0)
     }
 }
 

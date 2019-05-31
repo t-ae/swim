@@ -1,9 +1,30 @@
 import Foundation
 
-public enum Histograms<P: NoAlpha, T: DataType> {
+public enum Histograms<P: PixelType, T: DataType> {
+    
+    /// Create histogram image.
+    ///
+    /// Get bins by `Histograms.histogram(of:)` and pass it to this function.
+    ///
+    /// - Returns: Image with size (bins.count, bins.max()!)
+    @inlinable
+    public static func createHistogramImage(bins: [Int], color: Color<P, T>, background: Color<P, T>) -> Image<P, T> {
+        let maximum = bins.max()!
+        
+        let width = bins.count
+        let height = maximum+1
+        
+        var image = Image<P, T>(width: width, height: height, color: background)
+        
+        for (i, b) in bins.enumerated() {
+            image.drawLine(p1: (i, maximum - b), p2: (i, height-1), color: color)
+        }
+        
+        return image
+    }
 }
 
-extension Histograms where T: BinaryInteger {
+extension Histograms where P: NoAlpha, T: BinaryInteger {
     /// Compute histogram of given image.
     ///
     /// This function assumes pixel value range is [0, 255].
@@ -52,7 +73,7 @@ extension Histograms where T: BinaryInteger {
     }
 }
 
-extension Histograms where T: BinaryFloatingPoint {
+extension Histograms where P: NoAlpha, T: BinaryFloatingPoint {
     /// Compute histogram of given image.
     ///
     /// This function assumes pixel value range is [0, 1].
