@@ -56,12 +56,8 @@ extension Filter where T: FloatingPoint {
         return Image(width: 5, height: 5, data: data.map { $0 / 256 })
     }
     
-    public static var mean3x3: Image<Gray, T> {
-        return Image(width: 3, height: 3, value: 1/9)
-    }
-    
-    public static var mean5x5: Image<Gray, T> {
-        return Image(width: 5, height: 5, value: 1/25)
+    public static func mean(size: Int) -> Image<Gray, T> {
+        return Image(width: size, height: size, value: 1 / T(size*size))
     }
 }
 
