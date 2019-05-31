@@ -186,22 +186,22 @@ extension ApplicationVisualTests {
     public func testLifeGame() {
         func next(_ image: Image<Gray, UInt8>) -> Image<Gray, UInt8> {
             let padded = image.withPadding(1, edgeMode: .zero)
-            let (m, n, matrix) = padded.im2col(patchWidth: 3, patchHeight: 3)
+            let matrix = padded.im2col(patchWidth: 3, patchHeight: 3)
             
-            var sums = [UInt8](repeating: 0, count: n)
+            var sums = [UInt8](repeating: 0, count: matrix.cols)
             
-            for i in 0..<m {
-                if i == 4 { continue }  // ignore self
-                for j in 0..<n {
-                    sums[j] += matrix[i*n+j]
+            for r in 0..<matrix.rows {
+                if r == 4 { continue }  // ignore self
+                for c in 0..<matrix.cols {
+                    sums[c] += matrix[r, c]
                 }
             }
-            for j in 0..<n {
-                switch (matrix[4*n+j], sums[j]) {
+            for c in 0..<matrix.cols {
+                switch (matrix[4, c], sums[c]) {
                 case (0, 3), (1, 2), (1, 3): // born and survive
-                    sums[j] = 1
+                    sums[c] = 1
                 default:
-                    sums[j] = 0
+                    sums[c] = 0
                 }
             }
             return Image(width: image.width, height: image.height, data: sums)
