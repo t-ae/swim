@@ -15,12 +15,17 @@ extension Image where T == Double {
         precondition(distance >= 0, "distance must be positive.")
         precondition(windowSize > 0, "windowSize must be greater than 0.")
         
-        let pad = (windowSize-1)/2
+        let pad1 = (windowSize-1)/2
+        let pad2 = windowSize/2
         let sigma2 = sigma*sigma
+        
+        // self[x, y] == base[x+pad1, y+pad1]
+        let base = withPadding(left: pad1, right: pad2, top: pad1, bottom: pad2, edgeMode: .edge)
         
         return .createWithPixelValues(width: width, height: height) { x, y, c in
             var weightedSum: Double = 0
             var weightSum: Double = 0
+            
             
             for dy in -distance...distance {
                 let ly = y + dy
@@ -36,14 +41,10 @@ extension Image where T == Double {
                     // Compute distance^2
                     var distance2: Double = 0
                     for i in 0..<windowSize {
-                        let yy1 = clamp(y + i - pad, min: 0, max: height-1)
-                        let yy2 = clamp(ly + i - pad, min: 0, max: height-1)
                         for j in 0..<windowSize {
-                            let xx1 = clamp(x + j - pad, min: 0, max: width-1)
-                            let xx2 = clamp(lx + j - pad, min: 0, max: width-1)
                             
-                            let s = self[xx1, yy1, c]
-                            let l = self[xx2, yy2, c]
+                            let s = base[x+j, y+i, c]
+                            let l = base[lx+j, ly+i, c]
                             distance2 += (s-l)*(s-l)
                         }
                     }
