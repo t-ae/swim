@@ -26,22 +26,10 @@ extension EdgeMode {
         
         color.data.withUnsafeMutableBufferPointer {
             let ref = PixelRef<P, T>(x: -1, y: -1, pointer: $0)
-            getColor(x: x, y: y, in: image, into: ref)
+            ref.setColor(x: x, y: y, in: image, edgeMode: self)
         }
         
         return color
-    }
-    
-    @inlinable
-    public func getColor(x: Int, y: Int, in image: Image<P, T>, into ref: PixelRef<P, T>) {
-        if let x = clampValue(value: x, max: image.width),
-            let y = clampValue(value: y, max: image.height) {
-            ref.setColor(x: x, y: y, in: image)
-        } else if case let .constant(color) = self {
-            ref.setColor(color: color)
-        } else {
-            fatalError("Never happens.")
-        }
     }
 }
 
@@ -50,7 +38,7 @@ extension EdgeMode {
     ///
     /// Return `nil` if `self` is `.constant` and `value` is out of range.
     @inlinable
-    func clampValue(value: Int, max: Int) -> Int? {
+    public func clampValue(value: Int, max: Int) -> Int? {
         guard value < 0 || value >= max else {
             // Already inside
             return value
@@ -88,6 +76,22 @@ extension EdgeMode {
             } else {
                 return x
             }
+        }
+    }
+}
+
+extension PixelRef {
+    /// Set color of `image` at (`x`, `y`).
+    /// If (`x`, `y`) is outside `image`, extrapolate by `edgeMode`.
+    @inlinable
+    public func setColor(x: Int, y: Int, in image: Image<P, T>, edgeMode: EdgeMode<P, T>) {
+        if let x = edgeMode.clampValue(value: x, max: image.width),
+            let y = edgeMode.clampValue(value: y, max: image.height) {
+            setColor(x: x, y: y, in: image)
+        } else if case let .constant(color) = edgeMode {
+            setColor(color: color)
+        } else {
+            fatalError("Never happens.")
         }
     }
 }
