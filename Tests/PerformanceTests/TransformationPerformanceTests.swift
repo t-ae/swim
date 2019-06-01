@@ -51,4 +51,12 @@ class TransformationPerformanceTests: XCTestCase {
             _ = try? image.warp(transformation: affine)
         }
     }
+    
+    func testPadding() {
+        let image = Image<RGBA, Double>(width: 3840, height: 2160, value: 0)
+        
+        measure {
+            _ = image.withPadding(3, edgeMode: .edge)
+        }
+    }
 }
