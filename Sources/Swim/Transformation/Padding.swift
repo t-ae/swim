@@ -15,17 +15,41 @@ extension Image {
         let width = self.width + left + right
         let height = self.height + top + bottom
         
-        return .createWithPixelRef(width: width, height: height) { ref in
-            let originalX = ref.x - left
-            let originalY = ref.y - top
+        return .createWithUnsafeMutableBufferPointer(width: width, height: height) { bp in
+            // draw self part
+            for y in 0..<self.height {
+                let selfOffset = self.dataIndex(x: 0, y: y)
+                let bpOffset = Image<P, T>.dataIndex(x: left, y: top+y, width: width, height: height)
+                copy(src: self.data, srcOffset: selfOffset,
+                     dst: bp, dstOffset: bpOffset, count: self.width*P.channels)
+            }
             
-            if let x = edgeMode.clampValue(value: originalX, max: self.width),
-                let y = edgeMode.clampValue(value: originalY, max: self.height) {
-                ref.setColor(x: x, y: y, in: self)
-            } else if case let .constant(px) = edgeMode {
-                ref.setColor(color: px)
-            } else {
-                fatalError("Never happens.")
+            // draw padding parts
+            for y in 0..<top {
+                for x in 0..<width {
+                    let start = Image<P, T>.dataIndex(x: x, y: y, width: width, height: height)
+                    let ref = PixelRef<P, T>(x: x, y: y, rebasing: bp[start..<start+P.channels])
+                    edgeMode.getColor(x: x - left, y: y - top, in: self, into: ref)
+                }
+            }
+            for y in top..<top+self.height {
+                for x in 0..<left {
+                    let start = Image<P, T>.dataIndex(x: x, y: y, width: width, height: height)
+                    let ref = PixelRef<P, T>(x: x, y: y, rebasing: bp[start..<start+P.channels])
+                    edgeMode.getColor(x: x - left, y: y - top, in: self, into: ref)
+                }
+                for x in left+self.width..<width {
+                    let start = Image<P, T>.dataIndex(x: x, y: y, width: width, height: height)
+                    let ref = PixelRef<P, T>(x: x, y: y, rebasing: bp[start..<start+P.channels])
+                    edgeMode.getColor(x: x - left, y: y - top, in: self, into: ref)
+                }
+            }
+            for y in top+self.height..<height {
+                for x in 0..<width {
+                    let start = Image<P, T>.dataIndex(x: x, y: y, width: width, height: height)
+                    let ref = PixelRef<P, T>(x: x, y: y, rebasing: bp[start..<start+P.channels])
+                    edgeMode.getColor(x: x - left, y: y - top, in: self, into: ref)
+                }
             }
         }
     }
