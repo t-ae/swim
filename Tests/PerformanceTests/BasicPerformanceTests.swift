@@ -14,12 +14,8 @@ extension BasicPerformanceTests {
         let scalar: Double = 0.99
         measure {
             for _ in 0..<10 {
-                rgba.withUnsafeMutableBufferPointer {
-                    var p = $0.baseAddress!
-                    for _ in 0..<$0.count {
-                        p.pointee *= scalar
-                        p += 1
-                    }
+                for i in 0..<rgba.count {
+                    rgba[i] *= scalar
                 }
             }
         }
@@ -43,12 +39,8 @@ extension BasicPerformanceTests {
         let scalar: Double = 0.99
         measure {
             for _ in 0..<1000000 {
-                rgba.withUnsafeMutableBufferPointer {
-                    var p = $0.baseAddress!
-                    for _ in 0..<$0.count {
-                        p.pointee *= scalar
-                        p += 1
-                    }
+                for i in 0..<rgba.count {
+                    rgba[i] *= scalar
                 }
             }
         }
@@ -73,23 +65,9 @@ extension BasicPerformanceTests {
         let y = [Double](repeating: 1, count: cnt)
         var result = [Double](repeating: 0, count: 2*cnt)
         measure {
-            x.withUnsafeBufferPointer {
-                var xp = $0.baseAddress!
-                y.withUnsafeBufferPointer {
-                    var yp = $0.baseAddress!
-                    result.withUnsafeMutableBufferPointer {
-                        var p = $0.baseAddress!
-                        
-                        for _ in 0..<cnt {
-                            p.pointee = xp.pointee
-                            p += 1
-                            xp += 1
-                            p.pointee = yp.pointee
-                            p += 1
-                            yp += 1
-                        }
-                    }
-                }
+            for i in 0..<cnt {
+                result[2*i+0] = x[i]
+                result[2*i+1] = y[i]
             }
         }
     }

@@ -58,13 +58,11 @@ extension ApplicationVisualTests {
         
         func getJuliaImage(c: (Double, Double), color: Color<RGB, Double>) -> Image<RGBA, Double> {
             let color = Color(r: color[.red], g: color[.green], b: color[.blue], a: 0)
-            var image = Image<RGBA, Double>(width: size,
-                                            height: size,
-                                            color: color)
-            
             var iterationMax = 0
             
-            image.pixelwiseConvert { ref in
+            var image = Image<RGBA, Double>.createWithPixelRef(width: size, height: size) { ref in
+                ref.setColor(color: color)
+                
                 var z: (Double, Double) = ((Double(ref.x)/Double(size) - 0.5)*range,
                                            (Double(ref.y)/Double(size) - 0.5)*range)
                 for n in 0..<maxIteration*2 {
@@ -119,51 +117,38 @@ extension ApplicationVisualTests {
         }
         
         func perlin(width: Int, height: Int, fieldSize: Int) -> Image<Gray, Double> {
-            var gradX = Image<Gray, Double>(width: fieldSize+1, height: fieldSize+1, value: 0)
-            var gradY = Image<Gray, Double>(width: fieldSize+1, height: fieldSize+1, value: 0)
-            for y in 0..<fieldSize {
-                for x in 0..<fieldSize {
-                    gradX[x, y, .gray] = Double.random(in: -1..<1)
-                    gradY[x, y, .gray] = Double.random(in: -1..<1)
+            // gradX: .gray, gradY: .alpha
+            let grads = Image<GrayAlpha, Double>.createWithUnsafeMutableBufferPointer(width: fieldSize, height: fieldSize) { bp in
+                for i in 0..<bp.count {
+                    bp[i] = .random(in: -1..<1)
                 }
-            }
-            gradX[row: gradX.height-1] = gradX[row: 0]
-            gradY[row: gradY.height-1] = gradY[row: 0]
-            gradX[col: gradX.height-1] = gradX[col: 0]
-            gradY[col: gradY.height-1] = gradY[col: 0]
+            }.withPadding(left: 0, right: 1, top: 0, bottom: 1, edgeMode: .wrap)
             
             func value(x: Double, y: Double) -> Double {
-                let gx = gradX[Rect(x: Int(x), y: Int(y), width: 2, height: 2)]
-                let gy = gradY[Rect(x: Int(x), y: Int(y), width: 2, height: 2)]
+                let gs = grads[Rect(x: Int(x), y: Int(y), width: 2, height: 2)]
                 
                 let u = x - floor(x)
                 let v = y - floor(y)
                 
-                let ui = Image(width: 2, height: 2, gray: [u, u-1,
-                                                           u, u-1])
-                let vi = Image(width: 2, height: 2, gray: [v, v,
-                                                           v-1, v-1])
-                let cui = ui.dataConverted(c)
-                let cvi = vi.dataConverted(c)
+                let uv = Image(width: 2, height: 2, grayAlpha: [u, v, u-1, v,
+                                                                u, v-1, u-1, v-1])
+                let cs = uv.dataConverted(c) // bell
+                let gsuv = gs*uv // line
                 
                 // wavelet values
-                let c = cui * cvi
-                let w = c * (gx * ui + gy * vi)
+                let c = cs[channel: .gray] * cs[channel: .alpha]
+                let w = c * (gsuv[channel: .gray] + gsuv[channel: .alpha])
                 
                 // weight sum
-                let coef = Image(width: 2, height: 2, gray: [(1-u)*(1-v), u*(1-v),
-                                                             (1-u)*v, u*v])
+                let coef = (1-uv[channel: .gray])*(1-uv[channel: .alpha])
                 return (w * coef).withUnsafeBufferPointer { $0.reduce(0, +) }
             }
             
-            var image = Image<Gray, Double>(width: width, height: height, value: 0)
-            image.pixelwiseConvert { ref in
+            return Image<Gray, Double>.createWithPixelRef(width: width, height: height) { ref in
                 let px = Double(fieldSize) * Double(ref.x) / Double(width)
                 let py = Double(fieldSize) * Double(ref.y) / Double(height)
                 ref[.gray] = value(x: px, y: py)
             }
-            
-            return image
         }
         
         let size = 256
@@ -550,8 +535,7 @@ extension ApplicationVisualTests {
         }
         
         // apply reduction
-        var reduced = lena
-        reduced.pixelwiseConvert { ref in
+        let reduced = Image<RGB, Double>.createWithPixelRef(width: lena.width, height: lena.height) { ref in
             let cls = classImage[ref.x, ref.y, .gray]
             ref.setColor(color: centers[cls])
         }
