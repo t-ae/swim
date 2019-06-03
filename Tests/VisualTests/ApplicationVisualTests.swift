@@ -57,12 +57,8 @@ extension ApplicationVisualTests {
         let maxIteration = 256
         
         func getJuliaImage(c: (Double, Double), color: Color<RGB, Double>) -> Image<RGBA, Double> {
-            let color = Color(r: color[.red], g: color[.green], b: color[.blue], a: 0)
             var iterationMax = 0
-            
-            var image = Image<RGBA, Double>.createWithPixelRef(width: size, height: size) { ref in
-                ref.setColor(color: color)
-                
+            let alpha = Image<Gray, Double>.createWithPixelRef(width: size, height: size) { ref in
                 var z: (Double, Double) = ((Double(ref.x)/Double(size) - 0.5)*range,
                                            (Double(ref.y)/Double(size) - 0.5)*range)
                 for n in 0..<maxIteration*2 {
@@ -70,16 +66,16 @@ extension ApplicationVisualTests {
                     let zi = 2*z.0*z.1 + c.1
                     z = (zr, zi)
                     if z.0*z.0 + z.1*z.1 > 2*2 {
-                        ref[.alpha] = Double(n)
+                        ref[.gray] = Double(n)
                         iterationMax = max(iterationMax, n)
-                        break
+                        return
                     }
                 }
+                ref[.gray] = 0
             }
             
-            image[channel: .alpha] /= Double(iterationMax)
-            
-            return image
+            return Image(rgb: Image(width: size, height: size, color: color),
+                         a: alpha / Double(iterationMax))
         }
         
         
