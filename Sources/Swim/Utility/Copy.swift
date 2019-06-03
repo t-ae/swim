@@ -3,6 +3,7 @@ protocol CopySource: RandomAccessCollection where Index == Int {}
 
 extension Array: CopySource {}
 extension UnsafeBufferPointer: CopySource {}
+extension UnsafeMutableBufferPointer: CopySource {}
 
 @inlinable
 func copy<S: CopySource, T>(src: S, srcOffset: Int = 0,

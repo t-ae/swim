@@ -162,7 +162,8 @@ extension ApplicationVisualTests {
         image /= image.withUnsafeMutableBufferPointer { $0.max()! }
         
         // repeat
-        image = Image.concat([[image, image], [image, image]])
+        image = image.repeated(horizontally: 2, vertically: 2)
+        
         
         let nsImage = doubleToNSImage(image)
         XCTAssertTrue(nsImage.isValid, "Break and check nsImage in debugger.")
