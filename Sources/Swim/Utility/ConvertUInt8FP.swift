@@ -1,3 +1,5 @@
+import Foundation
+
 /// Convert [0, 255] image to [0, 1] image.
 @inlinable
 func convertPixelValue<P, T: BinaryFloatingPoint>(image: Image<P, UInt8>) -> Image<P, T> {
@@ -10,6 +12,6 @@ func convertPixelValue<P, T: BinaryFloatingPoint>(image: Image<P, UInt8>) -> Ima
 @inlinable
 func convertPixelValue<P, T: BinaryFloatingPoint>(image: Image<P, T>) -> Image<P, UInt8> {
     return image.dataConverted { value in
-        UInt8(clamp(value * 255, min: 0, max: 255).rounded())
+        UInt8(round_(clamp(value * 255, min: 0, max: 255)))
     }
 }
