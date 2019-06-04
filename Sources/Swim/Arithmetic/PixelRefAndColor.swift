@@ -124,7 +124,7 @@ extension PixelRef where T: Numeric {
     ///
     /// for c in 0..<P.channels { self[c] += factor * image[x, y, c] }
     @inlinable
-    public func addColor(x: Int, y: Int, in image: Image<P, T>, with factor: T = 1) {
+    func addColor(x: Int, y: Int, in image: Image<P, T>, with factor: T = 1) {
         let start = image.dataIndex(x: x, y: y)
         for i in 0..<pointer.count {
             pointer[i] += image.data[start+i] * factor
