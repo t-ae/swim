@@ -9,15 +9,8 @@ public struct BilinearInterpolator<P:PixelType, T: BinaryFloatingPoint&DataType>
 
     @inlinable
     public func interpolate(x: Double, y: Double, in image: Image<P, T>, into pixel: PixelRef<P, T>) {
-        let x0 = floor(x)
-        let x1 = x0 + 1
-        let y0 = floor(y)
-        let y1 = y0 + 1
-        
-        let x0x = T(x - x0)
-        let xx1 = T(x1 - x)
-        let y0y = T(y - y0)
-        let yy1 = T(y1 - y)
+        let xmin = floor(x)
+        let ymin = floor(y)
         
         var constant: Color<P, T>?
         switch edgeMode {
@@ -27,46 +20,57 @@ public struct BilinearInterpolator<P:PixelType, T: BinaryFloatingPoint&DataType>
             constant = nil
         }
         
-        if let y = edgeMode.clampValue(value: Int(y0), max: image.height) {
-            if let x = edgeMode.clampValue(value: Int(x0), max: image.width) {
-                pixel.setColor(x: x, y: y, in: image, with: xx1 * yy1)
+        // weights
+        let wx0 = T(xmin + 1 - x)
+        let wx1 = T(x - xmin)
+        let wy0 = T(ymin + 1 - y)
+        let wy1 = T(y - ymin)
+        
+        let xp = Int(xmin)
+        let yp = Int(ymin)
+        let x0 = edgeMode.clampValue(value: xp, max: image.width)
+        let x1 = edgeMode.clampValue(value: xp+1, max: image.width)
+        
+        if let y = edgeMode.clampValue(value: yp, max: image.height) {
+            if let x = x0 {
+                pixel.setColor(x: x, y: y, in: image, with: wx0 * wy0)
             } else if let constant = constant {
-                pixel.setColor(color: constant, with: xx1 * yy1)
+                pixel.setColor(color: constant, with: wx0 * wy0)
             } else {
                 fatalError("Never happens.")
             }
             
-            if let x = edgeMode.clampValue(value: Int(x1), max: image.width) {
-                pixel.addColor(x: x, y: y, in: image, with: x0x * yy1)
+            if let x = x1 {
+                pixel.addColor(x: x, y: y, in: image, with: wx1 * wy0)
             } else if let constant = constant {
-                pixel.addColor(color: constant, with: x0x * yy1)
+                pixel.addColor(color: constant, with: wx1 * wy0)
             } else {
                 fatalError("Never happens.")
             }
         } else if let constant = constant {
-            pixel.setColor(color: constant, with: yy1)
+            pixel.setColor(color: constant, with: wy0)
         } else {
             fatalError("Never happens.")
         }
         
-        if let y = edgeMode.clampValue(value: Int(y1), max: image.height) {
-            if let x = edgeMode.clampValue(value: Int(x0), max: image.width) {
-                pixel.addColor(x: x, y: y, in: image, with: xx1 * y0y)
+        if let y = edgeMode.clampValue(value: yp+1, max: image.height) {
+            if let x = x0 {
+                pixel.addColor(x: x, y: y, in: image, with: wx0 * wy1)
             } else if let constant = constant {
-                pixel.addColor(color: constant, with: xx1 * y0y)
+                pixel.addColor(color: constant, with: wx0 * wy1)
             } else {
                 fatalError("Never happens.")
             }
             
-            if let x = edgeMode.clampValue(value: Int(x1), max: image.width) {
-                pixel.addColor(x: x, y: y, in: image, with: x0x * y0y)
+            if let x = x1 {
+                pixel.addColor(x: x, y: y, in: image, with: wx1 * wy1)
             } else if let constant = constant {
-                pixel.addColor(color: constant, with: x0x * y0y)
+                pixel.addColor(color: constant, with: wx1 * wy1)
             } else {
                 fatalError("Never happens.")
             }
         } else if let constant = constant {
-            pixel.addColor(color: constant, with: y0y)
+            pixel.addColor(color: constant, with: wy1)
         } else {
             fatalError("Never happens.")
         }

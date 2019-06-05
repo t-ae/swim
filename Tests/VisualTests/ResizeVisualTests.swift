@@ -44,7 +44,6 @@ extension ResizeVisualTests {
         
         let nsImage = doubleToNSImage(image.toRGBA(with: 1))
         
-        
         XCTAssertTrue(nsImage.isValid, "Break and check nsImage in debugger.")
     }
     
