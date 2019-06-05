@@ -24,6 +24,19 @@ class PixelwiseConversion: XCTestCase {
         }
     }
     
+    func testConvertRange() {
+        do {
+            let data = (0..<24).map { UInt8($0) }
+            var image = Image(width: 2, height: 3, rgba: data)
+            var after = Image(width: 2, height: 3, rgba: data)
+            after[1, 1] += 1
+            after[1, 2] += 1
+            
+            image.pixelwiseConvert(1..<2, 1..<3) { $0 += 1 }
+            XCTAssertEqual(image, after)
+        }
+    }
+    
     func testConverted() {
         do {
             let data = (0..<24).map { UInt8($0) }
@@ -43,6 +56,7 @@ class PixelwiseConversion: XCTestCase {
     
     static let allTests = [
         ("testConvert", testConvert),
+        ("testConvertRange", testConvertRange),
         ("testConverted", testConverted)
     ]
 }
