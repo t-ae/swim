@@ -8,7 +8,7 @@ public struct PixelIterator<P: PixelType, T: DataType>: IteratorProtocol, Sequen
     @usableFromInline var xRange: Range<Int>
     @usableFromInline var yRange: Range<Int>
     
-    @usableFromInline var start = 0
+    @usableFromInline var start: Int
     
     @inlinable
     public init(image: Image<P, T>, xRange: Range<Int>, yRange: Range<Int>) {
@@ -17,6 +17,8 @@ public struct PixelIterator<P: PixelType, T: DataType>: IteratorProtocol, Sequen
         self.y = yRange.startIndex
         self.xRange = xRange
         self.yRange = yRange
+        
+        self.start = image.dataIndex(x: x, y: y)
     }
     
     @inlinable
@@ -35,8 +37,10 @@ public struct PixelIterator<P: PixelType, T: DataType>: IteratorProtocol, Sequen
             if x >= xRange.endIndex {
                 y += 1
                 x = xRange.startIndex
+                start = image.dataIndex(x: x, y: y)
+            } else {
+                start += P.channels
             }
-            start += P.channels
         }
         
         return Pixel(x: x, y: y, data: image.data[start..<start+P.channels])
