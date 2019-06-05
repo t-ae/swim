@@ -9,7 +9,6 @@ public enum Skeletonizer {
         var phase = true
         while true {
             var removeTable = Image.full(value: true, like: newImage)
-            var continues = false
             
             for pixel in newImage.pixels(in: 1..<newImage.width-1, 1..<newImage.height-1) {
                 guard pixel[.gray] else {
@@ -55,13 +54,12 @@ public enum Skeletonizer {
                 }
                 
                 removeTable[x, y, .gray] = false
-                continues = true
             }
             
             newImage &= removeTable
             phase.toggle()
             
-            guard continues else {
+            guard removeTable.hasFalse() else {
                 break
             }
         }

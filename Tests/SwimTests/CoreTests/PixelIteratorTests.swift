@@ -30,6 +30,7 @@ class PixelIteratorTests: XCTestCase {
     }
     
     static let allTests = [
-        ("testIterator", testIterator)
+        ("testIterator", testIterator),
+        ("testIteratorRange", testIteratorRange)
     ]
 }

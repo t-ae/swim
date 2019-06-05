@@ -37,7 +37,9 @@ public struct PixelIterator<P: PixelType, T: DataType>: IteratorProtocol, Sequen
             if x >= xRange.endIndex {
                 y += 1
                 x = xRange.startIndex
-                start = image.dataIndex(x: x, y: y)
+                if y < yRange.endIndex {
+                    start = image.dataIndex(x: x, y: y)
+                }
             } else {
                 start += P.channels
             }
