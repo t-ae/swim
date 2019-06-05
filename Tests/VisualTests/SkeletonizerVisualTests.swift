@@ -2,6 +2,11 @@ import XCTest
 import Swim
 
 class SkeletonizerVisualTests: XCTestCase {
+}
+
+#if canImport(AppKit)
+
+extension SkeletonizerVisualTests {
     func testSkeletonize() {
         guard let font = try? TrueTypeFont(url: URL(fileURLWithPath: "/System/Library/Fonts/Helvetica.ttc"), fontSize: 50) else {
             XCTFail("Font not found.")
@@ -20,3 +25,5 @@ class SkeletonizerVisualTests: XCTestCase {
         XCTAssertTrue(ns.isValid, "break here")
     }
 }
+
+#endif
