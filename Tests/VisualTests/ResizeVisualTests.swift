@@ -10,9 +10,9 @@ import AppKit
 
 extension ResizeVisualTests {
     func testResize() {
-        let image = Image<RGB, Double>(width: 4,
+        let image = Image<RGB, Double>(width: 3,
                                        height: 4,
-                                       data: (0..<4*4*3).map { _ in Double.random(in: 0..<1) })
+                                       data: (0..<3*4*3).map { _ in Double.random(in: 0..<1) })
         
         let resizedNN = image.resize(width: 128, height: 192, method: .nearestNeighbor)
         let resizedBL = image.resize(width: 128, height: 192, method: .bilinear)

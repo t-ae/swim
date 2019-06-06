@@ -188,8 +188,8 @@ extension Image where T: BinaryFloatingPoint {
         
         return .createWithPixelRef(width: width, height: height)  { ref in
             // range: -0.5 ... baseImage.width+0.5
-            let xp = Double(baseImage.width) * Double(ref.x) / Double(width)
-            let yp = Double(baseImage.height) * Double(ref.y) / Double(height)
+            let xp = Double(baseImage.width) * Double(ref.x) / Double(width-1)
+            let yp = Double(baseImage.height) * Double(ref.y) / Double(height-1)
             interpolator.interpolate(x: xp-0.5, y: yp-0.5, in: baseImage, into: ref)
         }
     }

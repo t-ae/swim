@@ -80,8 +80,8 @@ extension Image where T: BinaryFloatingPoint {
     @inlinable
     public func resizeBL(width: Int, height: Int) -> Image {
         return .createWithPixelRef(width: width, height: height) { ref in
-            let x = Double(self.width) * Double(ref.x) / Double(width) - 0.5
-            let y = Double(self.height) * Double(ref.y) / Double(height) - 0.5
+            let x = Double(self.width) * Double(ref.x) / Double(width-1) - 0.5
+            let y = Double(self.height) * Double(ref.y) / Double(height-1) - 0.5
             
             let xmin = Foundation.floor(x)
             let ymin = Foundation.floor(y)
