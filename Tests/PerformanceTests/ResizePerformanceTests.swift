@@ -79,9 +79,11 @@ extension Image where T: BinaryFloatingPoint {
     /// For checking how much `resize` is slower than plain implementation.
     @inlinable
     public func resizeBL(width: Int, height: Int) -> Image {
+        let xc = Double(self.width) / Double(width-1)
+        let yc = Double(self.height) / Double(height-1)
         return .createWithPixelRef(width: width, height: height) { ref in
-            let x = Double(self.width) * Double(ref.x) / Double(width-1) - 0.5
-            let y = Double(self.height) * Double(ref.y) / Double(height-1) - 0.5
+            let x = xc * Double(ref.x)  - 0.5
+            let y = yc * Double(ref.y) - 0.5
             
             let xmin = Foundation.floor(x)
             let ymin = Foundation.floor(y)
