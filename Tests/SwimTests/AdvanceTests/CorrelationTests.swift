@@ -5,6 +5,13 @@ class CorrelationTests: XCTestCase {
     
     func testSSD() {
         do {
+            let image1 = Image(width: 3, height: 2, gray: [0, 1, 2, 3, 4, 5] as [UInt8])
+            let image2 = Image(width: 3, height: 2, gray: [2, 4, 6, 2, 4, 6] as [UInt8])
+            
+            XCTAssertEqual(Correlation.ssd(image1, image1), 0)
+            XCTAssertEqual(Correlation.ssd(image1, image2), 31)
+        }
+        do {
             let image1 = Image(width: 3, height: 2, gray: [0, 1, 2, 3, 4, 5] as [Float])
             let image2 = Image(width: 3, height: 2, gray: [2, 4, 6, 2, 4, 6] as [Float])
             
@@ -21,6 +28,13 @@ class CorrelationTests: XCTestCase {
     }
     
     func testSAD() {
+        do {
+            let image1 = Image(width: 3, height: 2, gray: [0, 1, 2, 3, 4, 5] as [UInt8])
+            let image2 = Image(width: 3, height: 2, gray: [2, 4, 6, 2, 4, 6] as [UInt8])
+            
+            XCTAssertEqual(Correlation.sad(image1, image1), 0)
+            XCTAssertEqual(Correlation.sad(image1, image2), 11)
+        }
         do {
             let image1 = Image(width: 3, height: 2, gray: [0, 1, 2, 3, 4, 5] as [Float])
             let image2 = Image(width: 3, height: 2, gray: [2, 4, 6, 2, 4, 6] as [Float])

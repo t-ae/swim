@@ -5,8 +5,8 @@ class ProjectiveTransformationTests: XCTestCase {
     func testProjectiveTransformation() {
         do {
             let a = ProjectiveTransformation(1, -1, 1,
-                                                    1, 1, 0,
-                                                    0, 3, 1)
+                                             1, 1, 0,
+                                             0, 3, 1)
             let inv = try! a.inverted()
             let id = a * inv
             

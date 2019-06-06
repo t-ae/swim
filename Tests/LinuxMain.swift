@@ -13,6 +13,7 @@ XCTMain([
     testCase(ColorArithmeticTests.allTests),
     // BooleanTests
     testCase(BitOperationsTests.allTests),
+    testCase(CheckBoolTests.allTests),
     // ConversionTests
     testCase(ChannelCompositionTests.allTests),
     testCase(ChannelwiseConversionTests.allTests),
@@ -24,7 +25,7 @@ XCTMain([
     testCase(LikeInitializerTests.allTests),
     testCase(PixelIteratorTests.allTests),
     // DrawTests
-    testCase(DrawRectTests.allTests),
+    testCase(DrawTests.allTests),
     // FilterTests
     testCase(ConvolutionTests.allTests),
     testCase(FilterTests.allTests),

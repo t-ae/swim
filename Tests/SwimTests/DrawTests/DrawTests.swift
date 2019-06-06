@@ -1,7 +1,7 @@
 import XCTest
 import Swim
 
-class DrawRectTests: XCTestCase {
+class DrawTests: XCTestCase {
     func testDrawRect() {
         var image = Image<Gray, UInt8>(width: 100, height: 100, value: 0)
         

@@ -45,6 +45,7 @@ class ChannelwiseConversionTests: XCTestCase {
     
     static let allTests = [
         ("testChannelwiseConvert", testChannelwiseConvert),
-        ("testConvertChannel", testConvertChannel)
+        ("testConvertChannel", testConvertChannel),
+        ("testConvertRange", testConvertRange)
     ]
 }
