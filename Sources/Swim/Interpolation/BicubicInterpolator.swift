@@ -15,18 +15,21 @@ public struct BicubicInterpolator<P: PixelType, T: BinaryFloatingPoint&DataType>
         guard distance < 2 else {
             return 0
         }
-        let d2 = distance*distance
-        let d3 = d2*distance
         
         if distance < 1 {
-            var result = (a+2) * d3
-            result -= (a+3)*d2
+            // (a+2)d^3 - (a+3)d^2 + 1
+            // = ((a+2)d - (a + 3))d^2 + 1
+            var result = (a+2) * distance
+            result -= (a+3)
+            result *= distance * distance
             return result + 1
         } else {
-            var result = a*d3
-            result -= 5*a*d2
-            result += 8*a*distance
-            return result - 4*a
+            // ad^3 - 5ad^2 +8ad - 4
+            // = a(d-1)(d-2)^2
+            var result = distance - 2
+            result *= result
+            result *= distance - 1
+            return a * result
         }
     }
 }
