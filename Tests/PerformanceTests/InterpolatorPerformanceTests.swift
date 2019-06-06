@@ -11,8 +11,12 @@ class InterpolatorPerformanceTests: XCTestCase {
         
         measure {
             target.withPixelRef(x: 0, y: 0) { ref in
-                for _ in 0..<3840*2160 {
-                    intpl.interpolate(x: 10.5, y: 10.5, in: image, into: ref)
+                for y in 0..<2160 {
+                    for x in 0..<3840 {
+                        intpl.interpolate(x: Double(x) * Double(image.width) / 3840,
+                                          y: Double(y) * Double(image.height) / 2160,
+                                          in: image, into: ref)
+                    }
                 }
             }
         }
@@ -26,8 +30,12 @@ class InterpolatorPerformanceTests: XCTestCase {
         
         measure {
             target.withPixelRef(x: 0, y: 0) { ref in
-                for _ in 0..<3840*2160 {
-                    intpl.interpolate(x: 10.5, y: 10.5, in: image, into: ref)
+                for y in 0..<2160 {
+                    for x in 0..<3840 {
+                        intpl.interpolate(x: Double(x) * Double(image.width) / 3840,
+                                          y: Double(y) * Double(image.height) / 2160,
+                                          in: image, into: ref)
+                    }
                 }
             }
         }
@@ -41,8 +49,12 @@ class InterpolatorPerformanceTests: XCTestCase {
         
         measure {
             target.withPixelRef(x: 0, y: 0) { ref in
-                for _ in 0..<3840*2160 {
-                    intpl.interpolate(x: 10.5, y: 10.5, in: image, into: ref)
+                for y in 0..<2160 {
+                    for x in 0..<3840 {
+                        intpl.interpolate(x: Double(x) * Double(image.width) / 3840,
+                                          y: Double(y) * Double(image.height) / 2160,
+                                          in: image, into: ref)
+                    }
                 }
             }
         }

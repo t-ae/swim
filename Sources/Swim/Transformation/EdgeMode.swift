@@ -22,14 +22,14 @@ extension EdgeMode {
     /// If (`x`, `y`) is inside `image`, it simply returns `image[x, y]`.
     @inlinable
     public func getColor(x: Int, y: Int, in image: Image<P, T>) -> Color<P, T> {
-        var color = Color<P, T>(value: T.swimDefaultValue)
-        
-        color.data.withUnsafeMutableBufferPointer {
-            let ref = PixelRef<P, T>(x: -1, y: -1, pointer: $0)
-            ref.setColor(x: x, y: y, in: image, edgeMode: self)
+        if let x = clampValue(value: x, max: image.width),
+            let y = clampValue(value: y, max: image.height) {
+            return image[x, y]
+        } else if case let .constant(color) = self {
+            return color
+        } else {
+            fatalError("Never happens.")
         }
-        
-        return color
     }
 }
 
