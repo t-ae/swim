@@ -17,38 +17,41 @@ public enum Skeletonizer {
                 
                 let (x, y) = (pixel.x, pixel.y)
                 
-                let list = [newImage[x, y-1, .gray], newImage[x+1, y-1, .gray],
-                            newImage[x+1, y, .gray], newImage[x+1, y+1, .gray],
-                            newImage[x, y+1, .gray], newImage[x-1, y+1, .gray],
-                            newImage[x-1, y, .gray], newImage[x-1, y-1, .gray]]
+                // 701
+                // 6*2
+                // 543
+                let neighbors = [newImage[x, y-1, .gray], newImage[x+1, y-1, .gray],
+                                 newImage[x+1, y, .gray], newImage[x+1, y+1, .gray],
+                                 newImage[x, y+1, .gray], newImage[x-1, y+1, .gray],
+                                 newImage[x-1, y, .gray], newImage[x-1, y-1, .gray]]
                 
-                var list2 = list
-                list2.append(list.first!)
-                
-                let f2t = zip(list2, list2.dropFirst()).filter { !$0.0 && $0.1 }.count
-                guard f2t == 1 else {
-                    continue
-                }
-                
-                let trues = list.filter { $0 }.count
+                let trues = neighbors.filter { $0 }.count
                 guard 2 <= trues && trues <= 6 else {
                     continue
                 }
                 
+                var list = neighbors
+                list.append(neighbors.first!)
+                
+                let f2t = zip(list, list.dropFirst()).filter { !$0.0 && $0.1 }.count
+                guard f2t == 1 else {
+                    continue
+                }
+                
                 if phase {
-                    guard !newImage[x, y-1, .gray] || !newImage[x+1, y, .gray] || !newImage[x, y+1, .gray] else {
+                    guard !neighbors[0] || !neighbors[2] || !neighbors[4] else {
                         continue
                     }
                     
-                    guard !newImage[x+1, y, .gray] || !newImage[x, y+1, .gray] || !newImage[x-1, y, .gray] else {
+                    guard !neighbors[2] || !neighbors[4] || !neighbors[6] else {
                         continue
                     }
                 } else {
-                    guard !newImage[x, y-1, .gray] || !newImage[x+1, y, .gray] || !newImage[x-1, y, .gray] else {
+                    guard !neighbors[0] || !neighbors[2] || !neighbors[6] else {
                         continue
                     }
                     
-                    guard !newImage[x, y-1, .gray] || !newImage[x, y+1, .gray] || !newImage[x-1, y, .gray] else {
+                    guard !neighbors[0] || !neighbors[4] || !neighbors[6] else {
                         continue
                     }
                 }
