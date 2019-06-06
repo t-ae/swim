@@ -1,5 +1,5 @@
 import XCTest
-import Swim
+@testable import Swim
 
 class ResizePerformanceTests: XCTestCase {
     func testResizeNN_UInt8() {
@@ -101,37 +101,25 @@ extension Image where T: BinaryFloatingPoint {
                 let x = min(max(x0, 0), self.width-1)
                 let y = min(max(y0, 0), self.height-1)
                 
-                let start = self.dataIndex(x: x, y: y)
-                for i in 0..<P.channels {
-                    ref[i] += self[data: start+i] * wx0 * wy0
-                }
+                ref.addColor(x: x, y: y, in: self, with: wx0*wy0)
             }
             do {
                 let x = min(max(x1, 0), self.width-1)
                 let y = min(max(y0, 0), self.height-1)
                 
-                let start = self.dataIndex(x: x, y: y)
-                for i in 0..<P.channels {
-                    ref[i] += self[data: start+i] * wx1 * wy0
-                }
+                ref.addColor(x: x, y: y, in: self, with: wx1*wy0)
             }
             do {
                 let x = min(max(x0, 0), self.width-1)
                 let y = min(max(y1, 0), self.height-1)
                 
-                let start = self.dataIndex(x: x, y: y)
-                for i in 0..<P.channels {
-                    ref[i] += self[data: start+i] * wx0 * wy1
-                }
+                ref.addColor(x: x, y: y, in: self, with: wx0*wy1)
             }
             do {
                 let x = min(max(x1, 0), self.width-1)
                 let y = min(max(y1, 0), self.height-1)
                 
-                let start = self.dataIndex(x: x, y: y)
-                for i in 0..<P.channels {
-                    ref[i] += self[data: start+i] * wx1 * wy1
-                }
+                ref.addColor(x: x, y: y, in: self, with: wx1*wy1)
             }
         }
     }

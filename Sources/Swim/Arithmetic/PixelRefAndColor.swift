@@ -97,7 +97,7 @@ extension PixelRef where T: Numeric {
     ///
     /// It's convenient and faster implementation of:
     ///
-    /// for c in 0..<P.channels { self[c] += factor * image[x, y, c] }
+    /// for c in 0..<P.channels { self[c] = factor * image[x, y, c] }
     @inlinable
     func setColor(x: Int,y: Int, in image: Image<P, T>, with factor: T) {
         let start = image.dataIndex(x: x, y: y)
