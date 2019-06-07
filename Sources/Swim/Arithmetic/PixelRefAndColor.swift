@@ -3,14 +3,14 @@ import Foundation
 extension PixelRef where T: AdditiveArithmetic {
     @inlinable
     public static func +=<C: ColorProtocol>(lhs: PixelRef, rhs: C) where C.P == P, C.T == T {
-        for i in 0..<lhs.pointer.count {
+        for i in 0..<P.channels {
             lhs.pointer[i] += rhs[i]
         }
     }
     
     @inlinable
     public static func -=<C: ColorProtocol>(lhs: PixelRef, rhs: C) where C.P == P, C.T == T {
-        for i in 0..<lhs.pointer.count {
+        for i in 0..<P.channels {
             lhs.pointer[i] -= rhs[i]
         }
     }
@@ -19,7 +19,7 @@ extension PixelRef where T: AdditiveArithmetic {
 extension PixelRef where T: Numeric {
     @inlinable
     public static func *=<C: ColorProtocol>(lhs: PixelRef, rhs: C) where C.P == P, C.T == T {
-        for i in 0..<lhs.pointer.count {
+        for i in 0..<P.channels {
             lhs.pointer[i] *= rhs[i]
         }
     }
@@ -28,7 +28,7 @@ extension PixelRef where T: Numeric {
 extension PixelRef where T: BinaryInteger {
     @inlinable
     public static func /=<C: ColorProtocol>(lhs: PixelRef, rhs: C) where C.P == P, C.T == T {
-        for i in 0..<lhs.pointer.count {
+        for i in 0..<P.channels {
             lhs.pointer[i] /= rhs[i]
         }
     }
@@ -37,7 +37,7 @@ extension PixelRef where T: BinaryInteger {
 extension PixelRef where T: FloatingPoint {
     @inlinable
     public static func /=<C: ColorProtocol>(lhs: PixelRef, rhs: C) where C.P == P, C.T == T {
-        for i in 0..<lhs.pointer.count {
+        for i in 0..<P.channels {
             lhs.pointer[i] /= rhs[i]
         }
     }
@@ -53,7 +53,7 @@ extension PixelRef {
     /// for c in 0..<P.channels { self[c] = color[c] }
     @inlinable
     public func setColor<C: ColorProtocol>(color: C) where C.P == P, C.T == T {
-        for i in 0..<pointer.count {
+        for i in 0..<P.channels {
             pointer[i] = color[i]
         }
     }
@@ -66,7 +66,7 @@ extension PixelRef {
     @inlinable
     public func setColor(x: Int,y: Int, in image: Image<P, T>) {
         let start = image.dataIndex(x: x, y: y)
-        for i in 0..<pointer.count {
+        for i in 0..<P.channels {
             pointer[i] = image.data[start + i]
         }
     }
@@ -80,7 +80,7 @@ extension PixelRef where T: Numeric {
     /// for c in 0..<P.channels { self[c] = factor * color[c] }
     @inlinable
     func setColor<C: ColorProtocol>(color: C, with factor: T) where C.P == P, C.T == T {
-        for i in 0..<pointer.count {
+        for i in 0..<P.channels {
             pointer[i] = color[i] * factor
         }
     }
@@ -93,7 +93,7 @@ extension PixelRef where T: Numeric {
     @inlinable
     func setColor(x: Int,y: Int, in image: Image<P, T>, with factor: T) {
         let start = image.dataIndex(x: x, y: y)
-        for i in 0..<pointer.count {
+        for i in 0..<P.channels {
             pointer[i] = image.data[start+i] * factor
         }
     }
@@ -105,7 +105,7 @@ extension PixelRef where T: Numeric {
     /// for c in 0..<P.channels { self[c] += factor * color[c] }
     @inlinable
     func addColor<C: ColorProtocol>(color: C, with factor: T = 1) where C.P == P, C.T == T {
-        for i in 0..<pointer.count {
+        for i in 0..<P.channels {
             pointer[i] += color[i] * factor
         }
     }
@@ -118,7 +118,7 @@ extension PixelRef where T: Numeric {
     @inlinable
     func addColor(x: Int, y: Int, in image: Image<P, T>, with factor: T = 1) {
         let start = image.dataIndex(x: x, y: y)
-        for i in 0..<pointer.count {
+        for i in 0..<P.channels {
             pointer[i] += image.data[start+i] * factor
         }
     }
