@@ -403,8 +403,14 @@ extension ApplicationVisualTests {
         let randDither = lena.dataConverted { px -> Double in
             (px < .random(in: 0..<1)) ? 0 : 1
         }
-        
         images.append(randDither)
+        
+        let matrix = Image(width: 4, height: 4, gray: (0..<16).map { (Double($0)+0.5)/16 }.shuffled())
+        let matrixDither = lena.channelwiseConverted { x, y, c, value -> Double in
+            let v = matrix[x%4, y%4, .gray]
+            return value < v ? 0 : 1
+        }
+        images.append(matrixDither)
         
         var floydSteinbergDither = lena
         for y in 0..<floydSteinbergDither.height {
