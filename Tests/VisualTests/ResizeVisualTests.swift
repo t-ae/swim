@@ -54,12 +54,13 @@ extension ResizeVisualTests {
         var images = [Image<RGB, Double>]()
         
         let size = 100
-        images.append(lena.resize(width: size, height: size, method: .nearestNeighbor))
-        images.append(lena.resize(width: size, height: size, method: .bilinear))
-        images.append(lena.resize(width: size, height: size, method: .bicubic))
-        images.append(lena.resize(width: size, height: size, method: .lanczos2))
-        images.append(lena.resize(width: size, height: size, method: .lanczos3))
-        images.append(lena.resize(width: size, height: size, method: .areaAverage))
+        let avoidSparseSampling = true
+        images.append(lena.resize(width: size, height: size, method: .nearestNeighbor, avoidSparseSampling: avoidSparseSampling))
+        images.append(lena.resize(width: size, height: size, method: .bilinear, avoidSparseSampling: avoidSparseSampling))
+        images.append(lena.resize(width: size, height: size, method: .bicubic, avoidSparseSampling: avoidSparseSampling))
+        images.append(lena.resize(width: size, height: size, method: .lanczos2, avoidSparseSampling: avoidSparseSampling))
+        images.append(lena.resize(width: size, height: size, method: .lanczos3, avoidSparseSampling: avoidSparseSampling))
+        images.append(lena.resize(width: size, height: size, method: .areaAverage, avoidSparseSampling: avoidSparseSampling))
         
         let image = Image.concatH(images)
         
