@@ -229,14 +229,14 @@ extension DrawVisualTests {
         let path = testResoruceRoot().appendingPathComponent("lena_512.png")
         var lena = try! Image<RGB, Double>(contentsOf: path)
         
-        let size = Image.getTextImageSize(text: "LENA", font: font)
+        let size = Image.getTextImageSize(text: "LENA2", font: font)
         
-        lena.drawText(origin: (0, 0), text: "LENA", font: font, color: Color(r: 0, g: 0, b: 0, a: 1))
-        lena.drawText(origin: (50, 50), text: "LENA", font: font, color: Color(r: 0, g: 0, b: 1, a: 0.7))
+        lena.drawText(position: (0, 0), text: "LENA1", font: font, color: Color(r: 0, g: 0, b: 0, a: 1), aligment: .right)
+        lena.drawText(position: (size.width / 2, size.height / 2), text: "LENA2", font: font, color: Color(r: 0, g: 0, b: 1, a: 0.7), aligment: .center)
         
-        lena.drawText(origin: (511-size.width, 256), text: "LENA", font: font, color: Color(r: 0, g: 1, b: 1, a: 0.7))
+        lena.drawText(position: (lena.width, 256), text: "LENA3", font: font, color: Color(r: 0, g: 1, b: 1, a: 0.7), aligment: .right)
         
-        lena.drawText(origin: (-30, 256), text: "LENA", font: font, color: Color(r: 1, g: 1, b: 1, a: 0.7))
+        lena.drawText(position: (-30, 256), text: "LENA4", font: font, color: Color(r: 1, g: 1, b: 1, a: 0.7), aligment: .left)
         
         let lorem = """
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
@@ -245,11 +245,12 @@ extension DrawVisualTests {
         Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
         """
         
-        lena.drawText(origin: (0, 300),
+        lena.drawText(position: (0, 300),
                       text: lorem,
                       font: font2,
                       lineGap: 0,
-                      color: Color(r: 0, g: 0, b: 0, a: 1))
+                      color: Color(r: 0, g: 0, b: 0, a: 1),
+                      aligment: .left)
         
         let nsImage = doubleToNSImage(lena)
         
@@ -271,12 +272,12 @@ extension DrawVisualTests {
         
         let size = Image.getTextImageSize(text: "LENA", font: font)
         
-        lena.drawText(origin: (0, 0), text: "LENA", font: font, color: .black)
-        lena.drawText(origin: (50, 50), text: "LENA", font: font, color: Color(r: 0, g: 0, b: 255, a: 200))
+        lena.drawText(position: (0, 0), text: "LENA", font: font, color: .black, aligment: .left)
+        lena.drawText(position: (50, 50), text: "LENA", font: font, color: Color(r: 0, g: 0, b: 255, a: 200), aligment: .left)
         
-        lena.drawText(origin: (511-size.width, 256), text: "LENA", font: font, color: Color(r: 0, g: 255, b: 255, a: 200))
+        lena.drawText(position: (511-size.width, 256), text: "LENA", font: font, color: Color(r: 0, g: 255, b: 255, a: 200), aligment: .left)
         
-        lena.drawText(origin: (-30, 256), text: "LENA", font: font, color: Color(r: 255, g: 255, b: 255, a: 200))
+        lena.drawText(position: (-30, 256), text: "LENA", font: font, color: Color(r: 255, g: 255, b: 255, a: 200), aligment: .left)
         
         let lorem = """
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
@@ -285,11 +286,12 @@ extension DrawVisualTests {
         Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
         """
         
-        lena.drawText(origin: (0, 300),
+        lena.drawText(position: (0, 300),
                       text: lorem,
                       font: font2,
                       lineGap: 0,
-                      color: Color(r: 0, g: 0, b: 0, a: 255))
+                      color: Color(r: 0, g: 0, b: 0, a: 255),
+                      aligment: .left)
         
         let nsImage = lena.nsImage()
         

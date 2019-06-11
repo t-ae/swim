@@ -33,6 +33,12 @@ public enum TrueTypeFontError: Error {
     case fontIndexOutOfRange
 }
 
+public enum TextAlignment: Int {
+    case left
+    case right
+    case center
+}
+
 public struct TrueTypeFont {
     @usableFromInline
     let info: stbtt_fontinfo
@@ -222,6 +228,18 @@ extension Image where P == Gray, T == UInt8 {
     }
 }
 
+@inlinable
+func calculateOrigin(for position: (x: Int, y: Int), size: (width: Int, height: Int), and textAligment: TextAlignment) -> (x: Int, y: Int) {
+    switch textAligment {
+    case .left:
+        return position
+    case .center:
+        return (x: position.x - size.width / 2, y: position.y - size.height / 2)
+    case .right:
+        return (x: position.x - size.width, y: position.y)
+    }
+}
+
 // MARK: - Color image creation
 extension Image where P: HasAlpha, T: BinaryInteger {
     /// Create image contains specified text/color.
@@ -284,12 +302,13 @@ extension Image where P: NoAlpha, T: BinaryInteger {
     ///
     /// If you want to know the size of text area in advance, use `getTextImageSize`.
     @inlinable
-    public mutating func drawText<P2: HasAlpha>(origin: (x: Int, y: Int),
+    public mutating func drawText<P2: HasAlpha>(position: (x: Int, y: Int),
                                                 text: String,
                                                 font: TrueTypeFont,
                                                 lineGap: Int? = nil,
-                                                color: Color<P2, T>) where P2.BaseType == P {
-        guard origin.x < width && origin.y < height else {
+                                                color: Color<P2, T>,
+                                                aligment: TextAlignment) where P2.BaseType == P {
+        guard position.x >= 0 && position.x <= width && position.y >= 0 && position.y <= height else {
             // Drawing area is out of image.
             return
         }
@@ -297,6 +316,7 @@ extension Image where P: NoAlpha, T: BinaryInteger {
                                                       font: font,
                                                       lineGap: lineGap,
                                                       color: color)
+        let origin = calculateOrigin(for: position, size: colorImage.size, and: aligment)
         drawImage(origin: origin, image: colorImage)
     }
 }
@@ -306,12 +326,13 @@ extension Image where P: NoAlpha, T: BinaryFloatingPoint {
     ///
     /// If you want to know the size of text area in advance, use `getTextImageSize`.
     @inlinable
-    public mutating func drawText<P2: HasAlpha>(origin: (x: Int, y: Int),
+    public mutating func drawText<P2: HasAlpha>(position: (x: Int, y: Int),
                                                 text: String,
                                                 font: TrueTypeFont,
                                                 lineGap: Int? = nil,
-                                                color: Color<P2, T>) where P2.BaseType == P {
-        guard origin.x < width && origin.y < height else {
+                                                color: Color<P2, T>,
+                                                aligment: TextAlignment) where P2.BaseType == P {
+        guard position.x >= 0 && position.x <= width && position.y >= 0 && position.y <= height else {
             // Drawing area is out of image.
             return
         }
@@ -319,6 +340,7 @@ extension Image where P: NoAlpha, T: BinaryFloatingPoint {
                                                       font: font,
                                                       lineGap: lineGap,
                                                       color: color)
+        let origin = calculateOrigin(for: position, size: colorImage.size, and: aligment)
         drawImage(origin: origin, image: colorImage)
     }
 }
@@ -328,12 +350,13 @@ extension Image where P: HasAlpha, T: BinaryInteger {
     ///
     /// If you want to know the size of text area in advance, use `getTextImageSize`.
     @inlinable
-    public mutating func drawText(origin: (x: Int, y: Int),
+    public mutating func drawText(position: (x: Int, y: Int),
                                   text: String,
                                   font: TrueTypeFont,
                                   lineGap: Int? = nil,
-                                  color: Color<P, T>) {
-        guard origin.x < width && origin.y < height else {
+                                  color: Color<P, T>,
+                                  aligment: TextAlignment) {
+        guard position.x >= 0 && position.x <= width && position.y >= 0 && position.y <= height else {
             // Drawing area is out of image.
             return
         }
@@ -341,6 +364,7 @@ extension Image where P: HasAlpha, T: BinaryInteger {
                                                      font: font,
                                                      lineGap: lineGap,
                                                      color: color)
+        let origin = calculateOrigin(for: position, size: colorImage.size, and: aligment)
         drawImage(origin: origin, image: colorImage)
     }
 }
@@ -351,12 +375,14 @@ extension Image where P: HasAlpha, T: BinaryFloatingPoint {
     ///
     /// If you want to know the size of text area in advance, use `getTextImageSize`.
     @inlinable
-    public mutating func drawText(origin: (x: Int, y: Int),
+    public mutating func drawText(position: (x: Int, y: Int),
                                   text: String,
                                   font: TrueTypeFont,
                                   lineGap: Int? = nil,
-                                  color: Color<P, T>) {
-        guard origin.x < width && origin.y < height else {
+                                  color: Color<P, T>,
+                                  aligment: TextAlignment) {
+        
+        guard position.x >= 0 && position.x <= width && position.y >= 0 && position.y <= height else {
             // Drawing area is out of image.
             return
         }
@@ -364,6 +390,7 @@ extension Image where P: HasAlpha, T: BinaryFloatingPoint {
                                                      font: font,
                                                      lineGap: lineGap,
                                                      color: color)
+        let origin = calculateOrigin(for: position, size: colorImage.size, and: aligment)
         drawImage(origin: origin, image: colorImage)
     }
 }
