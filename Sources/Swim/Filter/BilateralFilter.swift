@@ -19,12 +19,12 @@ extension Image where T == Double {
     
         let pad = (windowSize-1)/2
         
-        var distanceLUT = Image<Gray, Double>(width: windowSize, height: windowSize, value: 0)
-        distanceLUT.pixelwiseConvert { ref in
-            let dx = ref.x - pad
-            let dy = ref.y - pad
-            
-            ref[.gray] = exp(-Double(dx*dx + dy+dy) / (2*distanceSigma2))
+        let distanceLUT = Image<Gray, Double>
+            .createWithPixelRef(width: windowSize, height: windowSize) { ref in
+                let dx = ref.x - pad
+                let dy = ref.y - pad
+                
+                ref[.gray] = exp(-Double(dx*dx + dy+dy) / (2*distanceSigma2))
         }
         
         return channelwiseConverted { x, y, c, value in
