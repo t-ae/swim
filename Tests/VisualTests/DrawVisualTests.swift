@@ -275,10 +275,10 @@ extension DrawVisualTests {
         """, font: font, color: .yellow, anchor: .rightBottom)
         
         
-        lena.drawText(position: (-30, 200), text: """
+        lena.drawText(position: (-30, lena.height/4), text: """
         LENA4
         Partially out of image
-        """, font: font, color: Color(r: 1, g: 1, b: 1, a: 0.7), anchor: .leftTop)
+        """, font: font, color: Color(r: 1, g: 1, b: 1, a: 0.7), anchor: .leftCenter)
         
         let lorem = """
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.

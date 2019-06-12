@@ -329,10 +329,6 @@ extension Image where P: NoAlpha, T: BinaryInteger {
                                                 lineGap: Int? = nil,
                                                 color: Color<P2, T>,
                                                 anchor: TextAnchor) where P2.BaseType == P {
-        guard position.x >= 0 && position.x <= width && position.y >= 0 && position.y <= height else {
-            // Drawing area is out of image.
-            return
-        }
         let colorImage = Image<P2, T>.createTextImage(text: text,
                                                       font: font,
                                                       lineGap: lineGap,
@@ -353,10 +349,6 @@ extension Image where P: NoAlpha, T: BinaryFloatingPoint {
                                                 lineGap: Int? = nil,
                                                 color: Color<P2, T>,
                                                 anchor: TextAnchor) where P2.BaseType == P {
-        guard position.x >= 0 && position.x <= width && position.y >= 0 && position.y <= height else {
-            // Drawing area is out of image.
-            return
-        }
         let colorImage = Image<P2, T>.createTextImage(text: text,
                                                       font: font,
                                                       lineGap: lineGap,
@@ -377,10 +369,6 @@ extension Image where P: HasAlpha, T: BinaryInteger {
                                   lineGap: Int? = nil,
                                   color: Color<P, T>,
                                   anchor: TextAnchor) {
-        guard position.x >= 0 && position.x <= width && position.y >= 0 && position.y <= height else {
-            // Drawing area is out of image.
-            return
-        }
         let colorImage = Image<P, T>.createTextImage(text: text,
                                                      font: font,
                                                      lineGap: lineGap,
@@ -402,11 +390,6 @@ extension Image where P: HasAlpha, T: BinaryFloatingPoint {
                                   lineGap: Int? = nil,
                                   color: Color<P, T>,
                                   anchor: TextAnchor) {
-        
-        guard position.x >= 0 && position.x <= width && position.y >= 0 && position.y <= height else {
-            // Drawing area is out of image.
-            return
-        }
         let colorImage = Image<P, T>.createTextImage(text: text,
                                                      font: font,
                                                      lineGap: lineGap,
