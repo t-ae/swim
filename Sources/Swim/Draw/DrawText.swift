@@ -80,9 +80,24 @@ public struct TrueTypeFont {
     }
 }
 
-@inlinable
-func getCodepoint(char: Character) -> Int32 {
-    return Int32(char.unicodeScalars.reduce(0) { acc, v in (acc << 8) | v.value })
+@usableFromInline
+enum DrawTextUtils {
+    @inlinable
+    static func getCodepoint(char: Character) -> Int32 {
+        return Int32(char.unicodeScalars.reduce(0) { acc, v in (acc << 8) | v.value })
+    }
+    
+    @inlinable
+    static func calculateOrigin(for position: (x: Int, y: Int), size: (width: Int, height: Int), and anchor: TextAnchor) -> (x: Int, y: Int) {
+        switch anchor {
+        case .left:
+            return position
+        case .center:
+            return (x: position.x - size.width / 2, y: position.y - size.height / 2)
+        case .right:
+            return (x: position.x - size.width, y: position.y)
+        }
+    }
 }
 
 extension Image where P == Gray, T == UInt8 {
@@ -130,7 +145,7 @@ extension Image where P == Gray, T == UInt8 {
             var width = 0
             var actualLineHeight = lineHeight
             
-            let codepoints = line.map(getCodepoint)
+            let codepoints = line.map(DrawTextUtils.getCodepoint)
             
             for i in 0..<codepoints.count {
                 var ix0: Int32 = 0
@@ -185,7 +200,7 @@ extension Image where P == Gray, T == UInt8 {
         
         var y = 0
         text.enumerateLines { line, _ in
-            let codepoints = line.map(getCodepoint)
+            let codepoints = line.map(DrawTextUtils.getCodepoint)
             
             var x = 0
             
@@ -225,18 +240,6 @@ extension Image where P == Gray, T == UInt8 {
         }
         
         return image
-    }
-}
-
-@inlinable
-func calculateOrigin(for position: (x: Int, y: Int), size: (width: Int, height: Int), and anchor: TextAnchor) -> (x: Int, y: Int) {
-    switch anchor {
-    case .left:
-        return position
-    case .center:
-        return (x: position.x - size.width / 2, y: position.y - size.height / 2)
-    case .right:
-        return (x: position.x - size.width, y: position.y)
     }
 }
 
@@ -316,7 +319,7 @@ extension Image where P: NoAlpha, T: BinaryInteger {
                                                       font: font,
                                                       lineGap: lineGap,
                                                       color: color)
-        let origin = calculateOrigin(for: position, size: colorImage.size, and: anchor)
+        let origin = DrawTextUtils.calculateOrigin(for: position, size: colorImage.size, and: anchor)
         drawImage(origin: origin, image: colorImage)
     }
 }
@@ -340,7 +343,7 @@ extension Image where P: NoAlpha, T: BinaryFloatingPoint {
                                                       font: font,
                                                       lineGap: lineGap,
                                                       color: color)
-        let origin = calculateOrigin(for: position, size: colorImage.size, and: anchor)
+        let origin = DrawTextUtils.calculateOrigin(for: position, size: colorImage.size, and: anchor)
         drawImage(origin: origin, image: colorImage)
     }
 }
@@ -364,7 +367,7 @@ extension Image where P: HasAlpha, T: BinaryInteger {
                                                      font: font,
                                                      lineGap: lineGap,
                                                      color: color)
-        let origin = calculateOrigin(for: position, size: colorImage.size, and: anchor)
+        let origin = DrawTextUtils.calculateOrigin(for: position, size: colorImage.size, and: anchor)
         drawImage(origin: origin, image: colorImage)
     }
 }
@@ -390,7 +393,7 @@ extension Image where P: HasAlpha, T: BinaryFloatingPoint {
                                                      font: font,
                                                      lineGap: lineGap,
                                                      color: color)
-        let origin = calculateOrigin(for: position, size: colorImage.size, and: anchor)
+        let origin = DrawTextUtils.calculateOrigin(for: position, size: colorImage.size, and: anchor)
         drawImage(origin: origin, image: colorImage)
     }
 }
