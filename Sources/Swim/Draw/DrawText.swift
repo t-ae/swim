@@ -98,7 +98,7 @@ enum DrawTextUtils {
     }
     
     @inlinable
-    static func calculateOrigin(for position: (x: Int, y: Int), size: (width: Int, height: Int), and anchor: TextAnchor) -> (x: Int, y: Int) {
+    static func calculateOrigin(position: (x: Int, y: Int), size: (width: Int, height: Int), anchor: TextAnchor) -> (x: Int, y: Int) {
         let x: Int
         switch anchor {
         case .leftTop, .leftCenter, .leftBottom:
@@ -367,7 +367,7 @@ extension Image where P: NoAlpha, T: BinaryInteger {
                                                       alignment: alignment,
                                                       lineGap: lineGap,
                                                       color: color)
-        let origin = DrawTextUtils.calculateOrigin(for: position, size: colorImage.size, and: anchor)
+        let origin = DrawTextUtils.calculateOrigin(position: position, size: colorImage.size, anchor: anchor)
         drawImage(origin: origin, image: colorImage)
     }
 }
@@ -394,7 +394,7 @@ extension Image where P: NoAlpha, T: BinaryFloatingPoint {
                                                       alignment: alignment,
                                                       lineGap: lineGap,
                                                       color: color)
-        let origin = DrawTextUtils.calculateOrigin(for: position, size: colorImage.size, and: anchor)
+        let origin = DrawTextUtils.calculateOrigin(position: position, size: colorImage.size, anchor: anchor)
         drawImage(origin: origin, image: colorImage)
     }
 }
@@ -421,7 +421,7 @@ extension Image where P: HasAlpha, T: BinaryInteger {
                                                      alignment: alignment,
                                                      lineGap: lineGap,
                                                      color: color)
-        let origin = DrawTextUtils.calculateOrigin(for: position, size: colorImage.size, and: anchor)
+        let origin = DrawTextUtils.calculateOrigin(position: position, size: colorImage.size, anchor: anchor)
         drawImage(origin: origin, image: colorImage)
     }
 }
@@ -449,7 +449,7 @@ extension Image where P: HasAlpha, T: BinaryFloatingPoint {
                                                      alignment: alignment,
                                                      lineGap: lineGap,
                                                      color: color)
-        let origin = DrawTextUtils.calculateOrigin(for: position, size: colorImage.size, and: anchor)
+        let origin = DrawTextUtils.calculateOrigin(position: position, size: colorImage.size, anchor: anchor)
         drawImage(origin: origin, image: colorImage)
     }
 }
