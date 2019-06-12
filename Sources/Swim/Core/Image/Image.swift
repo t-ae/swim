@@ -11,7 +11,7 @@ public struct Image<P: PixelType, T: DataType> {
 
     @inlinable
     public init(width: Int, height: Int, data: [T]) {
-        precondition(width >= 0 && height >= 0, "Image can't have negative size.")
+        precondition(width > 0 && height > 0, "Image must have positive size.")
         precondition(data.count == width * height * P.channels,
                      "Size of `data` must be equal to `width` * `height` * number of channels")
         self.width = width
