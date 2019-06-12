@@ -229,14 +229,27 @@ extension DrawVisualTests {
         let path = testResoruceRoot().appendingPathComponent("lena_512.png")
         var lena = try! Image<RGB, Double>(contentsOf: path)
         
-        let size = Image.getTextImageSize(text: "LENA2", font: font)
+        lena.drawText(position: (0, 0), text: """
+        LENA1
+        ALIGN LEFT
+        """, font: font, color: Color(r: 0, g: 0, b: 0, a: 1), aligment: .left)
         
-        lena.drawText(position: (0, 0), text: "LENA1", font: font, color: Color(r: 0, g: 0, b: 0, a: 1), aligment: .right)
-        lena.drawText(position: (size.width / 2, size.height / 2), text: "LENA2", font: font, color: Color(r: 0, g: 0, b: 1, a: 0.7), aligment: .center)
+        let centerText = """
+        LENA2
+        ALIGN CENTER
+        """
+        let size = Image.getTextImageSize(text: centerText, font: font)
+        lena.drawText(position: (size.width / 2, size.height / 2 + 64), text: centerText, font: font, color: Color(r: 0, g: 0, b: 1, a: 0.7), aligment: .center)
         
-        lena.drawText(position: (lena.width, 256), text: "LENA3", font: font, color: Color(r: 0, g: 1, b: 1, a: 0.7), aligment: .right)
+        lena.drawText(position: (lena.width, 256), text: """
+        LENA3
+        ALIGN RIGHT
+        """, font: font, color: Color(r: 0, g: 1, b: 1, a: 0.7), aligment: .right)
         
-        lena.drawText(position: (-30, 256), text: "LENA4", font: font, color: Color(r: 1, g: 1, b: 1, a: 0.7), aligment: .left)
+        lena.drawText(position: (-30, 200), text: """
+        LENA4
+        Partially out of image
+        """, font: font, color: Color(r: 1, g: 1, b: 1, a: 0.7), aligment: .left)
         
         let lorem = """
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
