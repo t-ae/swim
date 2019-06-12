@@ -204,14 +204,32 @@ extension DrawVisualTests {
             XCTFail("Font not found.")
             return
         }
-        let image = Image.createTextImage(text: """
+        var images = [Image<Gray, UInt8>]()
+        let left = Image.createTextImage(text: """
             abcdefghijklmnopqrstuvwxyz
             ABCDEFGHIJKLMNOPQRSTUVWXYZ
             あいうえお阿伊宇江於
             AWAWAWAWAW
             """, font: font, alignment: .left)
+        images.append(left)
         
-        let nsImage = image.nsImage()
+        let center = Image.createTextImage(text: """
+            abcdefghijklmnopqrstuvwxyz
+            ABCDEFGHIJKLMNOPQRSTUVWXYZ
+            あいうえお阿伊宇江於
+            AWAWAWAWAW
+            """, font: font, alignment: .center)
+        images.append(center)
+        
+        let right = Image.createTextImage(text: """
+            abcdefghijklmnopqrstuvwxyz
+            ABCDEFGHIJKLMNOPQRSTUVWXYZ
+            あいうえお阿伊宇江於
+            AWAWAWAWAW
+            """, font: font, alignment: .right)
+        images.append(right)
+        
+        let nsImage = Image.concatV(images).nsImage()
         
         XCTAssertTrue(nsImage.isValid, "Break and check nsImage in debugger.")
     }
