@@ -316,11 +316,12 @@ extension Image where P: HasAlpha, T: BinaryFloatingPoint {
     /// Create image contains specified text/color.
     ///
     /// - Parameters:
+    ///   - alignment: Text alignment. Default: .left.
     ///   - lineGap: Gap between lines in pixel. If nil, proper size will be used. Default: nil.
     @inlinable
     public static func createTextImage(text: String,
                                        font: TrueTypeFont,
-                                       alignment: TextAlignment,
+                                       alignment: TextAlignment = .left,
                                        lineGap: Int? = nil,
                                        color: Color<P, T>) -> Image {
         let grayImage = Image<Gray, UInt8>.createTextImage(text: text,
@@ -348,6 +349,11 @@ extension Image where P: NoAlpha, T: BinaryInteger {
     /// Draw text in image.
     ///
     /// If you want to know the size of text area in advance, use `getTextImageSize`.
+    ///
+    /// - Parameters:
+    ///   - alignment: Text alignment. Default: .left.
+    ///   - anchor: Specify where the `position` is in text bounding box. Default: .leftTop.
+    ///   - lineGap: Gap between lines in pixel. If nil, proper size will be used. Default: nil.
     @inlinable
     public mutating func drawText<P2: HasAlpha>(position: (x: Int, y: Int),
                                                 text: String,
@@ -370,6 +376,11 @@ extension Image where P: NoAlpha, T: BinaryFloatingPoint {
     /// Draw text in image.
     ///
     /// If you want to know the size of text area in advance, use `getTextImageSize`.
+    ///
+    /// - Parameters:
+    ///   - alignment: Text alignment. Default: .left.
+    ///   - anchor: Specify where the `position` is in text bounding box. Default: .leftTop.
+    ///   - lineGap: Gap between lines in pixel. If nil, proper size will be used. Default: nil.
     @inlinable
     public mutating func drawText<P2: HasAlpha>(position: (x: Int, y: Int),
                                                 text: String,
@@ -392,6 +403,11 @@ extension Image where P: HasAlpha, T: BinaryInteger {
     /// Draw text in image.
     ///
     /// If you want to know the size of text area in advance, use `getTextImageSize`.
+    ///
+    /// - Parameters:
+    ///   - alignment: Text alignment. Default: .left.
+    ///   - anchor: Specify where the `position` is in text bounding box. Default: .leftTop.
+    ///   - lineGap: Gap between lines in pixel. If nil, proper size will be used. Default: nil.
     @inlinable
     public mutating func drawText(position: (x: Int, y: Int),
                                   text: String,
@@ -415,6 +431,11 @@ extension Image where P: HasAlpha, T: BinaryFloatingPoint {
     /// Draw text in image.
     ///
     /// If you want to know the size of text area in advance, use `getTextImageSize`.
+    ///
+    /// - Parameters:
+    ///   - alignment: Text alignment. Default: .left.
+    ///   - anchor: Specify where the `position` is in text bounding box. Default: .leftTop.
+    ///   - lineGap: Gap between lines in pixel. If nil, proper size will be used. Default: nil.
     @inlinable
     public mutating func drawText(position: (x: Int, y: Int),
                                   text: String,
