@@ -33,7 +33,7 @@ public enum TrueTypeFontError: Error {
     case fontIndexOutOfRange
 }
 
-public enum TextAlignment: Int {
+public enum TextAnchor {
     case left
     case right
     case center
@@ -229,8 +229,8 @@ extension Image where P == Gray, T == UInt8 {
 }
 
 @inlinable
-func calculateOrigin(for position: (x: Int, y: Int), size: (width: Int, height: Int), and textAligment: TextAlignment) -> (x: Int, y: Int) {
-    switch textAligment {
+func calculateOrigin(for position: (x: Int, y: Int), size: (width: Int, height: Int), and anchor: TextAnchor) -> (x: Int, y: Int) {
+    switch anchor {
     case .left:
         return position
     case .center:
@@ -307,7 +307,7 @@ extension Image where P: NoAlpha, T: BinaryInteger {
                                                 font: TrueTypeFont,
                                                 lineGap: Int? = nil,
                                                 color: Color<P2, T>,
-                                                aligment: TextAlignment) where P2.BaseType == P {
+                                                anchor: TextAnchor) where P2.BaseType == P {
         guard position.x >= 0 && position.x <= width && position.y >= 0 && position.y <= height else {
             // Drawing area is out of image.
             return
@@ -316,7 +316,7 @@ extension Image where P: NoAlpha, T: BinaryInteger {
                                                       font: font,
                                                       lineGap: lineGap,
                                                       color: color)
-        let origin = calculateOrigin(for: position, size: colorImage.size, and: aligment)
+        let origin = calculateOrigin(for: position, size: colorImage.size, and: anchor)
         drawImage(origin: origin, image: colorImage)
     }
 }
@@ -331,7 +331,7 @@ extension Image where P: NoAlpha, T: BinaryFloatingPoint {
                                                 font: TrueTypeFont,
                                                 lineGap: Int? = nil,
                                                 color: Color<P2, T>,
-                                                aligment: TextAlignment) where P2.BaseType == P {
+                                                anchor: TextAnchor) where P2.BaseType == P {
         guard position.x >= 0 && position.x <= width && position.y >= 0 && position.y <= height else {
             // Drawing area is out of image.
             return
@@ -340,7 +340,7 @@ extension Image where P: NoAlpha, T: BinaryFloatingPoint {
                                                       font: font,
                                                       lineGap: lineGap,
                                                       color: color)
-        let origin = calculateOrigin(for: position, size: colorImage.size, and: aligment)
+        let origin = calculateOrigin(for: position, size: colorImage.size, and: anchor)
         drawImage(origin: origin, image: colorImage)
     }
 }
@@ -355,7 +355,7 @@ extension Image where P: HasAlpha, T: BinaryInteger {
                                   font: TrueTypeFont,
                                   lineGap: Int? = nil,
                                   color: Color<P, T>,
-                                  aligment: TextAlignment) {
+                                  anchor: TextAnchor) {
         guard position.x >= 0 && position.x <= width && position.y >= 0 && position.y <= height else {
             // Drawing area is out of image.
             return
@@ -364,7 +364,7 @@ extension Image where P: HasAlpha, T: BinaryInteger {
                                                      font: font,
                                                      lineGap: lineGap,
                                                      color: color)
-        let origin = calculateOrigin(for: position, size: colorImage.size, and: aligment)
+        let origin = calculateOrigin(for: position, size: colorImage.size, and: anchor)
         drawImage(origin: origin, image: colorImage)
     }
 }
@@ -380,7 +380,7 @@ extension Image where P: HasAlpha, T: BinaryFloatingPoint {
                                   font: TrueTypeFont,
                                   lineGap: Int? = nil,
                                   color: Color<P, T>,
-                                  aligment: TextAlignment) {
+                                  anchor: TextAnchor) {
         
         guard position.x >= 0 && position.x <= width && position.y >= 0 && position.y <= height else {
             // Drawing area is out of image.
@@ -390,7 +390,7 @@ extension Image where P: HasAlpha, T: BinaryFloatingPoint {
                                                      font: font,
                                                      lineGap: lineGap,
                                                      color: color)
-        let origin = calculateOrigin(for: position, size: colorImage.size, and: aligment)
+        let origin = calculateOrigin(for: position, size: colorImage.size, and: anchor)
         drawImage(origin: origin, image: colorImage)
     }
 }
