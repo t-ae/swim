@@ -1,7 +1,7 @@
 import Foundation
 
 public enum ImageStatistics {
-    /// Compute peek sound/noise ratio.
+    /// Compute peek signal/noise ratio.
     public static func psnr(image1: Image<Gray, Double>, image2: Image<Gray, Double>) -> Double {
         let ssd = Correlation.ssd(image1, image2)
         let mse = ssd / Double(image1.pixelCount)
@@ -10,7 +10,7 @@ public enum ImageStatistics {
         return psnr
     }
     
-    /// Compute peek sound/noise ratio.
+    /// Compute peek signal/noise ratio.
     public static func psnr(image1: Image<RGB, Double>, image2: Image<RGB, Double>) -> Double {
         return psnr(image1: image1.toGray(), image2: image2.toGray())
     }
