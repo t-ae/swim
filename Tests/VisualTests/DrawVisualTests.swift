@@ -209,7 +209,7 @@ extension DrawVisualTests {
             ABCDEFGHIJKLMNOPQRSTUVWXYZ
             あいうえお阿伊宇江於
             AWAWAWAWAW
-            """, font: font)
+            """, font: font, alignment: .left)
         
         let nsImage = image.nsImage()
         
@@ -232,53 +232,53 @@ extension DrawVisualTests {
         lena.drawText(position: (0, 0), text: """
         LENA
         LEFT TOP
-        """, font: font, color: .black, anchor: .leftTop)
+        """, font: font, alignment: .left, anchor: .leftTop, color: .black)
         
         lena.drawText(position: (lena.width/2, 0), text: """
         LENA
         CENTER TOP
-        """, font: font, color: .white, anchor: .centerTop)
+        """, font: font, alignment: .center, anchor: .centerTop, color: .white)
         
         lena.drawText(position: (lena.width, 0), text: """
         LENA
         RIGHT TOP
-        """, font: font, color: .gray, anchor: .rightTop)
+        """, font: font, alignment: .right, anchor: .rightTop, color: .gray)
         
         lena.drawText(position: (0, lena.height/2), text: """
         LENA
         LEFT CENTER
-        """, font: font, color: .red, anchor: .leftCenter)
+        """, font: font, alignment: .left, anchor: .leftCenter, color: .red)
         
         lena.drawText(position: (lena.width/2, lena.height/2), text: """
         LENA
         CENTER CENTER
-        """, font: font, color: .green, anchor: .center)
+        """, font: font, alignment: .center, anchor: .center, color: .green)
         
         lena.drawText(position: (lena.width, lena.height/2), text: """
         LENA
         RIGHT CENTER
-        """, font: font, color: .blue, anchor: .rightCenter)
+        """, font: font, alignment: .right, anchor: .rightCenter, color: .blue)
         
         lena.drawText(position: (0, lena.height), text: """
         LENA
         LEFT Bottom
-        """, font: font, color: .cyan, anchor: .leftBottom)
+        """, font: font, alignment: .left, anchor: .leftBottom, color: .cyan)
         
         lena.drawText(position: (lena.width/2, lena.height), text: """
         LENA
         CENTER BOTTOM
-        """, font: font, color: .magenta, anchor: .centerBottom)
+        """, font: font, alignment: .center, anchor: .centerBottom, color: .magenta)
         
         lena.drawText(position: (lena.width, lena.height), text: """
         LENA
         RIGHT BOTTOM
-        """, font: font, color: .yellow, anchor: .rightBottom)
+        """, font: font, alignment: .right, anchor: .rightBottom, color: .yellow)
         
         
         lena.drawText(position: (-30, lena.height/4), text: """
         LENA4
         Partially out of image
-        """, font: font, color: Color(r: 1, g: 1, b: 1, a: 0.7), anchor: .leftCenter)
+        """, font: font, anchor: .leftCenter, color: Color(r: 1, g: 1, b: 1, a: 0.7))
         
         let lorem = """
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
@@ -290,9 +290,9 @@ extension DrawVisualTests {
         lena.drawText(position: (0, 300),
                       text: lorem,
                       font: font2,
+                      anchor: .leftTop,
                       lineGap: 0,
-                      color: Color(r: 0, g: 0, b: 0, a: 1),
-                      anchor: .leftTop)
+                      color: Color(r: 0, g: 0, b: 0, a: 1))
         
         let nsImage = doubleToNSImage(lena)
         
@@ -300,7 +300,7 @@ extension DrawVisualTests {
     }
     
     func testDrawTextUInt8() {
-        guard let font = try? TrueTypeFont(url: URL(fileURLWithPath: "/System/Library/Fonts/Helvetica.ttc"), fontSize: 30) else {
+        guard let font = try? TrueTypeFont(url: URL(fileURLWithPath: "/System/Library/Fonts/Helvetica.ttc"), fontSize: 20) else {
             XCTFail("Font not found.")
             return
         }
@@ -312,14 +312,56 @@ extension DrawVisualTests {
         let path = testResoruceRoot().appendingPathComponent("lena_512.png")
         var lena = try! Image<RGB, UInt8>(contentsOf: path)
         
-        let size = Image.getTextImageSize(text: "LENA", font: font)
+        lena.drawText(position: (0, 0), text: """
+        LENA
+        LEFT TOP
+        """, font: font, alignment: .left, anchor: .leftTop, color: .black)
         
-        lena.drawText(position: (0, 0), text: "LENA", font: font, color: .black, anchor: .leftTop)
-        lena.drawText(position: (50, 50), text: "LENA", font: font, color: Color(r: 0, g: 0, b: 255, a: 200), anchor: .leftTop)
+        lena.drawText(position: (lena.width/2, 0), text: """
+        LENA
+        CENTER TOP
+        """, font: font, alignment: .center, anchor: .centerTop, color: .white)
         
-        lena.drawText(position: (511-size.width, 256), text: "LENA", font: font, color: Color(r: 0, g: 255, b: 255, a: 200), anchor: .leftTop)
+        lena.drawText(position: (lena.width, 0), text: """
+        LENA
+        RIGHT TOP
+        """, font: font, alignment: .right, anchor: .rightTop, color: .gray)
         
-        lena.drawText(position: (-30, 256), text: "LENA", font: font, color: Color(r: 255, g: 255, b: 255, a: 200), anchor: .leftTop)
+        lena.drawText(position: (0, lena.height/2), text: """
+        LENA
+        LEFT CENTER
+        """, font: font, alignment: .left, anchor: .leftCenter, color: .red)
+        
+        lena.drawText(position: (lena.width/2, lena.height/2), text: """
+        LENA
+        CENTER CENTER
+        """, font: font, alignment: .center, anchor: .center, color: .green)
+        
+        lena.drawText(position: (lena.width, lena.height/2), text: """
+        LENA
+        RIGHT CENTER
+        """, font: font, alignment: .right, anchor: .rightCenter, color: .blue)
+        
+        lena.drawText(position: (0, lena.height), text: """
+        LENA
+        LEFT Bottom
+        """, font: font, alignment: .left, anchor: .leftBottom, color: .cyan)
+        
+        lena.drawText(position: (lena.width/2, lena.height), text: """
+        LENA
+        CENTER BOTTOM
+        """, font: font, alignment: .center, anchor: .centerBottom, color: .magenta)
+        
+        lena.drawText(position: (lena.width, lena.height), text: """
+        LENA
+        RIGHT BOTTOM
+        """, font: font, alignment: .right, anchor: .rightBottom, color: .yellow)
+        
+        
+        lena.drawText(position: (-30, lena.height/4), text: """
+        LENA4
+        Partially out of image
+        """, font: font, anchor: .leftCenter, color: Color(r: 255, g: 255, b: 255, a: 200))
         
         let lorem = """
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
@@ -331,9 +373,9 @@ extension DrawVisualTests {
         lena.drawText(position: (0, 300),
                       text: lorem,
                       font: font2,
+                      anchor: .leftTop,
                       lineGap: 0,
-                      color: Color(r: 0, g: 0, b: 0, a: 255),
-                      anchor: .leftTop)
+                      color: Color(r: 0, g: 0, b: 0, a: 255))
         
         let nsImage = lena.nsImage()
         

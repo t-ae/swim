@@ -15,7 +15,7 @@ extension SkeletonizerVisualTests {
         let image = Image.createTextImage(text: """
             abcdefghijklmnopqrstuvwxyz
             ABCDEFGHIJKLMNOPQRSTUVWXYZ
-            """, font: font)
+            """, font: font, alignment: .left)
         let boolImage = image.createMask { pixel in pixel[.gray] > 128 }
         
         let result = Skeletonizer.skeletonize(image: boolImage)
