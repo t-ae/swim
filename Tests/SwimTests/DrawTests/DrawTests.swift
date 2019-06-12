@@ -52,13 +52,26 @@ class DrawTests: XCTestCase {
         guard let font = try? TrueTypeFont(url: URL(fileURLWithPath: "/System/Library/Fonts/Helvetica.ttc"), fontSize: 30) else {
             return
         }
-        
-        let original = Image<RGB, Int>(width: 100, height: 100, value: 0)
-        var image = original
-        image.drawText(position: (0, 0), text: "test", font: font, anchor: .leftTop, color: .red)
-        
-        // Check at least drawing something
-        XCTAssertNotEqual(image, original)
+        do {
+            let original = Image<RGB, Int>(width: 100, height: 100, value: 0)
+            var image = original
+            image.drawText(position: (0, 0), text: "test", font: font, anchor: .leftTop, color: .red)
+            
+            // Check at least drawing something
+            XCTAssertNotEqual(image, original)
+        }
+        do {
+            let original = Image<RGB, Int>(width: 100, height: 100, value: 0)
+            var image = original
+            image.drawText(position: (0, 0), text: "", font: font, anchor: .leftTop, color: .red)
+            image.drawText(position: (0, 0), text: """
+
+            
+            """, font: font, anchor: .leftTop, color: .red)
+            
+            // Draw Nothing
+            XCTAssertEqual(image, original)
+        }
     }
     
     static let allTests = [

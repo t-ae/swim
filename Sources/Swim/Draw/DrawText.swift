@@ -200,7 +200,7 @@ extension Image where P == Gray, T == UInt8 {
         /// Some characters can protrule beyond lineHeight.
         /// All lines but last line has lineGap and below line so protrusion is OK.
         /// Only last line we have to consider its actual height.
-        let height = (lineNum-1) * (lineHeight + Int(Float(lineGap) * scale)) + lastLineHeight
+        let height = max(lineNum-1, 0) * (lineHeight + Int(Float(lineGap) * scale)) + lastLineHeight
         
         return TextImageMetrics(text: text, lineWidths: lineWidths, height: height,
                                 ascent: ascent, descent: descent, lineGap: lineGap, scale: scale)
@@ -210,14 +210,18 @@ extension Image where P == Gray, T == UInt8 {
     ///
     /// - Parameters:
     ///   - lineGap: Gap between lines in pixel. If nil, proper size will be used. Default: nil.
+    /// - Returns: Image contains text. If width or height is 0, returns nil.
     @inlinable
     public static func createTextImage(text: String,
                                        font: TrueTypeFont,
                                        alignment: TextAlignment,
-                                       lineGap: Int? = nil) -> Image {
+                                       lineGap: Int? = nil) -> Image? {
         precondition(lineGap ?? Int.max >= 0, "lineGap must be positive.")
         let metrics = getTextImageMetrics(text: text, font: font, lineGap: lineGap)
         let width = metrics.lineWidths.max() ?? 0
+        guard width > 0 && metrics.height > 0 else {
+            return nil
+        }
         var image = Image<Gray, UInt8>(width: width, height: metrics.height, value: 0)
         
         let scale = metrics.scale
@@ -285,16 +289,20 @@ extension Image where P: HasAlpha, T: BinaryInteger {
     ///
     /// - Parameters:
     ///   - lineGap: Gap between lines in pixel. If nil, proper size will be used. Default: nil.
+    /// - Returns: Image contains text. If width or height is 0, returns nil.
     @inlinable
     public static func createTextImage(text: String,
                                        font: TrueTypeFont,
                                        alignment: TextAlignment,
                                        lineGap: Int? = nil,
-                                       color: Color<P, T>) -> Image {
-        let grayImage = Image<Gray, UInt8>.createTextImage(text: text,
-                                                           font: font,
-                                                           alignment: alignment,
-                                                           lineGap: lineGap)
+                                       color: Color<P, T>) -> Image? {
+        guard let grayImage = Image<Gray, UInt8>.createTextImage(text: text,
+                                                                 font: font,
+                                                                 alignment: alignment,
+                                                                 lineGap: lineGap)
+            else {
+                return nil
+        }
         
         var colorImage = Image<P, T>.zeros(like: grayImage)
         
@@ -318,16 +326,20 @@ extension Image where P: HasAlpha, T: BinaryFloatingPoint {
     /// - Parameters:
     ///   - alignment: Text alignment. Default: .left.
     ///   - lineGap: Gap between lines in pixel. If nil, proper size will be used. Default: nil.
+    /// - Returns: Image contains text. If width or height is 0, returns nil.
     @inlinable
     public static func createTextImage(text: String,
                                        font: TrueTypeFont,
                                        alignment: TextAlignment = .left,
                                        lineGap: Int? = nil,
-                                       color: Color<P, T>) -> Image {
-        let grayImage = Image<Gray, UInt8>.createTextImage(text: text,
-                                                           font: font,
-                                                           alignment: alignment,
-                                                           lineGap: lineGap)
+                                       color: Color<P, T>) -> Image? {
+        guard let grayImage = Image<Gray, UInt8>.createTextImage(text: text,
+                                                                 font: font,
+                                                                 alignment: alignment,
+                                                                 lineGap: lineGap)
+            else {
+                return nil
+        }
         
         var colorImage = Image<P, T>.zeros(like: grayImage)
         
@@ -362,11 +374,14 @@ extension Image where P: NoAlpha, T: BinaryInteger {
                                                 anchor: TextAnchor = .leftTop,
                                                 lineGap: Int? = nil,
                                                 color: Color<P2, T>) where P2.BaseType == P {
-        let colorImage = Image<P2, T>.createTextImage(text: text,
-                                                      font: font,
-                                                      alignment: alignment,
-                                                      lineGap: lineGap,
-                                                      color: color)
+        guard let colorImage = Image<P2, T>.createTextImage(text: text,
+                                                            font: font,
+                                                            alignment: alignment,
+                                                            lineGap: lineGap,
+                                                            color: color)
+            else {
+                return
+        }
         let origin = DrawTextUtils.calculateOrigin(position: position, size: colorImage.size, anchor: anchor)
         drawImage(origin: origin, image: colorImage)
     }
@@ -389,11 +404,14 @@ extension Image where P: NoAlpha, T: BinaryFloatingPoint {
                                                 anchor: TextAnchor = .leftTop,
                                                 lineGap: Int? = nil,
                                                 color: Color<P2, T>) where P2.BaseType == P {
-        let colorImage = Image<P2, T>.createTextImage(text: text,
-                                                      font: font,
-                                                      alignment: alignment,
-                                                      lineGap: lineGap,
-                                                      color: color)
+        guard let colorImage = Image<P2, T>.createTextImage(text: text,
+                                                            font: font,
+                                                            alignment: alignment,
+                                                            lineGap: lineGap,
+                                                            color: color)
+            else {
+                return
+        }
         let origin = DrawTextUtils.calculateOrigin(position: position, size: colorImage.size, anchor: anchor)
         drawImage(origin: origin, image: colorImage)
     }
@@ -416,11 +434,14 @@ extension Image where P: HasAlpha, T: BinaryInteger {
                                   anchor: TextAnchor = .leftTop,
                                   lineGap: Int? = nil,
                                   color: Color<P, T>) {
-        let colorImage = Image<P, T>.createTextImage(text: text,
-                                                     font: font,
-                                                     alignment: alignment,
-                                                     lineGap: lineGap,
-                                                     color: color)
+        guard let colorImage = Image<P, T>.createTextImage(text: text,
+                                                           font: font,
+                                                           alignment: alignment,
+                                                           lineGap: lineGap,
+                                                           color: color)
+            else {
+                return
+        }
         let origin = DrawTextUtils.calculateOrigin(position: position, size: colorImage.size, anchor: anchor)
         drawImage(origin: origin, image: colorImage)
     }
@@ -444,11 +465,14 @@ extension Image where P: HasAlpha, T: BinaryFloatingPoint {
                                   anchor: TextAnchor = .leftTop,
                                   lineGap: Int? = nil,
                                   color: Color<P, T>) {
-        let colorImage = Image<P, T>.createTextImage(text: text,
-                                                     font: font,
-                                                     alignment: alignment,
-                                                     lineGap: lineGap,
-                                                     color: color)
+        guard let colorImage = Image<P, T>.createTextImage(text: text,
+                                                           font: font,
+                                                           alignment: alignment,
+                                                           lineGap: lineGap,
+                                                           color: color)
+            else {
+                return
+        }
         let origin = DrawTextUtils.calculateOrigin(position: position, size: colorImage.size, anchor: anchor)
         drawImage(origin: origin, image: colorImage)
     }

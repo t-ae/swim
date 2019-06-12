@@ -211,7 +211,7 @@ extension DrawVisualTests {
             あいうえお阿伊宇江於
             AWAWAWAWAW
             """, font: font, alignment: .left)
-        images.append(left)
+        images.append(left!)
         
         let center = Image.createTextImage(text: """
             abcdefghijklmnopqrstuvwxyz
@@ -219,7 +219,7 @@ extension DrawVisualTests {
             あいうえお阿伊宇江於
             AWAWAWAWAW
             """, font: font, alignment: .center)
-        images.append(center)
+        images.append(center!)
         
         let right = Image.createTextImage(text: """
             abcdefghijklmnopqrstuvwxyz
@@ -227,7 +227,7 @@ extension DrawVisualTests {
             あいうえお阿伊宇江於
             AWAWAWAWAW
             """, font: font, alignment: .right)
-        images.append(right)
+        images.append(right!)
         
         let nsImage = Image.concatV(images).nsImage()
         
