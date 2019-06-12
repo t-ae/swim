@@ -55,7 +55,7 @@ class DrawTests: XCTestCase {
         
         let original = Image<RGB, Int>(width: 100, height: 100, value: 0)
         var image = original
-        image.drawText(position: (0, 0), text: "test", font: font, color: .red, anchor: .left)
+        image.drawText(position: (0, 0), text: "test", font: font, color: .red, anchor: .leftTop)
         
         // Check at least drawing something
         XCTAssertNotEqual(image, original)

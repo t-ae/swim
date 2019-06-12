@@ -34,9 +34,15 @@ public enum TrueTypeFontError: Error {
 }
 
 public enum TextAnchor {
-    case left
-    case right
+    case leftTop
+    case centerTop
+    case rightTop
+    case leftCenter
     case center
+    case rightCenter
+    case leftBottom
+    case centerBottom
+    case rightBottom
 }
 
 public struct TrueTypeFont {
@@ -89,14 +95,26 @@ enum DrawTextUtils {
     
     @inlinable
     static func calculateOrigin(for position: (x: Int, y: Int), size: (width: Int, height: Int), and anchor: TextAnchor) -> (x: Int, y: Int) {
+        let x: Int
         switch anchor {
-        case .left:
-            return position
-        case .center:
-            return (x: position.x - size.width / 2, y: position.y - size.height / 2)
-        case .right:
-            return (x: position.x - size.width, y: position.y)
+        case .leftTop, .leftCenter, .leftBottom:
+            x = position.x
+        case .centerTop, .center, .centerBottom:
+            x = position.x - size.width/2
+        case .rightTop, .rightCenter, .rightBottom:
+            x = position.x - size.width
         }
+        let y: Int
+        switch anchor {
+        case .leftTop, .centerTop, .rightTop:
+            y = position.y
+        case .leftCenter, .center, .rightCenter:
+            y = position.y - size.height/2
+        case .leftBottom, .centerBottom, .rightBottom:
+            y = position.y - size.height
+        }
+        
+        return (x, y)
     }
 }
 
