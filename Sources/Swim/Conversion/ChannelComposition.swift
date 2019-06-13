@@ -1,6 +1,9 @@
 import Foundation
 
 extension Image where P == GrayAlpha {
+    /// Create `Image<GrayAlpha, T>` from two `Gray` images.
+    ///
+    /// - Precondition: gray.size == alpha.size
     @inlinable
     public init(gray: Image<Gray, T>, alpha: Image<Gray, T>) {
         precondition(gray.size == alpha.size, "Images must have same size.")
@@ -13,6 +16,9 @@ extension Image where P == GrayAlpha {
 }
 
 extension Image where P == RGB {
+    /// Create `Image<RGB, T>` from three `Gray` images.
+    ///
+    /// - Precondition: r.size == g.size == b.size
     @inlinable
     public init(r: Image<Gray, T>, g: Image<Gray, T>, b: Image<Gray, T>) {
         precondition(r.size == g.size && g.size == b.size, "Images must have same size.")
@@ -25,6 +31,9 @@ extension Image where P == RGB {
 }
 
 extension Image where P == RGBA {
+    /// Create `Image<RGBA, T>` from four `Gray` images.
+    ///
+    /// - Precondition: r.size == g.size == b.size == a.size
     @inlinable
     public init(r: Image<Gray, T>, g: Image<Gray, T>, b: Image<Gray, T>, a: Image<Gray, T>) {
         precondition(r.size == g.size && g.size == b.size && b.size == a.size, "Images must have same size.")
@@ -35,6 +44,9 @@ extension Image where P == RGBA {
         self.init(width: width, height: height, data: data)
     }
     
+    /// Create `Image<RGBA, T>` from `RGB` image and `Gray` image.
+    ///
+    /// - Precondition: rgb.size == a.size
     @inlinable
     public init(rgb: Image<RGB, T>,  a: Image<Gray, T>) {
         precondition(rgb.size == a.size, "Images must have same size.")
@@ -49,6 +61,9 @@ extension Image where P == RGBA {
 }
 
 extension Image where P == ARGB {
+    /// Create `Image<ARGB, T>` from four `Gray` images.
+    ///
+    /// - Precondition: a.size == r.size == g.size == b.size
     @inlinable
     public init(a: Image<Gray, T>, r: Image<Gray, T>, g: Image<Gray, T>, b: Image<Gray, T>) {
         precondition(a.size == r.size && r.size == g.size && g.size == b.size, "Images must have same size.")
@@ -59,6 +74,9 @@ extension Image where P == ARGB {
         self.init(width: width, height: height, data: data)
     }
     
+    /// Create `Image<ARGB, T>` from `RGB` image and `Gray` image.
+    ///
+    /// - Precondition: a.size == rgb.size
     @inlinable
     public init(a: Image<Gray, T>, rgb: Image<RGB, T>) {
         precondition(rgb.size == a.size, "Images must have same size.")

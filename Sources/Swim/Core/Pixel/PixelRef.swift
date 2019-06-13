@@ -1,4 +1,14 @@
-// MARK: - PixelRef
+/// Reference to pixel in image.
+///
+/// It contains `UnsafeMutableBufferPointer` which pointing images buffer.
+/// `PixelRef` is created only inside `withUnsafeMutableBufferPointer`'s body.
+/// Since `withUnsafeMutableBufferPointer` 's argument is valid only for the duration of the method’s execution, `PixelRef` is also valid only for the duration of the methods' execution.
+///
+/// Usages:
+/// - `Image<P, T>.createWithPixelRef`
+/// - `Image<P, T>.withPixelRef`
+/// - `Image<P, T>.pixelwiseConvert`
+/// - `Image<P, T>.pixelwiseConverted`
 public struct PixelRef<P: PixelType, T: DataType> {
     public let x: Int
     public let y: Int
@@ -46,7 +56,7 @@ extension PixelRef {
 extension Image {
     /// Create `PixelRef` pointing specified coord and execute `body`.
     ///
-    /// For raster iteration, using `pixelwiseConvert` is faster.
+    /// For raster iteration, using `pixels()` or `pixelwiseConvert(_:)` is better.
     @inlinable
     public mutating func withPixelRef<R>(x: Int, y: Int, _ body: (PixelRef<P, T>)->R) -> R {
         let start = dataIndex(x: x, y: y)

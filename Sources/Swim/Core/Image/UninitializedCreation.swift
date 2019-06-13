@@ -2,6 +2,12 @@
 // https://github.com/apple/swift-evolution/blob/master/proposals/0245-array-uninitialized-initializer.md
 
 extension Image {
+    /// Create `Image` by computing
+    ///
+    /// `initializer` takes `PixelRef`, which is uninitialized at first.
+    /// You must initialize all pixel values of `PixelRef`.
+    ///
+    /// - Note: `PixelRef` contains `UnsafeMutableBufferPointer`. So it's unsafe to bring it outside closure.
     @inlinable
     public static func createWithPixelRef(width: Int,
                                           height: Int,
@@ -13,6 +19,10 @@ extension Image {
         return image
     }
     
+    /// Create `Image` by computing pixel values from their coords.
+    ///
+    /// `initializer` takes 3 arguments, x, y, and c.
+    /// You have to compute pixel values with these arguments and return it.
     @inlinable
     public static func createWithPixelValues(width: Int,
                                              height: Int,
@@ -26,6 +36,9 @@ extension Image {
         return image
     }
     
+    /// Create `Image` with filling `UnsafeMutableBufferPointer`.
+    ///
+    /// `UnsafeMutableBufferPointer` must be initialized at the end of closure's execution.
     @inlinable
     public static func createWithUnsafeMutableBufferPointer(width: Int,
                                                             height: Int,

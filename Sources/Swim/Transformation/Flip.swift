@@ -1,6 +1,7 @@
 import Foundation
 
 extension Image {
+    /// Flip horizontally.
     @inlinable
     public func flipLR() -> Image<P, T> {
         return .createWithUnsafeMutableBufferPointer(width: width, height: height) { dst in
@@ -13,6 +14,7 @@ extension Image {
         }
     }
     
+    /// Flip vertically.
     @inlinable
     public func flipUD() -> Image<P, T> {
         return .createWithUnsafeMutableBufferPointer(width: width, height: height) { dst in

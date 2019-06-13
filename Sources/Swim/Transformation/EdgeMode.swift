@@ -1,3 +1,4 @@
+/// Represents how to compute the color outside of image.
 public enum EdgeMode<P: PixelType, T: DataType> {
     case constant(color: Color<P, T>)
     case edge

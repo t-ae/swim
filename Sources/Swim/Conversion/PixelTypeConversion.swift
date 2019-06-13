@@ -2,6 +2,7 @@ import Foundation
 
 // MARK: - Gray -> RGB
 extension Image where P == Gray {
+    /// Create `Image<GrayAlpha, T>` by filling alpha channel with specified `alphaValue`.
     @inlinable
     public func toGrayAlpha(with alphaValue: T) -> Image<GrayAlpha, T> {
         return .createWithUnsafeMutableBufferPointer(width: width, height: height) { bp in
@@ -12,6 +13,7 @@ extension Image where P == Gray {
         }
     }
     
+    /// Create grayscale `Image<RGB, T>`.
     @inlinable
     public func toRGB() -> Image<RGB, T> {
         return .createWithPixelRef(width: width, height: height) { ref in
@@ -31,11 +33,13 @@ extension Image where P == Gray {
         }
     }
     
+    /// Create grayscale `Image<RGBA, T>` with specified `alphaValue`.
     @inlinable
     public func toRGBA(with alphaValue: T) -> Image<RGBA, T> {
         return toRGBWithAlpha(with: alphaValue)
     }
     
+    /// Create grayscale `Image<ARGB, T>` with specified `alphaValue`.
     @inlinable
     public func toARGB(with alphaValue: T) -> Image<ARGB, T> {
         return toRGBWithAlpha(with: alphaValue)
@@ -54,11 +58,13 @@ extension Image where P == GrayAlpha {
         }
     }
     
+    /// Create grayscale `Image<RGBA, T>`.
     @inlinable
     public func toRGBA() -> Image<RGBA, T> {
         return toRGBWithAlpha()
     }
     
+    /// Create grayscale `Image<ARGB, T>`.
     @inlinable
     public func toARGB() -> Image<ARGB, T> {
         return toRGBWithAlpha()
@@ -129,11 +135,13 @@ extension Image where P == RGB {
         }
     }
     
+    /// Create `Image<RGBA, T>` with specified `alphaValue`.
     @inlinable
     public func toRGBA(with alphaValue: T) -> Image<RGBA, T> {
         return toRGBWithAlpha(with: alphaValue)
     }
     
+    /// Create `Image<ARGB, T>` with specified `alphaValue`.
     @inlinable
     public func toARGB(with alphaValue: T) -> Image<ARGB, T> {
         return toRGBWithAlpha(with: alphaValue)
@@ -157,6 +165,7 @@ extension Image where P: RGBWithAlpha {
 
 // MARK: - RGBA <-> ARGB
 extension Image where P == RGBA {
+    /// Create `Image<ARGB, T>` by permuting channels.
     @inlinable
     public func toARGB() -> Image<ARGB, T> {
         return pixelwiseConverted { src, dst in
@@ -169,6 +178,7 @@ extension Image where P == RGBA {
 }
 
 extension Image where P == ARGB {
+    /// Create `Image<RGBA, T>` by permuting channels.
     @inlinable
     public func toRGBA() -> Image<RGBA, T> {
         return pixelwiseConverted { src, dst in

@@ -95,7 +95,7 @@ extension Filter where T == Double {
 
 // MARK: - convoluted
 extension Image where T: Numeric {
-    /// Apply convolution with specified `filter`.
+    /// Apply convolution with specified linear `filter`.
     ///
     /// `filter` will be applied to each channel separately.
     @inlinable

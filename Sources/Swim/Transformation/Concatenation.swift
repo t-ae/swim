@@ -1,4 +1,5 @@
 extension Image {
+    /// Concatenate given `images` horizontally.
     @inlinable
     public static func concatH(_ images: [Image<P, T>]) -> Image<P, T> {
         let width: Int = images.map { $0.width }.reduce(0, +)
@@ -19,6 +20,7 @@ extension Image {
 }
 
 extension Image {
+    /// Concatenate given `images` vertically.
     @inlinable
     public static func concatV(_ images: [Image<P, T>]) -> Image<P, T> {
         let width: Int = images[0].width
@@ -40,6 +42,10 @@ extension Image {
 }
 
 extension Image {
+    /// Concatenate given `images`.
+    ///
+    /// First `images` in inner array will be concatenated horizontally.
+    /// Then all horizontally-concatenated images will be concatenated vertically.
     @inlinable
     public static func concat(_ images: [[Image<P, T>]]) -> Image<P, T> {
         let colConcated = images.map { concatH($0) }

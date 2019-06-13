@@ -1,6 +1,9 @@
 import Foundation
 
 extension Image {
+    /// Add padding for each edge.
+    ///
+    /// Color of padding will be determined by `edgeMode`.
     @inlinable
     public func withPadding(left: Int,
                             right: Int,
@@ -54,21 +57,33 @@ extension Image {
         }
     }
     
+    /// Add padding for each edge.
+    ///
+    /// Color of padding will be determined by `edgeMode`.
     @inlinable
     public func withPadding(x: Int, y: Int, edgeMode: EdgeMode<P, T>) -> Image<P, T> {
         return withPadding(left: x, right: x, top: y, bottom: y, edgeMode: edgeMode)
     }
     
+    /// Add padding for left/right edges.
+    ///
+    /// Color of padding will be determined by `edgeMode`.
     @inlinable
     public func withPadding(x: Int, edgeMode: EdgeMode<P, T>) -> Image<P, T> {
         return withPadding(left: x, right: x, top: 0, bottom: 0, edgeMode: edgeMode)
     }
     
+    /// Add padding for top/bottom edges.
+    ///
+    /// Color of padding will be determined by `edgeMode`.
     @inlinable
     public func withPadding(y: Int, edgeMode: EdgeMode<P, T>) -> Image<P, T> {
         return withPadding(left: 0, right: 0, top: y, bottom: y, edgeMode: edgeMode)
     }
     
+    /// Add padding for each edge.
+    ///
+    /// Color of padding will be determined by `edgeMode`.
     @inlinable
     public func withPadding(_ paddingSize: Int,
                             edgeMode: EdgeMode<P, T>) -> Image<P, T> {

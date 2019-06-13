@@ -1,6 +1,7 @@
 import Foundation
 
 extension Image {
+    /// Rotate image by 90 degrees clockwise.
     @inlinable
     public func rot90() -> Image<P, T> {
         return .createWithUnsafeMutableBufferPointer(width: height, height: width) { dst in
@@ -14,6 +15,7 @@ extension Image {
         }
     }
     
+    /// Rotate image by 180 degrees clockwise.
     @inlinable
     public func rot180() -> Image<P, T> {
         return .createWithUnsafeMutableBufferPointer(width: width, height: height) { dst in
@@ -28,6 +30,7 @@ extension Image {
         }
     }
     
+    /// Rotate image by 270 degrees clockwise.
     @inlinable
     public func rot270() -> Image<P, T> {
         return .createWithUnsafeMutableBufferPointer(width: height, height: width) { dst in
