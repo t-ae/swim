@@ -1,4 +1,7 @@
 extension Image {
+    /// Access the grayscale image in specified channel.
+    ///
+    /// The complexity is `O(width*height)`
     @inlinable
     public subscript(channel channel: Int) -> Image<Gray, T> {
         get{
@@ -19,6 +22,9 @@ extension Image {
         }
     }
     
+    /// Access the grayscale image in specified channel.
+    ///
+    /// The complexity is `O(width*height)`.
     @inlinable
     public subscript(channel channel: P) -> Image<Gray, T> {
         get {

@@ -41,6 +41,9 @@ extension Image {
 }
 
 extension Image {
+    /// Access the subimage in specified rect.
+    ///
+    /// The complexity is `O(rect.width*rect.height)`.
     @inlinable
     public subscript(rect: Rect) -> Image<P, T> {
         get {
@@ -51,7 +54,9 @@ extension Image {
         }
     }
     
-    
+    /// Access the subimage in specified range.
+    ///
+    /// The complexity is `O(xRange.count*yRange.count)`.
     @inlinable
     public subscript(xRange: Range<Int>, yRange: Range<Int>) -> Image<P, T> {
         get {
@@ -68,6 +73,9 @@ extension Image {
         }
     }
     
+    /// Access the subimage in specified range.
+    ///
+    /// The complexity is `O(width*rows.count)`.
     @inlinable
     public subscript(rows rows: Range<Int>) -> Image<P, T> {
         get {
@@ -78,6 +86,9 @@ extension Image {
         }
     }
     
+    /// Access the subimage in specified range.
+    ///
+    /// The complexity is `O(cols.count*height)`.
     @inlinable
     public subscript(cols cols: Range<Int>) -> Image<P, T> {
         get {
@@ -88,6 +99,9 @@ extension Image {
         }
     }
     
+    /// Access the subimage in specified range.
+    ///
+    /// The complexity is `O(width)`.
     @inlinable
     public subscript(row row: Int) -> Image<P, T> {
         get {
@@ -98,6 +112,9 @@ extension Image {
         }
     }
     
+    /// Access the subimage in specified range.
+    ///
+    /// The complexity is `O(height)`.
     @inlinable
     public subscript(col col: Int) -> Image<P, T> {
         get {
