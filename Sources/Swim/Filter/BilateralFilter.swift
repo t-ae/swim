@@ -28,8 +28,8 @@ extension Image where T == Double {
         }
         
         return channelwiseConverted { x, y, c, value in
-            var denominator: Double = 0
             var numerator: Double = 0
+            var denominator: Double = 0
             
             for py in 0..<windowSize {
                 let yy = clamp(y + py - pad, min: 0, max: height-1)
@@ -45,12 +45,12 @@ extension Image where T == Double {
                     
                     let prod = distanceGauss * valueGauss
                     
-                    denominator += pixelValue * prod
-                    numerator += prod
+                    numerator += pixelValue * prod
+                    denominator += prod
                 }
             }
             
-            return denominator / numerator
+            return numerator / denominator
         }
     }
 }

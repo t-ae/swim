@@ -119,14 +119,14 @@ extension Correlation where T: BinaryFloatingPoint {
         let sumasumb = suma*sumb
         let suma2 = suma*suma
         let sumb2 = sumb*sumb
-        let denominator: T = c*sumCross - sumasumb
+        let numerator: T = c*sumCross - sumasumb
         
-        let numeratorA: T = c*sum2a - suma2
-        let numeratorB: T = c*sum2b - sumb2
+        let denominatorA: T = c*sum2a - suma2
+        let denominatorB: T = c*sum2b - sumb2
 
-        let numerator = sqrt(numeratorA*numeratorB) + epsilon
+        let denominator = sqrt(denominatorA*denominatorB) + epsilon
         
-        return clamp(denominator / numerator, min: -1, max: 1)
+        return clamp(numerator / denominator, min: -1, max: 1)
     }
 }
 
