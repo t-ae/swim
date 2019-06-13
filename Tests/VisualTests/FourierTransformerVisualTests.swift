@@ -11,7 +11,7 @@ extension FourierTransformerVisualTests {
         var spectrum = shifted[channel: 0].pow(2) + shifted[channel: 1].pow(2)
         spectrum.dataConvert { log1p(sqrt($0)) }
         
-        let (minSpectrum, maxSpectrum) = spectrum.withUnsafeBufferPointer { ($0.min()!, $0.max()!) }
+        let (minSpectrum, maxSpectrum) = spectrum.extrema()
         return (spectrum - minSpectrum) / (maxSpectrum - minSpectrum)
     }
     
