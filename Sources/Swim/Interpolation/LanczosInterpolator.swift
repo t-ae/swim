@@ -52,7 +52,7 @@ public struct Lanczos3Interpolator<P: PixelType, T: BinaryFloatingPoint&DataType
     public func interpolate(x: Double,
                             y: Double,
                             in image: Image<P, T>,
-                            into pixel: PixelRef<P, T>) {
+                            into pixel: UnsafePixelRef<P, T>) {
         let xmin = floor(x) - 2
         let ymin = floor(y) - 2
         

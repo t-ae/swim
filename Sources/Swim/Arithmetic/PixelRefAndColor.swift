@@ -1,42 +1,42 @@
 import Foundation
 
-extension PixelRef where T: AdditiveArithmetic {
+extension UnsafePixelRef where T: AdditiveArithmetic {
     @inlinable
-    public static func +=<C: ColorProtocol>(lhs: PixelRef, rhs: C) where C.P == P, C.T == T {
+    public static func +=<C: ColorProtocol>(lhs: UnsafePixelRef, rhs: C) where C.P == P, C.T == T {
         for i in 0..<P.channels {
             lhs.pointer[i] += rhs[i]
         }
     }
     
     @inlinable
-    public static func -=<C: ColorProtocol>(lhs: PixelRef, rhs: C) where C.P == P, C.T == T {
+    public static func -=<C: ColorProtocol>(lhs: UnsafePixelRef, rhs: C) where C.P == P, C.T == T {
         for i in 0..<P.channels {
             lhs.pointer[i] -= rhs[i]
         }
     }
 }
 
-extension PixelRef where T: Numeric {
+extension UnsafePixelRef where T: Numeric {
     @inlinable
-    public static func *=<C: ColorProtocol>(lhs: PixelRef, rhs: C) where C.P == P, C.T == T {
+    public static func *=<C: ColorProtocol>(lhs: UnsafePixelRef, rhs: C) where C.P == P, C.T == T {
         for i in 0..<P.channels {
             lhs.pointer[i] *= rhs[i]
         }
     }
 }
 
-extension PixelRef where T: BinaryInteger {
+extension UnsafePixelRef where T: BinaryInteger {
     @inlinable
-    public static func /=<C: ColorProtocol>(lhs: PixelRef, rhs: C) where C.P == P, C.T == T {
+    public static func /=<C: ColorProtocol>(lhs: UnsafePixelRef, rhs: C) where C.P == P, C.T == T {
         for i in 0..<P.channels {
             lhs.pointer[i] /= rhs[i]
         }
     }
 }
 
-extension PixelRef where T: FloatingPoint {
+extension UnsafePixelRef where T: FloatingPoint {
     @inlinable
-    public static func /=<C: ColorProtocol>(lhs: PixelRef, rhs: C) where C.P == P, C.T == T {
+    public static func /=<C: ColorProtocol>(lhs: UnsafePixelRef, rhs: C) where C.P == P, C.T == T {
         for i in 0..<P.channels {
             lhs.pointer[i] /= rhs[i]
         }
@@ -45,7 +45,7 @@ extension PixelRef where T: FloatingPoint {
 
 // MARK: - Utility
 
-extension PixelRef {
+extension UnsafePixelRef {
     /// Set color.
     ///
     /// It's convenient implementation of:
@@ -72,7 +72,7 @@ extension PixelRef {
     }
 }
 
-extension PixelRef where T: Numeric {
+extension UnsafePixelRef where T: Numeric {
     /// Set color with multiply factor.
     ///
     /// It's convenient implementation of:

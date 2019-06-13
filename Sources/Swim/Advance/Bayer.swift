@@ -170,7 +170,7 @@ extension BayerConverter {
             }
         }
         
-        return .createWithPixelRef(width: image.width, height: image.height) { ref in
+        return .createWithUnsafePixelRef(width: image.width, height: image.height) { ref in
             ref[.red] = getPixelValue(x: ref.x, y: ref.y, channel: .red)
             ref[.green] = getPixelValue(x: ref.x, y: ref.y, channel: .green)
             ref[.blue] = getPixelValue(x: ref.x, y: ref.y, channel: .blue)
@@ -289,7 +289,7 @@ extension BayerConverter {
             }
         }
         
-        return .createWithPixelRef(width: image.width, height: image.height)  { ref in
+        return .createWithUnsafePixelRef(width: image.width, height: image.height)  { ref in
             ref[.red] = getPixelValue(x: ref.x, y: ref.y, channel: .red)
             ref[.green] = getPixelValue(x: ref.x, y: ref.y, channel: .green)
             ref[.blue] = getPixelValue(x: ref.x, y: ref.y, channel: .blue)

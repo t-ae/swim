@@ -4,17 +4,17 @@
 extension Image {
     /// Create `Image` by computing
     ///
-    /// `initializer` takes `PixelRef`, which is uninitialized at first.
-    /// You must initialize all pixel values of `PixelRef`.
+    /// `initializer` takes `UnsafePixelRef`, which is uninitialized at first.
+    /// You must initialize all pixel values of `UnsafePixelRef`.
     ///
-    /// - Note: `PixelRef` contains `UnsafeMutableBufferPointer`. So it's unsafe to bring it outside closure.
+    /// - Note: `UnsafePixelRef` contains `UnsafeMutableBufferPointer`. So it's unsafe to bring it outside closure.
     @inlinable
-    public static func createWithPixelRef(width: Int,
-                                          height: Int,
-                                          initializer: (PixelRef<P, T>)->Void) -> Image {
+    public static func createWithUnsafePixelRef(width: Int,
+                                                height: Int,
+                                                initializer: (UnsafePixelRef<P, T>)->Void) -> Image {
         var image = Image<P, T>(width: width, height: height)
         
-        image.pixelwiseConvert(initializer)
+        image.unsafePixelwiseConvert(initializer)
         
         return image
     }

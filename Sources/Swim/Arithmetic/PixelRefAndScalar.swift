@@ -1,40 +1,40 @@
-extension PixelRef where T: AdditiveArithmetic {
+extension UnsafePixelRef where T: AdditiveArithmetic {
     @inlinable
-    public static func +=(lhs: PixelRef, rhs: T) {
+    public static func +=(lhs: UnsafePixelRef, rhs: T) {
         for i in 0..<P.channels {
             lhs.pointer[i] += rhs
         }
     }
     
     @inlinable
-    public static func -=(lhs: PixelRef, rhs: T) {
+    public static func -=(lhs: UnsafePixelRef, rhs: T) {
         for i in 0..<P.channels {
             lhs.pointer[i] -= rhs
         }
     }
 }
 
-extension PixelRef where T: Numeric {
+extension UnsafePixelRef where T: Numeric {
     @inlinable
-    public static func *=(lhs: PixelRef, rhs: T) {
+    public static func *=(lhs: UnsafePixelRef, rhs: T) {
         for i in 0..<P.channels {
             lhs.pointer[i] *= rhs
         }
     }
 }
 
-extension PixelRef where T: BinaryInteger {
+extension UnsafePixelRef where T: BinaryInteger {
     @inlinable
-    public static func /=(lhs: PixelRef, rhs: T) {
+    public static func /=(lhs: UnsafePixelRef, rhs: T) {
         for i in 0..<P.channels {
             lhs.pointer[i] /= rhs
         }
     }
 }
 
-extension PixelRef where T: FloatingPoint {
+extension UnsafePixelRef where T: FloatingPoint {
     @inlinable
-    public static func /=(lhs: PixelRef, rhs: T) {
+    public static func /=(lhs: UnsafePixelRef, rhs: T) {
         for i in 0..<P.channels {
             lhs.pointer[i] /= rhs
         }
@@ -43,7 +43,7 @@ extension PixelRef where T: FloatingPoint {
 
 // MARK: - Utility
 
-extension PixelRef {
+extension UnsafePixelRef {
     /// Fill with given value.
     @inlinable
     public func fill(value: T) {

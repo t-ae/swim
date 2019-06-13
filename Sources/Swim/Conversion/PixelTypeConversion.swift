@@ -16,7 +16,7 @@ extension Image where P == Gray {
     /// Create grayscale `Image<RGB, T>`.
     @inlinable
     public func toRGB() -> Image<RGB, T> {
-        return .createWithPixelRef(width: width, height: height) { ref in
+        return .createWithUnsafePixelRef(width: width, height: height) { ref in
             ref.fill(value: self[ref.x, ref.y, 0])
         }
     }
@@ -50,7 +50,7 @@ extension Image where P == Gray {
 extension Image where P == GrayAlpha {
     @inlinable
     func toRGBWithAlpha<P2: RGBWithAlpha>() -> Image<P2, T> {
-        return pixelwiseConverted { src, dst in
+        return unsafePixelwiseConverted { src, dst in
             dst[P2.redIndex] = src[.gray]
             dst[P2.greenIndex] = src[.gray]
             dst[P2.blueIndex] = src[.gray]
@@ -127,7 +127,7 @@ extension Image where P == RGB, T: BinaryFloatingPoint {
 extension Image where P == RGB {
     @inlinable
     func toRGBWithAlpha<P2: RGBWithAlpha>(with alphaValue: T) -> Image<P2, T> {
-        return pixelwiseConverted { src, dst in
+        return unsafePixelwiseConverted { src, dst in
             dst[P2.redIndex] = src[.red]
             dst[P2.greenIndex] = src[.green]
             dst[P2.blueIndex] = src[.blue]
@@ -155,7 +155,7 @@ extension Image where P: RGBWithAlpha {
     /// This method simply discards alpha channel.
     @inlinable
     public func toRGB() -> Image<RGB, T> {
-        return pixelwiseConverted { src, dst in
+        return unsafePixelwiseConverted { src, dst in
             dst[.red] = src[P.redIndex]
             dst[.green] = src[P.greenIndex]
             dst[.blue] = src[P.blueIndex]
@@ -168,7 +168,7 @@ extension Image where P == RGBA {
     /// Create `Image<ARGB, T>` by permuting channels.
     @inlinable
     public func toARGB() -> Image<ARGB, T> {
-        return pixelwiseConverted { src, dst in
+        return unsafePixelwiseConverted { src, dst in
             dst[.red] = src[.red]
             dst[.green] = src[.green]
             dst[.blue] = src[.blue]
@@ -181,7 +181,7 @@ extension Image where P == ARGB {
     /// Create `Image<RGBA, T>` by permuting channels.
     @inlinable
     public func toRGBA() -> Image<RGBA, T> {
-        return pixelwiseConverted { src, dst in
+        return unsafePixelwiseConverted { src, dst in
             dst[.red] = src[.red]
             dst[.green] = src[.green]
             dst[.blue] = src[.blue]

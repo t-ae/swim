@@ -7,7 +7,7 @@ public protocol Interpolator4x4: Interpolator where T: BinaryFloatingPoint {
 
 extension Interpolator4x4 {
     @inlinable
-    public func interpolate(x: Double, y: Double, in image: Image<P, T>, into pixel: PixelRef<P, T>) {
+    public func interpolate(x: Double, y: Double, in image: Image<P, T>, into pixel: UnsafePixelRef<P, T>) {
         let xmin = floor(x) - 1
         let ymin = floor(y) - 1
         

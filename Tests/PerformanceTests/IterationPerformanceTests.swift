@@ -51,7 +51,7 @@ extension IterationPerformanceTests {
         }
     }
     
-    // This is slower since `withPixelRef` calls `Array.withUnsafeMutableBufferPointer` internally.
+    // This is slower since `withUnsafePixelRef` calls `Array.withUnsafeMutableBufferPointer` internally.
     // The overhead of that makes this slower.
     func testMutableIteration2() {
         var image = Image<RGBA, Double>(width: 3840, height: 2160, value: 1)
@@ -60,7 +60,7 @@ extension IterationPerformanceTests {
         measure {
             for y in 0..<2160 {
                 for x in 0..<3840 {
-                    image.withPixelRef(x: x, y: y) { ref -> Void in
+                    image.withUnsafePixelRef(x: x, y: y) { ref -> Void in
                         ref += color
                     }
                 }
@@ -69,13 +69,13 @@ extension IterationPerformanceTests {
     }
     
     // This is the fastest.
-    // `pixelwiseConvert` calls `Array.withUnsafeMutableBufferPointer` only once.
+    // `unsafePixelwiseConvert` calls `Array.withUnsafeMutableBufferPointer` only once.
     func testMutableIteration3() {
         var image = Image<RGBA, Double>(width: 3840, height: 2160, value: 1)
         let color = Color<RGBA, Double>(r: 0, g: 0, b: 0, a: 1)
         
         measure {
-            image.pixelwiseConvert { ref in
+            image.unsafePixelwiseConvert { ref in
                 ref += color
             }
         }
@@ -165,7 +165,7 @@ extension IterationPerformanceTests {
         var image = Image<RGBA, Double>(width: 3840, height: 2160, value: 1)
         
         measure {
-            image.pixelwiseConvert { ref in
+            image.unsafePixelwiseConvert { ref in
                 ref[.red] += 1
             }
         }

@@ -10,7 +10,7 @@ class InterpolatorPerformanceTests: XCTestCase {
         let intpl = NearestNeighborInterpolator<RGBA, Double>(edgeMode: .edge)
         
         measure {
-            target.withPixelRef(x: 0, y: 0) { ref in
+            target.withUnsafePixelRef(x: 0, y: 0) { ref in
                 for y in 0..<2160 {
                     for x in 0..<3840 {
                         intpl.interpolate(x: Double(x) * Double(image.width) / 3840,
@@ -29,7 +29,7 @@ class InterpolatorPerformanceTests: XCTestCase {
         let intpl = BilinearInterpolator<RGBA, Double>(edgeMode: .edge)
         
         measure {
-            target.withPixelRef(x: 0, y: 0) { ref in
+            target.withUnsafePixelRef(x: 0, y: 0) { ref in
                 for y in 0..<2160 {
                     for x in 0..<3840 {
                         intpl.interpolate(x: Double(x) * Double(image.width) / 3840,
@@ -48,7 +48,7 @@ class InterpolatorPerformanceTests: XCTestCase {
         let intpl = BicubicInterpolator<RGBA, Double>(edgeMode: .edge)
         
         measure {
-            target.withPixelRef(x: 0, y: 0) { ref in
+            target.withUnsafePixelRef(x: 0, y: 0) { ref in
                 for y in 0..<2160 {
                     for x in 0..<3840 {
                         intpl.interpolate(x: Double(x) * Double(image.width) / 3840,

@@ -20,7 +20,7 @@ extension Image where T == Double {
         let pad = (windowSize-1)/2
         
         let distanceLUT = Image<Gray, Double>
-            .createWithPixelRef(width: windowSize, height: windowSize) { ref in
+            .createWithUnsafePixelRef(width: windowSize, height: windowSize) { ref in
                 let dx = ref.x - pad
                 let dy = ref.y - pad
                 

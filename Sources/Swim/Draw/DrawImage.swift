@@ -26,7 +26,7 @@ extension Image where P: NoAlpha {
         let imageStartX = max(-origin.x, 0)
         let imageStartY = max(-origin.y, 0)
         
-        pixelwiseConvert(selfRangeX, selfRangeY) { ref in
+        unsafePixelwiseConvert(selfRangeX, selfRangeY) { ref in
             let imageX = ref.x - selfRangeX.startIndex + imageStartX
             let imageY = ref.y - selfRangeY.startIndex + imageStartY
             
@@ -58,7 +58,7 @@ extension Image where P: NoAlpha, T: BinaryInteger {
         let imageStartX = max(-origin.x, 0)
         let imageStartY = max(-origin.y, 0)
         
-        pixelwiseConvert(selfRangeX, selfRangeY) { ref in
+        unsafePixelwiseConvert(selfRangeX, selfRangeY) { ref in
             let imageX = ref.x - selfRangeX.startIndex + imageStartX
             let imageY = ref.y - selfRangeY.startIndex + imageStartY
             
@@ -96,7 +96,7 @@ extension Image where P: NoAlpha, T: BinaryFloatingPoint {
         let imageStartX = max(-origin.x, 0)
         let imageStartY = max(-origin.y, 0)
         
-        pixelwiseConvert(selfRangeX, selfRangeY) { ref in
+        unsafePixelwiseConvert(selfRangeX, selfRangeY) { ref in
             let imageX = ref.x - selfRangeX.startIndex + imageStartX
             let imageY = ref.y - selfRangeY.startIndex + imageStartY
             
@@ -133,7 +133,7 @@ extension Image where P: HasAlpha, T: BinaryInteger {
         let imageStartX = max(-origin.x, 0)
         let imageStartY = max(-origin.y, 0)
         
-        pixelwiseConvert(selfRangeX, selfRangeY) { ref in
+        unsafePixelwiseConvert(selfRangeX, selfRangeY) { ref in
             let imageX = ref.x - selfRangeX.startIndex + imageStartX
             let imageY = ref.y - selfRangeY.startIndex + imageStartY
             
@@ -186,7 +186,7 @@ extension Image where P: HasAlpha, T: BinaryFloatingPoint {
         let imageStartX = max(-origin.x, 0)
         let imageStartY = max(-origin.y, 0)
         
-        pixelwiseConvert(selfRangeX, selfRangeY) { ref in
+        unsafePixelwiseConvert(selfRangeX, selfRangeY) { ref in
             let imageX = ref.x - selfRangeX.startIndex + imageStartX
             let imageY = ref.y - selfRangeY.startIndex + imageStartY
             

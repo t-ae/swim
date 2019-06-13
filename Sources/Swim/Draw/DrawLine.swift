@@ -18,7 +18,7 @@ extension Image {
             return
         }
         
-        pixelwiseConvert(left..<right, y..<y+1) { ref in
+        unsafePixelwiseConvert(left..<right, y..<y+1) { ref in
             ref.setColor(color: color)
         }
     }

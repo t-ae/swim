@@ -81,7 +81,7 @@ extension Image where T: BinaryFloatingPoint {
     public func resizeBL(width: Int, height: Int) -> Image {
         let xc = Double(self.width) / Double(width-1)
         let yc = Double(self.height) / Double(height-1)
-        return .createWithPixelRef(width: width, height: height) { ref in
+        return .createWithUnsafePixelRef(width: width, height: height) { ref in
             let x = xc * Double(ref.x)  - 0.5
             let y = yc * Double(ref.y) - 0.5
             

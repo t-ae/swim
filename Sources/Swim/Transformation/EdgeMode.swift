@@ -81,7 +81,7 @@ extension EdgeMode {
     }
 }
 
-extension PixelRef {
+extension UnsafePixelRef {
     /// Set color of `image` at (`x`, `y`).
     /// If (`x`, `y`) is outside `image`, extrapolate by `edgeMode`.
     @inlinable

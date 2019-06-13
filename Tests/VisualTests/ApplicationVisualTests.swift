@@ -58,7 +58,7 @@ extension ApplicationVisualTests {
         
         func getJuliaImage(c: (Double, Double), color: Color<RGB, Double>) -> Image<RGBA, Double> {
             var iterationMax = 0
-            let alpha = Image<Gray, Double>.createWithPixelRef(width: size, height: size) { ref in
+            let alpha = Image<Gray, Double>.createWithUnsafePixelRef(width: size, height: size) { ref in
                 var z: (Double, Double) = ((Double(ref.x)/Double(size) - 0.5)*range,
                                            (Double(ref.y)/Double(size) - 0.5)*range)
                 for n in 0..<maxIteration*2 {
@@ -140,7 +140,7 @@ extension ApplicationVisualTests {
                 return (w * coef).withUnsafeBufferPointer { $0.reduce(0, +) }
             }
             
-            return Image<Gray, Double>.createWithPixelRef(width: width, height: height) { ref in
+            return Image<Gray, Double>.createWithUnsafePixelRef(width: width, height: height) { ref in
                 let px = Double(fieldSize) * Double(ref.x) / Double(width)
                 let py = Double(fieldSize) * Double(ref.y) / Double(height)
                 ref[.gray] = value(x: px, y: py)
@@ -538,7 +538,7 @@ extension ApplicationVisualTests {
         }
         
         // apply reduction
-        let reduced = Image<RGB, Double>.createWithPixelRef(width: lena.width, height: lena.height) { ref in
+        let reduced = Image<RGB, Double>.createWithUnsafePixelRef(width: lena.width, height: lena.height) { ref in
             let cls = classImage[ref.x, ref.y, .gray]
             ref.setColor(color: centers[cls])
         }

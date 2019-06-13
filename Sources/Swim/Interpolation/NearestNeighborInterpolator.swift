@@ -8,7 +8,7 @@ public struct NearestNeighborInterpolator<P: PixelType, T: DataType>: Interpolat
     }
     
     @inlinable
-    public func interpolate(x: Double, y: Double, in image: Image<P, T>, into pixel: PixelRef<P, T>) {
+    public func interpolate(x: Double, y: Double, in image: Image<P, T>, into pixel: UnsafePixelRef<P, T>) {
         let (x, y) = (Int(round(x)), Int(round(y)))
         
         pixel.setColor(x: x, y: y, in: image, edgeMode: edgeMode)

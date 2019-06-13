@@ -306,7 +306,7 @@ extension Image where P: HasAlpha, T: BinaryInteger {
         
         var colorImage = Image<P, T>.zeros(like: grayImage)
         
-        colorImage.pixelwiseConvert { ref in
+        colorImage.unsafePixelwiseConvert { ref in
             let grayValue = grayImage[ref.x, ref.y, .gray]
             guard grayValue > 0 else {
                 return
@@ -343,7 +343,7 @@ extension Image where P: HasAlpha, T: BinaryFloatingPoint {
         
         var colorImage = Image<P, T>.zeros(like: grayImage)
         
-        colorImage.pixelwiseConvert { ref in
+        colorImage.unsafePixelwiseConvert { ref in
             let grayValue = grayImage[ref.x, ref.y, .gray]
             guard grayValue > 0 else {
                 return
