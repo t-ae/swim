@@ -57,6 +57,8 @@ extension Color: Equatable where T: Equatable {
     }
 }
 
+extension Color: Hashable where T: Hashable {}
+
 extension Color {
     @inlinable
     public subscript(channel: Int) -> T {

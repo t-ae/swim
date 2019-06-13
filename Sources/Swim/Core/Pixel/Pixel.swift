@@ -34,3 +34,4 @@ extension Pixel {
 }
 
 extension Pixel: Equatable where T: Equatable {}
+extension Pixel: Hashable where T: Hashable {}
