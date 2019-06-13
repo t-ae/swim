@@ -37,6 +37,8 @@ let image = try Image<RGBA, UInt8>(contentsOf: url)
 try image.write(path: dstPath)
 ```
 
+For reading and writing image, Swim uses [stb_image.h](https://github.com/nothings/stb/blob/master/stb_image.h) and [stb_image_write.h](https://github.com/nothings/stb/blob/master/stb_image_write.h).
+
 ### Convertible from/to CoreGraphics image types
 ```swift
 let image = try! Image<RGBA, UInt8>(contentsOf: url)
@@ -119,6 +121,8 @@ image.drawText(origin: (100, 100),
                font: font, 
                color: .black)
 ```
+
+For font rendering, Swim uses [stb_truetype.h](https://github.com/nothings/stb/blob/master/stb_truetype.h).
 
 ### Resize
 ```swift 
