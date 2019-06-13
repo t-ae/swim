@@ -1,7 +1,7 @@
 extension Image where P: NoAlpha {
     /// Draw image.
     ///
-    /// This method only overwrites the pixel values.
+    /// This method simply overwrites the pixel values. `self`'s colors in drawing area does no effect.
     ///
     /// - Parameters:
     ///   - origin: Origin in `self` to draw
@@ -117,7 +117,9 @@ extension Image where P: NoAlpha, T: BinaryFloatingPoint {
 extension Image where P: HasAlpha, T: BinaryInteger {
     /// Draw image with alpha blending.
     ///
-    /// Pixel values are assumed to be in range [0, 1].
+    /// Pixel values are assumed to be in range [0, 255].
+    ///
+    /// - Note: If you simply want overwriting rather than alpha blending, use `image.subscript(xRange:, yRange:)`'s setter.
     @inlinable
     public mutating func drawImage<P2: HasAlpha>(origin: (x: Int, y: Int),
                                                  image: Image<P2, T>) where P2.BaseType == P.BaseType{
@@ -171,6 +173,8 @@ extension Image where P: HasAlpha, T: BinaryFloatingPoint {
     /// Draw image with alpha blending.
     ///
     /// Pixel values are assumed to be in range [0, 1].
+    ///
+    /// - Note: If you simply want overwriting rather than alpha blending, use `image.subscript(xRange:, yRange:)`'s setter.
     @inlinable
     public mutating func drawImage<P2: HasAlpha>(origin: (x: Int, y: Int),
                                                  image: Image<P2, T>) where P2.BaseType == P.BaseType{
