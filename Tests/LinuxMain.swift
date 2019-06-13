@@ -40,6 +40,8 @@ XCTMain([
     testCase(ClipTests.allTests),
     testCase(PowerTests.allTests),
     testCase(RoundingTests.allTests),
+    // StatTests
+    testCase(ExtremaTests.allTests),
     // SubscriptTests
     testCase(ChannelSubscriptTests.allTests),
     testCase(PixelSubscriptTests.allTests),
