@@ -39,11 +39,6 @@ public struct Image<P: PixelType, T: DataType> {
         
         self.init(width: width, height: height, data: data)
     }
-    
-    @inlinable
-    init(width: Int, height: Int) {
-        self.init(width: width, height: height, value: T.swimDefaultValue)
-    }
 }
 
 extension Image {

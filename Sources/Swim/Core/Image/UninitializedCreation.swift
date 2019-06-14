@@ -53,7 +53,7 @@ extension Image {
     public static func createWithUnsafeMutableBufferPointer(width: Int,
                                                             height: Int,
                                                             initializer: (UnsafeMutableBufferPointer<T>)->Void) -> Image {
-        var image = Image<P, T>(width: width, height: height)
+        var image = Image<P, T>(width: width, height: height, value: T.swimDefaultValue)
         
         image.withUnsafeMutableBufferPointer { bp in
             initializer(bp)

@@ -6,7 +6,7 @@ extension Image {
         let height: Int = images[0].height
         precondition(images.allSatisfy { $0.height == height }, "All images must have same `height`.")
         
-        var image = Image<P, T>(width: width, height: height)
+        var image = Image<P, T>(width: width, height: height, value: T.swimDefaultValue)
         
         var start = 0
         for im in images {
@@ -28,7 +28,7 @@ extension Image {
         
         precondition(images.allSatisfy { $0.width == width }, "All images must have same `width`.")
         
-        var image = Image<P, T>(width: width, height: height)
+        var image = Image<P, T>(width: width, height: height, value: T.swimDefaultValue)
         
         var start = 0
         for im in images {
