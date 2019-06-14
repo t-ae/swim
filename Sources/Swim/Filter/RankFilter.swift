@@ -45,19 +45,18 @@ extension Image where T: Comparable {
         
         let pad = (windowSize - 1) / 2
         
-        var patch = [T](repeating: T.swimDefaultValue, count: windowSize*windowSize)
+        let buffer = UnsafeMutableBufferPointer<T>.allocate(capacity: windowSize*windowSize)
+        defer { buffer.deallocate() }
         
-        return patch.withUnsafeMutableBufferPointer { patch in
-            .createWithPixelValues(width: width, height: height) { x, y, c in
-                var count = 0
-                for yy in max(y-pad, 0)..<min(y-pad+windowSize, height) {
-                    for xx in max(x-pad, 0)..<min(x-pad+windowSize, width) {
-                        patch[count] = self[xx, yy, c]
-                        count += 1
-                    }
+        return .createWithPixelValues(width: width, height: height) { x, y, c in
+            var count = 0
+            for yy in max(y-pad, 0)..<min(y-pad+windowSize, height) {
+                for xx in max(x-pad, 0)..<min(x-pad+windowSize, width) {
+                    buffer[count] = self[xx, yy, c]
+                    count += 1
                 }
-                return rankFunc(patch[..<count])
             }
+            return rankFunc(buffer[..<count])
         }
     }
 }
