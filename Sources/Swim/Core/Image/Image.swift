@@ -27,17 +27,9 @@ public struct Image<P: PixelType, T: DataType> {
     
     @inlinable
     public init(width: Int, height: Int, color: Color<P, T>) {
-        var data = [T](repeating: T.swimDefaultValue, count: width*height*P.channels)
-        
-        var offset = 0
-        color.withUnsafeBufferPointer { bp in
-            for _ in 0..<width*height {
-                copy(src: bp, dst: &data, dstOffset: offset, count: P.channels)
-                offset += P.channels
-            }
+        self = .createWithUnsafePixelRef(width: width, height: height) { ref in
+            ref.setColor(color: color)
         }
-        
-        self.init(width: width, height: height, data: data)
     }
 }
 

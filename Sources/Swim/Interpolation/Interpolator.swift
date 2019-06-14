@@ -13,13 +13,9 @@ public protocol Interpolator {
 extension Interpolator {
     @inlinable
     public func interpolate(x: Double, y: Double, in image: Image<P, T>) -> Color<P, T> {
-        var color = Color<P, T>(value: T.swimDefaultValue)
-        
-        color.data.withUnsafeMutableBufferPointer {
-            let ref = UnsafePixelRef<P, T>(x: -1, y: -1, pointer: $0)
+        return Color.createWithUnsafeMutableBufferPointer { bp in
+            let ref = UnsafePixelRef<P, T>(x: -1, y: -1, pointer: bp)
             interpolate(x: x, y: y, in: image, into: ref)
         }
-        
-        return color
     }
 }

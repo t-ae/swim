@@ -6,16 +6,16 @@ extension Image {
         let height: Int = images[0].height
         precondition(images.allSatisfy { $0.height == height }, "All images must have same `height`.")
         
-        var image = Image<P, T>(width: width, height: height, value: T.swimDefaultValue)
-        
-        var start = 0
-        for im in images {
-            let cols: Range<Int> = start..<start+im.width
-            image[cols: cols] = im
-            start += im.width
+        return .createWithUnsafeMutableBufferPointer(width: width, height: height) { bp in
+            var start = 0
+            for y in 0..<height {
+                for i in 0..<images.count {
+                    copy(src: images[i].data, srcOffset: images[i].dataIndex(x: 0, y: y),
+                         dst: bp, dstOffset: start, count: images[i].width*P.channels)
+                    start += images[i].width*P.channels
+                }
+            }
         }
-        
-        return image
     }
 }
 
@@ -28,16 +28,14 @@ extension Image {
         
         precondition(images.allSatisfy { $0.width == width }, "All images must have same `width`.")
         
-        var image = Image<P, T>(width: width, height: height, value: T.swimDefaultValue)
-        
-        var start = 0
-        for im in images {
-            let rows = start..<start+im.height
-            image[rows: rows] = im
-            start += im.height
+        return .createWithUnsafeMutableBufferPointer(width: width, height: height) { bp in
+            var start = 0
+            for i in 0..<images.count {
+                copy(src: images[i].data, srcOffset: 0,
+                     dst: bp, dstOffset: start, count: images[i].data.count)
+                start += images[i].data.count
+            }
         }
-        
-        return image
     }
 }
 
