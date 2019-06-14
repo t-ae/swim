@@ -14,7 +14,7 @@ extension Image {
                        height: Int) -> Image<P, T> {
         let intpl = NearestNeighborInterpolator<P, T>(edgeMode: .edge)
         
-        return .createWithPixelRef(width: width, height: height) { ref in
+        return .createWithUnsafePixelRef(width: width, height: height) { ref in
             // range: -0.5 ... baseImage.width+0.5
             let xp = Double(self.width) * Double(ref.x) / Double(width)
             let yp = Double(self.height) * Double(ref.y) / Double(height)
@@ -45,7 +45,7 @@ extension Image where T: BinaryFloatingPoint {
                     
                     for y in 0..<height {
                         let start = Image<P, T>.dataIndex(x: x, y: y, width: width, height: height)
-                        let ref = PixelRef<P, T>(x: x, y: y, rebasing: bp[start..<start+P.channels])
+                        let ref = UnsafePixelRef<P, T>(x: x, y: y, rebasing: bp[start..<start+P.channels])
                         
                         guard ceilStartX <= floorEndX else {
                             // refer single pixel
@@ -91,7 +91,7 @@ extension Image where T: BinaryFloatingPoint {
                     
                     for x in 0..<width {
                         let start = Image<P, T>.dataIndex(x: x, y: y, width: width, height: height)
-                        let ref = PixelRef<P, T>(x: x, y: y, rebasing: bp[start..<start+P.channels])
+                        let ref = UnsafePixelRef<P, T>(x: x, y: y, rebasing: bp[start..<start+P.channels])
                         
                         guard ceilStartY <= floorEndY else {
                             // refer single pixel
@@ -188,7 +188,7 @@ extension Image where T: BinaryFloatingPoint {
         
         let xc = Double(baseImage.width) / Double(width-1)
         let yc = Double(baseImage.height) / Double(height-1)
-        return .createWithPixelRef(width: width, height: height)  { ref in
+        return .createWithUnsafePixelRef(width: width, height: height)  { ref in
             // range: -0.5 ... baseImage.width+0.5
             let xp = xc * Double(ref.x)
             let yp = yc * Double(ref.y)

@@ -81,7 +81,7 @@ extension Filter where T == Double {
             return c * exp(-d*d / (2*sigma2))
         }
         
-        image.pixelwiseConvert { ref in
+        image.unsafePixelwiseConvert { ref in
             ref[0] = gauss1D[ref.x] * gauss1D[ref.y]
         }
         
@@ -103,7 +103,7 @@ extension Image where T: Numeric {
         let padLeft = (filter.width-1)/2
         let padTop = (filter.height-1)/2
         
-        return .createWithPixelRef(width: width, height: height) { ref in
+        return .createWithUnsafePixelRef(width: width, height: height) { ref in
             ref.fill(value: 0)
             
             for py in 0..<filter.height {

@@ -53,7 +53,7 @@ func rainbowImage256() -> Image<RGB, Double> {
 func gradiationImage256() -> Image<Gray, UInt8> {
     var image = Image<Gray, UInt8>(width: 256, height: 256, value: 0)
     
-    image.pixelwiseConvert { ref in
+    image.unsafePixelwiseConvert { ref in
         ref[.gray] = UInt8(ref.y * ref.y / 256)
     }
     

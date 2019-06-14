@@ -7,7 +7,7 @@ class PixelRefArithmeticTests: XCTestCase {
             var image = Image(width: 2, height: 2, rgba: (0..<16).map { UInt8($0) })
             var answer = image
             
-            image.withPixelRef(x: 0, y: 0) { ref in
+            image.withUnsafePixelRef(x: 0, y: 0) { ref in
                 ref += 1
                 ref += Color(r: 0, g: 0, b: 0, a: 1)
             }
@@ -21,7 +21,7 @@ class PixelRefArithmeticTests: XCTestCase {
             var image = Image(width: 2, height: 2, rgba: (0..<16).map { Double($0) })
             var answer = image
             
-            image.withPixelRef(x: 0, y: 0) { ref in
+            image.withUnsafePixelRef(x: 0, y: 0) { ref in
                 ref += 1
                 ref += Color(r: 0, g: 0, b: 0, a: 1)
             }
@@ -38,7 +38,7 @@ class PixelRefArithmeticTests: XCTestCase {
             var image = Image(width: 2, height: 2, rgba: (10..<10+16).map { UInt8($0) })
             var answer = image
             
-            image.withPixelRef(x: 0, y: 0) { ref in
+            image.withUnsafePixelRef(x: 0, y: 0) { ref in
                 ref -= 1
                 ref -= Color(r: 0, g: 0, b: 0, a: 1)
             }
@@ -52,7 +52,7 @@ class PixelRefArithmeticTests: XCTestCase {
             var image = Image(width: 2, height: 2, rgba: (10..<10+16).map { Double($0) })
             var answer = image
             
-            image.withPixelRef(x: 0, y: 0) { ref in
+            image.withUnsafePixelRef(x: 0, y: 0) { ref in
                 ref -= 1
                 ref -= Color(r: 0, g: 0, b: 0, a: 1)
             }
@@ -69,7 +69,7 @@ class PixelRefArithmeticTests: XCTestCase {
             var image = Image(width: 2, height: 2, rgba: (0..<16).map { UInt8($0) })
             var answer = image
             
-            image.withPixelRef(x: 0, y: 0) { ref in
+            image.withUnsafePixelRef(x: 0, y: 0) { ref in
                 ref *= 2
                 ref *= Color(r: 1, g: 1, b: 1, a: 2)
             }
@@ -83,7 +83,7 @@ class PixelRefArithmeticTests: XCTestCase {
             var image = Image(width: 2, height: 2, rgba: (0..<16).map { Double($0) })
             var answer = image
             
-            image.withPixelRef(x: 0, y: 0) { ref in
+            image.withUnsafePixelRef(x: 0, y: 0) { ref in
                 ref *= 2
                 ref *= Color(r: 1, g: 1, b: 1, a: 2)
             }
@@ -100,7 +100,7 @@ class PixelRefArithmeticTests: XCTestCase {
             var image = Image(width: 2, height: 2, rgba: (100..<100+16).map { UInt8($0) })
             var answer = image
             
-            image.withPixelRef(x: 0, y: 0) { ref in
+            image.withUnsafePixelRef(x: 0, y: 0) { ref in
                 ref /= 2
                 ref /= Color(r: 1, g: 1, b: 1, a: 2)
             }
@@ -114,7 +114,7 @@ class PixelRefArithmeticTests: XCTestCase {
             var image = Image(width: 2, height: 2, rgba: (100..<100+16).map { Double($0) })
             var answer = image
             
-            image.withPixelRef(x: 0, y: 0) { ref in
+            image.withUnsafePixelRef(x: 0, y: 0) { ref in
                 ref /= 2
                 ref /= Color(r: 1, g: 1, b: 1, a: 2)
             }

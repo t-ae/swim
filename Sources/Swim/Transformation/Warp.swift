@@ -64,7 +64,7 @@ extension Image where T: BinaryFloatingPoint {
 
         let inv = try transformation.inverted()
         
-        dest.pixelwiseConvert { ref in
+        dest.unsafePixelwiseConvert { ref in
             let (x0, y0) = inv * (Double(ref.x), Double(ref.y))
             interpolator.interpolate(x: x0, y: y0, in: self, into: ref)
         }

@@ -7,7 +7,7 @@ class ConversionPerformanceTests: XCTestCase {
         
         measure {
             for _ in 0..<10 {
-                image.pixelwiseConvert { src in
+                image.unsafePixelwiseConvert { src in
                     src += 1
                 }
             }
@@ -19,7 +19,7 @@ class ConversionPerformanceTests: XCTestCase {
         
         measure {
             for _ in 0..<10 {
-                _ = image.pixelwiseConverted { src, dst in
+                _ = image.unsafePixelwiseConverted { src, dst in
                     dst[.red] = src[.red]
                     dst[.green] = src[.green]
                     dst[.blue] = src[.blue]

@@ -8,7 +8,7 @@ public struct BilinearInterpolator<P:PixelType, T: BinaryFloatingPoint&DataType>
     }
 
     @inlinable
-    public func interpolate(x: Double, y: Double, in image: Image<P, T>, into pixel: PixelRef<P, T>) {
+    public func interpolate(x: Double, y: Double, in image: Image<P, T>, into pixel: UnsafePixelRef<P, T>) {
         let xmin = floor(x)
         let ymin = floor(y)
         
