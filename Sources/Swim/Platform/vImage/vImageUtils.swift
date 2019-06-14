@@ -9,7 +9,7 @@ public struct vImageUtilsError: Error {
     public let vImageErrorCode: Int
     
     @inlinable
-    init(vImageErrorCode: Int) {
+    public init(vImageErrorCode: Int) {
         self.vImageErrorCode = vImageErrorCode
     }
 }

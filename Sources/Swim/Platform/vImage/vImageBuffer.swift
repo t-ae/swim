@@ -2,32 +2,38 @@
 
 import Accelerate
 
+public protocol vImagePixelType: PixelType {}
+extension Gray: vImagePixelType {}
+extension ARGB: vImagePixelType {}
+
+public protocol vImageDataType: DataType {}
+extension UInt8: vImageDataType {}
+extension Float: vImageDataType {}
+
 extension vImageUtils {
     @inlinable
-    public static func withBuffer<P, R>(_ image: inout Image<P, UInt8>,
-                                        closure: (inout vImage_Buffer)->R) -> R {
+    public static func withBuffer<P: vImagePixelType, T: vImageDataType, R>(_ image: inout Image<P, T>, closure: (inout vImage_Buffer) throws -> R) rethrows -> R {
+        
         let height = image.height
         let width = image.width
-        return image.data.withUnsafeMutableBufferPointer {
+        return try image.data.withUnsafeMutableBufferPointer {
             var buffer = vImage_Buffer(data: $0.baseAddress!,
                                        height: UInt(height),
                                        width: UInt(width),
-                                       rowBytes: MemoryLayout<UInt8>.size * width * P.channels)
-            return closure(&buffer)
+                                       rowBytes: MemoryLayout<T>.size * width * P.channels)
+            return try closure(&buffer)
         }
     }
     
     @inlinable
-    public static func withBuffer<P, R>(_ image: inout Image<P, Float>,
-                                        closure: (inout vImage_Buffer)->R) -> R {
-        let height = image.height
-        let width = image.width
-        return image.data.withUnsafeMutableBufferPointer {
+    public static func createWithBuffer<P: vImagePixelType, T: vImageDataType>(width: Int, height: Int, body: (inout vImage_Buffer) throws -> Void) rethrows -> Image<P, T> {
+        
+        return try .createWithUnsafeMutableBufferPointer(width: width, height: height) {
             var buffer = vImage_Buffer(data: $0.baseAddress!,
                                        height: UInt(height),
                                        width: UInt(width),
-                                       rowBytes: MemoryLayout<Float>.size * width * P.channels)
-            return closure(&buffer)
+                                       rowBytes: MemoryLayout<T>.size * width * P.channels)
+            try body(&buffer)
         }
     }
 }

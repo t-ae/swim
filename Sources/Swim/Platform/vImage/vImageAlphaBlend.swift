@@ -3,61 +3,49 @@
 import Accelerate
 
 extension vImageUtils {
-    // MARK: UInt8
     @inlinable
     public static func alphaBlend(top: inout Image<ARGB, UInt8>,
                                   bottom: inout Image<ARGB, UInt8>) throws -> Image<ARGB, UInt8> {
-        precondition(top.width == bottom.width && top.height == bottom.height)
+        precondition(top.size == bottom.size)
         
-        let width = top.width
-        let height = top.height
+        let (width, height) = top.size
         
-        var memory = [UInt8](repeating: 0, count: width*height*ARGB.channels)
-        var dest = vImage_Buffer(data: &memory,
-                                 height: UInt(height),
-                                 width: UInt(width),
-                                 rowBytes: MemoryLayout<UInt8>.size*width)
-        
-        let code = withBuffer(&top) { (srcTop: inout vImage_Buffer) in
-            withBuffer(&bottom) { (srcBottom: inout vImage_Buffer) in
-                vImageAlphaBlend_ARGB8888(&srcTop, &srcBottom, &dest, 0)
+        return try withBuffer(&top) { (srcTop: inout vImage_Buffer) in
+            try withBuffer(&bottom) { (srcBottom: inout vImage_Buffer) in
+                try createWithBuffer(width: width, height: height) { dest in
+                    let code = vImageAlphaBlend_ARGB8888(&srcTop, &srcBottom, &dest, 0)
+                    
+                    switch code {
+                    case kvImageNoError:
+                        break
+                    default:
+                        throw vImageUtilsError(vImageErrorCode: code)
+                    }
+                }
             }
-        }
-        
-        switch code {
-        case kvImageNoError:
-            return Image(width: width, height: height, data: memory)
-        default:
-            throw vImageUtilsError(vImageErrorCode: code)
         }
     }
     
-    // MARK: Float
     @inlinable
     public static func alphaBlend(top: inout Image<ARGB, Float>,
                                   bottom: inout Image<ARGB, Float>) throws -> Image<ARGB, Float> {
-        precondition(top.width == bottom.width && top.height == bottom.height)
+        precondition(top.size == bottom.size)
         
-        let width = top.width
-        let height = top.height
+        let (width, height) = top.size
         
-        var memory = [Float](repeating: 0, count: width*height*ARGB.channels)
-        var dest = vImage_Buffer(data: &memory,
-                                 height: UInt(height),
-                                 width: UInt(width),
-                                 rowBytes: MemoryLayout<Float>.size*width)
-        
-        let code = withBuffer(&top) { (srcTop: inout vImage_Buffer) in
-            withBuffer(&bottom) { (srcBottom: inout vImage_Buffer) in
-                vImageAlphaBlend_ARGBFFFF(&srcTop, &srcBottom, &dest, 0)
+        return try withBuffer(&top) { (srcTop: inout vImage_Buffer) in
+            try withBuffer(&bottom) { (srcBottom: inout vImage_Buffer) in
+                try createWithBuffer(width: width, height: height) { dest in
+                    let code = vImageAlphaBlend_ARGBFFFF(&srcTop, &srcBottom, &dest, 0)
+                    
+                    switch code {
+                    case kvImageNoError:
+                        break
+                    default:
+                        throw vImageUtilsError(vImageErrorCode: code)
+                    }
+                }
             }
-        }
-        
-        switch code {
-        case kvImageNoError:
-            return Image(width: width, height: height, data: memory)
-        default:
-            throw vImageUtilsError(vImageErrorCode: code)
         }
     }
 }

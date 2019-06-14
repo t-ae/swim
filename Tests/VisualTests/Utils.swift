@@ -44,10 +44,10 @@ func rainbowImage256() -> Image<RGB, UInt8> {
     return image
 }
 
-func rainbowImage256() -> Image<RGB, Double> {
+func rainbowImage256<T: BinaryFloatingPoint>() -> Image<RGB, T> {
     let uint: Image<RGB, UInt8> = rainbowImage256()
     
-    return uint.cast(to: Double.self) / 255
+    return uint.cast(to: T.self) / 255
 }
 
 func gradiationImage256() -> Image<Gray, UInt8> {
@@ -60,10 +60,10 @@ func gradiationImage256() -> Image<Gray, UInt8> {
     return image
 }
 
-func gradiationImage256() -> Image<Gray, Double> {
+func gradiationImage256<T: BinaryFloatingPoint>() -> Image<Gray, T> {
     let uint: Image<Gray, UInt8> = gradiationImage256()
     
-    return uint.cast(to: Double.self) / 255
+    return uint.cast(to: T.self) / 255
 }
 
 #if canImport(AppKit)
