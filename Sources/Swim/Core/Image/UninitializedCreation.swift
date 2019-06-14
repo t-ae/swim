@@ -2,7 +2,7 @@
 // https://github.com/apple/swift-evolution/blob/master/proposals/0245-array-uninitialized-initializer.md
 
 extension Image {
-    /// Create `Image` by filling `PixelRef`s.
+    /// Create `Image` by filling `UnsafePixelRef`s.
     ///
     /// `initializer` takes `UnsafePixelRef`, which is uninitialized at first.
     /// You must initialize all pixel values of `UnsafePixelRef`.
