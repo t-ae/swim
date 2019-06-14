@@ -11,14 +11,14 @@ extension Image {
     @inlinable
     public static func createWithUnsafePixelRef(width: Int,
                                                 height: Int,
-                                                initializer: (UnsafePixelRef<P, T>)->Void) -> Image {
-        return .createWithUnsafeMutableBufferPointer(width: width, height: height) { bp in
+                                                initializer: (UnsafePixelRef<P, T>) throws -> Void) rethrows -> Image {
+        return try .createWithUnsafeMutableBufferPointer(width: width, height: height) { bp in
             var start = 0
             for y in 0..<height {
                 for x in 0..<width {
                     let slice = bp[start..<start+P.channels]
                     let ref = UnsafePixelRef<P, T>(x: x, y: y, rebasing: slice)
-                    initializer(ref)
+                    try initializer(ref)
                     start += P.channels
                 }
             }
@@ -32,13 +32,13 @@ extension Image {
     @inlinable
     public static func createWithPixelValues(width: Int,
                                              height: Int,
-                                             initializer: (_ x: Int, _ y: Int, _ c: P)->T) -> Image {
-        return .createWithUnsafeMutableBufferPointer(width: width, height: height) { bp in
+                                             initializer: (_ x: Int, _ y: Int, _ c: P) throws -> T) rethrows -> Image {
+        return try .createWithUnsafeMutableBufferPointer(width: width, height: height) { bp in
             var i = 0
             for y in 0..<height {
                 for x in 0..<width {
                     for c in 0..<P.channels {
-                        bp[i] = initializer(x, y, P(rawValue: c)!)
+                        bp[i] = try initializer(x, y, P(rawValue: c)!)
                         i += 1
                     }
                 }
@@ -52,11 +52,11 @@ extension Image {
     @inlinable
     public static func createWithUnsafeMutableBufferPointer(width: Int,
                                                             height: Int,
-                                                            initializer: (UnsafeMutableBufferPointer<T>)->Void) -> Image {
+                                                            initializer: (UnsafeMutableBufferPointer<T>) throws -> Void) rethrows -> Image {
         var image = Image<P, T>(width: width, height: height, value: T.swimDefaultValue)
         
-        image.withUnsafeMutableBufferPointer { bp in
-            initializer(bp)
+        try image.withUnsafeMutableBufferPointer { bp in
+            try initializer(bp)
         }
         
         return image

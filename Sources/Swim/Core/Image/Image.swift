@@ -96,14 +96,14 @@ extension Image {
 
 extension Image {
     @inlinable
-    public func withUnsafeBufferPointer<R>(_ body: (UnsafeBufferPointer<T>) -> R) -> R {
-        return data.withUnsafeBufferPointer(body)
+    public func withUnsafeBufferPointer<R>(_ body: (UnsafeBufferPointer<T>) throws -> R) rethrows -> R {
+        return try data.withUnsafeBufferPointer(body)
     }
     
     @inlinable
-    public mutating func withUnsafeMutableBufferPointer<R>(_ body: (UnsafeMutableBufferPointer<T>) -> R) -> R {
-        return data.withUnsafeMutableBufferPointer { bp in
-            body(bp)
+    public mutating func withUnsafeMutableBufferPointer<R>(_ body: (UnsafeMutableBufferPointer<T>) throws -> R) rethrows -> R {
+        return try data.withUnsafeMutableBufferPointer { bp in
+            try body(bp)
         }
     }
 }

@@ -1,5 +1,3 @@
-public typealias ChannelwiseConversion<P, T, T2> = (_ x: Int, _ y: Int, _ c: P, _ value: T) -> T2
-
 extension Image {
     /// Convert pixel values.
     ///
@@ -7,7 +5,7 @@ extension Image {
     ///
     /// - Note: If you don't need x, y, channel information, using `dataConvert` is faster.
     @inlinable
-    public mutating func channelwiseConvert(_ body: ChannelwiseConversion<P, T, T>) {
+    public mutating func channelwiseConvert(_ body: (_ x: Int, _ y: Int, _ c: P, _ value: T) -> T) {
         channelwiseConvert(0..<width, 0..<height, body)
     }
     
@@ -17,7 +15,7 @@ extension Image {
     @inlinable
     public mutating func channelwiseConvert(_ xRange: Range<Int>,
                                             _ yRange: Range<Int>,
-                                            _ body: ChannelwiseConversion<P, T, T>) {
+                                            _ body: (_ x: Int, _ y: Int, _ c: P, _ value: T) -> T) {
         var start = dataIndex(x: xRange.startIndex, y: yRange.startIndex)
         for y in yRange {
             var i = start
@@ -64,13 +62,13 @@ extension Image {
     ///
     /// - Note: If you don't need x, y, channel information, using `dataConverted` is faster.
     @inlinable
-    public func channelwiseConverted<T2>(_ body: ChannelwiseConversion<P, T, T2>) -> Image<P, T2> {
-        return .createWithUnsafeMutableBufferPointer(width: width, height: height) { bp in
+    public func channelwiseConverted<T2>(_ body: (_ x: Int, _ y: Int, _ c: P, _ value: T) throws -> T2) rethrows -> Image<P, T2> {
+        return try .createWithUnsafeMutableBufferPointer(width: width, height: height) { bp in
             var i = 0
             for y in 0..<height {
                 for x in 0..<width {
                     for c in 0..<P.channels {
-                        bp[i] = body(x, y, P(rawValue: c)!, data[i])
+                        bp[i] = try body(x, y, P(rawValue: c)!, data[i])
                         i += 1
                     }
                 }

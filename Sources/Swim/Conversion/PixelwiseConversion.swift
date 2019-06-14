@@ -44,8 +44,8 @@ extension Image {
     ///
     /// - Note: `UnsafePixelRef` contains `UnsafeMutableBufferPointer`. So it's unsafe to bring them outside closure.
     @inlinable
-    public func unsafePixelwiseConverted<P2, T2>(_ body: (Pixel<P, T>, UnsafePixelRef<P2, T2>)->Void) -> Image<P2, T2> {
-        return .createWithUnsafeMutableBufferPointer(width: width, height: height) { bp in
+    public func unsafePixelwiseConverted<P2, T2>(_ body: (Pixel<P, T>, UnsafePixelRef<P2, T2>) throws -> Void) rethrows -> Image<P2, T2> {
+        return try .createWithUnsafeMutableBufferPointer(width: width, height: height) { bp in
             var si = 0
             var di = 0
             for y in 0..<height {
@@ -53,7 +53,7 @@ extension Image {
                     let pixel = Pixel<P, T>(x: x, y: y, data: data[si..<si+P.channels])
                     let ref = UnsafePixelRef<P2, T2>(x: x, y: y, rebasing: bp[di..<di+P2.channels])
                     
-                    body(pixel, ref)
+                    try body(pixel, ref)
                     
                     si += P.channels
                     di += P2.channels
