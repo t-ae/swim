@@ -12,11 +12,17 @@ extension Image {
     public static func createWithUnsafePixelRef(width: Int,
                                                 height: Int,
                                                 initializer: (UnsafePixelRef<P, T>)->Void) -> Image {
-        var image = Image<P, T>(width: width, height: height)
-        
-        image.unsafePixelwiseConvert(initializer)
-        
-        return image
+        return .createWithUnsafeMutableBufferPointer(width: width, height: height) { bp in
+            var start = 0
+            for y in 0..<height {
+                for x in 0..<width {
+                    let slice = bp[start..<start+P.channels]
+                    let ref = UnsafePixelRef<P, T>(x: x, y: y, rebasing: slice)
+                    initializer(ref)
+                    start += P.channels
+                }
+            }
+        }
     }
     
     /// Create `Image` by computing pixel values from their coords.
@@ -27,13 +33,17 @@ extension Image {
     public static func createWithPixelValues(width: Int,
                                              height: Int,
                                              initializer: (_ x: Int, _ y: Int, _ c: P)->T) -> Image {
-        var image = Image<P, T>(width: width, height: height)
-        
-        image.channelwiseConvert { x, y, c, value in
-            initializer(x, y, c)
+        return .createWithUnsafeMutableBufferPointer(width: width, height: height) { bp in
+            var i = 0
+            for y in 0..<height {
+                for x in 0..<width {
+                    for c in 0..<P.channels {
+                        bp[i] = initializer(x, y, P(rawValue: c)!)
+                        i += 1
+                    }
+                }
+            }
         }
-        
-        return image
     }
     
     /// Create `Image` with filling `UnsafeMutableBufferPointer`.

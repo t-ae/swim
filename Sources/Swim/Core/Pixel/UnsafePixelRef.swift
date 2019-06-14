@@ -61,8 +61,8 @@ extension Image {
     public mutating func withUnsafePixelRef<R>(x: Int, y: Int, _ body: (UnsafePixelRef<P, T>)->R) -> R {
         let start = dataIndex(x: x, y: y)
         return data.withUnsafeMutableBufferPointer {
-            let bp = UnsafeMutableBufferPointer(rebasing: $0[start..<start+P.channels])
-            let ref = UnsafePixelRef<P, T>(x: x, y: y, pointer: bp)
+            let slice = $0[start..<start+P.channels]
+            let ref = UnsafePixelRef<P, T>(x: x, y: y, rebasing: slice)
             return body(ref)
         }
     }
