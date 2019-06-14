@@ -1,16 +1,14 @@
-// TODO: Replace with uninitialized initializer when Swift5.1 is out.
-// https://github.com/apple/swift-evolution/blob/master/proposals/0245-array-uninitialized-initializer.md
-
 @inlinable
 func interleave<T: DataType>(data1: [T], data2: [T]) -> [T] {
     assert(data1.count == data2.count)
     
     let count = data1.count
-    var newData = [T](repeating: T.swimDefaultValue, count: count * 2)
-    
-    for i in 0..<count {
-        newData[2*i+0] = data1[i]
-        newData[2*i+1] = data2[i]
+    let newData = [T](unsafeUninitializedCapacity: count*2) { bp, initializedCount in
+        for i in 0..<count {
+            bp[2*i+0] = data1[i]
+            bp[2*i+1] = data2[i]
+        }
+        initializedCount = bp.count
     }
     
     return newData
@@ -21,12 +19,13 @@ func interleave<T: DataType>(data1: [T], data2: [T], data3: [T]) -> [T] {
     assert(data1.count == data2.count && data2.count == data3.count)
     
     let count = data1.count
-    var newData = [T](repeating: T.swimDefaultValue, count: count * 3)
-    
-    for i in 0..<count {
-        newData[3*i+0] = data1[i]
-        newData[3*i+1] = data2[i]
-        newData[3*i+2] = data3[i]
+    let newData = [T](unsafeUninitializedCapacity: count*3) { bp, initializedCount in
+        for i in 0..<count {
+            bp[3*i+0] = data1[i]
+            bp[3*i+1] = data2[i]
+            bp[3*i+2] = data3[i]
+        }
+        initializedCount = bp.count
     }
     
     return newData
@@ -37,13 +36,14 @@ func interleave<T: DataType>(data1: [T], data2: [T], data3: [T], data4: [T]) -> 
     assert(data1.count == data2.count && data2.count == data3.count && data3.count == data4.count)
     
     let count = data1.count
-    var newData = [T](repeating: T.swimDefaultValue, count: count * 4)
-    
-    for i in 0..<count {
-        newData[4*i+0] = data1[i]
-        newData[4*i+1] = data2[i]
-        newData[4*i+2] = data3[i]
-        newData[4*i+3] = data4[i]
+    let newData = [T](unsafeUninitializedCapacity: count*4) { bp, initializedCount in
+        for i in 0..<count {
+            bp[4*i+0] = data1[i]
+            bp[4*i+1] = data2[i]
+            bp[4*i+2] = data3[i]
+            bp[4*i+3] = data4[i]
+        }
+        initializedCount = bp.count
     }
     
     return newData
