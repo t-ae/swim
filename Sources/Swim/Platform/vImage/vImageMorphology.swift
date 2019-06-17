@@ -15,8 +15,8 @@ extension vImageUtils {
     public static func dilate(src: inout Image<Gray, UInt8>,
                               roi: Rect,
                               kernel: Image<Gray, UInt8>) throws -> Image<Gray, UInt8> {
-        return try withBuffer(&src) { (src: inout vImage_Buffer) in
-            try createWithBuffer(width: roi.width, height: roi.height) { dest in
+        return try withBuffer(image: &src) { (src: inout vImage_Buffer) in
+            try createImageWithBuffer(width: roi.width, height: roi.height) { dest in
                 let code = vImageDilate_Planar8(&src, &dest, UInt(roi.x), UInt(roi.y),
                                                 kernel.data, UInt(kernel.height), UInt(kernel.width), 0)
                 
@@ -41,8 +41,8 @@ extension vImageUtils {
     public static func dilate(src: inout Image<Gray, Float>,
                               roi: Rect,
                               kernel: Image<Gray, Float>) throws -> Image<Gray, Float> {
-        return try withBuffer(&src) { (src: inout vImage_Buffer) in
-            try createWithBuffer(width: roi.width, height: roi.height) { dest in
+        return try withBuffer(image: &src) { (src: inout vImage_Buffer) in
+            try createImageWithBuffer(width: roi.width, height: roi.height) { dest in
                 let code = vImageDilate_PlanarF(&src, &dest, UInt(roi.x), UInt(roi.y),
                                                 kernel.data, UInt(kernel.height), UInt(kernel.width), 0)
                 
@@ -70,8 +70,8 @@ extension vImageUtils {
     public static func erode(src: inout Image<Gray, UInt8>,
                              roi: Rect,
                              kernel: Image<Gray, UInt8>) throws -> Image<Gray, UInt8> {
-        return try withBuffer(&src) { (src: inout vImage_Buffer) in
-            try createWithBuffer(width: roi.width, height: roi.height) { dest in
+        return try withBuffer(image: &src) { (src: inout vImage_Buffer) in
+            try createImageWithBuffer(width: roi.width, height: roi.height) { dest in
                 let code = vImageErode_Planar8(&src, &dest, UInt(roi.x), UInt(roi.y),
                                                kernel.data, UInt(kernel.height), UInt(kernel.width), 0)
                 
@@ -96,8 +96,8 @@ extension vImageUtils {
     public static func erode(src: inout Image<Gray, Float>,
                              roi: Rect,
                              kernel: Image<Gray, Float>) throws -> Image<Gray, Float> {
-        return try withBuffer(&src) { (src: inout vImage_Buffer) in
-            try createWithBuffer(width: roi.width, height: roi.height) { dest in
+        return try withBuffer(image: &src) { (src: inout vImage_Buffer) in
+            try createImageWithBuffer(width: roi.width, height: roi.height) { dest in
                 let code = vImageErode_PlanarF(&src, &dest, UInt(roi.x), UInt(roi.y),
                                                kernel.data, UInt(kernel.height), UInt(kernel.width), 0)
                 
@@ -127,8 +127,8 @@ extension vImageUtils {
                            roi: Rect,
                            kernelWidth: Int,
                            kernelHeight: Int) throws -> Image<Gray, UInt8> {
-        return try withBuffer(&src) { (src: inout vImage_Buffer) in
-            try createWithBuffer(width: roi.width, height: roi.height) { dest in
+        return try withBuffer(image: &src) { (src: inout vImage_Buffer) in
+            try createImageWithBuffer(width: roi.width, height: roi.height) { dest in
                 let code = vImageMax_Planar8(&src, &dest, nil, UInt(roi.x), UInt(roi.y),
                                              UInt(kernelHeight), UInt(kernelWidth), 0)
                 
@@ -155,8 +155,8 @@ extension vImageUtils {
                            roi: Rect,
                            kernelWidth: Int,
                            kernelHeight: Int) throws -> Image<Gray, Float> {
-        return try withBuffer(&src) { (src: inout vImage_Buffer) in
-            try createWithBuffer(width: roi.width, height: roi.height) { dest in
+        return try withBuffer(image: &src) { (src: inout vImage_Buffer) in
+            try createImageWithBuffer(width: roi.width, height: roi.height) { dest in
                 let code = vImageMax_PlanarF(&src, &dest, nil, UInt(roi.x), UInt(roi.y),
                                              UInt(kernelHeight), UInt(kernelWidth), 0)
                 
@@ -186,8 +186,8 @@ extension vImageUtils {
                            roi: Rect,
                            kernelWidth: Int,
                            kernelHeight: Int) throws -> Image<Gray, UInt8> {
-        return try withBuffer(&src) { (src: inout vImage_Buffer) in
-            try createWithBuffer(width: roi.width, height: roi.height) { dest in
+        return try withBuffer(image: &src) { (src: inout vImage_Buffer) in
+            try createImageWithBuffer(width: roi.width, height: roi.height) { dest in
                 let code = vImageMin_Planar8(&src, &dest, nil, UInt(roi.x), UInt(roi.y),
                                              UInt(kernelHeight), UInt(kernelWidth), 0)
                 
@@ -214,8 +214,8 @@ extension vImageUtils {
                            roi: Rect,
                            kernelWidth: Int,
                            kernelHeight: Int) throws -> Image<Gray, Float> {
-        return try withBuffer(&src) { (src: inout vImage_Buffer) in
-            try createWithBuffer(width: roi.width, height: roi.height) { dest in
+        return try withBuffer(image: &src) { (src: inout vImage_Buffer) in
+            try createImageWithBuffer(width: roi.width, height: roi.height) { dest in
                 let code = vImageMin_PlanarF(&src, &dest, nil, UInt(roi.x), UInt(roi.y),
                                              UInt(kernelHeight), UInt(kernelWidth), 0)
                 

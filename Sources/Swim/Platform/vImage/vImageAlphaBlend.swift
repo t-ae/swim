@@ -10,9 +10,9 @@ extension vImageUtils {
         
         let (width, height) = top.size
         
-        return try withBuffer(&top) { (srcTop: inout vImage_Buffer) in
-            try withBuffer(&bottom) { (srcBottom: inout vImage_Buffer) in
-                try createWithBuffer(width: width, height: height) { dest in
+        return try withBuffer(image: &top) { (srcTop: inout vImage_Buffer) in
+            try withBuffer(image: &bottom) { (srcBottom: inout vImage_Buffer) in
+                try createImageWithBuffer(width: width, height: height) { dest in
                     let code = vImageAlphaBlend_ARGB8888(&srcTop, &srcBottom, &dest, 0)
                     
                     switch code {
@@ -33,9 +33,9 @@ extension vImageUtils {
         
         let (width, height) = top.size
         
-        return try withBuffer(&top) { (srcTop: inout vImage_Buffer) in
-            try withBuffer(&bottom) { (srcBottom: inout vImage_Buffer) in
-                try createWithBuffer(width: width, height: height) { dest in
+        return try withBuffer(image: &top) { (srcTop: inout vImage_Buffer) in
+            try withBuffer(image: &bottom) { (srcBottom: inout vImage_Buffer) in
+                try createImageWithBuffer(width: width, height: height) { dest in
                     let code = vImageAlphaBlend_ARGBFFFF(&srcTop, &srcBottom, &dest, 0)
                     
                     switch code {

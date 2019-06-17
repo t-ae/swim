@@ -12,7 +12,7 @@ extension Float: vImageDataType {}
 
 extension vImageUtils {
     @inlinable
-    public static func withBuffer<P: vImagePixelType, T: vImageDataType, R>(_ image: inout Image<P, T>, closure: (inout vImage_Buffer) throws -> R) rethrows -> R {
+    public static func withBuffer<P: vImagePixelType, T: vImageDataType, R>(image: inout Image<P, T>, closure: (inout vImage_Buffer) throws -> R) rethrows -> R {
         
         let height = image.height
         let width = image.width
@@ -26,7 +26,7 @@ extension vImageUtils {
     }
     
     @inlinable
-    public static func createWithBuffer<P: vImagePixelType, T: vImageDataType>(width: Int, height: Int, body: (inout vImage_Buffer) throws -> Void) rethrows -> Image<P, T> {
+    public static func createImageWithBuffer<P: vImagePixelType, T: vImageDataType>(width: Int, height: Int, body: (inout vImage_Buffer) throws -> Void) rethrows -> Image<P, T> {
         
         return try .createWithUnsafeMutableBufferPointer(width: width, height: height) {
             var buffer = vImage_Buffer(data: $0.baseAddress!,
