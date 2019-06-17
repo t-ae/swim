@@ -81,7 +81,7 @@ extension vImageVisualTests {
         
         let kernel = Filter<Float>.mean(size: 5)
         
-        let blurred: Image<ARGB, Float> = try! vImageUtils.createImageWithBuffer(width: lena.width, height: lena.height) { dest in
+        let blurred: Image<ARGB, Float> = try vImageUtils.createImageWithBuffer(width: lena.width, height: lena.height) { dest in
             try vImageUtils.withBuffer(image: &lena) { lena in
                 try kernel.withUnsafeBufferPointer { kernel in
                     let flags: vImageProcessingFlag = [.edgeExtend,

@@ -39,7 +39,7 @@ try image.write(path: dstPath)
 
 For reading and writing image, Swim uses [stb_image.h](https://github.com/nothings/stb/blob/master/stb_image.h) and [stb_image_write.h](https://github.com/nothings/stb/blob/master/stb_image_write.h).
 
-### Convertible from/to CoreGraphics image types
+### Apple platform specific operations
 ```swift
 let image = try! Image<RGBA, UInt8>(contentsOf: url)
 
@@ -50,6 +50,21 @@ let imageFromNS = Image<RGBA, UInt8>(nsImage: nsImage)!
 // on iOS
 let uiImage = image.uiImage()
 let imageFromUI = Image<RGBA, UInt8>(uiImage: uiImage)!
+
+// with vImage
+var argb = image.toARGB()
+let kernel = Filter<UInt8>.mean(size: 5)
+        
+let blurred: Image<ARGB, UInt8> = try vImageUtils.createImageWithBuffer(width: argb.width, height: argb.height) { dest in
+    try vImageUtils.withBuffer(image: &argb) { argb in
+        try kernel.withUnsafeBufferPointer { kernel in
+            let flags: vImageProcessingFlag = [.edgeExtend,
+                                                .printDiagnosticsToConsole]
+            let code = vImageConvolve_ARGB8888(&argb, &dest, nil, 0, 0, kernel.baseAddress, 5, 5, nil, flags.vImage_Flags)
+            try vImageUtils.validateErrorCode(code)
+        }
+    }
+}
 ```
 
 ### Subscriptions
