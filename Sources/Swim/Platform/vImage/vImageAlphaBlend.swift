@@ -14,13 +14,7 @@ extension vImageUtils {
             try withBuffer(image: &bottom) { (srcBottom: inout vImage_Buffer) in
                 try createImageWithBuffer(width: width, height: height) { dest in
                     let code = vImageAlphaBlend_ARGB8888(&srcTop, &srcBottom, &dest, 0)
-                    
-                    switch code {
-                    case kvImageNoError:
-                        break
-                    default:
-                        throw vImageUtilsError(vImageErrorCode: code)
-                    }
+                    try validateErrorCode(code)
                 }
             }
         }
@@ -37,13 +31,7 @@ extension vImageUtils {
             try withBuffer(image: &bottom) { (srcBottom: inout vImage_Buffer) in
                 try createImageWithBuffer(width: width, height: height) { dest in
                     let code = vImageAlphaBlend_ARGBFFFF(&srcTop, &srcBottom, &dest, 0)
-                    
-                    switch code {
-                    case kvImageNoError:
-                        break
-                    default:
-                        throw vImageUtilsError(vImageErrorCode: code)
-                    }
+                    try validateErrorCode(code)
                 }
             }
         }

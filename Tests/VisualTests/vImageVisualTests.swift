@@ -6,6 +6,8 @@ class vImageVisualTests: XCTestCase {
 
 #if canImport(Accelerate)
 
+import Accelerate
+
 extension vImageVisualTests {
     func testDilate() throws {
         let path = testResoruceRoot().appendingPathComponent("lena_512_gray.png")
@@ -69,6 +71,29 @@ extension vImageVisualTests {
         
         let nsImage = try vImageUtils.alphaBlend(top: &top, bottom: &bottom)
             .toRGBA().nsImage()
+        
+        XCTAssertTrue(nsImage.isValid, "Break and check nsImage in debugger.")
+    }
+    
+    func testConvolve() throws {
+        let path = testResoruceRoot().appendingPathComponent("lena_512.png")
+        var lena = try! Image<RGBA, Float>(contentsOf: path).toARGB()
+        
+        let kernel = Filter<Float>.mean(size: 5)
+        
+        let blurred: Image<ARGB, Float> = try! vImageUtils.createImageWithBuffer(width: lena.width, height: lena.height) { dest in
+            try vImageUtils.withBuffer(image: &lena) { lena in
+                try kernel.withUnsafeBufferPointer { kernel in
+                    let flags: vImageProcessingFlag = [.edgeExtend,
+                                                       .printDiagnosticsToConsole]
+                    let code = vImageConvolve_ARGBFFFF(&lena, &dest, nil, 0, 0, kernel.baseAddress, 5, 5, nil, flags.vImage_Flags)
+                    try vImageUtils.validateErrorCode(code)
+                }
+            }
+        }
+        
+        let images = [lena, blurred]
+        let nsImage = Image.concatH(images).toRGBA().nsImage()
         
         XCTAssertTrue(nsImage.isValid, "Break and check nsImage in debugger.")
     }
