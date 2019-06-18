@@ -17,19 +17,22 @@ public struct vImageProcessingFlag: OptionSet {
         return Accelerate.vImage_Flags(rawValue)
     }
     
-    public static let noFlags = vImageProcessingFlag(rawValue: 0b0)
-    public static let leaveAlphaUnchanged = vImageProcessingFlag(rawValue: 0b1)
-    public static let doNotTile = vImageProcessingFlag(rawValue: 0b10000)
-    public static let highQualityResampling = vImageProcessingFlag(rawValue: 0b100000)
-    public static let getTempBufferSize = vImageProcessingFlag(rawValue: 0b10000000)
-    public static let printDiagnosticsToConsole = vImageProcessingFlag(rawValue: 0b100000000)
-    public static let noAllocate = vImageProcessingFlag(rawValue: 0b1000000000)
-    public static let hdrContent = vImageProcessingFlag(rawValue: 0b10000000000)
-    public static let doNotClamp = vImageProcessingFlag(rawValue: 0b100000000000)
-    public static let copyInPlace = vImageProcessingFlag(rawValue: 0b10)
-    public static let backgroundColorFill = vImageProcessingFlag(rawValue: 0b100)
-    public static let edgeExtend = vImageProcessingFlag(rawValue: 0b1000)
-    public static let truncateKernel = vImageProcessingFlag(rawValue: 0b1000000)
+    public static let noFlags = vImageProcessingFlag(rawValue: kvImageNoFlags)
+    public static let leaveAlphaUnchanged = vImageProcessingFlag(rawValue: kvImageLeaveAlphaUnchanged)
+    public static let doNotTile = vImageProcessingFlag(rawValue: kvImageDoNotTile)
+    public static let highQualityResampling = vImageProcessingFlag(rawValue: kvImageHighQualityResampling)
+    public static let getTempBufferSize = vImageProcessingFlag(rawValue: kvImageGetTempBufferSize)
+    public static let printDiagnosticsToConsole = vImageProcessingFlag(rawValue: kvImagePrintDiagnosticsToConsole)
+    public static let noAllocate = vImageProcessingFlag(rawValue: kvImageNoAllocate)
+    public static let doNotClamp = vImageProcessingFlag(rawValue: kvImageDoNotTile)
+    public static let copyInPlace = vImageProcessingFlag(rawValue: kvImageCopyInPlace)
+    public static let backgroundColorFill = vImageProcessingFlag(rawValue: kvImageBackgroundColorFill)
+    public static let edgeExtend = vImageProcessingFlag(rawValue: kvImageEdgeExtend)
+    public static let truncateKernel = vImageProcessingFlag(rawValue: kvImageTruncateKernel)
+    
+    @available(iOS 9.0, *)
+    @available(OSX 10.11, *)
+    public static let hdrContent = vImageProcessingFlag(rawValue: kvImageHDRContent)
 }
 
 // MARK: - Error
@@ -57,7 +60,11 @@ public enum vImageError: Error {
 }
 
 extension vImageUtils {
-    public static func validateErrorCode(_ errorCode: Int) throws {
+    /// Check `vImage_Error` which vImage operations returned.
+    ///
+    /// If `errorCode` is `kvImageNoError`, this does nothing.
+    /// Otherwise, corresponding `vImageError` is thrown.
+    public static func validateErrorCode(_ errorCode: vImage_Error) throws {
         switch errorCode {
         case kvImageNoError:
             return
