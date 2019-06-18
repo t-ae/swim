@@ -4,6 +4,8 @@ extension Image {
     /// Because of its simplicity, this method is much faster than `drawLine`.
     ///
     /// It should be used to fill area, like `drawRect` and `drawCircle`.
+    ///
+    /// - Note: This method doesn't support alpha blending.
     @inlinable
     mutating func drawHorizontalLine(x1: Int, x2: Int, y: Int, color: Color<P, T>) {
         guard 0 <= y && y < height else {
@@ -12,7 +14,6 @@ extension Image {
         
         let left = max(min(x1, x2), 0)
         let right = min(max(x1, x2) + 1, width)
-        
         
         if left > width || right < 0 {
             return
@@ -24,6 +25,8 @@ extension Image {
     }
     
     /// Draw line between specified points.
+    ///
+    /// - Note: This method doesn't support alpha blending.
     @inlinable
     public mutating func drawLine(p1: (x: Int, y: Int),
                                   p2: (x: Int, y: Int),
@@ -77,6 +80,7 @@ extension Image {
     /// Draw cross mark at the specified point.
     ///
     /// - Note: If size is not odd, the size of mark will be size+1.
+    /// - Note: This method doesn't support alpha blending.
     @inlinable
     public mutating func drawX(center: (x: Int, y: Int), size: Int, color: Color<P, T>) {
         let length = size / 2
