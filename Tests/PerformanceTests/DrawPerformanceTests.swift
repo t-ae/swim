@@ -92,8 +92,8 @@ class DrawPerformanceTests: XCTestCase {
     }
     
     func testDrawImageAlphaBlend() {
-        var image = Image<RGB, Double>(width: 1920, height: 1080, value: 0)
-        let draw = Image<RGBA, Double>(width: 1000, height: 700, value: 1)
+        var image = Image<RGB, Double>(width: 1920, height: 1080, value: 0.8)
+        let draw = Image<RGBA, Double>(width: 1000, height: 700, value: 0.7)
         
         measure {
             image.drawImage(origin: (10, 10), image: draw)
