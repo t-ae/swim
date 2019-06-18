@@ -21,11 +21,19 @@ extension vImageUtils {
         
         let height = image.height
         let width = image.width
-        return try image.data.withUnsafeMutableBufferPointer {
-            var buffer = vImage_Buffer(data: $0.baseAddress!,
+        return try image.data.withUnsafeMutableBufferPointer { bp in
+            var buffer = vImage_Buffer(data: bp.baseAddress!,
                                        height: UInt(height),
                                        width: UInt(width),
                                        rowBytes: MemoryLayout<T>.size * width * P.channels)
+            defer {
+                // Check if vImage_Buffer itself is not replaced while closure execution
+                precondition(buffer.data == UnsafeMutableRawPointer(bp.baseAddress), "Replacing `vImage_Buffer` is not allowed.")
+                precondition(buffer.width == UInt(width), "Replacing `vImage_Buffer` is not allowed.")
+                precondition(buffer.height == UInt(height), "Replacing `vImage_Buffer` is not allowed.")
+                precondition(buffer.rowBytes == MemoryLayout<T>.size * width * P.channels, "Replacing `vImage_Buffer` is not allowed.")
+            }
+            
             return try body(&buffer)
         }
     }
@@ -42,6 +50,12 @@ extension vImageUtils {
                                        width: UInt(width),
                                        rowBytes: MemoryLayout<T>.size * width * P.channels)
             try body(&buffer)
+            
+            // Check if vImage_Buffer itself is not replaced while closure execution
+            precondition(buffer.data == UnsafeMutableRawPointer($0.baseAddress), "Replacing `vImage_Buffer` is not allowed.")
+            precondition(buffer.width == UInt(width), "Replacing `vImage_Buffer` is not allowed.")
+            precondition(buffer.height == UInt(height), "Replacing `vImage_Buffer` is not allowed.")
+            precondition(buffer.rowBytes == MemoryLayout<T>.size * width * P.channels, "Replacing `vImage_Buffer` is not allowed.")
         }
     }
 }
