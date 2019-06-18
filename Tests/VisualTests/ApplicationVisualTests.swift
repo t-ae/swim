@@ -502,6 +502,7 @@ extension ApplicationVisualTests {
         for iter in 0..<maxIter {
             // Check nearest pixels
             var newClassImage = classImage
+            var dist2sum: Double = 0
             for pixel in lena.pixels() {
                 var minDist = Double.infinity
                 for (i, c) in centers.enumerated() {
@@ -511,7 +512,10 @@ extension ApplicationVisualTests {
                         minDist = d
                     }
                 }
+                dist2sum += minDist
             }
+            
+            print("step\(iter): dist2sum: \(dist2sum)")
             
             if newClassImage == classImage {
                 print("Break at iter: \(iter)")
