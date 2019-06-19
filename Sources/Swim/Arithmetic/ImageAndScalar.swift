@@ -106,3 +106,26 @@ extension Image where T: FloatingPoint {
         }
     }
 }
+
+extension Image where T: ComplexProtocol {
+    @inlinable
+    public static func /=(lhs: inout Image, rhs: T) {
+        for i in 0..<lhs.data.count {
+            lhs.data[i] /= rhs
+        }
+    }
+    
+    @inlinable
+    public static func /(lhs: Image, rhs: T) -> Image {
+        return lhs.dataConverted {
+            $0 / rhs
+        }
+    }
+    
+    @inlinable
+    public static func /(lhs: T, rhs: Image) -> Image {
+        return rhs.dataConverted {
+            lhs / $0
+        }
+    }
+}
