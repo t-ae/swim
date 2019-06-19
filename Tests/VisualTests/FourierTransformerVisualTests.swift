@@ -139,14 +139,14 @@ extension FourierTransformerVisualTests {
             let roll = filter.width / 2
             f2 = f2.withPadding(left: 0, right: roll, top: 0, bottom: roll, edgeMode: .wrap)
             f2 = f2[roll..<f2.width, roll..<f2.height]
-            let g2fft = FourierTransformer.fft(image: f2)
+            let f2fft = FourierTransformer.fft(image: f2)
             
             let fft = Image<GrayAlpha, Double>
                 .createWithUnsafePixelRef(width: lena.width, height: lena.height) { ref in
-                    ref[.gray] = lenafft[ref.x, ref.y, .gray] * g2fft[ref.x, ref.y, .gray]
-                        - lenafft[ref.x, ref.y, .alpha] * g2fft[ref.x, ref.y, .alpha]
-                    ref[.alpha] = lenafft[ref.x, ref.y, .alpha] * g2fft[ref.x, ref.y, .gray]
-                        + lenafft[ref.x, ref.y, .gray] * g2fft[ref.x, ref.y, .alpha]
+                    ref[.gray] = lenafft[ref.x, ref.y, .gray] * f2fft[ref.x, ref.y, .gray]
+                        - lenafft[ref.x, ref.y, .alpha] * f2fft[ref.x, ref.y, .alpha]
+                    ref[.alpha] = lenafft[ref.x, ref.y, .alpha] * f2fft[ref.x, ref.y, .gray]
+                        + lenafft[ref.x, ref.y, .gray] * f2fft[ref.x, ref.y, .alpha]
             }
             
             let image = FourierTransformer.ifft(image: fft)
