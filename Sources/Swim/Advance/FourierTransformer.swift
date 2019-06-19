@@ -47,6 +47,27 @@ public enum FourierTransformer {
         return image.shifted(x: image.width/2, y: image.height/2, edgeMode: .wrap)
     }
     
+    /// Get spectrum from FFT result.
+    ///
+    /// The result is log-scale magnitude of each `Complex`es normalized in [0, 1] range.
+    ///
+    /// - Parameters:
+    ///   - shift: If `true`, call `FourierTransformer.shift` beforehand. Default: `false`.
+    @inlinable
+    public static func spectrum(image: Image<Gray, Complex<Double>>,
+                                shift: Bool = false) -> Image<Gray, Double> {
+        var image = image
+        if shift {
+            image = FourierTransformer.shift(image: image)
+        }
+        let logmag = image.dataConverted { log1p($0.magnitude) }
+        
+        let extrema = logmag.extrema()
+        return logmag.dataConverted { value in
+            (value - extrema.min) / (extrema.max - extrema.min)
+        }
+    }
+    
     /// Fast fourier transformation horizontally.
     @inlinable
     static func fftx(image: inout Image<Gray, Complex<Double>>, inverse: Bool) {

@@ -7,14 +7,6 @@ class FourierTransformerVisualTests: XCTestCase {
 #if canImport(AppKit)
 
 extension FourierTransformerVisualTests {
-    func getSpectrum(shifted: Image<Gray, Complex<Double>>) -> Image<Gray, Double> {
-        var spectrum = shifted.dataConverted { $0.magnitude }
-        spectrum.dataConvert { log1p(sqrt($0)) }
-        
-        let (minSpectrum, maxSpectrum) = spectrum.extrema()
-        return (spectrum - minSpectrum) / (maxSpectrum - minSpectrum)
-    }
-    
     func testWaves() {
         var images = [Image<Gray, Double>]()
         do { // square wave
@@ -22,10 +14,9 @@ extension FourierTransformerVisualTests {
             image.drawRect(254..<258, 254..<258, color: .white)
             
             let fft = FourierTransformer.fft(image: image)
-            let shifted = FourierTransformer.shift(image: fft)
             
             images.append(image)
-            images.append(getSpectrum(shifted: shifted))
+            images.append(FourierTransformer.spectrum(image: fft, shift: true))
         }
         do { // sine wave
             let sine = Image<Gray, Double>.createWithPixelValues(width: 360, height: 1) { x, y, c in
@@ -36,10 +27,9 @@ extension FourierTransformerVisualTests {
                                        interpolator: BilinearInterpolator(edgeMode: .wrap))
             
             let fft = FourierTransformer.fft(image: image)
-            let shifted = FourierTransformer.shift(image: fft)
             
             images.append(image)
-            images.append(getSpectrum(shifted: shifted))
+            images.append(FourierTransformer.spectrum(image: fft, shift: true))
         }
         do { // sine wave + rotation
             let sine = Image<Gray, Double>.createWithPixelValues(width: 360, height: 1) { x, y, c in
@@ -51,10 +41,9 @@ extension FourierTransformerVisualTests {
                                        interpolator: BilinearInterpolator(edgeMode: .wrap))
             
             let fft = FourierTransformer.fft(image: image)
-            let shifted = FourierTransformer.shift(image: fft)
             
             images.append(image)
-            images.append(getSpectrum(shifted: shifted))
+            images.append(FourierTransformer.spectrum(image: fft, shift: true))
         }
         
         let ns = doubleToNSImage(Image.concatH(images))
@@ -71,7 +60,7 @@ extension FourierTransformerVisualTests {
         let shifted = FourierTransformer.shift(image: fft)
         
         do {
-            images.append(getSpectrum(shifted: shifted))
+            images.append(FourierTransformer.spectrum(image: shifted))
             
             // inverse transform
             images.append(FourierTransformer.ifft(image: fft))
@@ -86,7 +75,7 @@ extension FourierTransformerVisualTests {
             var shifted = shifted
             shifted *= lowPassFilter.dataConverted { Complex(real: $0) }
             
-            images.append(getSpectrum(shifted: shifted))
+            images.append(FourierTransformer.spectrum(image: shifted))
             
             // inverse transform
             let fft = FourierTransformer.shift(image: shifted)
@@ -98,7 +87,7 @@ extension FourierTransformerVisualTests {
             let highPassFilter = 1 - lowPassFilter
             shifted *= highPassFilter.dataConverted { Complex(real: $0) }
             
-            images.append(getSpectrum(shifted: shifted))
+            images.append(FourierTransformer.spectrum(image: shifted))
             
             // inverse transform
             let fft = FourierTransformer.shift(image: shifted)
