@@ -129,14 +129,13 @@ extension FourierTransformerVisualTests {
             // convolution with fft
             let lenafft = FourierTransformer.fft(image: lena)
             
-            // adjust size
-            var f2 = filter.withPadding(left: 0, right: lena.width - filter.width,
+            // adjust size and shift
+            let roll = filter.width / 2
+            let f2 = filter.withPadding(left: 0, right: lena.width - filter.width,
                                         top: 0, bottom: lena.height - filter.height,
                                         edgeMode: .constant(value: 0))
-            // roll
-            let roll = filter.width / 2
-            f2 = f2.withPadding(left: 0, right: roll, top: 0, bottom: roll, edgeMode: .wrap)
-            f2 = f2[roll..<f2.width, roll..<f2.height]
+                .shifted(x: -roll, y: -roll, edgeMode: .wrap)
+            
             let f2fft = FourierTransformer.fft(image: f2)
             
             let fft = lenafft * f2fft
