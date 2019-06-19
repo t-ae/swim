@@ -46,7 +46,7 @@ extension Image {
         }
     }
     
-    /// Create `Image` with filling `UnsafeMutableBufferPointer`.
+    /// Create `Image` by filling `UnsafeMutableBufferPointer`.
     ///
     /// `UnsafeMutableBufferPointer` must be initialized at the end of closure's execution.
     @inlinable
