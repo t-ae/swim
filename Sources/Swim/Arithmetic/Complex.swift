@@ -31,6 +31,17 @@ extension Complex: ExpressibleByFloatLiteral {
     }
 }
 
+extension Complex: CustomStringConvertible {
+    @inlinable
+    public var description: String {
+        if imag >= 0 {
+            return "\(real) + \(imag)i"
+        } else {
+            return "\(real) - \(-imag)i"
+        }
+    }
+}
+
 extension Complex: AdditiveArithmetic {
     @inlinable
     public static var zero: Complex<T> {
