@@ -120,8 +120,8 @@ extension FourierTransformerVisualTests {
         
         print("Image.convoluted")
         time {
-            let lap = lena.convoluted(filter)
-            images.append(lap)
+            let result = lena.convoluted(filter)
+            images.append(result)
         }
         
         print("Convolution with FFT")
