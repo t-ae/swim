@@ -122,3 +122,30 @@ extension Color where T: FloatingPoint {
         }
     }
 }
+
+extension Color where T: ComplexProtocol {
+    @inlinable
+    public static func /=(lhs: inout Color, rhs: T) {
+        for i in 0..<P.channels {
+            lhs[i] /= rhs
+        }
+    }
+    
+    @inlinable
+    public static func /(lhs: Color, rhs: T) -> Color {
+        return .createWithUnsafeMutableBufferPointer { bp in
+            for i in 0..<P.channels {
+                bp[i] = lhs[i] / rhs
+            }
+        }
+    }
+    
+    @inlinable
+    public static func /(lhs: T, rhs: Color) -> Color {
+        return .createWithUnsafeMutableBufferPointer { bp in
+            for i in 0..<P.channels {
+                bp[i] = lhs / rhs[i]
+            }
+        }
+    }
+}

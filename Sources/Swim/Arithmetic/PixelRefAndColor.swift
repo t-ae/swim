@@ -43,6 +43,15 @@ extension UnsafePixelRef where T: FloatingPoint {
     }
 }
 
+extension UnsafePixelRef where T: ComplexProtocol {
+    @inlinable
+    public static func /=<C: ColorProtocol>(lhs: UnsafePixelRef, rhs: C) where C.P == P, C.T == T {
+        for i in 0..<P.channels {
+            lhs.pointer[i] /= rhs[i]
+        }
+    }
+}
+
 // MARK: - Utility
 
 extension UnsafePixelRef {
