@@ -44,13 +44,7 @@ public enum FourierTransformer {
         precondition(image.width % 2 == 0, "Image width must be even number.")
         precondition(image.height % 2 == 0, "Image height must be even number.")
         
-        let w1 = 0..<image.width/2
-        let w2 = image.width/2..<image.width
-        let h1 = 0..<image.height/2
-        let h2 = image.height/2..<image.height
-        
-        return Image.concat([[image[w2, h2], image[w1, h2]],
-                             [image[w2, h1], image[w1, h1]]])
+        return image.shifted(x: image.width/2, y: image.height/2, edgeMode: .wrap)
     }
     
     /// Fast fourier transformation horizontally.
