@@ -112,6 +112,52 @@ extension FourierTransformerVisualTests {
         
         XCTAssertTrue(ns.isValid, "break here")
     }
+    
+    func testConvolutionWithFFT() {
+        let path = testResoruceRoot().appendingPathComponent("lena_512_gray.png")
+        let lena = try! Image<Gray, Double>(contentsOf: path).resize(width: 256, height: 256)
+        var images: [Image<Gray, Double>] = [lena]
+        
+        let filter = Filter.gaussian(size: 13, sigma: 3, scaleTo1: true)
+        
+        print("Image.convoluted")
+        time {
+            let lap = lena.convoluted(filter)
+            images.append(lap)
+        }
+        
+        print("Convolution with FFT")
+        time {
+            // convolution with fft
+            let lenafft = FourierTransformer.fft(image: lena)
+            
+            // adjust size
+            var f2 = filter.withPadding(left: 0, right: lena.width - filter.width,
+                                        top: 0, bottom: lena.height - filter.height,
+                                        edgeMode: .constant(value: 0))
+            // roll
+            let roll = filter.width / 2
+            f2 = f2.withPadding(left: 0, right: roll, top: 0, bottom: roll, edgeMode: .wrap)
+            f2 = f2[roll..<f2.width, roll..<f2.height]
+            let g2fft = FourierTransformer.fft(image: f2)
+            
+            let fft = Image<GrayAlpha, Double>
+                .createWithUnsafePixelRef(width: lena.width, height: lena.height) { ref in
+                    ref[.gray] = lenafft[ref.x, ref.y, .gray] * g2fft[ref.x, ref.y, .gray]
+                        - lenafft[ref.x, ref.y, .alpha] * g2fft[ref.x, ref.y, .alpha]
+                    ref[.alpha] = lenafft[ref.x, ref.y, .alpha] * g2fft[ref.x, ref.y, .gray]
+                        + lenafft[ref.x, ref.y, .gray] * g2fft[ref.x, ref.y, .alpha]
+            }
+            
+            let image = FourierTransformer.ifft(image: fft)
+            images.append(image)
+        }
+        
+        // result
+        let ns = doubleToNSImage(Image.concatH(images))
+        
+        XCTAssertTrue(ns.isValid, "break here")
+    }
 }
 
 #endif
