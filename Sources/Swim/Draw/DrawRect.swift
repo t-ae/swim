@@ -1,5 +1,7 @@
 extension Image {
     /// Draw rectangle.
+    ///
+    /// - Note: This method doesn't support alpha blending.
     @inlinable
     public mutating func drawRect(_ xRange: Range<Int>,
                                   _ yRange: Range<Int>,
@@ -10,6 +12,8 @@ extension Image {
     }
     
     /// Draw rectangle.
+    ///
+    /// - Note: This method doesn't support alpha blending.
     @inlinable
     public mutating func drawRect(origin: (x: Int, y: Int),
                                   size: (width: Int, height: Int),
@@ -30,6 +34,8 @@ extension Image {
     }
     
     /// Draw rectangle pelimeter.
+    ///
+    /// - Note: This method doesn't support alpha blending.
     @inlinable
     public mutating func drawRectPelimeter(_ xRange: Range<Int>,
                                            _ yRange: Range<Int>,
@@ -40,6 +46,8 @@ extension Image {
     }
         
     /// Draw rectangle pelimeter.
+    ///
+    /// - Note: This method doesn't support alpha blending.
     @inlinable
     public mutating func drawRectPelimeter(origin: (x: Int, y: Int),
                                            size: (width: Int, height: Int),

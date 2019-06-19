@@ -10,7 +10,7 @@ struct Image<P: PixelType, T: DataType>
 
 #### Supported types
 `PixelType`: `Gray`, `GrayAlpha`, `RGB`, `RGBA`, `ARGB`  
-`DataType`: `Bool`, `UInt8`, `Int`, `Float`, `Double`  
+`DataType`: `Bool`, `UInt8`, `Int`, `Float`, `Double`, `Complex<T: BinaryFloatingPoint>`
 
 Some functions assume pixel values are:
 - in  [0, 255] range if `DataType` is integer.
@@ -39,7 +39,7 @@ try image.write(path: dstPath)
 
 For reading and writing image, Swim uses [stb_image.h](https://github.com/nothings/stb/blob/master/stb_image.h) and [stb_image_write.h](https://github.com/nothings/stb/blob/master/stb_image_write.h).
 
-### Convertible from/to CoreGraphics image types
+### Apple platform specific operations
 ```swift
 let image = try! Image<RGBA, UInt8>(contentsOf: url)
 
@@ -50,6 +50,21 @@ let imageFromNS = Image<RGBA, UInt8>(nsImage: nsImage)!
 // on iOS
 let uiImage = image.uiImage()
 let imageFromUI = Image<RGBA, UInt8>(uiImage: uiImage)!
+
+// with vImage
+var argb = image.toARGB()
+let kernel = Filter<UInt8>.mean(size: 5)
+        
+let blurred: Image<ARGB, UInt8> = try vImageUtils.createImageWithBuffer(width: argb.width, height: argb.height) { dest in
+    try vImageUtils.withBuffer(image: &argb) { argb in
+        try kernel.withUnsafeBufferPointer { kernel in
+            let flags: vImageProcessingFlag = [.edgeExtend,
+                                                .printDiagnosticsToConsole]
+            let code = vImageConvolve_ARGB8888(&argb, &dest, nil, 0, 0, kernel.baseAddress, 5, 5, nil, flags.vImage_Flags)
+            try vImageUtils.validateErrorCode(code)
+        }
+    }
+}
 ```
 
 ### Subscriptions
@@ -201,11 +216,11 @@ let nlmean = image.nonLocalMeanFilter(windowSize: 5, distance: 2, sigma: 0.1)
 ```swift
 let image = try Image<Gray, Double>(contentsOf: url)
 // image size must be power of 2
-let transformed: Image<GrayAlpha, Double> = FourierTransformer.fft(image: image)
+let transformed: Image<Gray, Complex<Double>> = FourierTransformer.fft(image: image)
 let inverted: Image<Gray, Double> = FourierTransformer.ifft(image: transformed)
 ```
 
-[Example: Spectrum and inverted image / Low-pass filtered / High-pass filtered](https://github.com/t-ae/swim/blob/99e7be2655057190b62426cdb85fe56b130d7126/Tests/VisualTests/FourierTransformerVisualTests.swift#L10-L74)
+[Example: Spectrum and inverted image / Low-pass filtered / High-pass filtered](https://github.com/t-ae/swim/blob/045a55032bfc426a571844704779dec537282cad/Tests/VisualTests/FourierTransformerVisualTests.swift#L65-L112)
 
 ![fft](https://user-images.githubusercontent.com/12446914/57998357-109c1800-7b0c-11e9-818b-600f75485794.png)
 

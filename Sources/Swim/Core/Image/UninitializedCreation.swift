@@ -1,5 +1,5 @@
 extension Image {
-    /// Create `Image` by filling `PixelRef`s.
+    /// Create `Image` by filling `UnsafePixelRef`s.
     ///
     /// `initializer` takes `UnsafePixelRef`, which is uninitialized at first.
     /// You must initialize all pixel values of `UnsafePixelRef`.
@@ -8,14 +8,14 @@ extension Image {
     @inlinable
     public static func createWithUnsafePixelRef(width: Int,
                                                 height: Int,
-                                                initializer: (UnsafePixelRef<P, T>)->Void) -> Image {
-        return .createWithUnsafeMutableBufferPointer(width: width, height: height) { bp in
+                                                initializer: (UnsafePixelRef<P, T>) throws -> Void) rethrows -> Image {
+        return try .createWithUnsafeMutableBufferPointer(width: width, height: height) { bp in
             var start = 0
             for y in 0..<height {
                 for x in 0..<width {
                     let slice = bp[start..<start+P.channels]
                     let ref = UnsafePixelRef<P, T>(x: x, y: y, rebasing: slice)
-                    initializer(ref)
+                    try initializer(ref)
                     start += P.channels
                 }
             }
@@ -29,13 +29,13 @@ extension Image {
     @inlinable
     public static func createWithPixelValues(width: Int,
                                              height: Int,
-                                             initializer: (_ x: Int, _ y: Int, _ c: P)->T) -> Image {
-        return .createWithUnsafeMutableBufferPointer(width: width, height: height) { bp in
+                                             initializer: (_ x: Int, _ y: Int, _ c: P) throws -> T) rethrows -> Image {
+        return try .createWithUnsafeMutableBufferPointer(width: width, height: height) { bp in
             var i = 0
             for y in 0..<height {
                 for x in 0..<width {
                     for c in 0..<P.channels {
-                        bp[i] = initializer(x, y, P(rawValue: c)!)
+                        bp[i] = try initializer(x, y, P(rawValue: c)!)
                         i += 1
                     }
                 }
@@ -49,10 +49,10 @@ extension Image {
     @inlinable
     public static func createWithUnsafeMutableBufferPointer(width: Int,
                                                             height: Int,
-                                                            initializer: (UnsafeMutableBufferPointer<T>)->Void) -> Image {
+                                                            initializer: (UnsafeMutableBufferPointer<T>) throws -> Void) rethrows -> Image {
         let dataCount = width*height*P.channels
-        let data = [T](unsafeUninitializedCapacity: dataCount) { bp, initializedCount in
-            initializer(bp)
+        let data = try [T](unsafeUninitializedCapacity: dataCount) { bp, initializedCount in
+            try initializer(bp)
             initializedCount = bp.count
         }
         

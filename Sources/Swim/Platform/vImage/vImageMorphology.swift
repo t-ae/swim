@@ -4,7 +4,6 @@ import Accelerate
 
 // MARK: - Dilate
 extension vImageUtils {
-    // MARK: UInt8
     @inlinable
     public static func dilate(src: inout Image<Gray, UInt8>,
                               kernel: Image<Gray, UInt8>) throws -> Image<Gray, UInt8> {
@@ -16,27 +15,15 @@ extension vImageUtils {
     public static func dilate(src: inout Image<Gray, UInt8>,
                               roi: Rect,
                               kernel: Image<Gray, UInt8>) throws -> Image<Gray, UInt8> {
-        
-        var memory = [UInt8](repeating: 0, count: roi.width * roi.height)
-        var dest = vImage_Buffer(data: &memory,
-                                 height: UInt(roi.height),
-                                 width: UInt(roi.width),
-                                 rowBytes: MemoryLayout<UInt8>.size*roi.width)
-        
-        let code = withBuffer(&src) { (src: inout vImage_Buffer) in
-            vImageDilate_Planar8(&src, &dest, UInt(roi.x), UInt(roi.y),
-                                 kernel.data, UInt(kernel.height), UInt(kernel.width), 0)
-        }
-        
-        switch code {
-        case kvImageNoError:
-            return Image(width: roi.width, height: roi.height, data: memory)
-        default:
-            throw vImageUtilsError(vImageErrorCode: code)
+        return try withBuffer(image: &src) { (src: inout vImage_Buffer) in
+            try createImageWithBuffer(width: roi.width, height: roi.height) { dest in
+                let code = vImageDilate_Planar8(&src, &dest, UInt(roi.x), UInt(roi.y),
+                                                kernel.data, UInt(kernel.height), UInt(kernel.width), 0)
+                try validateErrorCode(code)
+            }
         }
     }
     
-    // MARK: Float
     @inlinable
     public static func dilate(src: inout Image<Gray, Float>,
                               kernel: Image<Gray, Float>) throws -> Image<Gray, Float> {
@@ -48,30 +35,18 @@ extension vImageUtils {
     public static func dilate(src: inout Image<Gray, Float>,
                               roi: Rect,
                               kernel: Image<Gray, Float>) throws -> Image<Gray, Float> {
-        
-        var memory = [Float](repeating: 0, count: roi.width * roi.height)
-        var dest = vImage_Buffer(data: &memory,
-                                 height: UInt(roi.height),
-                                 width: UInt(roi.width),
-                                 rowBytes: MemoryLayout<Float>.size*roi.width)
-        
-        let code = withBuffer(&src) { (src: inout vImage_Buffer) in
-            vImageDilate_PlanarF(&src, &dest, UInt(roi.x), UInt(roi.y),
-                                 kernel.data, UInt(kernel.height), UInt(kernel.width), 0)
-        }
-        
-        switch code {
-        case kvImageNoError:
-            return Image(width: roi.width, height: roi.height, data: memory)
-        default:
-            throw vImageUtilsError(vImageErrorCode: code)
+        return try withBuffer(image: &src) { (src: inout vImage_Buffer) in
+            try createImageWithBuffer(width: roi.width, height: roi.height) { dest in
+                let code = vImageDilate_PlanarF(&src, &dest, UInt(roi.x), UInt(roi.y),
+                                                kernel.data, UInt(kernel.height), UInt(kernel.width), 0)
+                try validateErrorCode(code)
+            }
         }
     }
 }
 
 // MARK: - Erode
 extension vImageUtils {
-    // MARK: UInt8
     @inlinable
     public static func erode(src: inout Image<Gray, UInt8>,
                              kernel: Image<Gray, UInt8>) throws -> Image<Gray, UInt8> {
@@ -83,27 +58,15 @@ extension vImageUtils {
     public static func erode(src: inout Image<Gray, UInt8>,
                              roi: Rect,
                              kernel: Image<Gray, UInt8>) throws -> Image<Gray, UInt8> {
-        
-        var memory = [UInt8](repeating: 0, count: roi.width * roi.height)
-        var dest = vImage_Buffer(data: &memory,
-                                 height: UInt(roi.height),
-                                 width: UInt(roi.width),
-                                 rowBytes: MemoryLayout<UInt8>.size*roi.width)
-        
-        let code = withBuffer(&src) { (src: inout vImage_Buffer) in
-            vImageErode_Planar8(&src, &dest, UInt(roi.x), UInt(roi.y),
-                                kernel.data, UInt(kernel.height), UInt(kernel.width), 0)
-        }
-        
-        switch code {
-        case kvImageNoError:
-            return Image(width: roi.width, height: roi.height, data: memory)
-        default:
-            throw vImageUtilsError(vImageErrorCode: code)
+        return try withBuffer(image: &src) { (src: inout vImage_Buffer) in
+            try createImageWithBuffer(width: roi.width, height: roi.height) { dest in
+                let code = vImageErode_Planar8(&src, &dest, UInt(roi.x), UInt(roi.y),
+                                               kernel.data, UInt(kernel.height), UInt(kernel.width), 0)
+                try validateErrorCode(code)
+            }
         }
     }
     
-    // MARK: Float
     @inlinable
     public static func erode(src: inout Image<Gray, Float>,
                              kernel: Image<Gray, Float>) throws -> Image<Gray, Float> {
@@ -115,30 +78,18 @@ extension vImageUtils {
     public static func erode(src: inout Image<Gray, Float>,
                              roi: Rect,
                              kernel: Image<Gray, Float>) throws -> Image<Gray, Float> {
-        
-        var memory = [Float](repeating: 0, count: roi.width * roi.height)
-        var dest = vImage_Buffer(data: &memory,
-                                 height: UInt(roi.height),
-                                 width: UInt(roi.width),
-                                 rowBytes: MemoryLayout<Float>.size*roi.width)
-        
-        let code = withBuffer(&src) { (src: inout vImage_Buffer) in
-            vImageErode_PlanarF(&src, &dest, UInt(roi.x), UInt(roi.y),
-                                kernel.data, UInt(kernel.height), UInt(kernel.width), 0)
-        }
-        
-        switch code {
-        case kvImageNoError:
-            return Image(width: roi.width, height: roi.height, data: memory)
-        default:
-            throw vImageUtilsError(vImageErrorCode: code)
+        return try withBuffer(image: &src) { (src: inout vImage_Buffer) in
+            try createImageWithBuffer(width: roi.width, height: roi.height) { dest in
+                let code = vImageErode_PlanarF(&src, &dest, UInt(roi.x), UInt(roi.y),
+                                               kernel.data, UInt(kernel.height), UInt(kernel.width), 0)
+                try validateErrorCode(code)
+            }
         }
     }
 }
 
 // MARK: - Max
 extension vImageUtils {
-    // MARK: UInt8
     @inlinable
     public static func max(src: inout Image<Gray, UInt8>,
                            kernelWidth: Int,
@@ -152,27 +103,15 @@ extension vImageUtils {
                            roi: Rect,
                            kernelWidth: Int,
                            kernelHeight: Int) throws -> Image<Gray, UInt8> {
-        
-        var memory = [UInt8](repeating: 0, count: roi.width * roi.height)
-        var dest = vImage_Buffer(data: &memory,
-                                 height: UInt(roi.height),
-                                 width: UInt(roi.width),
-                                 rowBytes: MemoryLayout<UInt8>.size*roi.width)
-        
-        let code = withBuffer(&src) { (src: inout vImage_Buffer) in
-            vImageMax_Planar8(&src, &dest, nil, UInt(roi.x), UInt(roi.y),
-                              UInt(kernelHeight), UInt(kernelWidth), 0)
-        }
-        
-        switch code {
-        case kvImageNoError:
-            return Image(width: roi.width, height: roi.height, data: memory)
-        default:
-            throw vImageUtilsError(vImageErrorCode: code)
+        return try withBuffer(image: &src) { (src: inout vImage_Buffer) in
+            try createImageWithBuffer(width: roi.width, height: roi.height) { dest in
+                let code = vImageMax_Planar8(&src, &dest, nil, UInt(roi.x), UInt(roi.y),
+                                             UInt(kernelHeight), UInt(kernelWidth), 0)
+                try validateErrorCode(code)
+            }
         }
     }
     
-    // MARK: Float
     @inlinable
     public static func max(src: inout Image<Gray, Float>,
                            kernelWidth: Int,
@@ -186,30 +125,18 @@ extension vImageUtils {
                            roi: Rect,
                            kernelWidth: Int,
                            kernelHeight: Int) throws -> Image<Gray, Float> {
-        
-        var memory = [Float](repeating: 0, count: roi.width * roi.height)
-        var dest = vImage_Buffer(data: &memory,
-                                 height: UInt(roi.height),
-                                 width: UInt(roi.width),
-                                 rowBytes: MemoryLayout<Float>.size*roi.width)
-        
-        let code = withBuffer(&src) { (src: inout vImage_Buffer) in
-            vImageMax_PlanarF(&src, &dest, nil, UInt(roi.x), UInt(roi.y),
-                              UInt(kernelHeight), UInt(kernelWidth), 0)
-        }
-        
-        switch code {
-        case kvImageNoError:
-            return Image(width: roi.width, height: roi.height, data: memory)
-        default:
-            throw vImageUtilsError(vImageErrorCode: code)
+        return try withBuffer(image: &src) { (src: inout vImage_Buffer) in
+            try createImageWithBuffer(width: roi.width, height: roi.height) { dest in
+                let code = vImageMax_PlanarF(&src, &dest, nil, UInt(roi.x), UInt(roi.y),
+                                             UInt(kernelHeight), UInt(kernelWidth), 0)
+                try validateErrorCode(code)
+            }
         }
     }
 }
 
 // MARK: - Min
 extension vImageUtils {
-    // MARK: UInt8
     @inlinable
     public static func min(src: inout Image<Gray, UInt8>,
                            kernelWidth: Int,
@@ -223,27 +150,15 @@ extension vImageUtils {
                            roi: Rect,
                            kernelWidth: Int,
                            kernelHeight: Int) throws -> Image<Gray, UInt8> {
-        
-        var memory = [UInt8](repeating: 0, count: roi.width * roi.height)
-        var dest = vImage_Buffer(data: &memory,
-                                 height: UInt(roi.height),
-                                 width: UInt(roi.width),
-                                 rowBytes: MemoryLayout<UInt8>.size*roi.width)
-        
-        let code = withBuffer(&src) { (src: inout vImage_Buffer) in
-            vImageMin_Planar8(&src, &dest, nil, UInt(roi.x), UInt(roi.y),
-                              UInt(kernelHeight), UInt(kernelWidth), 0)
-        }
-        
-        switch code {
-        case kvImageNoError:
-            return Image(width: roi.width, height: roi.height, data: memory)
-        default:
-            throw vImageUtilsError(vImageErrorCode: code)
+        return try withBuffer(image: &src) { (src: inout vImage_Buffer) in
+            try createImageWithBuffer(width: roi.width, height: roi.height) { dest in
+                let code = vImageMin_Planar8(&src, &dest, nil, UInt(roi.x), UInt(roi.y),
+                                             UInt(kernelHeight), UInt(kernelWidth), 0)
+                try validateErrorCode(code)
+            }
         }
     }
     
-    // MARK: Float
     @inlinable
     public static func min(src: inout Image<Gray, Float>,
                            kernelWidth: Int,
@@ -257,23 +172,12 @@ extension vImageUtils {
                            roi: Rect,
                            kernelWidth: Int,
                            kernelHeight: Int) throws -> Image<Gray, Float> {
-        
-        var memory = [Float](repeating: 0, count: roi.width * roi.height)
-        var dest = vImage_Buffer(data: &memory,
-                                 height: UInt(roi.height),
-                                 width: UInt(roi.width),
-                                 rowBytes: MemoryLayout<Float>.size*roi.width)
-        
-        let code = withBuffer(&src) { (src: inout vImage_Buffer) in
-            vImageMin_PlanarF(&src, &dest, nil, UInt(roi.x), UInt(roi.y),
-                              UInt(kernelHeight), UInt(kernelWidth), 0)
-        }
-        
-        switch code {
-        case kvImageNoError:
-            return Image(width: roi.width, height: roi.height, data: memory)
-        default:
-            throw vImageUtilsError(vImageErrorCode: code)
+        return try withBuffer(image: &src) { (src: inout vImage_Buffer) in
+            try createImageWithBuffer(width: roi.width, height: roi.height) { dest in
+                let code = vImageMin_PlanarF(&src, &dest, nil, UInt(roi.x), UInt(roi.y),
+                                             UInt(kernelHeight), UInt(kernelWidth), 0)
+                try validateErrorCode(code)
+            }
         }
     }
 }

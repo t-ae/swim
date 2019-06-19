@@ -336,7 +336,7 @@ extension ApplicationVisualTests {
             for y in 0..<lena.height-size {
                 for x in 0..<lena.width-size {
                     let patch = lena[Rect(x: x, y: y, width: size, height: size)]
-                    let c = Correlation.zncc(patch, template)
+                    let c = ImageCompare.zncc(patch, template)
                     if c > maxc {
                         maxc = c
                         maxPosition = (x, y)
@@ -377,7 +377,7 @@ extension ApplicationVisualTests {
                 for y in searchRangeY {
                     for x in searchRangeX {
                         let patch = image[Rect(x: x, y: y, width: template.width, height: template.height)]
-                        let c = Correlation.zncc(patch, template)
+                        let c = ImageCompare.zncc(patch, template)
                         if c > maxc {
                             maxc = c
                             maxPosition = (x, y)
@@ -456,17 +456,17 @@ extension ApplicationVisualTests {
         }
         var images: [Image<RGB, Double>] = [noisy]
         
-        print("PSNR(noisy): \(ImageStatistics.psnr(image1: lena, image2: noisy))")
+        print("PSNR(noisy): \(ImageCompare.psnr(lena, noisy))")
         
         let gaussian = noisy.convoluted(Filter.gaussian3x3)
         images.append(gaussian)
         
-        print("PSNR(gaussian): \(ImageStatistics.psnr(image1: lena, image2: gaussian))")
+        print("PSNR(gaussian): \(ImageCompare.psnr(lena, gaussian))")
         
         let median = noisy.rankFilter(.median, windowSize: 3)
         images.append(median)
         
-        print("PSNR(median): \(ImageStatistics.psnr(image1: lena, image2: median))")
+        print("PSNR(median): \(ImageCompare.psnr(lena, median))")
         
         // result
         let ns = doubleToNSImage(Image.concatH(images))
@@ -502,6 +502,7 @@ extension ApplicationVisualTests {
         for iter in 0..<maxIter {
             // Check nearest pixels
             var newClassImage = classImage
+            var dist2sum: Double = 0
             for pixel in lena.pixels() {
                 var minDist = Double.infinity
                 for (i, c) in centers.enumerated() {
@@ -511,7 +512,10 @@ extension ApplicationVisualTests {
                         minDist = d
                     }
                 }
+                dist2sum += minDist
             }
+            
+            print("step\(iter): dist2sum: \(dist2sum)")
             
             if newClassImage == classImage {
                 print("Break at iter: \(iter)")

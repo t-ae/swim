@@ -1,4 +1,9 @@
 extension Image {
+    /// Draw polygon.
+    ///
+    /// - Precondition: `points.count >= 3`
+    ///
+    /// - Note: This method doesn't support alpha blending.
     @inlinable
     public mutating func drawPolygon(points: [(x: Int, y: Int)], color: Color<P, T>) {
         precondition(points.count >= 3, "Needs at least 3 points.")
@@ -96,6 +101,8 @@ extension Image {
     /// Draw polygon pelimeter.
     ///
     /// Same as `drawLines` with `close: true`.
+    ///
+    /// - Note: This method doesn't support alpha blending.
     @inlinable
     public mutating func drawPolygonPelimeter(points: [(x: Int, y: Int)], color: Color<P, T>) {
         drawLines(points: points, close: true, color: color)

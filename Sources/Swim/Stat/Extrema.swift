@@ -19,6 +19,7 @@ extension Image where T: Comparable {
         var p = channel.rawValue
         var min = data[p]
         var max = data[p]
+        p += P.channels
         
         for _ in 1..<pixelCount {
             min = Swift.min(data[p], min)

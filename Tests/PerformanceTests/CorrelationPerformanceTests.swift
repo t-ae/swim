@@ -9,7 +9,7 @@ class CorrelationPerformanceTests: XCTestCase {
         
         measure {
             for _ in 0..<100 {
-                let d = Correlation.ssd(image1, image2)
+                let d = ImageCompare.ssd(image1, image2)
                 XCTAssertEqual(d, 0)
             }
         }
@@ -22,7 +22,7 @@ class CorrelationPerformanceTests: XCTestCase {
         
         measure {
             for _ in 0..<100 {
-                let d = Correlation.ssd(image1, image2, mask: mask)
+                let d = ImageCompare.ssd(image1, image2, mask: mask)
                 XCTAssertEqual(d, 0)
             }
         }
@@ -34,7 +34,7 @@ class CorrelationPerformanceTests: XCTestCase {
         
         measure {
             for _ in 0..<100 {
-                let d = Correlation.sad(image1, image2)
+                let d = ImageCompare.sad(image1, image2)
                 XCTAssertEqual(d, 0)
             }
         }
@@ -47,7 +47,7 @@ class CorrelationPerformanceTests: XCTestCase {
         
         measure {
             for _ in 0..<100 {
-                let d = Correlation.sad(image1, image2, mask: mask)
+                let d = ImageCompare.sad(image1, image2, mask: mask)
                 XCTAssertEqual(d, 0)
             }
         }
@@ -59,7 +59,7 @@ class CorrelationPerformanceTests: XCTestCase {
         
         measure {
             for _ in 0..<100 {
-                let d = Correlation.ncc(image1, image2)
+                let d = ImageCompare.ncc(image1, image2)
                 XCTAssertEqual(d, 1, accuracy: 1e-3)
             }
         }
@@ -72,7 +72,7 @@ class CorrelationPerformanceTests: XCTestCase {
         
         measure {
             for _ in 0..<100 {
-                let d = Correlation.ncc(image1, image2, mask: mask)
+                let d = ImageCompare.ncc(image1, image2, mask: mask)
                 XCTAssertEqual(d, 1, accuracy: 1e-3)
             }
         }
@@ -84,7 +84,7 @@ class CorrelationPerformanceTests: XCTestCase {
         
         measure {
             for _ in 0..<100 {
-                let d = Correlation.zncc(image1, image2)
+                let d = ImageCompare.zncc(image1, image2)
                 XCTAssertEqual(d, 1, accuracy: 1e-3)
             }
         }
@@ -97,7 +97,7 @@ class CorrelationPerformanceTests: XCTestCase {
         
         measure {
             for _ in 0..<100 {
-                let d = Correlation.zncc(image1, image2, mask: mask)
+                let d = ImageCompare.zncc(image1, image2, mask: mask)
                 XCTAssertEqual(d, 1, accuracy: 1e-3)
             }
         }

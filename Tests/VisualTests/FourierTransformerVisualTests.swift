@@ -7,8 +7,8 @@ class FourierTransformerVisualTests: XCTestCase {
 #if canImport(AppKit)
 
 extension FourierTransformerVisualTests {
-    func getSpectrum(shifted: Image<GrayAlpha, Double>) -> Image<Gray, Double> {
-        var spectrum = shifted[channel: 0].pow(2) + shifted[channel: 1].pow(2)
+    func getSpectrum(shifted: Image<Gray, Complex<Double>>) -> Image<Gray, Double> {
+        var spectrum = shifted.dataConverted { $0.magnitude }
         spectrum.dataConvert { log1p(sqrt($0)) }
         
         let (minSpectrum, maxSpectrum) = spectrum.extrema()
@@ -84,8 +84,7 @@ extension FourierTransformerVisualTests {
                                  color: Color(gray: 1))
         do { // low pass filter
             var shifted = shifted
-            shifted[channel: .gray] *= lowPassFilter
-            shifted[channel: .alpha] *= lowPassFilter
+            shifted *= lowPassFilter.dataConverted { Complex(real: $0) }
             
             images.append(getSpectrum(shifted: shifted))
             
@@ -97,14 +96,53 @@ extension FourierTransformerVisualTests {
         do { // high pass filter
             var shifted = shifted
             let highPassFilter = 1 - lowPassFilter
-            shifted[channel: .gray] *= highPassFilter
-            shifted[channel: .alpha] *= highPassFilter
+            shifted *= highPassFilter.dataConverted { Complex(real: $0) }
             
             images.append(getSpectrum(shifted: shifted))
             
             // inverse transform
             let fft = FourierTransformer.shift(image: shifted)
             images.append(FourierTransformer.ifft(image: fft))
+        }
+        
+        // result
+        let ns = doubleToNSImage(Image.concatH(images))
+        
+        XCTAssertTrue(ns.isValid, "break here")
+    }
+    
+    func testConvolutionWithFFT() {
+        let path = testResoruceRoot().appendingPathComponent("lena_512_gray.png")
+        let lena = try! Image<Gray, Double>(contentsOf: path).resize(width: 256, height: 256)
+        var images: [Image<Gray, Double>] = [lena]
+        
+        let filter = Filter.gaussian(size: 13, sigma: 3, scaleTo1: true)
+        
+        print("Image.convoluted")
+        time {
+            let lap = lena.convoluted(filter)
+            images.append(lap)
+        }
+        
+        print("Convolution with FFT")
+        time {
+            // convolution with fft
+            let lenafft = FourierTransformer.fft(image: lena)
+            
+            // adjust size
+            var f2 = filter.withPadding(left: 0, right: lena.width - filter.width,
+                                        top: 0, bottom: lena.height - filter.height,
+                                        edgeMode: .constant(value: 0))
+            // roll
+            let roll = filter.width / 2
+            f2 = f2.withPadding(left: 0, right: roll, top: 0, bottom: roll, edgeMode: .wrap)
+            f2 = f2[roll..<f2.width, roll..<f2.height]
+            let f2fft = FourierTransformer.fft(image: f2)
+            
+            let fft = lenafft * f2fft
+            
+            let image = FourierTransformer.ifft(image: fft)
+            images.append(image)
         }
         
         // result

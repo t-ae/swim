@@ -87,15 +87,21 @@ extension Image {
 }
 
 extension Image {
+    /// Call underlying buffer's `withUnsafeBufferPointer`.
+    ///
+    /// See `Array.withUnsafeBufferPointer` for further information.
     @inlinable
-    public func withUnsafeBufferPointer<R>(_ body: (UnsafeBufferPointer<T>) -> R) -> R {
-        return data.withUnsafeBufferPointer(body)
+    public func withUnsafeBufferPointer<R>(_ body: (UnsafeBufferPointer<T>) throws -> R) rethrows -> R {
+        return try data.withUnsafeBufferPointer(body)
     }
     
+    /// Call underlying buffer's `withUnsafeMutableBufferPointer`.
+    ///
+    /// See `Array.withUnsafeMutableBufferPointer` for further information.
     @inlinable
-    public mutating func withUnsafeMutableBufferPointer<R>(_ body: (UnsafeMutableBufferPointer<T>) -> R) -> R {
-        return data.withUnsafeMutableBufferPointer { bp in
-            body(bp)
+    public mutating func withUnsafeMutableBufferPointer<R>(_ body: (inout UnsafeMutableBufferPointer<T>) throws -> R) rethrows -> R {
+        return try data.withUnsafeMutableBufferPointer { bp in
+            try body(&bp)
         }
     }
 }

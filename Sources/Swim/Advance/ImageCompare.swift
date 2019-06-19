@@ -1,10 +1,10 @@
 import Foundation
 
-public enum Correlation<T: DataType> {
+public enum ImageCompare<T: DataType> {
     
 }
 
-extension Correlation where T: Strideable {
+extension ImageCompare where T: Strideable {
     /// Compute sum of square difference.
     ///
     /// - Parameters:
@@ -47,7 +47,7 @@ extension Correlation where T: Strideable {
     }
 }
 
-extension Correlation where T: BinaryFloatingPoint {
+extension ImageCompare where T: BinaryFloatingPoint {
     /// Compute normalized cross correlation.
     ///
     /// - Parameters:
@@ -131,3 +131,20 @@ extension Correlation where T: BinaryFloatingPoint {
 }
 
 
+extension ImageCompare where T == Double {
+    // TODO: Add Float version
+    
+    /// Compute peek signal/noise ratio.
+    public static func psnr(_ image1: Image<Gray, T>, _ image2: Image<Gray, T>) -> T {
+        let ssd = ImageCompare.ssd(image1, image2)
+        let mse = ssd / Double(image1.pixelCount)
+        
+        let psnr = 10 * log10(1 / mse)
+        return psnr
+    }
+    
+    /// Compute peek signal/noise ratio.
+    public static func psnr(_ image1: Image<RGB, T>, _ image2: Image<RGB, T>) -> T {
+        return psnr(image1.toGray(), image2.toGray())
+    }
+}

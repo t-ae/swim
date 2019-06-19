@@ -63,7 +63,7 @@ class ArithmeticPerformanceTests: XCTestCase {
     
     func testMulImageEquivalent() {
         var image1 = [Double](repeating: 1, count: 3840*2160*4)
-        var image2 = [Double](repeating: 1.1, count: 3840*2160*4)
+        let image2 = [Double](repeating: 1.1, count: 3840*2160*4)
         
         measure {
             for _ in 0..<10 {
