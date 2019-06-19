@@ -165,15 +165,16 @@ let warpedImage = image.warp(transformation: affine, outputSize: (500, 500), int
 
 ![warp](https://user-images.githubusercontent.com/12446914/58522375-09a39280-81fb-11e9-9229-3478797c26e8.png)
 
-### Correlation
+### Compare images
 ```swift
-let image1 = try Image<Gray, Float>(contentsOf: url1)
-let image2 = try Image<Gray, Float>(contentsOf: url2)
+let image1 = try Image<Gray, Double>(contentsOf: url1)
+let image2 = try Image<Gray, Double>(contentsOf: url2)
 
-let ssd = Correlation.ssd(image1, image2)
-let sad = Correlation.sad(image1, image2)
-let ncc = Correlation.ncc(image1, image2)
-let zncc = Correlation.zncc(image1, image2)
+let ssd = ImageCompare.ssd(image1, image2)
+let sad = ImageCompare.sad(image1, image2)
+let ncc = ImageCompare.ncc(image1, image2)
+let zncc = ImageCompare.zncc(image1, image2)
+let psnr = ImageCompare.psnr(image1, image2)
 ```
 
 ### Blending
