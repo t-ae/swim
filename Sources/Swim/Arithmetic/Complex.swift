@@ -4,15 +4,11 @@ public protocol ComplexProtocol: SignedNumeric, CustomStringConvertible, Express
     var real: T { get set }
     var imag: T { get set }
     
-    init(real: T)
     init(real: T, imag: T)
     
     var conj: Self { get }
     
-    @inlinable
     static func /(lhs: Self, rhs: Self) -> Self
-    
-    @inlinable
     static func /= (lhs: inout Self, rhs: Self)
 }
 
@@ -131,7 +127,7 @@ public struct Complex<T: BinaryFloatingPoint>: ComplexProtocol {
     public var imag: T
     
     @inlinable
-    public init(real: T, imag: T = .zero) {
+    public init(real: T, imag: T) {
         self.real = real
         self.imag = imag
     }
