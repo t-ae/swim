@@ -59,4 +59,12 @@ class TransformationPerformanceTests: XCTestCase {
             _ = image.withPadding(3, edgeMode: .edge)
         }
     }
+    
+    func testShifted() {
+        let image = Image<RGBA, Double>(width: 3840, height: 2160, value: 0)
+        
+        measure {
+            _ = image.shifted(x: 1000, y: -1000, edgeMode: .edge)
+        }
+    }
 }
