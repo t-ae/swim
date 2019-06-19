@@ -7,8 +7,8 @@ class FourierTransformerVisualTests: XCTestCase {
 #if canImport(AppKit)
 
 extension FourierTransformerVisualTests {
-    func getSpectrum(shifted: Image<GrayAlpha, Double>) -> Image<Gray, Double> {
-        var spectrum = shifted[channel: 0].pow(2) + shifted[channel: 1].pow(2)
+    func getSpectrum(shifted: Image<Gray, Complex<Double>>) -> Image<Gray, Double> {
+        var spectrum = shifted.dataConverted { $0.magnitude }
         spectrum.dataConvert { log1p(sqrt($0)) }
         
         let (minSpectrum, maxSpectrum) = spectrum.extrema()
@@ -84,8 +84,7 @@ extension FourierTransformerVisualTests {
                                  color: Color(gray: 1))
         do { // low pass filter
             var shifted = shifted
-            shifted[channel: .gray] *= lowPassFilter
-            shifted[channel: .alpha] *= lowPassFilter
+            shifted *= lowPassFilter.dataConverted { Complex(real: $0) }
             
             images.append(getSpectrum(shifted: shifted))
             
@@ -97,8 +96,7 @@ extension FourierTransformerVisualTests {
         do { // high pass filter
             var shifted = shifted
             let highPassFilter = 1 - lowPassFilter
-            shifted[channel: .gray] *= highPassFilter
-            shifted[channel: .alpha] *= highPassFilter
+            shifted *= highPassFilter.dataConverted { Complex(real: $0) }
             
             images.append(getSpectrum(shifted: shifted))
             
@@ -141,13 +139,7 @@ extension FourierTransformerVisualTests {
             f2 = f2[roll..<f2.width, roll..<f2.height]
             let f2fft = FourierTransformer.fft(image: f2)
             
-            let fft = Image<GrayAlpha, Double>
-                .createWithUnsafePixelRef(width: lena.width, height: lena.height) { ref in
-                    ref[.gray] = lenafft[ref.x, ref.y, .gray] * f2fft[ref.x, ref.y, .gray]
-                        - lenafft[ref.x, ref.y, .alpha] * f2fft[ref.x, ref.y, .alpha]
-                    ref[.alpha] = lenafft[ref.x, ref.y, .alpha] * f2fft[ref.x, ref.y, .gray]
-                        + lenafft[ref.x, ref.y, .gray] * f2fft[ref.x, ref.y, .alpha]
-            }
+            let fft = lenafft * f2fft
             
             let image = FourierTransformer.ifft(image: fft)
             images.append(image)
