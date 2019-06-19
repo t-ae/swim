@@ -63,6 +63,15 @@ extension Image: Equatable where T: Equatable {
     }
 }
 
+extension Image: CustomStringConvertible {
+    @inlinable
+    public var description: String {
+        let t = type(of: self)
+        
+        return "\(t)(width: \(width), height: \(height))"
+    }
+}
+
 extension Image {
     /// Read/write pixel value.
     @inlinable
