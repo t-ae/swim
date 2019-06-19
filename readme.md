@@ -221,7 +221,7 @@ let transformed: Image<Gray, Complex<Double>> = FourierTransformer.fft(image: im
 let inverted: Image<Gray, Double> = FourierTransformer.ifft(image: transformed)
 ```
 
-[Example: Spectrum and inverted image / Low-pass filtered / High-pass filtered](https://github.com/t-ae/swim/blob/045a55032bfc426a571844704779dec537282cad/Tests/VisualTests/FourierTransformerVisualTests.swift#L65-L112)
+[Example: Spectrum and inverted image / Low-pass filtered / High-pass filtered](https://github.com/t-ae/swim/blob/1530980e40ea0ec3ab90d2e3feb0dc5d50700cc1/Tests/VisualTests/FourierTransformerVisualTests.swift#L54-L101)
 
 ![fft](https://user-images.githubusercontent.com/12446914/57998357-109c1800-7b0c-11e9-818b-600f75485794.png)
 
