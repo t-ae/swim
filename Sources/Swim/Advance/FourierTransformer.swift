@@ -94,7 +94,7 @@ public enum FourierTransformer {
                     k >>= 1
                 }
                 if j < i {
-                    swap(&data[j], &data[i])
+                    data.swapAt(i, j)
                 }
             }
             
