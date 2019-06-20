@@ -456,17 +456,23 @@ extension ApplicationVisualTests {
         }
         var images: [Image<RGB, Double>] = [noisy]
         
-        print("PSNR(noisy): \(ImageCompare.psnr(lena, noisy))")
+        print("original: PSNR=N/A, "
+            + "SSIM=\(ImageCompare.ssim(lena, lena, windowSize: 7))")
+        
+        print("noisy: PSNR=\(ImageCompare.psnr(lena, noisy)), "
+            + "SSIM=\(ImageCompare.ssim(lena, noisy, windowSize: 7))")
         
         let gaussian = noisy.convoluted(Filter.gaussian3x3)
         images.append(gaussian)
         
-        print("PSNR(gaussian): \(ImageCompare.psnr(lena, gaussian))")
+        print("gauss: PSNR=\(ImageCompare.psnr(lena, gaussian)), "
+            + "SSIM=\(ImageCompare.ssim(lena, gaussian, windowSize: 7))")
         
         let median = noisy.rankFilter(.median, windowSize: 3)
         images.append(median)
         
-        print("PSNR(median): \(ImageCompare.psnr(lena, median))")
+        print("median: PSNR=\(ImageCompare.psnr(lena, median)), "
+            + "SSIM=\(ImageCompare.ssim(lena, median, windowSize: 7))")
         
         // result
         let ns = doubleToNSImage(Image.concatH(images))

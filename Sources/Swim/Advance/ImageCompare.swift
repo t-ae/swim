@@ -135,6 +135,7 @@ extension ImageCompare where T == Double {
     // TODO: Add Float version
     
     /// Compute peek signal/noise ratio.
+    @inlinable
     public static func psnr(_ image1: Image<Gray, T>, _ image2: Image<Gray, T>) -> T {
         let ssd = ImageCompare.ssd(image1, image2)
         let mse = ssd / Double(image1.pixelCount)
@@ -144,7 +145,84 @@ extension ImageCompare where T == Double {
     }
     
     /// Compute peek signal/noise ratio.
+    @inlinable
     public static func psnr(_ image1: Image<RGB, T>, _ image2: Image<RGB, T>) -> T {
         return psnr(image1.toGray(), image2.toGray())
+    }
+    
+    /// Compute mean structual similarity index.
+    ///
+    /// - Parameters:
+    ///   - windowSize: Size of sliding window used in comparison.
+    @inlinable
+    public static func ssim(_ image1: Image<Gray, T>, _ image2: Image<Gray, T>,
+                            windowSize: Int, k1: T = 0.01, k2: T = 0.03) -> T {
+        precondition(image1.size == image2.size, "Images must have same size.")
+        
+        let c1 = k1*k1
+        let c2 = k2*k2
+        
+        let winHalf = (windowSize-1) / 2
+        
+        let edgeMode = EdgeMode<Gray, T>.reflect
+        func localSSIM(x: Int, y: Int) -> T {
+            var suma: T = 0
+            var sum2a: T = 0
+            var sumb: T = 0
+            var sum2b: T = 0
+            var sumCross: T = 0
+            for dy in 0..<windowSize {
+                let y = edgeMode.clampValue(value: y + dy - winHalf, max: image1.height)!
+                for dx in 0..<windowSize {
+                    let x = edgeMode.clampValue(value: x + dx - winHalf, max: image1.width)!
+                    
+                    let a = image1[x, y, .gray]
+                    let b = image2[x, y, .gray]
+                    suma += a
+                    sum2a += a*a
+                    sumb += b
+                    sum2b += b*b
+                    sumCross += a*b
+                }
+            }
+            
+            let count = T(windowSize*windowSize)
+            let meana = suma / count
+            let meanb = sumb / count
+            let vara = sum2a / count - meana*meana
+            let varb = sum2b / count - meanb*meanb
+            let cov = sumCross / count - meana*meanb
+            
+            let numerator = (2*meana*meanb + c1) * (2*cov + c2)
+            let denominator = (meana*meana + meanb*meanb + c1) * (vara + varb + c2)
+            
+            return numerator / denominator
+        }
+        
+        var sum: T = 0
+        for y in 0..<image1.height {
+            for x in 0..<image1.width {
+                sum += localSSIM(x: x, y: y)
+            }
+        }
+        
+        return sum / T(image1.pixelCount)
+    }
+    
+    /// Compute mean structual similarity index.
+    ///
+    /// - Parameters:
+    ///   - windowSize: Size of sliding window used in comparison.
+    @inlinable
+    public static func ssim(_ image1: Image<RGB, T>, _ image2: Image<RGB, T>,
+                            windowSize: Int, k1: T = 0.01, k2: T = 0.03) -> T {
+        let rSSIM = ssim(image1[channel: .red], image2[channel: .red],
+                           windowSize: windowSize, k1: k1, k2: k2)
+        let gSSIM = ssim(image1[channel: .green], image2[channel: .green],
+                           windowSize: windowSize, k1: k1, k2: k2)
+        let bSSIM = ssim(image1[channel: .blue], image2[channel: .blue],
+                           windowSize: windowSize, k1: k1, k2: k2)
+        
+        return (rSSIM + gSSIM + bSSIM) / 3
     }
 }
