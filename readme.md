@@ -175,6 +175,7 @@ let sad = ImageCompare.sad(image1, image2)
 let ncc = ImageCompare.ncc(image1, image2)
 let zncc = ImageCompare.zncc(image1, image2)
 let psnr = ImageCompare.psnr(image1, image2)
+let ssim = ImageCompare.ssim(image1, image2, windowSize: 7)
 ```
 
 ### Blending
