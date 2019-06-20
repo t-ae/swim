@@ -10,8 +10,8 @@ extension FourierTransformerVisualTests {
     func testWaves() {
         var images = [Image<Gray, Double>]()
         do { // square wave
-            var image = Image<Gray, Double>(width: 512, height: 512, value: 0)
-            image.drawRect(254..<258, 254..<258, color: .white)
+            var image = Image<Gray, Double>(width: 256, height: 512, value: 0)
+            image.drawRect(126..<130, 254..<258, color: .white)
             
             let fft = FourierTransformer.fft(image: image)
             
@@ -23,7 +23,7 @@ extension FourierTransformerVisualTests {
                 (sin(.pi * Double(x) / 180) + 1) / 2
             }
             let image = try! sine.warp(transformation: AffineTransformation(scale: (0.3, 0.3)),
-                                       outputSize: (512, 512),
+                                       outputSize: (256, 512),
                                        interpolator: BilinearInterpolator(edgeMode: .wrap))
             
             let fft = FourierTransformer.fft(image: image)
@@ -37,7 +37,7 @@ extension FourierTransformerVisualTests {
             }
             let image = try! sine.warp(transformation: AffineTransformation(scale: (0.3, 0.3),
                                                                             rotation: .pi/6),
-                                       outputSize: (512, 512),
+                                       outputSize: (256, 512),
                                        interpolator: BilinearInterpolator(edgeMode: .wrap))
             
             let fft = FourierTransformer.fft(image: image)

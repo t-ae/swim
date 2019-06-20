@@ -77,6 +77,14 @@ class PerformanceTests: XCTestCase {
     }
     
     func testFFT() {
+        let image = Image<Gray, Double>(width: 2048, height: 512, value: 1)
+        
+        measure {
+            _ = FourierTransformer.fft(image: image)
+        }
+    }
+    
+    func testFFTSquare() {
         let image = Image<Gray, Double>(width: 1024, height: 1024, value: 1)
         
         measure {

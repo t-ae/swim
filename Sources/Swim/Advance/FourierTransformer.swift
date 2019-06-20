@@ -13,9 +13,9 @@ public enum FourierTransformer {
         var image = image.dataConverted { Complex(real: $0) }
         
         fftx(image: &image, inverse: false)
-        image = image.transposed()
+        transpose(image: &image)
         fftx(image: &image, inverse: false)
-        image = image.transposed()
+        transpose(image: &image)
         
         return image
     }
@@ -31,9 +31,9 @@ public enum FourierTransformer {
         precondition(image.width.isPOT, "image height must be power of 2.")
         var image = image
         fftx(image: &image, inverse: true)
-        image = image.transposed()
+        transpose(image: &image)
         fftx(image: &image, inverse: true)
-        image = image.transposed()
+        transpose(image: &image)
         
         return image.dataConverted { $0.real }
     }
@@ -140,6 +140,26 @@ public enum FourierTransformer {
             let n = Double(n)
             image.dataConvert {
                 Complex(real: $0.real / n, imag: $0.imag / n)
+            }
+        }
+    }
+    
+    /// Transpose given image.
+    ///
+    /// If `image` is square, it does in-place transposition.
+    /// Otherwise, call `image.transposed` which is out-of-place.
+    @inlinable
+    static func transpose<T>(image: inout Image<Gray, T>) {
+        guard image.width == image.height else {
+            image = image.transposed()
+            return
+        }
+        
+        for y in 0..<image.height {
+            for x in y+1..<image.width {
+                let i = y*image.width + x
+                let j = x*image.width + y
+                image.data.swapAt(i, j)
             }
         }
     }
