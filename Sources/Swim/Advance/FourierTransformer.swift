@@ -76,7 +76,8 @@ public enum FourierTransformer {
         let n = image.width
         let theta = 2 * Double.pi / Double(n) * (inverse ? 1 : -1)
         
-        let wLUT: [Complex<Double>] = (0..<n).map {
+        // wLUT: irev -> w (0 <= irev < n/2)
+        let wLUT: [Complex<Double>] = (0..<n/2).map {
             Complex(real: cos(theta * Double($0)),
                     imag: sin(theta * Double($0)))
         }
