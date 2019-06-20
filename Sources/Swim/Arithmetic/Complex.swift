@@ -15,7 +15,7 @@ public protocol ComplexProtocol: SignedNumeric, CustomStringConvertible, Express
 extension ComplexProtocol {
     @inlinable
     public init(real: T) {
-        self.init(real: real, imag: .zero)
+        self.init(real: real, imag: 0)
     }
     
     @inlinable
@@ -47,7 +47,7 @@ extension ComplexProtocol {
     
     @inlinable
     public static var zero: Self {
-        return Self(real: .zero)
+        return Self(real: 0)
     }
     
     @inlinable

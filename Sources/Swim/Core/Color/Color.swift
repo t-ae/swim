@@ -45,6 +45,7 @@ extension Color {
 }
 
 extension Color where T: AdditiveArithmetic {
+    @inlinable
     public static var zero: Color {
         return Color<P, T>(value: .zero)
     }
