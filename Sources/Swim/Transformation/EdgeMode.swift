@@ -61,10 +61,10 @@ extension EdgeMode {
             }
             return x
         case .reflect:
-            var x = value
-            if x < 0 {
-                x.negate()
+            if max == 1 {
+                return 0
             }
+            var x = abs(value)
             x %= 2*max - 2 // Make x in [0, 2*max-3]
             if x >= max {
                 x = 2*max - x - 2
