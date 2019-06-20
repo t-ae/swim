@@ -20,6 +20,9 @@ extension BayerVisualTests {
             images.append(gray.toRGB())
             let color = conv.demosaic(image: gray)
             images.append(color)
+            
+            print("PSNR=\(ImageCompare.psnr(lena, color))")
+            print("SSIM=\(ImageCompare.ssim(lena, color, windowSize: 7))")
         }
         
         let nsImage = doubleToNSImage(Image.concatH(images))
@@ -38,6 +41,9 @@ extension BayerVisualTests {
             images.append(gray.toRGB())
             let color = conv.demosaic(image: gray)
             images.append(color)
+            
+            print("PSNR=\(ImageCompare.psnr(lena, color))")
+            print("SSIM=\(ImageCompare.ssim(lena, color, windowSize: 7))")
         }
         
         let nsImage = doubleToNSImage(Image.concatH(images))
@@ -56,6 +62,9 @@ extension BayerVisualTests {
             images.append(gray.toRGB())
             let color = conv.demosaic(image: gray)
             images.append(color)
+            
+            print("PSNR=\(ImageCompare.psnr(lena, color))")
+            print("SSIM=\(ImageCompare.ssim(lena, color, windowSize: 7))")
         }
         
         let nsImage = doubleToNSImage(Image.concatH(images))
@@ -74,6 +83,9 @@ extension BayerVisualTests {
             images.append(gray.toRGB())
             let color = conv.demosaic(image: gray)
             images.append(color)
+            
+            print("PSNR=\(ImageCompare.psnr(lena, color))")
+            print("SSIM=\(ImageCompare.ssim(lena, color, windowSize: 7))")
         }
         
         let nsImage = doubleToNSImage(Image.concatH(images))
