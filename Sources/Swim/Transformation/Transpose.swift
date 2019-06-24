@@ -1,9 +1,4 @@
-import Foundation
-
 extension Image {
-    
-    // TODO: Add transpose when width/height become var.
-    
     /// Transpose image.
     @inlinable
     public func transposed() -> Image<P, T> {

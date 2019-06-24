@@ -1,5 +1,3 @@
-import Foundation
-
 extension Image {
     @inlinable
     public subscript(x: Int, y: Int, c: Int) -> T {

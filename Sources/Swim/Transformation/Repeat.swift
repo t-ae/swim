@@ -1,5 +1,3 @@
-import Foundation
-
 extension Image {
     /// Create new image repeating self horizontally/vertically.
     ///

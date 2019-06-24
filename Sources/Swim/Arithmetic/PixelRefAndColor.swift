@@ -1,5 +1,3 @@
-import Foundation
-
 extension UnsafePixelRef where T: AdditiveArithmetic {
     @inlinable
     public static func +=<C: ColorProtocol>(lhs: UnsafePixelRef, rhs: C) where C.P == P, C.T == T {

@@ -1,5 +1,3 @@
-import Foundation
-
 public struct BicubicInterpolator<P: PixelType, T: BinaryFloatingPoint&DataType>: Interpolator4x4 {
     public var a: Double
     public var edgeMode: EdgeMode<P, T>

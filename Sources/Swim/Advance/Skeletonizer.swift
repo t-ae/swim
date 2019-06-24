@@ -1,5 +1,3 @@
-import Foundation
-
 public enum Skeletonizer {
     /// Skeletonize binary image with Zhang-Suen algorithm.
     @inlinable

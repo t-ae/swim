@@ -1,5 +1,3 @@
-import Foundation
-
 extension Image {
     @inlinable
     func getSubimage(x: Int, y: Int, width: Int, height: Int) -> Image<P, T> {

@@ -1,5 +1,3 @@
-import Foundation
-
 extension Image {
     /// Flip horizontally.
     @inlinable

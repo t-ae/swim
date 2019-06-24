@@ -1,5 +1,3 @@
-import Foundation
-
 extension Color where T: AdditiveArithmetic {
     @inlinable
     public static func +=<C: ColorProtocol>(lhs: inout Color, rhs: C) where C.P == P, C.T == T {

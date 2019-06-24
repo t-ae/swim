@@ -1,5 +1,3 @@
-import Foundation
-
 extension Image where P == GrayAlpha {
     /// Create `Image<GrayAlpha, T>` from two `Gray` images.
     ///

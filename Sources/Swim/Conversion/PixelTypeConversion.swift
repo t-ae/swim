@@ -1,5 +1,3 @@
-import Foundation
-
 // MARK: - Gray -> RGB
 extension Image where P == Gray {
     /// Create `Image<GrayAlpha, T>` by filling alpha channel with specified `alphaValue`.

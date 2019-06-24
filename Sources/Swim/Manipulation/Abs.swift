@@ -1,5 +1,3 @@
-import Foundation
-
 extension Image where T: Comparable&SignedNumeric {
     @inlinable
     public mutating func applyAbs() {

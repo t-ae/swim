@@ -1,5 +1,3 @@
-import Foundation
-
 extension Image {
     /// Add padding for each edge.
     ///

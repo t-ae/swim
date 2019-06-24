@@ -1,5 +1,3 @@
-import Foundation
-
 public enum Histograms<P: PixelType, T: DataType> {
     
     /// Create histogram image.

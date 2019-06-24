@@ -1,5 +1,3 @@
-import Foundation
-
 public struct Color<P: PixelType, T: DataType> {
     @usableFromInline
     var data: ArraySlice<T>

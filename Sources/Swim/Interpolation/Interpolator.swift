@@ -1,5 +1,3 @@
-import Foundation
-
 public protocol Interpolator {
     associatedtype P: PixelType
     associatedtype T: DataType

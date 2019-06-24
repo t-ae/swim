@@ -1,5 +1,3 @@
-import Foundation
-
 extension Image {
     /// Rotate image by 90 degrees clockwise.
     @inlinable

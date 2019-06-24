@@ -1,8 +1,4 @@
-import Foundation
-
 public struct Image<P: PixelType, T: DataType> {
-    // FIXME: These should be @usableFromInline public internal(set) var, but it's not possible now.
-    // https://bugs.swift.org/browse/SR-7590
     public let width: Int
     public let height: Int
     
