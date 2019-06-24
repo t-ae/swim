@@ -13,12 +13,5 @@ public struct Rect {
     }
 }
 
-extension Rect: Equatable {
-    @inlinable
-    public static func ==(lhs: Rect, rhs: Rect) -> Bool {
-        return lhs.x == rhs.x && lhs.y == rhs.y && lhs.width == rhs.width && lhs.height == rhs.height
-    }
-}
-
-extension Rect: Hashable {
-}
+extension Rect: Equatable {}
+extension Rect: Hashable {}
