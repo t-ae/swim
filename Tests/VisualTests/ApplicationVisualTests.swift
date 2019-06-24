@@ -170,23 +170,24 @@ extension ApplicationVisualTests {
             let padded = image.withPadding(1, edgeMode: .zero)
             let matrix = padded.im2col(patchWidth: 3, patchHeight: 3)
             
-            var sums = [UInt8](repeating: 0, count: matrix.cols)
+            let neighbor = Matrix<UInt8>(rows: 1, cols: 9, data: [1, 1, 1,
+                                                                  1, 0, 1,
+                                                                  1, 1, 1]) // flatten 3x3 matrix
+            var sums = neighbor * matrix
             
-            for r in 0..<matrix.rows {
-                if r == 4 { continue }  // ignore self
-                for c in 0..<matrix.cols {
-                    sums[c] += matrix[r, c]
-                }
-            }
             for c in 0..<matrix.cols {
-                switch (matrix[4, c], sums[c]) {
+                switch (matrix[4, c], sums[0, c]) {
                 case (0, 3), (1, 2), (1, 3): // born and survive
-                    sums[c] = 1
+                    sums[0, c] = 1
                 default:
-                    sums[c] = 0
+                    sums[0, c] = 0
                 }
             }
-            return Image(width: image.width, height: image.height, data: sums)
+            return Image.createWithUnsafeMutableBufferPointer(width: image.width, height: image.height) { dst in
+                sums.withUnsafeBufferPointer { src in
+                    _ = dst.initialize(from: src)
+                }
+            }
         }
         
         // pentadecathlon
