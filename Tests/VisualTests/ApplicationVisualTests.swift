@@ -587,10 +587,10 @@ extension ApplicationVisualTests {
                     let iy = sobely[x, y, .gray]
                     
                     let w = window[dx, dy, .gray]
-                    M +=  Matrix<Double>(rows: 2,
-                                         cols: 2,
-                                         data: [ix*ix, ix*iy,
-                                                ix*iy, iy*iy].map { $0 * w })
+                    M +=  w * Matrix<Double>(rows: 2,
+                                             cols: 2,
+                                             data: [ix*ix, ix*iy,
+                                                    ix*iy, iy*iy])
                 }
             }
             

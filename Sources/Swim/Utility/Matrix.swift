@@ -65,6 +65,23 @@ extension Matrix where T: AdditiveArithmetic {
     }
     
     @inlinable
+    public static func +=(lhs: inout Matrix, rhs: T) {
+        for i in 0..<lhs.data.count {
+            lhs.data[i] += rhs
+        }
+    }
+    
+    @inlinable
+    public static func +(lhs: Matrix, rhs: T) -> Matrix {
+        return Matrix(rows: lhs.rows, cols: lhs.cols, data: lhs.data.map { $0 + rhs })
+    }
+    
+    @inlinable
+    public static func +(lhs: T, rhs: Matrix) -> Matrix {
+        return rhs + lhs
+    }
+    
+    @inlinable
     public static func -=(lhs: inout Matrix, rhs: Matrix) {
         precondition(lhs.rows == rhs.rows, "rows not match")
         precondition(lhs.cols == rhs.cols, "cols not match")
@@ -80,6 +97,23 @@ extension Matrix where T: AdditiveArithmetic {
         precondition(lhs.cols == rhs.cols, "cols not match")
         
         return Matrix(rows: lhs.rows, cols: lhs.cols, data: zip(lhs.data, rhs.data).map { $0 - $1 })
+    }
+    
+    @inlinable
+    public static func -=(lhs: inout Matrix, rhs: T) {
+        for i in 0..<lhs.data.count {
+            lhs.data[i] -= rhs
+        }
+    }
+    
+    @inlinable
+    public static func -(lhs: Matrix, rhs: T) -> Matrix {
+        return Matrix(rows: lhs.rows, cols: lhs.cols, data: lhs.data.map { $0 - rhs })
+    }
+    
+    @inlinable
+    public static func -(lhs: T, rhs: Matrix) -> Matrix {
+        return Matrix(rows: rhs.rows, cols: rhs.cols, data: rhs.data.map { lhs - $0 })
     }
 }
 
@@ -99,6 +133,16 @@ extension Matrix where T: Numeric {
         }
         
         return matrix
+    }
+    
+    @inlinable
+    public static func *(lhs: Matrix, rhs: T) -> Matrix {
+        return Matrix(rows: lhs.rows, cols: lhs.cols, data: lhs.data.map { $0 * rhs })
+    }
+    
+    @inlinable
+    public static func *(lhs: T, rhs: Matrix) -> Matrix {
+        return rhs * lhs
     }
 }
 
