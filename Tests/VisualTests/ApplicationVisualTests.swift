@@ -559,6 +559,69 @@ extension ApplicationVisualTests {
         
         XCTAssertTrue(ns.isValid, "break here")
     }
+    
+    func testHarrisCornerDetection() throws {
+        // https://docs.opencv.org/3.4.3/dc/d0d/tutorial_py_features_harris.html
+        let checker: Image<Gray, Double> = checkerboardImage256()
+        let proj = try ProjectiveTransformation(source: ((0, 0), (256, 0), (0, 256), (256, 256)),
+                                                target: ((0, 0), (100, 128), (-150, 128), (0, 226)))
+        let checker2 = try checker.warp(transformation: proj,
+                                        interpolator: NearestNeighborInterpolator(edgeMode: .wrap))
+        let image = Image.concatH([checker, checker2])
+        
+        let gauss = image.convoluted(Filter.gaussian3x3)
+        
+        let sobelx = gauss.convoluted(Filter.sobel3x3H)
+        let sobely = gauss.convoluted(Filter.sobel3x3V)
+        
+        let winSize = 3
+        let window = Filter<Double>.mean(size: winSize)
+        
+        func R(u: Int, v: Int) -> Double {
+            var M = Matrix<Double>(rows: 2, cols: 2, full: 0)
+            for dy in 0..<winSize {
+                let y = min(max(v + dy - (winSize-1)/2, 0), image.height-1)
+                for dx in 0..<winSize {
+                    let x = min(max(u + dx - (winSize-1)/2, 0), image.width-1)
+                    let ix = sobelx[x, y, .gray]
+                    let iy = sobely[x, y, .gray]
+                    
+                    let w = window[dx, dy, .gray]
+                    M +=  Matrix<Double>(rows: 2,
+                                         cols: 2,
+                                         data: [ix*ix, ix*iy,
+                                                ix*iy, iy*iy].map { $0 * w })
+                }
+            }
+            
+            let det = M[0, 0]*M[1, 1] - M[1, 0]*M[0, 1]
+            let trace = M[0, 0] + M[1, 1]
+            let k = 0.04
+            return det - k*trace*trace
+        }
+        
+        var result = image.toRGB()
+        
+        for y in 0..<image.height {
+            for x in 0..<image.width {
+                let r = R(u: x, v: y)
+                
+                if abs(r) < 1 { // Small number?
+                    // flat
+                } else if r < 0 {
+                    // edge
+                } else {
+                    // corner
+                    result.drawCircle(center: (x, y), radius: 1, color: .red)
+                }
+            }
+        }
+        
+        // result
+        let ns = doubleToNSImage(result)
+        
+        XCTAssertTrue(ns.isValid, "break here")
+    }
 }
 
 #endif

@@ -66,6 +66,20 @@ func gradiationImage256<T: BinaryFloatingPoint>() -> Image<Gray, T> {
     return uint.cast(to: T.self) / 255
 }
 
+func checkerboardImage256() -> Image<Gray, UInt8> {
+    let checker = Image<Gray, UInt8>.createWithPixelValues(width: 8, height: 8) { x, y, c in
+        (x+y)%2 == 0 ? 255 : 0
+    }
+    
+    return checker.resize(width: 256, height: 256)
+}
+
+func checkerboardImage256<T: BinaryFloatingPoint>() -> Image<Gray, T> {
+    let uint: Image<Gray, UInt8> = checkerboardImage256()
+    
+    return uint.cast(to: T.self) / 255
+}
+
 #if canImport(AppKit)
 
 import AppKit
