@@ -4,6 +4,7 @@ import Foundation
 public struct Lanczos2Interpolator<P: PixelType, T: BinaryFloatingPoint&DataType>: Interpolator4x4 {
     public var edgeMode: EdgeMode<P, T>
     
+    @inlinable
     public init(edgeMode: EdgeMode<P, T> = .zero) {
         self.edgeMode = edgeMode
     }
@@ -29,6 +30,7 @@ public struct Lanczos2Interpolator<P: PixelType, T: BinaryFloatingPoint&DataType
 public struct Lanczos3Interpolator<P: PixelType, T: BinaryFloatingPoint&DataType>: Interpolator {
     public var edgeMode: EdgeMode<P, T>
     
+    @inlinable
     public init(edgeMode: EdgeMode<P, T> = .zero) {
         self.edgeMode = edgeMode
     }

@@ -4,6 +4,7 @@ public struct BicubicInterpolator<P: PixelType, T: BinaryFloatingPoint&DataType>
     public var a: Double
     public var edgeMode: EdgeMode<P, T>
     
+    @inlinable
     public init(a: Double = -0.5, edgeMode: EdgeMode<P, T> = .zero) {
         self.a = a
         self.edgeMode = edgeMode

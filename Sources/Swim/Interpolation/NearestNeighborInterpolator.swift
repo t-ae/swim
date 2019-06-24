@@ -3,6 +3,7 @@ import Foundation
 public struct NearestNeighborInterpolator<P: PixelType, T: DataType>: Interpolator {
     public var edgeMode: EdgeMode<P, T>
     
+    @inlinable
     public init(edgeMode: EdgeMode<P, T>) {
         self.edgeMode = edgeMode
     }

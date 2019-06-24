@@ -5,6 +5,7 @@ public struct Matrix<T> {
     @usableFromInline
     var data: [T]
     
+    @inlinable
     public init(rows: Int, cols: Int, data: [T]) {
         precondition(data.count == rows*cols, "data.count must be equal to width*height.")
         self.rows = rows
@@ -12,10 +13,12 @@ public struct Matrix<T> {
         self.data = data
     }
     
+    @inlinable
     public init(rows: Int, cols: Int, full value: T) {
         self.init(rows: rows, cols: cols, data: [T](repeating: value, count: rows*cols))
     }
     
+    @inlinable
     public subscript(row: Int, col: Int) -> T {
         get {
             precondition(0 <= row && row < rows, "row out of range.")

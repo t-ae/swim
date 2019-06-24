@@ -3,6 +3,7 @@ import Foundation
 public struct BilinearInterpolator<P:PixelType, T: BinaryFloatingPoint&DataType>: Interpolator {
     public var edgeMode: EdgeMode<P, T>
     
+    @inlinable
     public init(edgeMode: EdgeMode<P, T> = .zero) {
         self.edgeMode = edgeMode
     }

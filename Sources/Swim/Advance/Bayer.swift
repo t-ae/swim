@@ -5,6 +5,7 @@ public struct BayerConverter {
     
     public var pattern: Pattern
     
+    @inlinable
     public init(pattern: Pattern) {
         self.pattern = pattern
     }
