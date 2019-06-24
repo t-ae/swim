@@ -2,7 +2,7 @@
 /// if `value` is NaN, it return NaN.
 @inlinable
 func clamp<T: Comparable>(_ value: T, min: T, max: T) -> T {
-    assert(min<max)
+    assert(min<=max)
     
     if value <= min {
         return min

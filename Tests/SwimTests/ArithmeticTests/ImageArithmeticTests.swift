@@ -374,7 +374,7 @@ class ImageArithmeticTests: XCTestCase {
     }
     
     static let allTests = [
-        ("testNagate", testNegate),
+        ("testNegate", testNegate),
         ("testAddInt", testAddInt),
         ("testAddDouble", testAddDouble),
         ("testSubInt", testSubInt),

@@ -45,7 +45,7 @@ class BitOperationsTests: XCTestCase {
     }
     
     static let allTests = [
-        ("testNagete", testNegate),
+        ("testNegate", testNegate),
         ("testAnd", testAnd),
         ("testOr", testOr),
         ("testXor", testXor),
