@@ -21,196 +21,266 @@ class WarpVisualTests: XCTestCase {
 
 extension WarpVisualTests {
     func testWarpNN() {
+        guard let font = try? TrueTypeFont(url: URL(fileURLWithPath: "/System/Library/Fonts/Helvetica.ttc"), fontSize: 20) else {
+            XCTFail("Font not found.")
+            return
+        }
+        let bg = Color<RGBA, Double>(r: 1, g: 1, b: 1, a: 0.5)
+        
         typealias Intpl = NearestNeighborInterpolator<RGB, Double>
         
-        var nsImages = [String: NSImage]()
+        var images = [Image<RGB, Double>]()
         
         do {
             let intpl = Intpl()
-            let result = try! src.warp(transformation: affine, outputSize: (512, 512), interpolator: intpl)
-            nsImages["constant0"] = doubleToNSImage(result)
+            var result = try! src.warp(transformation: affine, outputSize: (512, 512), interpolator: intpl)
+            result.drawText(position: (0, 0), text: "constant0", font: font, color: .black, backgroundColor: bg)
+            images.append(result)
         }
         do {
             let intpl = Intpl(edgeMode: .constant(color: Color(r: 1, g: 0, b: 0)))
-            let result = try! src.warp(transformation: affine, outputSize: (512, 512), interpolator: intpl)
-            nsImages["constant-red"] = doubleToNSImage(result)
+            var result = try! src.warp(transformation: affine, outputSize: (512, 512), interpolator: intpl)
+            result.drawText(position: (0, 0), text: "constant red", font: font, color: .black, backgroundColor: bg)
+            images.append(result)
         }
         do {
             let intpl = Intpl(edgeMode: .reflect)
-            let result = try! src.warp(transformation: affine, outputSize: (512, 512), interpolator: intpl)
-            nsImages["reflect"] = doubleToNSImage(result)
+            var result = try! src.warp(transformation: affine, outputSize: (512, 512), interpolator: intpl)
+            result.drawText(position: (0, 0), text: "reflect", font: font, color: .black, backgroundColor: bg)
+            images.append(result)
         }
         do {
             let intpl = Intpl(edgeMode: .symmetric)
-            let result = try! src.warp(transformation: affine, outputSize: (512, 512), interpolator: intpl)
-            nsImages["symmetric"] = doubleToNSImage(result)
+            var result = try! src.warp(transformation: affine, outputSize: (512, 512), interpolator: intpl)
+            result.drawText(position: (0, 0), text: "symmetric", font: font, color: .black, backgroundColor: bg)
+            images.append(result)
         }
         do {
             let intpl = Intpl(edgeMode: .edge)
-            let result = try! src.warp(transformation: affine, outputSize: (512, 512), interpolator: intpl)
-            nsImages["edge"] = doubleToNSImage(result)
+            var result = try! src.warp(transformation: affine, outputSize: (512, 512), interpolator: intpl)
+            result.drawText(position: (0, 0), text: "edge", font: font, color: .black, backgroundColor: bg)
+            images.append(result)
         }
         do {
             let intpl = Intpl(edgeMode: .wrap)
-            let result = try! src.warp(transformation: affine, outputSize: (512, 512), interpolator: intpl)
-            nsImages["wrap"] = doubleToNSImage(result)
+            var result = try! src.warp(transformation: affine, outputSize: (512, 512), interpolator: intpl)
+            result.drawText(position: (0, 0), text: "wrap", font: font, color: .black, backgroundColor: bg)
+            images.append(result)
         }
         
-        XCTAssertFalse(nsImages.isEmpty, "Break and check nsImages in debugger.")
+        let nsImage = Image.concatH(images).nsImage()
+        
+        XCTAssertTrue(nsImage.isValid, "Break and check nsImages")
     }
     
     func testWarpBL() {
+        guard let font = try? TrueTypeFont(url: URL(fileURLWithPath: "/System/Library/Fonts/Helvetica.ttc"), fontSize: 20) else {
+            XCTFail("Font not found.")
+            return
+        }
+        let bg = Color<RGBA, Double>(r: 1, g: 1, b: 1, a: 0.5)
+        
         typealias Intpl = BilinearInterpolator<RGB, Double>
         
-        var nsImages = [String: NSImage]()
+        var images = [Image<RGB, Double>]()
         
         do {
             let intpl = Intpl()
-            let result = try! src.warp(transformation: affine, outputSize: (512, 512), interpolator: intpl)
-            nsImages["constant0"] = doubleToNSImage(result)
+            var result = try! src.warp(transformation: affine, outputSize: (512, 512), interpolator: intpl)
+            result.drawText(position: (0, 0), text: "constant0", font: font, color: .black, backgroundColor: bg)
+            images.append(result)
         }
         do {
             let intpl = Intpl(edgeMode: .reflect)
-            let result = try! src.warp(transformation: affine, outputSize: (512, 512), interpolator: intpl)
-            nsImages["reflect"] = doubleToNSImage(result)
+            var result = try! src.warp(transformation: affine, outputSize: (512, 512), interpolator: intpl)
+            result.drawText(position: (0, 0), text: "reflect", font: font, color: .black, backgroundColor: bg)
+            images.append(result)
         }
         do {
             let intpl = Intpl(edgeMode: .symmetric)
-            let result = try! src.warp(transformation: affine, outputSize: (512, 512), interpolator: intpl)
-            nsImages["symmetric"] = doubleToNSImage(result)
+            var result = try! src.warp(transformation: affine, outputSize: (512, 512), interpolator: intpl)
+            result.drawText(position: (0, 0), text: "symmetric", font: font, color: .black, backgroundColor: bg)
+            images.append(result)
         }
         do {
             let intpl = Intpl(edgeMode: .edge)
-            let result = try! src.warp(transformation: affine, outputSize: (512, 512), interpolator: intpl)
-            nsImages["edge"] = doubleToNSImage(result)
+            var result = try! src.warp(transformation: affine, outputSize: (512, 512), interpolator: intpl)
+            result.drawText(position: (0, 0), text: "edge", font: font, color: .black, backgroundColor: bg)
+            images.append(result)
         }
         do {
             let intpl = Intpl(edgeMode: .wrap)
-            let result = try! src.warp(transformation: affine, outputSize: (512, 512), interpolator: intpl)
-            nsImages["wrap"] = doubleToNSImage(result)
+            var result = try! src.warp(transformation: affine, outputSize: (512, 512), interpolator: intpl)
+            result.drawText(position: (0, 0), text: "wrap", font: font, color: .black, backgroundColor: bg)
+            images.append(result)
         }
         
-        XCTAssertFalse(nsImages.isEmpty, "Break and check nsImages in debugger.")
+        let nsImage = Image.concatH(images).nsImage()
+        
+        XCTAssertTrue(nsImage.isValid, "Break and check nsImages")
     }
     
     func testWarpBC() {
+        guard let font = try? TrueTypeFont(url: URL(fileURLWithPath: "/System/Library/Fonts/Helvetica.ttc"), fontSize: 20) else {
+            XCTFail("Font not found.")
+            return
+        }
+        let bg = Color<RGBA, Double>(r: 1, g: 1, b: 1, a: 0.5)
+        
         typealias Intpl = BicubicInterpolator<RGB, Double>
         
-        var nsImages = [String: NSImage]()
+        var images = [Image<RGB, Double>]()
         
         do {
             let intpl = Intpl()
             var result = try! src.warp(transformation: affine, outputSize: (512, 512), interpolator: intpl)
             result.clip(low: 0, high: 1)
-            nsImages["constant0 a=-0.5"] = doubleToNSImage(result)
+            result.drawText(position: (0, 0), text: "constant0 a=-0.5", font: font, color: .black, backgroundColor: bg)
+            images.append(result)
         }
         do {
             let intpl = Intpl(a: -0.75)
             var result = try! src.warp(transformation: affine, outputSize: (512, 512), interpolator: intpl)
             result.clip(low: 0, high: 1)
-            nsImages["constant0 a=-0.75"] = doubleToNSImage(result)
+            result.drawText(position: (0, 0), text: "constant0 a=-0.75", font: font, color: .black, backgroundColor: bg)
+            images.append(result)
         }
         do {
             let intpl = Intpl(edgeMode: .reflect)
-            let result = try! src.warp(transformation: affine, outputSize: (512, 512), interpolator: intpl)
-            nsImages["reflect"] = doubleToNSImage(result)
+            var result = try! src.warp(transformation: affine, outputSize: (512, 512), interpolator: intpl)
+            result.clip(low: 0, high: 1)
+            result.drawText(position: (0, 0), text: "reflect", font: font, color: .black, backgroundColor: bg)
+            images.append(result)
         }
         do {
             let intpl = Intpl(edgeMode: .symmetric)
             var result = try! src.warp(transformation: affine, outputSize: (512, 512), interpolator: intpl)
             result.clip(low: 0, high: 1)
-            nsImages["symmetric"] = doubleToNSImage(result)
+            result.drawText(position: (0, 0), text: "symmetric", font: font, color: .black, backgroundColor: bg)
+            images.append(result)
         }
         do {
             let intpl = Intpl(edgeMode: .edge)
             var result = try! src.warp(transformation: affine, outputSize: (512, 512), interpolator: intpl)
             result.clip(low: 0, high: 1)
-            nsImages["edge"] = doubleToNSImage(result)
+            result.drawText(position: (0, 0), text: "edge", font: font, color: .black, backgroundColor: bg)
+            images.append(result)
         }
         do {
             let intpl = Intpl(edgeMode: .wrap)
             var result = try! src.warp(transformation: affine, outputSize: (512, 512), interpolator: intpl)
             result.clip(low: 0, high: 1)
-            nsImages["wrap"] = doubleToNSImage(result)
+            result.drawText(position: (0, 0), text: "wrap", font: font, color: .black, backgroundColor: bg)
+            images.append(result)
         }
         
-        XCTAssertFalse(nsImages.isEmpty, "Break and check nsImages in debugger.")
+        let nsImage = Image.concatH(images).nsImage()
+        
+        XCTAssertTrue(nsImage.isValid, "Break and check nsImages")
     }
     
     func testWarpLanczos2() {
+        guard let font = try? TrueTypeFont(url: URL(fileURLWithPath: "/System/Library/Fonts/Helvetica.ttc"), fontSize: 20) else {
+            XCTFail("Font not found.")
+            return
+        }
+        let bg = Color<RGBA, Double>(r: 1, g: 1, b: 1, a: 0.5)
+        
         typealias Intpl = Lanczos2Interpolator<RGB, Double>
         
-        var nsImages = [String: NSImage]()
+        var images = [Image<RGB, Double>]()
         
         do {
             let intpl = Intpl()
             var result = try! src.warp(transformation: affine, outputSize: (512, 512), interpolator: intpl)
             result.clip(low: 0, high: 1)
-            nsImages["constant0"] = doubleToNSImage(result)
+            result.drawText(position: (0, 0), text: "constant0", font: font, color: .black, backgroundColor: bg)
+            images.append(result)
         }
         do {
             let intpl = Intpl(edgeMode: .reflect)
-            let result = try! src.warp(transformation: affine, outputSize: (512, 512), interpolator: intpl)
-            nsImages["reflect"] = doubleToNSImage(result)
+            var result = try! src.warp(transformation: affine, outputSize: (512, 512), interpolator: intpl)
+            result.clip(low: 0, high: 1)
+            result.drawText(position: (0, 0), text: "reflect", font: font, color: .black, backgroundColor: bg)
+            images.append(result)
         }
         do {
             let intpl = Intpl(edgeMode: .symmetric)
             var result = try! src.warp(transformation: affine, outputSize: (512, 512), interpolator: intpl)
             result.clip(low: 0, high: 1)
-            nsImages["symmetric"] = doubleToNSImage(result)
+            result.drawText(position: (0, 0), text: "symmetric", font: font, color: .black, backgroundColor: bg)
+            images.append(result)
         }
         do {
             let intpl = Intpl(edgeMode: .edge)
             var result = try! src.warp(transformation: affine, outputSize: (512, 512), interpolator: intpl)
             result.clip(low: 0, high: 1)
-            nsImages["edge"] = doubleToNSImage(result)
+            result.drawText(position: (0, 0), text: "edge", font: font, color: .black, backgroundColor: bg)
+            images.append(result)
         }
         do {
             let intpl = Intpl(edgeMode: .wrap)
             var result = try! src.warp(transformation: affine, outputSize: (512, 512), interpolator: intpl)
             result.clip(low: 0, high: 1)
-            nsImages["wrap"] = doubleToNSImage(result)
+            result.drawText(position: (0, 0), text: "wrap", font: font, color: .black, backgroundColor: bg)
+            images.append(result)
         }
         
-        XCTAssertFalse(nsImages.isEmpty, "Break and check nsImages in debugger.")
+        let nsImage = Image.concatH(images).nsImage()
+        
+        XCTAssertTrue(nsImage.isValid, "Break and check nsImages")
     }
     
     func testWarpLanczos3() {
+        guard let font = try? TrueTypeFont(url: URL(fileURLWithPath: "/System/Library/Fonts/Helvetica.ttc"), fontSize: 20) else {
+            XCTFail("Font not found.")
+            return
+        }
+        let bg = Color<RGBA, Double>(r: 1, g: 1, b: 1, a: 0.5)
+        
         typealias Intpl = Lanczos3Interpolator<RGB, Double>
         
-        var nsImages = [String: NSImage]()
+        var images = [Image<RGB, Double>]()
         
         do {
             let intpl = Intpl()
             var result = try! src.warp(transformation: affine, outputSize: (512, 512), interpolator: intpl)
             result.clip(low: 0, high: 1)
-            nsImages["constant0"] = doubleToNSImage(result)
+            result.drawText(position: (0, 0), text: "constant0", font: font, color: .black, backgroundColor: bg)
+            images.append(result)
         }
         do {
             let intpl = Intpl(edgeMode: .reflect)
-            let result = try! src.warp(transformation: affine, outputSize: (512, 512), interpolator: intpl)
-            nsImages["reflect"] = doubleToNSImage(result)
+            var result = try! src.warp(transformation: affine, outputSize: (512, 512), interpolator: intpl)
+            result.clip(low: 0, high: 1)
+            result.drawText(position: (0, 0), text: "reflect", font: font, color: .black, backgroundColor: bg)
+            images.append(result)
         }
         do {
             let intpl = Intpl(edgeMode: .symmetric)
             var result = try! src.warp(transformation: affine, outputSize: (512, 512), interpolator: intpl)
             result.clip(low: 0, high: 1)
-            nsImages["symmetric"] = doubleToNSImage(result)
+            result.drawText(position: (0, 0), text: "symmetric", font: font, color: .black, backgroundColor: bg)
+            images.append(result)
         }
         do {
             let intpl = Intpl(edgeMode: .edge)
             var result = try! src.warp(transformation: affine, outputSize: (512, 512), interpolator: intpl)
             result.clip(low: 0, high: 1)
-            nsImages["edge"] = doubleToNSImage(result)
+            result.drawText(position: (0, 0), text: "edge", font: font, color: .black, backgroundColor: bg)
+            images.append(result)
         }
         do {
             let intpl = Intpl(edgeMode: .wrap)
             var result = try! src.warp(transformation: affine, outputSize: (512, 512), interpolator: intpl)
             result.clip(low: 0, high: 1)
-            nsImages["wrap"] = doubleToNSImage(result)
+            result.drawText(position: (0, 0), text: "wrap", font: font, color: .black, backgroundColor: bg)
+            images.append(result)
         }
         
-        XCTAssertFalse(nsImages.isEmpty, "Break and check nsImages in debugger.")
+        let nsImage = Image.concatH(images).nsImage()
+        
+        XCTAssertTrue(nsImage.isValid, "Break and check nsImages")
     }
     
     func testMatrix() {
