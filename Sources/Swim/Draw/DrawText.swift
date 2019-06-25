@@ -373,7 +373,8 @@ extension Image where P: NoAlpha, T: BinaryInteger {
                                                 alignment: TextAlignment = .left,
                                                 anchor: TextAnchor = .leftTop,
                                                 lineGap: Int? = nil,
-                                                color: Color<P2, T>) where P2.BaseType == P {
+                                                color: Color<P2, T>,
+                                                backgroundColor: Color<P2, T>? = nil) where P2.BaseType == P {
         guard let colorImage = Image<P2, T>.createTextImage(text: text,
                                                             font: font,
                                                             alignment: alignment,
@@ -383,6 +384,11 @@ extension Image where P: NoAlpha, T: BinaryInteger {
                 return
         }
         let origin = DrawTextUtils.calculateOrigin(position: position, size: colorImage.size, anchor: anchor)
+        
+        if let backgroundColor = backgroundColor {
+            let bg = Image<P2, T>.full(color: backgroundColor, like: colorImage)
+            drawImage(origin: origin, image: bg)
+        }
         drawImage(origin: origin, image: colorImage)
     }
 }
@@ -403,7 +409,8 @@ extension Image where P: NoAlpha, T: BinaryFloatingPoint {
                                                 alignment: TextAlignment = .left,
                                                 anchor: TextAnchor = .leftTop,
                                                 lineGap: Int? = nil,
-                                                color: Color<P2, T>) where P2.BaseType == P {
+                                                color: Color<P2, T>,
+                                                backgroundColor: Color<P2, T>? = nil) where P2.BaseType == P {
         guard let colorImage = Image<P2, T>.createTextImage(text: text,
                                                             font: font,
                                                             alignment: alignment,
@@ -413,6 +420,11 @@ extension Image where P: NoAlpha, T: BinaryFloatingPoint {
                 return
         }
         let origin = DrawTextUtils.calculateOrigin(position: position, size: colorImage.size, anchor: anchor)
+        
+        if let backgroundColor = backgroundColor {
+            let bg = Image<P2, T>.full(color: backgroundColor, like: colorImage)
+            drawImage(origin: origin, image: bg)
+        }
         drawImage(origin: origin, image: colorImage)
     }
 }
@@ -433,7 +445,8 @@ extension Image where P: HasAlpha, T: BinaryInteger {
                                   alignment: TextAlignment = .left,
                                   anchor: TextAnchor = .leftTop,
                                   lineGap: Int? = nil,
-                                  color: Color<P, T>) {
+                                  color: Color<P, T>,
+                                  backgroundColor: Color<P, T>? = nil) {
         guard let colorImage = Image<P, T>.createTextImage(text: text,
                                                            font: font,
                                                            alignment: alignment,
@@ -443,6 +456,11 @@ extension Image where P: HasAlpha, T: BinaryInteger {
                 return
         }
         let origin = DrawTextUtils.calculateOrigin(position: position, size: colorImage.size, anchor: anchor)
+        
+        if let backgroundColor = backgroundColor {
+            let bg = Image.full(color: backgroundColor, like: colorImage)
+            drawImage(origin: origin, image: bg)
+        }
         drawImage(origin: origin, image: colorImage)
     }
 }
@@ -464,7 +482,8 @@ extension Image where P: HasAlpha, T: BinaryFloatingPoint {
                                   alignment: TextAlignment = .left,
                                   anchor: TextAnchor = .leftTop,
                                   lineGap: Int? = nil,
-                                  color: Color<P, T>) {
+                                  color: Color<P, T>,
+                                  backgroundColor: Color<P, T>? = nil) {
         guard let colorImage = Image<P, T>.createTextImage(text: text,
                                                            font: font,
                                                            alignment: alignment,
@@ -474,6 +493,11 @@ extension Image where P: HasAlpha, T: BinaryFloatingPoint {
                 return
         }
         let origin = DrawTextUtils.calculateOrigin(position: position, size: colorImage.size, anchor: anchor)
+        
+        if let backgroundColor = backgroundColor {
+            let bg = Image.full(color: backgroundColor, like: colorImage)
+            drawImage(origin: origin, image: bg)
+        }
         drawImage(origin: origin, image: colorImage)
     }
 }

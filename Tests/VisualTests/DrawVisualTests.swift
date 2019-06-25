@@ -250,7 +250,7 @@ extension DrawVisualTests {
         lena.drawText(position: (0, 0), text: """
         LENA
         LEFT TOP
-        """, font: font, alignment: .left, anchor: .leftTop, color: .black)
+        """, font: font, alignment: .left, anchor: .leftTop, color: .black, backgroundColor: Color(r: 1, g: 1, b: 1, a: 0.5))
         
         lena.drawText(position: (lena.width/2, 0), text: """
         LENA
@@ -333,7 +333,7 @@ extension DrawVisualTests {
         lena.drawText(position: (0, 0), text: """
         LENA
         LEFT TOP
-        """, font: font, alignment: .left, anchor: .leftTop, color: .black)
+        """, font: font, alignment: .left, anchor: .leftTop, color: .black, backgroundColor: Color(r: 255, g: 255, b: 255, a: 128))
         
         lena.drawText(position: (lena.width/2, 0), text: """
         LENA
