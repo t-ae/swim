@@ -58,17 +58,11 @@ extension Image where T: BinaryFloatingPoint {
         outputSize: (width: Int, height: Int),
         interpolator: Intpl) throws -> Image<P, T> where Intpl.P == P, Intpl.T == T {
         
-        var dest = Image<P, T>(width: outputSize.width,
-                               height: outputSize.height,
-                               value: 0)
-
         let inv = try transformation.inverted()
         
-        dest.unsafePixelwiseConvert { ref in
+        return .createWithUnsafePixelRef(width: outputSize.width, height: outputSize.height) { ref in
             let (x0, y0) = inv * (Double(ref.x), Double(ref.y))
             interpolator.interpolate(x: x0, y: y0, in: self, into: ref)
         }
-        
-        return dest
     }
 }
