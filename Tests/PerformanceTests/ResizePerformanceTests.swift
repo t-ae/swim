@@ -87,42 +87,23 @@ extension Image where T: BinaryFloatingPoint {
             
             let xmin = Foundation.floor(x)
             let ymin = Foundation.floor(y)
-            let x0 = Int(xmin)
-            let y0 = Int(ymin)
-            let x1 = x0+1
-            let y1 = y0+1
             
             let wx0 = T(xmin + 1 - x)
             let wx1 = T(x - xmin)
             let wy0 = T(ymin + 1 - y)
             let wy1 = T(y - ymin)
             
-            ref.fill(value: 0)
+            let xp = Int(xmin)
+            let yp = Int(ymin)
+            let x0 = min(max(xp+0, 0), self.width-1)
+            let x1 = min(max(xp+1, 0), self.width-1)
+            let y0 = min(max(yp+0, 0), self.height-1)
+            let y1 = min(max(yp+1, 0), self.height-1)
             
-            do {
-                let x = min(max(x0, 0), self.width-1)
-                let y = min(max(y0, 0), self.height-1)
-                
-                ref.addColor(x: x, y: y, in: self, with: wx0*wy0)
-            }
-            do {
-                let x = min(max(x1, 0), self.width-1)
-                let y = min(max(y0, 0), self.height-1)
-                
-                ref.addColor(x: x, y: y, in: self, with: wx1*wy0)
-            }
-            do {
-                let x = min(max(x0, 0), self.width-1)
-                let y = min(max(y1, 0), self.height-1)
-                
-                ref.addColor(x: x, y: y, in: self, with: wx0*wy1)
-            }
-            do {
-                let x = min(max(x1, 0), self.width-1)
-                let y = min(max(y1, 0), self.height-1)
-                
-                ref.addColor(x: x, y: y, in: self, with: wx1*wy1)
-            }
+            ref.setColor(x: x0, y: y0, in: self, with: wx0*wy0)
+            ref.addColor(x: x1, y: y0, in: self, with: wx1*wy0)
+            ref.addColor(x: x0, y: y1, in: self, with: wx0*wy1)
+            ref.addColor(x: x1, y: y1, in: self, with: wx1*wy1)
         }
     }
 }
