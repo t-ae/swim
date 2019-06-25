@@ -18,23 +18,6 @@ extension EdgeMode where T: AdditiveArithmetic {
 }
 
 extension EdgeMode {
-    /// Extrapolate color of image at (x, y).
-    ///
-    /// If (`x`, `y`) is inside `image`, it simply returns `image[x, y]`.
-    @inlinable
-    public func getColor(x: Int, y: Int, in image: Image<P, T>) -> Color<P, T> {
-        if let x = clampValue(value: x, max: image.width),
-            let y = clampValue(value: y, max: image.height) {
-            return image[x, y]
-        } else if case let .constant(color) = self {
-            return color
-        } else {
-            fatalError("Never happens.")
-        }
-    }
-}
-
-extension EdgeMode {
     /// Clamp value into `0..<max` by self mode.
     ///
     /// Return `nil` if `self` is `.constant` and `value` is out of range.
@@ -91,6 +74,24 @@ extension UnsafePixelRef {
             setColor(x: x, y: y, in: image)
         } else if case let .constant(color) = edgeMode {
             setColor(color: color)
+        } else {
+            fatalError("Never happens.")
+        }
+    }
+}
+
+extension Image {
+    /// Extrapolate color of image at (x, y).
+    ///
+    /// If (`x`, `y`) is inside `image`, it simply returns `image[x, y]`.
+    /// Otherwise, extrapolate color by `edgeMode`.
+    @inlinable
+    public subscript(x: Int, y: Int, edgeMode edgeMode: EdgeMode<P, T>) -> Color<P, T> {
+        if let x = edgeMode.clampValue(value: x, max: width),
+            let y = edgeMode.clampValue(value: y, max: height) {
+            return self[x, y]
+        } else if case let .constant(color) = edgeMode {
+            return color
         } else {
             fatalError("Never happens.")
         }

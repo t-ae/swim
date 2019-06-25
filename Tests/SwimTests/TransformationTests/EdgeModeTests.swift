@@ -27,15 +27,15 @@ class EdgeModeTests: XCTestCase {
             let constant = Color<RGBA, Int>(data: [100, 101, 102, 103])
             let edgeMode = EdgeMode<RGBA, Int>.constant(color: constant)
             
-            XCTAssertEqual(edgeMode.getColor(x: 0, y: 0, in: image), image[0, 0])
-            XCTAssertEqual(edgeMode.getColor(x: 1, y: 0, in: image), image[1, 0])
-            XCTAssertEqual(edgeMode.getColor(x: 0, y: 1, in: image), image[0, 1])
-            XCTAssertEqual(edgeMode.getColor(x: 1, y: 1, in: image), image[1, 1])
+            XCTAssertEqual(image[0, 0, edgeMode: edgeMode], image[0, 0])
+            XCTAssertEqual(image[1, 0, edgeMode: edgeMode], image[1, 0])
+            XCTAssertEqual(image[0, 1, edgeMode: edgeMode], image[0, 1])
+            XCTAssertEqual(image[1, 1, edgeMode: edgeMode], image[1, 1])
             
-            XCTAssertEqual(edgeMode.getColor(x: -1, y: 0, in: image), constant)
-            XCTAssertEqual(edgeMode.getColor(x: 0, y: -1, in: image), constant)
-            XCTAssertEqual(edgeMode.getColor(x: 2, y: 0, in: image), constant)
-            XCTAssertEqual(edgeMode.getColor(x: 0, y: 2, in: image), constant)
+            XCTAssertEqual(image[-1, 0, edgeMode: edgeMode], constant)
+            XCTAssertEqual(image[0, -1, edgeMode: edgeMode], constant)
+            XCTAssertEqual(image[2, 0, edgeMode: edgeMode], constant)
+            XCTAssertEqual(image[0, 2, edgeMode: edgeMode], constant)
         }
     }
 
@@ -61,20 +61,20 @@ class EdgeModeTests: XCTestCase {
             let image = Image(width: 2, height: 2, rgba: (0..<16).map { $0 })
             let edgeMode = EdgeMode<RGBA, Int>.edge
             
-            XCTAssertEqual(edgeMode.getColor(x: 0, y: 0, in: image), image[0, 0])
-            XCTAssertEqual(edgeMode.getColor(x: 1, y: 0, in: image), image[1, 0])
-            XCTAssertEqual(edgeMode.getColor(x: 0, y: 1, in: image), image[0, 1])
-            XCTAssertEqual(edgeMode.getColor(x: 1, y: 1, in: image), image[1, 1])
+            XCTAssertEqual(image[0, 0, edgeMode: edgeMode], image[0, 0])
+            XCTAssertEqual(image[1, 0, edgeMode: edgeMode], image[1, 0])
+            XCTAssertEqual(image[0, 1, edgeMode: edgeMode], image[0, 1])
+            XCTAssertEqual(image[1, 1, edgeMode: edgeMode], image[1, 1])
             
-            XCTAssertEqual(edgeMode.getColor(x: -1, y: 0, in: image), image[0, 0])
-            XCTAssertEqual(edgeMode.getColor(x: 0, y: -1, in: image), image[0, 0])
-            XCTAssertEqual(edgeMode.getColor(x: 2, y: 0, in: image), image[1, 0])
-            XCTAssertEqual(edgeMode.getColor(x: 0, y: 2, in: image), image[0, 1])
+            XCTAssertEqual(image[-1, 0, edgeMode: edgeMode], image[0, 0])
+            XCTAssertEqual(image[0, -1, edgeMode: edgeMode], image[0, 0])
+            XCTAssertEqual(image[2, 0, edgeMode: edgeMode], image[1, 0])
+            XCTAssertEqual(image[0, 2, edgeMode: edgeMode], image[0, 1])
             
-            XCTAssertEqual(edgeMode.getColor(x: -10, y: -10, in: image), image[0, 0])
-            XCTAssertEqual(edgeMode.getColor(x: 10, y: -10, in: image), image[1, 0])
-            XCTAssertEqual(edgeMode.getColor(x: -10, y: 10, in: image), image[0, 1])
-            XCTAssertEqual(edgeMode.getColor(x: 10, y: 10, in: image), image[1, 1])
+            XCTAssertEqual(image[-10, -10, edgeMode: edgeMode], image[0, 0])
+            XCTAssertEqual(image[10, -10, edgeMode: edgeMode], image[1, 0])
+            XCTAssertEqual(image[-10, 10, edgeMode: edgeMode], image[0, 1])
+            XCTAssertEqual(image[10, 10, edgeMode: edgeMode], image[1, 1])
         }
     }
     
@@ -100,20 +100,20 @@ class EdgeModeTests: XCTestCase {
             let image = Image(width: 2, height: 2, rgba: (0..<16).map { $0 })
             let edgeMode = EdgeMode<RGBA, Int>.wrap
             
-            XCTAssertEqual(edgeMode.getColor(x: 0, y: 0, in: image), image[0, 0])
-            XCTAssertEqual(edgeMode.getColor(x: 1, y: 0, in: image), image[1, 0])
-            XCTAssertEqual(edgeMode.getColor(x: 0, y: 1, in: image), image[0, 1])
-            XCTAssertEqual(edgeMode.getColor(x: 1, y: 1, in: image), image[1, 1])
+            XCTAssertEqual(image[0, 0, edgeMode: edgeMode], image[0, 0])
+            XCTAssertEqual(image[1, 0, edgeMode: edgeMode], image[1, 0])
+            XCTAssertEqual(image[0, 1, edgeMode: edgeMode], image[0, 1])
+            XCTAssertEqual(image[1, 1, edgeMode: edgeMode], image[1, 1])
             
-            XCTAssertEqual(edgeMode.getColor(x: -1, y: 0, in: image), image[1, 0])
-            XCTAssertEqual(edgeMode.getColor(x: 0, y: -1, in: image), image[0, 1])
-            XCTAssertEqual(edgeMode.getColor(x: 2, y: 0, in: image), image[0, 0])
-            XCTAssertEqual(edgeMode.getColor(x: 0, y: 2, in: image), image[0, 0])
+            XCTAssertEqual(image[-1, 0, edgeMode: edgeMode], image[1, 0])
+            XCTAssertEqual(image[0, -1, edgeMode: edgeMode], image[0, 1])
+            XCTAssertEqual(image[2, 0, edgeMode: edgeMode], image[0, 0])
+            XCTAssertEqual(image[0, 2, edgeMode: edgeMode], image[0, 0])
             
-            XCTAssertEqual(edgeMode.getColor(x: -1, y: -1, in: image), image[1, 1])
-            XCTAssertEqual(edgeMode.getColor(x: 2, y: -1, in: image), image[0, 1])
-            XCTAssertEqual(edgeMode.getColor(x: -1, y: 2, in: image), image[1, 0])
-            XCTAssertEqual(edgeMode.getColor(x: 2, y: 2, in: image), image[0, 0])
+            XCTAssertEqual(image[-1, -1, edgeMode: edgeMode], image[1, 1])
+            XCTAssertEqual(image[2, -1, edgeMode: edgeMode], image[0, 1])
+            XCTAssertEqual(image[-1, 2, edgeMode: edgeMode], image[1, 0])
+            XCTAssertEqual(image[2, 2, edgeMode: edgeMode], image[0, 0])
         }
     }
     
@@ -139,20 +139,20 @@ class EdgeModeTests: XCTestCase {
             let image = Image(width: 2, height: 2, rgba: (0..<16).map { $0 })
             let edgeMode = EdgeMode<RGBA, Int>.symmetric
             
-            XCTAssertEqual(edgeMode.getColor(x: 0, y: 0, in: image), image[0, 0])
-            XCTAssertEqual(edgeMode.getColor(x: 1, y: 0, in: image), image[1, 0])
-            XCTAssertEqual(edgeMode.getColor(x: 0, y: 1, in: image), image[0, 1])
-            XCTAssertEqual(edgeMode.getColor(x: 1, y: 1, in: image), image[1, 1])
+            XCTAssertEqual(image[0, 0, edgeMode: edgeMode], image[0, 0])
+            XCTAssertEqual(image[1, 0, edgeMode: edgeMode], image[1, 0])
+            XCTAssertEqual(image[0, 1, edgeMode: edgeMode], image[0, 1])
+            XCTAssertEqual(image[1, 1, edgeMode: edgeMode], image[1, 1])
             
-            XCTAssertEqual(edgeMode.getColor(x: -1, y: 0, in: image), image[0, 0])
-            XCTAssertEqual(edgeMode.getColor(x: 0, y: -1, in: image), image[0, 0])
-            XCTAssertEqual(edgeMode.getColor(x: 2, y: 0, in: image), image[1, 0])
-            XCTAssertEqual(edgeMode.getColor(x: 0, y: 2, in: image), image[0, 1])
+            XCTAssertEqual(image[-1, 0, edgeMode: edgeMode], image[0, 0])
+            XCTAssertEqual(image[0, -1, edgeMode: edgeMode], image[0, 0])
+            XCTAssertEqual(image[2, 0, edgeMode: edgeMode], image[1, 0])
+            XCTAssertEqual(image[0, 2, edgeMode: edgeMode], image[0, 1])
             
-            XCTAssertEqual(edgeMode.getColor(x: -1, y: -1, in: image), image[0, 0])
-            XCTAssertEqual(edgeMode.getColor(x: 2, y: -1, in: image), image[1, 0])
-            XCTAssertEqual(edgeMode.getColor(x: -1, y: 2, in: image), image[0, 1])
-            XCTAssertEqual(edgeMode.getColor(x: 2, y: 2, in: image), image[1, 1])
+            XCTAssertEqual(image[-1, -1, edgeMode: edgeMode], image[0, 0])
+            XCTAssertEqual(image[2, -1, edgeMode: edgeMode], image[1, 0])
+            XCTAssertEqual(image[-1, 2, edgeMode: edgeMode], image[0, 1])
+            XCTAssertEqual(image[2, 2, edgeMode: edgeMode], image[1, 1])
         }
     }
     
@@ -178,20 +178,20 @@ class EdgeModeTests: XCTestCase {
             let image = Image(width: 2, height: 2, rgba: (0..<16).map { $0 })
             let edgeMode = EdgeMode<RGBA, Int>.reflect
             
-            XCTAssertEqual(edgeMode.getColor(x: 0, y: 0, in: image), image[0, 0])
-            XCTAssertEqual(edgeMode.getColor(x: 1, y: 0, in: image), image[1, 0])
-            XCTAssertEqual(edgeMode.getColor(x: 0, y: 1, in: image), image[0, 1])
-            XCTAssertEqual(edgeMode.getColor(x: 1, y: 1, in: image), image[1, 1])
+            XCTAssertEqual(image[0, 0, edgeMode: edgeMode], image[0, 0])
+            XCTAssertEqual(image[1, 0, edgeMode: edgeMode], image[1, 0])
+            XCTAssertEqual(image[0, 1, edgeMode: edgeMode], image[0, 1])
+            XCTAssertEqual(image[1, 1, edgeMode: edgeMode], image[1, 1])
             
-            XCTAssertEqual(edgeMode.getColor(x: -1, y: 0, in: image), image[1, 0])
-            XCTAssertEqual(edgeMode.getColor(x: 0, y: -1, in: image), image[0, 1])
-            XCTAssertEqual(edgeMode.getColor(x: 2, y: 0, in: image), image[0, 0])
-            XCTAssertEqual(edgeMode.getColor(x: 0, y: 2, in: image), image[0, 0])
+            XCTAssertEqual(image[-1, 0, edgeMode: edgeMode], image[1, 0])
+            XCTAssertEqual(image[0, -1, edgeMode: edgeMode], image[0, 1])
+            XCTAssertEqual(image[2, 0, edgeMode: edgeMode], image[0, 0])
+            XCTAssertEqual(image[0, 2, edgeMode: edgeMode], image[0, 0])
             
-            XCTAssertEqual(edgeMode.getColor(x: -1, y: -1, in: image), image[1, 1])
-            XCTAssertEqual(edgeMode.getColor(x: 2, y: -1, in: image), image[0, 1])
-            XCTAssertEqual(edgeMode.getColor(x: -1, y: 2, in: image), image[1, 0])
-            XCTAssertEqual(edgeMode.getColor(x: 2, y: 2, in: image), image[0, 0])
+            XCTAssertEqual(image[-1, -1, edgeMode: edgeMode], image[1, 1])
+            XCTAssertEqual(image[2, -1, edgeMode: edgeMode], image[0, 1])
+            XCTAssertEqual(image[-1, 2, edgeMode: edgeMode], image[1, 0])
+            XCTAssertEqual(image[2, 2, edgeMode: edgeMode], image[0, 0])
         }
     }
     
