@@ -47,7 +47,10 @@ public struct Lanczos3Interpolator<P: PixelType, T: BinaryFloatingPoint&DataType
         }
         let xpi = distance * .pi
         
-        return 3 * sin(xpi) * sin(xpi/3) / (xpi*xpi)
+        let sine = sin(xpi/3)
+        let sine2 = sine*sine
+        // sin(xpi) = 3*sine - 4*sine^3
+        return sine2 * (9 - 12*sine2) / (xpi*xpi)
     }
     
     @inlinable
