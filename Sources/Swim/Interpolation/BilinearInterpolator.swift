@@ -9,7 +9,10 @@ public struct BilinearInterpolator<P:PixelType, T: BinaryFloatingPoint&DataType>
     }
 
     @inlinable
-    public func interpolate(x: Double, y: Double, in image: Image<P, T>, into pixel: UnsafePixelRef<P, T>) {
+    public func interpolate(x: Double,
+                            y: Double,
+                            in image: Image<P, T>,
+                            into pixel: UnsafePixelRef<P, T>) {
         // We can unify them, but separate implementation gets better performance gain.
         switch edgeMode {
         case .constant:
@@ -20,7 +23,10 @@ public struct BilinearInterpolator<P:PixelType, T: BinaryFloatingPoint&DataType>
     }
     
     @inlinable
-    func interpolate_constant(x: Double, y: Double, in image: Image<P, T>, into pixel: UnsafePixelRef<P, T>) {
+    func interpolate_constant(x: Double,
+                              y: Double,
+                              in image: Image<P, T>,
+                              into pixel: UnsafePixelRef<P, T>) {
         guard case let .constant(constant) = edgeMode else {
             assertionFailure()
             return
@@ -76,7 +82,10 @@ public struct BilinearInterpolator<P:PixelType, T: BinaryFloatingPoint&DataType>
     }
     
     @inlinable
-    func interpolate_other(x: Double, y: Double, in image: Image<P, T>, into pixel: UnsafePixelRef<P, T>) {
+    func interpolate_other(x: Double,
+                           y: Double,
+                           in image: Image<P, T>,
+                           into pixel: UnsafePixelRef<P, T>) {
         if case .constant = edgeMode {
             assertionFailure()
             return
