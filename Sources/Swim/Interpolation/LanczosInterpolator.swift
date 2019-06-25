@@ -21,7 +21,11 @@ public struct Lanczos2Interpolator<P: PixelType, T: BinaryFloatingPoint&DataType
         }
         let xpi = distance * .pi
         
-        return 2 * sin(xpi) * sin(xpi/2) / (xpi*xpi)
+        // Computing `sin` and `cos` is faster than two `sin`s
+        let sine = sin(xpi/2)
+        let cosine = cos(xpi/2)
+        // sin(xpi) = 2*sine*cosine
+        return 4 * sine * sine * cosine / (xpi*xpi)
     }
 }
 
