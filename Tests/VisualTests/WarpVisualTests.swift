@@ -284,6 +284,12 @@ extension WarpVisualTests {
     }
     
     func testMatrix() {
+        guard let font = try? TrueTypeFont(url: URL(fileURLWithPath: "/System/Library/Fonts/Helvetica.ttc"), fontSize: 20) else {
+            XCTFail("Font not found.")
+            return
+        }
+        let bg = Color<RGBA, Double>(r: 1, g: 1, b: 1, a: 0.5)
+
         let path = testResoruceRoot().appendingPathComponent("lena_128.png")
         let lena = try! Image<RGB, Double>(contentsOf: path)
         
@@ -298,27 +304,32 @@ extension WarpVisualTests {
         var images = [Image<RGB, Double>]()
         do {
             let intpl = NearestNeighborInterpolator<RGB, Double>(edgeMode: .wrap)
-            let result = try! lena.warp(transformation: affine, outputSize: (300, 300), interpolator: intpl)
+            var result = try! lena.warp(transformation: affine, outputSize: (300, 300), interpolator: intpl)
+            result.drawText(position: (0, 0), text: "NN\nwrap", font: font, color: .black, backgroundColor: bg)
             images.append(result)
         }
         do {
             let intpl = BilinearInterpolator<RGB, Double>(edgeMode: .zero)
-            let result = try! lena.warp(transformation: affine, outputSize: (300, 300), interpolator: intpl)
+            var result = try! lena.warp(transformation: affine, outputSize: (300, 300), interpolator: intpl)
+            result.drawText(position: (0, 0), text: "Bilinear\nconstant-zero", font: font, color: .black, backgroundColor: bg)
             images.append(result)
         }
         do {
             let intpl = BicubicInterpolator<RGB, Double>(edgeMode: .reflect)
-            let result = try! lena.warp(transformation: affine, outputSize: (300, 300), interpolator: intpl)
+            var result = try! lena.warp(transformation: affine, outputSize: (300, 300), interpolator: intpl)
+            result.drawText(position: (0, 0), text: "Bicubic\nreflect", font: font, color: .black, backgroundColor: bg)
             images.append(result)
         }
         do {
             let intpl = Lanczos2Interpolator<RGB, Double>(edgeMode: .edge)
-            let result = try! lena.warp(transformation: affine, outputSize: (300, 300), interpolator: intpl)
+            var result = try! lena.warp(transformation: affine, outputSize: (300, 300), interpolator: intpl)
+            result.drawText(position: (0, 0), text: "Lanczos2\nedge", font: font, color: .black, backgroundColor: bg)
             images.append(result)
         }
         do {
             let intpl = Lanczos3Interpolator<RGB, Double>(edgeMode: .symmetric)
-            let result = try! lena.warp(transformation: affine, outputSize: (300, 300), interpolator: intpl)
+            var result = try! lena.warp(transformation: affine, outputSize: (300, 300), interpolator: intpl)
+            result.drawText(position: (0, 0), text: "Lanczos3\nsymmetric", font: font, color: .black, backgroundColor: bg)
             images.append(result)
         }
         
