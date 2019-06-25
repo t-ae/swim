@@ -4,20 +4,17 @@ public protocol Interpolator {
     
     var edgeMode: EdgeMode<P, T> { get set }
     
-    func interpolate(x: Double, y: Double, in image: Image<P, T>) -> Color<P, T>
     func interpolate(x: Double, y: Double, in image: Image<P, T>, into pixel: UnsafePixelRef<P, T>)
 }
 
-extension Interpolator {
+extension Image {
+    /// Interpolate color.
     @inlinable
-    public func interpolate(x: Double, y: Double, in image: Image<P, T>) -> Color<P, T> {
-        var color = Color<P, T>(value: T.swimDefaultValue)
+    public subscript<Intpl: Interpolator>(x: Double, y: Double, interpolator interpolator: Intpl) -> Color<P, T> where Intpl.P == P, Intpl.T == T {
         
-        color.data.withUnsafeMutableBufferPointer {
+        return .createWithUnsafeMutableBufferPointer {
             let ref = UnsafePixelRef<P, T>(x: -1, y: -1, pointer: $0)
-            interpolate(x: x, y: y, in: image, into: ref)
+            interpolator.interpolate(x: x, y: y, in: self, into: ref)
         }
-        
-        return color
     }
 }
