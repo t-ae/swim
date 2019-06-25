@@ -23,7 +23,7 @@ public struct BicubicInterpolator<P: PixelType, T: BinaryFloatingPoint&DataType>
             result *= distance * distance
             return result + 1
         } else {
-            // ad^3 - 5ad^2 +8ad - 4
+            // ad^3 - 5ad^2 +8ad - 4a
             // = a(d-1)(d-2)^2
             var result = distance - 2
             result *= result
