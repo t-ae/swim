@@ -53,6 +53,9 @@ public struct TrueTypeFont {
     @usableFromInline
     let info: stbtt_fontinfo
     
+    @usableFromInline
+    let data: Data
+    
     public let fontSize: Float
     
     /// Create font with font file(ttf/ttc) and fontSize in pixel.
@@ -67,9 +70,9 @@ public struct TrueTypeFont {
         precondition(fontSize > 0, "Font size must be greater than 0.")
         
         var info = stbtt_fontinfo()
-        let bytes = try Data(contentsOf: url)
+        self.data = try Data(contentsOf: url)
         
-        let result = try bytes.withUnsafeBytes { p -> Int32 in
+        let result = try data.withUnsafeBytes { p -> Int32 in
             let uint8p = p.bindMemory(to: UInt8.self)
             
             let numFonts = Int(get_number_of_fonts(uint8p.baseAddress!))
