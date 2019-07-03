@@ -74,4 +74,13 @@ class ComplexTests: XCTestCase {
         comp1.negate()
         XCTAssertEqual(comp1, answer)
     }
+    
+    static let allTests = [
+        ("testInit", testInit),
+        ("testAdd", testAdd),
+        ("testSub", testSub),
+        ("testMul", testMul),
+        ("testDiv", testDiv),
+        ("testNeg", testNeg)
+    ]
 }
