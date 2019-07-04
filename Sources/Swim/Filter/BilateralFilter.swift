@@ -19,12 +19,13 @@ extension Image where T == Double {
     
         let pad = (windowSize-1)/2
         
-        let distanceLUT = Image<Gray, Double>
-            .createWithUnsafePixelRef(width: windowSize, height: windowSize) { ref in
-                let dx = ref.x - pad
-                let dy = ref.y - pad
-                
-                ref[.gray] = exp(-Double(dx*dx + dy+dy) / (2*distanceSigma2))
+        let distanceLUT: Matrix<Double>
+        do {
+            let d = Matrix(rows: 1, cols: windowSize, data: (0..<windowSize).map { x -> Double in
+                let d = x - pad
+                return exp(-Double(d*d) / (2*distanceSigma2))
+            })
+            distanceLUT = d.transposed() * d
         }
         
         return channelwiseConverted { x, y, c, value in
@@ -37,7 +38,7 @@ extension Image where T == Double {
                 for px in 0..<windowSize {
                     let xx = clamp(x + px - pad, min: 0, max: width-1)
                     
-                    let distanceGauss = distanceLUT[px, py, .gray]
+                    let distanceGauss = distanceLUT[py, px]
                     
                     let pixelValue = self[xx, yy, c]
                     let diff = pixelValue - value
