@@ -70,20 +70,17 @@ extension Filter where T == Double {
     ///   - scaleTo1: If true, output pixel values are scaled so that these sum is 1.
     @inlinable
     public static func gaussian(size: Int, sigma: T, scaleTo1: Bool = false) -> Image<Gray, T> {
-        var image = Image<Gray, T>(width: size, height: size, value: 0)
-        
         let sigma2 = sigma * sigma
-        
         let c = 1 / (2 * T.pi * sigma2).squareRoot()
         
-        let gauss1D: [T] = (0..<size).map {
+        let gauss1D = Matrix<T>(rows: 1, cols: size, data: (0..<size).map {
             let d = T($0) - T(size-1)/2
             return c * exp(-d*d / (2*sigma2))
-        }
+        })
         
-        image.unsafePixelwiseConvert { ref in
-            ref[0] = gauss1D[ref.x] * gauss1D[ref.y]
-        }
+        let gauss2D = gauss1D.transposed() * gauss1D
+        
+        var image = Image<Gray, T>(width: size, height: size, data: gauss2D.data)
         
         if scaleTo1 {
             image /= image.data.reduce(0, +)
