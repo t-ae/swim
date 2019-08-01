@@ -4,6 +4,15 @@ public struct Image<P: PixelType, T: DataType> {
     
     @usableFromInline
     var data: [T]
+    
+    /// Returns underlying buffer.
+    // `data` should be internal(set) but currently it can't.
+    // So provide this instead.
+    // https://bugs.swift.org/browse/SR-10340
+    @inlinable
+    public func getData() -> [T] {
+        return data
+    }
 
     @inlinable
     public init(width: Int, height: Int, data: [T]) {
