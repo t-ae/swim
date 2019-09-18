@@ -140,6 +140,11 @@ extension Color where P == RGBA {
     public init(rgba: [T]) {
         self.init(data: rgba)
     }
+    
+    @inlinable
+    public init(rgb: Color<RGB, T>, a: T) {
+        self.init(data: rgb.data + [a])
+    }
 }
 
 // MARK: ARGB
@@ -152,5 +157,10 @@ extension Color where P == ARGB {
     @inlinable
     public init(argb: [T]) {
         self.init(data: argb)
+    }
+    
+    @inlinable
+    public init(a: T, rgb: Color<RGB, T>) {
+        self.init(data: [a] + rgb.data)
     }
 }
