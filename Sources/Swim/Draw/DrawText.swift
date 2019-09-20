@@ -160,13 +160,12 @@ extension Image where P == Gray, T == UInt8 {
         
         let lineHeight = Int(Float(ascent - descent)*scale)
         
-        var lineNum = 0
         var lineWidths: [Int] = []
         
         var lastLineHeight = 0
-        text.enumerateLines { line, _ in
-            lineNum += 1
-            
+        
+        let lines = text.components(separatedBy: .newlines)
+        for line in lines {
             var width = 0
             var actualLineHeight = lineHeight
             
@@ -203,7 +202,7 @@ extension Image where P == Gray, T == UInt8 {
         /// Some characters can protrule beyond lineHeight.
         /// All lines but last line has lineGap and below line so protrusion is OK.
         /// Only last line we have to consider its actual height.
-        let height = max(lineNum-1, 0) * (lineHeight + Int(Float(lineGap) * scale)) + lastLineHeight
+        let height = max(lines.count-1, 0) * (lineHeight + Int(Float(lineGap) * scale)) + lastLineHeight
         
         return TextImageMetrics(text: text, lineWidths: lineWidths, height: height,
                                 ascent: ascent, descent: descent, lineGap: lineGap, scale: scale)
@@ -231,8 +230,7 @@ extension Image where P == Gray, T == UInt8 {
         
         var y = 0
         
-        var lineNo = 0
-        text.enumerateLines { line, _ in
+        for (lineNo, line) in text.components(separatedBy: .newlines).enumerated() {
             let codepoints = line.map(DrawTextUtils.getCodepoint)
             
             var x: Int
@@ -278,8 +276,6 @@ extension Image where P == Gray, T == UInt8 {
             // advance line
             y += Int(Float(metrics.ascent - metrics.descent) * scale)
             y += Int(Float(metrics.lineGap) * scale)
-            
-            lineNo += 1
         }
         
         return image
