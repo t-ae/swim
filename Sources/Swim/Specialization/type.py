@@ -1,6 +1,0 @@
-pixel_types = ["Intensity", "IntensityAlpha", "RGB", "RGBA", "ARGB"]
-bool_data_types = ["Bool"]
-int_data_types = ["UInt8", "Int"]
-fp_data_types = ["Float", "Double"]
-signed_data_types = ["Int", "Float", "Double"]
-large_enough_data_types = ["Int", "Float", "Double"]
