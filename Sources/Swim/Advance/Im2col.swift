@@ -16,19 +16,20 @@ extension Image where P == Gray {
         let rows = patchWidth*patchHeight
         let cols = numPatchX * numPatchY
         
-        var matrix = [T](repeating: T.swimDefaultValue, count: rows*cols)
-        
-        for patchY in 0..<numPatchY {
-            for patchX in 0..<numPatchX {
-                let patchIndex = patchY*numPatchX + patchX
-                
-                for y in 0..<patchHeight {
-                    for x in 0..<patchWidth {
-                        let valueIndex = y * patchWidth + x
-                        matrix[valueIndex*cols + patchIndex] = self[x+patchX, y+patchY, 0]
+        let matrix = [T](unsafeUninitializedCapacity: rows*cols) { bp, initializedCount in
+            for patchY in 0..<numPatchY {
+                for patchX in 0..<numPatchX {
+                    let patchIndex = patchY*numPatchX + patchX
+                    
+                    for y in 0..<patchHeight {
+                        for x in 0..<patchWidth {
+                            let valueIndex = y * patchWidth + x
+                            bp[valueIndex*cols + patchIndex] = self[x+patchX, y+patchY, 0]
+                        }
                     }
                 }
             }
+            initializedCount = bp.count
         }
         
         return Matrix(rows: rows, cols: cols, data: matrix)
@@ -51,19 +52,20 @@ extension Image where P == Gray {
         let rows = numPatchX * numPatchY
         let cols = patchWidth*patchHeight
         
-        var matrix = [T](repeating: T.swimDefaultValue, count: rows*cols)
-        
-        for patchY in 0..<numPatchY {
-            for patchX in 0..<numPatchX {
-                let patchIndex = patchY*numPatchX + patchX
-                
-                for y in 0..<patchHeight {
-                    for x in 0..<patchWidth {
-                        let valueIndex = y * patchWidth + x
-                        matrix[patchIndex*cols + valueIndex] = self[x+patchX, y+patchY, 0]
+        let matrix = [T](unsafeUninitializedCapacity: rows*cols) { bp, initializedCount in
+            for patchY in 0..<numPatchY {
+                for patchX in 0..<numPatchX {
+                    let patchIndex = patchY*numPatchX + patchX
+                    
+                    for y in 0..<patchHeight {
+                        for x in 0..<patchWidth {
+                            let valueIndex = y * patchWidth + x
+                            bp[patchIndex*cols + valueIndex] = self[x+patchX, y+patchY, 0]
+                        }
                     }
                 }
             }
+            initializedCount = bp.count
         }
         
         return Matrix(rows: rows, cols: cols, data: matrix)

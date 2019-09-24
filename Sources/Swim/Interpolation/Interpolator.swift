@@ -11,7 +11,6 @@ extension Image {
     /// Interpolate color.
     @inlinable
     public subscript<Intpl: Interpolator>(x: Double, y: Double, interpolator interpolator: Intpl) -> Color<P, T> where Intpl.P == P, Intpl.T == T {
-        
         return .createWithUnsafeMutableBufferPointer {
             let ref = UnsafePixelRef<P, T>(x: -1, y: -1, pointer: $0)
             interpolator.interpolate(x: x, y: y, in: self, into: ref)

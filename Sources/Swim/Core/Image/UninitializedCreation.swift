@@ -1,6 +1,3 @@
-// TODO: Replace with uninitialized initializer when Swift5.1 is out.
-// https://github.com/apple/swift-evolution/blob/master/proposals/0245-array-uninitialized-initializer.md
-
 extension Image {
     /// Create `Image` by filling `UnsafePixelRef`s.
     ///
@@ -53,12 +50,12 @@ extension Image {
     public static func createWithUnsafeMutableBufferPointer(width: Int,
                                                             height: Int,
                                                             initializer: (UnsafeMutableBufferPointer<T>) throws -> Void) rethrows -> Image {
-        var image = Image<P, T>(width: width, height: height, value: T.swimDefaultValue)
-        
-        try image.withUnsafeMutableBufferPointer { bp in
+        let dataCount = width*height*P.channels
+        let data = try [T](unsafeUninitializedCapacity: dataCount) { bp, initializedCount in
             try initializer(bp)
+            initializedCount = bp.count
         }
         
-        return image
+        return Image<P, T>(width: width, height: height, data: data)
     }
 }
