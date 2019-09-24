@@ -11,7 +11,9 @@ extension ImageCompare where T: Strideable {
     ///   - mask: If given, `false` coords are ignored.
     /// - Precondition: a.size == b.size (== mask.size)
     @inlinable
-    public static func ssd(_ a: Image<Gray, T>, _ b: Image<Gray, T>, mask: Image<Gray, Bool>? = nil) -> T.Stride {
+    public static func ssd(_ a: Image<Gray, T>,
+                           _ b: Image<Gray, T>,
+                           mask: Image<Gray, Bool>? = nil) -> T.Stride {
         precondition(a.size == b.size, "Images must have same size.")
         precondition(a.size == mask?.size ?? a.size, "Mask must have same size as images.")
         
@@ -32,7 +34,9 @@ extension ImageCompare where T: Strideable {
     ///   - mask: If given, `false` coords are ignored.
     /// - Precondition: a.size == b.size (== mask.size)
     @inlinable
-    public static func sad(_ a: Image<Gray, T>, _ b: Image<Gray, T>, mask: Image<Gray, Bool>? = nil) -> T.Stride {
+    public static func sad(_ a: Image<Gray, T>,
+                           _ b: Image<Gray, T>,
+                           mask: Image<Gray, Bool>? = nil) -> T.Stride {
         precondition(a.size == b.size, "Images must have same size.")
         precondition(a.size == mask?.size ?? a.size, "Mask must have same size as images.")
         

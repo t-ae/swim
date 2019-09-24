@@ -6,9 +6,11 @@ extension Image {
     ///
     /// - Note: `UnsafePixelRef` contains `UnsafeMutableBufferPointer`. So it's unsafe to bring it outside closure.
     @inlinable
-    public static func createWithUnsafePixelRef(width: Int,
-                                                height: Int,
-                                                initializer: (UnsafePixelRef<P, T>) throws -> Void) rethrows -> Image {
+    public static func createWithUnsafePixelRef(
+        width: Int,
+        height: Int,
+        initializer: (UnsafePixelRef<P, T>) throws -> Void
+    ) rethrows -> Image {
         return try .createWithUnsafeMutableBufferPointer(width: width, height: height) { bp in
             var start = 0
             for y in 0..<height {
@@ -27,9 +29,11 @@ extension Image {
     /// `initializer` takes 3 arguments, x, y, and c.
     /// You have to compute pixel values with these arguments and return it.
     @inlinable
-    public static func createWithPixelValues(width: Int,
-                                             height: Int,
-                                             initializer: (_ x: Int, _ y: Int, _ c: P) throws -> T) rethrows -> Image {
+    public static func createWithPixelValues(
+        width: Int,
+        height: Int,
+        initializer: (_ x: Int, _ y: Int, _ c: P) throws -> T
+    ) rethrows -> Image {
         return try .createWithUnsafeMutableBufferPointer(width: width, height: height) { bp in
             var i = 0
             for y in 0..<height {
@@ -47,9 +51,11 @@ extension Image {
     ///
     /// `UnsafeMutableBufferPointer` must be initialized at the end of closure's execution.
     @inlinable
-    public static func createWithUnsafeMutableBufferPointer(width: Int,
-                                                            height: Int,
-                                                            initializer: (UnsafeMutableBufferPointer<T>) throws -> Void) rethrows -> Image {
+    public static func createWithUnsafeMutableBufferPointer(
+        width: Int,
+        height: Int,
+        initializer: (UnsafeMutableBufferPointer<T>) throws -> Void
+    ) rethrows -> Image {
         let dataCount = width*height*P.channels
         let data = try [T](unsafeUninitializedCapacity: dataCount) { bp, initializedCount in
             try initializer(bp)

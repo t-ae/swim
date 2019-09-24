@@ -366,14 +366,16 @@ extension Image where P: NoAlpha, T: BinaryInteger {
     ///   - anchor: Specify where the `position` is in text bounding box. Default: .leftTop.
     ///   - lineGap: Gap between lines in pixel. If nil, proper size will be used. Default: nil.
     @inlinable
-    public mutating func drawText<P2: HasAlpha>(position: (x: Int, y: Int),
-                                                text: String,
-                                                font: TrueTypeFont,
-                                                alignment: TextAlignment = .left,
-                                                anchor: TextAnchor = .leftTop,
-                                                lineGap: Int? = nil,
-                                                color: Color<P2, T>,
-                                                backgroundColor: Color<P2, T>? = nil) where P2.BaseType == P {
+    public mutating func drawText<P2: HasAlpha>(
+        position: (x: Int, y: Int),
+        text: String,
+        font: TrueTypeFont,
+        alignment: TextAlignment = .left,
+        anchor: TextAnchor = .leftTop,
+        lineGap: Int? = nil,
+        color: Color<P2, T>,
+        backgroundColor: Color<P2, T>? = nil
+    ) where P2.BaseType == P {
         guard let colorImage = Image<P2, T>.createTextImage(text: text,
                                                             font: font,
                                                             alignment: alignment,
@@ -402,14 +404,16 @@ extension Image where P: NoAlpha, T: BinaryFloatingPoint {
     ///   - anchor: Specify where the `position` is in text bounding box. Default: .leftTop.
     ///   - lineGap: Gap between lines in pixel. If nil, proper size will be used. Default: nil.
     @inlinable
-    public mutating func drawText<P2: HasAlpha>(position: (x: Int, y: Int),
-                                                text: String,
-                                                font: TrueTypeFont,
-                                                alignment: TextAlignment = .left,
-                                                anchor: TextAnchor = .leftTop,
-                                                lineGap: Int? = nil,
-                                                color: Color<P2, T>,
-                                                backgroundColor: Color<P2, T>? = nil) where P2.BaseType == P {
+    public mutating func drawText<P2: HasAlpha>(
+        position: (x: Int, y: Int),
+        text: String,
+        font: TrueTypeFont,
+        alignment: TextAlignment = .left,
+        anchor: TextAnchor = .leftTop,
+        lineGap: Int? = nil,
+        color: Color<P2, T>,
+        backgroundColor: Color<P2, T>? = nil
+    ) where P2.BaseType == P {
         guard let colorImage = Image<P2, T>.createTextImage(text: text,
                                                             font: font,
                                                             alignment: alignment,

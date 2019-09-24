@@ -9,7 +9,8 @@ public struct Color<P: PixelType, T: DataType> {
     
     @inlinable
     init(data: ArraySlice<T>) {
-        precondition(data.count == P.channels, "Size of `data` must be exact same as the number of channels.")
+        precondition(data.count == P.channels,
+                     "Size of `data` must be exact same as the number of channels.")
         self.data = data
     }
     
@@ -82,7 +83,9 @@ extension Color {
 
 extension Color {
     @inlinable
-    public static func createWithUnsafeMutableBufferPointer(_ body: (UnsafeMutableBufferPointer<T>)->Void) -> Color {
+    public static func createWithUnsafeMutableBufferPointer(
+        _ body: (UnsafeMutableBufferPointer<T>)->Void
+    ) -> Color {
         let data = [T](unsafeUninitializedCapacity: P.channels) { bp, initializedCount in
             body(bp)
             initializedCount = bp.count

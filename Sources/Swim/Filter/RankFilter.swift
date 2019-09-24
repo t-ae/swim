@@ -40,7 +40,8 @@ extension Image where T: Comparable {
     }
     
     @inlinable
-    func rankFilter(windowSize: Int, rankFunc: (Slice<UnsafeMutableBufferPointer<T>>)->T) -> Image<P, T> {
+    func rankFilter(windowSize: Int,
+                    rankFunc: (Slice<UnsafeMutableBufferPointer<T>>)->T) -> Image<P, T> {
         precondition(windowSize > 0, "windowSize must be greater than 0.")
         
         let pad = (windowSize - 1) / 2

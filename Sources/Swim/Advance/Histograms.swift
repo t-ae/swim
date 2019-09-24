@@ -6,7 +6,9 @@ public enum Histograms<P: PixelType, T: DataType> {
     ///
     /// - Returns: Image with size (bins.count, bins.max()!+1)
     @inlinable
-    public static func createHistogramImage(bins: [Int], color: Color<P, T>, background: Color<P, T>) -> Image<P, T> {
+    public static func createHistogramImage(bins: [Int],
+                                            color: Color<P, T>,
+                                            background: Color<P, T>) -> Image<P, T> {
         let maximum = bins.max()!
         
         let width = bins.count
