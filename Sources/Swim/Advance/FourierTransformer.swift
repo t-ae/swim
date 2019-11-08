@@ -38,7 +38,7 @@ public enum FourierTransformer {
         return image.dataConverted { $0.real }
     }
     
-    /// Shift output of fft by (width/2, height/2).
+    /// Shift output of FFT by (width/2, height/2).
     @inlinable
     public static func shifted(image: Image<Gray, Complex<Double>>) -> Image<Gray, Complex<Double>> {
         var image = image
@@ -46,6 +46,7 @@ public enum FourierTransformer {
         return image
     }
     
+    /// Shift output of FFT by (width/2, height/2).
     @inlinable
     public static func shift(image: inout Image<Gray, Complex<Double>>) {
         precondition(image.width % 2 == 0, "Image width must be even number.")
