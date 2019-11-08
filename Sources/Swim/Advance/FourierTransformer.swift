@@ -40,11 +40,46 @@ public enum FourierTransformer {
     
     /// Shift output of fft by (width/2, height/2).
     @inlinable
-    public static func shift(image: Image<Gray, Complex<Double>>) -> Image<Gray, Complex<Double>> {
+    public static func shifted(image: Image<Gray, Complex<Double>>) -> Image<Gray, Complex<Double>> {
+        var image = image
+        shift(image: &image)
+        return image
+    }
+    
+    @inlinable
+    public static func shift(image: inout Image<Gray, Complex<Double>>) {
         precondition(image.width % 2 == 0, "Image width must be even number.")
         precondition(image.height % 2 == 0, "Image height must be even number.")
         
-        return image.shifted(x: image.width/2, y: image.height/2, edgeMode: .wrap)
+        let w = image.width
+        let w2 = image.width/2
+        let h2 = image.height/2
+        
+        image.withUnsafeMutableBufferPointer { bp in
+            _ = [Complex<Double>](unsafeUninitializedCapacity: w) { buf, count in
+                let buf1 = buf.baseAddress!
+                let buf2 = buf1 + w2
+                var lt = bp.baseAddress!
+                var rt = lt + w2
+                var lb = lt + w * h2
+                var rb = lb + w2
+                
+                for _ in 0..<h2 {
+                    buf1.moveInitialize(from: rb, count: w2)
+                    buf2.moveInitialize(from: lb, count: w2)
+                    rb.moveInitialize(from: lt, count: w2)
+                    lb.moveInitialize(from: rt, count: w2)
+                    lt.moveInitialize(from: buf1, count: w)
+                    
+                    lt += w
+                    rt += w
+                    lb += w
+                    rb += w
+                }
+                
+                count = 0
+            }
+        }
     }
     
     /// Get spectrum from FFT result.
@@ -58,7 +93,7 @@ public enum FourierTransformer {
                                 shift: Bool = false) -> Image<Gray, Double> {
         var image = image
         if shift {
-            image = FourierTransformer.shift(image: image)
+            FourierTransformer.shift(image: &image)
         }
         let logmag = image.dataConverted { log1p($0.magnitude) }
         

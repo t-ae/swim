@@ -18,11 +18,19 @@ class FourierTransformerPerformanceTests: XCTestCase {
         }
     }
     
-    func testFFTShift() {
+    func testFFTShifted() {
         let image = Image<Gray, Complex>(width: 1024, height: 1024, value: Complex(real: 1, imag: 2))
         
         measure {
-            _ = FourierTransformer.shift(image: image)
+            _ = FourierTransformer.shifted(image: image)
+        }
+    }
+    
+    func testFFTShift() {
+        var image = Image<Gray, Complex>(width: 1024, height: 1024, value: Complex(real: 1, imag: 2))
+        
+        measure {
+            FourierTransformer.shift(image: &image)
         }
     }
 }

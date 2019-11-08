@@ -57,7 +57,7 @@ extension FourierTransformerVisualTests {
         var images: [Image<Gray, Double>] = []
         
         let fft = FourierTransformer.fft(image: lena)
-        let shifted = FourierTransformer.shift(image: fft)
+        let shifted = FourierTransformer.shifted(image: fft)
         
         do {
             images.append(FourierTransformer.spectrum(image: shifted))
@@ -78,7 +78,7 @@ extension FourierTransformerVisualTests {
             images.append(FourierTransformer.spectrum(image: shifted))
             
             // inverse transform
-            let fft = FourierTransformer.shift(image: shifted)
+            let fft = FourierTransformer.shifted(image: shifted)
             images.append(FourierTransformer.ifft(image: fft))
         }
         
@@ -90,7 +90,7 @@ extension FourierTransformerVisualTests {
             images.append(FourierTransformer.spectrum(image: shifted))
             
             // inverse transform
-            let fft = FourierTransformer.shift(image: shifted)
+            let fft = FourierTransformer.shifted(image: shifted)
             images.append(FourierTransformer.ifft(image: fft))
         }
         
