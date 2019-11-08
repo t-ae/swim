@@ -10,6 +10,14 @@ class FourierTransformerPerformanceTests: XCTestCase {
         }
     }
     
+    func testIFFT() {
+        let image = Image<Gray, Complex>(width: 2048, height: 512, value: Complex(real: 0.3, imag: 0.2))
+        
+        measure {
+            _ = FourierTransformer.ifft(image: image)
+        }
+    }
+    
     func testFFTSquare() {
         let image = Image<Gray, Double>(width: 1024, height: 1024, value: 1)
         
