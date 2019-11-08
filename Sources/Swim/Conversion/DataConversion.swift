@@ -7,6 +7,14 @@ extension Image {
         }
     }
     
+    /// Mutate all pixel values.
+    @inlinable
+    public mutating func dataMutate(_ body: (inout T)->Void) {
+        for i in 0..<data.count {
+            body(&data[i])
+        }
+    }
+    
     /// Convert all pixel values.
     @inlinable
     public func dataConverted<T2>(_ body: (T) throws -> T2) rethrows  -> Image<P, T2> {
