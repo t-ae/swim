@@ -1,3 +1,6 @@
+// TODO: Replace with swift-numerics implementation
+// https://github.com/apple/swift-numerics
+
 public protocol ComplexProtocol: SignedNumeric, CustomStringConvertible, ExpressibleByFloatLiteral, Hashable {
     associatedtype T: BinaryFloatingPoint
     
@@ -81,7 +84,7 @@ extension ComplexProtocol {
     }
     
     @inlinable
-    public static func += (lhs: inout Self, rhs: Self) {
+    public static func +=(lhs: inout Self, rhs: Self) {
         lhs.real += rhs.real
         lhs.imag += rhs.imag
     }
@@ -92,7 +95,7 @@ extension ComplexProtocol {
     }
     
     @inlinable
-    public static func -= (lhs: inout Self, rhs: Self) {
+    public static func -=(lhs: inout Self, rhs: Self) {
         lhs.real -= rhs.real
         lhs.imag -= rhs.imag
     }
@@ -105,7 +108,7 @@ extension ComplexProtocol {
     }
     
     @inlinable
-    public static func *= (lhs: inout Self, rhs: Self) {
+    public static func *=(lhs: inout Self, rhs: Self) {
         lhs = lhs * rhs
     }
     
@@ -117,7 +120,7 @@ extension ComplexProtocol {
     }
     
     @inlinable
-    public static func /= (lhs: inout Self, rhs: Self) {
+    public static func /=(lhs: inout Self, rhs: Self) {
         lhs = lhs / rhs
     }
 }
