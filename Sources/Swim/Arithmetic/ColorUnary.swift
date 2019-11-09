@@ -1,9 +1,11 @@
 extension Color where T: SignedNumeric {
     @inlinable
     public static prefix func -(arg: Color) -> Color {
-        return .createWithUnsafeMutableBufferPointer { bp in
+        return .createWithUnsafeMutableBufferPointer {
+            var p = $0.baseAddress!
             for i in 0..<P.channels {
-                bp[i] = -arg[i]
+                p.initialize(to: -arg[i])
+                p += 1
             }
         }
     }

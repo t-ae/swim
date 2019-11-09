@@ -2,7 +2,7 @@ import XCTest
 import Swim
 
 class ArithmeticPerformanceTests: XCTestCase {
-    func testMulScalar() {
+    func testMulAssignScalar() {
         var image = Image<RGBA, Double>(width: 3840, height: 2160, value: 1)
         
         measure {
@@ -12,7 +12,7 @@ class ArithmeticPerformanceTests: XCTestCase {
         }
     }
     
-    func testMulScalarEquivalent() {
+    func testMulAssignScalarEquivalent() {
         var image = [Double](repeating: 1, count: 3840*2160*4)
         
         measure {
@@ -24,7 +24,7 @@ class ArithmeticPerformanceTests: XCTestCase {
         }
     }
     
-    func testMulPixel() {
+    func testMulAssignPixel() {
         var image = Image<RGBA, Double>(width: 3840, height: 2160, value: 1)
         let color = Color<RGBA, Double>(r: 0.9, g: 1.1, b: 0.9, a: 1.1)
         
@@ -35,7 +35,7 @@ class ArithmeticPerformanceTests: XCTestCase {
         }
     }
     
-    func testMulPixelEquivalent() {
+    func testMulAssignPixelEquivalent() {
         var image = [Double](repeating: 1, count: 3840*2160*4)
         let color = [0.9, 1.1, 0.9, 1.1]
         
@@ -50,7 +50,7 @@ class ArithmeticPerformanceTests: XCTestCase {
         }
     }
     
-    func testMulImage() {
+    func testMulAssignImage() {
         var image1 = Image<RGBA, Double>(width: 3840, height: 2160, value: 1)
         let image2 = Image<RGBA, Double>(width: 3840, height: 2160, value: 1.1)
         
@@ -61,7 +61,7 @@ class ArithmeticPerformanceTests: XCTestCase {
         }
     }
     
-    func testMulImageEquivalent() {
+    func testMulAssignImageEquivalent() {
         var image1 = [Double](repeating: 1, count: 3840*2160*4)
         let image2 = [Double](repeating: 1.1, count: 3840*2160*4)
         
@@ -71,6 +71,15 @@ class ArithmeticPerformanceTests: XCTestCase {
                     image1[i] *= image2[i]
                 }
             }
+        }
+    }
+    
+    func testMul() {
+        let image1 = Image<RGBA, Double>(width: 3840, height: 2160, value: 1)
+        let image2 = Image<RGBA, Double>(width: 3840, height: 2160, value: 1.1)
+        
+        measure {
+            _ = image1 * image2
         }
     }
 }

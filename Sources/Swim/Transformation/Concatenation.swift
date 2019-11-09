@@ -10,8 +10,11 @@ extension Image {
             var start = 0
             for y in 0..<height {
                 for i in 0..<images.count {
-                    copy(src: images[i].data, srcOffset: images[i].dataIndex(x: 0, y: y),
-                         dst: bp, dstOffset: start, count: images[i].width*P.channels)
+                    let rowCount = images[i].width*P.channels
+                    let dst = UnsafeMutableBufferPointer(rebasing: bp[start..<start+rowCount])
+                    let srcOffset = images[i].dataIndex(x: 0, y: y)
+                    _ = dst.initialize(from: images[i].data[srcOffset..<srcOffset+rowCount])
+                    
                     start += images[i].width*P.channels
                 }
             }
@@ -31,8 +34,10 @@ extension Image {
         return .createWithUnsafeMutableBufferPointer(width: width, height: height) { bp in
             var start = 0
             for i in 0..<images.count {
-                copy(src: images[i].data, srcOffset: 0,
-                     dst: bp, dstOffset: start, count: images[i].data.count)
+                let count = images[i].data.count
+                let dst = UnsafeMutableBufferPointer(rebasing: bp[start..<start+count])
+                _ = dst.initialize(from: images[i].data)
+                
                 start += images[i].data.count
             }
         }

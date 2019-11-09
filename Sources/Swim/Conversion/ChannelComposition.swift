@@ -49,10 +49,17 @@ extension Image where P == RGBA {
     public init(rgb: Image<RGB, T>,  a: Image<Gray, T>) {
         precondition(rgb.size == a.size, "Images must have same size.")
 
-        self = .createWithUnsafeMutableBufferPointer(width: a.width, height: a.height) { bp in
+        self = .createWithUnsafeMutableBufferPointer(width: a.width, height: a.height) {
+            var p = $0.baseAddress!
             for i in 0..<a.pixelCount {
-                copy(src: rgb.data, srcOffset: 3*i, dst: bp, dstOffset: 4*i, count: 3)
-                bp[4*i+3] = a.data[i]
+                p.initialize(to: rgb.data[3*i + 0])
+                p += 1
+                p.initialize(to: rgb.data[3*i + 1])
+                p += 1
+                p.initialize(to: rgb.data[3*i + 2])
+                p += 1
+                p.initialize(to: a.data[i])
+                p += 1
             }
         }
     }
@@ -79,10 +86,17 @@ extension Image where P == ARGB {
     public init(a: Image<Gray, T>, rgb: Image<RGB, T>) {
         precondition(rgb.size == a.size, "Images must have same size.")
 
-        self = .createWithUnsafeMutableBufferPointer(width: a.width, height: a.height) { bp in
+        self = .createWithUnsafeMutableBufferPointer(width: a.width, height: a.height) {
+            var p = $0.baseAddress!
             for i in 0..<a.pixelCount {
-                bp[4*i+0] = a.data[i]
-                copy(src: rgb.data, srcOffset: 3*i, dst: bp, dstOffset: 4*i+1, count: 3)
+                p.initialize(to: a.data[i])
+                p += 1
+                p.initialize(to: rgb.data[3*i + 0])
+                p += 1
+                p.initialize(to: rgb.data[3*i + 1])
+                p += 1
+                p.initialize(to: rgb.data[3*i + 2])
+                p += 1
             }
         }
     }

@@ -28,8 +28,10 @@ class FilterPerformanceTests: XCTestCase {
     
     func testBilateralFilter() {
         let image = Image<RGB, Double>.createWithUnsafeMutableBufferPointer(width: 640, height: 480) {
+            var p = $0.baseAddress!
             for i in 0..<$0.count {
-                $0[i] = sin(Double(i))
+                p.initialize(to: sin(Double(i)))
+                p += 1
             }
         }
         
@@ -40,8 +42,10 @@ class FilterPerformanceTests: XCTestCase {
     
     func testNLMeanFilter() {
         let image = Image<RGB, Double>.createWithUnsafeMutableBufferPointer(width: 640, height: 480) {
+            var p = $0.baseAddress!
             for i in 0..<$0.count {
-                $0[i] = sin(Double(i))
+                p.initialize(to: sin(Double(i)))
+                p += 1
             }
         }
         

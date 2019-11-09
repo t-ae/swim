@@ -69,8 +69,10 @@ class PerformanceTests: XCTestCase {
         
         measure {
             _ = Image<RGBA, Double>.createWithUnsafeMutableBufferPointer(width: 1920, height: 1080) {
+                var p = $0.baseAddress!
                 for i in 0..<$0.count {
-                    $0[i] = pow(image1[data: i], 2) + pow(image2[data: i], 2)
+                    p.initialize(to: pow(image1[data: i], 2) + pow(image2[data: i], 2))
+                    p += 1
                 }
             }
         }

@@ -42,11 +42,13 @@ extension Interpolator4x4 {
         let x2 = edgeMode.clampValue(value: xp+2, max: image.width)
         let x3 = edgeMode.clampValue(value: xp+3, max: image.width)
         
+        pixel.pointer.initialize(repeating: 0)
+        
         if let y = edgeMode.clampValue(value: yp+0, max: image.height) {
             if let x = x0 {
-                pixel.setColor(x: x, y: y, in: image, with: xw0 * yw0)
+                pixel.addColor(x: x, y: y, in: image, with: xw0 * yw0)
             } else if let constant = constant {
-                pixel.setColor(color: constant, with: xw0 * yw0)
+                pixel.addColor(color: constant, with: xw0 * yw0)
             } else {
                 fatalError("Never happens")
             }

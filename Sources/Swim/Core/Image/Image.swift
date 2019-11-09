@@ -33,7 +33,7 @@ public struct Image<P: PixelType, T: DataType> {
     @inlinable
     public init(width: Int, height: Int, color: Color<P, T>) {
         self = .createWithUnsafePixelRef(width: width, height: height) { ref in
-            ref.setColor(color: color)
+            ref.initialize(to: color)
         }
     }
 }

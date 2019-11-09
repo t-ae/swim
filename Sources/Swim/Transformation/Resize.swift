@@ -49,14 +49,14 @@ extension Image where T: BinaryFloatingPoint {
                         
                         guard ceilStartX <= floorEndX else {
                             // refer single pixel
-                            ref.setColor(x: Int(startX), y: ref.y, in: baseImage)
+                            ref.initialize(to: baseImage[Int(startX), ref.y])
                             continue
                         }
                         
                         let startVolume = ceilStartX - startX
                         let endVolume = endX - floorEndX
                         
-                        ref.fill(value: 0)
+                        ref.pointer.initialize(repeating: 0)
                         
                         if startVolume > 0 {
                             ref.addColor(x: Int(startX), y: ref.y, in: baseImage, with: startVolume)
@@ -95,14 +95,14 @@ extension Image where T: BinaryFloatingPoint {
                         
                         guard ceilStartY <= floorEndY else {
                             // refer single pixel
-                            ref.setColor(x: ref.x, y: Int(startY), in: baseImage)
+                            ref.initialize(to: baseImage[ref.x, Int(startY)])
                             continue
                         }
                         
                         let startVolume = ceilStartY - startY
                         let endVolume = endY - floorEndY
                         
-                        ref.fill(value: 0)
+                        ref.pointer.initialize(repeating: 0)
                         if startVolume > 0 {
                             ref.addColor(x: ref.x, y: Int(startY), in: baseImage, with: startVolume)
                         }

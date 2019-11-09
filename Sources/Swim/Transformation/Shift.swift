@@ -8,7 +8,7 @@ extension Image {
     @inlinable
     public func shifted(x: Int, y: Int, edgeMode: EdgeMode<P, T>) -> Image {
         return .createWithUnsafePixelRef(width: width, height: height) { ref in
-            ref.setColor(x: ref.x - x, y: ref.y - y, in: self, edgeMode: edgeMode)
+            ref.initialize(to: self[ref.x-x, ref.y-y, edgeMode: edgeMode])
         }
     }
 }

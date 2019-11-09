@@ -7,11 +7,15 @@ extension Image {
         precondition(y+height <= self.height, "Index out of range.")
         
         let start = dataIndex(x: x, y: y)
+        let rowCount = width * P.channels
         
-        return .createWithUnsafeMutableBufferPointer(width: width, height: height) { dst in
+        return .createWithUnsafeMutableBufferPointer(width: width, height: height) {
             for y in 0..<height {
-                copy(src: data, srcOffset: start + y*self.width*P.channels,
-                     dst: dst, dstOffset: y*width*P.channels, count: width*P.channels)
+                let dstStart = y * width * P.channels
+                let dst = UnsafeMutableBufferPointer(rebasing: $0[dstStart..<dstStart+rowCount])
+                
+                let srcStart = start + y*self.width*P.channels
+                _ = dst.initialize(from: self.data[srcStart..<srcStart+rowCount])
             }
         }
     }

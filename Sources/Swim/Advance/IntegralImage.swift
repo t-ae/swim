@@ -4,11 +4,13 @@ public enum IntegralImageConverter {
     public static func convert<T: BinaryInteger>(image: Image<Gray, T>) -> Image<Gray, Int> {
         return .createWithUnsafeMutableBufferPointer(width: image.width, height: image.height) { bp in
             // First row
+            var p = bp.baseAddress!
             do {
                 var rowsum = 0
                 for i in 0..<image.width {
                     rowsum += Int(image.data[i])
-                    bp[i] = rowsum
+                    p.initialize(to: rowsum)
+                    p += 1
                 }
             }
             
@@ -17,7 +19,9 @@ public enum IntegralImageConverter {
                 var rowsum = 0
                 for x in 0..<image.width {
                     rowsum += Int(image.data[i+x])
-                    bp[i+x] = rowsum + bp[i+x-image.width]
+                    
+                    p.initialize(to: rowsum + bp[i+x-image.width])
+                    p += 1
                 }
             }
         }
@@ -28,11 +32,13 @@ public enum IntegralImageConverter {
     public static func convert<T: FloatingPoint>(image: Image<Gray, T>) -> Image<Gray, T> {
         return .createWithUnsafeMutableBufferPointer(width: image.width, height: image.height) { bp in
             // First row
+            var p = bp.baseAddress!
             do {
                 var rowsum = T.zero
                 for i in 0..<image.width {
                     rowsum += image.data[i]
-                    bp[i] = rowsum
+                    p.initialize(to: rowsum)
+                    p += 1
                 }
             }
             
@@ -41,7 +47,8 @@ public enum IntegralImageConverter {
                 var rowsum = T.zero
                 for x in 0..<image.width {
                     rowsum += image.data[i+x]
-                    bp[i+x] = rowsum + bp[i+x-image.width]
+                    p.initialize(to: rowsum + bp[i+x-image.width])
+                    p += 1
                 }
             }
         }

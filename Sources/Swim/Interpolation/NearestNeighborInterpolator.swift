@@ -14,8 +14,7 @@ public struct NearestNeighborInterpolator<P: PixelType, T: DataType>: Interpolat
                             in image: Image<P, T>,
                             into pixel: UnsafePixelRef<P, T>) {
         let (x, y) = (Int(round(x)), Int(round(y)))
-        
-        pixel.setColor(x: x, y: y, in: image, edgeMode: edgeMode)
+        pixel.initialize(to: image[x, y, edgeMode: edgeMode])
     }
 }
 

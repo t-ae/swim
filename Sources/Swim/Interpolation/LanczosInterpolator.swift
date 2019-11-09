@@ -98,12 +98,14 @@ public struct Lanczos3Interpolator<P: PixelType, T: BinaryFloatingPoint&DataType
         let x3 = edgeMode.clampValue(value: xp+3, max: image.width)
         let x4 = edgeMode.clampValue(value: xp+4, max: image.width)
         let x5 = edgeMode.clampValue(value: xp+5, max: image.width)
+        
+        pixel.pointer.initialize(repeating: 0)
 
         if let y = edgeMode.clampValue(value: yp+0, max: image.height) {
             if let x = x0 {
-                pixel.setColor(x: x, y: y, in: image, with: xw0 * yw0)
+                pixel.addColor(x: x, y: y, in: image, with: xw0 * yw0)
             } else if let constant = constant {
-                pixel.setColor(color: constant, with: xw0 * yw0)
+                pixel.addColor(color: constant, with: xw0 * yw0)
             } else {
                 fatalError("Never happens")
             }

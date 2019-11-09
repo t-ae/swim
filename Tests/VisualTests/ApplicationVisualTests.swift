@@ -66,12 +66,12 @@ extension ApplicationVisualTests {
                     let zi = 2*z.0*z.1 + c.1
                     z = (zr, zi)
                     if z.0*z.0 + z.1*z.1 > 2*2 {
-                        ref[.gray] = Double(n)
+                        ref.initialize(channel: .gray, to: Double(n))
                         iterationMax = max(iterationMax, n)
                         return
                     }
                 }
-                ref[.gray] = 0
+                ref.initialize(channel: .gray, to: 0)
             }
             
             return Image(rgb: Image(width: size, height: size, color: color),
@@ -114,9 +114,11 @@ extension ApplicationVisualTests {
         
         func perlin(width: Int, height: Int, fieldSize: Int) -> Image<Gray, Double> {
             // gradX: .gray, gradY: .alpha
-            let grads = Image<GrayAlpha, Double>.createWithUnsafeMutableBufferPointer(width: fieldSize, height: fieldSize) { bp in
-                for i in 0..<bp.count {
-                    bp[i] = .random(in: -1..<1)
+            let grads = Image<GrayAlpha, Double>.createWithUnsafeMutableBufferPointer(width: fieldSize, height: fieldSize) {
+                var p = $0.baseAddress!
+                for i in 0..<$0.count {
+                    p.initialize(to: .random(in: -1..<1))
+                    p += 1
                 }
             }.withPadding(left: 0, right: 1, top: 0, bottom: 1, edgeMode: .wrap)
             
@@ -143,7 +145,7 @@ extension ApplicationVisualTests {
             return Image<Gray, Double>.createWithUnsafePixelRef(width: width, height: height) { ref in
                 let px = Double(fieldSize) * Double(ref.x) / Double(width)
                 let py = Double(fieldSize) * Double(ref.y) / Double(height)
-                ref[.gray] = value(x: px, y: py)
+                ref.initialize(channel: .gray, to: value(x: px, y: py))
             }
         }
         
@@ -551,7 +553,7 @@ extension ApplicationVisualTests {
         // apply reduction
         let reduced = Image<RGB, Double>.createWithUnsafePixelRef(width: lena.width, height: lena.height) { ref in
             let cls = classImage[ref.x, ref.y, .gray]
-            ref.setColor(color: centers[cls])
+            ref.initialize(to: centers[cls])
         }
         images.append(reduced)
         

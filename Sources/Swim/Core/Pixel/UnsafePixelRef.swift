@@ -13,8 +13,7 @@ public struct UnsafePixelRef<P: PixelType, T: DataType> {
     public let x: Int
     public let y: Int
     
-    @usableFromInline
-    let pointer: UnsafeMutableBufferPointer<T>
+    public let pointer: UnsafeMutableBufferPointer<T>
     
     @inlinable
     init(x: Int, y: Int, pointer: UnsafeMutableBufferPointer<T>) {
@@ -48,6 +47,27 @@ extension UnsafePixelRef {
         }
         nonmutating set {
             self[channel.rawValue] = newValue
+        }
+    }
+}
+
+extension UnsafePixelRef {
+    @inlinable
+    public func initialize(channel: P, to value: T) {
+        initialize(channel: channel.rawValue, to: value)
+    }
+    
+    @inlinable
+    public func initialize(channel: Int, to value: T) {
+        pointer.baseAddress!.advanced(by: channel).initialize(to: value)
+    }
+    
+    @inlinable
+    public func initialize<C: ColorProtocol>(to color: C) where C.P == P, C.T == T {
+        var p = pointer.baseAddress!
+        for i in 0..<P.channels {
+            p.initialize(to: color[i])
+            p += 1
         }
     }
 }

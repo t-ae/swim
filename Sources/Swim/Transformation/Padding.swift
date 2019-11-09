@@ -22,8 +22,10 @@ extension Image {
             for y in 0..<self.height {
                 let selfOffset = self.dataIndex(x: 0, y: y)
                 let bpOffset = Image<P, T>.dataIndex(x: left, y: top+y, width: width, height: height)
-                copy(src: self.data, srcOffset: selfOffset,
-                     dst: bp, dstOffset: bpOffset, count: self.width*P.channels)
+                let rowCount = self.width * P.channels
+                
+                let dst = UnsafeMutableBufferPointer(rebasing: bp[bpOffset..<bpOffset+rowCount])
+                _ = dst.initialize(from: self.data[selfOffset..<selfOffset+rowCount])
             }
             
             // draw padding parts
@@ -31,26 +33,26 @@ extension Image {
                 for x in 0..<width {
                     let start = Image<P, T>.dataIndex(x: x, y: y, width: width, height: height)
                     let ref = UnsafePixelRef<P, T>(x: x, y: y, rebasing: bp[start..<start+P.channels])
-                    ref.setColor(x: x-left, y: y-top, in: self, edgeMode: edgeMode)
+                    ref.initialize(to: self[x-left, y-top, edgeMode: edgeMode])
                 }
             }
             for y in top..<top+self.height {
                 for x in 0..<left {
                     let start = Image<P, T>.dataIndex(x: x, y: y, width: width, height: height)
                     let ref = UnsafePixelRef<P, T>(x: x, y: y, rebasing: bp[start..<start+P.channels])
-                    ref.setColor(x: x-left, y: y-top, in: self, edgeMode: edgeMode)
+                    ref.initialize(to: self[x-left, y-top, edgeMode: edgeMode])
                 }
                 for x in left+self.width..<width {
                     let start = Image<P, T>.dataIndex(x: x, y: y, width: width, height: height)
                     let ref = UnsafePixelRef<P, T>(x: x, y: y, rebasing: bp[start..<start+P.channels])
-                    ref.setColor(x: x-left, y: y-top, in: self, edgeMode: edgeMode)
+                    ref.initialize(to: self[x-left, y-top, edgeMode: edgeMode])
                 }
             }
             for y in top+self.height..<height {
                 for x in 0..<width {
                     let start = Image<P, T>.dataIndex(x: x, y: y, width: width, height: height)
                     let ref = UnsafePixelRef<P, T>(x: x, y: y, rebasing: bp[start..<start+P.channels])
-                    ref.setColor(x: x-left, y: y-top, in: self, edgeMode: edgeMode)
+                    ref.initialize(to: self[x-left, y-top, edgeMode: edgeMode])
                 }
             }
         }

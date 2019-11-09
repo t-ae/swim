@@ -8,7 +8,7 @@ extension RGB: vImagePixelType {}
 extension RGBA: vImagePixelType {}
 extension ARGB: vImagePixelType {}
 
-public protocol vImageDataType: DataType {}
+public protocol vImageDataType: DataType, AdditiveArithmetic {}
 extension UInt8: vImageDataType {}
 extension Float: vImageDataType {}
 
@@ -45,6 +45,7 @@ extension vImageUtils {
     public static func createImageWithBuffer<P: vImagePixelType, T: vImageDataType>(width: Int, height: Int, body: (inout vImage_Buffer) throws -> Void) rethrows -> Image<P, T> {
         
         return try .createWithUnsafeMutableBufferPointer(width: width, height: height) {
+            $0.initialize(repeating: .zero)
             var buffer = vImage_Buffer(data: $0.baseAddress!,
                                        height: UInt(height),
                                        width: UInt(width),

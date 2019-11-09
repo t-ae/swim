@@ -33,21 +33,21 @@ extension BayerConverter {
     public func convert<T>(image: Image<RGB, T>) -> Image<Gray, T> {
         let (offsetX, offsetY) = pattern.offsetToBGGR
         
-        return .createWithUnsafeMutableBufferPointer(width: image.width, height: image.height) { bp in
-            var i = 0
+        return .createWithUnsafeMutableBufferPointer(width: image.width, height: image.height) {
+            var p = $0.baseAddress!
             var redRow = offsetY % 2 != 0 // or blue row
             for y in 0..<image.height {
                 var oddCol = offsetX % 2 != 0
                 for x in 0..<image.width {
                     switch (oddCol, redRow) {
                     case (true, true): // r
-                        bp[i] = image[x, y, .red]
+                        p.initialize(to: image[x, y, .red])
                     case (false, true), (true, false): // g
-                        bp[i] = image[x, y, .green]
+                        p.initialize(to: image[x, y, .green])
                     case (false, false): // b
-                        bp[i] = image[x, y, .blue]
+                        p.initialize(to: image[x, y, .blue])
                     }
-                    i += 1
+                    p += 1
                     
                     oddCol.toggle()
                 }
@@ -172,9 +172,9 @@ extension BayerConverter {
         }
         
         return .createWithUnsafePixelRef(width: image.width, height: image.height) { ref in
-            ref[.red] = getPixelValue(x: ref.x, y: ref.y, channel: .red)
-            ref[.green] = getPixelValue(x: ref.x, y: ref.y, channel: .green)
-            ref[.blue] = getPixelValue(x: ref.x, y: ref.y, channel: .blue)
+            ref.initialize(channel: .red, to: getPixelValue(x: ref.x, y: ref.y, channel: .red))
+            ref.initialize(channel: .green, to: getPixelValue(x: ref.x, y: ref.y, channel: .green))
+            ref.initialize(channel: .blue, to: getPixelValue(x: ref.x, y: ref.y, channel: .blue))
         }
     }
     
@@ -291,9 +291,9 @@ extension BayerConverter {
         }
         
         return .createWithUnsafePixelRef(width: image.width, height: image.height)  { ref in
-            ref[.red] = getPixelValue(x: ref.x, y: ref.y, channel: .red)
-            ref[.green] = getPixelValue(x: ref.x, y: ref.y, channel: .green)
-            ref[.blue] = getPixelValue(x: ref.x, y: ref.y, channel: .blue)
+            ref.initialize(channel: .red, to: getPixelValue(x: ref.x, y: ref.y, channel: .red))
+            ref.initialize(channel: .green, to: getPixelValue(x: ref.x, y: ref.y, channel: .green))
+            ref.initialize(channel: .blue, to: getPixelValue(x: ref.x, y: ref.y, channel: .blue))
         }
     }
 }

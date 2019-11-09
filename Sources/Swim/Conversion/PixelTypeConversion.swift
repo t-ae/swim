@@ -3,10 +3,13 @@ extension Image where P == Gray {
     /// Create `Image<GrayAlpha, T>` by filling alpha channel with specified `alphaValue`.
     @inlinable
     public func toGrayAlpha(with alphaValue: T) -> Image<GrayAlpha, T> {
-        return .createWithUnsafeMutableBufferPointer(width: width, height: height) { bp in
+        return .createWithUnsafeMutableBufferPointer(width: width, height: height) {
+            var p = $0.baseAddress!
             for i in 0..<pixelCount {
-                bp[2*i+0] = data[i]
-                bp[2*i+1] = alphaValue
+                p.initialize(to: data[i])
+                p += 1
+                p.initialize(to: alphaValue)
+                p += 1
             }
         }
     }
@@ -15,18 +18,18 @@ extension Image where P == Gray {
     @inlinable
     public func toRGB() -> Image<RGB, T> {
         return .createWithUnsafePixelRef(width: width, height: height) { ref in
-            ref.fill(value: self[ref.x, ref.y, 0])
+            ref.pointer.initialize(repeating: self[ref.x, ref.y, .gray])
         }
     }
     
     @inlinable
     func toRGBWithAlpha<P2: RGBWithAlpha>(with alphaValue: T) -> Image<P2, T> {
         return .createWithUnsafeMutableBufferPointer(width: width, height: height) { bp in
+            var p = bp.baseAddress!
             for i in 0..<data.count {
-                bp[4*i+P2.redIndex] = data[i]
-                bp[4*i+P2.greenIndex] = data[i]
-                bp[4*i+P2.blueIndex] = data[i]
-                bp[4*i+P2.alphaIndex] = alphaValue
+                p.advanced(by: P2.colorStartIndex).initialize(repeating: data[i], count: 3)
+                p.advanced(by: P2.alphaIndex).initialize(to: alphaValue)
+                p += 4
             }
         }
     }
@@ -49,10 +52,10 @@ extension Image where P == GrayAlpha {
     @inlinable
     func toRGBWithAlpha<P2: RGBWithAlpha>() -> Image<P2, T> {
         return unsafePixelwiseConverted { src, dst in
-            dst[P2.redIndex] = src[.gray]
-            dst[P2.greenIndex] = src[.gray]
-            dst[P2.blueIndex] = src[.gray]
-            dst[P2.alphaIndex] = src[.alpha]
+            dst.initialize(channel: P2.redIndex, to: src[.gray])
+            dst.initialize(channel: P2.greenIndex, to: src[.gray])
+            dst.initialize(channel: P2.blueIndex, to: src[.gray])
+            dst.initialize(channel: P2.alphaIndex, to: src[.alpha])
         }
     }
     
@@ -76,12 +79,14 @@ extension Image where P == RGB, T: BinaryInteger {
     /// Output = wr*R + wg*G + wb*B.
     @inlinable
     public func toGray<T2: BinaryFloatingPoint>(wr: T2, wg: T2, wb: T2) -> Image<Gray, T> {
-        return .createWithUnsafeMutableBufferPointer(width: width, height: height) { bp in
+        return .createWithUnsafeMutableBufferPointer(width: width, height: height) {
+            var p = $0.baseAddress!
             for i in 0..<pixelCount {
                 var sum = wr * T2(data[3*i+0])
                 sum += wg * T2(data[3*i+1])
                 sum += wb * T2(data[3*i+2])
-                bp[i] = T(sum)
+                p.initialize(to: T(sum))
+                p += 1
             }
         }
     }
@@ -101,11 +106,13 @@ extension Image where P == RGB, T: FloatingPoint {
     /// Output = wr*R + wg*G + wb*B.
     @inlinable
     public func toGray(wr: T, wg: T, wb: T) -> Image<Gray, T> {
-        return .createWithUnsafeMutableBufferPointer(width: width, height: height) { bp in
+        return .createWithUnsafeMutableBufferPointer(width: width, height: height) {
+            var p = $0.baseAddress!
             for i in 0..<pixelCount {
-                bp[i] = wr * data[3*i+0]
-                bp[i] += wg * data[3*i+1]
-                bp[i] += wb * data[3*i+2]
+                p.initialize(to: wr * data[3*i+0])
+                p.pointee += wg * data[3*i+1]
+                p.pointee += wb * data[3*i+2]
+                p += 1
             }
         }
     }

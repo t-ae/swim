@@ -2,8 +2,8 @@ extension Image where T == Bool {
     // MARK: - Negation
     @inlinable
     public mutating func negate() {
-        for i in 0..<self.data.count {
-            self.data[i].toggle()
+        dataMutate {
+            $0.toggle()
         }
     }
     
@@ -26,9 +26,11 @@ extension Image where T == Bool {
     public static func &(lhs: Image, rhs: Image) -> Image {
         precondition(lhs.size == rhs.size, "Images must have same size.")
         
-        return .createWithUnsafeMutableBufferPointer(width: lhs.width, height: lhs.height) { bp in
-            for i in 0..<bp.count {
-                bp[i] = lhs.data[i] && rhs.data[i]
+        return .createWithUnsafeMutableBufferPointer(width: lhs.width, height: lhs.height) {
+            var p = $0.baseAddress!
+            for i in 0..<$0.count {
+                p.initialize(to: lhs.data[i] && rhs.data[i])
+                p += 1
             }
         }
     }
@@ -47,9 +49,11 @@ extension Image where T == Bool {
     public static func |(lhs: Image, rhs: Image) -> Image {
         precondition(lhs.size == rhs.size, "Images must have same size.")
         
-        return .createWithUnsafeMutableBufferPointer(width: lhs.width, height: lhs.height) { bp in
-            for i in 0..<bp.count {
-                bp[i] = lhs.data[i] || rhs.data[i]
+        return .createWithUnsafeMutableBufferPointer(width: lhs.width, height: lhs.height) {
+            var p = $0.baseAddress!
+            for i in 0..<$0.count {
+                p.initialize(to: lhs.data[i] || rhs.data[i])
+                p += 1
             }
         }
     }
@@ -68,9 +72,11 @@ extension Image where T == Bool {
     public static func ^(lhs: Image, rhs: Image) -> Image {
         precondition(lhs.size == rhs.size, "Images must have same size.")
         
-        return .createWithUnsafeMutableBufferPointer(width: lhs.width, height: lhs.height) { bp in
-            for i in 0..<bp.count {
-                bp[i] = lhs.data[i] != rhs.data[i]
+        return .createWithUnsafeMutableBufferPointer(width: lhs.width, height: lhs.height) {
+            var p = $0.baseAddress!
+            for i in 0..<$0.count {
+                p.initialize(to: lhs.data[i] != rhs.data[i])
+                p += 1
             }
         }
     }

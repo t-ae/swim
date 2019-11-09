@@ -68,7 +68,8 @@ extension Image {
             for y in 0..<height {
                 for x in 0..<width {
                     for c in 0..<P.channels {
-                        bp[i] = try body(x, y, P(rawValue: c)!, data[i])
+                        bp.baseAddress!.advanced(by: i)
+                            .initialize(to: try body(x, y, P(rawValue: c)!, data[i]))
                         i += 1
                     }
                 }

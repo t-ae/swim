@@ -100,7 +100,8 @@ extension Image where T: BinaryFloatingPoint {
             let y0 = min(max(yp+0, 0), self.height-1)
             let y1 = min(max(yp+1, 0), self.height-1)
             
-            ref.setColor(x: x0, y: y0, in: self, with: wx0*wy0)
+            ref.pointer.initialize(repeating: 0)
+            ref.addColor(x: x0, y: y0, in: self, with: wx0*wy0)
             ref.addColor(x: x1, y: y0, in: self, with: wx1*wy0)
             ref.addColor(x: x0, y: y1, in: self, with: wx0*wy1)
             ref.addColor(x: x1, y: y1, in: self, with: wx1*wy1)

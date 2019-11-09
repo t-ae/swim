@@ -48,11 +48,13 @@ public struct BilinearInterpolator<P:PixelType, T: BinaryFloatingPoint&DataType>
         let y0 = edgeMode.clampValue(value: yp, max: image.height)
         let y1 = edgeMode.clampValue(value: yp+1, max: image.height)
         
+        pixel.pointer.initialize(repeating: 0)
+        
         if let y = y0 {
             if let x = x0 {
-                pixel.setColor(x: x, y: y, in: image, with: wx0 * wy0)
+                pixel.addColor(x: x, y: y, in: image, with: wx0 * wy0)
             } else {
-                pixel.setColor(color: constant, with: wx0 * wy0)
+                pixel.addColor(color: constant, with: wx0 * wy0)
             }
             
             if let x = x1 {

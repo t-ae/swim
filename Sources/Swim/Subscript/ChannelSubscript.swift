@@ -7,9 +7,13 @@ extension Image {
         get{
             precondition(0 <= channel && channel < P.channels, "Index out of range.")
             
-            return .createWithUnsafeMutableBufferPointer(width: width, height: height) { dst in
-                strideCopy(src: data, srcOffset: channel, srcStride: P.channels,
-                           dst: dst, dstOffset: 0, dstStride: 1, count: dst.count)
+            return .createWithUnsafeMutableBufferPointer(width: width, height: height) {
+                var p = $0.baseAddress!
+                for i in 0..<$0.count {
+                    let srcOffset = i*P.channels + channel
+                    p.initialize(to: data[srcOffset])
+                    p += 1
+                }
             }
         }
         set {

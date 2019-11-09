@@ -17,17 +17,21 @@ extension Image {
             for y in 0..<height {
                 let srcOffset = self.dataIndex(x: 0, y: y)
                 for i in 0..<horizontally {
-                    let dstOffset = Image<P, T>.dataIndex(x: i*width, y: y, width: newWidth, height: newHeight)
-                    copy(src: data, srcOffset: srcOffset,
-                         dst: bp, dstOffset: dstOffset, count: width*P.channels)
+                    let dstOffset = Image<P, T>.dataIndex(x: i*width, y: y,
+                                                          width: newWidth, height: newHeight)
+                    let dst = UnsafeMutableBufferPointer(
+                        rebasing: bp[dstOffset..<dstOffset+width*P.channels])
+                    _ = dst.initialize(from: data[srcOffset..<srcOffset+width*P.channels])
                 }
             }
             
+            let src = UnsafeMutableBufferPointer(rebasing: bp[0..<height*newWidth*P.channels])
             // vertically
-            for i in 0..<vertically {
+            for i in 1..<vertically {
                 let dstOffset = i * height*newWidth*P.channels
-                copy(src: bp, srcOffset: 0,
-                     dst: bp, dstOffset: dstOffset, count: height*newWidth*P.channels)
+                let dst = UnsafeMutableBufferPointer(
+                    rebasing: bp[dstOffset..<dstOffset+src.count])
+                _ = dst.initialize(from: src)
             }
         }
     }

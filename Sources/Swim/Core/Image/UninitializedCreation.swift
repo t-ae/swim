@@ -2,7 +2,7 @@ extension Image {
     /// Create `Image` by filling `UnsafePixelRef`s.
     ///
     /// `initializer` takes `UnsafePixelRef`, which is uninitialized at first.
-    /// You must initialize all pixel values of `UnsafePixelRef`.
+    /// You are responsible to initialize all pixel values of `UnsafePixelRef`.
     ///
     /// - Note: `UnsafePixelRef` contains `UnsafeMutableBufferPointer`. So it's unsafe to bring it outside closure.
     @inlinable
@@ -39,7 +39,8 @@ extension Image {
             for y in 0..<height {
                 for x in 0..<width {
                     for c in 0..<P.channels {
-                        bp[i] = try initializer(x, y, P(rawValue: c)!)
+                        bp.baseAddress!.advanced(by: i)
+                            .initialize(to: try initializer(x, y, P(rawValue: c)!))
                         i += 1
                     }
                 }
@@ -49,7 +50,7 @@ extension Image {
     
     /// Create `Image` by filling `UnsafeMutableBufferPointer`.
     ///
-    /// `UnsafeMutableBufferPointer` must be initialized at the end of closure's execution.
+    /// All values in `UnsafeMutableBufferPointer` must be initialized at the end of closure's execution.
     @inlinable
     public static func createWithUnsafeMutableBufferPointer(
         width: Int,

@@ -38,7 +38,7 @@ extension Image {
     /// Create new image from `self` by applying `body` for each pixel.
     ///
     /// `body` takes two arguments. `Pixel` refers `self` pixel. `PixelRef` refers new image's pixel.
-    /// You have to assign all pixel values of `PixelRef`.
+    /// You are responsible to initialize all pixel values of `PixelRef`.
     ///
     /// - Note: `UnsafePixelRef` contains `UnsafeMutableBufferPointer`. So it's unsafe to bring them outside closure.
     @inlinable
