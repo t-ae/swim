@@ -9,6 +9,13 @@ extension Color where T: SignedNumeric {
     }
     
     @inlinable
+    public mutating func negate() {
+        for i in 0..<P.channels {
+            data[i].negate()
+        }
+    }
+    
+    @inlinable
     public static prefix func +(arg: Color) -> Color {
         return arg
     }
