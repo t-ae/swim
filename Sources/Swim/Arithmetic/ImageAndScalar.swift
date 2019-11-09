@@ -1,8 +1,8 @@
 extension Image where T: AdditiveArithmetic {
     @inlinable
     public static func +=(lhs: inout Image, rhs: T) {
-        for i in 0..<lhs.data.count {
-            lhs.data[i] += rhs
+        lhs.dataMutate {
+            $0 += rhs
         }
     }
     
@@ -20,8 +20,8 @@ extension Image where T: AdditiveArithmetic {
     
     @inlinable
     public static func -=(lhs: inout Image, rhs: T) {
-        for i in 0..<lhs.data.count {
-            lhs.data[i] -= rhs
+        lhs.dataMutate {
+            $0 -= rhs
         }
     }
     
@@ -43,8 +43,8 @@ extension Image where T: AdditiveArithmetic {
 extension Image where T: Numeric {
     @inlinable
     public static func *=(lhs: inout Image, rhs: T) {
-        for i in 0..<lhs.data.count {
-            lhs.data[i] *= rhs
+        lhs.dataMutate {
+            $0 *= rhs
         }
     }
     
@@ -64,8 +64,8 @@ extension Image where T: Numeric {
 extension Image where T: BinaryInteger {
     @inlinable
     public static func /=(lhs: inout Image, rhs: T) {
-        for i in 0..<lhs.data.count {
-            lhs.data[i] /= rhs
+        lhs.dataMutate {
+            $0 /= rhs
         }
     }
     
@@ -87,8 +87,8 @@ extension Image where T: BinaryInteger {
 extension Image where T: FloatingPoint {
     @inlinable
     public static func /=(lhs: inout Image, rhs: T) {
-        for i in 0..<lhs.data.count {
-            lhs.data[i] /= rhs
+        lhs.dataMutate {
+            $0 /= rhs
         }
     }
     
@@ -110,8 +110,8 @@ extension Image where T: FloatingPoint {
 extension Image where T: ComplexProtocol {
     @inlinable
     public static func /=(lhs: inout Image, rhs: T) {
-        for i in 0..<lhs.data.count {
-            lhs.data[i] /= rhs
+        lhs.dataMutate {
+            $0 /= rhs
         }
     }
     
