@@ -43,12 +43,12 @@ class PixelwiseConversion: XCTestCase {
             let image = Image(width: 2, height: 3, rgba: data)
 
             let red: Image<Gray, UInt8> = image.unsafePixelwiseConverted { src, dst in
-                dst[.gray] = src[.red]
+                dst.initialize(channel: .gray, to: src[.red])
             }
             XCTAssertEqual(red, Image(width: 2, height: 3, data: [0, 4, 8, 12, 16, 20]))
             
             let redDouble: Image<Gray, Double> = image.unsafePixelwiseConverted { src, dst in
-                dst[.gray] = Double(src[.red])
+                dst.initialize(channel: .gray, to: Double(src[.red]))
             }
             XCTAssertEqual(redDouble, Image(width: 2, height: 3, data: [0, 4, 8, 12, 16, 20]))
         }

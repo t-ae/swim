@@ -10,7 +10,7 @@ extension Image where T: AdditiveArithmetic {
     public static func +<C: ColorProtocol>(lhs: Image, rhs: C) -> Image where C.P == P, C.T == T {
         return lhs.unsafePixelwiseConverted { src, dst in
             for c in 0..<P.channels {
-                dst[c] = src[c] + rhs[c]
+                dst.initialize(channel: c, to: src[c] + rhs[c])
             }
         }
     }
@@ -31,7 +31,7 @@ extension Image where T: AdditiveArithmetic {
     public static func -<C: ColorProtocol>(lhs: Image, rhs: C) -> Image where C.P == P, C.T == T {
         return lhs.unsafePixelwiseConverted { src, dst in
             for c in 0..<P.channels {
-                dst[c] = src[c] - rhs[c]
+                dst.initialize(channel: c, to: src[c] - rhs[c])
             }
         }
     }
@@ -40,7 +40,7 @@ extension Image where T: AdditiveArithmetic {
     public static func -<C: ColorProtocol>(lhs: C, rhs: Image) -> Image where C.P == P, C.T == T {
         return rhs.unsafePixelwiseConverted { src, dst in
             for c in 0..<P.channels {
-                dst[c] = lhs[c] - src[c]
+                dst.initialize(channel: c, to: lhs[c] - src[c])
             }
         }
     }
@@ -58,7 +58,7 @@ extension Image where T: Numeric {
     public static func *<C: ColorProtocol>(lhs: Image, rhs: C) -> Image where C.P == P, C.T == T {
         return lhs.unsafePixelwiseConverted { src, dst in
             for c in 0..<P.channels {
-                dst[c] = src[c] * rhs[c]
+                dst.initialize(channel: c, to: src[c] * rhs[c])
             }
         }
     }
@@ -81,7 +81,7 @@ extension Image where T: BinaryInteger {
     public static func /<C: ColorProtocol>(lhs: Image, rhs: C) -> Image where C.P == P, C.T == T {
         return lhs.unsafePixelwiseConverted { src, dst in
             for c in 0..<P.channels {
-                dst[c] = src[c] / rhs[c]
+                dst.initialize(channel: c, to: src[c] / rhs[c])
             }
         }
     }
@@ -90,7 +90,7 @@ extension Image where T: BinaryInteger {
     public static func /<C: ColorProtocol>(lhs: C, rhs: Image) -> Image where C.P == P, C.T == T {
         return rhs.unsafePixelwiseConverted { src, dst in
             for c in 0..<P.channels {
-                dst[c] = lhs[c] / src[c]
+                dst.initialize(channel: c, to: lhs[c] / src[c])
             }
         }
     }
@@ -108,7 +108,7 @@ extension Image where T: FloatingPoint {
     public static func /<C: ColorProtocol>(lhs: Image, rhs: C) -> Image where C.P == P, C.T == T {
         return lhs.unsafePixelwiseConverted { src, dst in
             for c in 0..<P.channels {
-                dst[c] = src[c] / rhs[c]
+                dst.initialize(channel: c, to: src[c] / rhs[c])
             }
         }
     }
@@ -117,7 +117,7 @@ extension Image where T: FloatingPoint {
     public static func /<C: ColorProtocol>(lhs: C, rhs: Image) -> Image where C.P == P, C.T == T {
         return rhs.unsafePixelwiseConverted { src, dst in
             for c in 0..<P.channels {
-                dst[c] = lhs[c] / src[c]
+                dst.initialize(channel: c, to: lhs[c] / src[c])
             }
         }
     }
@@ -135,7 +135,7 @@ extension Image where T: ComplexProtocol {
     public static func /<C: ColorProtocol>(lhs: Image, rhs: C) -> Image where C.P == P, C.T == T {
         return lhs.unsafePixelwiseConverted { src, dst in
             for c in 0..<P.channels {
-                dst[c] = src[c] / rhs[c]
+                dst.initialize(channel: c, to: src[c] / rhs[c])
             }
         }
     }
@@ -144,7 +144,7 @@ extension Image where T: ComplexProtocol {
     public static func /<C: ColorProtocol>(lhs: C, rhs: Image) -> Image where C.P == P, C.T == T {
         return rhs.unsafePixelwiseConverted { src, dst in
             for c in 0..<P.channels {
-                dst[c] = lhs[c] / src[c]
+                dst.initialize(channel: c, to: lhs[c] / src[c])
             }
         }
     }

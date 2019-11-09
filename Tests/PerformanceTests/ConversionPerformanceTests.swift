@@ -20,11 +20,11 @@ class ConversionPerformanceTests: XCTestCase {
         measure {
             for _ in 0..<10 {
                 _ = image.unsafePixelwiseConverted { src, dst in
-                    dst[.red] = src[.red]
-                    dst[.green] = src[.green]
-                    dst[.blue] = src[.blue]
-                    dst[.alpha] = src[.alpha]
-                    } as Image<RGBA, UInt8>
+                    dst.initialize(channel: .red, to: src[.red])
+                    dst.initialize(channel: .green, to: src[.green])
+                    dst.initialize(channel: .blue, to: src[.blue])
+                    dst.initialize(channel: .alpha, to: src[.alpha])
+                } as Image<RGBA, UInt8>
             }
         }
     }

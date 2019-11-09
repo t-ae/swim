@@ -5,7 +5,7 @@ extension Image {
     @inlinable
     public func createMask(_ body: (Pixel<P, T>)->Bool) -> Image<Gray, Bool> {
         return unsafePixelwiseConverted { src, dst in
-            dst[.gray] = body(src)
+            dst.initialize(channel: .gray, to: body(src))
         }
     }
 }

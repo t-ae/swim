@@ -24,7 +24,8 @@ extension Image where P == Gray {
                     for y in 0..<patchHeight {
                         for x in 0..<patchWidth {
                             let valueIndex = y * patchWidth + x
-                            bp[valueIndex*cols + patchIndex] = self[x+patchX, y+patchY, 0]
+                            bp.baseAddress!.advanced(by: valueIndex*cols + patchIndex)
+                                .initialize(to: self[x+patchX, y+patchY, 0])
                         }
                     }
                 }
@@ -60,7 +61,8 @@ extension Image where P == Gray {
                     for y in 0..<patchHeight {
                         for x in 0..<patchWidth {
                             let valueIndex = y * patchWidth + x
-                            bp[patchIndex*cols + valueIndex] = self[x+patchX, y+patchY, 0]
+                            bp.baseAddress!.advanced(by: patchIndex*cols + valueIndex)
+                                .initialize(to: self[x+patchX, y+patchY, 0])
                         }
                     }
                 }

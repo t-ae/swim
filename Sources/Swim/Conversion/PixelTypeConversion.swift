@@ -133,10 +133,10 @@ extension Image where P == RGB {
     @inlinable
     func toRGBWithAlpha<P2: RGBWithAlpha>(with alphaValue: T) -> Image<P2, T> {
         return unsafePixelwiseConverted { src, dst in
-            dst[P2.redIndex] = src[.red]
-            dst[P2.greenIndex] = src[.green]
-            dst[P2.blueIndex] = src[.blue]
-            dst[P2.alphaIndex] = alphaValue
+            dst.initialize(channel: P2.redIndex, to: src[.red])
+            dst.initialize(channel: P2.greenIndex, to: src[.green])
+            dst.initialize(channel: P2.blueIndex, to: src[.blue])
+            dst.initialize(channel: P2.alphaIndex, to: alphaValue)
         }
     }
     
@@ -161,9 +161,9 @@ extension Image where P: RGBWithAlpha {
     @inlinable
     public func toRGB() -> Image<RGB, T> {
         return unsafePixelwiseConverted { src, dst in
-            dst[.red] = src[P.redIndex]
-            dst[.green] = src[P.greenIndex]
-            dst[.blue] = src[P.blueIndex]
+            dst.initialize(channel: .red, to: src[P.redIndex])
+            dst.initialize(channel: .green, to: src[P.greenIndex])
+            dst.initialize(channel: .blue, to: src[P.blueIndex])
         }
     }
 }
@@ -174,10 +174,10 @@ extension Image where P == RGBA {
     @inlinable
     public func toARGB() -> Image<ARGB, T> {
         return unsafePixelwiseConverted { src, dst in
-            dst[.red] = src[.red]
-            dst[.green] = src[.green]
-            dst[.blue] = src[.blue]
-            dst[.alpha] = src[.alpha]
+            dst.initialize(channel: .red, to: src[.red])
+            dst.initialize(channel: .green, to: src[.green])
+            dst.initialize(channel: .blue, to: src[.blue])
+            dst.initialize(channel: .alpha, to: src[.alpha])
         }
     }
 }
@@ -187,10 +187,10 @@ extension Image where P == ARGB {
     @inlinable
     public func toRGBA() -> Image<RGBA, T> {
         return unsafePixelwiseConverted { src, dst in
-            dst[.red] = src[.red]
-            dst[.green] = src[.green]
-            dst[.blue] = src[.blue]
-            dst[.alpha] = src[.alpha]
+            dst.initialize(channel: .red, to: src[.red])
+            dst.initialize(channel: .green, to: src[.green])
+            dst.initialize(channel: .blue, to: src[.blue])
+            dst.initialize(channel: .alpha, to: src[.alpha])
         }
     }
 }

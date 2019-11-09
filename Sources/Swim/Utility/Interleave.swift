@@ -4,9 +4,12 @@ func interleave<T: DataType>(data1: [T], data2: [T]) -> [T] {
     
     let count = data1.count
     let newData = [T](unsafeUninitializedCapacity: count*2) { bp, initializedCount in
+        var p = bp.baseAddress!
         for i in 0..<count {
-            bp[2*i+0] = data1[i]
-            bp[2*i+1] = data2[i]
+            p.initialize(to: data1[i])
+            p += 1
+            p.initialize(to: data2[i])
+            p += 1
         }
         initializedCount = bp.count
     }
@@ -20,10 +23,14 @@ func interleave<T: DataType>(data1: [T], data2: [T], data3: [T]) -> [T] {
     
     let count = data1.count
     let newData = [T](unsafeUninitializedCapacity: count*3) { bp, initializedCount in
+        var p = bp.baseAddress!
         for i in 0..<count {
-            bp[3*i+0] = data1[i]
-            bp[3*i+1] = data2[i]
-            bp[3*i+2] = data3[i]
+            p.initialize(to: data1[i])
+            p += 1
+            p.initialize(to: data2[i])
+            p += 1
+            p.initialize(to: data3[i])
+            p += 1
         }
         initializedCount = bp.count
     }
@@ -37,11 +44,16 @@ func interleave<T: DataType>(data1: [T], data2: [T], data3: [T], data4: [T]) -> 
     
     let count = data1.count
     let newData = [T](unsafeUninitializedCapacity: count*4) { bp, initializedCount in
+        var p = bp.baseAddress!
         for i in 0..<count {
-            bp[4*i+0] = data1[i]
-            bp[4*i+1] = data2[i]
-            bp[4*i+2] = data3[i]
-            bp[4*i+3] = data4[i]
+            p.initialize(to: data1[i])
+            p += 1
+            p.initialize(to: data2[i])
+            p += 1
+            p.initialize(to: data3[i])
+            p += 1
+            p.initialize(to: data4[i])
+            p += 1
         }
         initializedCount = bp.count
     }
