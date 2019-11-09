@@ -100,11 +100,9 @@ extension Image where T: Numeric {
         let padLeft = (filter.width-1)/2
         let padTop = (filter.height-1)/2
         
-        // TODO: first zero fill?
+        var image = Image.zeros(like: self)
         
-        return .createWithUnsafePixelRef(width: width, height: height) { ref in
-            ref.pointer.initialize(repeating: 0)
-            
+        image.unsafePixelwiseConvert { ref in
             for py in 0..<filter.height {
                 let yy = clamp(ref.y+py-padTop, min: 0, max: height-1)
                 for px in 0..<filter.width {
@@ -114,5 +112,7 @@ extension Image where T: Numeric {
                 }
             }
         }
+        
+        return image
     }
 }
