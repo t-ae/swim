@@ -37,8 +37,9 @@ extension Image where T: BinaryFloatingPoint {
                 let volume: T = T(self.width) / T(width)
                 
                 for x in 0..<width {
-                    let startX: T = T(x) * volume
-                    let endX: T = T(x+1) * volume
+                    // T(x+1) * volume can result in `endX` > `width`.
+                    let startX: T = T(x * self.width) / T(width)
+                    let endX: T = T((x+1) * self.width) / T(width)
                     
                     let ceilStartX = Foundation.ceil(startX)
                     let floorEndX = Foundation.floor(endX)
@@ -83,8 +84,9 @@ extension Image where T: BinaryFloatingPoint {
                 let volume: T = T(self.height) / T(height)
                 
                 for y in 0..<height {
-                    let startY: T = T(y) * volume
-                    let endY: T = T(y+1) * volume
+                    // T(y+1) * volume can result in `endY` > `height`.
+                    let startY: T = T(y * self.height) / T(height)
+                    let endY: T = T((y+1) * self.height) / T(height)
                     
                     let ceilStartY = Foundation.ceil(startY)
                     let floorEndY = Foundation.floor(endY)
