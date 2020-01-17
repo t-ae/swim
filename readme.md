@@ -39,7 +39,7 @@ try image.write(path: dstPath)
 
 For reading and writing image, Swim uses [stb_image.h](https://github.com/nothings/stb/blob/master/stb_image.h) and [stb_image_write.h](https://github.com/nothings/stb/blob/master/stb_image_write.h).
 
-### Apple platform specific operations
+### Platform specific operations
 ```swift
 let image = try! Image<RGBA, UInt8>(contentsOf: url)
 
@@ -65,6 +65,9 @@ let blurred: Image<ARGB, UInt8> = try vImageUtils.createImageWithBuffer(width: a
         }
     }
 }
+
+// on Swift for TensorFlow
+let tensor = Tensor(image: image)
 ```
 
 ### Subscriptions
