@@ -64,7 +64,7 @@ extension Image where P == RGBA, T: TensorFlowScalar {
 extension Image where P == ARGB, T: TensorFlowScalar {
     /// Create image from tensor.
     /// - Parameters:
-    ///   - tensor: Image tensor which has shape [height, width, 3].
+    ///   - tensor: Image tensor which has shape [height, width, 4].
     public init(tensor: Tensor<T>) {
         precondition(tensor.rank == 3 && tensor.shape[2] == 4, "Invalid tensor shape: \(tensor.shape)")
         let width = tensor.shape[1]
