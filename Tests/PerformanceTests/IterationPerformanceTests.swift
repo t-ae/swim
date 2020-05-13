@@ -134,7 +134,7 @@ extension IterationPerformanceTests {
         var image = Image<RGBA, Double>(width: 3840, height: 2160, value: 1)
         
         measure {
-            _ = image[channel: .red].dataConvert { value in value + 1 }
+            image[channel: .red].dataConvert { value in value + 1 }
         }
     }
     

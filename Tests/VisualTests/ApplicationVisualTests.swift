@@ -49,9 +49,6 @@ extension ApplicationVisualTests {
     }
     
     func testJulia() {
-        
-        let c = (-0.74543, 0.11301)
-        
         let size = 256
         let range: Double = 3.2
         let maxIteration = 256
@@ -116,7 +113,7 @@ extension ApplicationVisualTests {
             // gradX: .gray, gradY: .alpha
             let grads = Image<GrayAlpha, Double>.createWithUnsafeMutableBufferPointer(width: fieldSize, height: fieldSize) {
                 var p = $0.baseAddress!
-                for i in 0..<$0.count {
+                for _ in 0..<$0.count {
                     p.initialize(to: .random(in: -1..<1))
                     p += 1
                 }
