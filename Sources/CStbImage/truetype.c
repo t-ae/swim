@@ -1,5 +1,5 @@
 #define STB_TRUETYPE_IMPLEMENTATION
-//#define STBTT_STATIC
+#define STBTT_STATIC
 #include "stb_truetype.h"
 
 #include "CStbImage.h"

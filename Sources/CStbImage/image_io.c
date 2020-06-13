@@ -1,8 +1,10 @@
 #include "CStbImage.h"
 
 #define STB_IMAGE_IMPLEMENTATION
+#define STB_IMAGE_STATIC
 #include "stb_image.h"
 #define STB_IMAGE_WRITE_IMPLEMENTATION
+#define STB_IMAGE_WRITE_STATIC
 #include "stb_image_write.h"
 
 unsigned char* load_image(const char* path, int* width, int* height, int* channels, int desired_channels){
