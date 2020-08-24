@@ -1,7 +1,7 @@
 import Foundation
 import CStbImage
 
-// MARRK: - Protocol
+// MARK: Protocol
 public protocol ImageFileFormat {}
 public protocol AlphaImageFileFormat {}
 
@@ -88,7 +88,7 @@ func detectFormat(url: URL) -> WriteFormat {
 
 // MARK: - UInt8
 extension Image where P: AlphaImageFileFormat, T == UInt8 {
-    /// Save image as PNG file.
+    /// Writes representation of the image to a URL using the PNG format.
     @inlinable
     public func write(to url: URL) throws {
         try Swim.write(image: self, url: url)
@@ -96,7 +96,7 @@ extension Image where P: AlphaImageFileFormat, T == UInt8 {
 }
 
 extension Image where P: ImageFileFormat, T == UInt8 {
-    /// Save image.
+    /// Writes representation of the image to a URL using the format detected from the URL extension.
     ///
     /// File format is automatically decided from pathExtension of url.
     @inlinable
@@ -105,18 +105,19 @@ extension Image where P: ImageFileFormat, T == UInt8 {
         try write(to: url, format: format)
     }
     
-    /// Save image.
+    /// Writes representation of the image to a URL using the specified format.
     ///
-    /// - Parameter format: Image file format. Default: .png
+    /// - Parameter format: Image file format. Defaults to PNG.
     @inlinable
     public func write(to url: URL, format: WriteFormat = .png) throws {
+        let s = ""
         try Swim.write(image: self, url: url, format: format)
     }
 }
 
 // MARK: - FloatingPoint
 extension Image where P: AlphaImageFileFormat, T: BinaryFloatingPoint {
-    /// Save image as PNG file.
+    /// Writes representation of the image to a URL using the PNG format.
     ///
     /// All pixel values are assumed to be in [0, 1] range.
     /// Values outside the range will be clipped.
@@ -127,7 +128,7 @@ extension Image where P: AlphaImageFileFormat, T: BinaryFloatingPoint {
 }
 
 extension Image where P: ImageFileFormat, T: BinaryFloatingPoint {
-    /// Save image.
+    /// Writes representation of the image to a URL using the format detected from the URL extension.
     ///
     /// File format is automatically decided from pathExtension of url.
     ///
@@ -139,12 +140,12 @@ extension Image where P: ImageFileFormat, T: BinaryFloatingPoint {
         try write(to: url, format: format)
     }
     
-    /// Save image.
+    /// Writes representation of the image to a URL using the specified format.
     ///
     /// All pixel values are assumed to be in [0, 1] range.
     /// Values outside the range will be clipped.
     ///
-    /// - Parameter format: Image file format. Default: .png
+    /// - Parameter format: Image file format. Defaults to PNG.
     @inlinable
     public func write(to url: URL, format: WriteFormat = .png) throws {
         return try convertPixelValue(image: self).write(to: url, format: format)
