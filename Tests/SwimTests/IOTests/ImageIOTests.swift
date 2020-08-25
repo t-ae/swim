@@ -142,9 +142,118 @@ class ImageIOTests: XCTestCase {
         }
     }
     
+    func testInscribeUInt8() {
+        do { // RGBA
+            let image = self.baseImage!
+            
+            try! image.write(to: srcPath)
+
+            let data = try! image.inscribe()
+            
+            XCTAssertEqual(data, try! Data(contentsOf: srcPath))
+        }
+        do { // RGB
+            let image = self.baseImage.toRGB()
+            
+            for format in WriteFormat.all {
+                try! image.write(to: srcPath, format: format)
+
+                let data = try! image.inscribe(format: format)
+
+                XCTAssertEqual(data, try! Data(contentsOf: srcPath))
+            }
+        }
+        do { // Grey
+            let image = self.baseLuminance!
+
+            for format in WriteFormat.all {
+                try! image.write(to: srcPath, format: format)
+
+                let data = try! image.inscribe(format: format)
+
+                XCTAssertEqual(data, try! Data(contentsOf: srcPath))
+            }
+        }
+    }
+    
+    func testInscribeFloat() {
+        do { // RGBA
+            let image = (self.baseImage / UInt8.max).cast(to: Float.self)
+            
+            try! image.write(to: srcPath)
+
+            let data = try! image.inscribe()
+            
+            XCTAssertEqual(data, try! Data(contentsOf: srcPath))
+        }
+        do { // RGB
+            let image = (self.baseImage.toRGB() / UInt8.max).cast(to: Float.self)
+            
+            for format in WriteFormat.all {
+                try! image.write(to: srcPath, format: format)
+
+                let data = try! image.inscribe(format: format)
+
+                XCTAssertEqual(data, try! Data(contentsOf: srcPath))
+            }
+        }
+        do { // Grey
+            let image = (self.baseLuminance / UInt8.max).cast(to: Float.self)
+
+            for format in WriteFormat.all {
+                try! image.write(to: srcPath, format: format)
+
+                let data = try! image.inscribe(format: format)
+
+                XCTAssertEqual(data, try! Data(contentsOf: srcPath))
+            }
+        }
+    }
+    
+    func testInscribeDouble() {
+        do { // RGBA
+            let image = (self.baseImage / UInt8.max).cast(to: Double.self)
+            
+            try! image.write(to: srcPath)
+
+            let data = try! image.inscribe()
+            
+            XCTAssertEqual(data, try! Data(contentsOf: srcPath))
+        }
+        do { // RGB
+            let image = (self.baseImage.toRGB() / UInt8.max).cast(to: Double.self)
+            
+            for format in WriteFormat.all {
+                try! image.write(to: srcPath, format: format)
+
+                let data = try! image.inscribe(format: format)
+
+                XCTAssertEqual(data, try! Data(contentsOf: srcPath))
+            }
+        }
+        do { // Grey
+            let image = (self.baseLuminance / UInt8.max).cast(to: Double.self)
+
+            for format in WriteFormat.all {
+                try! image.write(to: srcPath, format: format)
+
+                let data = try! image.inscribe(format: format)
+
+                XCTAssertEqual(data, try! Data(contentsOf: srcPath))
+            }
+        }
+    }
+    
     static let allTests = [
         ("testSaveLoadUInt8", testSaveLoadUInt8),
         ("testSaveLoadFloat", testSaveLoadFloat),
         ("testSaveLoadDouble", testSaveLoadDouble),
+        ("testInscribeUInt8", testInscribeUInt8),
+        ("testInscribeFloat", testInscribeFloat),
+        ("testInscribeDouble", testInscribeDouble)
     ]
+}
+
+fileprivate extension WriteFormat {
+    static let all: [WriteFormat] = [.bitmap, .jpeg(quality: 90), .png]
 }
