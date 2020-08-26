@@ -31,13 +31,20 @@ let zero = Image<RGBA, Double>(width: 3, height: 4, value: 0)
 let red = Image<RGBA, Double>(width: 3, height: 5, color: Color(r: 1, g: 0, b: 0, a: 1))
 ```
 
-### Save/Load image
+### Input and output
+
+#### Save and load from a file
 ```swift
 let image = try Image<RGBA, UInt8>(contentsOf: url)
-try image.write(path: dstPath)
+try image.write(to: dstPath)
 ```
+For reading and writing image, Swim uses [`stb_image.h`](https://github.com/nothings/stb/blob/master/stb_image.h) and [`stb_image_write.h`](https://github.com/nothings/stb/blob/master/stb_image_write.h).
 
-For reading and writing image, Swim uses [stb_image.h](https://github.com/nothings/stb/blob/master/stb_image.h) and [stb_image_write.h](https://github.com/nothings/stb/blob/master/stb_image_write.h).
+#### Inscribe to a `Data` BLOB
+```swift
+let image = Image<RGB, UInt8>(width: 32, height: 32, color: Color.red)
+let data = try image.inscribe(format: .jpeg(quality: 80))
+```
 
 ### Platform specific operations
 ```swift
@@ -254,7 +261,7 @@ let reconstruct = converter.demosaic(image: bayer)
 
 ![bayer_bggr](https://user-images.githubusercontent.com/12446914/56634959-cce5f800-669e-11e9-89a2-ce49121a44bc.png)
 
-## Application exapmles
+## Application examples
 
 - [Template matching](https://github.com/t-ae/swim/blob/99e7be2655057190b62426cdb85fe56b130d7126/Tests/VisualTests/ApplicationVisualTests.swift#L340-L414)
 - [Canny edge detection](https://github.com/t-ae/swim/blob/99e7be2655057190b62426cdb85fe56b130d7126/Tests/VisualTests/ApplicationVisualTests.swift#L226-L338)
