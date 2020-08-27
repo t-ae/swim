@@ -1,7 +1,7 @@
 import Foundation
 import CStbImage
 
-// MARK: - Utilities
+// MARK: Utilities
 @usableFromInline
 struct STBImageData {
     @usableFromInline var width: Int

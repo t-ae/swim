@@ -27,3 +27,15 @@ int write_image_jpg(const char* path, int width, int height, int bpp, const void
 int write_image_png(const char* path, int width, int height, int bpp, const void* data) {
     return stbi_write_png(path, width, height, bpp, data, width*bpp);
 }
+
+int write_image_bmp_to_func(write_func* func, void * context, int width, int height, int bpp, const void* data) {
+    return stbi_write_bmp_to_func(func, context, width, height, bpp, data);
+}
+
+int write_image_jpg_to_func(write_func* func, void * context, int width, int height, int bpp, const void* data, int quality) {
+    return stbi_write_jpg_to_func(func, context, width, height, bpp, data, quality);
+}
+
+int write_image_png_to_func(write_func* func, void* context, int width, int height, int bpp, const void* data) {
+    return stbi_write_png_to_func(func, context, width, height, bpp, data, width*bpp);
+}

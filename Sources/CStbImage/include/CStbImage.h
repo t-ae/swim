@@ -16,6 +16,11 @@ extern "C" {
     int write_image_jpg(const char* path, int width, int height, int bpp, const void* data, int quality);
     int write_image_png(const char* path, int width, int height, int bpp, const void* data);
 
+    typedef void write_func(void *context, void *data, int size);
+    int write_image_bmp_to_func(write_func* func, void* context, int width, int height, int bpp, const void* data);
+    int write_image_jpg_to_func(write_func* func, void* context, int width, int height, int bpp, const void* data, int quality);
+    int write_image_png_to_func(write_func* func, void* context, int width, int height, int bpp, const void* data);
+
     // Text
     int get_number_of_fonts(const unsigned char* bytes);
     int init_font(stbtt_fontinfo* info, const unsigned char* bytes, int index);
