@@ -40,10 +40,10 @@ try image.write(to: dstPath)
 ```
 For reading and writing image, Swim uses [`stb_image.h`](https://github.com/nothings/stb/blob/master/stb_image.h) and [`stb_image_write.h`](https://github.com/nothings/stb/blob/master/stb_image_write.h).
 
-#### Inscribe to a `Data` BLOB
+#### Save image to a `Data` BLOB
 ```swift
 let image = Image<RGB, UInt8>(width: 32, height: 32, color: Color.red)
-let data = try image.inscribe(format: .jpeg(quality: 80))
+let data = try image.fileData(format: .jpeg(quality: 80))
 ```
 
 ### Platform specific operations

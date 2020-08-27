@@ -142,13 +142,13 @@ class ImageIOTests: XCTestCase {
         }
     }
     
-    func testInscribeUInt8() {
+    func testDataUInt8() {
         do { // RGBA
             let image = self.baseImage!
             
             try! image.write(to: srcPath)
 
-            let data = try! image.inscribe()
+            let data = try! image.fileData()
             
             XCTAssertEqual(data, try! Data(contentsOf: srcPath))
         }
@@ -158,7 +158,7 @@ class ImageIOTests: XCTestCase {
             for format in WriteFormat.all {
                 try! image.write(to: srcPath, format: format)
 
-                let data = try! image.inscribe(format: format)
+                let data = try! image.fileData(format: format)
 
                 XCTAssertEqual(data, try! Data(contentsOf: srcPath))
             }
@@ -169,20 +169,20 @@ class ImageIOTests: XCTestCase {
             for format in WriteFormat.all {
                 try! image.write(to: srcPath, format: format)
 
-                let data = try! image.inscribe(format: format)
+                let data = try! image.fileData(format: format)
 
                 XCTAssertEqual(data, try! Data(contentsOf: srcPath))
             }
         }
     }
     
-    func testInscribeFloat() {
+    func testDataFloat() {
         do { // RGBA
             let image = (self.baseImage / UInt8.max).cast(to: Float.self)
             
             try! image.write(to: srcPath)
 
-            let data = try! image.inscribe()
+            let data = try! image.fileData()
             
             XCTAssertEqual(data, try! Data(contentsOf: srcPath))
         }
@@ -192,7 +192,7 @@ class ImageIOTests: XCTestCase {
             for format in WriteFormat.all {
                 try! image.write(to: srcPath, format: format)
 
-                let data = try! image.inscribe(format: format)
+                let data = try! image.fileData(format: format)
 
                 XCTAssertEqual(data, try! Data(contentsOf: srcPath))
             }
@@ -203,20 +203,20 @@ class ImageIOTests: XCTestCase {
             for format in WriteFormat.all {
                 try! image.write(to: srcPath, format: format)
 
-                let data = try! image.inscribe(format: format)
+                let data = try! image.fileData(format: format)
 
                 XCTAssertEqual(data, try! Data(contentsOf: srcPath))
             }
         }
     }
     
-    func testInscribeDouble() {
+    func testDataDouble() {
         do { // RGBA
             let image = (self.baseImage / UInt8.max).cast(to: Double.self)
             
             try! image.write(to: srcPath)
 
-            let data = try! image.inscribe()
+            let data = try! image.fileData()
             
             XCTAssertEqual(data, try! Data(contentsOf: srcPath))
         }
@@ -226,7 +226,7 @@ class ImageIOTests: XCTestCase {
             for format in WriteFormat.all {
                 try! image.write(to: srcPath, format: format)
 
-                let data = try! image.inscribe(format: format)
+                let data = try! image.fileData(format: format)
 
                 XCTAssertEqual(data, try! Data(contentsOf: srcPath))
             }
@@ -237,7 +237,7 @@ class ImageIOTests: XCTestCase {
             for format in WriteFormat.all {
                 try! image.write(to: srcPath, format: format)
 
-                let data = try! image.inscribe(format: format)
+                let data = try! image.fileData(format: format)
 
                 XCTAssertEqual(data, try! Data(contentsOf: srcPath))
             }
@@ -248,9 +248,9 @@ class ImageIOTests: XCTestCase {
         ("testSaveLoadUInt8", testSaveLoadUInt8),
         ("testSaveLoadFloat", testSaveLoadFloat),
         ("testSaveLoadDouble", testSaveLoadDouble),
-        ("testInscribeUInt8", testInscribeUInt8),
-        ("testInscribeFloat", testInscribeFloat),
-        ("testInscribeDouble", testInscribeDouble)
+        ("testDataUInt8", testDataUInt8),
+        ("testDataFloat", testDataFloat),
+        ("testDataDouble", testDataDouble)
     ]
 }
 
