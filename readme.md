@@ -33,17 +33,19 @@ let red = Image<RGBA, Double>(width: 3, height: 5, color: Color(r: 1, g: 0, b: 0
 
 ### Input and output
 
-#### Save and load from a file
+For reading and writing image, Swim uses [`stb_image.h`](https://github.com/nothings/stb/blob/master/stb_image.h) and [`stb_image_write.h`](https://github.com/nothings/stb/blob/master/stb_image_write.h).
+
+#### Reading & writing files
 ```swift
 let image = try Image<RGBA, UInt8>(contentsOf: url)
 try image.write(to: dstPath)
 ```
-For reading and writing image, Swim uses [`stb_image.h`](https://github.com/nothings/stb/blob/master/stb_image.h) and [`stb_image_write.h`](https://github.com/nothings/stb/blob/master/stb_image_write.h).
 
-#### Save image to a `Data` BLOB
+#### Reading & writing `Data`
 ```swift
-let image = Image<RGB, UInt8>(width: 32, height: 32, color: Color.red)
-let data = try image.fileData(format: .jpeg(quality: 80))
+let data = try Data(contentsOf: url)
+let image = try Image<RGB, UInt8>(fileData: data)
+let jpegData = try image.fileData(format: .jpeg(quality: 80))
 ```
 
 ### Platform specific operations
