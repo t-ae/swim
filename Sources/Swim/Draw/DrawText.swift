@@ -75,13 +75,14 @@ public struct TrueTypeFont {
         let result = try data.withUnsafeBytes { p -> Int32 in
             let uint8p = p.bindMemory(to: UInt8.self)
             
-            let numFonts = Int(get_number_of_fonts(uint8p.baseAddress!))
+            let numFonts = Int(stbtt_GetNumberOfFonts(uint8p.baseAddress!))
             
             guard 0 <= fontIndex && fontIndex < numFonts else {
                 throw TrueTypeFontError.fontIndexOutOfRange
             }
             
-            return init_font(&info, uint8p.baseAddress!, Int32(fontIndex))
+            let offset = stbtt_GetFontOffsetForIndex(uint8p.baseAddress!, Int32(fontIndex));
+            return stbtt_InitFont(&info, uint8p.baseAddress!, offset)
         }
         
         guard result != 0 else {
@@ -147,11 +148,12 @@ extension Image where P == Gray, T == UInt8 {
                                            font: TrueTypeFont,
                                            lineGap: Int? = nil) -> TextImageMetrics {
         precondition(lineGap ?? Int.max >= 0, "lineGap must be positive.")
+        var fontInfo = font.info
         var ascent: Int32 = 0
         var descent: Int32 = 0
         var autoLineGap: Int32 = 0
         
-        get_vmetrics(font.info, &ascent, &descent, &autoLineGap)
+        stbtt_GetFontVMetrics(&fontInfo, &ascent, &descent, &autoLineGap)
         
         let scale = font.fontSize / Float(ascent - descent)
         
@@ -176,11 +178,11 @@ extension Image where P == Gray, T == UInt8 {
                 var iy0: Int32 = 0
                 var ix1: Int32 = 0
                 var iy1: Int32 = 0
-                get_codepoint_bitmap_box(font.info, codepoints[i], scale, &ix0, &iy0, &ix1, &iy1)
+                stbtt_GetCodepointBitmapBox(&fontInfo, codepoints[i], scale, scale, &ix0, &iy0, &ix1, &iy1)
                 
                 var advanceWidth: Int32 = 0
                 var leftSideBearing: Int32 = 0
-                get_hmetrics(font.info, codepoints[i], &advanceWidth, &leftSideBearing)
+                stbtt_GetCodepointHMetrics(&fontInfo, codepoints[i], &advanceWidth, &leftSideBearing)
                 
                 // iy1 is height below baseline
                 let charHeight = Int(Float(ascent)*scale) + Int(iy1)
@@ -190,7 +192,7 @@ extension Image where P == Gray, T == UInt8 {
                 
                 // kerning
                 if i < codepoints.count-1 {
-                    let kern = get_kern(font.info, codepoints[i], codepoints[i+1])
+                    let kern = stbtt_GetCodepointKernAdvance(&fontInfo, codepoints[i], codepoints[i+1])
                     width -= Int(Float(kern) * scale)
                 }
             }
@@ -228,6 +230,7 @@ extension Image where P == Gray, T == UInt8 {
         
         let scale = metrics.scale
         
+        var fontInfo = font.info
         var y = 0
         
         for (lineNo, line) in text.components(separatedBy: .newlines).enumerated() {
@@ -248,11 +251,11 @@ extension Image where P == Gray, T == UInt8 {
                 var iy0: Int32 = 0
                 var ix1: Int32 = 0
                 var iy1: Int32 = 0
-                get_codepoint_bitmap_box(font.info, codepoints[i], scale, &ix0, &iy0, &ix1, &iy1)
+                stbtt_GetCodepointBitmapBox(&fontInfo, codepoints[i], scale, scale, &ix0, &iy0, &ix1, &iy1)
                 
                 var advanceWidth: Int32 = 0
                 var leftSideBearing: Int32 = 0
-                get_hmetrics(font.info, codepoints[i], &advanceWidth, &leftSideBearing)
+                stbtt_GetCodepointHMetrics(&fontInfo, codepoints[i], &advanceWidth, &leftSideBearing)
                 
                 let xx = x + Int(Float(leftSideBearing)*scale)
                 let yy = y + Int(Float(metrics.ascent)*scale) + Int(iy0)
@@ -261,14 +264,14 @@ extension Image where P == Gray, T == UInt8 {
                 let h = iy1-iy0
                 image.data.withUnsafeMutableBufferPointer { bp in
                     let p = bp.baseAddress!.advanced(by: dataOffset)
-                    make_codepoint_bitmap(font.info, p, w, h, Int32(width), scale, codepoints[i])
+                    stbtt_MakeCodepointBitmap(&fontInfo, p, w, h, Int32(width), scale, scale, codepoints[i])
                 }
                 
                 x += Int(Float(advanceWidth)*scale)
                 
                 // kerning
                 if i < codepoints.count-1 {
-                    let kern = get_kern(font.info, codepoints[i], codepoints[i+1])
+                    let kern = stbtt_GetCodepointKernAdvance(&fontInfo, codepoints[i], codepoints[i+1])
                     x -= Int(Float(kern) * scale)
                 }
             }

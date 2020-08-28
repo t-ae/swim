@@ -11,7 +11,7 @@ func fileData<P: AlphaImageFileFormat>(image: Image<P, UInt8>) throws -> Data {
     var content = Data()
     
     let code = image.data.withUnsafeBufferPointer {
-        write_image_png_to_func(storeContent, &content, width, height, bpp, $0.baseAddress!)
+        stbi_write_png_to_func(storeContent, &content, width, height, bpp, $0.baseAddress!, width*bpp)
     }
 
     guard code != 0 else {
@@ -33,18 +33,18 @@ func fileData<P: ImageFileFormat>(image: Image<P, UInt8>, format: WriteFormat) t
     switch format {
     case .bitmap:
         code = image.data.withUnsafeBufferPointer {
-            write_image_bmp_to_func(storeContent, &content, width, height, bpp, $0.baseAddress!)
+            stbi_write_bmp_to_func(storeContent, &content, width, height, bpp, $0.baseAddress!)
         }
     case let .jpeg(quality):
         guard (1...100).contains(quality) else {
             throw ImageWriteError.qualityOutOfRange
         }
         code = image.data.withUnsafeBufferPointer {
-            write_image_jpg_to_func(storeContent, &content, width, height, bpp, $0.baseAddress!, Int32(quality))
+            stbi_write_jpg_to_func(storeContent, &content, width, height, bpp, $0.baseAddress!, Int32(quality))
         }
     case .png:
         code = image.data.withUnsafeBufferPointer {
-            write_image_png_to_func(storeContent, &content, width, height, bpp, $0.baseAddress!)
+            stbi_write_png_to_func(storeContent, &content, width, height, bpp, $0.baseAddress!, width*bpp)
         }
     }
     

@@ -30,7 +30,7 @@ func write<P: AlphaImageFileFormat>(image: Image<P, UInt8>, url: URL) throws {
     let bpp = Int32(P.channels)
     
     let code = image.data.withUnsafeBufferPointer {
-        write_image_png(path, width, height, bpp, $0.baseAddress!)
+        stbi_write_png(path, width, height, bpp, $0.baseAddress, width*bpp)
     }
     
     guard code != 0 else {
@@ -54,18 +54,18 @@ func write<P: ImageFileFormat>(image: Image<P, UInt8>, url: URL, format: WriteFo
     switch format {
     case .bitmap:
         code = image.data.withUnsafeBufferPointer {
-            write_image_bmp(path, width, height, bpp, $0.baseAddress!)
+            stbi_write_bmp(path, width, height, bpp, $0.baseAddress!)
         }
     case let .jpeg(quality):
         guard (1...100).contains(quality) else {
             throw ImageWriteError.qualityOutOfRange
         }
         code = image.data.withUnsafeBufferPointer {
-            write_image_jpg(path, width, height, bpp, $0.baseAddress!, Int32(quality))
+            stbi_write_jpg(path, width, height, bpp, $0.baseAddress!, Int32(quality))
         }
     case .png:
         code = image.data.withUnsafeBufferPointer {
-            write_image_png(path, width, height, bpp, $0.baseAddress!)
+            stbi_write_png(path, width, height, bpp, $0.baseAddress!, width*bpp)
         }
     }
     
@@ -110,7 +110,6 @@ extension Image where P: ImageFileFormat, T == UInt8 {
     /// - Parameter format: Image file format. Defaults to PNG.
     @inlinable
     public func write(to url: URL, format: WriteFormat = .png) throws {
-        let s = ""
         try Swim.write(image: self, url: url, format: format)
     }
 }
