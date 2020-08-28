@@ -7,15 +7,14 @@ func readFileData(_ data: Data) throws -> STBImageData {
     var width: Int32 = 0
     var height: Int32 = 0
     var bpp: Int32 = 0
-    
-    let pixels = try data.withUnsafeBytes { (p: UnsafeRawBufferPointer) -> UnsafeMutablePointer<stbi_uc> in
+    let pixels = try data.withUnsafeBytes { (p: UnsafeRawBufferPointer) -> UnsafeMutablePointer<UInt8> in
         let uc = p.baseAddress!.assumingMemoryBound(to: UInt8.self)
-        guard let pixels = stbi_load_from_memory(uc, len, &width, &height, &bpp, 0) else {
+        guard let pixels = load_image_from_memory(uc, len, &width, &height, &bpp, 0) else {
             throw ImageReadError.failedToReadImage
         }
         return pixels
     }
-    defer { stbi_image_free(pixels) }
+    defer { free_image(pixels) }
     
     let data = [UInt8](UnsafeBufferPointer(start: pixels, count: Int(width*height*bpp)))
     

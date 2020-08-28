@@ -1,6 +1,0 @@
-module CStbImage {
-    header "stb_image.h"
-    header "stb_image_write.h"
-    header "stb_truetype.h"
-    export *
-}

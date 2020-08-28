@@ -11,10 +11,10 @@ func readImage(url: URL) throws -> STBImageData {
     var height: Int32 = 0
     var bpp: Int32 = 0
     
-    guard let pixels = stbi_load(url.path, &width, &height, &bpp, 0) else {
+    guard let pixels = load_image(url.path, &width, &height, &bpp, 0) else {
         throw ImageReadError.failedToReadImage
     }
-    defer { stbi_image_free(pixels) }
+    defer { free_image(pixels) }
     
     let data = [UInt8](UnsafeBufferPointer(start: pixels, count: Int(width*height*bpp)))
     
