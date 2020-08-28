@@ -142,7 +142,109 @@ class ImageIOTests: XCTestCase {
         }
     }
     
-    func testDataUInt8() {
+    func testReadDataUInt8() throws {
+        typealias DataType = UInt8
+        do { // RGBA
+            try baseImage.write(to: srcPath)
+            let fromFile = try Image<RGBA, DataType>(contentsOf: srcPath)
+            let fromMemory = try Image<RGBA, DataType>(fileData: Data(contentsOf: srcPath))
+            XCTAssertEqual(fromMemory, fromFile)
+        }
+        do { // Gray
+            try baseLuminance.write(to: srcPath)
+            let fromFile = try Image<Gray, DataType>(contentsOf: srcPath)
+            let fromMemory = try Image<Gray, DataType>(fileData: Data(contentsOf: srcPath))
+            XCTAssertEqual(fromMemory, fromFile)
+        }
+        do { // Gray as GrayAlpha
+            try baseLuminance.write(to: srcPath)
+            let fromFile = try Image<GrayAlpha, DataType>(contentsOf: srcPath)
+            let fromMemory = try Image<GrayAlpha, DataType>(fileData: Data(contentsOf: srcPath))
+            XCTAssertEqual(fromMemory, fromFile)
+        }
+        do { // Gray as RGB
+            try baseLuminance.write(to: srcPath)
+            let fromFile = try Image<RGB, DataType>(contentsOf: srcPath)
+            let fromMemory = try Image<RGB, DataType>(fileData: Data(contentsOf: srcPath))
+            XCTAssertEqual(fromMemory, fromFile)
+        }
+        do { // Gray as RGBA
+            try baseLuminance.write(to: srcPath)
+            let fromFile = try Image<RGBA, DataType>(contentsOf: srcPath)
+            let fromMemory = try Image<RGBA, DataType>(fileData: Data(contentsOf: srcPath))
+            XCTAssertEqual(fromMemory, fromFile)
+        }
+    }
+    
+    func testReadDataFloat() throws {
+        typealias DataType = Float
+        do { // RGBA
+            try baseImage.write(to: srcPath)
+            let fromFile = try Image<RGBA, DataType>(contentsOf: srcPath)
+            let fromMemory = try Image<RGBA, DataType>(fileData: Data(contentsOf: srcPath))
+            XCTAssertEqual(fromMemory, fromFile)
+        }
+        do { // Gray
+            try baseLuminance.write(to: srcPath)
+            let fromFile = try Image<Gray, DataType>(contentsOf: srcPath)
+            let fromMemory = try Image<Gray, DataType>(fileData: Data(contentsOf: srcPath))
+            XCTAssertEqual(fromMemory, fromFile)
+        }
+        do { // Gray as GrayAlpha
+            try baseLuminance.write(to: srcPath)
+            let fromFile = try Image<GrayAlpha, DataType>(contentsOf: srcPath)
+            let fromMemory = try Image<GrayAlpha, DataType>(fileData: Data(contentsOf: srcPath))
+            XCTAssertEqual(fromMemory, fromFile)
+        }
+        do { // Gray as RGB
+            try baseLuminance.write(to: srcPath)
+            let fromFile = try Image<RGB, DataType>(contentsOf: srcPath)
+            let fromMemory = try Image<RGB, DataType>(fileData: Data(contentsOf: srcPath))
+            XCTAssertEqual(fromMemory, fromFile)
+        }
+        do { // Gray as RGBA
+            try baseLuminance.write(to: srcPath)
+            let fromFile = try Image<RGBA, DataType>(contentsOf: srcPath)
+            let fromMemory = try Image<RGBA, DataType>(fileData: Data(contentsOf: srcPath))
+            XCTAssertEqual(fromMemory, fromFile)
+        }
+    }
+    
+    func testReadDataDouble() throws {
+        typealias DataType = Double
+        do { // RGBA
+            try baseImage.write(to: srcPath)
+            let fromFile = try Image<RGBA, DataType>(contentsOf: srcPath)
+            let fromMemory = try Image<RGBA, DataType>(fileData: Data(contentsOf: srcPath))
+            XCTAssertEqual(fromMemory, fromFile)
+        }
+        do { // Gray
+            try baseLuminance.write(to: srcPath)
+            let fromFile = try Image<Gray, DataType>(contentsOf: srcPath)
+            let fromMemory = try Image<Gray, DataType>(fileData: Data(contentsOf: srcPath))
+            XCTAssertEqual(fromMemory, fromFile)
+        }
+        do { // Gray as GrayAlpha
+            try baseLuminance.write(to: srcPath)
+            let fromFile = try Image<GrayAlpha, DataType>(contentsOf: srcPath)
+            let fromMemory = try Image<GrayAlpha, DataType>(fileData: Data(contentsOf: srcPath))
+            XCTAssertEqual(fromMemory, fromFile)
+        }
+        do { // Gray as RGB
+            try baseLuminance.write(to: srcPath)
+            let fromFile = try Image<RGB, DataType>(contentsOf: srcPath)
+            let fromMemory = try Image<RGB, DataType>(fileData: Data(contentsOf: srcPath))
+            XCTAssertEqual(fromMemory, fromFile)
+        }
+        do { // Gray as RGBA
+            try baseLuminance.write(to: srcPath)
+            let fromFile = try Image<RGBA, DataType>(contentsOf: srcPath)
+            let fromMemory = try Image<RGBA, DataType>(fileData: Data(contentsOf: srcPath))
+            XCTAssertEqual(fromMemory, fromFile)
+        }
+    }
+    
+    func testWriteDataUInt8() {
         do { // RGBA
             let image = self.baseImage!
             
@@ -176,7 +278,7 @@ class ImageIOTests: XCTestCase {
         }
     }
     
-    func testDataFloat() {
+    func testWriteDataFloat() {
         do { // RGBA
             let image = (self.baseImage / UInt8.max).cast(to: Float.self)
             
@@ -210,7 +312,7 @@ class ImageIOTests: XCTestCase {
         }
     }
     
-    func testDataDouble() {
+    func testWriteDataDouble() {
         do { // RGBA
             let image = (self.baseImage / UInt8.max).cast(to: Double.self)
             
@@ -248,9 +350,12 @@ class ImageIOTests: XCTestCase {
         ("testSaveLoadUInt8", testSaveLoadUInt8),
         ("testSaveLoadFloat", testSaveLoadFloat),
         ("testSaveLoadDouble", testSaveLoadDouble),
-        ("testDataUInt8", testDataUInt8),
-        ("testDataFloat", testDataFloat),
-        ("testDataDouble", testDataDouble)
+        ("testReadDataUInt8", testReadDataUInt8),
+        ("testReadDataFloat", testReadDataFloat),
+        ("testReadDataDouble", testReadDataDouble),
+        ("testWriteDataUInt8", testWriteDataUInt8),
+        ("testWriteDataFloat", testWriteDataFloat),
+        ("testWriteDataDouble", testWriteDataDouble)
     ]
 }
 

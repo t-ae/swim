@@ -150,10 +150,3 @@ extension Image where P: ImageFileFormat, T: BinaryFloatingPoint {
         return try convertPixelValue(image: self).write(to: url, format: format)
     }
 }
-
-// MARK: - Error type
-
-public enum ImageWriteError: Error {
-    case failedToWrite
-    case qualityOutOfRange
-}
